@@ -1,0 +1,77 @@
+---
+title: "Principles and Vocabulary"
+description: | 
+author:
+  - name: Kris Sankaran
+    affiliation: UW Madison
+date: 2021-09-06
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [1.1](), [1.3](), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/master/_posts/2021-08-02-week1-1/week1-1.Rmd)_ 
+
+1. What is an experiment?
+
+>  A test or series of runs in which purposeful changes are made to the input
+variables of a process or system so that we may observe and identify the reasons
+for changes that may be observed -- Montgomery, pg. 1
+
+More simply,
+* Try to see how inputs affect outputs
+* You must try turning the “knobs,” it’s not enough to passively watch
+
+2. To illustrate, consider a planting example. Try different gardening
+strategies (soil type, watering schedule, …), and see what happens.
+
+### Randomization
+
+“Allocation of experimental material and the order in which the individual runs are performed are randomly determined” -- Montgomery, pg. 11
+
+More simply,
+Assign your treatments using a coin toss (or random number generator)
+
+Why is this important? There are many factors besides treatment that can influence outcome. You don’t want those to bias your conclusions.
+
+Example [Treating sickest patients]
+If we don’t randomize, we might end up only treating sicker patients than usual. If the sickest patients are the ones who would end up improving the most either way, we might fool ourselves into thinking the treatment works. 
+If we randomize, the differences coming from these extraneous factors (like amount of sickness) will cancel out.
+Though, if there had been a difference, you’d still be able to detect it.
+
+### Replication
+“An independent run of each factor combination” -- Montgomery, pg. 12
+
+If you had only grown the plant once, you’d have no idea about typical variation.
+As you get more replicates, your estimate of the mean gets better (orange -> red)
+
+Example [Computer Chips]
+
+The book highlights a distinction between replicates and repeated measures.
+
+* Top: Repeated measures on the same chip.
+* Bottom: Replicates are completely independent chips.
+
+### Blocking
+
+> A design technique used to improve the precision with which comparisons among
+the factors of interest are made. Often used to reduce or eliminate variability
+from nuisance factors.
+
+Example [Shoe soles]
+
+We want to test the difference between these purple and green shoe sole types
+(which wears down faster?).
+
+Design 1 [No blocking]: Each person is randomly assigned a shoe sole type.
+Design 2 [Blocking]: Each person gets one of each shoe sole, and randomly wears
+on on the left / right foot.
+
+Under design 1, any true shoe sole effect would be drowned out by the amount of
+walking each person did In the blocked design, consistent effects within
+individuals become detectable
