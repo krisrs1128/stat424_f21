@@ -1,0 +1,98 @@
+---
+title: "Testing Differences in Means"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [2.4](), [Rmarkdown]()_
+
+https://docs.google.com/document/d/1ku-YEyU1LPr9KtSE9jcnIwHYbChJHXzWsm-ACWJ3EJg/edit#heading=h.ga02xa5s37bi
+
+Hypothesis testing review
+Statistics is about making general conclusions based on specific evidence. One approach is based on hypothesis testing: 
+we have a theory about the general (a null hypothesis), and we want to see whether our specific sample is consistent with that theory.
+
+There’s a general recipe,
+Pose a null hypothesis about the world
+Define a test statistic that should detect departures from that null hypothesis
+Determine a reference distribution for that test statistic
+Compute the test statistic on your data, and see if it’s plausibly a draw from your reference distribution
+
+Types of Error
+
+
+
+Test rejected
+Test didn’t reject
+Null is true
+False alarm
+Correct
+Null is false
+Correct
+Missed detection
+
+
+The probability that a test will correctly detect a true departure from the null is called its power.
+
+p-values
+“Rejected” or “Not rejected” is a very coarse description
+p-values give a measure of the degree of (im)plausibility of a test statistic under a given null hypothesis
+Two Sample t-test
+
+Motivating example: You have two ways of making concrete mortar. Is one stronger than the other? By default, you think they are equally strong.
+
+
+Our test statistic for detecting departures from this null will be,
+
+
+where we define the pooled standard deviation by,
+
+
+and S1 and S2 are the usual standard deviations for each group individually. (consider what happens when n1 = n2 = n)
+
+Under the null hypothesis, this is a ratio between a standard normal and chi-square, so t0 is t-distributed with n - 2 df.
+This gives reference distribution under the null.
+Confidence intervals
+Instead of thinking we know the mean and trying to reject it, why don’t we try to directly estimate it (with an error bar)?
+
+A 95% confidence interval is an interval [L, U] satisfying,
+
+
+
+The randomness here is in L and U. If we were being more formal, we would write those as functions of the (random) sample,
+
+
+
+To construct one for the two sample test, observe,
+
+
+To simplify the algebra, let
+
+
+So that the above expression reduces to
+
+
+
+Then if we rearrange terms, we find
+
+
+
+If you are calculating by hand, you can use the fact that tleft=-tright, to simplify the expression to
+
+
+
+Which is exactly the definition of a confidence interval.  Plugging in the original expressions gives the confidence interval for the difference in means, assuming shared variance.
+

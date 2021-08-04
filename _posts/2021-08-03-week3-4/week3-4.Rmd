@@ -1,0 +1,67 @@
+---
+title: "Multiple Comparisons"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [3.5](), [Rmarkdown]()_
+
+https://docs.google.com/document/d/1D44LrqM0uUv2MlC2s50A0yzMqZxyOOnqWxp8VKP-5HY/edit#
+
+If we planned in advance which contrasts we want to use, we are fine. But what if we hadn’t planned any, and go in search for significant results using different contrasts?
+
+Imagine testing 100 hypothesis at = 0.05. Suppose they are all null). We would see 5 rejected null hypotheses on average.
+If we want to allow ourselves some flexibility in searching over contrasts, we need to adapt our methodology.
+We should control the experimentwise error rate,  the probability that any test results in a false positive.
+Scheffe’s Method
+Let’s say we’re interested in m contrasts, c1, ,cm. The idea is to widen our confidence intervals slightly, to make false positives rarer.
+
+How much should the intervals be widened? It’s not obvious, but Scheffe found that we should multiply the endpoints of each of our m intervals by
+
+
+
+(this is for 95% confidence intervals).
+Tukey’s Method
+If we only care about the differences between pairs of group means, we can use Tukey’s method.
+
+All the contrasts now have the form,
+
+
+
+We’re going to make confidence intervals for these, and it’s natural to center them around,
+
+How wide should the intervals be?
+
+Tukey found a reference distribution for
+
+
+where ymax refers to the maximum groups average across the a groups. From there, he tabulated the quantiles as q(a, df).
+
+It turns out that the appropriate width of the confidence intervals can be derived from these quantiles,
+
+
+
+This works because, if the difference between the max and min group averages is contained within this interval, then all pairs i, j of differences are also contained in this interval.
+Fisher’s Least Significant Difference
+Fisher’s LSD is used to compare pairs of means
+Unlike Tukey’s method, it doesn’t control the experimentwise error rate
+
+Notice that the variance of the differences is
+
+
+
+Fisher’s LSD compares each difference |yi- yj| to the cutoff,
+
+and rejects the null that the pairs have equal means if the difference is larger.

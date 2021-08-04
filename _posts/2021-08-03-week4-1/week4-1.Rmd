@@ -1,0 +1,55 @@
+---
+title: "Random Effects"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+https://docs.google.com/document/d/1dHiCnwlLtSe2SX4ZE8WldiUKpkl1Kr4uIR5N0Oa916E/edit#heading=h.ga02xa5s37bi
+
+_Readings [3.9](), [Rmarkdown]()_
+
+Sometimes a factor has so many levels, that we can’t collect observations for all of them.
+Or, even if you can collect them, having one parameter for each would lead to a clumsy model
+We instead settle for saying the effect of the factor on average, rather than any specific level
+
+Examples,
+Is there a high school effect on college GPA? (instead of effects for individual schools)
+Is there a loom effect on fiber strength? (don’t care about individual looms)
+
+Model
+
+The model has the form,
+
+
+
+where iN(0, 2) and ijN(0, 2).  The crucial difference is that i is now thought of as random, not fixed.
+
+Notice that 
+
+
+
+More generally, the covariance matrix is block diagonal, with blocks of 2 within groups.
+
+Hypothesis Testing
+
+We may want to test whether there is any variation in response across factor levels. Formally,
+
+
+
+For our test statistic, we can use the same one as before,
+
+
+
+and for the same reasons as in fixed-effect ANOVA, this is F-distributed with (a - 1, N - a) df, and we can reject when this is large.

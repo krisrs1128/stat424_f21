@@ -1,0 +1,85 @@
+---
+title: "Probability Review"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [](), [Rmarkdown]()_
+
+Probability
+The most basic idea of statistics is that if you ran an experiment again, you would get different results
+i.e., there is randomness
+Probability is the calculus of randomness
+
+Definitions
+
+The mean of a random variable Y defined as
+
+
+
+If there are just two values with equal probability, it’s just a midpoint
+If one of the probability weights is larger, it’s closer to the larger weight
+If you have many values, it’s closer to the ones with large weight
+Think of continuous integral like Riemann sum in calculus
+
+The variance of a random variable Y is defined as
+
+
+
+Measures the amount of spread of Y around its mean
+
+
+Useful properties
+
+For calculations, it’s often easier to use properties of mean and variance to reduce to simpler expressions, rather than using the formulas above
+Expectation is a linear function,
+
+
+
+Variance is not linear, but satisfies,
+
+
+
+	where we define the covariance as,
+
+
+
+Sampling and Estimators
+
+Goal: Draw inferences from the specific to the general.
+
+Using a sample, estimate something about the population
+Use a statistic (function of the data) to say something about the probability distribution it was drawn from
+
+Two very useful statistics are the sample mean,
+
+
+
+and the sample standard deviation,
+
+
+
+
+Desirable properties
+
+You want your statistics to be “unbiased” and “minimum variance”
+Unbiased means it’s centered around the correct value, on average
+Minimum variance means it’s not too far from the correct value, on average
+
+Central limit theorem
+
+For very many distributions, an appropriately rescaled version of the sample mean converges to a normal distribution
+

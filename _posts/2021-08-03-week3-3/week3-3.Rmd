@@ -1,0 +1,67 @@
+---
+title: "Contrasts"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+https://docs.google.com/document/d/12jrrcuA4oGYoVqSR-eqNhWYf0pW09ISaMgibEugwf8w/edit
+
+_Readings [3.5](), [Rmarkdown]()_
+
+What is a contrast?
+When we reject the null in ANOVA, we know at least one of the treatments deviates from the global average. But which one(s)?
+
+Contrasts help. A contrast is a linear combination of the means,
+
+For any particular c, we test
+
+
+
+To see that this is actually something worth doing, consider the case that we have 4 different means, 1, 2, 3, 4,
+c = (1, 1, -1, -1): Are the first two means different from the last two, on average?
+c = (1, -1, 0, 0): Are the first two means equal to each other?
+etc.
+Testing Contrasts
+Remember the hypothesis testing recipe. We need,
+A test statistic
+A reference distribution
+
+Our best guess at i is yi, so a reasonable statistic is,
+
+
+
+How will we find its reference distribution? Under the null, this statistic is normally distributed with mean 0 and variance,
+
+
+So, a standardized statistic is,
+
+
+To estimate 2, we can use MSE. This is a good choice, because it remains valid even when the null is untrue.
+
+Since we plugged-in the estimate 2, we have divided our normal distribution by the square root of a chi-square. The result is therefore t-distributed, with N - a df.
+Confidence Intervals for Contrasts
+If we make the same computations as above, but without assuming that the null is true, we would find that,
+
+when we choose tleft and tright to be the 0.025 and 0.975 quantiles of a t distribution with N - a df.
+
+The resulting  confidence interval,
+
+
+
+This is an explicit formula that you can use in your computations, but don’t let the density of the symbols here confuse you. Returning to our original definitions, this is just,
+
+
+where we’re writing Var instead of Var because we’re plugging in the estimate 2.

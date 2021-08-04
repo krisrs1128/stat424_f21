@@ -1,0 +1,85 @@
+---
+title: "week1-2"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [](), [Rmarkdown]()_
+
+https://docs.google.com/document/d/1HVXirkNwAS2IRkHRxhSC1tAdz6xXTS_KWq2z_ViPihU/edit#
+
+Example [Golf]
+You can imagine someone’s golf score being a function of many factors,
+
+golf score = f(driver type, type of ball, …)
+
+When you only study two factors at a time, each with two possible values, this is called a 22 design
+You can visualize the 4 possible configurations as corners of a square
+The golf score is the height of the plane
+
+Mathematically,
+
+
+Interactions
+
+It’s possible that the effect of one factor depends on the value of the other. We say the two factors interact with one another.
+In this case, the slopes along the edges are no longer parallel.
+The previous formula doesn’t capture this. Instead, we need,
+
+
+
+
+because now the slopes can change depending on the value of the other factor,
+
+Replicates
+
+For each configuration of factors, it is better to play several rounds of golf
+If you played many rounds, you’d eventually have a good estimate of the effects from each factor
+
+More than 2 factors
+Suppose we want to see how K different binary factors influence golf score
+We can no longer visualize the effects as corners of a square
+But we can still collect samples for each configuration of factors. This is called a 2K experiment
+A challenge is that for large K, this means collecting lots of samples
+K = 3 means 8 configurations
+K = 4 means 16
+etc.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Example [Soldering]
+
+Experimental design is often used in characterizing a process
+How do each of the knobs affect the outcome?
+Sometimes we ask whether certain knobs matter at all. This is called factor screening.
+
+Example [Chemical Process Yield]
+
+Sometimes we want to optimize a process across several continuous variables
+Visualize the value to optimize as a smooth function of the factors
+Make a preliminary test, and proceed in the direction of the max
+This is called the response surface method

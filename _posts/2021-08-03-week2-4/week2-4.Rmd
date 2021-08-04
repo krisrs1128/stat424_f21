@@ -1,0 +1,45 @@
+---
+title: "Diagnostics and Power"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+https://docs.google.com/document/d/1vM-26q7Go4HqaqeR18mZFMM8RBYJVGWkGHeTYmmigG4/edit
+
+_Readings [2.4](), [Rmarkdown]()_
+
+The reference distribution depends on three assumptions,
+Samples are independent. If they aren’t, then we’re pretending we have more samples than we do
+The standard deviations are equal
+The populations are normally distributed
+
+For the last two, you can use something called a normal probability plot. This plots the sample quantiles against the theoretical normal distribution quantiles.
+Power Analysis
+People will often call you asking about what a good sample size is for their experiment. A good way to answer this is to compute the power curves as a function of different signal strengths.
+
+Of course, you can never know the signal strength in advance. But you can test a few different plausible ranges, based on past experience.
+Important Variations
+What if the variances are not equal?
+
+Our test statistic used a pooled standard deviation. If the variances aren’t equal, we standardize differently,
+
+
+
+This is unfortunately not exactly t-distributed under the null. That said, the reference distribution can be well approximated by one, and almost any statistical package will let you compute corresponding p-values and confidence intervals.
+
+What if the variances are known?
+
+In this case, don’t use S1 and S2 -- standardize using the known standard deviations. Since there’s no additional randomness coming from this estimation, the reference distribution is actually standard normal.

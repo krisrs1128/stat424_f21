@@ -1,0 +1,71 @@
+---
+title: "Randomized Complete Block Design"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [4.1](), [Rmarkdown]()_
+https://docs.google.com/document/d/17cdyQSI9V7XQ68F4ZYC14mr8P7tIHjRonaf3XPxpakw/edit#
+
+How can we generalize the idea of pairing to the case that we have more than two treatments to compare?
+Suppose that the nuisance factor is known and controllable
+Also assume the blocks have the same number a of samples as we have treatments (a=2 → pairing)
+
+Example [page 120]: Medical device manufacturer creates vascular grafts, and wants to see effect of manufacturing pressure on defect rate. But the resin used to make the graft arrives in batches, and may itself contribute to defects.
+
+Idea: Randomly assign each of the a treatments to the units within each block. This is called the RCBD.
+
+This is a restriction on randomization. Only random treatment assignments where each block has each treatment are allowed.
+
+Model Setup
+
+For hypothesis testing, we need a probability model. We suppose
+
+where ijN(0, 2) independently and ii=jj=0 is required to ensure identifiability.
+
+As before,
+ is a global mean
+i is the treatment effect for the ith treatment level
+ij is the error term
+
+But now we also have
+j, the effect of the jthblock
+
+Notice that in each block, we must have exactly a samples, one from each treatment.
+
+Hypothesis Testing
+
+We’re interested in whether any treatments have an effect,
+
+
+
+There’s a useful decomposition of the total variance that accounts for block-to-block variation,
+
+
+We’ll abbreviate this as SST= SSTreatment+ SSBlock+SSE. 
+
+The corresponding mean squares are,
+
+MST=1N - 1SST, which is the sample variance of all yij
+MSTreatment=1a - 1SSTreatment
+MSBlock=1b - 1SSBlock
+MSE=1(a - 1)(b - 1)SSE, which a good estimator for 2
+
+As in usual ANOVA, if MSTreatment is much larger than MSE, then we have evidence against the null hypothesis. In fact, it turns out that, under the null,
+
+
+
+So, we can reject the null hypothesis if this statistic is larger than the1 -  quantile of an F distribution with (a - 1, (a - 1)(b - 1)) df.

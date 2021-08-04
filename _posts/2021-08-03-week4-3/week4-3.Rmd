@@ -1,0 +1,49 @@
+---
+title: "Nonparametric Anova
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [3.11](), [Rmarkdown]()_
+https://docs.google.com/document/d/1P7RRGBBthrBIAK7esOSl2TBFtXfPZY9xZytZG3T691s/edit
+
+What can we do when the errors seem very far from normally distributed?
+Imagine all attempts to transform the data have failed.
+We can always use nonparametric ANOVA
+
+Idea: If the groups have the same means, then no group should be consistently ranked higher than another.
+
+Recipe
+
+Transform the data to their ranks. The smallest of the yij becomes 1, the next smallest becomes 2, etc. Denote these ranks by Rij.
+Compute the test statistic
+
+where we define Ri. to be the sum of the ranks in the ith group, and
+
+
+Compare the test statistic to a 2a -1 reference distribution. If it seems too large to be plausible, reject the null hypothesis.
+
+Where did this test statistic come from?
+
+It’s possible to show that the statistic is equivalent to
+
+
+
+which compares the average rank in group i to the average rank overall, and standardizes by the overall variance of the ranks. The first formula is the one presented in the book, though, and it’s easier to calculate by hand.
+
+Why not always use nonparametric ANOVA?
+
+If the data are actually normal, than this approach has less power than standard ANOVA
+If you have doubts about validity, a safe approach is to try both. If the approaches approximately agree, default to standard ANOVA.

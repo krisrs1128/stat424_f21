@@ -1,0 +1,53 @@
+---
+title: "Common Distributions"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-03-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+https://docs.google.com/document/d/1fJxl3kNL0EdbMTHMQub3IiKqthXqKdW6HUoB4s8gw9I/edit#
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [2.3](), [Rmarkdown]()_
+
+Don’t try to memorize the formulas for all the probability distributions
+Do understand their relationships to one another
+Do learn their shapes, and how their shapes change when you change the parameters
+
+Chi-Square Distribution
+
+This distribution arises as the sum of squares of normals,
+
+when z[k] are N(0, 1).
+Its claim to fame is that, if yiN(, 2) independently,
+
+
+which is a nontrivial but very useful fact, since the expression on the right is similar to the usual estimate of the sample variance.
+
+t Distribution
+
+A t distribution with k d.f. arises as a ratio between a normal and the square root of a chi-square with K d.f.,
+
+This seems like an esoteric fact, until you realize that the usual way of standardizing the mean (when the true variance is unknown) has this form
+
+
+F Distribution
+
+The F distribution occurs as the ratio of independent chi-squares (suitably rescaled),
+Since chi-squares arise whenever we have sums of squares, this distribution will come in handy whenever we need to compare two different sums of squares
+	
+
+
+
+
+
