@@ -86,35 +86,38 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: Principles and Vocabulary</title>
+<title>Statistical Experimental Design: Fitting Random Effects</title>
 
+<meta property="description" itemprop="description" content="A short description of the post."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-09-06"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-09-06"/>
+<meta property="article:published" itemprop="datePublished" content="2021-08-03"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-08-03"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: Principles and Vocabulary"/>
+<meta property="og:title" content="Statistical Experimental Design: Fitting Random Effects"/>
 <meta property="og:type" content="article"/>
+<meta property="og:description" content="A short description of the post."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: Principles and Vocabulary"/>
+<meta property="twitter:title" content="Statistical Experimental Design: Fitting Random Effects"/>
+<meta property="twitter:description" content="A short description of the post."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Principles and Vocabulary"]},{"type":"NULL"},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"character","attributes":{},"value":["UW Madison"]}]}]},{"type":"character","attributes":{},"value":["2021-09-06"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Fitting Random Effects"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-03-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week1-1_files/anchor-4.2.2/anchor.min.js","week1-1_files/bowser-1.9.3/bowser.min.js","week1-1_files/distill-2.2.21/template.v2.js","week1-1_files/header-attrs-2.8/header-attrs.js","week1-1_files/jquery-1.11.3/jquery.min.js","week1-1_files/popper-2.6.0/popper.min.js","week1-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week1-1_files/tippy-6.2.7/tippy-light-border.css","week1-1_files/tippy-6.2.7/tippy.css","week1-1_files/tippy-6.2.7/tippy.umd.min.js","week1-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week4-2_files/anchor-4.2.2/anchor.min.js","week4-2_files/bowser-1.9.3/bowser.min.js","week4-2_files/distill-2.2.21/template.v2.js","week4-2_files/header-attrs-2.8/header-attrs.js","week4-2_files/jquery-1.11.3/jquery.min.js","week4-2_files/popper-2.6.0/popper.min.js","week4-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","week4-2_files/tippy-6.2.7/tippy-light-border.css","week4-2_files/tippy-6.2.7/tippy.css","week4-2_files/tippy-6.2.7/tippy.umd.min.js","week4-2_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2250,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Principles and Vocabulary","authors":[{"author":"Kris Sankaran","authorURL":"#","affiliation":"UW Madison","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-09-06T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Fitting Random Effects","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-03T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2273,128 +2276,34 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Principles and Vocabulary</h1>
+<h1>Fitting Random Effects</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-
+<p><p>A short description of the post.</p></p>
 </div>
 
 <div class="d-byline">
-  Kris Sankaran  (UW Madison)
+  Kris Sankaran true 
   
-<br/>2021-09-06
+<br/>08-03-2021
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">1.1</a>, <a href="">1.3</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/master/_posts/2021-08-02-week1-1/week1-1.Rmd">Rmarkdown</a></em></p>
-<ol type="1">
-<li>What is an experiment?</li>
-</ol>
-<blockquote>
-<p>A test or series of runs in which purposeful changes are made to the input variables of a process or system so that we may observe and identify the reasons for changes that may be observed – Montgomery, pg. 1</p>
-</blockquote>
-<p>More simply, * Try to see how inputs affect outputs * You must try turning the “knobs,” it’s not enough to passively watch</p>
-<ol start="2" type="1">
-<li>To illustrate, consider a planting example. Try different gardening strategies (soil type, watering schedule, …), and see what happens.</li>
-</ol>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/hzv2nghaxm87u7s0awfqttmsh2k3963h.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="https://uwmadison.box.com/shared/static/hzv2nghaxm87u7s0awfqttmsh2k3963h.png" width="40%" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/c9dof66gs3b2fwp3rhx353e6tpojhqdn.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/c9dof66gs3b2fwp3rhx353e6tpojhqdn.png" width="40%" /></p>
-</div>
-<h3 id="randomization">Randomization</h3>
-<blockquote>
-<p>Allocation of experimental material and the order in which the individual runs are performed are randomly determined – Montgomery, pg. 11</p>
-</blockquote>
-<p>More simply – assign your treatments using a coin toss (or random number generator)</p>
-<p>Why is this important? There are many factors besides treatment that can influence outcome. You don’t want those to bias your conclusions.</p>
-<p>Example [Treating sickest patients] * If we don’t randomize, we might end up only treating sicker patients than usual. If the sickest patients are the ones who would end up improving the most either way, we might fool ourselves into thinking the treatment works. * If we randomize, the differences coming from these extraneous factors (like amount of sickness) will cancel out. * Though, if there had been a difference, you’d still be able to detect it.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/cmm759fivv4g0xsg85k25b1cq32zn7gp.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="https://uwmadison.box.com/shared/static/cmm759fivv4g0xsg85k25b1cq32zn7gp.png" width="40%" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/y531b9lly0twl9i987978dqp8kwzfze5.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="https://uwmadison.box.com/shared/static/y531b9lly0twl9i987978dqp8kwzfze5.png" width="40%" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/t4btwq8hyhkt14kcn0p2o8rwzg2magqa.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/t4btwq8hyhkt14kcn0p2o8rwzg2magqa.png" width="40%" /></p>
-</div>
-<h3 id="replication">Replication</h3>
-<blockquote>
-<p>An independent run of each factor combination – Montgomery, pg. 12</p>
-</blockquote>
-<p>If you had only grown the plant once, you’d have no idea about typical variation. As you get more replicates, your estimate of the mean gets better (orange -&gt; red)</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/s/vwu2gz8cm01l1fa2u3vc5fha8rsvxycx"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/s/vwu2gz8cm01l1fa2u3vc5fha8rsvxycx" /><!-- --></p>
-</div>
-<p>Example [Computer Chips]</p>
-<p>The book highlights a distinction between replicates and repeated measures.</p>
-<ul>
-<li>Top: Repeated measures on the same chip.</li>
-<li>Bottom: Replicates are completely independent chips.</li>
-</ul>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/rqu00u66f4szo40wfevwmesslkniz2d6.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="https://uwmadison.box.com/shared/static/rqu00u66f4szo40wfevwmesslkniz2d6.png" /><!-- -->
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/inwjp3ntywaoim7vs88wehl6m73wu3pb.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/inwjp3ntywaoim7vs88wehl6m73wu3pb.png" /><!-- --></p>
-</div>
-<h3 id="blocking">Blocking</h3>
-<blockquote>
-<p>A design technique used to improve the precision with which comparisons among the factors of interest are made. Often used to reduce or eliminate variability from nuisance factors.</p>
-</blockquote>
-<p>Example [Shoe soles]</p>
-<p>We want to test the difference between these purple and green shoe sole types (which wears down faster?).</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/iimo8kf3idq1s9rjb8i853zbrlg989c2.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="https://uwmadison.box.com/shared/static/iimo8kf3idq1s9rjb8i853zbrlg989c2.png" /><!-- -->
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png" /><!-- --></p>
-</div>
-<p>Design 1 [No blocking]: Each person is randomly assigned a shoe sole type. Design 2 <a href="#blocking">Blocking</a>: Each person gets one of each shoe sole, and randomly wears on on the left / right foot.</p>
-<p>Under design 1, any true shoe sole effect would be drowned out by the amount of walking each person did In the blocked design, consistent effects within individuals become detectable</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/rnuet4s27hhidnxde2ys5n3taw9ygjhy.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="https://uwmadison.box.com/shared/static/rnuet4s27hhidnxde2ys5n3taw9ygjhy.png" /><!-- -->
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png" /><!-- --></p>
-</div>
+<p><em>Readings <a href="">3.9</a>, <a href="">Rmarkdown</a></em> <a href="https://docs.google.com/document/d/1OjgpajLhWmrbjB2PG52__QUYstWYvMFuIaU2aTiBh4c/edit" class="uri">https://docs.google.com/document/d/1OjgpajLhWmrbjB2PG52__QUYstWYvMFuIaU2aTiBh4c/edit</a></p>
+<p>There are three key parameters: , 2,2. Two ways to fit them are (1) the method of moments and (2) maximum likelihood.</p>
+<p>Method of Moments</p>
+<p>For estimating , this method uses the overall mean y.</p>
+<p>What about the 2’s? The key identity is,</p>
+<p>We can approximate the expected values through,</p>
+<p>If we pretended these approximations were exact equalities, then we have two equations with two unknowns. The method of moments defines parameter estimates as the solutions to that system of equations.</p>
+<p>How can we get confidence intervals for these estimates?</p>
+<p>For =y, we can use Var(y)=1NVar(yij)=2+n2N For 2, we can use the fact that (N - a)MSE22N - a For 2, we’re out of luck, though some papers give approximate confidence intervals.</p>
+<p>Maximum Likelihood Estimation</p>
+<p>An alternative approach is to use maximum likelihood.</p>
+<p>Stack all the yij’s into one long length N vector, and observe that the data are jointly normally distributed</p>
+<p>The specific form of the covariance isn’t important. What is important is that we can exactly evaluate the probability of y11, y12,yan under any choice of the parameters , 2, 2.</p>
+<p>Define L(, 2, 2) the probability of the dataset y11, y12,yanviewed as a function of the normal distribution’s parameters A good estimate for these parameters comes from finding the configuration that maximizes L(, 2, 2).</p>
+<p>The maximizers can’t be found analytically, but algorithms exist to find the maximizers Software also gives a confidence interval for the estimates. It works by studying the curvature of the likelihood function at the maximizer, though we don’t need to worry about the details.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
