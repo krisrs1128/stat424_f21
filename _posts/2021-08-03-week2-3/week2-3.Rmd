@@ -26,13 +26,26 @@ Statistics is about making general conclusions based on specific evidence. One a
 we have a theory about the general (a null hypothesis), and we want to see whether our specific sample is consistent with that theory.
 
 There’s a general recipe,
-Pose a null hypothesis about the world
-Define a test statistic that should detect departures from that null hypothesis
-Determine a reference distribution for that test statistic
-Compute the test statistic on your data, and see if it’s plausibly a draw from your reference distribution
+* Pose a null hypothesis about the world
+* Define a test statistic that should detect departures from that null
+hypothesis
+* Determine a reference distribution for that test statistic
+* Compute the test statistic on your data, and see if it’s plausibly a draw from
+your reference distribution
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/e2vep3vvfvnz8v4kiilim1pjxe2w2upr.png")
+```
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/66793m770ob31z53fpgc4xoci4y0s7fi.png")
+```
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/r9dzi8ar8l7ic7h2xarnrdiwoab6tojz.png")
+```
 
 Types of Error
-
 
 
 Test rejected

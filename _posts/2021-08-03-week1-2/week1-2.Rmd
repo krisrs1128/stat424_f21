@@ -23,14 +23,18 @@ https://docs.google.com/document/d/1HVXirkNwAS2IRkHRxhSC1tAdz6xXTS_KWq2z_ViPihU/
 Example [Golf]
 You can imagine someone’s golf score being a function of many factors,
 
+```
 golf score = f(driver type, type of ball, …)
-
+```
 When you only study two factors at a time, each with two possible values, this is called a 22 design
 You can visualize the 4 possible configurations as corners of a square
-The golf score is the height of the plane
+The golf score is the height of the plane.
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/nl6161tped9imsph7qc8c830mmh4ru02.png")
+```
 
 Mathematically,
-
 
 Interactions
 
@@ -39,9 +43,11 @@ In this case, the slopes along the edges are no longer parallel.
 The previous formula doesn’t capture this. Instead, we need,
 
 
-
-
 because now the slopes can change depending on the value of the other factor,
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png")
+```
 
 Replicates
 
@@ -58,8 +64,17 @@ K = 4 means 16
 etc.
 
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png")
+```
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/2w0x5hzg03zk8113e3rcto58tocc4y6w.png")
+```
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/yzxaz23mgvezuny1ybgydrvpxazn3pm2.png")
+```
 
 
 
@@ -77,9 +92,18 @@ Experimental design is often used in characterizing a process
 How do each of the knobs affect the outcome?
 Sometimes we ask whether certain knobs matter at all. This is called factor screening.
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/da48ixumvvvh51y2mi0b6vkaeczqnsmb.png")
+```
+
 Example [Chemical Process Yield]
 
 Sometimes we want to optimize a process across several continuous variables
 Visualize the value to optimize as a smooth function of the factors
 Make a preliminary test, and proceed in the direction of the max
 This is called the response surface method
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/stgfkm41btsdbnzdxkxs7osnd37hahdj.png")
+```
+

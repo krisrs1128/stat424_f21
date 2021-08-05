@@ -30,25 +30,41 @@ More simply,
 2. To illustrate, consider a planting example. Try different gardening
 strategies (soil type, watering schedule, …), and see what happens.
 
+```{r, fig.hold = TRUE, out.width = "40%"}
+include_graphics("https://uwmadison.box.com/shared/static/hzv2nghaxm87u7s0awfqttmsh2k3963h.png")
+include_graphics("https://uwmadison.box.com/shared/static/c9dof66gs3b2fwp3rhx353e6tpojhqdn.png")
+```
+
 ### Randomization
 
-“Allocation of experimental material and the order in which the individual runs are performed are randomly determined” -- Montgomery, pg. 11
+> Allocation of experimental material and the order in which the individual runs are performed are randomly determined -- Montgomery, pg. 11
 
-More simply,
-Assign your treatments using a coin toss (or random number generator)
+More simply -- assign your treatments using a coin toss (or random number generator)
 
 Why is this important? There are many factors besides treatment that can influence outcome. You don’t want those to bias your conclusions.
 
 Example [Treating sickest patients]
-If we don’t randomize, we might end up only treating sicker patients than usual. If the sickest patients are the ones who would end up improving the most either way, we might fool ourselves into thinking the treatment works. 
-If we randomize, the differences coming from these extraneous factors (like amount of sickness) will cancel out.
-Though, if there had been a difference, you’d still be able to detect it.
+* If we don’t randomize, we might end up only treating sicker patients than usual. If the sickest patients are the ones who would end up improving the most either way, we might fool ourselves into thinking the treatment works. 
+* If we randomize, the differences coming from these extraneous factors (like amount of sickness) will cancel out.
+* Though, if there had been a difference, you’d still be able to detect it.
+
+```{r, out.width = "40%", fig.hold = TRUE}
+include_graphics("https://uwmadison.box.com/shared/static/cmm759fivv4g0xsg85k25b1cq32zn7gp.png")
+include_graphics("https://uwmadison.box.com/shared/static/y531b9lly0twl9i987978dqp8kwzfze5.png")
+include_graphics("https://uwmadison.box.com/shared/static/t4btwq8hyhkt14kcn0p2o8rwzg2magqa.png")
+```
 
 ### Replication
-“An independent run of each factor combination” -- Montgomery, pg. 12
 
-If you had only grown the plant once, you’d have no idea about typical variation.
-As you get more replicates, your estimate of the mean gets better (orange -> red)
+> An independent run of each factor combination -- Montgomery, pg. 12
+
+If you had only grown the plant once, you’d have no idea about typical
+variation. As you get more replicates, your estimate of the mean gets better
+(orange -> red)
+
+```{r}
+include_graphics("https://uwmadison.box.com/s/vwu2gz8cm01l1fa2u3vc5fha8rsvxycx")
+```
 
 Example [Computer Chips]
 
@@ -56,6 +72,11 @@ The book highlights a distinction between replicates and repeated measures.
 
 * Top: Repeated measures on the same chip.
 * Bottom: Replicates are completely independent chips.
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/rqu00u66f4szo40wfevwmesslkniz2d6.png")
+include_graphics("https://uwmadison.box.com/shared/static/inwjp3ntywaoim7vs88wehl6m73wu3pb.png")
+```
 
 ### Blocking
 
@@ -68,6 +89,11 @@ Example [Shoe soles]
 We want to test the difference between these purple and green shoe sole types
 (which wears down faster?).
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/iimo8kf3idq1s9rjb8i853zbrlg989c2.png")
+include_graphics("https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png")
+```
+
 Design 1 [No blocking]: Each person is randomly assigned a shoe sole type.
 Design 2 [Blocking]: Each person gets one of each shoe sole, and randomly wears
 on on the left / right foot.
@@ -75,3 +101,8 @@ on on the left / right foot.
 Under design 1, any true shoe sole effect would be drowned out by the amount of
 walking each person did In the blocked design, consistent effects within
 individuals become detectable
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/rnuet4s27hhidnxde2ys5n3taw9ygjhy.png")
+include_graphics("https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png")
+```

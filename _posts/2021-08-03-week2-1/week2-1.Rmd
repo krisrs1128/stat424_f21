@@ -28,7 +28,18 @@ Definitions
 
 The mean of a random variable Y defined as
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/rrvufphhkjkvqjkwgvu4pj712hn9tigt.png")
+```
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/8truwe0fd247iuq7m5p56f2ylx4nmewn.png")
+```
+
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/plbcevhwx1sq8f9rzvn1vdwr7x70syk5.png")
+```
 
 If there are just two values with equal probability, it’s just a midpoint
 If one of the probability weights is larger, it’s closer to the larger weight
@@ -47,6 +58,9 @@ Useful properties
 For calculations, it’s often easier to use properties of mean and variance to reduce to simpler expressions, rather than using the formulas above
 Expectation is a linear function,
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/pvfua6rtht3vubmz50yi3xry02t2elo3.png")
+```
 
 
 Variance is not linear, but satisfies,
@@ -66,7 +80,13 @@ Use a statistic (function of the data) to say something about the probability di
 
 Two very useful statistics are the sample mean,
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/o3li54yw6986aurviiljfmgmrmuh5wms.png")
+```
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/310ij7e4ki9xnn4doe191hks8k6h3o9z.png")
+```
 
 and the sample standard deviation,
 
@@ -82,4 +102,8 @@ Minimum variance means it’s not too far from the correct value, on average
 Central limit theorem
 
 For very many distributions, an appropriately rescaled version of the sample mean converges to a normal distribution
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png")
+```
 

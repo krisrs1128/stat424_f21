@@ -22,13 +22,25 @@ https://docs.google.com/document/d/1vM-26q7Go4HqaqeR18mZFMM8RBYJVGWkGHeTYmmigG4/
 _Readings [2.4](), [Rmarkdown]()_
 
 The reference distribution depends on three assumptions,
-Samples are independent. If they aren’t, then we’re pretending we have more samples than we do
-The standard deviations are equal
-The populations are normally distributed
+* Samples are independent. If they aren’t, then we’re pretending we have more samples than we do
+* The standard deviations are equal
+* The populations are normally distributed
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/n1a3bdzspet06ibsd1yebc1r6w7kzf3o.png")
+```
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/uzh72egfwwp251xzac932cej6kna1woz.png")
+```
 
 For the last two, you can use something called a normal probability plot. This plots the sample quantiles against the theoretical normal distribution quantiles.
 Power Analysis
 People will often call you asking about what a good sample size is for their experiment. A good way to answer this is to compute the power curves as a function of different signal strengths.
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/06qu4t1q6jemmwto01vgd95jtzd0if3e.png")
+```
 
 Of course, you can never know the signal strength in advance. But you can test a few different plausible ranges, based on past experience.
 Important Variations
