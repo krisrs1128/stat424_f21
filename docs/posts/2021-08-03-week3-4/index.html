@@ -2290,7 +2290,24 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 
 <div class="d-article">
 <p><em>Readings <a href="">3.5</a>, <a href="">Rmarkdown</a></em></p>
-<p><a href="https://docs.google.com/document/d/1D44LrqM0uUv2MlC2s50A0yzMqZxyOOnqWxp8VKP-5HY/edit#" class="uri">https://docs.google.com/document/d/1D44LrqM0uUv2MlC2s50A0yzMqZxyOOnqWxp8VKP-5HY/edit#</a></p>
+<a href="https://docs.google.com/document/d/1D44LrqM0uUv2MlC2s50A0yzMqZxyOOnqWxp8VKP-5HY/edit#" class="uri">https://docs.google.com/document/d/1D44LrqM0uUv2MlC2s50A0yzMqZxyOOnqWxp8VKP-5HY/edit#</a>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/tmez3gdyre3lth822zm2wimmes3nujyy.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="https://uwmadison.box.com/shared/static/tmez3gdyre3lth822zm2wimmes3nujyy.png" /><!-- -->
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/lc34pprk90p7evabiycjiw5c22xsm666.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="https://uwmadison.box.com/shared/static/lc34pprk90p7evabiycjiw5c22xsm666.png" /><!-- -->
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow05carx9uwna.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow05carx9uwna.png" /><!-- --></p>
+</div>
 <p>If we planned in advance which contrasts we want to use, we are fine. But what if we hadn’t planned any, and go in search for significant results using different contrasts?</p>
 <p>Imagine testing 100 hypothesis at = 0.05. Suppose they are all null). We would see 5 rejected null hypotheses on average. If we want to allow ourselves some flexibility in searching over contrasts, we need to adapt our methodology. We should control the experimentwise error rate, the probability that any test results in a false positive. Scheffe’s Method Let’s say we’re interested in m contrasts, c1, ,cm. The idea is to widen our confidence intervals slightly, to make false positives rarer.</p>
 <p>How much should the intervals be widened? It’s not obvious, but Scheffe found that we should multiply the endpoints of each of our m intervals by</p>

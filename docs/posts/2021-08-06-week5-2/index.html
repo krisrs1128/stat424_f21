@@ -86,18 +86,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: Random Effects</title>
+<title>Statistical Experimental Design: RCBD Diagnostics</title>
 
 <meta property="description" itemprop="description" content="A short description of the post."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-03"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-03"/>
+<meta property="article:published" itemprop="datePublished" content="2021-08-06"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-08-06"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: Random Effects"/>
+<meta property="og:title" content="Statistical Experimental Design: RCBD Diagnostics"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="A short description of the post."/>
 <meta property="og:locale" content="en_US"/>
@@ -105,19 +105,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: Random Effects"/>
+<meta property="twitter:title" content="Statistical Experimental Design: RCBD Diagnostics"/>
 <meta property="twitter:description" content="A short description of the post."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Random Effects"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-03-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["RCBD Diagnostics"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-06-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week4-1_files/anchor-4.2.2/anchor.min.js","week4-1_files/bowser-1.9.3/bowser.min.js","week4-1_files/distill-2.2.21/template.v2.js","week4-1_files/header-attrs-2.8/header-attrs.js","week4-1_files/jquery-1.11.3/jquery.min.js","week4-1_files/popper-2.6.0/popper.min.js","week4-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week4-1_files/tippy-6.2.7/tippy-light-border.css","week4-1_files/tippy-6.2.7/tippy.css","week4-1_files/tippy-6.2.7/tippy.umd.min.js","week4-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"NULL"}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Random Effects","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-03T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"RCBD Diagnostics","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-06T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,7 +2276,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Random Effects</h1>
+<h1>RCBD Diagnostics</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>A short description of the post.</p></p>
@@ -2285,45 +2285,30 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-03-2021
+<br/>08-06-2021
 </div>
 
 <div class="d-article">
-<p><a href="https://docs.google.com/document/d/1dHiCnwlLtSe2SX4ZE8WldiUKpkl1Kr4uIR5N0Oa916E/edit#heading=h.ga02xa5s37bi" class="uri">https://docs.google.com/document/d/1dHiCnwlLtSe2SX4ZE8WldiUKpkl1Kr4uIR5N0Oa916E/edit#heading=h.ga02xa5s37bi</a></p>
-<p><em>Readings <a href="">3.9</a>, <a href="">Rmarkdown</a></em></p>
-Sometimes a factor has so many levels, that we can’t collect observations for all of them. Or, even if you can collect them, having one parameter for each would lead to a clumsy model We instead settle for saying the effect of the factor on average, rather than any specific level
+<p><em>Readings <a href="">4.1</a>, <a href="">Rmarkdown</a></em></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/qezu75a0hv1qhqyeoz8wb7sbb294vrsm.png"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png" /><!-- -->
+<img src="https://uwmadison.box.com/shared/static/qezu75a0hv1qhqyeoz8wb7sbb294vrsm.png" /><!-- -->
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/dmob9sjh8my7l8hez390o7gnn3vu1oe6.png"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png" /><!-- -->
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png"</span><span class='op'>)</span>
-</code></pre>
+<p><img src="https://uwmadison.box.com/shared/static/dmob9sjh8my7l8hez390o7gnn3vu1oe6.png" /><!-- --></p>
 </div>
-<img src="https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png" /><!-- -->
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png" /><!-- --></p>
-</div>
-<p>Examples, Is there a high school effect on college GPA? (instead of effects for individual schools) Is there a loom effect on fiber strength? (don’t care about individual looms)</p>
-<p>Model</p>
-<p>The model has the form,</p>
-<p>where iN(0, 2) and ijN(0, 2). The crucial difference is that i is now thought of as random, not fixed.</p>
-<p>Notice that</p>
-<p>More generally, the covariance matrix is block diagonal, with blocks of 2 within groups.</p>
-<p>Hypothesis Testing</p>
-<p>We may want to test whether there is any variation in response across factor levels. Formally,</p>
-<p>For our test statistic, we can use the same one as before,</p>
-<p>and for the same reasons as in fixed-effect ANOVA, this is F-distributed with (a - 1, N - a) df, and we can reject when this is large.</p>
+<p>Multiple Comparisons</p>
+<p>As before, we may want to use contrasts to decide on which treatment effects are different We can continue to use the same multiple comparisons procedures as before Only differences: The number of samples per treatment n is replaced by the number of blocks b. The df for MSE is now (a - 1)(b - 1), not N - a. For example, the cutoff in Fisher’s LSD becomes</p>
+<p>Model Diagnostics</p>
+<p>There are two key assumptions, ijN(0, 2) are independently distributed. Note that this also implies homoskedasticity (the variances are not changing from sample to sample). Additivity (i.e. “no interaction”). The treatment effect i needs to be the same across all blocks.</p>
+<p>We’ve seen the first assumption before, and can continue to use normal probability plots and residual analysis to check it.</p>
+<p>One way to check additivity is to look at residuals, and see whether they are consistently lower / higher in some blocks.</p>
+<p>What can we do if we find an interaction effect? Sometimes it’s enough to transform the response Otherwise, another design may be necessary. Factorial designs (to be discussed soon) allow for inference even in the presence of interactions.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

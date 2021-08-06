@@ -86,7 +86,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: Random Effects</title>
+<title>Statistical Experimental Design: Randomized Complete Block Design</title>
 
 <meta property="description" itemprop="description" content="A short description of the post."/>
 
@@ -97,7 +97,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: Random Effects"/>
+<meta property="og:title" content="Statistical Experimental Design: Randomized Complete Block Design"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="A short description of the post."/>
 <meta property="og:locale" content="en_US"/>
@@ -105,19 +105,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: Random Effects"/>
+<meta property="twitter:title" content="Statistical Experimental Design: Randomized Complete Block Design"/>
 <meta property="twitter:description" content="A short description of the post."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Random Effects"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-03-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Randomized Complete Block Design"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-03-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week4-1_files/anchor-4.2.2/anchor.min.js","week4-1_files/bowser-1.9.3/bowser.min.js","week4-1_files/distill-2.2.21/template.v2.js","week4-1_files/header-attrs-2.8/header-attrs.js","week4-1_files/jquery-1.11.3/jquery.min.js","week4-1_files/popper-2.6.0/popper.min.js","week4-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week4-1_files/tippy-6.2.7/tippy-light-border.css","week4-1_files/tippy-6.2.7/tippy.css","week4-1_files/tippy-6.2.7/tippy.umd.min.js","week4-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"NULL"}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Random Effects","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-03T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Randomized Complete Block Design","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-03T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,7 +2276,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Random Effects</h1>
+<h1>Randomized Complete Block Design</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>A short description of the post.</p></p>
@@ -2289,41 +2289,47 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><a href="https://docs.google.com/document/d/1dHiCnwlLtSe2SX4ZE8WldiUKpkl1Kr4uIR5N0Oa916E/edit#heading=h.ga02xa5s37bi" class="uri">https://docs.google.com/document/d/1dHiCnwlLtSe2SX4ZE8WldiUKpkl1Kr4uIR5N0Oa916E/edit#heading=h.ga02xa5s37bi</a></p>
-<p><em>Readings <a href="">3.9</a>, <a href="">Rmarkdown</a></em></p>
-Sometimes a factor has so many levels, that we can’t collect observations for all of them. Or, even if you can collect them, having one parameter for each would lead to a clumsy model We instead settle for saying the effect of the factor on average, rather than any specific level
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/pq0v9wj2z63szngnxqm0mjfiq323q28k.png"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png" /><!-- -->
+<img src="https://uwmadison.box.com/shared/static/pq0v9wj2z63szngnxqm0mjfiq323q28k.png" /><!-- -->
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/35mmpml4az9ztv2wd5zp45mxiun11gja.png"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png" /><!-- -->
+<img src="https://uwmadison.box.com/shared/static/35mmpml4az9ztv2wd5zp45mxiun11gja.png" /><!-- -->
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/rp2oe5pq19cxxvgps7hie04c3tni14r2.png"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png" /><!-- -->
+<img src="https://uwmadison.box.com/shared/static/rp2oe5pq19cxxvgps7hie04c3tni14r2.png" /><!-- -->
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/fgtpgaimnwwlm5s63bmj9f8ahe1nq4qp.png"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png" /><!-- --></p>
+<p><img src="https://uwmadison.box.com/shared/static/fgtpgaimnwwlm5s63bmj9f8ahe1nq4qp.png" /><!-- --></p>
 </div>
-<p>Examples, Is there a high school effect on college GPA? (instead of effects for individual schools) Is there a loom effect on fiber strength? (don’t care about individual looms)</p>
-<p>Model</p>
-<p>The model has the form,</p>
-<p>where iN(0, 2) and ijN(0, 2). The crucial difference is that i is now thought of as random, not fixed.</p>
-<p>Notice that</p>
-<p>More generally, the covariance matrix is block diagonal, with blocks of 2 within groups.</p>
+<p><em>Readings <a href="">4.1</a>, <a href="">Rmarkdown</a></em> <a href="https://docs.google.com/document/d/17cdyQSI9V7XQ68F4ZYC14mr8P7tIHjRonaf3XPxpakw/edit#" class="uri">https://docs.google.com/document/d/17cdyQSI9V7XQ68F4ZYC14mr8P7tIHjRonaf3XPxpakw/edit#</a></p>
+<p>How can we generalize the idea of pairing to the case that we have more than two treatments to compare? Suppose that the nuisance factor is known and controllable Also assume the blocks have the same number a of samples as we have treatments (a=2 → pairing)</p>
+<p>Example [page 120]: Medical device manufacturer creates vascular grafts, and wants to see effect of manufacturing pressure on defect rate. But the resin used to make the graft arrives in batches, and may itself contribute to defects.</p>
+<p>Idea: Randomly assign each of the a treatments to the units within each block. This is called the RCBD.</p>
+<p>This is a restriction on randomization. Only random treatment assignments where each block has each treatment are allowed.</p>
+<p>Model Setup</p>
+<p>For hypothesis testing, we need a probability model. We suppose</p>
+<p>where ijN(0, 2) independently and ii=jj=0 is required to ensure identifiability.</p>
+<p>As before, is a global mean i is the treatment effect for the ith treatment level ij is the error term</p>
+<p>But now we also have j, the effect of the jthblock</p>
+<p>Notice that in each block, we must have exactly a samples, one from each treatment.</p>
 <p>Hypothesis Testing</p>
-<p>We may want to test whether there is any variation in response across factor levels. Formally,</p>
-<p>For our test statistic, we can use the same one as before,</p>
-<p>and for the same reasons as in fixed-effect ANOVA, this is F-distributed with (a - 1, N - a) df, and we can reject when this is large.</p>
+<p>We’re interested in whether any treatments have an effect,</p>
+<p>There’s a useful decomposition of the total variance that accounts for block-to-block variation,</p>
+<p>We’ll abbreviate this as SST= SSTreatment+ SSBlock+SSE.</p>
+<p>The corresponding mean squares are,</p>
+<p>MST=1N - 1SST, which is the sample variance of all yij MSTreatment=1a - 1SSTreatment MSBlock=1b - 1SSBlock MSE=1(a - 1)(b - 1)SSE, which a good estimator for 2</p>
+<p>As in usual ANOVA, if MSTreatment is much larger than MSE, then we have evidence against the null hypothesis. In fact, it turns out that, under the null,</p>
+<p>So, we can reject the null hypothesis if this statistic is larger than the1 - quantile of an F distribution with (a - 1, (a - 1)(b - 1)) df.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
