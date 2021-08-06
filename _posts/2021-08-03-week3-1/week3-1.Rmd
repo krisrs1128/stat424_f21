@@ -19,6 +19,13 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 
 _Readings [3.1 - 3.3](), [Rmarkdown]()_
 
+https://uwmadison.box.com/shared/static/h3bbv7cjo0our7syhlsc0tdn5c22xyme.png
+https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png
+https://uwmadison.box.com/shared/static/znpaeugwi14nxhuvz2lkmoo2ovv2jtx1.png
+https://uwmadison.box.com/shared/static/n836t4q718m2o16hluvglplqi4lshgcm.png
+https://uwmadison.box.com/shared/static/7prsedegwnp6wdghcw6vfv2rs7zsr7nj.png
+https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png
+
 Problem Setting
 ANOVA is used when you want to compare the effect of different treatments on a continuous response. For example,
 How does the etch rate of a tool depend on its power setting?

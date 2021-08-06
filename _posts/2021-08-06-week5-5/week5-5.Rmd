@@ -1,0 +1,58 @@
+---
+title: "Latin Squares, part 2"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-06-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [4.2, 4.3](), [Rmarkdown]()_
+
+When p is small, this test can have low power. If we can collect more than p2 samples, we should. But how exactly should the samples be collected, and how is the replicated design analyzed?
+
+The design decision is context dependent,
+You can use the same row and column levels
+You can keep column levels, but have different row levels
+Equivalently, can keep rows, but different columns
+You can have different row and different column levels
+
+Note that in each case, you use a different latin square in each replicate.
+
+Fortunately, the analysis is conceptually unified.
+We continue to have row, column, and treatment mean squares
+We have to add in replicate mean squares, to track variation from replicate-to-replicate
+The code in each case is the same,
+lm(Y ~ Replicate + W1 + W2 + X)
+
+
+Graceo-Latin Squares
+
+We motivated Latin squares by asking how we can block 2 factors simultaneously. What if we have 3?
+We could go on forever….
+That said, the transition from 2 to 3 is not hard
+
+Introduce p greek letters to represent the 3rd blocking factor. When p=5, we would have , , ,, , for example.
+
+A Graeco-Latin square is like two Latin Squares overlaid on one another,
+
+
+with one additional requirement: each latin and each greek letter must only appear together once.
+This last requirement is called orthogonality
+
+A hypothesis test can be defined, by using the decomposition,
+
+
+
+and noting that,
+
+

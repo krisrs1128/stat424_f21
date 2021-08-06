@@ -23,6 +23,12 @@ _Readings [3.9](), [Rmarkdown]()_
 Sometimes a factor has so many levels, that we can’t collect observations for all of them.
 Or, even if you can collect them, having one parameter for each would lead to a clumsy model
 We instead settle for saying the effect of the factor on average, rather than any specific level
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png")
+include_graphics("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png")
+include_graphics("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png")
+include_graphics("https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png")
+```
 
 Examples,
 Is there a high school effect on college GPA? (instead of effects for individual schools)

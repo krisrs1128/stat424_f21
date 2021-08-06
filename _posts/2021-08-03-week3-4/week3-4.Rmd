@@ -19,6 +19,11 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 _Readings [3.5](), [Rmarkdown]()_
 
 https://docs.google.com/document/d/1D44LrqM0uUv2MlC2s50A0yzMqZxyOOnqWxp8VKP-5HY/edit#
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/tmez3gdyre3lth822zm2wimmes3nujyy.png")
+include_graphics("https://uwmadison.box.com/shared/static/lc34pprk90p7evabiycjiw5c22xsm666.png")
+include_graphics("https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow05carx9uwna.png")
+```
 
 If we planned in advance which contrasts we want to use, we are fine. But what if we hadn’t planned any, and go in search for significant results using different contrasts?
 

@@ -21,6 +21,8 @@ _Readings [3.4](), [Rmarkdown]()_
 
 https://docs.google.com/document/d/1Ds7H3hZyqLNYhF8wQ2OZO7viJuHd74EzYNSXjrTH6eU/edit
 
+https://uwmadison.box.com/shared/static/ka2t5b3awtqt0mqdqtm8o5zbzs8ur7xp.png
+
 Assumptions
 
 Recall the ANOVA model,

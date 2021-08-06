@@ -1,0 +1,57 @@
+---
+title: "RCBD with Random Block Effects"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-06-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [4.1](), [Rmarkdown]()_
+
+```{r}
+include_graphics("https://uwmadison.box.com/s/gu58jurmhyraebsdyh4txlpyxegxn9xf")
+```
+
+As in standard random effects, sometimes the blocks are from a larger population
+We care about a “resin effect,” but don’t care about each individual batch The
+model is setup as before,
+
+
+
+except now both jN(0, 2) and ijN(0, 2), all independently.
+
+Observations are correlated within each block are correlated
+
+Testing
+
+We’re interested in whether any of the treatments have an effect,
+
+
+
+We won’t show it, but it turns that
+
+	
+
+so we should reject the null when MSTreatment is much larger than MSE. In fact, as in the fixed block case,
+
+
+
+so we can use the same F-distribution cutoff when testing whether any treatment effects are nonzero.
+
+Estimation
+
+As in random effects for the completely randomized design, we can use either the method of moments or maximum likelihood
+The method of moments estimators are
+	
+	
+Finding confidence intervals continues to be a challenge for the method of moments approach. If you want that, you should use maximum likelihood, as shown in the computer example accompanying these notes.

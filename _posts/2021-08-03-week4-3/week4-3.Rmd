@@ -1,5 +1,5 @@
 ---
-title: "Nonparametric Anova
+title: "Nonparametric Anova"
 description: |
   A short description of the post.
 author:
@@ -22,6 +22,19 @@ https://docs.google.com/document/d/1P7RRGBBthrBIAK7esOSl2TBFtXfPZY9xZytZG3T691s/
 What can we do when the errors seem very far from normally distributed?
 Imagine all attempts to transform the data have failed.
 We can always use nonparametric ANOVA
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/kdv2ayi2heooodf0a0j15swxld4ofll7.png")
+```
+
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5lvoajju3ekf.png")
+```
+
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/a2evjeib97ay362iue2vhkxk18gbh7l4.png")
+```
 
 Idea: If the groups have the same means, then no group should be consistently ranked higher than another.
 

@@ -1,0 +1,83 @@
+---
+title: "Latin Squares, part 1"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-06-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [4.2, 4.3](), [Rmarkdown]()_
+
+
+RCBD is nice when we have one nuisance factor
+What if we have two?
+We’re testing a manufacturing procedure, but raw materials come in batches and different operators have different skills
+We’re testing different diets on cows over a series of days, but there will both cow and day effects
+
+Assume two nuisance factors, each with p levels
+Assume that we care about p different treatments.
+
+Design idea: Make sure to run each treatment on each nuisance factor.
+Each operator sees each treatment once
+Each batch of materials is used for each treatment
+
+Setup
+
+Latin Squares are pp arrays, filled with p letters, so that each letter appears exactly once in each row and each column.
+
+
+
+This is basically sudoku for statisticians
+Why do we care? It tells us how we can implement the design idea above.
+Randomly choose a pp latin square
+The rows are levels of the first blocking factor
+The columns are levels of the second blocking factor
+The letters are the treatment levels
+The experiment consists of p2 runs, on each of the pairs of blocking levels, with treatment specified by the cell’s label
+
+Model Setting
+
+Instead of just one set of block effects, we’ll have two sets, i and k. This results in,
+
+
+
+where ijkN(0,2) independently. Here, each of the indices i, j and k range from 1, , p.
+
+To make the model identifiable, we assume 
+
+
+Hypothesis Testing
+
+Our test hasn’t changed at all,
+
+
+
+But now we need to account for block-to-block variation across both nuisance factors. The formula isn’t pretty, but it’s exactly analogous to the decompositions we’ve seen before,
+
+
+
+This is abbreviated as,
+
+
+
+and we define
+MSRows=1p - 1SSRows
+MSTreatments=1p - 1SSTreatments
+MSColumns=1p - 1SSColumns
+MSE=1(p - 1)(p - 2)SSE
+
+It turns out that
+
+
+
+which forms the basis for the test: reject the null if the ratio lies above the 1 -  quantile of this F-distribution.
