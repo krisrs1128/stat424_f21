@@ -1,10 +1,11 @@
 ---
 title: "Principles and Vocabulary"
-description: | 
+description:  | 
+  An introduction to randomization, replication, and blocking.
 author:
   - name: Kris Sankaran
     affiliation: UW Madison
-date: 2021-09-06
+date: 2021-09-09
 output:
   distill::distill_article:
     self_contained: false
@@ -15,7 +16,7 @@ library("knitr")
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-_Readings [1.1](), [1.3](), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/master/_posts/2021-08-02-week1-1/week1-1.Rmd)_ 
+_Readings [1.1, 1.3](), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/master/_posts/2021-08-02-week1-1/week1-1.Rmd)_ 
 
 1. What is an experiment?
 
@@ -23,12 +24,14 @@ _Readings [1.1](), [1.3](), [Rmarkdown](https://github.com/krisrs1128/stat424_f2
 variables of a process or system so that we may observe and identify the reasons
 for changes that may be observed -- Montgomery, pg. 1
 
-More simply,
-* Try to see how inputs affect outputs
-* You must try turning the “knobs,” it’s not enough to passively watch
+More simply, in an experiment, our goal is to learn how inputs affect outputs. It's not enough to passively watch -- we need to see how turning certain "knobs" affects the system.
 
-2. To illustrate, consider a planting example. Try different gardening
-strategies (soil type, watering schedule, …), and see what happens.
+2. To illustrate, we can consider a planting example. There are a variety of
+factors that could influence how the plants grow (soil type, watering schedule,
+etc.). We could allocate different plots of land to trying different
+configurations of factors. At the end, we hope we can arrive at generalizable
+knowledge about which configurations we should use during future growing
+seasons.
 
 ```{r, fig.hold = TRUE, out.width = "40%"}
 include_graphics("https://uwmadison.box.com/shared/static/hzv2nghaxm87u7s0awfqttmsh2k3963h.png")
@@ -37,16 +40,25 @@ include_graphics("https://uwmadison.box.com/shared/static/c9dof66gs3b2fwp3rhx353
 
 ### Randomization
 
+3. One of three key principles of experimental design is randomization. The book
+says that randomization has been applied if the,
+
 > Allocation of experimental material and the order in which the individual runs are performed are randomly determined -- Montgomery, pg. 11
 
-More simply -- assign your treatments using a coin toss (or random number generator)
+4. More simply -- we should assign treatments using a coin toss (or random
+number generator). Why is this important? There are many factors besides
+treatment that can influence outcome. We don’t want these superfluous factors to
+bias our conclusions.
 
-Why is this important? There are many factors besides treatment that can influence outcome. You don’t want those to bias your conclusions.
+5. [**Treating the sickest patients**] What could go wrong in the absence of
+randomization? Suppose we are at a hospital and are trying to see whether a new
+treatment is effective. If we don’t randomize, we might end up only treating
+sicker patients than usual. If the sickest patients have worse outcomes on
+average, then we might underestimate the effectiveness of our treatment.
 
-Example [Treating sickest patients]
-* If we don’t randomize, we might end up only treating sicker patients than usual. If the sickest patients are the ones who would end up improving the most either way, we might fool ourselves into thinking the treatment works. 
-* If we randomize, the differences coming from these extraneous factors (like amount of sickness) will cancel out.
-* Though, if there had been a difference, you’d still be able to detect it.
+6. If we randomize, the differences coming from these extraneous factors (like
+amount of sickness) will cancel out. However, if the treatment does have an
+effect, we will be able to detect it.
 
 ```{r, out.width = "40%", fig.hold = TRUE}
 include_graphics("https://uwmadison.box.com/shared/static/cmm759fivv4g0xsg85k25b1cq32zn7gp.png")
@@ -56,22 +68,27 @@ include_graphics("https://uwmadison.box.com/shared/static/t4btwq8hyhkt14kcn0p2o8
 
 ### Replication
 
+6. Replication is the second of the three main principles of experimental design. A replicate is,
+
 > An independent run of each factor combination -- Montgomery, pg. 12
 
-If you had only grown the plant once, you’d have no idea about typical
-variation. As you get more replicates, your estimate of the mean gets better
-(orange -> red)
+7. Replication is important because it helps us understand run-to-run variation.
+If we had only grown the plant once, we’d have no idea about the range of
+variation we'd expect even when fixing the influential factors. Moreover, if we
+can get many replicates, our estimates of hte mean will improve (orange -> red)
 
 ```{r}
 include_graphics("https://uwmadison.box.com/s/vwu2gz8cm01l1fa2u3vc5fha8rsvxycx")
 ```
 
-Example [Computer Chips]
+8. The book highlights a distinction between replicates and repeated measures.
+Repeated measures are several measurements on the same experimental unit.
+Replicates are distinct experimental units drawn under the same overarching
+conditions.
 
-The book highlights a distinction between replicates and repeated measures.
-
-* Top: Repeated measures on the same chip.
-* Bottom: Replicates are completely independent chips.
+9. [**Computer Chips**]. If we were trying to build better computer chips, then
+repeated measures would be several measurements on the same chip. Replicates
+would be completely independent chips.
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/rqu00u66f4szo40wfevwmesslkniz2d6.png")
@@ -80,27 +97,30 @@ include_graphics("https://uwmadison.box.com/shared/static/inwjp3ntywaoim7vs88weh
 
 ### Blocking
 
+10. The final major principle of experimental design is blocking, defined as,
+
 > A design technique used to improve the precision with which comparisons among
 the factors of interest are made. Often used to reduce or eliminate variability
 from nuisance factors.
 
-Example [Shoe soles]
-
-We want to test the difference between these purple and green shoe sole types
-(which wears down faster?).
+11. [**Shoe soles**] Suppose that we want to test the difference between these
+purple and green shoe sole types (which wears down faster?).
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/iimo8kf3idq1s9rjb8i853zbrlg989c2.png")
 include_graphics("https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png")
 ```
 
-Design 1 [No blocking]: Each person is randomly assigned a shoe sole type.
-Design 2 [Blocking]: Each person gets one of each shoe sole, and randomly wears
-on on the left / right foot.
+Two designs seem natural,
 
-Under design 1, any true shoe sole effect would be drowned out by the amount of
-walking each person did In the blocked design, consistent effects within
-individuals become detectable
+* Design 1 [No blocking]: Each person is randomly assigned a shoe sole type.
+* Design 2 [Blocking]: Each person gets one of each shoe sole, and randomly
+wears on on the left / right foot.
+
+12. Under design 1, any true shoe sole effect would be drowned out by the amount
+of walking each person did In the blocked design, consistent effects within
+individuals become detectable. In this example, blocking helped remove nuiscance
+variation resulting from some people walking more than others.
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/rnuet4s27hhidnxde2ys5n3taw9ygjhy.png")

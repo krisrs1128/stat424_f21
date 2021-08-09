@@ -1,11 +1,11 @@
 ---
-title: "week1-2"
+title: "Motivating Examples"
 description: |
-  A short description of the post.
+  Why are experiments run in the first place?
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-03-2021
+date: 09-09-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -16,19 +16,21 @@ library("knitr")
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-_Readings [](), [Rmarkdown]()_
+_Readings [1.1, 1.2, 1.4](), [Rmarkdown]()_
 
-https://docs.google.com/document/d/1HVXirkNwAS2IRkHRxhSC1tAdz6xXTS_KWq2z_ViPihU/edit#
-
-Example [Golf]
-You can imagine someone’s golf score being a function of many factors,
+1. [**Golf**] We can imagine someone’s golf score as being a function of many
+factors,
 
 ```
-golf score = f(driver type, type of ball, …)
+golf score = f(driver type, type of ball, ...)
 ```
-When you only study two factors at a time, each with two possible values, this is called a 22 design
-You can visualize the 4 possible configurations as corners of a square
-The golf score is the height of the plane.
+
+In theory, we could manipulate these factors to see how they influenced golf
+score. If we considered only two factors at a time, each with two possible
+levels, this would be called a $2^2$ design.
+
+2. We can visualize the 4 possible configurations as corners of a square The
+golf score is the height of the plane.
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/nl6161tped9imsph7qc8c830mmh4ru02.png")
@@ -36,33 +38,50 @@ include_graphics("https://uwmadison.box.com/shared/static/nl6161tped9imsph7qc8c8
 
 Mathematically,
 
-Interactions
+$$
+y = \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \epsilon
+$$
 
-It’s possible that the effect of one factor depends on the value of the other. We say the two factors interact with one another.
-In this case, the slopes along the edges are no longer parallel.
-The previous formula doesn’t capture this. Instead, we need,
+### Interactions
 
+3. It’s possible that the effect of one factor depends on the value of the other
+-- this called an interaction between the two factors. If this happens, then the
+slopes along the edges are no longer parallel. The previous formula cannot
+capture this. Instead, we need,
 
-because now the slopes can change depending on the value of the other factor,
+$$
+y = \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \beta_{12}x_{1}x_{2} + \epsilon
+$$
+
+because now the slopes can change depending on the value of the other factor.
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png")
 ```
 
-Replicates
+4. For example, rearranging terms, we can see that the slope for $x_1$ depends on the value of $x_2$,
 
-For each configuration of factors, it is better to play several rounds of golf
-If you played many rounds, you’d eventually have a good estimate of the effects from each factor
+$$
+y = \beta_{0} + \left(\beta_{1} + \beta_{12}x_2\right)x_{1} + \beta_{2}x_{2} + \epsilon.
+$$
 
-More than 2 factors
-Suppose we want to see how K different binary factors influence golf score
-We can no longer visualize the effects as corners of a square
-But we can still collect samples for each configuration of factors. This is called a 2K experiment
-A challenge is that for large K, this means collecting lots of samples
-K = 3 means 8 configurations
-K = 4 means 16
-etc.
+Can you write an expression showing how the slope for $x_{2}$ depends on $x_{1}$?
 
+5. For each configuration of factors, it is better to play several rounds of
+golf. The more rounds we play, the better our estimates of the effects for each
+factor. This is a special case of what we discussed in the last notes; the more replicates, the better our estimates.
+
+### More than 2 factors
+
+6. Suppose we want to see how K different binary factors influence golf score.
+We can no longer visualize the effects as corners of a square, but we can still
+collect samples for each configuration of factors. This is called a $2^K$
+experiment.
+
+7. A challenge is that for large K, this means collecting lots of samples
+* K = 3 means 8 configurations
+* K = 4 means 16
+* etc.
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png")
@@ -76,34 +95,24 @@ include_graphics("https://uwmadison.box.com/shared/static/2w0x5hzg03zk8113e3rcto
 include_graphics("https://uwmadison.box.com/shared/static/yzxaz23mgvezuny1ybgydrvpxazn3pm2.png")
 ```
 
-
-
-
-
-
-
-
-
-
-
-Example [Soldering]
-
-Experimental design is often used in characterizing a process
-How do each of the knobs affect the outcome?
-Sometimes we ask whether certain knobs matter at all. This is called factor screening.
+8. Experimental design is often used in characterizing a process; i.e., how do
+each of the knobs affect the outcome? Alternatively, we may ask a simpler
+question -- are there knobs that have no effect on the outcome? This is called
+factor screening. An example is the soldering experiment.
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/da48ixumvvvh51y2mi0b6vkaeczqnsmb.png")
 ```
 
-Example [Chemical Process Yield]
+9. Sometimes we care more about optimization. In this case, we don't care so
+much about how each factor influences an outcome; we just want a combination of
+factors that maximizes it. We can visualize the outcome of hte process as a
+function of several continuous variables.
 
-Sometimes we want to optimize a process across several continuous variables
-Visualize the value to optimize as a smooth function of the factors
-Make a preliminary test, and proceed in the direction of the max
-This is called the response surface method
+10. Intuitively, our experimentation should proceed by first making a
+preliminary test and then proceeding in the direction of the max. This intuition
+is formalized in response surface methodology.
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/stgfkm41btsdbnzdxkxs7osnd37hahdj.png")
 ```
-
