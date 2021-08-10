@@ -88,31 +88,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: Probability Review</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Probability distributions, their properties, and relationships."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-03"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-03"/>
+<meta property="article:published" itemprop="datePublished" content="2021-09-14"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-09-14"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: Probability Review"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Probability distributions, their properties, and relationships."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: Probability Review"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="Probability distributions, their properties, and relationships."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Probability Review"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-03-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Probability Review"]},{"type":"character","attributes":{},"value":["Probability distributions, their properties, and relationships."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["09-14-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Probability Review","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-03T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Probability Review","description":"Probability distributions, their properties, and relationships.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-09-14T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,20 +2279,24 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>Probability Review</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>Probability distributions, their properties, and relationships.</p></p>
 </div>
 
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-03-2021
+<br/>09-14-2021
 </div>
 
 <div class="d-article">
 <p><em>Readings <a href=""></a>, <a href="">Rmarkdown</a></em></p>
-<p>Probability The most basic idea of statistics is that if you ran an experiment again, you would get different results i.e., there is randomness Probability is the calculus of randomness</p>
-<p>Definitions</p>
-<p>The mean of a random variable Y defined as</p>
+<ol type="1">
+<li>The most basic idea of statistics is that if you ran an experiment again, you would get different results i.e., there is randomness Probability is the calculus of randomness</li>
+</ol>
+<h3 id="definitions">Definitions</h3>
+<ol start="2" type="1">
+<li>If <span class="math inline">\(y\)</span> is a discrete random variable taking on values <span class="math inline">\(y_{k}\)</span> with probability <span class="math inline">\(p_{k}\)</span>, then its mean is defined as <span class="math inline">\(\matbf{E}\left[y\right] = \sum_{k} p_{k}y_{k}\)</span>. If it is a continuous variable with density <span class="math inline">\(p\left(y\right)\)</span>, the corresponding quantity is <span class="math inline">\(\mathbf{E}\left[y\right] = \int_{\mathbf{R}} y p\left(y) dy\)</span>. Think of integral in the continuous case like the limit of a Riemann sum in calculus</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/rrvufphhkjkvqjkwgvu4pj712hn9tigt.png"</span><span class='op'>)</span>
@@ -2314,11 +2318,24 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 <p><img src="https://uwmadison.box.com/shared/static/plbcevhwx1sq8f9rzvn1vdwr7x70syk5.png" /><!-- --></p>
 </div>
-<p>If there are just two values with equal probability, it’s just a midpoint If one of the probability weights is larger, it’s closer to the larger weight If you have many values, it’s closer to the ones with large weight Think of continuous integral like Riemann sum in calculus</p>
-<p>The variance of a random variable Y is defined as</p>
-<p>Measures the amount of spread of Y around its mean</p>
-<p>Useful properties</p>
-<p>For calculations, it’s often easier to use properties of mean and variance to reduce to simpler expressions, rather than using the formulas above Expectation is a linear function,</p>
+<ol start="3" type="1">
+<li>To build intuition about this formula, consider some special cases,</li>
+</ol>
+<ul>
+<li>If there are just two values with equal probability, it’s just a midpoint</li>
+<li>If one of the probability weights is larger, it’s closer to the larger weight</li>
+<li>If you have many values, it’s closer to the ones with large weight</li>
+</ul>
+<ol start="4" type="1">
+<li>The variance of a random variable Y is defined as <span class="math inline">\(\mathbf{V}\left[y\right] = \mathbf{E}\left[y - \mathbf{E}\left[y\right]\right]^2\)</span>. This measures the typical distance of <span class="math inline">\(Y\)</span> around its mean.</li>
+</ol>
+<h3 id="useful-properties">Useful properties</h3>
+<ol start="5" type="1">
+<li>For calculations, it’s often easier to use properties of mean and variance to reduce to simpler expressions, rather than using the formulas above. For example, expectation is a linear function,</li>
+</ol>
+<p><span class="math display">\[
+\mathbf{E}\left[c_{1}y_{1} + c_{2}y_{2}\right] = c_{1}\mathbf{E}\left[y_{1}\right] + c_{2}\mathbf{E}\left[y_{2}\right].
+\]</span></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/pvfua6rtht3vubmz50yi3xry02t2elo3.png"</span><span class='op'>)</span>
@@ -2326,12 +2343,27 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 <p><img src="https://uwmadison.box.com/shared/static/pvfua6rtht3vubmz50yi3xry02t2elo3.png" /><!-- --></p>
 </div>
-<p>Variance is not linear, but satisfies,</p>
-<pre><code>where we define the covariance as,</code></pre>
-<p>Sampling and Estimators</p>
-<p>Goal: Draw inferences from the specific to the general.</p>
-<p>Using a sample, estimate something about the population Use a statistic (function of the data) to say something about the probability distribution it was drawn from</p>
-<p>Two very useful statistics are the sample mean,</p>
+<p>Variance is not linear, but the variance of a linear combination of two random variables can be found simply enough,</p>
+<p><span class="math display">\[
+\mathbf{V}\left[c_1 y_1 + c_2 y_2\right] = c_1^2 \mathbf{V}\left[y_1\right] + 
+  c_2^2 \mathbf{V}\left[y_2\right] +
+  c_1 c_2 \textbf{Cov}\left[y_1, y_2\right]
+\]</span></p>
+<p>where we define the covariance as,</p>
+<p><span class="math display">\[
+\textbf{Cov}\left[y_1, y_2\right] = \mathbf{E}\left[\left(y_1 - \mathbf{E}\left[y_1\right]\right)\left(
+y_2 - \mathbf{E}\left[y_2\right]\right)\right]
+\]</span></p>
+<h3 id="sampling-and-estimators">Sampling and Estimators</h3>
+<ol start="6" type="1">
+<li><p>Why is probability useful in statistics. From a high-level, statistics is concerned with drawing inferences from the specific to the general. Starting from a sample, we would like to say something true about the population. A typical strategy is to compute a statistic (a function of the sample) to say something about the probability distribution that it was drawn from (a property of the population).</p></li>
+<li><p>Suppose we have observed <span class="math inline">\(n\)</span> samples <span class="math inline">\(y_{1}, \dots, y_{n}\)</span>. Two very useful statistics are the sample mean,</p></li>
+</ol>
+<p><span class="math display">\[
+\bar{y} = \frac{1}{n}\sum_{i = 1}^{n}y_i
+\]</span> and the sample standard deviation <span class="math display">\[
+S = \sqrt{\frac{1}{n - 1}\sum_{i = 1}^{n}\left(y_i - \bar{y}\right)^2}
+\]</span></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/o3li54yw6986aurviiljfmgmrmuh5wms.png"</span><span class='op'>)</span>
@@ -2347,10 +2379,19 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <p><img src="https://uwmadison.box.com/shared/static/310ij7e4ki9xnn4doe191hks8k6h3o9z.png" /><!-- --></p>
 </div>
 <p>and the sample standard deviation,</p>
-<p>Desirable properties</p>
-<p>You want your statistics to be “unbiased” and “minimum variance” Unbiased means it’s centered around the correct value, on average Minimum variance means it’s not too far from the correct value, on average</p>
-<p>Central limit theorem</p>
-<p>For very many distributions, an appropriately rescaled version of the sample mean converges to a normal distribution</p>
+<ol start="8" type="1">
+<li>Statisticians have come up with a variety of properties that they would like their statistics to satisfy. Two common requirements are that the statistic be “unbiased” and “minimum variance.” Unbiased means it’s centered around the correct value, on average Minimum variance means it’s not too far from the correct value, on average.</li>
+</ol>
+<h3 id="central-limit-theorem">Central limit theorem</h3>
+<ol start="9" type="1">
+<li>For very many distributions, an appropriately rescaled version of the sample mean converges to a normal distribution. Specifically, if all the <span class="math inline">\(y_i\)</span> are drawn i.i.d. from some distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>, then</li>
+</ol>
+<p><span class="math display">\[
+\frac{\sqrt{n}\left(\bar{y} - \mu\right)}{\sigma} \to \mathcal{N}\left(0, 1\right).
+\]</span></p>
+<ol start="10" type="1">
+<li>This phenomenon is called the central limit theorem.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png"</span><span class='op'>)</span>
@@ -2358,7 +2399,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 <p><img src="https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png" /><!-- --></p>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2366,6 +2407,15 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

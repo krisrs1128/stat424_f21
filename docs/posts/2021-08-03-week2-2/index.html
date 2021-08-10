@@ -92,8 +92,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-03"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-03"/>
+<meta property="article:published" itemprop="datePublished" content="2021-09-14"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-09-14"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -112,7 +112,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Common Distributions"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-03-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Common Distributions"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["09-14-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Common Distributions","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-03T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Common Distributions","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-09-14T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2285,22 +2285,44 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-03-2021
+<br/>09-14-2021
 </div>
 
 <div class="d-article">
 <p><a href="https://docs.google.com/document/d/1fJxl3kNL0EdbMTHMQub3IiKqthXqKdW6HUoB4s8gw9I/edit#" class="uri">https://docs.google.com/document/d/1fJxl3kNL0EdbMTHMQub3IiKqthXqKdW6HUoB4s8gw9I/edit#</a></p>
 <p><em>Readings <a href="">2.3</a>, <a href="">Rmarkdown</a></em></p>
-<p>Don’t try to memorize the formulas for all the probability distributions Do understand their relationships to one another Do learn their shapes, and how their shapes change when you change the parameters</p>
-<p>Chi-Square Distribution</p>
-<p>This distribution arises as the sum of squares of normals,</p>
-<p>when z[k] are N(0, 1). Its claim to fame is that, if yiN(, 2) independently,</p>
-<p>which is a nontrivial but very useful fact, since the expression on the right is similar to the usual estimate of the sample variance.</p>
-<p>t Distribution</p>
-<p>A t distribution with k d.f. arises as a ratio between a normal and the square root of a chi-square with K d.f.,</p>
-<p>This seems like an esoteric fact, until you realize that the usual way of standardizing the mean (when the true variance is unknown) has this form</p>
-<p>F Distribution</p>
-<p>The F distribution occurs as the ratio of independent chi-squares (suitably rescaled), Since chi-squares arise whenever we have sums of squares, this distribution will come in handy whenever we need to compare two different sums of squares</p>
+<ol type="1">
+<li>Don’t try to memorize the formulas for all the probability distributions! Instead, it’s much more useful to learn,</li>
+</ol>
+<ul>
+<li>The relationships between distributions</li>
+<li>The basic shapes of the distributions (unimodal? nonnegative? …)</li>
+<li>How their shapes change then their parameters are changed We’ll give a refresher of some common probability distributions in these notes.</li>
+</ul>
+<ol start="2" type="1">
+<li><p><strong>Chi-Square Distribution</strong>. This distribution arises as the sum of squares of standard normals. That is, if <span class="math inline">\(z_[k] \sim \mathcal{N}\left(0, 1\right)\)</span>, then <span class="math inline">\(\sum_{k} z_{k}^2 \sim \chi^2_{K}\)</span>, a chi-square distribution with <span class="math inline">\(K\)</span>-degrees of freedom (d.f.).</p></li>
+<li><p>This distributions claim to fame is that if <span class="math inline">\(y_i \sim \mathcal{N}\left(\mu, \sigma^2\right)\)</span> independently, then</p></li>
+</ol>
+<p><span class="math display">\[
+\frac{1}{\sigma^2}\sum_{i = 1}^{n} \left(y_i- \bar{y}\right)^2 \sim \chi^2_{n -1}
+\]</span> which is a nontrivial but very useful fact, since the expression on the right is similar to the usual estimator for the sample standard deviation. We’ll make use of connection when we construct some common hypothesis tests.</p>
+<ol start="4" type="1">
+<li><strong><span class="math inline">\(t\)</span> distribution</strong>. A <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(k\)</span> d.f. arises as a ratio between a normal and the square root of a chi-square with K d.f.,</li>
+</ol>
+<p><span class="math display">\[
+\frac{\mathcal{N}\left(0, 1\right)}{\sqrt{\frac{\chi^2_{K}}{K}}}
+\]</span></p>
+<p>This seems like an esoteric fact, but notice that the usual way of standardizing the mean (when the true variance is unknown) has this form,</p>
+<p><span class="math display">\[
+\frac{\sqrt{n}\left(\bar{y} - \mu\right)}{S}
+\]</span></p>
+<ol start="5" type="1">
+<li><strong><span class="math inline">\(F\)</span> Distribution</strong>. The <span class="math inline">\(F\)</span> distribution occurs as the ratio of independent chi-squares (suitably rescaled),</li>
+</ol>
+<p><span class="math display">\[
+F_{u, v} = \frac{\frac{1}{u}\chi^2_u}{\frac{1}{v}\chi^2_v}
+\]</span></p>
+<p>Since chi-squares arise whenever we have sums of squares, this distribution will come in handy whenever we need to compare two different sums of squares.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/dv5tvok0m9vkqqmkd3c0woam5is7gzse.png"</span><span class='op'>)</span>
@@ -2316,6 +2338,15 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
