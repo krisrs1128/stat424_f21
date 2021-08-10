@@ -1,11 +1,11 @@
 ---
 title: "Probability Review"
 description: |
-  A short description of the post.
+  Probability distributions, their properties, and relationships.
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-03-2021
+date: 09-14-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -19,14 +19,18 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 
 _Readings [](), [Rmarkdown]()_
 
-Probability
-The most basic idea of statistics is that if you ran an experiment again, you would get different results
-i.e., there is randomness
-Probability is the calculus of randomness
+1. The most basic idea of statistics is that if you ran an experiment again, you
+would get different results i.e., there is randomness Probability is the
+calculus of randomness
 
-Definitions
+### Definitions
 
-The mean of a random variable Y defined as
+2. If $y$ is a discrete random variable taking on values $y_{k}$ with
+probability $p_{k}$, then its mean is defined as $\matbf{E}\left[y\right] =
+\sum_{k} p_{k}y_{k}$. If it is a continuous variable with density
+$p\left(y\right)$, the corresponding quantity is $\mathbf{E}\left[y\right] =
+\int_{\mathbf{R}} y p\left(y) dy$. Think of integral in the continuous case like
+the limit of a Riemann sum in calculus
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/rrvufphhkjkvqjkwgvu4pj712hn9tigt.png")
@@ -36,49 +40,71 @@ include_graphics("https://uwmadison.box.com/shared/static/rrvufphhkjkvqjkwgvu4pj
 include_graphics("https://uwmadison.box.com/shared/static/8truwe0fd247iuq7m5p56f2ylx4nmewn.png")
 ```
 
-
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/plbcevhwx1sq8f9rzvn1vdwr7x70syk5.png")
 ```
 
-If there are just two values with equal probability, it’s just a midpoint
-If one of the probability weights is larger, it’s closer to the larger weight
-If you have many values, it’s closer to the ones with large weight
-Think of continuous integral like Riemann sum in calculus
+3. To build intuition about this formula, consider some special cases, 
 
-The variance of a random variable Y is defined as
-
+* If there are just two values with equal probability, it’s just a midpoint
+* If one of the probability weights is larger, it’s closer to the larger weight
+* If you have many values, it’s closer to the ones with large weight
 
 
-Measures the amount of spread of Y around its mean
+4. The variance of a random variable Y is defined as $\mathbf{V}\left[y\right] =
+\mathbf{E}\left[y - \mathbf{E}\left[y\right]\right]^2$. This measures the
+typical distance of $Y$ around its mean.
 
+### Useful properties
 
-Useful properties
+5. For calculations, it’s often easier to use properties of mean and variance to
+reduce to simpler expressions, rather than using the formulas above. For
+example, expectation is a linear function,
 
-For calculations, it’s often easier to use properties of mean and variance to reduce to simpler expressions, rather than using the formulas above
-Expectation is a linear function,
+$$
+\mathbf{E}\left[c_{1}y_{1} + c_{2}y_{2}\right] = c_{1}\mathbf{E}\left[y_{1}\right] + c_{2}\mathbf{E}\left[y_{2}\right].
+$$
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/pvfua6rtht3vubmz50yi3xry02t2elo3.png")
 ```
 
+Variance is not linear, but the variance of a linear combination of two
+random variables can be found simply enough,
 
-Variance is not linear, but satisfies,
+$$
+\mathbf{V}\left[c_1 y_1 + c_2 y_2\right] = c_1^2 \mathbf{V}\left[y_1\right] + 
+  c_2^2 \mathbf{V}\left[y_2\right] +
+  c_1 c_2 \textbf{Cov}\left[y_1, y_2\right]
+$$
 
 
+where we define the covariance as,
 
-	where we define the covariance as,
+$$
+\textbf{Cov}\left[y_1, y_2\right] = \mathbf{E}\left[\left(y_1 - \mathbf{E}\left[y_1\right]\right)\left(
+y_2 - \mathbf{E}\left[y_2\right]\right)\right]
+$$
 
+### Sampling and Estimators
 
+6. Why is probability useful in statistics. From a high-level, statistics is
+concerned with drawing inferences from the specific to the general. Starting
+from a sample, we would like to say something true about the population. A
+typical strategy is to compute a statistic (a function of the sample) to say
+something about the probability distribution that it was drawn from (a property
+of the population).
 
-Sampling and Estimators
+7. Suppose we have observed $n$ samples $y_{1}, \dots, y_{n}$. Two very useful
+statistics are the sample mean, 
 
-Goal: Draw inferences from the specific to the general.
-
-Using a sample, estimate something about the population
-Use a statistic (function of the data) to say something about the probability distribution it was drawn from
-
-Two very useful statistics are the sample mean,
+$$
+\bar{y} = \frac{1}{n}\sum_{i = 1}^{n}y_i
+$$ 
+and the sample standard deviation
+$$
+S = \sqrt{\frac{1}{n - 1}\sum_{i = 1}^{n}\left(y_i - \bar{y}\right)^2}
+$$ 
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/o3li54yw6986aurviiljfmgmrmuh5wms.png")
@@ -90,20 +116,25 @@ include_graphics("https://uwmadison.box.com/shared/static/310ij7e4ki9xnn4doe191h
 
 and the sample standard deviation,
 
+8. Statisticians have come up with a variety of properties that they would like
+their statistics to satisfy. Two common requirements are that the statistic be
+"unbiased" and "minimum variance." Unbiased means it’s centered around the
+correct value, on average Minimum variance means it’s not too far from the
+correct value, on average.
 
+### Central limit theorem
 
+9. For very many distributions, an appropriately rescaled version of the sample
+mean converges to a normal distribution. Specifically, if all the $y_i$ are
+drawn i.i.d. from some distribution with mean $\mu$ and variance $\sigma^2$,
+then
 
-Desirable properties
+$$
+\frac{\sqrt{n}\left(\bar{y} - \mu\right)}{\sigma} \to \mathcal{N}\left(0, 1\right).
+$$
 
-You want your statistics to be “unbiased” and “minimum variance”
-Unbiased means it’s centered around the correct value, on average
-Minimum variance means it’s not too far from the correct value, on average
-
-Central limit theorem
-
-For very many distributions, an appropriately rescaled version of the sample mean converges to a normal distribution
+10. This phenomenon is called the central limit theorem.
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png")
 ```
-

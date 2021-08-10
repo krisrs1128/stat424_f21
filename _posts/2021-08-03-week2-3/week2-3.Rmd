@@ -1,11 +1,11 @@
 ---
 title: "Testing Differences in Means"
 description: |
-  A short description of the post.
+  The basic principles of hypothesis testing.
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-03-2021
+date: 09-16-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -19,13 +19,12 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 
 _Readings [2.4](), [Rmarkdown]()_
 
-https://docs.google.com/document/d/1ku-YEyU1LPr9KtSE9jcnIwHYbChJHXzWsm-ACWJ3EJg/edit#heading=h.ga02xa5s37bi
+1. Statistics is about making general conclusions based on specific evidence.
+One approach is based on hypothesis testing: we have a theory about the general
+(a null hypothesis), and we want to see whether our specific sample is
+consistent with that theory. This philosophy is made quantitative by following
+a standard recipe,
 
-Hypothesis testing review
-Statistics is about making general conclusions based on specific evidence. One approach is based on hypothesis testing: 
-we have a theory about the general (a null hypothesis), and we want to see whether our specific sample is consistent with that theory.
-
-There’s a general recipe,
 * Pose a null hypothesis about the world
 * Define a test statistic that should detect departures from that null
 hypothesis
@@ -45,28 +44,23 @@ include_graphics("https://uwmadison.box.com/shared/static/66793m770ob31z53fpgc4x
 include_graphics("https://uwmadison.box.com/shared/static/r9dzi8ar8l7ic7h2xarnrdiwoab6tojz.png")
 ```
 
-Types of Error
+2. Proceeding in this way, there are a few types of error
 
+|  | Tested rejected | Test didn't reject |
+|---|---|---|
+| Null is true | False alarm | Correct |
+| Null is false | Correct | Missed detection |
 
-Test rejected
-Test didn’t reject
-Null is true
-False alarm
-Correct
-Null is false
-Correct
-Missed detection
+3. **$p$-values**. “Rejected” or “Not rejected” is only a very coarse
+description of how the data conforms to a theory. $p$-values give a measure of
+the degree of (im)plausibility of a test statistic under a given null
+hypothesis. The specific measure of plausibility will depend on the form of the
+test -- we will see a specific example in the next set of notes.
 
+### Two Sample t-test
 
-The probability that a test will correctly detect a true departure from the null is called its power.
-
-p-values
-“Rejected” or “Not rejected” is a very coarse description
-p-values give a measure of the degree of (im)plausibility of a test statistic under a given null hypothesis
-Two Sample t-test
-
-Motivating example: You have two ways of making concrete mortar. Is one stronger than the other? By default, you think they are equally strong.
-
+4. Motivating example: You have two ways of making concrete mortar. Is one
+stronger than the other? By default, you think they are equally strong.
 
 Our test statistic for detecting departures from this null will be,
 

@@ -5,7 +5,7 @@ description: |
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-03-2021
+date: 09-14-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -20,33 +20,52 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 
 _Readings [2.3](), [Rmarkdown]()_
 
-Don’t try to memorize the formulas for all the probability distributions
-Do understand their relationships to one another
-Do learn their shapes, and how their shapes change when you change the parameters
+1. Don’t try to memorize the formulas for all the probability distributions! Instead, it's much more useful to learn,
+* The relationships between distributions
+* The basic shapes of the distributions (unimodal? nonnegative? ...)
+* How their shapes change then their parameters are changed
+We'll give a refresher of some common probability distributions in these notes.
 
-Chi-Square Distribution
+2. **Chi-Square Distribution**. This distribution arises as the sum of squares
+of standard normals. That is, if $z_[k] \sim \mathcal{N}\left(0, 1\right)$, then
+$\sum_{k} z_{k}^2 \sim \chi^2_{K}$, a chi-square distribution with $K$-degrees
+of freedom (d.f.).
 
-This distribution arises as the sum of squares of normals,
+3. This distributions claim to fame is that if $y_i \sim \mathcal{N}\left(\mu,
+\sigma^2\right)$ independently, then
 
-when z[k] are N(0, 1).
-Its claim to fame is that, if yiN(, 2) independently,
+$$
+\frac{1}{\sigma^2}\sum_{i = 1}^{n} \left(y_i- \bar{y}\right)^2 \sim \chi^2_{n -1}
+$$
+which is a nontrivial but very useful fact, since the expression on the right is
+similar to the usual estimator for the sample standard deviation. We'll make use
+of connection when we construct some common hypothesis tests.
+
+4. **$t$ distribution**.  A $t$ distribution with $k$ d.f. arises as a ratio
+between a normal and the square root of a chi-square with K d.f.,
+
+$$
+\frac{\mathcal{N}\left(0, 1\right)}{\sqrt{\frac{\chi^2_{K}}{K}}}
+$$
+
+This seems like an esoteric fact, but notice that the usual way of standardizing
+the mean (when the true variance is unknown) has this form,
+
+$$
+\frac{\sqrt{n}\left(\bar{y} - \mu\right)}{S}
+$$
 
 
-which is a nontrivial but very useful fact, since the expression on the right is similar to the usual estimate of the sample variance.
+5. **$F$ Distribution**. The $F$ distribution occurs as the ratio of independent
+chi-squares (suitably rescaled), 
 
-t Distribution
+$$
+F_{u, v} = \frac{\frac{1}{u}\chi^2_u}{\frac{1}{v}\chi^2_v}
+$$
 
-A t distribution with k d.f. arises as a ratio between a normal and the square root of a chi-square with K d.f.,
-
-This seems like an esoteric fact, until you realize that the usual way of standardizing the mean (when the true variance is unknown) has this form
-
-
-F Distribution
-
-The F distribution occurs as the ratio of independent chi-squares (suitably rescaled),
-Since chi-squares arise whenever we have sums of squares, this distribution will come in handy whenever we need to compare two different sums of squares
+Since chi-squares arise whenever we have sums of squares, this distribution will
+come in handy whenever we need to compare two different sums of squares.
 	
-
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/dv5tvok0m9vkqqmkd3c0woam5is7gzse.png")
 ```

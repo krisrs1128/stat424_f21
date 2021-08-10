@@ -1,2 +1,3 @@
 _posts/*/*.html
 _posts/*/*files*
+.Rproj.user
