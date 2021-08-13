@@ -88,31 +88,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: Latin Squares, part 1</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="An alternative to RCBDs that works with two nuisance factors"/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-06"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-06"/>
+<meta property="article:published" itemprop="datePublished" content="2021-10-07"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-10-07"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: Latin Squares, part 1"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="An alternative to RCBDs that works with two nuisance factors"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: Latin Squares, part 1"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="An alternative to RCBDs that works with two nuisance factors"/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Latin Squares, part 1"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-06-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Latin Squares, part 1"]},{"type":"character","attributes":{},"value":["An alternative to RCBDs that works with two nuisance factors"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["10-07-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Latin Squares, part 1","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-06T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Latin Squares, part 1","description":"An alternative to RCBDs that works with two nuisance factors","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-10-07T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,34 +2279,86 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>Latin Squares, part 1</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>An alternative to RCBDs that works with two nuisance factors</p></p>
 </div>
 
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-06-2021
+<br/>10-07-2021
 </div>
 
 <div class="d-article">
 <p><em>Readings <a href="">4.2, 4.3</a>, <a href="">Rmarkdown</a></em></p>
-<p>RCBD is nice when we have one nuisance factor What if we have two? We’re testing a manufacturing procedure, but raw materials come in batches and different operators have different skills We’re testing different diets on cows over a series of days, but there will both cow and day effects</p>
-<p>Assume two nuisance factors, each with p levels Assume that we care about p different treatments.</p>
-<p>Design idea: Make sure to run each treatment on each nuisance factor. Each operator sees each treatment once Each batch of materials is used for each treatment</p>
-<p>Setup</p>
-<p>Latin Squares are pp arrays, filled with p letters, so that each letter appears exactly once in each row and each column.</p>
-<p>This is basically sudoku for statisticians Why do we care? It tells us how we can implement the design idea above. Randomly choose a pp latin square The rows are levels of the first blocking factor The columns are levels of the second blocking factor The letters are the treatment levels The experiment consists of p2 runs, on each of the pairs of blocking levels, with treatment specified by the cell’s label</p>
-<p>Model Setting</p>
-<p>Instead of just one set of block effects, we’ll have two sets, i and k. This results in,</p>
-<p>where ijkN(0,2) independently. Here, each of the indices i, j and k range from 1, , p.</p>
-<p>To make the model identifiable, we assume</p>
-<p>Hypothesis Testing</p>
-<p>Our test hasn’t changed at all,</p>
-<p>But now we need to account for block-to-block variation across both nuisance factors. The formula isn’t pretty, but it’s exactly analogous to the decompositions we’ve seen before,</p>
-<p>This is abbreviated as,</p>
-<p>and we define MSRows=1p - 1SSRows MSTreatments=1p - 1SSTreatments MSColumns=1p - 1SSColumns MSE=1(p - 1)(p - 2)SSE</p>
-<p>It turns out that</p>
-<p>which forms the basis for the test: reject the null if the ratio lies above the 1 - quantile of this F-distribution.</p>
+<ol type="1">
+<li>RCBD is useful when we have one nuisance factor. But what if we have two?</li>
+</ol>
+<ul>
+<li>We’re testing a manufacturing procedure, but raw materials come in batches and different operators have different skills.</li>
+<li>We’re testing different diets on cows over a series of days, but there will both cow and day effects.</li>
+</ul>
+<ol start="2" type="1">
+<li><p>Assume two nuisance factors, each with <span class="math inline">\(p\)</span> levels. Furthermore, assume that we care about <span class="math inline">\(p\)</span> different treatments.</p></li>
+<li><p>The intuition for Latin Squares is similar to the intuition for RCBD,</p></li>
+</ol>
+<blockquote>
+<p>Make sure to run each treatment on each nuisance factor. For example, in the manufacturing example, each operator should see each treatment once, and each batch of materials should be used for each treatment</p>
+</blockquote>
+<h3 id="setup">Setup</h3>
+<ol start="4" type="1">
+<li>Latin Squares are <span class="math inline">\(p\times p\)</span> arrays, filled with <span class="math inline">\(p\)</span> letters, so that each letter appears exactly once in each row and each column. Here are three tables when <span class="math inline">\(p = 3\)</span>.</li>
+</ol>
+<p>| A | B | C | | B | C | A | | C | A | B |</p>
+<p>| B | A | C | | A | C | B | | C | B | A |</p>
+<p>| C | B | A | | B | A | C | | A | C | B |</p>
+<p>This is basically sudoku for statisticians</p>
+<ol start="5" type="1">
+<li>Why do we care? It tells us how we can implement the design idea above. First, randomly choose a <span class="math inline">\(p\times p\)</span> latin square</li>
+</ol>
+<ul>
+<li>The rows are levels of the first blocking factor.</li>
+<li>The columns are levels of the second blocking factor.</li>
+<li>The letters are the treatment levels Then, the experiment consists of <span class="math inline">\(p^2\)</span> runs, one for each of the pairs of blocking levels, with treatment specified by the cell’s label</li>
+</ul>
+<h3 id="model-setting">Model Setting</h3>
+<ol start="6" type="1">
+<li><p>Instead of just one set of block effects, we’ll have two sets, <span class="math inline">\(\alpha_i\)</span> and <span class="math inline">\(\beta_k\)</span>. This results in, <span class="math display">\[
+y_{ijk} &amp;= \mu + \alpha_i + \tau_j + \beta_k + \epsilon_{ijk}
+\]</span> where <span class="math inline">\(\epsilon_{ijk} \mathcal{N}\left(0,\sigma^2\right)\)</span> independently. Note that each of the indices <span class="math inline">\(i, j\)</span> and <span class="math inline">\(k\)</span> range from <span class="math inline">\(1, \dots, p\)</span>.</p></li>
+<li><p>To make the model identifiable, we assume <span class="math display">\[
+\sum_{i = 1}^{p} \alpha_i = \sum_{j = 1}^{p} \tau_j = \sum_{k = 1}^{p} \beta_{k} = 0
+\]</span></p></li>
+</ol>
+<h3 id="hypothesis-testing">Hypothesis Testing</h3>
+<ol start="8" type="1">
+<li><p>Our test hasn’t changed at all, <span class="math display">\[\begin{align*}
+H_0 &amp;: \tau_1 = \dots = \tau_a = 0 \\
+H_{1} &amp;: \tau_{i} \neq 0 \text{ for at least one } i
+\end{align*}\]</span></p></li>
+<li><p>But now we need to account for block-to-block variation across both nuisance factors. The formula isn’t pretty, but it’s exactly analogous to the decompositions we’ve seen before,</p></li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\sum_{i=1}^{p} \sum_{j=1}^{p} \sum_{k=1}^{p}\left(y_{i j k}-\bar{y} . . .\right)^{2}=&amp; p \sum_{i=1}^{p}\left(\bar{y}_{i . .}-\bar{y} . . .\right)^{2}+\\
+&amp; p \sum_{j=1}^{p}\left(\bar{y}_{\cdot j} \cdot \bar{y}_{\cdots} .\right)^{2}+\\
+&amp; p \sum_{k=1}^{p}\left(\bar{y}_{\cdot \cdot k}-\bar{y} . .\right)^{2}+\\
+&amp; \sum_{i=1}^{p} \sum_{j=1}^{p} \sum_{k=1}^{p}\left(y_{i j k}-\bar{y}_{i . .}-\bar{y}_{. j .}+\bar{y} . .\right)^{2}
+\end{aligned}
+\]</span></p>
+<ol start="10" type="1">
+<li>This is abbreviated as,</li>
+</ol>
+<p><span class="math display">\[\begin{align*}
+SS_{\text{Total}} = &amp;SS_{\text{Rows}} + \\
+&amp;SS_{\text{Columns}} +\\
+&amp;SS_{\text{Treatments}} + \\
+&amp;SS_{E}
+\end{align*}\]</span> and we define * <span class="math inline">\(MS_{\text{Rows}}=\frac{1}{p - 1}SS_{\text{Rows}}\)</span> * <span class="math inline">\(MS_{\text{Treatments}}=\frac{1}{p - 1}SS_{\text{Treatments}}\)</span> * <span class="math inline">\(MS_{\text{Columns}}=\frac{1}{p - 1}SS_{\text{Columns}}\)</span> * <span class="math inline">\(MS_{E}=\frac{1}{(p - 1)(p - 2)}SS_{E}\)</span></p>
+<ol start="11" type="1">
+<li>It turns out that <span class="math display">\[
+\frac{MS_{\text{Treatment}}}{MS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 2\right)\right)
+\]</span> which forms the basis for the test: reject the null if the ratio lies above the <span class="math inline">\(1 - \alpha\)</span> quantile of this <span class="math inline">\(F\)</span>-distribution.</li>
+</ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
@@ -2315,6 +2367,15 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

@@ -88,31 +88,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: RCBD Diagnostics</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Multiple comparison and model checks for RCBDs"/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-06"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-06"/>
+<meta property="article:published" itemprop="datePublished" content="2021-10-05"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-10-05"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: RCBD Diagnostics"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Multiple comparison and model checks for RCBDs"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: RCBD Diagnostics"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="Multiple comparison and model checks for RCBDs"/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["RCBD Diagnostics"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-06-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["RCBD Diagnostics"]},{"type":"character","attributes":{},"value":["Multiple comparison and model checks for RCBDs"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["10-05-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"RCBD Diagnostics","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-06T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"RCBD Diagnostics","description":"Multiple comparison and model checks for RCBDs","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-10-05T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,13 +2279,13 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>RCBD Diagnostics</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>Multiple comparison and model checks for RCBDs</p></p>
 </div>
 
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-06-2021
+<br/>10-05-2021
 </div>
 
 <div class="d-article">
@@ -2302,13 +2302,36 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 <p><img src="https://uwmadison.box.com/shared/static/dmob9sjh8my7l8hez390o7gnn3vu1oe6.png" /><!-- --></p>
 </div>
-<p>Multiple Comparisons</p>
-<p>As before, we may want to use contrasts to decide on which treatment effects are different We can continue to use the same multiple comparisons procedures as before Only differences: The number of samples per treatment n is replaced by the number of blocks b. The df for MSE is now (a - 1)(b - 1), not N - a. For example, the cutoff in Fisher’s LSD becomes</p>
-<p>Model Diagnostics</p>
-<p>There are two key assumptions, ijN(0, 2) are independently distributed. Note that this also implies homoskedasticity (the variances are not changing from sample to sample). Additivity (i.e. “no interaction”). The treatment effect i needs to be the same across all blocks.</p>
-<p>We’ve seen the first assumption before, and can continue to use normal probability plots and residual analysis to check it.</p>
-<p>One way to check additivity is to look at residuals, and see whether they are consistently lower / higher in some blocks.</p>
-<p>What can we do if we find an interaction effect? Sometimes it’s enough to transform the response Otherwise, another design may be necessary. Factorial designs (to be discussed soon) allow for inference even in the presence of interactions.</p>
+<h3 id="multiple-comparisons">Multiple Comparisons</h3>
+<ol type="1">
+<li>As before, we may want to use contrasts to decide on which treatment effects are different We can continue to use the same multiple comparisons procedures as before, but have to account for a few differences,</li>
+</ol>
+<ul>
+<li>The number of samples per treatment <span class="math inline">\(n\)</span> is replaced by the number of blocks <span class="math inline">\(b\)</span>.</li>
+<li>The d.f. for <span class="math inline">\(MS_{E}\)</span> is now <span class="math inline">\((a - 1)(b - 1)\)</span>, not <span class="math inline">\(N - a\)</span>.</li>
+</ul>
+<ol start="2" type="1">
+<li>For example, the cutoff in Fisher’s LSD becomes <span class="math display">\[
+t_{\frac{\alpha}{2}, \left(a - 1\right)\left(b - 1\right)}\sqrt{\frac{2 MS_{E}}{b}}
+\]</span></li>
+</ol>
+<h3 id="model-diagnostics">Model Diagnostics</h3>
+<ol start="3" type="1">
+<li>There are two key assumptions when we use RCBDs,</li>
+</ol>
+<ul>
+<li><span class="math inline">\(\epsilon \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> are independently distributed. Note that this also implies homoskedasticity (the variances are not changing from sample to sample).</li>
+<li>Additivity (i.e. “no interaction”). The treatment effects <span class="math inline">\(\tau_i\)</span> need to be the same across all blocks.</li>
+</ul>
+<ol start="4" type="1">
+<li><p>We’ve seen the first assumption before, and can continue to use normal probability plots and residual analysis to check it.</p></li>
+<li><p>One way to check additivity is to look at residuals, and see whether they are consistently lower / higher in some blocks.</p></li>
+<li><p>What can we do if we find an interaction effect?</p></li>
+</ol>
+<ul>
+<li>Sometimes the interaction effects will disappear after transforming the response (e.g., using <span class="math inline">\(\log\)</span> or <span class="math inline">\(\sqrt\)</span>)</li>
+<li>Otherwise, another design may be necessary. Factorial designs (to be discussed soon) allow for inference even in the presence of interactions.</li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
@@ -2317,6 +2340,15 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

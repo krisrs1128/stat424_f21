@@ -2349,20 +2349,66 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </ol>
 <h3 id="two-sample-t-test">Two Sample t-test</h3>
 <ol start="4" type="1">
-<li>Motivating example: You have two ways of making concrete mortar. Is one stronger than the other? By default, you think they are equally strong.</li>
+<li>Motivating example: You have two ways of making concrete mortar. Is one stronger than the other? By default, you think they are equally strong. We can denote this (the <em>null hypothesis</em>) by,</li>
 </ol>
-<p>Our test statistic for detecting departures from this null will be,</p>
-<p>where we define the pooled standard deviation by,</p>
-<p>and S1 and S2 are the usual standard deviations for each group individually. (consider what happens when n1 = n2 = n)</p>
-<p>Under the null hypothesis, this is a ratio between a standard normal and chi-square, so t0 is t-distributed with n - 2 df. This gives reference distribution under the null. Confidence intervals Instead of thinking we know the mean and trying to reject it, why don’t we try to directly estimate it (with an error bar)?</p>
-<p>A 95% confidence interval is an interval [L, U] satisfying,</p>
-<p>The randomness here is in L and U. If we were being more formal, we would write those as functions of the (random) sample,</p>
-<p>To construct one for the two sample test, observe,</p>
+<p><span class="math display">\[
+H_0: \mu_1 = \mu_2
+\]</span></p>
+<p>The alternative hypothesis is that the strengths are not equal,</p>
+<p><span class="math display">\[
+H_1: \mu_1 \neq \mu_2
+\]</span></p>
+<ol start="5" type="1">
+<li>Our test statistic for detecting departures from this null will be,</li>
+</ol>
+<p><span class="math display">\[
+t_0 := \frac{\bar{y}_1 - \bar{y}_2}{S_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
+\]</span> where we define the pooled standard deviation by,</p>
+<p><span class="math display">\[
+S^2_p = \frac{\left(n_1 - 1\right)S_1^2 + \left(n_2 - 1\right)S_2^2}{n_1 + n_2 -2}
+\]</span> and <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are the usual standard deviations for each group individually. (consider what happens when <span class="math inline">\(n_1 = n_2 = n\)</span>)</p>
+<ol start="6" type="1">
+<li>Under the null hypothesis, this is a ratio between a standard normal and chi-square, so <span class="math inline">\(t_0\)</span> is <span class="math inline">\(t\)</span>-distributed with <span class="math inline">\(n - 2\)</span> d.f. This gives reference distribution under the null.</li>
+</ol>
+<h3 id="confidence-intervals">Confidence intervals</h3>
+<ol start="7" type="1">
+<li>Instead of thinking we know the mean and trying to reject it, why don’t we try to directly estimate it (with an error bar)? A 95% confidence interval is an interval <span class="math inline">\([L, U]\)</span> satisfying,</li>
+</ol>
+<p><span class="math display">\[
+\mathbf{P}\left(\theta \in \left[L, U\right]\right) = 0.95
+\]</span></p>
+<ol start="8" type="1">
+<li>The randomness here is in <span class="math inline">\(L\)</span> and <span class="math inline">\(U\)</span>. If we were being more formal, we would write those as functions of the (random) sample,</li>
+</ol>
+<p><span class="math display">\[
+\left[L\left(y_1, \dots, y_n\right), U\left(y_1, \dots, y_n\right)\right]
+\]</span></p>
+<ol start="9" type="1">
+<li>To construct one for the two sample test, recall that, based on the <span class="math inline">\(t\)</span>-distribution characterization from the probability-review lecture,</li>
+</ol>
+<p><span class="math display">\[
+P\left(\left(\frac{\bar{y}_1 - \bar{y}_2\right) - \left(\mu_1 - \mu_2\right)}{S_p\sqrt{\frac{2}{n}}} \in \left[t_{0.025, 2\left(n - 1\right), t_{0.975, 2\left(n - 1\right)}}\right]  \right) = 0.95
+\]</span></p>
 <p>To simplify the algebra, let</p>
-<p>So that the above expression reduces to</p>
-<p>Then if we rearrange terms, we find</p>
-<p>If you are calculating by hand, you can use the fact that tleft=-tright, to simplify the expression to</p>
-<p>Which is exactly the definition of a confidence interval. Plugging in the original expressions gives the confidence interval for the difference in means, assuming shared variance.</p>
+<p><span class="math display">\[
+T\left(y\right) := \bar{y}_1 - \bar{y}_2 \\
+\theta := \mu_1 - \mu_2 \\
+\hat{\sigma} := S_p\sqrt{\frac{2}{n}} \\
+t_{0.025, 2\left(n - 1\right)} := t_{\text{left}} \\
+t_{0.975, 2\left(n - 1\right)} := t_{\text{right}}
+\]</span> so that the above expression reduces to,</p>
+<p><span class="math display">\[
+\mathbf{P}\left(\frac{T\left(y\right) - \theta}{\hat{\sigma}} \in \left[t_{\text{left}}, t_{\text{right}}\right]\right) = 0.95
+\]</span></p>
+<ol start="10" type="1">
+<li>Now, if we rearrange terms, we find</li>
+</ol>
+<p><span class="math display">\[
+\mathbf{P}\left(\theta \in \left[T\left(y\right) - \hat{\sigma}t_{\text{right}}, T\left(y\right) + \hat{\sigma}t_{\text{left}}\right]\right) = 0.95
+\]</span> We can use the fact that <span class="math inline">\(t_{\text{left}} = t_{\text{right}}\)</span> to simplify the expression further to</p>
+<p><span class="math display">\[
+\mathbf{P}\left(\theta \in \left[T\left(y\right) - \hat{\sigma}t_{\text{right}}, T\left(y\right) + \hat{\sigma}t_{\text{right}}\right]\right) = 0.95
+\]</span> This is exactly the property that a confidence interval has to satisfy. Plugging in the original expressions gives the confidence interval for the difference in means, assuming shared variance.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

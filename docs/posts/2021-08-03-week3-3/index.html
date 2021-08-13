@@ -88,31 +88,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: Contrasts</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Making pointed comparisons between treatment levels in ANOVA"/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-03"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-03"/>
+<meta property="article:published" itemprop="datePublished" content="2021-09-23"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-09-23"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: Contrasts"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Making pointed comparisons between treatment levels in ANOVA"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: Contrasts"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="Making pointed comparisons between treatment levels in ANOVA"/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Contrasts"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-03-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Contrasts"]},{"type":"character","attributes":{},"value":["Making pointed comparisons between treatment levels in ANOVA"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["09-23-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Contrasts","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-03T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Contrasts","description":"Making pointed comparisons between treatment levels in ANOVA","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-09-23T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,13 +2279,13 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>Contrasts</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>Making pointed comparisons between treatment levels in ANOVA</p></p>
 </div>
 
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-03-2021
+<br/>09-23-2021
 </div>
 
 <div class="d-article">
@@ -2299,19 +2299,57 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <p><img src="https://www.airmeet.com/event/3124e6e0-8b3d-11eb-adfc-b1c12ad96800?code=ffbe7ca8-0134-473b-9f02-83856e75c8f4" /><!-- --></p>
 </div>
 <p><em>Readings <a href="">3.5</a>, <a href="">Rmarkdown</a></em></p>
-<p>What is a contrast? When we reject the null in ANOVA, we know at least one of the treatments deviates from the global average. But which one(s)?</p>
-<p>Contrasts help. A contrast is a linear combination of the means,</p>
-<p>For any particular c, we test</p>
-<p>To see that this is actually something worth doing, consider the case that we have 4 different means, 1, 2, 3, 4, c = (1, 1, -1, -1): Are the first two means different from the last two, on average? c = (1, -1, 0, 0): Are the first two means equal to each other? etc. Testing Contrasts Remember the hypothesis testing recipe. We need, A test statistic A reference distribution</p>
-<p>Our best guess at i is yi, so a reasonable statistic is,</p>
-<p>How will we find its reference distribution? Under the null, this statistic is normally distributed with mean 0 and variance,</p>
-<p>So, a standardized statistic is,</p>
-<p>To estimate 2, we can use MSE. This is a good choice, because it remains valid even when the null is untrue.</p>
-<p>Since we plugged-in the estimate 2, we have divided our normal distribution by the square root of a chi-square. The result is therefore t-distributed, with N - a df. Confidence Intervals for Contrasts If we make the same computations as above, but without assuming that the null is true, we would find that,</p>
-<p>when we choose tleft and tright to be the 0.025 and 0.975 quantiles of a t distribution with N - a df.</p>
-<p>The resulting confidence interval,</p>
-<p>This is an explicit formula that you can use in your computations, but don’t let the density of the symbols here confuse you. Returning to our original definitions, this is just,</p>
-<p>where we’re writing Var instead of Var because we’re plugging in the estimate 2.</p>
+<ol type="1">
+<li><p>What is a contrast? When we reject the null in ANOVA, we know at least one of the treatments deviates from the global average. But which one(s)?</p></li>
+<li><p>Contrasts address this question. A contrast is a linear combination of the means, <span class="math display">\[
+\Gamma(c)=\sum_{i=1}^{a} c_{i} \mu_{i}
+\]</span> For any particular <span class="math inline">\(c\)</span>, we test <span class="math display">\[
+\begin{aligned}
+&amp;H_{0}: \Gamma(c)=0 \\
+&amp;H_{1}: \Gamma(c) \neq 0
+\end{aligned}
+\]</span></p></li>
+<li><p>To see that this is actually something worth doing, consider the case that we have 4 different means, <span class="math inline">\(\mu_1, \mu_2, \mu_3, \mu_4\)</span>,</p>
+<ul>
+<li>c = (1, 1, -1, -1): Are the first two means different from the last two, on average?</li>
+<li>c = (1, -1, 0, 0): Are the first two means equal to each other?</li>
+<li>etc.</li>
+</ul></li>
+</ol>
+<h3 id="testing-contrasts">Testing Contrasts</h3>
+<ol start="4" type="1">
+<li><p>Remember the hypothesis testing recipe. We need, (a) a test statistic and (b) a reference distribution for that statistic.</p></li>
+<li><p>Our best guess at <span class="math inline">\(\mu_i\)</span> is <span class="math inline">\(\bar{y}_i\)</span>, so a reasonable statistic is,</p></li>
+</ol>
+<p><span class="math display">\[
+\hat{\Gamma}(c)=\sum_{i=1}^{a} c_{i} \bar{y}_{i}
+\]</span></p>
+<ol start="6" type="1">
+<li><p>How will we find its reference distribution? Under the null, this statistic is normally distributed with mean 0 and variance, <span class="math display">\[
+\begin{aligned}
+\operatorname{Var}(\hat{\Gamma}(c)) &amp;=\sum_{i=1}^{a} c_{i}^{2} \operatorname{Var}\left(\bar{y}_{i}\right) \\
+&amp;=\frac{\sigma^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}
+\end{aligned}
+\]</span> Standardizing our original statistic, we obtain,</p>
+<span class="math display">\[\begin{aligned}
+\frac{\hat{\Gamma}(c)}{\sqrt{\operatorname{Var}(\hat{\Gamma}(c))}} &amp;=\frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}}{\sqrt{\frac{\sigma^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}} \\
+&amp; \approx \frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}}{\sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}}
+\end{aligned}\]</span></li>
+<li><p>To estimate <span class="math inline">\(\sigma^2\)</span>, we can use <span class="math inline">\(\hat{\sigma}^2 := MS_E\)</span>. This is a good choice, because it remains valid even when the null is untrue.</p></li>
+<li><p>Since we plugged-in the estimate <span class="math inline">\(\hat{\sigma}^2\)</span>, we have divided our normal distribution by the square root of a chi-square. The result is therefore t-distributed, with <span class="math inline">\(N - a\)</span> df.</p></li>
+</ol>
+<h3 id="confidence-intervals-for-contrasts">Confidence Intervals for Contrasts</h3>
+<ol start="9" type="1">
+<li><p>If we make the same computations as above, but without assuming that the null is true, we would find that, <span class="math display">\[
+\mathbf{P}\left(\frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}-\sum_{i=1}^{a} c_{i} \mu_{i}}{\sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}} \in\left[t_{\text {left }}, t_{\text {right }}\right]\right)=0.95
+\]</span> where we choose <span class="math inline">\(t_{\text{left}}\)</span> and <span class="math inline">\(t_{\text{right}}\)</span> to be the 0.025 and 0.975 quantiles of a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(N - a\)</span> df.</p></li>
+<li><p>The resulting confidence interval is,</p></li>
+</ol>
+<p><span class="math display">\[
+\left[\sum_{i=1}^{a} c_{i} \bar{y}_{i}-t_{\text {right }} \sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}, \sum_{i=1}^{a} c_{i} \bar{y}_{i}+t_{\text {right }} \sqrt{\left.\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}\right]}\right.
+\]</span> This is an explicit formula that you can use in your computations, but don’t let the complexity of the symbols here confuse you. Returning to our original definitions, this is just, <span class="math display">\[
+\left[\hat{\Gamma}(c)-t_{\mathrm{left}} \sqrt{\widehat{\operatorname{Var}}(\hat{\Gamma}(c))}, \hat{\Gamma}(c)+t_{\mathrm{left}} \sqrt{\widehat{\operatorname{Var}}(\hat{\Gamma}(c))}\right]
+\]</span> where we’re writing <span class="math inline">\(\hat{\text{Var}}\)</span> instead of <span class="math inline">\(\text{Var}\)</span> because we’re plugging in the estimate <span class="math inline">\(\hat{\sigma}^2\)</span>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
@@ -2320,6 +2358,15 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

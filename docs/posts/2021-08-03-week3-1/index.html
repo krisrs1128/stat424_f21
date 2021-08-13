@@ -88,31 +88,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: ANOVA</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="The ANOVA model and sum-of-squares decomposition"/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-03"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-03"/>
+<meta property="article:published" itemprop="datePublished" content="2021-09-21"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-09-21"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: ANOVA"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="The ANOVA model and sum-of-squares decomposition"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: ANOVA"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="The ANOVA model and sum-of-squares decomposition"/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["ANOVA"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-03-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["ANOVA"]},{"type":"character","attributes":{},"value":["The ANOVA model and sum-of-squares decomposition"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["09-21-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"ANOVA","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-03T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"ANOVA","description":"The ANOVA model and sum-of-squares decomposition","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-09-21T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,34 +2279,133 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>ANOVA</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>The ANOVA model and sum-of-squares decomposition</p></p>
 </div>
 
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-03-2021
+<br/>09-21-2021
 </div>
 
 <div class="d-article">
 <p><em>Readings <a href="">3.1 - 3.3</a>, <a href="">Rmarkdown</a></em></p>
-<p><a href="https://uwmadison.box.com/shared/static/h3bbv7cjo0our7syhlsc0tdn5c22xyme.png" class="uri">https://uwmadison.box.com/shared/static/h3bbv7cjo0our7syhlsc0tdn5c22xyme.png</a> <a href="https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png" class="uri">https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png</a> <a href="https://uwmadison.box.com/shared/static/znpaeugwi14nxhuvz2lkmoo2ovv2jtx1.png" class="uri">https://uwmadison.box.com/shared/static/znpaeugwi14nxhuvz2lkmoo2ovv2jtx1.png</a> <a href="https://uwmadison.box.com/shared/static/n836t4q718m2o16hluvglplqi4lshgcm.png" class="uri">https://uwmadison.box.com/shared/static/n836t4q718m2o16hluvglplqi4lshgcm.png</a> <a href="https://uwmadison.box.com/shared/static/7prsedegwnp6wdghcw6vfv2rs7zsr7nj.png" class="uri">https://uwmadison.box.com/shared/static/7prsedegwnp6wdghcw6vfv2rs7zsr7nj.png</a> <a href="https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png" class="uri">https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png</a></p>
-<p>Problem Setting ANOVA is used when you want to compare the effect of different treatments on a continuous response. For example, How does the etch rate of a tool depend on its power setting? How do an opera company’s different donation strategies compare with one another? How does the average rental time compare across cars?</p>
-<p>Visually, it can be used whenever the data can be arranged as a series of boxplots. Model and Test Setup Formally, consider the model</p>
-<p>where i=1, , a and j=1, , n and the errors ijN(0, 2) are independent.</p>
-<p>i indexes different groups j indexes the samples within groups. a is the number of groups n is the number of samples in each group N=na is the total number of samples</p>
-<p>Our null hypothesis is that none of the groups deviate from the global mean. The alternative is that at least one of the groups is different. Formally,</p>
-<p>Important Identities The word “analysis” in ANOVA is used in the classical sense of to break something into its parts. ANOVA breaks the observed variation into distinct components,</p>
-<p>which is abbreviated as</p>
-<p>SStotal = SStreatments + SSerror.</p>
-<p>If any of the groups had a mean that was different from the global mean, then you’d expect the treatment term to be larger than it would otherwise be. How large is large enough to reject?</p>
-<p>Since the variance within each group is 2, the variance of each yi is 2n. The blue term looks like how we would usually estimate the variances of the yi, i.e.,</p>
-<p>On the other hand, under the null, all the yijN(,2), so we would also know,</p>
-<p>So under the null,</p>
-<p>but otherwise it would be larger.</p>
-<p>Note that the numerator and denominator are chi-squares, with a - 1 and N - a df, respectively. It’s not obvious, but they’re also independent (this is called Cochran’s theorem). Therefore, the null reference is an F distribution with (a - 1, N - a) df. The ANOVA Table If we introduce MStreatments and MSE for the numerator and denominator in the ratio above, we can organize this information as,</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/h3bbv7cjo0our7syhlsc0tdn5c22xyme.png
+"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="https://uwmadison.box.com/shared/static/h3bbv7cjo0our7syhlsc0tdn5c22xyme.png" /><!-- --></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png
+"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png" /><!-- --></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/znpaeugwi14nxhuvz2lkmoo2ovv2jtx1.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="https://uwmadison.box.com/shared/static/znpaeugwi14nxhuvz2lkmoo2ovv2jtx1.png" /><!-- --></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/n836t4q718m2o16hluvglplqi4lshgcm.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="https://uwmadison.box.com/shared/static/n836t4q718m2o16hluvglplqi4lshgcm.png" /><!-- --></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/7prsedegwnp6wdghcw6vfv2rs7zsr7nj.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="https://uwmadison.box.com/shared/static/7prsedegwnp6wdghcw6vfv2rs7zsr7nj.png" /><!-- --></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png" /><!-- --></p>
+</div>
+<ol type="1">
+<li>ANOVA is used when we want to compare the effect of different treatments on a continuous response. For example,</li>
+</ol>
+<ul>
+<li>How does the etch rate of a tool depend on its power setting?</li>
+<li>How do an opera company’s different donation strategies compare with one another?</li>
+<li>How does the average rental time compare across cars?</li>
+</ul>
+<ol start="2" type="1">
+<li>Visually, it can be used whenever the data can be arranged as a series of boxplots.</li>
+</ol>
+<h3 id="model-and-test-setup">Model and Test Setup</h3>
+<ol start="3" type="1">
+<li>Formally, consider the model</li>
+</ol>
+<p><span class="math display">\[
+y_{ij} = \mu + \tau_i + \epsilon_{ij}
+\]</span> where <span class="math inline">\(i=1 \dots a\)</span> and <span class="math inline">\(j=1, \dots, n\)</span> and the errors <span class="math inline">\(\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> are independent.</p>
+<ul>
+<li><span class="math inline">\(i\)</span> indexes different groups</li>
+<li><span class="math inline">\(j\)</span> indexes the samples within groups.</li>
+<li><span class="math inline">\(a\)</span> is the number of groups</li>
+<li><span class="math inline">\(n\)</span> is the number of samples in each group</li>
+<li><span class="math inline">\(N=na\)</span> is the total number of samples</li>
+</ul>
+<ol start="4" type="1">
+<li>Our null hypothesis is that none of the groups deviate from the global mean. The alternative is that at least one of the groups is different. Formally,</li>
+</ol>
+<p><span class="math display">\[
+H_0: \tau_1 = \dots, = \tau_{a} = 0 \\
+H_1: \tau_{i} \neq 0 \text{ for at least one }i.
+\]</span></p>
+<h3 id="important-identities">Important Identities</h3>
+<ol start="5" type="1">
+<li>The word “analysis” in ANOVA is used in the classical sense of to break something into its parts<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. ANOVA breaks the observed variation into distinct components,</li>
+</ol>
+<p><span class="math display">\[
+\sum_{ij} \color{#ff8200}{\left(y_{ij} - \bar{y}\right)}^2 = n\sum_{i} \color{#447583}{\left(\bar{y}_i - \bar{y}\right)}^2 + \sum_{i,j} \color{#b090c2}{\left(y_{ij} - \bar{y}_{i}\right)}^2
+\]</span> which is abbreviated as</p>
+<p><span class="math display">\[
+\color{#ff8200}{SS_{\text{total}}} = \color{#447583}{SS_{\text{treatments}}} + \color{#b090c2}{SS_{\text{error}}}.
+\]</span> This is usually called the “ANOVA identity.”</p>
+<ol start="5" type="1">
+<li><p>If any of the groups had a mean that was different from the global mean, then you’d expect the  term to be larger than it would otherwise be. How large is large enough to reject?</p></li>
+<li><p>Since the variance within each group is <span class="math inline">\(\sigma^2\)</span>, the variance of each <span class="math inline">\(\bar{y}_i\)</span> is <span class="math inline">\(\frac{\sigma^2}{n}\)</span>. The blue term looks like how we would usually estimate the variances of the <span class="math inline">\(y_i\)</span>, i.e.,</p></li>
+</ol>
+<p><span class="math display">\[
+\frac{1}{a}\sum_{i}\color{#447583}{\left(y_i - \bar{y}\right)}^2 \approx \frac{\sigma^2}{n}
+\]</span> 7. On the other hand, under the null, all the <span class="math inline">\(y_{ij} \sim \mathcal{N}\left(\mu, \sigma^2\right)\)</span>, so we would also know,</p>
+<p><span class="math display">\[
+\frac{1}{N-a} \sum_{i, j}\color{#b090c2}{\left(y_{i, j}-\bar{y}_{i}\right)}^{2} \approx \sigma^{2},
+\]</span></p>
+<p>so under the null,</p>
+<p><span class="math display">\[
+\frac{\frac{\color{#447583}{SS_{\text {treatments }}}}{a-1}}{\color{#b090c2}{\frac{SS_{\text {error }}}{N-a}}} \approx 1.
+\]</span></p>
+<p>Note that under the alternative, it would be larger than 1.</p>
+<ol start="8" type="1">
+<li>From our results in the probability review lectures, both the  and  are chi-squares, with <span class="math inline">\(a - 1\)</span> and <span class="math inline">\(N - a\)</span> d.f., respectively. It’s not obvious, but they’re also independent (this is called Cochran’s theorem). Therefore, the null reference distribution is an <span class="math inline">\(F\)</span> distribution with <span class="math inline">\((a - 1, N - a)\)</span> d.f.</li>
+</ol>
+<h3 id="the-anova-table">The ANOVA Table</h3>
+<ol start="9" type="1">
+<li>If we introduce <span class="math inline">\(\color{#447583}{MS_{\text{treatments}}}\)</span> and <span class="math inline">\(\color{#b090c2}{MS_{E}}\)</span> for the numerator and denominator in the ratio above, we can organize this information as,</li>
+</ol>
 <p>This is also how most computer output will be displayed, so it’s worth being familiar with.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>i.e. the oppositive of “synthesis.”<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2314,6 +2413,15 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

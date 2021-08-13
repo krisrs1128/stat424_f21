@@ -88,31 +88,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: RCBD with Random Block Effects</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="The random effects analog of RCBD designs"/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-06"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-06"/>
+<meta property="article:published" itemprop="datePublished" content="2021-10-07"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-10-07"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: RCBD with Random Block Effects"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="The random effects analog of RCBD designs"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: RCBD with Random Block Effects"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="The random effects analog of RCBD designs"/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["RCBD with Random Block Effects"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-06-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["RCBD with Random Block Effects"]},{"type":"character","attributes":{},"value":["The random effects analog of RCBD designs"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["10-07-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"RCBD with Random Block Effects","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-06T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"RCBD with Random Block Effects","description":"The random effects analog of RCBD designs","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-10-07T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,13 +2279,13 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>RCBD with Random Block Effects</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>The random effects analog of RCBD designs</p></p>
 </div>
 
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-06-2021
+<br/>10-07-2021
 </div>
 
 <div class="d-article">
@@ -2297,17 +2297,42 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 <p><img src="https://uwmadison.box.com/s/gu58jurmhyraebsdyh4txlpyxegxn9xf" /><!-- --></p>
 </div>
-<p>As in standard random effects, sometimes the blocks are from a larger population We care about a “resin effect,” but don’t care about each individual batch The model is setup as before,</p>
-<p>except now both jN(0, 2) and ijN(0, 2), all independently.</p>
-<p>Observations are correlated within each block are correlated</p>
-<p>Testing</p>
-<p>We’re interested in whether any of the treatments have an effect,</p>
-<p>We won’t show it, but it turns that</p>
-<p>so we should reject the null when MSTreatment is much larger than MSE. In fact, as in the fixed block case,</p>
-<p>so we can use the same F-distribution cutoff when testing whether any treatment effects are nonzero.</p>
-<p>Estimation</p>
-<p>As in random effects for the completely randomized design, we can use either the method of moments or maximum likelihood The method of moments estimators are</p>
-<p>Finding confidence intervals continues to be a challenge for the method of moments approach. If you want that, you should use maximum likelihood, as shown in the computer example accompanying these notes.</p>
+<ol type="1">
+<li><p>As in standard random effects, sometimes the blocks are from a larger population. For example, in the medical device example, we care about a ``resin effect,’’ but don’t care about each individual batch.</p></li>
+<li><p>The model is setup as before,</p></li>
+</ol>
+<p><span class="math display">\[
+y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
+\]</span> except now both <span class="math inline">\(\beta_j \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> and <span class="math inline">\(\epsilon_{ij} \sim \mathcal{N}\left(0, 2\right)\)</span>, all independently.</p>
+<ol start="3" type="1">
+<li>Observations are correlated within each block are correlated. The calculation to demonstrate this is similar to the one used to show that observations <span class="math inline">\(i\)</span> within levels of an ordinary random effects model are correlated.</li>
+</ol>
+<h3 id="hypothesis-testing">Hypothesis Testing</h3>
+<ol start="4" type="1">
+<li>We’re interested in whether any of the treatments have an effect,</li>
+</ol>
+<p><span class="math display">\[\begin{align*}
+H_0 &amp;: \tau_1 = \dots = \tau_a = 0 \\
+H_{1} &amp;: \tau_{i} \neq 0 \text{ for at least one } i
+\end{align*}\]</span></p>
+<ol start="5" type="1">
+<li><p>We won’t show it, but it turns that <span class="math display">\[\begin{align*}
+\mathbf{E}\left[MS_{\text{Treatment}}\right] &amp;= \sigma^2 + \frac{b \sum_{i = 1}^{a} \tau_i^2}{a - 1} \\
+\mathbf{E}\left[MS_{\text{Block}}\right] &amp;= \sigma^2 + a \sigma^2_{\beta} \\
+\mathbf{E}\left[MS_{E}\right] &amp;= \sigma^2
+\end{align*}\]</span> so we should reject the null when <span class="math inline">\(MS_{\text{Treatment}}\)</span> is much larger than <span class="math inline">\(MS_E\)</span>.</p></li>
+<li><p>In fact, as in the fixed block case, <span class="math display">\[
+\frac{MS_{\text{Treatment}}}{MS_{E}} \sim F\left(a - 1, \left(a - 1\right)\left(b - 1\right)\right)
+\]</span> so we can use the same F-distribution cutoff when testing whether any treatment effects are nonzero.</p></li>
+</ol>
+<h3 id="estimation">Estimation</h3>
+<ol start="7" type="1">
+<li><p>As in random effects for the completely randomized design, we can use either the method of moments or maximum likelihood. The method of moments estimators are <span class="math display">\[\begin{align*}
+\hat{\sigma}    &amp;= MS_{E} \\
+\hat{\sigma}^2_{\beta} &amp;= \frac{1}{a}\left[MS_{\text{Block}} - MS_{E}\right]
+\end{align*}\]</span></p></li>
+<li><p>Finding confidence intervals continues to be a challenge for the method of moments approach. In this case, maximum likelihood is preferred. This method is shown in the computer example accompanying these notes.</p></li>
+</ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
@@ -2316,6 +2341,15 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

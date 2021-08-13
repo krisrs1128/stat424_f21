@@ -86,33 +86,33 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: Nonparametric Anova</title>
+<title>Statistical Experimental Design: Nonparametric ANOVA</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="A model-free alternative to ANOVA."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-03"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-03"/>
+<meta property="article:published" itemprop="datePublished" content="2021-09-30"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-09-30"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: Nonparametric Anova"/>
+<meta property="og:title" content="Statistical Experimental Design: Nonparametric ANOVA"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="A model-free alternative to ANOVA."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: Nonparametric Anova"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:title" content="Statistical Experimental Design: Nonparametric ANOVA"/>
+<meta property="twitter:description" content="A model-free alternative to ANOVA."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Nonparametric Anova"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-03-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Nonparametric ANOVA"]},{"type":"character","attributes":{},"value":["A model-free alternative to ANOVA."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["09-30-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Nonparametric Anova","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-03T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Nonparametric ANOVA","description":"A model-free alternative to ANOVA.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-09-30T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,21 +2276,23 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Nonparametric Anova</h1>
+<h1>Nonparametric ANOVA</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>A model-free alternative to ANOVA.</p></p>
 </div>
 
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-03-2021
+<br/>09-30-2021
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">3.11</a>, <a href="">Rmarkdown</a></em> <a href="https://docs.google.com/document/d/1P7RRGBBthrBIAK7esOSl2TBFtXfPZY9xZytZG3T691s/edit" class="uri">https://docs.google.com/document/d/1P7RRGBBthrBIAK7esOSl2TBFtXfPZY9xZytZG3T691s/edit</a></p>
-What can we do when the errors seem very far from normally distributed? Imagine all attempts to transform the data have failed. We can always use nonparametric ANOVA
+<p><em>Readings <a href="">3.11</a>, <a href="">Rmarkdown</a></em></p>
+<ol type="1">
+<li>What can we do when the errors seem very far from normally distributed? Imagine all attempts to transform the data have failed. An alternative is to use nonparametric ANOVA.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/kdv2ayi2heooodf0a0j15swxld4ofll7.png"</span><span class='op'>)</span>
@@ -2312,16 +2314,27 @@ What can we do when the errors seem very far from normally distributed? Imagine 
 </div>
 <p><img src="https://uwmadison.box.com/shared/static/a2evjeib97ay362iue2vhkxk18gbh7l4.png" /><!-- --></p>
 </div>
-<p>Idea: If the groups have the same means, then no group should be consistently ranked higher than another.</p>
-<p>Recipe</p>
-<p>Transform the data to their ranks. The smallest of the yij becomes 1, the next smallest becomes 2, etc. Denote these ranks by Rij. Compute the test statistic</p>
-<p>where we define Ri. to be the sum of the ranks in the ith group, and</p>
-<p>Compare the test statistic to a 2a -1 reference distribution. If it seems too large to be plausible, reject the null hypothesis.</p>
-<p>Where did this test statistic come from?</p>
-<p>It’s possible to show that the statistic is equivalent to</p>
-<p>which compares the average rank in group i to the average rank overall, and standardizes by the overall variance of the ranks. The first formula is the one presented in the book, though, and it’s easier to calculate by hand.</p>
-<p>Why not always use nonparametric ANOVA?</p>
-<p>If the data are actually normal, than this approach has less power than standard ANOVA If you have doubts about validity, a safe approach is to try both. If the approaches approximately agree, default to standard ANOVA.</p>
+<ol start="2" type="1">
+<li>The intuition is that, if all the groups have the same means, then no group should be consistently ranked higher than another. To implement this idea quantitatively,</li>
+</ol>
+<ul>
+<li>Transform the data to their ranks. The smallest of the <span class="math inline">\(y_ij\)</span> becomes 1, the next smallest becomes 2, etc. Denote these ranks by <span class="math inline">\(R_{ij}\)</span>.</li>
+<li>Compute the test statistic <span class="math display">\[
+\frac{1}{S^2}\left[\sum_{i = 1}^{a} \frac{R_{i\cdot}^2}{n_{i}} - \frac{N\left(N + 1\right)^2}{4}\right]
+\]</span> where we define <span class="math inline">\(R_{i\cdot}\)</span> to be the sum of the ranks in the <span class="math inline">\(i^{th}\)</span> group, and <span class="math display">\[
+S^2 = \frac{1}{N - 1} \left[\sum_{i, j} R_{ij}^2 - \frac{N\left(N + 1\right)^2}{4}\right].
+\]</span></li>
+<li>Compare the test statistic to a <span class="math inline">\(\chi^2_{a -1}\)</span> reference distribution. If it seems too large to be plausible, reject the null hypothesis.</li>
+</ul>
+<ol start="3" type="1">
+<li>Where did this test statistic come from? It’s possible to show that the statistic is equivalent to</li>
+</ol>
+<p><span class="math display">\[
+\frac{\sum_{i} n_{i}\left(\bar{R}_{i} - \bar{R}\right)^2}{\frac{1}{N - 1}\sum_{i, j} \left(R_{ij} - \bar{R}\right)^2}
+\]</span> which compares the average rank in group <span class="math inline">\(i\)</span> to the average rank overall, and standardizes by the overall variance of the ranks. The first formula is the one presented in the book, though, and it’s easier to calculate by hand.</p>
+<ol start="4" type="1">
+<li>Why not always use nonparametric ANOVA? If the data are actually normal, than this approach has less power than standard ANOVA. If you have doubts about validity, a safe approach is to try both. If the approaches approximately agree, default to standard ANOVA.</li>
+</ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
@@ -2330,6 +2343,15 @@ What can we do when the errors seem very far from normally distributed? Imagine 
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

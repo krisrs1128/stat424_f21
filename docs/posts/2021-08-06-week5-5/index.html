@@ -88,31 +88,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: Latin Squares, part 2</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Extensions of Latin Squares"/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-06"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-06"/>
+<meta property="article:published" itemprop="datePublished" content="2021-10-07"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-10-07"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: Latin Squares, part 2"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Extensions of Latin Squares"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: Latin Squares, part 2"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="Extensions of Latin Squares"/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Latin Squares, part 2"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-06-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Latin Squares, part 2"]},{"type":"character","attributes":{},"value":["Extensions of Latin Squares"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["10-07-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Latin Squares, part 2","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-06T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Latin Squares, part 2","description":"Extensions of Latin Squares","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-10-07T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,29 +2279,47 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>Latin Squares, part 2</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>Extensions of Latin Squares</p></p>
 </div>
 
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-06-2021
+<br/>10-07-2021
 </div>
 
 <div class="d-article">
 <p><em>Readings <a href="">4.2, 4.3</a>, <a href="">Rmarkdown</a></em></p>
-<p>When p is small, this test can have low power. If we can collect more than p2 samples, we should. But how exactly should the samples be collected, and how is the replicated design analyzed?</p>
-<p>The design decision is context dependent, You can use the same row and column levels You can keep column levels, but have different row levels Equivalently, can keep rows, but different columns You can have different row and different column levels</p>
-<p>Note that in each case, you use a different latin square in each replicate.</p>
-<p>Fortunately, the analysis is conceptually unified. We continue to have row, column, and treatment mean squares We have to add in replicate mean squares, to track variation from replicate-to-replicate The code in each case is the same, lm(Y ~ Replicate + W1 + W2 + X)</p>
-<p>Graceo-Latin Squares</p>
-<p>We motivated Latin squares by asking how we can block 2 factors simultaneously. What if we have 3? We could go on forever…. That said, the transition from 2 to 3 is not hard</p>
-<p>Introduce p greek letters to represent the 3rd blocking factor. When p=5, we would have , , ,, , for example.</p>
-<p>A Graeco-Latin square is like two Latin Squares overlaid on one another,</p>
-<p>with one additional requirement: each latin and each greek letter must only appear together once. This last requirement is called orthogonality</p>
-<p>A hypothesis test can be defined, by using the decomposition,</p>
-<p>and noting that,</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<ol type="1">
+<li><p>When p is small, the test from the previous notes can have low power. If we can collect more than <span class="math inline">\(p^2\)</span> samples, we should. But how exactly should the samples be collected, and how is the replicated design analyzed?</p></li>
+<li><p>The design decision is context dependent,</p>
+<ul>
+<li></li>
+<li><ul>
+<li>Equivalently, can keep rows, but different columns</li>
+</ul></li>
+<li>Note that in each case, we use a different latin square in each replicate.</li>
+</ul></li>
+<li><p>Fortunately, the analysis is conceptually unified. We continue to have row, column, and treatment mean squares. Then, we have to add in replicate mean squares, to track variation from replicate-to-replicate. The code in each setting is the same,</p></li>
+</ol>
+<pre><code>lm(Y ~ Replicate + W1 + W2 + X)</code></pre>
+<h3 id="graceo-latin-squares">Graceo-Latin Squares</h3>
+<ol start="4" type="1">
+<li><p>We motivated Latin squares by asking how we can block 2 factors simultaneously. What if we have 3? We could go on forever…. That said, the transition from 2 to 3 is not hard</p></li>
+<li><p>Introduce <span class="math inline">\(p\)</span> greek letters to represent the third blocking factor. When <span class="math inline">\(p=5\)</span>, we would have <span class="math inline">\(\alpha, \beta, \gamma, \delta, \epsilon\)</span>, for example.</p></li>
+<li><p>A Graeco-Latin square is like two Latin Squares overlaid on one another,</p></li>
+</ol>
+<p>with one additional requirement: each latin and each greek letter must only appear together once. This last requirement is called <strong>orthogonality</strong>.</p>
+<ol start="6" type="1">
+<li>A hypothesis test can be defined, by using the decomposition, <span class="math display">\[
+SS_{T} = SS_{\text{Rows}} + SS_{\text{Columns}} + SS_{\text{Trewatments}} + SS_{\text{Greek}} + 
+SS_{E}
+\]</span> and noting that,</li>
+</ol>
+<p><span class="math display">\[
+\frac{MS_{\text{Treatment}}}{MS_{E}} &amp;= \frac{\frac{1}{p - 1}SS_{\text{Treatment}}}{\frac{1}{\left(p - 1\right)\left(p - 3\right)}SS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 3\right)\right)
+\]</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2309,6 +2327,15 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
