@@ -1,11 +1,11 @@
 ---
 title: "RCBD Diagnostics"
 description: |
-  A short description of the post.
+  Multiple comparison and model checks for RCBDs
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-06-2021
+date: 10-05-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -24,28 +24,35 @@ include_graphics("https://uwmadison.box.com/shared/static/dmob9sjh8my7l8hez390o7
 
 ```
 
-Multiple Comparisons
+### Multiple Comparisons
 
-As before, we may want to use contrasts to decide on which treatment effects are different 
-We can continue to use the same multiple comparisons procedures as before
-Only differences:
-The number of samples per treatment n is replaced by the number of blocks b.
-The df for MSE is now (a - 1)(b - 1), not N - a.
-For example, the cutoff in Fisher’s LSD becomes
+1. As before, we may want to use contrasts to decide on which treatment effects
+are different We can continue to use the same multiple comparisons procedures as
+before, but have to account for a few differences,
+  * The number of samples per treatment $n$ is replaced by the number of blocks $b$.
+  * The d.f. for $MS_{E}$ is now $(a - 1)(b - 1)$, not $N - a$.
+  
+2. For example, the cutoff in Fisher’s LSD becomes
+$$
+t_{\frac{\alpha}{2}, \left(a - 1\right)\left(b - 1\right)}\sqrt{\frac{2 MS_{E}}{b}}
+$$
 
+### Model Diagnostics
 
-Model Diagnostics
+3. There are two key assumptions when we use RCBDs,
+  * $\epsilon \sim \mathcal{N}\left(0, \sigma^2\right)$ are independently
+  distributed. Note that this also implies homoskedasticity (the variances are
+  not changing from sample to sample).
+  * Additivity (i.e. "no interaction"). The treatment effects $\tau_i$ need to
+  be the same across all blocks.
 
-There are two key assumptions,
-ijN(0, 2) are independently distributed. Note that this also implies homoskedasticity (the variances are not changing from sample to sample).
-Additivity (i.e. “no interaction”). The treatment effect i needs to be the same across all blocks.
+4. We’ve seen the first assumption before, and can continue to use normal
+probability plots and residual analysis to check it.
 
-We’ve seen the first assumption before, and can continue to use normal probability plots and residual analysis to check it.
+5. One way to check additivity is to look at residuals, and see whether they are
+consistently lower / higher in some blocks.
 
-
-
-One way to check additivity is to look at residuals, and see whether they are consistently lower / higher in some blocks.
-
-What can we do if we find an interaction effect?
-Sometimes it’s enough to transform the response
-Otherwise, another design may be necessary. Factorial designs (to be discussed soon) allow for inference even in the presence of interactions.
+6. What can we do if we find an interaction effect?
+  * Sometimes the interaction effects will disappear after transforming the response (e.g., using $\log$ or $\sqrt$)
+  * Otherwise, another design may be necessary. Factorial designs (to be
+  discussed soon) allow for inference even in the presence of interactions.

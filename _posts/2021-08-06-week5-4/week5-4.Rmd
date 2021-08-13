@@ -1,11 +1,11 @@
 ---
 title: "Latin Squares, part 1"
 description: |
-  A short description of the post.
+  An alternative to RCBDs that works with two nuisance factors
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-06-2021
+date: 10-07-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -19,65 +19,96 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 _Readings [4.2, 4.3](), [Rmarkdown]()_
 
 
-RCBD is nice when we have one nuisance factor
-What if we have two?
-We’re testing a manufacturing procedure, but raw materials come in batches and different operators have different skills
-We’re testing different diets on cows over a series of days, but there will both cow and day effects
+1. RCBD is useful when we have one nuisance factor. But what if we have two?
+  * We’re testing a manufacturing procedure, but raw materials come in batches and different operators have different skills.
+  * We’re testing different diets on cows over a series of days, but there will both cow and day effects.
 
-Assume two nuisance factors, each with p levels
-Assume that we care about p different treatments.
+2. Assume two nuisance factors, each with $p$ levels. Furthermore, assume that
+we care about $p$ different treatments.
 
-Design idea: Make sure to run each treatment on each nuisance factor.
-Each operator sees each treatment once
-Each batch of materials is used for each treatment
+3. The intuition for Latin Squares is similar to the intuition for RCBD,
 
-Setup
+> Make sure to run each treatment on each nuisance factor.
+  For example, in the manufacturing example, each operator should see each
+  treatment once, and each batch of materials should be used for each treatment
 
-Latin Squares are pp arrays, filled with p letters, so that each letter appears exactly once in each row and each column.
+### Setup
 
+4. Latin Squares are $p\times p$ arrays, filled with $p$ letters, so that each
+letter appears exactly once in each row and each column. Here are three tables when $p = 3$.
 
+  | A | B | C |
+  | B | C | A |
+  | C | A | B |
+  
+  | B | A | C |
+  | A | C | B |
+  | C | B | A |
+  
+  | C | B | A |
+  | B | A | C |
+  | A | C | B |
+  
+  This is basically sudoku for statisticians
 
-This is basically sudoku for statisticians
-Why do we care? It tells us how we can implement the design idea above.
-Randomly choose a pp latin square
-The rows are levels of the first blocking factor
-The columns are levels of the second blocking factor
-The letters are the treatment levels
-The experiment consists of p2 runs, on each of the pairs of blocking levels, with treatment specified by the cell’s label
+5. Why do we care? It tells us how we can implement the design idea above.
+First, randomly choose a $p\times p$ latin square
+  * The rows are levels of the first blocking factor.
+  * The columns are levels of the second blocking factor.
+  * The letters are the treatment levels
+  Then, the experiment consists of $p^2$ runs, one for each of the pairs of
+  blocking levels, with treatment specified by the cell’s label
 
-Model Setting
+### Model Setting
 
-Instead of just one set of block effects, we’ll have two sets, i and k. This results in,
+6. Instead of just one set of block effects, we’ll have two sets, $\alpha_i$ and $\beta_k$. This results in,
+$$
+y_{ijk} &= \mu + \alpha_i + \tau_j + \beta_k + \epsilon_{ijk}
+$$
+    where $\epsilon_{ijk} \mathcal{N}\left(0,\sigma^2\right)$ independently. Note that
+  each of the indices $i, j$ and $k$ range from $1, \dots, p$.
 
+7. To make the model identifiable, we assume 
+$$
+\sum_{i = 1}^{p} \alpha_i = \sum_{j = 1}^{p} \tau_j = \sum_{k = 1}^{p} \beta_{k} = 0
+$$
 
+### Hypothesis Testing
 
-where ijkN(0,2) independently. Here, each of the indices i, j and k range from 1, , p.
+8. Our test hasn’t changed at all,
+\begin{align*}
+H_0 &: \tau_1 = \dots = \tau_a = 0 \\
+H_{1} &: \tau_{i} \neq 0 \text{ for at least one } i
+\end{align*}
 
-To make the model identifiable, we assume 
+9. But now we need to account for block-to-block variation across both nuisance factors. The formula isn’t pretty, but it’s exactly analogous to the decompositions we’ve seen before,
 
+$$
+\begin{aligned}
+\sum_{i=1}^{p} \sum_{j=1}^{p} \sum_{k=1}^{p}\left(y_{i j k}-\bar{y} . . .\right)^{2}=& p \sum_{i=1}^{p}\left(\bar{y}_{i . .}-\bar{y} . . .\right)^{2}+\\
+& p \sum_{j=1}^{p}\left(\bar{y}_{\cdot j} \cdot \bar{y}_{\cdots} .\right)^{2}+\\
+& p \sum_{k=1}^{p}\left(\bar{y}_{\cdot \cdot k}-\bar{y} . .\right)^{2}+\\
+& \sum_{i=1}^{p} \sum_{j=1}^{p} \sum_{k=1}^{p}\left(y_{i j k}-\bar{y}_{i . .}-\bar{y}_{. j .}+\bar{y} . .\right)^{2}
+\end{aligned}
+$$
 
-Hypothesis Testing
+10. This is abbreviated as,
 
-Our test hasn’t changed at all,
-
-
-
-But now we need to account for block-to-block variation across both nuisance factors. The formula isn’t pretty, but it’s exactly analogous to the decompositions we’ve seen before,
-
-
-
-This is abbreviated as,
-
-
-
+\begin{align*}
+SS_{\text{Total}} = &SS_{\text{Rows}} + \\
+&SS_{\text{Columns}} +\\
+&SS_{\text{Treatments}} + \\
+&SS_{E}
+\end{align*}
 and we define
-MSRows=1p - 1SSRows
-MSTreatments=1p - 1SSTreatments
-MSColumns=1p - 1SSColumns
-MSE=1(p - 1)(p - 2)SSE
+* $MS_{\text{Rows}}=\frac{1}{p - 1}SS_{\text{Rows}}$
+* $MS_{\text{Treatments}}=\frac{1}{p - 1}SS_{\text{Treatments}}$
+* $MS_{\text{Columns}}=\frac{1}{p - 1}SS_{\text{Columns}}$
+* $MS_{E}=\frac{1}{(p - 1)(p - 2)}SS_{E}$
 
-It turns out that
-
-
-
-which forms the basis for the test: reject the null if the ratio lies above the 1 -  quantile of this F-distribution.
+11. It turns out that
+$$
+\frac{MS_{\text{Treatment}}}{MS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 2\right)\right)
+$$
+  which forms the basis for the test: reject the null if the ratio lies above the
+$1 -  \alpha$ quantile of this $F$-distribution.

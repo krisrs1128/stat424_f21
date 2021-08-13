@@ -1,11 +1,11 @@
 ---
 title: "RCBD with Random Block Effects"
 description: |
-  A short description of the post.
+  The random effects analog of RCBD designs
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-06-2021
+date: 10-07-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -22,36 +22,53 @@ _Readings [4.1](), [Rmarkdown]()_
 include_graphics("https://uwmadison.box.com/s/gu58jurmhyraebsdyh4txlpyxegxn9xf")
 ```
 
-As in standard random effects, sometimes the blocks are from a larger population
-We care about a “resin effect,” but don’t care about each individual batch The
-model is setup as before,
+1. As in standard random effects, sometimes the blocks are from a larger population. For example, in the medical device example, we care about a ``resin effect,'' but don’t care about each individual batch. 
 
+2. The model is setup as before,
 
+$$
+y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
+$$
+  except now both $\beta_j \sim \mathcal{N}\left(0, \sigma^2\right)$ and
+  $\epsilon_{ij} \sim \mathcal{N}\left(0, 2\right)$, all independently.
 
-except now both jN(0, 2) and ijN(0, 2), all independently.
+3. Observations are correlated within each block are correlated. The calculation
+to demonstrate this is similar to the one used to show that observations $i$
+within levels of an ordinary random effects model are correlated.
 
-Observations are correlated within each block are correlated
+### Hypothesis Testing
 
-Testing
+4. We’re interested in whether any of the treatments have an effect,
 
-We’re interested in whether any of the treatments have an effect,
+\begin{align*}
+H_0 &: \tau_1 = \dots = \tau_a = 0 \\
+H_{1} &: \tau_{i} \neq 0 \text{ for at least one } i
+\end{align*}
 
+5. We won’t show it, but it turns that
+\begin{align*}
+\mathbf{E}\left[MS_{\text{Treatment}}\right] &= \sigma^2 + \frac{b \sum_{i = 1}^{a} \tau_i^2}{a - 1} \\
+\mathbf{E}\left[MS_{\text{Block}}\right] &= \sigma^2 + a \sigma^2_{\beta} \\
+\mathbf{E}\left[MS_{E}\right] &= \sigma^2
+\end{align*}
+so we should reject the null when $MS_{\text{Treatment}}$ is much larger than
+$MS_E$. 
 
+6. In fact, as in the fixed block case,
+$$
+\frac{MS_{\text{Treatment}}}{MS_{E}} \sim F\left(a - 1, \left(a - 1\right)\left(b - 1\right)\right)
+$$
+  so we can use the same F-distribution cutoff when testing whether any treatment effects are nonzero.
 
-We won’t show it, but it turns that
+### Estimation
 
+7. As in random effects for the completely randomized design, we can use either
+the method of moments or maximum likelihood. The method of moments estimators are
+\begin{align*}
+\hat{\sigma}	&= MS_{E} \\
+\hat{\sigma}^2_{\beta} &= \frac{1}{a}\left[MS_{\text{Block}} - MS_{E}\right]
+\end{align*}
 	
-
-so we should reject the null when MSTreatment is much larger than MSE. In fact, as in the fixed block case,
-
-
-
-so we can use the same F-distribution cutoff when testing whether any treatment effects are nonzero.
-
-Estimation
-
-As in random effects for the completely randomized design, we can use either the method of moments or maximum likelihood
-The method of moments estimators are
-	
-	
-Finding confidence intervals continues to be a challenge for the method of moments approach. If you want that, you should use maximum likelihood, as shown in the computer example accompanying these notes.
+8. Finding confidence intervals continues to be a challenge for the method of
+moments approach. In this case, maximum likelihood is preferred. This method is
+shown in the computer example accompanying these notes.

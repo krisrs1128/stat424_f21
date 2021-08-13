@@ -1,11 +1,11 @@
 ---
-title: "Nonparametric Anova"
+title: "Nonparametric ANOVA"
 description: |
-  A short description of the post.
+  A model-free alternative to ANOVA.
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-03-2021
+date: 09-30-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -17,11 +17,11 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
 _Readings [3.11](), [Rmarkdown]()_
-https://docs.google.com/document/d/1P7RRGBBthrBIAK7esOSl2TBFtXfPZY9xZytZG3T691s/edit
 
-What can we do when the errors seem very far from normally distributed?
-Imagine all attempts to transform the data have failed.
-We can always use nonparametric ANOVA
+1. What can we do when the errors seem very far from normally distributed?
+Imagine all attempts to transform the data have failed. An alternative is to use
+nonparametric ANOVA.
+
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/kdv2ayi2heooodf0a0j15swxld4ofll7.png")
 ```
@@ -36,27 +36,33 @@ include_graphics("https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5l
 include_graphics("https://uwmadison.box.com/shared/static/a2evjeib97ay362iue2vhkxk18gbh7l4.png")
 ```
 
-Idea: If the groups have the same means, then no group should be consistently ranked higher than another.
+2. The intuition is that, if all the groups have the same means, then no group
+should be consistently ranked higher than another. To implement this idea
+quantitatively,
+  * Transform the data to their ranks. The smallest of the $y_ij$ becomes 1, the
+next smallest becomes 2, etc. Denote these ranks by $R_{ij}$. 
+  * Compute the test statistic
+$$
+\frac{1}{S^2}\left[\sum_{i = 1}^{a} \frac{R_{i\cdot}^2}{n_{i}} - \frac{N\left(N + 1\right)^2}{4}\right]
+$$
+  where we define $R_{i\cdot}$ to be the sum of the ranks in the $i^{th}$ group,
+and
+$$
+S^2 = \frac{1}{N - 1} \left[\sum_{i, j} R_{ij}^2 - \frac{N\left(N + 1\right)^2}{4}\right].
+$$
+  * Compare the test statistic to a $\chi^2_{a -1}$ reference distribution. If
+  it seems too large to be plausible, reject the null hypothesis.
 
-Recipe
+3. Where did this test statistic come from? It’s possible to show that the statistic is equivalent to
 
-Transform the data to their ranks. The smallest of the yij becomes 1, the next smallest becomes 2, etc. Denote these ranks by Rij.
-Compute the test statistic
+$$
+\frac{\sum_{i} n_{i}\left(\bar{R}_{i} - \bar{R}\right)^2}{\frac{1}{N - 1}\sum_{i, j} \left(R_{ij} - \bar{R}\right)^2}
+$$
+which compares the average rank in group $i$ to the average rank overall, and
+standardizes by the overall variance of the ranks. The first formula is the one
+presented in the book, though, and it’s easier to calculate by hand.
 
-where we define Ri. to be the sum of the ranks in the ith group, and
-
-
-Compare the test statistic to a 2a -1 reference distribution. If it seems too large to be plausible, reject the null hypothesis.
-
-Where did this test statistic come from?
-
-It’s possible to show that the statistic is equivalent to
-
-
-
-which compares the average rank in group i to the average rank overall, and standardizes by the overall variance of the ranks. The first formula is the one presented in the book, though, and it’s easier to calculate by hand.
-
-Why not always use nonparametric ANOVA?
-
-If the data are actually normal, than this approach has less power than standard ANOVA
-If you have doubts about validity, a safe approach is to try both. If the approaches approximately agree, default to standard ANOVA.
+4. Why not always use nonparametric ANOVA? If the data are actually normal, than
+this approach has less power than standard ANOVA. If you have doubts about
+validity, a safe approach is to try both. If the approaches approximately agree,
+default to standard ANOVA.

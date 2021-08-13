@@ -1,11 +1,11 @@
 ---
 title: "ANOVA"
 description: |
-  A short description of the post.
+  The ANOVA model and sum-of-squares decomposition
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-03-2021
+date: 09-21-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -19,61 +19,122 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 
 _Readings [3.1 - 3.3](), [Rmarkdown]()_
 
-https://uwmadison.box.com/shared/static/h3bbv7cjo0our7syhlsc0tdn5c22xyme.png
-https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png
-https://uwmadison.box.com/shared/static/znpaeugwi14nxhuvz2lkmoo2ovv2jtx1.png
-https://uwmadison.box.com/shared/static/n836t4q718m2o16hluvglplqi4lshgcm.png
-https://uwmadison.box.com/shared/static/7prsedegwnp6wdghcw6vfv2rs7zsr7nj.png
-https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png
-
-Problem Setting
-ANOVA is used when you want to compare the effect of different treatments on a continuous response. For example,
-How does the etch rate of a tool depend on its power setting?
-How do an opera company’s different donation strategies compare with one another?
-How does the average rental time compare across cars?
-
-Visually, it can be used whenever the data can be arranged as a series of boxplots.
-Model and Test Setup
-Formally, consider the model
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/h3bbv7cjo0our7syhlsc0tdn5c22xyme.png
+")
+```
 
 
-
-where i=1, , a and j=1, , n and the errors ijN(0, 2) are independent.
-
-i indexes different groups
-j indexes the samples within groups. 
-a is the number of groups
-n is the number of samples in each group 
-N=na is the total number of samples
-
-Our null hypothesis is that none of the groups deviate from the global mean. The alternative is that at least one of the groups is different. Formally,
-
-Important Identities
-The word “analysis” in ANOVA is used in the classical sense of to break something into its parts. ANOVA breaks the observed variation into distinct components,
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png
+")
+```
 
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/znpaeugwi14nxhuvz2lkmoo2ovv2jtx1.png")
+```
 
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/n836t4q718m2o16hluvglplqi4lshgcm.png")
+```
+
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/7prsedegwnp6wdghcw6vfv2rs7zsr7nj.png")
+```
+
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png")
+```
+
+1. ANOVA is used when we want to compare the effect of different treatments on a
+continuous response. For example,
+* How does the etch rate of a tool depend on its power setting?
+* How do an opera company’s different donation strategies compare with one
+another?
+* How does the average rental time compare across cars?
+
+2. Visually, it can be used whenever the data can be arranged as a series of
+boxplots.
+
+### Model and Test Setup
+
+3. Formally, consider the model
+
+$$
+y_{ij} = \mu + \tau_i + \epsilon_{ij}
+$$
+where $i=1 \dots a$ and $j=1, \dots, n$ and the errors $\epsilon_{ij} \sim
+\mathcal{N}\left(0, \sigma^2\right)$ are independent.
+
+* $i$ indexes different groups
+* $j$ indexes the samples within groups. 
+* $a$ is the number of groups
+* $n$ is the number of samples in each group 
+* $N=na$ is the total number of samples
+
+4. Our null hypothesis is that none of the groups deviate from the global mean.
+The alternative is that at least one of the groups is different. Formally,
+
+$$
+H_0: \tau_1 = \dots, = \tau_{a} = 0 \\
+H_1: \tau_{i} \neq 0 \text{ for at least one }i.
+$$
+
+### Important Identities
+
+5. The word "analysis" in ANOVA is used in the classical sense of to break
+something into its parts^[i.e. the oppositive of "synthesis."]. ANOVA breaks the
+observed variation into distinct components,
+
+$$
+\sum_{ij} \color{#ff8200}{\left(y_{ij} - \bar{y}\right)}^2 = n\sum_{i} \color{#447583}{\left(\bar{y}_i - \bar{y}\right)}^2 + \sum_{i,j} \color{#b090c2}{\left(y_{ij} - \bar{y}_{i}\right)}^2
+$$
 which is abbreviated as
 
-SStotal = SStreatments + SSerror.
-
-If any of the groups had a mean that was different from the global mean, then you’d expect the treatment term to be larger than it would otherwise be.  How large is large enough to reject?
-
-Since the variance within each group is 2, the variance of each yi is 2n. The blue term looks like how we would usually estimate the variances of the yi, i.e.,
-
-On the other hand, under the null, all the yijN(,2), so we would also know,
+$$
+\color{#ff8200}{SS_{\text{total}}} = \color{#447583}{SS_{\text{treatments}}} + \color{#b090c2}{SS_{\text{error}}}.
+$$
+This is usually called the "ANOVA identity."
 
 
+5. If any of the groups had a mean that was different from the global mean, then you’d expect the \color{#447583}{treatment} term to be larger than it would otherwise be.  How large is large enough to reject?
 
-So under the null, 
+6. Since the variance within each group is $\sigma^2$, the variance of each
+$\bar{y}_i$ is $\frac{\sigma^2}{n}$. The blue term looks like how we would
+usually estimate the variances of the $y_i$, i.e.,
 
+$$
+\frac{1}{a}\sum_{i}\color{#447583}{\left(y_i - \bar{y}\right)}^2 \approx \frac{\sigma^2}{n}
+$$
+7. On the other hand, under the null, all the $y_{ij} \sim \mathcal{N}\left(\mu, \sigma^2\right)$, so we would also know,
 
-but otherwise it would be larger. 
+$$
+\frac{1}{N-a} \sum_{i, j}\color{#b090c2}{\left(y_{i, j}-\bar{y}_{i}\right)}^{2} \approx \sigma^{2},
+$$
 
-Note that the numerator and denominator are chi-squares, with a - 1 and N - a df, respectively. It’s not obvious, but they’re also independent (this is called Cochran’s theorem). Therefore, the null reference is an F distribution with (a - 1, N - a) df.
-The ANOVA Table
-If we introduce MStreatments and MSE for the numerator and denominator in the ratio above, we can organize this information as,
+so under the null, 
 
+$$
+\frac{\frac{\color{#447583}{SS_{\text {treatments }}}}{a-1}}{\color{#b090c2}{\frac{SS_{\text {error }}}{N-a}}} \approx 1.
+$$
+
+Note that under the alternative, it would be larger than 1.
+
+8. From our results in the probability review lectures, both the
+\color{#447583}{numerator} and \color{#b090c2}{denominator} are chi-squares,
+with $a - 1$ and $N - a$ d.f., respectively. It’s not obvious, but they’re also
+independent (this is called Cochran’s theorem). Therefore, the null reference
+distribution is an $F$ distribution with $(a - 1, N - a)$ d.f.
+
+### The ANOVA Table
+
+9. If we introduce $\color{#447583}{MS_{\text{treatments}}}$ and
+$\color{#b090c2}{MS_{E}}$ for the numerator and denominator in the ratio above,
+we can organize this information as,
 
 
 This is also how most computer output will be displayed, so it’s worth being familiar with.

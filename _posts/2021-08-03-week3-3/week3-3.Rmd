@@ -1,11 +1,11 @@
 ---
 title: "Contrasts"
 description: |
-  A short description of the post.
+  Making pointed comparisons between treatment levels in ANOVA
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-03-2021
+date: 09-23-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -25,47 +25,76 @@ include_graphics("https://www.airmeet.com/event/3124e6e0-8b3d-11eb-adfc-b1c12ad9
 
 _Readings [3.5](), [Rmarkdown]()_
 
-What is a contrast?
-When we reject the null in ANOVA, we know at least one of the treatments deviates from the global average. But which one(s)?
+1. What is a contrast? When we reject the null in ANOVA, we know at least one of
+the treatments deviates from the global average. But which one(s)?
 
-Contrasts help. A contrast is a linear combination of the means,
+2. Contrasts address this question. A contrast is a linear combination of the
+means,
+$$
+\Gamma(c)=\sum_{i=1}^{a} c_{i} \mu_{i}
+$$
+  For any particular $c$, we test
+$$
+\begin{aligned}
+&H_{0}: \Gamma(c)=0 \\
+&H_{1}: \Gamma(c) \neq 0
+\end{aligned}
+$$
 
-For any particular c, we test
+3. To see that this is actually something worth doing, consider the case that we
+have 4 different means, $\mu_1, \mu_2, \mu_3, \mu_4$,
+    * c = (1, 1, -1, -1): Are the first two means different from the last two, on average?
+    * c = (1, -1, 0, 0): Are the first two means equal to each other?
+    * etc.
+    
+### Testing Contrasts
+
+4. Remember the hypothesis testing recipe. We need, (a) a test statistic and (b) a reference distribution for that statistic.
+
+5. Our best guess at $\mu_i$ is $\bar{y}_i$, so a reasonable statistic is,
+
+$$
+\hat{\Gamma}(c)=\sum_{i=1}^{a} c_{i} \bar{y}_{i}
+$$
+
+6. How will we find its reference distribution? Under the null, this statistic
+is normally distributed with mean 0 and variance,
+$$
+\begin{aligned}
+\operatorname{Var}(\hat{\Gamma}(c)) &=\sum_{i=1}^{a} c_{i}^{2} \operatorname{Var}\left(\bar{y}_{i}\right) \\
+&=\frac{\sigma^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}
+\end{aligned}
+$$
+    Standardizing our original statistic, we obtain,
+\begin{aligned}
+\frac{\hat{\Gamma}(c)}{\sqrt{\operatorname{Var}(\hat{\Gamma}(c))}} &=\frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}}{\sqrt{\frac{\sigma^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}} \\
+& \approx \frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}}{\sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}}
+\end{aligned}
+
+7. To estimate $\sigma^2$, we can use $\hat{\sigma}^2 := MS_E$. This is a good
+choice, because it remains valid even when the null is untrue.
+
+8. Since we plugged-in the estimate $\hat{\sigma}^2$, we have divided our normal distribution by the square root of a chi-square. The result is therefore t-distributed, with $N - a$ df.
 
 
+### Confidence Intervals for Contrasts
 
-To see that this is actually something worth doing, consider the case that we have 4 different means, 1, 2, 3, 4,
-c = (1, 1, -1, -1): Are the first two means different from the last two, on average?
-c = (1, -1, 0, 0): Are the first two means equal to each other?
-etc.
-Testing Contrasts
-Remember the hypothesis testing recipe. We need,
-A test statistic
-A reference distribution
+9. If we make the same computations as above, but without assuming that the null
+is true, we would find that,
+$$
+\mathbf{P}\left(\frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}-\sum_{i=1}^{a} c_{i} \mu_{i}}{\sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}} \in\left[t_{\text {left }}, t_{\text {right }}\right]\right)=0.95
+$$
+    where we choose $t_{\text{left}}$ and $t_{\text{right}}$ to be the 0.025 and
+    0.975 quantiles of a $t$-distribution with $N - a$ df.
 
-Our best guess at i is yi, so a reasonable statistic is,
+10. The resulting  confidence interval is,
 
-
-
-How will we find its reference distribution? Under the null, this statistic is normally distributed with mean 0 and variance,
-
-
-So, a standardized statistic is,
-
-
-To estimate 2, we can use MSE. This is a good choice, because it remains valid even when the null is untrue.
-
-Since we plugged-in the estimate 2, we have divided our normal distribution by the square root of a chi-square. The result is therefore t-distributed, with N - a df.
-Confidence Intervals for Contrasts
-If we make the same computations as above, but without assuming that the null is true, we would find that,
-
-when we choose tleft and tright to be the 0.025 and 0.975 quantiles of a t distribution with N - a df.
-
-The resulting  confidence interval,
-
-
-
-This is an explicit formula that you can use in your computations, but don’t let the density of the symbols here confuse you. Returning to our original definitions, this is just,
-
-
-where we’re writing Var instead of Var because we’re plugging in the estimate 2.
+$$
+\left[\sum_{i=1}^{a} c_{i} \bar{y}_{i}-t_{\text {right }} \sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}, \sum_{i=1}^{a} c_{i} \bar{y}_{i}+t_{\text {right }} \sqrt{\left.\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}\right]}\right.
+$$
+    This is an explicit formula that you can use in your computations, but don’t let the complexity of the symbols here confuse you. Returning to our original definitions, this is just,
+$$
+\left[\hat{\Gamma}(c)-t_{\mathrm{left}} \sqrt{\widehat{\operatorname{Var}}(\hat{\Gamma}(c))}, \hat{\Gamma}(c)+t_{\mathrm{left}} \sqrt{\widehat{\operatorname{Var}}(\hat{\Gamma}(c))}\right]
+$$
+    where we’re writing $\hat{\text{Var}}$ instead of $\text{Var}$ because we’re
+plugging in the estimate $\hat{\sigma}^2$.

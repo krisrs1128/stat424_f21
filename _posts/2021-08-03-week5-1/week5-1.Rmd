@@ -1,11 +1,11 @@
 ---
 title: "Randomized Complete Block Design"
 description: |
-  A short description of the post.
+  Dealing with batch effects using a generalization of pairing.
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-03-2021
+date: 10-05-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -23,54 +23,69 @@ include_graphics("https://uwmadison.box.com/shared/static/fgtpgaimnwwlm5s63bmj9f
 ```
 
 _Readings [4.1](), [Rmarkdown]()_
-https://docs.google.com/document/d/17cdyQSI9V7XQ68F4ZYC14mr8P7tIHjRonaf3XPxpakw/edit#
 
-How can we generalize the idea of pairing to the case that we have more than two treatments to compare?
-Suppose that the nuisance factor is known and controllable
-Also assume the blocks have the same number a of samples as we have treatments (a=2 → pairing)
+1. How can we generalize the idea of pairing to the case that we have more than
+two treatments to compare? Suppose that the nuisance factor is known and
+controllable. For simplicity, also assume that the blocks have the same number $a$
+of samples as we have treatments ($a=2 \to$ pairing)
 
-Example [page 120]: Medical device manufacturer creates vascular grafts, and wants to see effect of manufacturing pressure on defect rate. But the resin used to make the graft arrives in batches, and may itself contribute to defects.
+2. _Example [page 120]_. A medical device manufacturer creates vascular grafts,
+and wants to see the effect of manufacturing pressure on defect rate. But the resin
+used to make the graft arrives in batches, and may itself contribute to defects.
 
-Idea: Randomly assign each of the a treatments to the units within each block. This is called the RCBD.
+> Idea: Randomly assign each of the a treatments to the units within each block. This is called the RCBD.
 
-This is a restriction on randomization. Only random treatment assignments where each block has each treatment are allowed.
+3. This is a restriction on randomization. Only random treatment assignments
+where each block has each treatment are allowed. In the medical example, we
+would test all the manufacturing pressures on each of the resin batches, rather
+than having batches that receive only subsets of pressures.
 
-Model Setup
+### Model Setup
 
-For hypothesis testing, we need a probability model. We suppose
+4. For hypothesis testing, we need a probability model. We suppose
+$$
+y_{ij} = \mu + \tau_i + \beta_{j} + \epsilon_{ij}
+$$
+  where $\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)$ independently
+  and $\sum_{i}\tau_i=\sum_{j} \beta_j=0$ is required to ensure identifiability.
 
-where ijN(0, 2) independently and ii=jj=0 is required to ensure identifiability.
+5. As before,
+  * $\mu$ is a global mean
+  * $\tau_i$ is the treatment effect for the $i^{th}$ treatment level
+  * $\epsilon_{ij}$ is the error term
+  
+  But now we also have
+  * $\beta_{j}$, the effect of the $j^{th}$ block
 
-As before,
- is a global mean
-i is the treatment effect for the ith treatment level
-ij is the error term
+6. Notice that in each block, we must have exactly $a$ samples, one from each
+treatment.
 
-But now we also have
-j, the effect of the jthblock
+### Hypothesis Testing
 
-Notice that in each block, we must have exactly a samples, one from each treatment.
+7. We’re interested in whether any treatments have an effect,
+\begin{align*}
+H_0 &: \tau_1 = \dots = \tau_a = 0 \\
+H_{1} &: \tau_{i} \neq 0 \text{ for at least one } i
+\end{align*}
 
-Hypothesis Testing
+8. There’s a useful decomposition of the total variance that accounts for block-to-block variation,
+\begin{align*}
+\sum_{i = 1}^{a}\sum_{j = 1}^{b}\left(y_{ij} - \bar{y}_{\cdot\cdot}\right)^2 = &b\sum_{i = 1}^{a} \left(\bar{y}_{i\cdot} - \bar{y}_{\cdot\cdot}\right)^2 + \\
+& a \sum_{j = 1}^{b}\left(\bar{y}_{\cdot j} - \bar{y}_{\cdot\cdot}\right)^2 + \\
+&\sum_{i = 1}^{a}\sum_{j = 1}^{b} \left(y_{ij} - \bar{y}_{i\cdot} - \bar{y}_{\cdot j} + \bar{y}_{\cdot\cdot}\right)^2
+\end{align*}
+  We’ll abbreviate this as $SS_{\text{Total}} = SS_{\text{Treatment}} + SS_{\text{Block}} + SS_{E}$.
 
-We’re interested in whether any treatments have an effect,
+9. The corresponding mean squares are,
+  * $MS_{\text{Total}}= \frac{1}{N - 1}SS_T$, which is the sample variance of all $y_{ij}$
+  * $MS_{\text{Treatment}}=\frac{1}{a - 1}SS_{\text{Treatment}}$
+  * $MS_{\text{Block}}=\frac{1}{b - 1}SS_{\text{Block}}$
+  * $MSE=\frac{1}{(a - 1)(b - 1)}SS_{E}$, which a good estimator for $\sigma^2$
 
+10. As in usual ANOVA, if $MS_{\text{Treatment}}$ is much larger than MSE, then we have evidence against the null hypothesis. In fact, it turns out that, under the null,
 
-
-There’s a useful decomposition of the total variance that accounts for block-to-block variation,
-
-
-We’ll abbreviate this as SST= SSTreatment+ SSBlock+SSE. 
-
-The corresponding mean squares are,
-
-MST=1N - 1SST, which is the sample variance of all yij
-MSTreatment=1a - 1SSTreatment
-MSBlock=1b - 1SSBlock
-MSE=1(a - 1)(b - 1)SSE, which a good estimator for 2
-
-As in usual ANOVA, if MSTreatment is much larger than MSE, then we have evidence against the null hypothesis. In fact, it turns out that, under the null,
-
-
-
-So, we can reject the null hypothesis if this statistic is larger than the1 -  quantile of an F distribution with (a - 1, (a - 1)(b - 1)) df.
+$$
+\frac{MS_{\text{Treatment}}}{MS_{E}} \sim F\left(a - 1, \left(a - 1\right)\left(b - 1\right)\right)
+$$
+so we can reject the null hypothesis if this statistic is larger than the $1 - \alpha$
+quantile of an $F$ distribution with $(a - 1, (a - 1)(b - 1))$ d.f.

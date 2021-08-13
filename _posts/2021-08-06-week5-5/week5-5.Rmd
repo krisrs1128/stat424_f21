@@ -1,11 +1,11 @@
 ---
 title: "Latin Squares, part 2"
 description: |
-  A short description of the post.
+  Extensions of Latin Squares
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-06-2021
+date: 10-07-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -18,41 +18,47 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 
 _Readings [4.2, 4.3](), [Rmarkdown]()_
 
-When p is small, this test can have low power. If we can collect more than p2 samples, we should. But how exactly should the samples be collected, and how is the replicated design analyzed?
+1. When p is small, the test from the previous notes can have low power. If we
+can collect more than $p^2$ samples, we should. But how exactly should the samples
+be collected, and how is the replicated design analyzed?
 
-The design decision is context dependent,
-You can use the same row and column levels
-You can keep column levels, but have different row levels
-Equivalently, can keep rows, but different columns
-You can have different row and different column levels
+2. The design decision is context dependent,
+    * \color{purple}{We can use the same row and column levels}
+    * \color{red}{You can keep column levels, but have different row levels}
+        * Equivalently, can keep rows, but different columns
+    * \color{green}{We can have different row and different column levels}
+  Note that in each case, we use a different latin square in each replicate.
 
-Note that in each case, you use a different latin square in each replicate.
+3. Fortunately, the analysis is conceptually unified. We continue to have row,
+column, and treatment mean squares. Then, we have to add in replicate mean squares, to
+track variation from replicate-to-replicate. The code in each setting is the same,
 
-Fortunately, the analysis is conceptually unified.
-We continue to have row, column, and treatment mean squares
-We have to add in replicate mean squares, to track variation from replicate-to-replicate
-The code in each case is the same,
+```
 lm(Y ~ Replicate + W1 + W2 + X)
+```
+
+### Graceo-Latin Squares
+
+4. We motivated Latin squares by asking how we can block 2 factors
+simultaneously. What if we have 3? We could go on forever…. That said, the
+transition from 2 to 3 is not hard
+
+4. Introduce $p$ greek letters to represent the third blocking factor. When $p=5$, we would have $\alpha, \beta, \gamma, \delta, \epsilon$, for example.
+
+5. A Graeco-Latin square is like two Latin Squares overlaid on one another,
 
 
-Graceo-Latin Squares
+  with one additional requirement: each latin and each greek letter must only appear together once.
+This last requirement is called __orthogonality__.
 
-We motivated Latin squares by asking how we can block 2 factors simultaneously. What if we have 3?
-We could go on forever….
-That said, the transition from 2 to 3 is not hard
+6. A hypothesis test can be defined, by using the decomposition,
+$$
+SS_{T} = SS_{\text{Rows}} + SS_{\text{Columns}} + SS_{\text{Trewatments}} + SS_{\text{Greek}} + 
+SS_{E}
+$$
+  and noting that,
 
-Introduce p greek letters to represent the 3rd blocking factor. When p=5, we would have , , ,, , for example.
-
-A Graeco-Latin square is like two Latin Squares overlaid on one another,
-
-
-with one additional requirement: each latin and each greek letter must only appear together once.
-This last requirement is called orthogonality
-
-A hypothesis test can be defined, by using the decomposition,
-
-
-
-and noting that,
-
+$$
+\frac{MS_{\text{Treatment}}}{MS_{E}} &= \frac{\frac{1}{p - 1}SS_{\text{Treatment}}}{\frac{1}{\left(p - 1\right)\left(p - 3\right)}SS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 3\right)\right)
+$$
 

@@ -1,11 +1,11 @@
 ---
 title: "Fitting Random Effects"
 description: |
-  A short description of the post.
+  Using the method of moments or maximum likelihood to estimate parameters
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-03-2021
+date: 09-30-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -17,7 +17,6 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
 _Readings [3.9](), [Rmarkdown]()_
-https://docs.google.com/document/d/1OjgpajLhWmrbjB2PG52__QUYstWYvMFuIaU2aTiBh4c/edit
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png")
@@ -26,44 +25,70 @@ include_graphics("https://uwmadison.box.com/shared/static/0au3iwj17u49ueqor5djqg
 include_graphics("https://uwmadison.box.com/shared/static/kqgsua08wh8n2h6zhssbmxf4byldcq2o.png")
 ```
 
-There are three key parameters: , 2,2. 
-Two ways to fit them are (1) the method of moments and (2) maximum likelihood.
+1. In random effects models, there are three key parameters: $\mu,
+\sigma^2_{\tau}, \sigma^2$. Two ways to fit them are (1) the method of moments
+and (2) maximum likelihood.
 
-Method of Moments
+### Method of Moments
 
-For estimating , this method uses the overall mean y.
+2. For estimating $\mu$, this method uses the overall mean $\bar{y}$.
 
-What about the 2’s? The key identity is,
+3. What about the $\sigma^2$’s? The key identity is,
+\begin{align*}
+\mathbf{E}\left[MS_{\text{treatments}}\right] &= \sigma^2 + n \sigma_{\tau}^2 \\
+\mathbf{E}\left[MS_{E}\right] &= \sigma^2
+\end{align*}
 
+4. We can approximate the expected values through,
+\begin{align*}
+MS_{\text{treatments} \approx \sigma^2 + n \sigma_{\tau}^2 \\
+MS_{E} \approx \sigma^2
+\end{align*}
 
-We can approximate the expected values through,
+5. If we pretended these approximations were exact equalities, then we have two
+equations with two unknowns. The method of moments defines parameter estimates
+as the solutions to that system of equations.
+\begin{align}
+\hat{\sigma}^2 &= MS_{E} \\
+\hat{\sigma}^2_{\tau} &= \frac{1}{n}\left[MS_{\text{treatments}} - MS_{E}\right]
+\end{align}
 
+6. How can we get confidence intervals for these estimates?
+    * For $\hat{\mu} = \bar{y}$, we can use $\text{Var}\left(y\right) &= \frac{1}{N} \text{Var}\left(y_{ij}\right)=\frac{1}{N}\left(\sigma^2 + n\sigma^2_{\tau}\right)$
+    * For $\hat{\sigma}^2$, we can use the fact that $\frac{N - a}{\sigma^2}MS_{E} \sim \chi^2_{N - a}$.
+    * For $\hat{\sigma}^2_{\tau}, we’re out of luck, though some papers give
+    approximate confidence intervals.
 
+### Maximum Likelihood Estimation
 
-If we pretended these approximations were exact equalities, then we have two equations with two unknowns. The method of moments defines parameter estimates as the solutions to that system of equations.
+7. An alternative approach is to use maximum likelihood. The first step is to
+stack all the $y_{ij}$’s into one long length $N$ vector, and observe that the
+data are jointly normally distributed,
+$$
+\left(\begin{array}{c}
+y_{11} \\
+y_{12} \\
+\vdots \\
+y_{a(n-1)} \\
+y_{a n}
+\end{array}\right) \sim \mathcal{N}\left(\mu 1_{N},\left(\begin{array}{cccc}
+\sigma^{2} I_{n}+\sigma_{\tau}^{2} 1_{n} 1_{n}^{T} & \mathbf{0} & \ldots & \mathbf{0} \\
+\mathbf{0} & \sigma^{2} I_{n}+\sigma_{\tau}^{2} 1_{n} 1_{n}^{T} & \ldots & \mathbf{0} \\
+\vdots & \vdots & & \vdots \\
+\mathbf{0} & \mathbf{0} & \ldots & \sigma^{2} I_{n}+\sigma_{\tau}^{2} 1_{n} 1_{n}^{T}
+\end{array}\right)\right)
+$$
 
+8. The specific form of the covariance isn’t important. What is important is
+that we can exactly evaluate the probability of $y_{11}, y_{12},\dots, y_{an}$ under
+any choice of the parameters $\mu, \sigma^2, \sigma^2_{\tau}$.
 
+9. Define $L(\mu, \sigma^2, \sigma^2_{\tau})$ to be the probability of the
+dataset $y_{11}, y_{12}, \dots y_{an}$ viewed as a function of the normal
+distribution’s parameters. A good estimate for these parameters comes from
+finding the configuration that maximizes $L\left(\mu, \sigma^2,
+\sigma^2_{\tau}\right)$. The maximizers can’t be found analytically, but algorithms exist to find the maximizers. 
 
-How can we get confidence intervals for these estimates?
-
-For =y, we can use Var(y)=1NVar(yij)=2+n2N
-For 2, we can use the fact that (N - a)MSE22N - a
-For 2, we’re out of luck, though some papers give approximate confidence intervals.
-
-Maximum Likelihood Estimation
-
-An alternative approach is to use maximum likelihood.
-
-Stack all the yij’s into one long length N vector, and observe that the data are jointly normally distributed
-
-
-
-The specific form of the covariance isn’t important. What is important is that we can exactly evaluate the probability of y11, y12,yan under any choice of the parameters , 2, 2. 
-
-Define L(, 2, 2) the probability of the dataset  y11, y12,yanviewed as a function of the normal distribution’s parameters
-A good estimate for these parameters comes from finding the configuration that maximizes L(, 2, 2).
-
-The maximizers can’t be found analytically, but algorithms exist to find the maximizers
-Software also gives a confidence interval for the estimates. It works by studying the curvature of the likelihood function at the maximizer, though we don’t need to worry about the details.
-
-
+10. Software also gives a confidence interval for the estimates. It works by
+studying the curvature of the likelihood function at the maximizer, though we
+don’t need to worry about the details.

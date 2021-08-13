@@ -1,11 +1,11 @@
 ---
 title: "Random Effects"
 description: |
-  A short description of the post.
+  An introduction to random effects models
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-03-2021
+date: 09-28-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -16,13 +16,14 @@ library("knitr")
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-https://docs.google.com/document/d/1dHiCnwlLtSe2SX4ZE8WldiUKpkl1Kr4uIR5N0Oa916E/edit#heading=h.ga02xa5s37bi
-
 _Readings [3.9](), [Rmarkdown]()_
 
-Sometimes a factor has so many levels, that we can’t collect observations for all of them.
-Or, even if you can collect them, having one parameter for each would lead to a clumsy model
-We instead settle for saying the effect of the factor on average, rather than any specific level
+1. Sometimes a factor has so many levels, that we can’t collect observations for all of them. Or, even if we could collect them, having one parameter for each would lead to a clumsy model.
+
+2. In this ase, we typically settle for saying the effect of the factor on
+average, rather than than trying to estimating the effects of every single level
+of that factor.
+
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png")
 include_graphics("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png")
@@ -30,32 +31,37 @@ include_graphics("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drs
 include_graphics("https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png")
 ```
 
-Examples,
-Is there a high school effect on college GPA? (instead of effects for individual schools)
-Is there a loom effect on fiber strength? (don’t care about individual looms)
+3. Examples,
+    * Is there a high school effect on college GPA? (instead of effects for individual schools)
+    * Is there a loom effect on fiber strength? (don’t care about individual looms)
 
-Model
+### Model
 
-The model has the form,
+4. Random effects models have the form,
+$$
+y_{ij} = \mu + \tau_i + \epsilon_{ij}
+$$
+    where $\tau_i \sim \mathcal{N}\left(0, 2\right)$ and $\epsilon_{ij} \sim
+    \mathcal{N}\left(0, \sigma^2\right)$.  The crucial difference is that $i$ is
+    now thought of as random, not fixed.
 
+5. Notice that 
+\begin{align}
+\text{Var}\left(y_{ij}\right) &= \text{Var}\left(\tau_j\right) + \text{Var}\left(\epsilon_{ij}\right) \\
+&= \sigma_{\tau}^2 + \sigma^2
+\end{align}
+    More generally, the covariance matrix is block diagonal, with blocks of $\sigma_{\tau}^2$ within groups.
 
+### Hypothesis Testing
 
-where iN(0, 2) and ijN(0, 2).  The crucial difference is that i is now thought of as random, not fixed.
+6. We may want to test whether there is any variation in response across factor
+levels. Formally,
+$$
+H_0: \sigma_\tau^2 &= 0 \\
+H_1: \sigma^2 > 0
+$$
 
-Notice that 
-
-
-
-More generally, the covariance matrix is block diagonal, with blocks of 2 within groups.
-
-Hypothesis Testing
-
-We may want to test whether there is any variation in response across factor levels. Formally,
-
-
-
-For our test statistic, we can use the same one as before,
-
-
-
-and for the same reasons as in fixed-effect ANOVA, this is F-distributed with (a - 1, N - a) df, and we can reject when this is large.
+6. For our test statistic, we can use the same one as before,
+$\frac{MS_{\text{treatments}}}{MS_{E}}$ and for the same reasons as in
+fixed-effect ANOVA, this is $F$-distributed with $(a - 1, N - a)$ d.f. -- we
+reject the null when this quantity is large.

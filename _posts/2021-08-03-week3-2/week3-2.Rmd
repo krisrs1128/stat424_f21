@@ -1,11 +1,11 @@
 ---
 title: "Model Checking"
 description: |
-  A short description of the post.
+  How should we check the assumptions of the ANOVA model?
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-03-2021
+date: 09-21-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -19,50 +19,74 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 
 _Readings [3.4](), [Rmarkdown]()_
 
-https://docs.google.com/document/d/1Ds7H3hZyqLNYhF8wQ2OZO7viJuHd74EzYNSXjrTH6eU/edit
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/ka2t5b3awtqt0mqdqtm8o5zbzs8ur7xp.png")
+```
 
-https://uwmadison.box.com/shared/static/ka2t5b3awtqt0mqdqtm8o5zbzs8ur7xp.png
+1. Recall the ANOVA model,
+$$
+y_{i j}=\mu+\tau_{i}+\epsilon_{i j}
+$$
+  with independent errors $\epsilon_{ij} \sim \mathcal{N}\left(0,
+  \sigma^2\right)$. There are a few ways that this model can fail,
 
-Assumptions
+   * There might be systematic variations besides the group deviations $\tau_i$.
+   * The errors might not be normally distributed
+   * The errors might not be independent
+   * The variance might not be the same in each group
 
-Recall the ANOVA model,
+2. To see if the model is okay, it will be helpful to define residuals,
+\begin{align*}
+e_{i j} &=y_{i j}-\hat{y}_{i j} \\
+&=y_{i j}-\bar{y}_{i}.
+\end{align*}
+    Residuals are our best guess of what the true random error $\epsilon_{ij}$ is
+like.
 
+### Normal Probability Plots
 
+3. We can’t check normality of $\epsilon_{ij}$ directly, but we can check
+normality of the residuals $e_{ij}$ using normal probability plots.
 
-with independent errors ijN(0, 2). There are a few ways that this model can fail,
-There might be systematic variations besides the group deviations i.
-The errors might not be normally distributed
-The errors might not be independent
-The variance might not be the same in each group
+4. In the plot to the right, it looks like the data are somewhat more tightly clustered near the middle, though the most extreme points are more extreme than expected. Do you see why?
 
-To see if the model is okay, it will be helpful to define residuals,
+5. Of the ways that the model can fail, normality of the residuals is not the
+most severe, because you can often count on the central limit theorem to make
+the reference $F$ distribution still approximately correct.
 
-.
-Residuals are our best guess of what the true random error ij is like.
-Normal Probability Plots
+### Plotting Residuals
 
-We can’t check normality of ijdirectly, but we can check normality of the residuals eij using normal probability plots.
+6. The way to check for systematic variation beyond the $\tau_i$’s, try plotting
+residuals against measured variables. If you see "patterns," those may
+correspond to missing terms in the model.
 
-In the plot to the right, it looks like the data are somewhat more tightly clustered near the middle, though the most extreme points are more extreme than expected. Do you see why?
+7. We can use plots to check for independence. For example, if you plot the
+residuals over time and you see clear trends, then the errors are likely
+correlated over time.
 
-Of the ways that the model can fail, normality of the residuals is not the most severe, because you can often count on the central limit theorem to make the reference F distribution still approximately correct.
-Plotting Residuals
-The way to check for systematic variation beyond the i’s, try plotting residuals against measured variables. If you see “patterns”, those represent missing terms in your model.
-Use plots to check for independence. For example, if you plot the residuals over time and you see clear trends, then the errors are likely correlated over time.
-Plotting residuals against the fitted values. This can reveal nonconstant variance across the groups.
-Testing Equality of Variances
-There are formal tests to test whether the equal variance assumption of the ANOVA is valid (it’s sort of meta). The most common are,
-Bartlett’s test
-The Modified Levene test
-The main difference is that the Modified Levene test is still valid even when the errors are not normally distributed. You don’t need to memorize the test statistics, but know that they exist, and be able to interpret associated computer output.
-Transformations
-What can you do if you detect nonconstant variance across groups? The most common fix is to use a variance stabilizing transformation. That is, apply some function f(x) to each data point and then perform the ANOVA.
+8. It's often useful to plot residuals against the fitted values. This can
+reveal nonconstant variance across the groups $i$.
 
- There are various rules of thumb, though the process is still somewhat informal,
-f(x) =x or f(x) =1 + x If your data seem Poisson
-f(x) =(x): If your data seem lognormal
-f(x) =(x ): If your data are binomial in fraction form
+### Testing Equality of Variances
 
-These are special cases. More generally, if you notice , then setting f(x) = x1 - will stabilize the variance.
+9. There are formal tests to test whether the equal variance assumption of the ANOVA is valid (it’s very meta). The most common are,
+    * Bartlett’s test
+    * The Modified Levene test
 
-(It’s not at all obvious why any of these transformations are effective -- they are typically derived in introductory mathematical statistics courses).
+    The main difference is that the Modified Levene test is still valid even when the errors are not normally distributed. You don’t need to memorize the test statistics, but know that they exist, and be able to interpret associated computer output.
+
+### Transformations
+
+10. What can you do if you detect nonconstant variance across groups? The most
+common fix is to use a variance stabilizing transformation. That is, apply some
+function $f(x)$ to each data point and then perform the ANOVA.
+
+11. There are various rules of thumb^[It’s not at all obvious why any of these transformations are effective --
+they are typically derived in introductory mathematical statistics courses.], though the process is still somewhat
+informal,
+    * $f(x) = \sqrt{x}$ or $f(x) = \sqrt{1 + x}$ if the data seem Poisson
+    * $f(x) = \log x$ if the data seem lognormal
+    * $f(x) = \arcsin\left(\sqrt{x}\right)$ if the data are binomial-derived fractions
+  
+12. These are special cases. More generally, if you notice $\sigma \propto
+\mu^\alpha$, then setting $f(x) = x^{1 - \alpha}$ will stabilize the variance.
