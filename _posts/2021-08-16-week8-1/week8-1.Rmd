@@ -1,0 +1,119 @@
+---
+title: "$2^2$ Factorial Designs"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-16-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+```{r, echo = FALSE}
+library(dplyr)
+library(ggplot2)
+library(readr)
+theme_set(theme_bw())
+```
+
+```{r, echo = FALSE, fig.margin = TRUE}
+library("EBImage")
+#display(readImage("https://uwmadison.box.com/shared/static/i3wmvjxtwk4rqdzyh9k8g2qexv27mjcf.png"))
+#display(readImage("https://uwmadison.box.com/shared/static/jb4cte8l2glri1i845c4ftrzsua5jybp.png"))
+```
+A special case of general factorial design is the $2^K$ design. This arises when
+there are $K$ factors, but only 2 levels for each factor. We assume $n$ samples
+at each configuration of factor levels.
+
+* With only two levels for each factor, these experiments aren’t useful for
+teasing out subtle variations across levels of a factor
+* They *are* useful for determining which of a large number of factors might be
+worth investigating further (factor screening)
+
+The simplest case of a $2^K$ design is when the number of factors $K = 2$. The
+experimental design can be represented by a square.
+
+```{r, echo = FALSE}
+yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt") %>%
+  mutate(
+    A = as.factor(A),
+    B = as.factor(B)
+  )
+```
+
+
+## Notation
+
+It will be handy to define ways of indexing corners of the square. One approach
+is to write + or - for whether we are at a low or high level for that factor.
+Alternatively, we can represent the corner by all the letters that are at high
+levels.
+
+```{r, echo = FALSE, fig.margin = TRUE}
+ggplot(yield) +
+  geom_point(
+    aes(x = A, y = B, col = Yield),
+    position = position_jitter(w = 0.1, h = 0.1)
+  ) +
+  scale_color_viridis_c() +
+  theme(legend.position = "bottom")
+ggplot(yield) +
+  geom_point(aes(x = A, y = Yield)) +
+  facet_wrap(~B)
+interaction.plot(yield$A, yield$B, yield$Yield)
+```
+
+| A | B | label |
+|---|---|---------|
+| - | - | (1)     |
+| + | - | a       |
+| - | + | b       |
+| + | + | ab      |
+
+We abuse notation and write $a$ to represent the *total* of the response values
+at the corner +-, rather than just the index of that corner.
+
+## Estimating effects
+
+Since there are only two levels for each factor, there are transparent formulas
+for estimating main and interaction effects.
+
+* The main effect for A summaries the average change in the response when A is
+activated. It is defined as
+\begin{align}
+A &= \frac{1}{2n}\left(\left(ab +a\right) - \left(b + (1)\right)\right)
+\end{align}
+
+which is the average of the responses on the edge where A is active minus the
+average when A is inactive. The definition for B is analogous.
+
+```{r, echo = FALSE, fig.margin = TRUE}
+#display(readImage("https://uwmadison.box.com/shared/static/gnrwjf27ji5ld239odkmxl3836jy2imd.png"))
+#display(readImage("https://uwmadison.box.com/shared/static/41twf6fdi67knj7xi9eivccxpwo4wu82.png"))
+```
+
+* The interaction effect measures the degree to which the effect of A changes
+depending on whether or not B is active. It is defined as
+\begin{align}
+AB &= \frac{1}{2n}\left[\left(ab - b\right) + \left(a - \left(1\right)\right)\right]
+\end{align}
+
+
+* The role of A and B is symmetric — you could read the interaction as how the
+effect of B changes depending on whether A is active.
+
+* All these effect estimates can be summarized by our tabular notation
+
+|label | effect A | effect B | effect AB |
+| --- |---|---|---------|
+| (1) | - | - |  + |
+| a | + | - | - |
+| b | - | + | - |
+| ab | + | + | + |

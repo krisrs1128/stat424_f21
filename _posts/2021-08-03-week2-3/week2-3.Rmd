@@ -13,7 +13,7 @@ output:
 
 
 ```{r setup, include=FALSE}
-library("knitr")
+library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
@@ -24,13 +24,12 @@ One approach is based on hypothesis testing: we have a theory about the general
 (a null hypothesis), and we want to see whether our specific sample is
 consistent with that theory. This philosophy is made quantitative by following
 a standard recipe,
-
-* Pose a null hypothesis about the world
-* Define a test statistic that should detect departures from that null
-hypothesis
-* Determine a reference distribution for that test statistic
-* Compute the test statistic on your data, and see if it’s plausibly a draw from
-your reference distribution
+    * Pose a null hypothesis about the world
+    * Define a test statistic that should detect departures from that null
+    hypothesis
+    * Determine a reference distribution for that test statistic
+    * Compute the test statistic on your data, and see if it’s plausibly a draw from
+    your reference distribution
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/e2vep3vvfvnz8v4kiilim1pjxe2w2upr.png")
@@ -132,14 +131,14 @@ $$
 10. Now, if we rearrange terms, we find
 
 $$
-\mathbf{P}\left(\theta \in \left[T\left(y\right) - \hat{\sigma}t_{\text{right}}, T\left(y\right) + \hat{\sigma}t_{\text{left}}\right]\right) = 0.95
+\mathbf{P}\left(\theta \in \left[T\left(y\right) - \hat{\sigma}t_{\text{right}}, T\left(y\right) - \hat{\sigma}t_{\text{left}}\right]\right) = 0.95
 $$
-We can use the fact that $t_{\text{left}} = t_{\text{right}}$ to simplify the
+  We can use the fact that $t_{\text{left}} = -t_{\text{right}}$ to simplify the
 expression further to
 
 $$
 \mathbf{P}\left(\theta \in \left[T\left(y\right) - \hat{\sigma}t_{\text{right}}, T\left(y\right) + \hat{\sigma}t_{\text{right}}\right]\right) = 0.95
 $$
-This is exactly the property that a confidence interval has to satisfy. Plugging
+  This is exactly the property that a confidence interval has to satisfy. Plugging
 in the original expressions gives the confidence interval for the difference in
 means, assuming shared variance.

@@ -1,0 +1,88 @@
+---
+title: "Balanced Incomplete Block Designs"
+description: 
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-16-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [4.4](), [Rmarkdown]()_
+
+1. Randomized Complete Block Designs are good when you can run each treatment in
+each block. What should we do if we have an upper limit on the number of samples
+we can obtain for each block? For example,
+  * The amount of material per block gets exhausted after 3 samples are
+  prepared,
+and we want to study 4 treatments 
+  * We’re interested in three shoe sole types
+
+2. We’ll have to settle on an Incomplete Block Design: not all treatments appear
+in each block. We should assign treatments randomly. We will call a design
+balanced if any pair of treatments appears together in a block the same number
+of times.
+
+3. Some helpful notation,
+    * $a$: Number of treatment levels
+    * $b$: Number of blocks
+    * $k$: Number of treatments per block
+    * $r$: Number of blocks per treatment
+    * $\lambda$: Number of appearances for each level pair
+  
+4. An identity that relates these variables is $\lambda (a - 1) = r(k - 1)$. We
+can derive it by counting the number of samples that occur in blocks containing
+treatment A, excluding the samples given treatment A.
+
+### Hypothesis Testing
+
+5. The model is the same as in the RCBD,
+$$
+y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
+$$
+  where $\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)$ independently and
+$\sum_{i} \tau_i= \sum_{j} \beta_{j}=0$. The difference is that we don’t observe
+$y_{ij}$ for all combinations of blocks and treatments.
+
+6. To test the hypothesis,
+\begin{aligned}
+H_0 &: \tau_1 = \dots = \tau_a = 0 \\
+H_{1} &: \tau_{i} \neq 0 \text{ for at least one } i
+\end{aligned}
+  we can use a decomposition,
+$$
+SS_{\text{Total}} = SS_{\text{Treatments}\left(adjusted\right)} + SS_{\text{Block}} + SS_{E}
+$$
+
+7. The $SS_{\text{Total}}$ and $SS_{\text{Block}}$ terms are familiar, except
+they are only summed over terms that are observed,
+\begin{align}
+SS_{\text{Total}} &= \sum_{i, j} \left(y_{ij} - \bar{y}_{\cdot\cdot}\right)^2 \\
+SS_{\text{Block}} &= k \sum_{j} \left(\bar{y}_{\cdot j} - \bar{y}_{\cdot\cdot}\right)^2
+\end{align}
+
+8. But $SS_{\text{Treatments}}$ is not the expression you might guess at first.
+The reason is each treatment only appears in a subset of blocks, which might
+bias conclusions.
+
+  An adjusted expression corrects for this bias,
+  
+\begin{align*}
+SS_{\text{Treatments }(adjusted )}=\frac{k}{\lambda a} \sum_{i=1}^{a}\left(\bar{y}_{i}-\frac{1}{k} \sum_{j \in B(j)} \bar{y}_{\cdot j}\right)^2
+\end{align*}
+  where $B\left(j\right)$ indexes the blocks within which treatment i was administered.
+
+9. $SS_E$ is obtained through subtraction, and turns out to have $N - a - b + 1$
+degrees of freedom. Therefore,
+\begin{aligned}
+\frac{M S_{\text {Treatment }(\text { adjusted })}}{M S_{E}} &:=\frac{\frac{1}{a-1} S S_{\text {Treatment }(\text { adjusted })}}{\frac{1}{N-a-b+1} S S_{E}} \\
+& \sim F(a-1, N-a-b+1)
+\end{aligned}
+  which can be used as the basis for a hypothesis test.

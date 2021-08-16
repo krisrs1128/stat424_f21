@@ -1,0 +1,100 @@
+---
+title: "Response Surfaces (Intro)"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-16-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [5.5](), [Rmarkdown]()_
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(readr)
+theme_set(theme_bw())
+```
+
+We’ve really pushed a particular recipe for all our hypothesis testing
+approaches,
+
+* Write down a model with various factor level effects
+
+* Write down a sum-of-squares identity, and get the corresponding
+degrees-of-freedom
+
+* Get a test statistic and its reference distribution, for testing each factor
+
+We’ve used this in ANOVA, RCBD, general factorial designs…
+
+It’s been a while coming, but we’re finally going to have a new idea. The new
+idea is to fit response surfaces. The idea is simple: use a flexible (nonlinear)
+function from experimental inputs (combinations of factor levels) to the
+response of interest.
+
+* If we can assume the response varies smoothly as factor inputs are perturbed,
+then this will work
+
+* We’ll be able to use the fit to determine important influences as well as find
+configurations that optimize the response (e.g., maximize profit[^Or if you are
+disgruntled, minimize profit]).
+
+* If we can assume that small changes in the levels of a factor don’t result in
+very dramatic changes in the response, then we’ll have a good representation of
+how varying factors affects the response.
+
+How should we fit these flexible functions?
+
+* Polynomial regression: include terms like $x_i^2, x_i^3, x_i^2 x_j, ...$
+
+* Spline regression: Include polynomial terms, but split across different
+regions of the input space. This is generally more stable than polynomial
+regression.
+
+* Really, you can use whatever function fitter that you want.
+
+Unfortunately, this idea will have to wait till near the end of the course for a
+more complete elaboration.
+
+## Data Example
+
+Let's look at this idea using the battery data from before. We'll treat
+temperature as a continuous variable, so that it makes sense to talk about a
+response surface[^really, a curve over temperature].
+
+```{r}
+battery <- read_table2("https://uwmadison.box.com/shared/static/vmxs2wcsdxkdjujp85nw5kvk83xz4gl9.txt") %>%
+  mutate( Material = as.factor(Material) )
+```
+
+We fit a quadratic regression to define the surface. The result let's us make
+predictions for battery life at temperatures that we haven't observed.
+
+```{r}
+fit <- lm(Life ~ Material * poly(Temperature, 2), data = battery)
+surface <- expand.grid(
+  Material = unique(battery$Material), 
+  Temperature = seq(15, 125, by = 1)
+  )
+surface$Life <- predict(fit, surface)
+ggplot() +
+  geom_point(data = battery, aes(x = Temperature, y = Life)) +
+  geom_line(data = surface, aes(x = Temperature, y = Life)) +
+  facet_wrap(~ Material)
+```
+
+Compare the associated fit with Table 5.15.
+
+```{r}
+summary(fit)
+```

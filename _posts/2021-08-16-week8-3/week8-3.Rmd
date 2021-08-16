@@ -1,0 +1,122 @@
+---
+title: "$2 ^ 3$ Factorial Design"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-16-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+```{r, fig.margin = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/sie5e1b8v005l5ow8wzbtpehfdpn7wnf.png"))
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(readr)
+theme_set(theme_bw())
+```
+
+* How can we generalize the $2^2$ analysis so that we can do studies that
+inspect many factors simultaneously (all at two levels each)?
+
+* We’ll analyze the 3 factor case (the $2^3$ design) first, but in search of
+general patterns
+
+* For the $2^3$ design, we have 8 factor configurations
+
+	* Visualize as corners of a cube
+	
+	* Call the third factor $C$.
+	
+```{r}
+plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1vq7uv7omp4pjdg.txt", header = TRUE) %>%
+  mutate(
+    A = as.factor(A),
+    B = as.factor(B),
+    C = as.factor(C)
+  )
+```
+
+```{r, fig.height = 5, fig.margin = TRUE}
+ggplot(plasma) +
+  geom_point(
+    aes(x = A, y = B, col = Rate),
+    position = position_jitter(w = 0.1, h = 0.1)
+  ) +
+  facet_grid(C ~ .) +
+  scale_color_viridis_c() +
+  theme(legend.position = "bottom")
+```
+
+## Effect Estimates
+
+Our table notation can be extended to deal with all 8 corners of the cube.
+
+| A | B | C | label |
+|---|---|--- | ---------|
+| - | - | - | (1) |
+| + | - | - | a       |
+| - | + | - | b       |
+| - | - | + | c       |
+| + | + | - | ab      |
+| + | - | + | ac      |
+| - | + | + | bc      |
+| + | + | + | abc   |
+
+* The main effect estimates can be made by subtracting the + from the - corners
+ 	* Average of when factor is on vs. off
+	* Average of one face of the cube minus the average of the opposite
+
+For example,
+$$A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]$$
+
+To estimate interactions, look at how average effects change when you condition.
+
+| B | Average A Effect | 
+| --- | ------| 
+| + | $\frac{1}{2^2 n}\left[\left(abc - bc\right) + \left(ab - b\right)\right]$ |
+| - | $\frac{1}{2^2 n}\left[\left(ac - c\right) + \left(a - \left(1\right)\right)\right]$ |
+
+Which inspires the definition,
+
+$$
+AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
+$$
+
+And notice that the associated contrast can be obtained by multiplying the
+columns in the table above.
+
+```{r, fig.margin = TRUE}
+display(readImage("https://uwmadison.box.com/shared/static/3j76s251jeervxrqheo8dqrm5vvq7e63.png"))
+display(readImage("https://uwmadison.box.com/shared/static/8h0vt5kcb5ss0l9dlghsswnpf88q8267.png"))
+```
+
+
+| A | B | C | AB | label |
+| --- | --- | --- | --- | ------| 
+| - | - | - | + | (1) |
+| + | - | - | - | a |
+| - | + | - | - | b |
+| - | - | + | + | c |
+| + | + | - | + | ab |
+| + | - | + | - | ac |
+| - | + | + | - |  bc |
+| + | + | + | + | abc |
+
+We won’t prove why this works, but you can use it as a device for avoiding
+having to memorize everything. The three-way interaction is defined as the
+change in two-way interactions across the two values for the third variable.
+It's contrast can be derived also by multiplying the relevant columns from the
+table above.

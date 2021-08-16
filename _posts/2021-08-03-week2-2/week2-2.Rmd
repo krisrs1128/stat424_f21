@@ -11,10 +11,8 @@ output:
     self_contained: false
 ---
 
-https://docs.google.com/document/d/1fJxl3kNL0EdbMTHMQub3IiKqthXqKdW6HUoB4s8gw9I/edit#
-
 ```{r setup, include=FALSE}
-library("knitr")
+library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 

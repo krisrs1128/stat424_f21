@@ -1,0 +1,99 @@
+---
+title: "Two-Factorial Factorial Design"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-16-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [5.3](), [Rmarkdown]()_
+
+1. Recall that in a factorial design, we want to study the influences of
+multiple experimental factors on some responses of interest. The simplest
+situation is when there are two factors of interest, and the associated designs
+are two-factor factorial designs.
+
+2. We will assume a model of the form,
+$$
+y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
+$$
+  where $\epsilon_{ijk} \sim \mathcal{N}\left(0, \sigma^2\right)$ independently.
+  For identifiability, we have to assume that the sums $\sum_{i} \tau_i =
+  \sum_{j} \beta_{j}= \sum_{ij} \left(\tau\beta\right)_{ij}=0$. We’ll suppose
+  $i$ ranges from $1, \dots, a$, $j$ ranges from $1, \dots, b$ and $k$ ranges
+  from $1,\dots, n$.
+
+2. What do the indices mean?
+  * $i$ indexes levels of the first factor (temperature).
+  * $j$ indexes levels of the second factor (material).
+  * $k$ indexes multiple replicates at a particular combination factor
+  combination $ij$ (battery lifetimes, for fixed temperature $\times$ material
+  combination)
+  
+3. What do the greek letters mean?
+* $\mu$: An intercept term, representing a global mean.
+* $\tau_i$: The effect of the $i^{th}$ level of factor 1 on the average response
+(effect of temperature setting $i$)
+* $\beta_{j}$: The effect of the $j^{th}$ level of factor 2 on the average
+response (effect of material $j$)
+* $\left(\tau\beta\right)_{ij}$:The interaction / synergy between the ith level
+of factor 1 and thejth level of factor 2. (especially long / short response
+times, depending on particular material and temperature settings)
+* $\epsilon_{ijk}$: The random variation we’d observe if we drew many samples at
+a fixed setting of the two factors.
+  __Caution__: $\beta_j$ now indexes a treatment of interest. It is *not* just
+  nuisance blocking variation.
+
+### Testing
+
+4. Up until now, we’ve only asked whether one particular factor had an influence
+on the response, as the levels were changed. Now, we care about each of the
+factors, and each gets a hypothesis test.
+
+  * (Hypothesis A) For the first factor, 
+$$
+H_0 &: \tau_1 = \dots = \tau_a = 0 \\
+H_{1} &: \tau_{i} \neq 0 \text{ for at least one } i
+$$
+
+  * (Hypothesis B) For the second factor,
+$$
+H_0 &: \beta_1 = \dots = \beta_{b} = 0 \\
+H_{1} &: \beta_{j} \neq 0 \text{ for at least one } j
+$$
+
+  * (Hypothesis AB) Are there interaction effects?
+$$
+H_0: \left(\tau\beta\right)_{ij}= \dots = \left(\tau\beta\right)_{ij} = 0 \\
+H_1: \left(\tau\beta\right)_{ij} &= 0 \text{ for at least one } ij \text{ combination}
+$$
+
+5. For each of these hypothesis tests, we’re going to need a test statistic
+that’s sensitive to departures from the null. We’re also going to need their
+reference distributions.
+
+6. Miraculously, we have the identity,
+\begin{align*}
+\sum_{i j k}\left(y_{i j k}-\bar{y}\right)^{2}=& b n \sum_{i}\left(\bar{y}_{i . .}-\bar{y}\right)^{2}+\\
+& a n \sum_{j}\left(\bar{y}_{j} .-\bar{y}\right)^{2}+\\
+& n \sum_{i, j}\left(\bar{y}_{i j}-\bar{y}_{i .}-\bar{y}_{. j}-\bar{y}\right)^{2}+\\
+& \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j} .\right)^{2}
+\end{align*}
+  which we’ll denote $SS_{\text{Total}}=SS_{A}+SS_{B}+SS_{AB}+SS_{E}$.
+
+7. The punchline is that if $SS_{A}$ is large, we have evidence against
+hypothesis A, if $SS_{B}$ is large we have evidence against hypothesis B, and if
+$SS_{AB}$ is large, we have evidence against hypothesis AB.
+
+8. We can define corresponding mean squares by dividing by the degrees of
+freedom. For each hypothesis, we get a corresponding F-statistic.

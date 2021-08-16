@@ -1,0 +1,171 @@
+---
+title: Following-up Two-Factor Fits
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-16-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library("knitr")
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [5.3](), [Rmarkdown]()_
+
+```{r}
+library(dplyr)
+library(broom)
+library(emmeans)
+library(ggplot2)
+library(readr)
+theme_set(theme_bw())
+```
+
+We’ll cover the analogs of performing multiple comparisons, and doing model
+diagnostics for the two-factor model. Almost everything will be familiar from
+our experience with single-factor models.
+
+```{r}
+# background from last time
+battery <- read_table2("https://uwmadison.box.com/shared/static/vmxs2wcsdxkdjujp85nw5kvk83xz4gl9.txt") %>%
+  mutate(
+    Material = as.factor(Material),
+    Temperature = as.factor(Temperature)
+  )
+fit <- lm(Life ~ Material * Temperature, data=battery)
+```
+
+## Multiple Comparisons
+
+We may want to use contrasts, to find out exactly how a particular factor is
+associated with the response.
+
+```{r, fig.margin=TRUE, echo = FALSE}
+library("EBImage")
+#display(readImage("https://uwmadison.box.com/shared/static/3j76s251jeervxrqheo8dqrm5vvq7e63.png"), method = "raster")
+```
+
+* _Subtlety_: If the factor under investigation interacts with the other one,
+its effects will depend on that other factor.
+
+* _Solution_: Fix a level for the other factor, and study the influence of
+levels for the factor of interest.
+
+* Example: Fix temperature, and use Tukey’s HSD to study pairwise difference
+between materials, for that fixed temperature.
+
+```{r}
+emmeans(fit, pairwise ~ Material | Temperature)$contrasts
+```
+
+## Model Checking
+
+Our key assumptions are independence, normality, and equal variances for the
+$\epsilon_{ijk}$’s. Our diagnostics are based on residuals.
+
+```{r, fig.margin = TRUE, echo = FALSE}
+battery <- battery %>%
+  mutate(
+    resid = resid(fit),
+    y_hat = predict(fit)
+  )
+ggplot(battery) +
+  geom_point(aes(x = Temperature, y = resid))
+```
+
+* Plot residuals against each of the two factors
+
+```{r, fig.margin = TRUE, echo = FALSE}
+ggplot(battery) +
+  geom_point(aes(x = y_hat, y = resid))
+```
+
+* Plot fitted vs. residual value
+
+```{r, fig.height = 3, fig.width = 3.5, fig.margin = TRUE, echo = FALSE}
+qqnorm(battery$resid, main = "")
+qqline(battery$resid, col = "red")
+```
+
+* Make normal probability plots
+ 
+## Choosing the Sample Size
+
+How should you choose how many replicates to have at each combination of the two
+factors?
+
+* Simulate a model using a particular configuration of coefficients. 
+* See how your power to detect effects varies as you increase the sample size.
+
+```{r, echo = FALSE}
+tau <- c(0, 1, 2)
+beta <- c(0, 1)
+ns <- seq(2, 10, by = 2)
+b <- 1
+sims <- list()
+for (k in seq_along(ns)) {
+  for (sim_rep in seq_len(50)) {
+    for (i in seq_along(tau)) {
+      for (j in seq_along(beta)) {
+        sims[[b]] <- data.frame(
+            "factor_1" = i,
+            "factor_2" = j,
+            "sample_size" = ns[k],
+            "replicate" = seq_len(ns[k]),
+            "value" = rnorm(ns[k], tau[i] + beta[j]),
+            "sim_rep" = sim_rep
+        )
+        b <- b + 1
+      }
+    }
+  }
+}
+sims <- bind_rows(sims)
+```
+
+
+```{r fig.margin = TRUE, fig.height = 5, fig.width = 2, echo = FALSE}
+ggplot(sims %>% filter(sim_rep == 1)) +
+  geom_point(aes(x = factor_1, y = value)) +
+  facet_grid(sample_size ~ factor_2)
+power <- sims %>%
+  group_by(sample_size, sim_rep) %>%
+  do(model = tidy(lm(value ~ factor_1 + factor_2, data = .))) %>%
+  tidyr::unnest()
+```
+
+
+```{r echo = FALSE}
+ggplot(power) +
+  geom_point(
+    aes(x = sample_size, y = p.value),
+    position = position_jitter(w = .5),
+    size = 0.5
+  ) +
+  geom_hline(yintercept = 0.05, col = "red") +
+  facet_wrap(~ term)
+```
+
+```{r, fig.fullwidth = TRUE, echo = FALSE}
+#display(readImage("https://uwmadison.box.com/shared/static/sie5e1b8v005l5ow8wzbtpehfdpn7wnf.png"), method = "raster")
+```
+
+
+## Interactions
+
+* Note 1: If we only have one replicate per cell, we can’t estimate an
+interaction effect. (If we tried, we’d be able to perfectly fit the data, so no
+way to estimate $\sigma^2$).
+
+* Note 2: To check for interactions, perform residual analysis on the main
+effects model.
+  - Alternatively, use Tukey's additivity test. It checks whether a multiplicative form of the
+  interaction is present, i.e., does
+  $$~y_{ijk} = \mu + \tau_i + \beta_j + \gamma \tau_i \beta_j~$$ 
+  fit significantly better than the main effects model?

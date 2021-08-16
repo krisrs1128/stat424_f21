@@ -59,6 +59,6 @@ $$
   and noting that,
 
 $$
-\frac{MS_{\text{Treatment}}}{MS_{E}} &= \frac{\frac{1}{p - 1}SS_{\text{Treatment}}}{\frac{1}{\left(p - 1\right)\left(p - 3\right)}SS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 3\right)\right)
+\frac{MS_{\text{Treatment}}}{MS_{E}} = \frac{\frac{1}{p - 1}SS_{\text{Treatment}}}{\frac{1}{\left(p - 1\right)\left(p - 3\right)}SS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 3\right)\right)
 $$
 
