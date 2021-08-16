@@ -86,38 +86,35 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: Testing Differences in Means</title>
+<title>Statistical Experimental Design: Balanced Incomplete Block Designs</title>
 
-<meta property="description" itemprop="description" content="The basic principles of hypothesis testing."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-09-16"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-09-16"/>
+<meta property="article:published" itemprop="datePublished" content="2021-08-16"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-08-16"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: Testing Differences in Means"/>
+<meta property="og:title" content="Statistical Experimental Design: Balanced Incomplete Block Designs"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="The basic principles of hypothesis testing."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: Testing Differences in Means"/>
-<meta property="twitter:description" content="The basic principles of hypothesis testing."/>
+<meta property="twitter:title" content="Statistical Experimental Design: Balanced Incomplete Block Designs"/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Testing Differences in Means"]},{"type":"character","attributes":{},"value":["The basic principles of hypothesis testing."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["09-16-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Balanced Incomplete Block Designs"]},{"type":"NULL"},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-16-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week2-3_files/anchor-4.2.2/anchor.min.js","week2-3_files/bowser-1.9.3/bowser.min.js","week2-3_files/distill-2.2.21/template.v2.js","week2-3_files/header-attrs-2.8/header-attrs.js","week2-3_files/jquery-1.11.3/jquery.min.js","week2-3_files/popper-2.6.0/popper.min.js","week2-3_files/tippy-6.2.7/tippy-bundle.umd.min.js","week2-3_files/tippy-6.2.7/tippy-light-border.css","week2-3_files/tippy-6.2.7/tippy.css","week2-3_files/tippy-6.2.7/tippy.umd.min.js","week2-3_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week6-1_files/anchor-4.2.2/anchor.min.js","week6-1_files/bowser-1.9.3/bowser.min.js","week6-1_files/distill-2.2.21/template.v2.js","week6-1_files/header-attrs-2.8/header-attrs.js","week6-1_files/jquery-1.11.3/jquery.min.js","week6-1_files/popper-2.6.0/popper.min.js","week6-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week6-1_files/tippy-6.2.7/tippy-light-border.css","week6-1_files/tippy-6.2.7/tippy.css","week6-1_files/tippy-6.2.7/tippy.umd.min.js","week6-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2250,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Testing Differences in Means","description":"The basic principles of hypothesis testing.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-09-16T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Balanced Incomplete Block Designs","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-16T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,139 +2273,70 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Testing Differences in Means</h1>
+<h1>Balanced Incomplete Block Designs</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>The basic principles of hypothesis testing.</p></p>
+
 </div>
 
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>09-16-2021
+<br/>08-16-2021
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">2.4</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="">4.4</a>, <a href="">Rmarkdown</a></em></p>
 <ol type="1">
-<li>Statistics is about making general conclusions based on specific evidence. One approach is based on hypothesis testing: we have a theory about the general (a null hypothesis), and we want to see whether our specific sample is consistent with that theory. This philosophy is made quantitative by following a standard recipe,
+<li>Randomized Complete Block Designs are good when you can run each treatment in each block. What should we do if we have an upper limit on the number of samples we can obtain for each block? For example,</li>
+</ol>
 <ul>
-<li>Pose a null hypothesis about the world</li>
-<li>Define a test statistic that should detect departures from that null hypothesis</li>
-<li>Determine a reference distribution for that test statistic</li>
-<li>Compute the test statistic on your data, and see if it’s plausibly a draw from your reference distribution</li>
-</ul></li>
-</ol>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/e2vep3vvfvnz8v4kiilim1pjxe2w2upr.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/e2vep3vvfvnz8v4kiilim1pjxe2w2upr.png" /><!-- --></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/66793m770ob31z53fpgc4xoci4y0s7fi.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/66793m770ob31z53fpgc4xoci4y0s7fi.png" /><!-- --></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/r9dzi8ar8l7ic7h2xarnrdiwoab6tojz.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/r9dzi8ar8l7ic7h2xarnrdiwoab6tojz.png" /><!-- --></p>
-</div>
+<li>The amount of material per block gets exhausted after 3 samples are prepared, and we want to study 4 treatments</li>
+<li>We’re interested in three shoe sole types</li>
+</ul>
 <ol start="2" type="1">
-<li>Proceeding in this way, there are a few types of error</li>
+<li><p>We’ll have to settle on an Incomplete Block Design: not all treatments appear in each block. We should assign treatments randomly. We will call a design balanced if any pair of treatments appears together in a block the same number of times.</p></li>
+<li><p>Some helpful notation,</p>
+<ul>
+<li><span class="math inline">\(a\)</span>: Number of treatment levels</li>
+<li><span class="math inline">\(b\)</span>: Number of blocks</li>
+<li><span class="math inline">\(k\)</span>: Number of treatments per block</li>
+<li><span class="math inline">\(r\)</span>: Number of blocks per treatment</li>
+<li><span class="math inline">\(\lambda\)</span>: Number of appearances for each level pair</li>
+</ul></li>
+<li><p>An identity that relates these variables is <span class="math inline">\(\lambda (a - 1) = r(k - 1)\)</span>. We can derive it by counting the number of samples that occur in blocks containing treatment A, excluding the samples given treatment A.</p></li>
 </ol>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th>Tested rejected</th>
-<th>Test didn’t reject</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Null is true</td>
-<td>False alarm</td>
-<td>Correct</td>
-</tr>
-<tr class="even">
-<td>Null is false</td>
-<td>Correct</td>
-<td>Missed detection</td>
-</tr>
-</tbody>
-</table>
-<ol start="3" type="1">
-<li><strong><span class="math inline">\(p\)</span>-values</strong>. “Rejected” or “Not rejected” is only a very coarse description of how the data conforms to a theory. <span class="math inline">\(p\)</span>-values give a measure of the degree of (im)plausibility of a test statistic under a given null hypothesis. The specific measure of plausibility will depend on the form of the test – we will see a specific example in the next set of notes.</li>
-</ol>
-<h3 id="two-sample-t-test">Two Sample t-test</h3>
-<ol start="4" type="1">
-<li>Motivating example: You have two ways of making concrete mortar. Is one stronger than the other? By default, you think they are equally strong. We can denote this (the <em>null hypothesis</em>) by,</li>
-</ol>
-<p><span class="math display">\[
-H_0: \mu_1 = \mu_2
-\]</span></p>
-<p>The alternative hypothesis is that the strengths are not equal,</p>
-<p><span class="math display">\[
-H_1: \mu_1 \neq \mu_2
-\]</span></p>
+<h3 id="hypothesis-testing">Hypothesis Testing</h3>
 <ol start="5" type="1">
-<li>Our test statistic for detecting departures from this null will be,</li>
+<li><p>The model is the same as in the RCBD, <span class="math display">\[
+y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
+\]</span> where <span class="math inline">\(\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> independently and <span class="math inline">\(\sum_{i} \tau_i= \sum_{j} \beta_{j}=0\)</span>. The difference is that we don’t observe <span class="math inline">\(y_{ij}\)</span> for all combinations of blocks and treatments.</p></li>
+<li><p>To test the hypothesis,</p>
+<span class="math display">\[\begin{aligned}
+H_0 &amp;: \tau_1 = \dots = \tau_a = 0 \\
+H_{1} &amp;: \tau_{i} \neq 0 \text{ for at least one } i
+\end{aligned}\]</span>
+<p>we can use a decomposition, <span class="math display">\[
+SS_{\text{Total}} = SS_{\text{Treatments}\left(adjusted\right)} + SS_{\text{Block}} + SS_{E}
+\]</span></p></li>
+<li><p>The <span class="math inline">\(SS_{\text{Total}}\)</span> and <span class="math inline">\(SS_{\text{Block}}\)</span> terms are familiar, except they are only summed over terms that are observed, <span class="math display">\[\begin{align}
+SS_{\text{Total}} &amp;= \sum_{i, j} \left(y_{ij} - \bar{y}_{\cdot\cdot}\right)^2 \\
+SS_{\text{Block}} &amp;= k \sum_{j} \left(\bar{y}_{\cdot j} - \bar{y}_{\cdot\cdot}\right)^2
+\end{align}\]</span></p></li>
+<li><p>But <span class="math inline">\(SS_{\text{Treatments}}\)</span> is not the expression you might guess at first. The reason is each treatment only appears in a subset of blocks, which might bias conclusions.</p></li>
 </ol>
-<p><span class="math display">\[
-t_0 := \frac{\bar{y}_1 - \bar{y}_2}{S_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
-\]</span> where we define the pooled standard deviation by,</p>
-<p><span class="math display">\[
-S^2_p = \frac{\left(n_1 - 1\right)S_1^2 + \left(n_2 - 1\right)S_2^2}{n_1 + n_2 -2}
-\]</span> and <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are the usual standard deviations for each group individually. (consider what happens when <span class="math inline">\(n_1 = n_2 = n\)</span>)</p>
-<ol start="6" type="1">
-<li>Under the null hypothesis, this is a ratio between a standard normal and chi-square, so <span class="math inline">\(t_0\)</span> is <span class="math inline">\(t\)</span>-distributed with <span class="math inline">\(n - 2\)</span> d.f. This gives reference distribution under the null.</li>
-</ol>
-<h3 id="confidence-intervals">Confidence intervals</h3>
-<ol start="7" type="1">
-<li>Instead of thinking we know the mean and trying to reject it, why don’t we try to directly estimate it (with an error bar)? A 95% confidence interval is an interval <span class="math inline">\([L, U]\)</span> satisfying,</li>
-</ol>
-<p><span class="math display">\[
-\mathbf{P}\left(\theta \in \left[L, U\right]\right) = 0.95
-\]</span></p>
-<ol start="8" type="1">
-<li>The randomness here is in <span class="math inline">\(L\)</span> and <span class="math inline">\(U\)</span>. If we were being more formal, we would write those as functions of the (random) sample,</li>
-</ol>
-<p><span class="math display">\[
-\left[L\left(y_1, \dots, y_n\right), U\left(y_1, \dots, y_n\right)\right]
-\]</span></p>
+<p>An adjusted expression corrects for this bias,</p>
+<p><span class="math display">\[\begin{align*}
+SS_{\text{Treatments }(adjusted )}=\frac{k}{\lambda a} \sum_{i=1}^{a}\left(\bar{y}_{i}-\frac{1}{k} \sum_{j \in B(j)} \bar{y}_{\cdot j}\right)^2
+\end{align*}\]</span> where <span class="math inline">\(B\left(j\right)\)</span> indexes the blocks within which treatment i was administered.</p>
 <ol start="9" type="1">
-<li>To construct one for the two sample test, recall that, based on the <span class="math inline">\(t\)</span>-distribution characterization from the probability-review lecture,</li>
+<li><span class="math inline">\(SS_E\)</span> is obtained through subtraction, and turns out to have <span class="math inline">\(N - a - b + 1\)</span> degrees of freedom. Therefore,
+<span class="math display">\[\begin{aligned}
+\frac{M S_{\text {Treatment }(\text { adjusted })}}{M S_{E}} &amp;:=\frac{\frac{1}{a-1} S S_{\text {Treatment }(\text { adjusted })}}{\frac{1}{N-a-b+1} S S_{E}} \\
+&amp; \sim F(a-1, N-a-b+1)
+\end{aligned}\]</span>
+which can be used as the basis for a hypothesis test.</li>
 </ol>
-<p><span class="math display">\[
-P\left(\left(\frac{\bar{y}_1 - \bar{y}_2\right) - \left(\mu_1 - \mu_2\right)}{S_p\sqrt{\frac{2}{n}}} \in \left[t_{0.025, 2\left(n - 1\right), t_{0.975, 2\left(n - 1\right)}}\right]  \right) = 0.95
-\]</span></p>
-<p>To simplify the algebra, let</p>
-<p><span class="math display">\[
-T\left(y\right) := \bar{y}_1 - \bar{y}_2 \\
-\theta := \mu_1 - \mu_2 \\
-\hat{\sigma} := S_p\sqrt{\frac{2}{n}} \\
-t_{0.025, 2\left(n - 1\right)} := t_{\text{left}} \\
-t_{0.975, 2\left(n - 1\right)} := t_{\text{right}}
-\]</span> so that the above expression reduces to,</p>
-<p><span class="math display">\[
-\mathbf{P}\left(\frac{T\left(y\right) - \theta}{\hat{\sigma}} \in \left[t_{\text{left}}, t_{\text{right}}\right]\right) = 0.95
-\]</span></p>
-<ol start="10" type="1">
-<li>Now, if we rearrange terms, we find</li>
-</ol>
-<p><span class="math display">\[
-\mathbf{P}\left(\theta \in \left[T\left(y\right) - \hat{\sigma}t_{\text{right}}, T\left(y\right) - \hat{\sigma}t_{\text{left}}\right]\right) = 0.95
-\]</span> We can use the fact that <span class="math inline">\(t_{\text{left}} = -t_{\text{right}}\)</span> to simplify the expression further to</p>
-<p><span class="math display">\[
-\mathbf{P}\left(\theta \in \left[T\left(y\right) - \hat{\sigma}t_{\text{right}}, T\left(y\right) + \hat{\sigma}t_{\text{right}}\right]\right) = 0.95
-\]</span> This is exactly the property that a confidence interval has to satisfy. Plugging in the original expressions gives the confidence interval for the difference in means, assuming shared variance.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
