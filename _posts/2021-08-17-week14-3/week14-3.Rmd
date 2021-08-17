@@ -1,0 +1,135 @@
+---
+title: "Split-Plot Designs"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-17-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [14.4](), [Rmarkdown]()_
+
+
+```{r}
+library("dplyr")
+library("ggplot2")
+library("readr")
+library("EBImage")
+library("reshape2")
+theme_set(theme_bw() + theme(legend.position = "bottom"))
+```
+```{r, fig.cap = "A single field from a true factorial design in the irrigation example."}
+#display(readImage("https://uwmadison.box.com/shared/static/qtxsckab5vcxffrhbpepj9peq28m7zwn.png"))
+```
+
+```{r, fig.cap = "An alternative split plot structure. The irrigation strategies are now rows, and each cell is a subplot."}
+#display(readImage("https://uwmadison.box.com/shared/static/9s2cmkmgc45po62yzm8eltry8cy7rv42.png"))
+```
+
+There are times when we would like to perform a two-factor factorial experiment
+across blocks, but one of the factors is much more difficult to vary than the
+other. For example,
+
+* We want to assess the effect of different irrigation ($A$) and corn varieties
+($B$) on total yield. There are three fields (Blocks) within which to gather data.
+It is hard to change irrigation strategy on small subplots of land, especially
+compared to corn variety.
+
+* We run a papermill, and want to compare pulp preparation strategies ($A$) and
+cooking temperatures ($B$). Samples are collected over three days (Blocks). It is
+hard to change the pulp preparation strategy from sample to sample — we would
+rather prepare a few big batches —  but it’s easy to cook them at different
+temperatures.
+
+This makes a true $2^{2}$ factorial experiment impractical, because it would
+require randomizing over all combinations of $A$ and $B$ for every sample that
+we collect.
+
+* If we had 3 irrigation strategies and 6 corn varieties, we would need to
+divide each field into 18 subplots and randomize the assignment of irrigation x
+corn pairs.
+
+* It’s much easier to first divide each field into 3 large plots, and then
+randomly assign corn varieties to 6 subplots within each large plot.
+
+Effectively, practical considerations impose a restriction on randomization.
+
+### Model
+
+The model for a split-plot design is
+
+\begin{align*}
+y_{ijk} &= \mu + \tau_{k} + \alpha_{i} + \beta_{j} + \left(\tau\alpha\right)_{ki} + \left(\alpha\beta\right)_{ij} + \epsilon_{ijk}
+\end{align*}
+
+where $\epsilon \sim N\left(0, \sigma^2\right)$ independently.
+
+The terms can be interpreted as,
+
+* $\mu$: The global response average.
+
+* $\tau_{k}$: The effect of the $k^{th}$ block (e.g., $k^{th}$ field).
+
+* $\alpha_{i}$: The effect of the $i^{th}$ level of $A$, the
+hard-to-granularly-randomize factor (e.g., $i^{th}$ irrigation strategy).
+
+* $\beta_{j}$: The effect of the $j^{th}$ level of $B$, the
+easy-to-granularly-randomize factor (e.g., $j^{th}$ corn variety)
+
+* $\left(\tau\alpha\right)_{ki}$: An interaction factor between the $k^{th}$
+block and the $i^{th}$ level of $A$ (e.g., the $i^{th}$ irrigation strategy
+within the $k^{th}$ field might be unusually good).
+
+* $\left(\alpha\beta\right)_{ij}$: An interaction factor between the $i^{th}$
+level of $A$ and the $j^{th}$ level of $B$.
+
+We will typically not care about individual block effects, though we will care
+about the two different treatments. Therefore, it is common to
+
+* Use random effects for $\tau_{k}, \left(\tau\alpha\right)_{ki}$.
+
+* Use fixed-effects for $\alpha_{i}$ and $\beta_{j}$.
+
+The expected mean squares associated with each of the terms above can be derived
+in closed form. Here, we will simply illustrate their use through the `lme4`
+package. The data are from the papermill experiment described above.
+
+```{r}
+pulp <- read_csv("https://uwmadison.box.com/shared/static/843r3mda46is46nbb5b6393u7caz8orq.csv") %>%
+  mutate_at(vars(Day, Method, Temperature), as.factor)
+```
+```{r, fig.cap = "Data from the papermill experiment."}
+ggplot(pulp) +
+  geom_point(
+    aes(x = Temperature, y = Strength, col = Day),
+    size = 3
+  ) +
+  scale_color_brewer(palette = "Set2") +
+  facet_grid(Method ~ .)
+```
+
+```{r}
+fit <- aov(Strength ~ Method * Temperature + Error(Day / Method), data = pulp)
+summary(fit)
+```
+
+### Split-Plot is not $2^{2}$ factorial
+
+Fitting a $2^{2}$ factorial model when the data were collected with restrictions
+on randomization can lead to misleading results. The code below fits an ordinary
+$2^{2}$ factorial model to the papermill data. Note the overconfidence about an
+effect of `Method`.
+
+```{r}
+fit <- aov(Strength ~ Method * Temperature, data = pulp)
+summary(fit)
+```

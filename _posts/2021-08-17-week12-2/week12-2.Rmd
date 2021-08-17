@@ -1,5 +1,5 @@
 ---
-title: "week12-2"
+title: "Canonical Analysis"
 description: |
   A short description of the post.
 author:
@@ -16,3 +16,227 @@ library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
+
+_Readings [11.3](), [Rmarkdown]()_
+
+
+```{r}
+library("dplyr")
+library("ggplot2")
+library("readr")
+library("EBImage")
+library("rsm")
+library("reshape2")
+theme_set(theme_bw() + theme(legend.position = "bottom"))
+```
+
+```{r fig.cap = "First order models have no isolated optima."}
+##display(readImage("https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lzt6gq5fkjfn.png"))
+```
+
+```{r fig.cap = "Second order model with a local minimum."}
+##display(readImage("https://uwmadison.box.com/shared/static/qn1f8hrbb8uwtbflv02axa817m6tcmb7.png"))
+```
+
+```{r fig.cap = "Second order model with a saddle point."}
+##display(readImage("https://uwmadison.box.com/shared/static/x81swx5xslpzziywsupkuwpkyfggagis.png"))
+```
+
+One we are in the vicinity of a potentially optimal point, we need more subtle
+methods. There are two essential issues,
+
+* We need a way of deciding whether a point is optimal. The method of steepest
+ascent will always report a new direction to explore, even if the benefit is
+marginal. At some point we need to stop.
+
+* We need a better way of proposing new directions to explore, when the
+first-order model is insufficient. Since the method of steepest ascent relies on
+a first-order model, it will not give good directions when the surface is
+actually highly nonlinear.
+
+Canonical analysis helps solve both of these problems. First, we’ll define
+canonical analysis, and then we’ll illustrate its use in finding optimal points
+and proposing new directions.
+
+### Mathematical Setup
+A first-order model never has any isolated optima. It’s either perfectly flat,
+or increases forever in some direction. A second-order model, however, does
+potentially have optimal values.
+
+Calculus can help us identify these optima. Recall that, at a function’s
+maximum, its gradient is zero. This makes it natural to consider the gradient of
+a fitted second order surface,
+\begin{align*}
+\nabla_{x}\hat{y}\left(x\right) &= \nabla_{x}\left[x^{T}\hat{b} + x^{T}\hat{B}x\right] \\
+&= \hat{b} + 2\hat{B}x
+\end{align*}
+
+so the function has a stationary point at
+\begin{align*}
+x_{\ast} &= -\frac{1}{2}\hat{B}^{-1}\hat{b}.
+\end{align*}
+
+We’ll denote the value of the surface at this optimal point by
+\begin{align*}
+\hat{y}_{\ast} &= \hat{b}^{T}x + x^{T}\hat{B}\hat{x} \\
+&= -\frac{1}{2}\hat{b}^{T}\hat{B}^{-1}\hat{b} + \frac{1}{4}\hat{b}^{T} \hat{B}^{-1} \hat{B} \hat{B}^{-1} \hat{b} \\
+&= -\frac{1}{4}\hat{b}^{T}\hat{B}^{-1}\hat{b}
+\end{align*}
+
+Just like in ordinary calculus, there are three possibilities,
+
+* The stationary point is a maximum
+
+* The stationary point is a minimum
+
+* The stationary point is a saddlepoint
+
+In one-variable calculus, we’d just take second derivatives, and see whether the
+function curves up, down, or is flat. We’re in higher-dimensions, though, so
+we’ll use the generalization of the second-derivative test, called...
+
+### Canonical Representation
+```{r, fig.cap = "Geometric representation of the eigendecomposition."}
+#display(readImage("https://uwmadison.box.com/shared/static/ngiy01l2mtvem1o9e6diwawhypgf3jst.png"))
+```
+
+Since $\hat{B}$ is symmetric, we can find an eigendecomposition,
+\begin{align*}
+\hat{B} &= U \Lambda U^{T},
+\end{align*}
+
+where $U$ are orthogonal eigenvectors and $\Lambda$ is a diagonal matrix
+containing eigenvalues $\lambda_{k}$. Define $w\left(x\right) = U^{T}\left(x -
+x_{\ast}\right)$. It turns out that our second-order fit can be equivalently
+expressed as
+\begin{align*}
+\hat{y}\left(x\right) &= \hat{y}_{\ast} + w^T\left(x\right)\Lambda w\left(x\right) \\
+&= \hat{y}_{\ast} + \sum_{k = 1}^{K} \lambda_{k}w^{2}_{k}\left(x\right)
+\end{align*}
+
+which is much simpler because there are no interaction terms between the
+$w_{k}$’s (like there are between $x_{k}$’s).
+
+
+_Proof_^[You can skip this proof without worrying whether it will appear in later lectures or assignments / exams. But I encourage you to go on, it gives a flavor of more advanced topics in statistics.]: The textbook skips the proof of this fact, but if you have seen some
+linear algebra, the approach is interesting. First, plug-in the value of
+$\hat{y}_{\ast}$ from above, and expand the definition of $w\left(x\right)$,
+\begin{align*}
+\hat{y}\left(x\right) &= \hat{y}_{\ast} + w^{T}\left(x\right) \Lambda w\left(x\right) \\
+&= -\frac{1}{4}\hat{b}^{T}\hat{B}\hat{b} + \left(x - x_{\ast}\right)^{T}U\Lambda U^{T} \left(x - x_{\ast}\right).
+\end{align*}
+
+Now, use the definition of our original eigendecomposition $\hat{B} = U \Lambda
+U^{T}$ and expand the quadratic,
+\begin{align*}
+\hat{y}\left(x\right) &= -\frac{1}{4}\hat{b}^{T}\hat{B}\hat{b} + \left(x - x_{\ast}\right)^{T}\hat{B}\left(x - x_{\ast}\right) \\
+&= -\frac{1}{4}\hat{b}^{T}\hat{B}\hat{b} + x^{T}\hat{B}x - 2x^{T}\hat{B}x_{\ast} + x^{T}_{\ast}\hat{B}x_{\ast}.
+\end{align*}
+
+To simplify, let’s plug-in the expression for the stationary point $x_{\ast} =
+-\frac{1}{2}\hat{B}^{-1}\hat{b}$ that we found above,
+\begin{align*}
+\hat{y}\left(x\right) &= -\frac{1}{4}\hat{b}^{T}\hat{B}\hat{b} + x^{T}\hat{B}x + x^{T}\hat{B}\hat{B}^{-1}\hat{b} + \frac{1}{4}\hat{b}^{T}\hat{B}^{-1}\hat{B}\hat{B}^{-1}\hat{b} \\
+&= \hat{b}^{T}x + x^{T}\hat{B}x
+\end{align*}
+
+which was exactly our original definition of the second-order model.
+
+### Implications
+
+The representation of the second-order model by
+\begin{align}
+\label{eq:canonical}
+\hat{y}\left(x\right) &= \hat{y}_{\ast} + \sum_{k = 1}^{K} \lambda_{k}w^{2}_{k}\left(x\right)
+\end{align}
+
+is an important one, because
+
+1. It provides the high-dimensional analog of the second-derivative test.
+
+2. It suggests new configurations of $x$ that might be better.
+
+To see 1., suppose the $\lambda_{k}$’s were all negative. Then, expression
+\ref{eq:canonical} is maximized when $w_{k}\left(x\right)$ are all zero — any
+change in the $w_{k}\left(x\right)$’s from there can only ever decrease
+$\hat{y}\left(x\right)$.
+
+* But $w\left(x\right) = 0$ happens at $x = x_{\ast}$, by definition of
+$w\left(x\right)$.
+
+* This means $x_{\ast}$ is a maximum!
+
+Similarly, when all $\lambda_{k}$ are all positive, then moving the
+$w_{k}\left(x\right)$’s by any amount can only increase $\hat{y}\left(x\right)$.
+This means we’re at a minimum!
+
+Finally, when some of the $\lambda_{k}$’s are positive and others are negative,
+then we’re at a saddlepoint.
+
+* Increasing $w_{k}\left(x\right)$ for $\lambda_{k}$’s that are positive will increase $\hat{y}\left(x\right)$.
+
+* Increasing $w_{k}\left(x\right)$ for $\lambda_{k}$’s that are negative will decrease $\hat{y}\left(x\right)$.
+
+This last discussion also gives us insight into 2.
+
+* To find configurations $x$ that further increase the value of the response
+surface  $\hat{y}\left(x\right)$, increase $w_{k}\left(x\right)$ for those $k$’s
+where $\lambda_{k}$ is most positive.
+
+### Data Example
+
+We'll continue the chemical process experiment from last time. Here, the
+experimenter has performed a central composite design experiment, a refinement
+of the earlier factorial designs. The hope is that now a configuration that
+maximizes the yield can be precisely isolated.
+
+```{r}
+chem <- read_csv("https://uwmadison.box.com/shared/static/nbaj1m8j7tuaqmznjlrsgbzyhp9k61i8.csv")
+ggplot(chem) +
+  geom_point(
+    aes(x = time, y = temp, col = yield),
+    position = position_jitter(w = 0.3, h = 0.3)
+  ) +
+  coord_fixed() +
+  scale_color_viridis_c()
+```
+As before, we will code the data. We use `SO` to fit a second-order model. It
+appears that the linear and pure quadratic components are very strong, and that
+there is limited, if any, interaction between these two variables.
+
+```{r, echo = TRUE}
+chem_coded <- coded.data(chem, time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 155) / 5)
+fit <- rsm(yield ~ SO(temp_coded, time_coded), data = chem_coded)
+anova(fit)
+```
+Next, we can perform a canonical analysis, to make sure that we are at a
+stationary point. Since both of the eigenvalues are negative, this is in fact
+the case. The eigenvectors also tell us directions that (in this case) decrease
+the yield fastest.
+
+```{r, echo = TRUE}
+analysis <- canonical(fit)
+analysis
+```
+
+We can identify the specific location of the optimum, by decoding the canonical
+analysis.
+
+```{r, echo = TRUE}
+stationary <- code2val(analysis$xs, codings = codings(chem_coded))
+stationary
+```
+
+
+```{r, plot_data}
+w1 <- code2val(analysis$xs + analysis$eigen$vectors[, 1], codings = codings(chem_coded))
+w2 <- code2val(analysis$xs + analysis$eigen$vectors[, 2], codings = codings(chem_coded))
+```
+
+Finally, let's plot the response surface, with the canonical points overlaid.
+
+```{r, echo = TRUE, fig.margin = FALSE, fig.cap = "The response surface, with canonical vectors overlaid."}
+contour(fit, ~ time_coded + temp_coded, image = TRUE, asp = 1)
+segments(stationary[2], stationary[1], w1[2], w1[1], col = "red")
+segments(stationary[2], stationary[1], w2[2], w2[1], col = "red")
+```

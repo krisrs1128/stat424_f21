@@ -1,0 +1,172 @@
+---
+title: "Nested Designs"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-17-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [14.1](), [Rmarkdown]()_
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(lme4)
+library(readr)
+library(EBImage)
+library(reshape2)
+theme_set(theme_bw() + theme(legend.position = "bottom"))
+```
+
+```{r, fig.cap = "The nested structure in the suppliers example"}
+#display(readImage("https://uwmadison.box.com/shared/static/kbs80435ds41u0qp7typvmuiaibyjlpm.png"))
+```
+
+Factorial designs cover the situation where effects from multiple sources are
+crossed with one another. In many situations, however, effects are nested within
+each other.
+
+* You rely on several suppliers to provide raw material and are interested in
+whether some suppliers provide consistently better material. The material
+arrives in batches, and there is variation across batches. The batch effect is
+*nested within* the supplier effect.
+
+* The hardness of different alloys are to be compared. Several ingots are built
+from each alloy, and repeated measures are drawn from each ingot. The ingot
+effect is nested within the alloy effect.
+
+### Model
+
+```{r, fig.cap = "Notation used in nested designs. Parentheses denote the parent branch."}
+#display(readImage("https://uwmadison.box.com/shared/static/g6yb4uu8nncnqc39rbjhh3kz8bv9jzwc.png"))
+```
+
+We will consider the two-stage design here. The data are imagined to be drawn
+according to
+\begin{align*}
+y_{ijk} &= \mu + \alpha_{i} + \beta_{j\left(i\right)} + \epsilon_{ijk}.
+\end{align*}
+
+```{r, fig.cap = "Another way to look at the nested coefficient structure.", out.width = "80%"}
+#display(readImage("https://uwmadison.box.com/shared/static/fy3jwyeou1bu6nyo1i2lypg8juj80z8k.png"))
+```
+
+* $\alpha_i$ is the parent-effect (e.g., supplier effect). For identifiability,
+assume $\sum_{i} \alpha_i = 0$.
+
+* $\beta_{j\left(i\right)}$ is the nested-effect associated with parent $i$
+(e.g., effect of the $j^{th}$ batch within the $i^{th}$ supplier). For
+identifiability, assume $\sum_{j}\beta_{j\left(i\right)} = 0$ for each $i$.
+
+* $\epsilon_{ijk} \sim N\left(0, \sigma^{2}\right)$ is independent noise.
+
+The key difference from the usual factorial model is that the nested effects
+$\beta_{j\left(i\right)}$ are not the same across different parents $i$.
+
+### Inference
+
+_Fixed-Effects_
+
+First, imagine treating all the effects as fixed. In this case, there are two
+typical hypotheses of interest.
+
+```{r, fig.cap = "The nested effect term looks at the variation across child means along a single branch."}
+#display(readImage("https://uwmadison.box.com/shared/static/6bona7dg8dl6fbnfvetovq2cl9l5zo11.png"))
+```
+
+* Null parent-effect,
+\begin{align*}
+&H_{0}: \alpha_{i} = 0 \text{ for all } i \\
+&H_{1}: \alpha_{i} \neq 0 \text{ for at least one } i
+\end{align*}
+	
+* Null child-effect,
+\begin{align*}
+&H_{0}: \beta_{j\left(i\right)} = 0 \text{ for all } i,j \\
+&H_{1}: \beta_{j\left(i\right)} \neq 0 \text{ for at least one } i,j
+\end{align*}
+
+In either case, a test is performed using a sum-of-squares decomposition,
+\begin{align*}
+SS_{T} &= SS_A + SS_{B\left(A\right)} + SS_{E}
+\end{align*}
+which is similar in structure to those we have seen before, except we now have a nested effect term,
+\begin{align*}
+SS_{B\left(A\right)} &= \sum_{i = 1}^{a}\sum_{j = 1}^{b} \left(\bar{y}_{ij\cdot} - \bar{y}_{i\cdot\cdot}\right)^{2}.
+\end{align*}
+
+which measures how much the $j^{th}$ effect within parent $i$ varies from
+the average in that group. The distribution of the associated mean-squares can
+then be used to perform an ANOVA. Let’s see an implementation, based on the
+supplier-materials example above. (example 14.1)
+
+```{r}
+purity <- read_csv("https://uwmadison.box.com/shared/static/uub0t6lvii52rxyygb2yt4ph3vmionjz.csv") %>%
+  mutate(
+    supplier = as.factor(supplier),
+    batch = as.factor(batch)
+  )
+```
+```{r, fig.cap = "Data from the supplier example."}
+ggplot(purity) +
+  geom_point( aes(x = batch, y = purity) ) +
+  facet_wrap(~supplier)
+```
+```{r, echo = TRUE}
+fit <- lm(purity ~ supplier + supplier / batch, data = purity)
+anova(fit)
+```
+The `A/B` notation is just shorthand for `A + A:B`; i.e., a main effect for the
+parent `A` and an interaction term between the parent `A` and child `B`, as the
+code below makes clear.
+
+```{r}
+fit_explicit <- lm(purity ~ supplier + supplier : batch, data = purity)
+anova(fit_explicit)
+```
+_Random Effects_
+
+Rather than caring about specific parent or nested effects, we may simply want
+to know the typical variation due to either factor. For example, we may not care
+about the effect of the 2nd batch in the 3rd supplier, but we may be curious
+about the typical size of batch-to-batch variation. In this case, it makes sense
+to use random effects. We can use a random effect for just the nested factors,
+
+```{r, fig.margin = FALSE, fig.cap = "We might imagine the batch effects are drawn from some distribution, and do inference on the variance of that distribution."}
+#display(readImage("https://uwmadison.box.com/shared/static/twey7ufa1zeaq8lgjpdg1uu66a7fi2l4.png"))
+```
+
+
+```{r}
+fit <- aov(purity ~ supplier + Error(supplier/batch), data = purity)
+summary(fit)
+```
+or for both the nested and parent factors,
+```{r}
+fit <- lmer(purity ~ (1 | supplier / batch), data = purity)
+summary(fit)
+```
+However, it makes no sense to treat the parent as random, but its child as
+fixed.
+
+An important detail to keep in mind is that, for nested designs, computation of
+$F$-statistics depends on which terms are treated as fixed or random. For
+example, suppose $B$ is nested within $A$. Then the $F$ statistic for $A$ is
+computed as
+
+* $\frac{MS_A}{MS_E}$ if both $A$ and $B$ are fixed
+
+* $\frac{MS_A}{MS_B(A)}$ if $A$ is fixed but $B$ is random
+
+* $\frac{MS_{B\left(A\right)}}{MS_{E}}$ if both $A$ and $B$ are random

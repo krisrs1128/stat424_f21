@@ -1,0 +1,104 @@
+---
+title: "Variations on Nested Designs"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-17-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [14.2, 14.3](), [Rmarkdown]()_
+
+
+
+```{r}
+library("dplyr")
+library("ggplot2")
+library("readr")
+library("EBImage")
+library("reshape2")
+theme_set(theme_bw() + theme(legend.position = "bottom"))
+```
+
+Nested designs are versatile; they can be applied to many levels of nesting and
+in conjunction with factors.
+
+### General Nested Designs
+```{r, fig.cap = "A three level nested design."}
+#display(readImage("https://uwmadison.box.com/shared/static/hacac7wv04k9ua657et7hzd8wg1827ln.png"))
+```
+
+Almost the same methodology used in 2-level nested designs carries over to more
+general levels. Graphically, the tree of effects grows deeper. Since there are
+more parameters at deeper levels of nesting, it is often a good idea to fit
+those parameters using random effects.
+
+### Simultaneous Nesting and Factors
+Nested terms can be included in standard factorial models. Consider the
+following setting (Example 14.2),
+
+* An industrial engineering is optimizing the assembly time of an electronic
+device.
+
+* There are different possible layouts and fixtures of the circuit boards which
+may influence the time to assembly.
+
+* The experiment must be run across factories. The operators who do the actual
+assembly will differ depending on layout.
+
+```{r, fig.cap = "A nested design can be combined with a factorial design, replicating the entire nesting structure across facotrs." }
+####(readImage("https://uwmadison.box.com/shared/static/ijhv501h8c07j2xvonxcsg4rkhjoh840.png"))
+```
+
+The operator effect is nested within the layout effect. It should also be
+treated as a random effect, because we want to understand variation across all
+possible operators, when choosing a particular layout and fixture design.
+Therefore, a reasonable model is
+
+\begin{align*}
+y_{ijkl} &= \mu + \alpha_{i} + \beta_{j} + \tau_{k\left(j\right)} + \left(\alpha\beta\right)_{ij} + \left(\alpha \tau\right)_{ik\left(j\right)}
+\end{align*}
+
+* $\alpha_i$: The fixture effect
+
+* $\beta_j$: The layout effect
+
+* $\tau_{k\left(j\right)}$: The operator random effect.
+
+* $\left(\alpha\beta\right)_{ij}$: An interaction effect between fixtures and
+layouts
+
+* $\left(\alpha\tau\right)_{ik\left(j\right)}$: A random interaction effect
+between the fixture and the operator.
+
+Since this model has both random and fixed effect terms, it is called a _mixed
+effects_ model. It is fit below.
+
+
+```{r}
+assembly <- read_csv("https://uwmadison.box.com/shared/static/gvev45mtp69fb19ng37nlntyiy4x6dmj.csv") %>%
+  mutate_at(vars(Operator, Layout, Fixture), as.factor)
+```
+
+```{r, fig.cap="Assembly time as a function of layout (columns) and fixture (rows). Note operators are nested within layouts."}
+ggplot(assembly) +
+  geom_point(aes(x = Operator, y = Time)) +
+  facet_grid(Fixture ~ Layout, scale = "free_x")
+```
+```{r}
+fit <- aov(Time ~ Fixture * Layout +  Error(Layout / Operator), data = assembly)
+summary(fit)
+```
+The ANOVA table suggests that layout doesn’t have much of an effect, but that
+certain fixtures are easier to assemble than others. The fact that there is an
+interaction between fixtures and operators suggests that the operators who are
+much worse at some fixtures than others could be retrained.

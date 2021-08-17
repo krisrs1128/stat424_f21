@@ -1,0 +1,103 @@
+---
+title: "Optimal Response Surface Designs"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-17-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [11.4](), [Rmarkdown]()_
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(EBImage)
+library(reshape2)
+theme_set(theme_bw() + theme(legend.position = "bottom"))
+```
+
+```{r, fig.cap = "The optimality definitions from our earlier discussion on factorial design."}
+###display(readImage("https://uwmadison.box.com/shared/static/6xoe5onf01gdpaef6g0qtcstbhb9w72n.png"))
+```
+
+In Chapter 6, we saw that $2^{K}$ factorial designs are optimal in the linear
+setting. These results don’t immediately apply to response surfaces, though, for
+two reasons,
+
+* Second-order response surfaces are not necessarily linear.
+
+* The experimental region might be irregularly shaped, due to known constraints
+on operating conditions
+
+In this setting, there will be no single design that clearly optimal, like there
+was before. Instead, the typical strategy is to compute the same optimality
+criteria from before, but to designs constructed through various heuristics.
+
+### Reminder: Optimality Measures
+
+We can use the same optimality measures that were studied for linear regression.
+
+* $D$-optimality reflects the variance in the coefficients of the associated
+linear model. A $D$-optimal design has minimal value of
+$\left|X^{T}X\right|^{-1}$.
+
+* $G$-optimality reflects the pointwise variance of the fitted surface. A
+$G$-optimal design minimizes the maximal value of
+$V\left(\hat{y}\left(x\right)\right)$.
+
+* $V$-optimality also reflects the pointwise variance of the fitted surface,
+but with less focus on the worst case $x$. A $V$-optimal design minimizes
+the average variance, $\int_{R} V\left(\hat{y}\left(x\right)\right)dx$
+over the experiment space $R$.
+
+### Heuristics
+```{r, fig.cap = "One iteration of the point exchange algorithm, for a constrained response surface design."}
+#display(readImage("https://uwmadison.box.com/shared/static/9pgowo8mgly6d8mm97t8sm324ggcio0y.png"))
+```
+
+```{r, fig.cap = "One iteration of the point coordinate exchange algorithm, in the same setup."}
+#display(readImage("https://uwmadison.box.com/shared/static/yr2dyd75we3ebp1gwe36r5xe3p8841h8.png"))
+```
+
+Once a candidate design is proposed, we can evaluate its quality using the
+measures above. There are various heuristics for proposing new candidate
+designs,
+
+* Point exchange
+
+	* Start with a grid of points to consider performing runs at.
+	
+	* Select a subset (possibly at random). Call this the design set and the complement the candidate set.
+	
+	* Compute an optimality criterion on the design set.
+	
+	* Try swapping a pair of points from the design and candidate sets
+	
+		* Is the optimality criterion is improved?
+		
+		*  If it is, keep the swap in the next iteration.
+		
+	* Repeat until the optimality criterion has converged.
+	
+* Coordinate exchange
+
+	*  Start with a grid of points to consider performing runs at, call this the design set.
+	
+	* For each point in the design set,
+	
+		* For each factor $k$,
+		
+			* Vary the value of factor $k$ until it maximizes the chosen optimality criterion.
+			
+		* Repeat until convergence
