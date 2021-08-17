@@ -86,18 +86,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: Two-Factorial Factorial Design</title>
+<title>Statistical Experimental Design: $2^K$ Designs and Regression</title>
 
 <meta property="description" itemprop="description" content="A short description of the post."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-16"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-16"/>
+<meta property="article:published" itemprop="datePublished" content="2021-08-17"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-08-17"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: Two-Factorial Factorial Design"/>
+<meta property="og:title" content="Statistical Experimental Design: $2^K$ Designs and Regression"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="A short description of the post."/>
 <meta property="og:locale" content="en_US"/>
@@ -105,19 +105,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: Two-Factorial Factorial Design"/>
+<meta property="twitter:title" content="Statistical Experimental Design: $2^K$ Designs and Regression"/>
 <meta property="twitter:description" content="A short description of the post."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Two-Factorial Factorial Design"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-16-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["$2^K$ Designs and Regression"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week7-1_files/anchor-4.2.2/anchor.min.js","week7-1_files/bowser-1.9.3/bowser.min.js","week7-1_files/distill-2.2.21/template.v2.js","week7-1_files/header-attrs-2.8/header-attrs.js","week7-1_files/jquery-1.11.3/jquery.min.js","week7-1_files/popper-2.6.0/popper.min.js","week7-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week7-1_files/tippy-6.2.7/tippy-light-border.css","week7-1_files/tippy-6.2.7/tippy.css","week7-1_files/tippy-6.2.7/tippy.umd.min.js","week7-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week10-1_files/figure-html5/unnamed-chunk-2-1.png"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Two-Factorial Factorial Design","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-16T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"$2^K$ Designs and Regression","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-17T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,7 +2276,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Two-Factorial Factorial Design</h1>
+<h1>2^K Designs and Regression</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>A short description of the post.</p></p>
@@ -2285,61 +2285,314 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-16-2021
+<br/>08-17-2021
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">5.3</a>, <a href="">Rmarkdown</a></em></p>
-<ol type="1">
-<li><p>Recall that in a factorial design, we want to study the influences of multiple experimental factors on some responses of interest. The simplest situation is when there are two factors of interest, and the associated designs are two-factor factorial designs.</p></li>
-<li><p>We will assume a model of the form, <span class="math display">\[
-y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
-\]</span> where <span class="math inline">\(\epsilon_{ijk} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> independently. For identifiability, we have to assume that the sums <span class="math inline">\(\sum_{i} \tau_i =  \sum_{j} \beta_{j}= \sum_{ij} \left(\tau\beta\right)_{ij}=0\)</span>. We’ll suppose <span class="math inline">\(i\)</span> ranges from <span class="math inline">\(1, \dots, a\)</span>, <span class="math inline">\(j\)</span> ranges from <span class="math inline">\(1, \dots, b\)</span> and <span class="math inline">\(k\)</span> ranges from <span class="math inline">\(1,\dots, n\)</span>.</p></li>
-<li><p>What do the indices mean?</p>
+<p><em>Readings <a href="">6.7</a>, <a href="">Rmarkdown</a></em></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>In all the code examples, we’ve been fitting <span class="math inline">\(2^K\)</span> designs using the <code>lm</code> function. Why does this work? In these notes, we’ll see how our effect estimates can be viewed through the lens of linear regression.</p>
+<h2 id="the-design-matrix">The Design Matrix</h2>
+<p>Let’s write our contrasts summary table linear algebraically. Remember our notation,</p>
+<table>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>AB</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>(1)</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>a</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>b</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>c</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>ab</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>ac</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>bc</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>abc</td>
+</tr>
+</tbody>
+</table>
+<p>We’ll translate this into</p>
+<p><span class="math display">\[\begin{align*}
+X &amp;= \begin{pmatrix}
+1 &amp; -1 &amp; -1 &amp; - 1 &amp; 1 \\
+1 &amp; 1 &amp; -1 &amp; -1 &amp; -1 \\
+1 &amp; -1 &amp; 1 &amp; -1 &amp; -1 \\
+1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 \\
+1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 \\
+1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 \\
+1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 \\
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+\end{pmatrix} \\
+\end{align*}\]</span> <span class="math display">\[\begin{align*}
+y &amp;= \begin{pmatrix}
+(1) \\
+a \\
+b \\
+c \\
+ab \\
+ac \\
+bc \\
+abc
+\end{pmatrix}
+\end{align*}\]</span></p>
+<p>For <span class="math inline">\(X\)</span>, we’ve just added an intercept column of <span class="math inline">\(1\)</span>’s and concatenated it with the contrasts written as <span class="math inline">\(\pm 1\)</span>’s. As before, <span class="math inline">\((1)\)</span> means the value of the sample taken at that corner of the cube, <span class="math inline">\(a\)</span> means the sample at the <span class="math inline">\(a\)</span> corner, etc.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/8euuywv5ay4x7przznhsxdo269865h2a.png"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week10-1_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
+</div>
+<p>Let’s observe some properties of this matrix,</p>
 <ul>
-<li><span class="math inline">\(i\)</span> indexes levels of the first factor (temperature).</li>
-<li><span class="math inline">\(j\)</span> indexes levels of the second factor (material).</li>
-<li><span class="math inline">\(k\)</span> indexes multiple replicates at a particular combination factor combination <span class="math inline">\(ij\)</span> (battery lifetimes, for fixed temperature <span class="math inline">\(\times\)</span> material combination)</li>
+<li><p>It has <span class="math inline">\(2^{K}\)</span> rows, one per replicate on each corner of the cube.</p></li>
+<li><p>It has <span class="math inline">\(2^{K}\)</span> columns. To see why, notice that there are</p>
+<ul>
+<li><p>1 intercept, <span class="math inline">\(K\)</span> main effects, and <span class="math inline">\({K \choose 2}\)</span> two-way interactions, which adds up to <span class="math inline">\(2 ^ K\)</span>.</p></li>
+<li><p>Moreover, if our <span class="math inline">\(K &gt; 2\)</span>, we’d have <span class="math inline">\({K \choose 3}\)</span> three-way interactions, etc. and that, by the binomial theorem, <span class="math inline">\(\left(1 + 1\right)^{K} = \sum_{j \leq  K} {K \choose j}1^{j}1^{K - j}\)</span></p></li>
 </ul></li>
-<li><p>What do the greek letters mean?</p>
-<ul>
-<li><span class="math inline">\(\mu\)</span>: An intercept term, representing a global mean.</li>
-<li><span class="math inline">\(\tau_i\)</span>: The effect of the <span class="math inline">\(i^{th}\)</span> level of factor 1 on the average response (effect of temperature setting <span class="math inline">\(i\)</span>)</li>
-<li><span class="math inline">\(\beta_{j}\)</span>: The effect of the <span class="math inline">\(j^{th}\)</span> level of factor 2 on the average response (effect of material <span class="math inline">\(j\)</span>)</li>
-<li><span class="math inline">\(\left(\tau\beta\right)_{ij}\)</span>:The interaction / synergy between the ith level of factor 1 and thejth level of factor 2. (especially long / short response times, depending on particular material and temperature settings)</li>
-<li><span class="math inline">\(\epsilon_{ijk}\)</span>: The random variation we’d observe if we drew many samples at a fixed setting of the two factors. <strong>Caution</strong>: <span class="math inline">\(\beta_j\)</span> now indexes a treatment of interest. It is <em>not</em> just nuisance blocking variation.</li>
-</ul></li>
-</ol>
-<h3 id="testing">Testing</h3>
-<ol start="4" type="1">
-<li>Up until now, we’ve only asked whether one particular factor had an influence on the response, as the levels were changed. Now, we care about each of the factors, and each gets a hypothesis test.</li>
-</ol>
-<ul>
-<li><p>(Hypothesis A) For the first factor, <span class="math display">\[
-H_0 &amp;: \tau_1 = \dots = \tau_a = 0 \\
-H_{1} &amp;: \tau_{i} \neq 0 \text{ for at least one } i
-\]</span></p></li>
-<li><p>(Hypothesis B) For the second factor, <span class="math display">\[
-H_0 &amp;: \beta_1 = \dots = \beta_{b} = 0 \\
-H_{1} &amp;: \beta_{j} \neq 0 \text{ for at least one } j
-\]</span></p></li>
-<li><p>(Hypothesis AB) Are there interaction effects? <span class="math display">\[
-H_0: \left(\tau\beta\right)_{ij}= \dots = \left(\tau\beta\right)_{ij} = 0 \\
-H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ combination}
-\]</span></p></li>
+<li><p>The columns are orthogonal. Their norms are all <span class="math inline">\(2^{K}\)</span>. Hence <span class="math inline">\(X^{T}X = 2^{K}I_{2^{K}}\)</span>.</p></li>
 </ul>
-<ol start="5" type="1">
-<li><p>For each of these hypothesis tests, we’re going to need a test statistic that’s sensitive to departures from the null. We’re also going to need their reference distributions.</p></li>
-<li><p>Miraculously, we have the identity, <span class="math display">\[\begin{align*}
-\sum_{i j k}\left(y_{i j k}-\bar{y}\right)^{2}=&amp; b n \sum_{i}\left(\bar{y}_{i . .}-\bar{y}\right)^{2}+\\
-&amp; a n \sum_{j}\left(\bar{y}_{j} .-\bar{y}\right)^{2}+\\
-&amp; n \sum_{i, j}\left(\bar{y}_{i j}-\bar{y}_{i .}-\bar{y}_{. j}-\bar{y}\right)^{2}+\\
-&amp; \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j} .\right)^{2}
-\end{align*}\]</span> which we’ll denote <span class="math inline">\(SS_{\text{Total}}=SS_{A}+SS_{B}+SS_{AB}+SS_{E}\)</span>.</p></li>
-<li><p>The punchline is that if <span class="math inline">\(SS_{A}\)</span> is large, we have evidence against hypothesis A, if <span class="math inline">\(SS_{B}\)</span> is large we have evidence against hypothesis B, and if <span class="math inline">\(SS_{AB}\)</span> is large, we have evidence against hypothesis AB.</p></li>
-<li><p>We can define corresponding mean squares by dividing by the degrees of freedom. For each hypothesis, we get a corresponding F-statistic.</p></li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="hatbeta-and-effect-estimates"><span class="math inline">\(\hat{\beta}\)</span> and Effect Estimates</h2>
+<p>In linear regression, the least squares solution <span class="math inline">\(\hat{\beta}\)</span> is the vector that optimizes</p>
+<p><span class="math display">\[\begin{align*}
+\hat{beta} := \arg\min_{\beta \in \mathbb{R}^{2^{K}}} \|y - X\beta\|_{2}^{2}
+\end{align*}\]</span></p>
+<p>To minimize a quadratic like this, we can differentiate and use the chain rule,</p>
+<p><span class="math display">\[\begin{align*}
+\frac{\partial}{\partial \beta}\left[\|y - X\beta\|_{2}^{2}\right] &amp;= 0 \\
+\iff 2X^{T}\left(y - X\beta\right) &amp;= 0
+\end{align*}\]</span></p>
+<p>which implies that <span class="math inline">\(\hat{\beta} = \left(X^{T}X\right)^{-1}X^{T}y\)</span>. However, by the observations above, this means,</p>
+<p><span class="math display">\[\begin{align*}
+\hat{\beta} &amp;= \left(2^{K}I_{2^{K}}\right)^{-1}X^T y \\
+&amp;= \frac{1}{2^{K}}X^{T}y.
+\end{align*}\]</span></p>
+<p>But <span class="math inline">\(X^{T}y\)</span> are exactly our contrasts (!),</p>
+<p><span class="math display">\[\begin{align*}
+X^{T}y &amp;= \begin{pmatrix}
+1 &amp;  1 &amp;  1 &amp;  1 &amp; 1 &amp; 1 &amp;  1 &amp; 1 \\
+-1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 \\
+-1 &amp; -1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 &amp; 1 &amp; 1 \\
+\vdots &amp; &amp; &amp; &amp; &amp; &amp; &amp; \vdots
+\end{pmatrix}
+\begin{pmatrix}
+\left(1\right) \\
+a \\
+b \\
+c \\
+\vdots 
+\end{pmatrix}
+\end{align*}\]</span></p>
+<p>e.g., <span class="math inline">\(A = \frac{1}{2^{K - 1}}\left[-(1) + a - b -c + ab + ac - bc + abc\right]\)</span>. The only difference between <span class="math inline">\(\hat{\beta}\)</span> and our effect estimates is a factor of 2 in the scaling. Therefore, to estimate the effects in a <span class="math inline">\(2^{K}\)</span> design, it’s enough to construct the <span class="math inline">\(X, y\)</span> matrices above and plug them into standard linear regression programs.</p>
+<h2 id="code-example">Code Example</h2>
+To complete this discussion, let’s revisit the <span class="math inline">\(2 ^ 4\)</span> design in the drill example. First, let’s verify that the <span class="math inline">\(X\)</span> matrix used by <code>lm</code> is the same as the one in our conceptual discussion.
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>code</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>'-'</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>drill</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/7l8bpcu36a12a8c0chlh4id0qezdnnoe.csv"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>rate</span><span class='op'>)</span>, <span class='va'>code</span><span class='op'>)</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>rate</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, <span class='va'>drill</span><span class='op'>)</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<span class='va'>X</span>
+</code></pre>
+</div>
+<pre><code>   (Intercept)  A  B  C  D A:B A:C B:C A:D B:D C:D A:B:C A:B:D A:C:D
+1            1 -1 -1 -1 -1   1   1   1   1   1   1    -1    -1    -1
+2            1  1 -1 -1 -1  -1  -1   1  -1   1   1     1     1     1
+3            1 -1  1 -1 -1  -1   1  -1   1  -1   1     1     1    -1
+4            1 -1 -1  1 -1   1  -1  -1   1   1  -1     1    -1     1
+5            1 -1 -1 -1  1   1   1   1  -1  -1  -1    -1     1     1
+6            1  1  1 -1 -1   1  -1  -1  -1  -1   1    -1    -1     1
+7            1  1 -1  1 -1  -1   1  -1  -1   1  -1    -1     1    -1
+8            1  1 -1 -1  1  -1  -1   1   1  -1  -1     1    -1    -1
+9            1 -1  1  1 -1  -1  -1   1   1  -1  -1    -1     1     1
+10           1 -1  1 -1  1  -1   1  -1  -1   1  -1     1    -1     1
+11           1 -1 -1  1  1   1  -1  -1  -1  -1   1     1     1    -1
+12           1  1  1  1 -1   1   1   1  -1  -1  -1     1    -1    -1
+13           1  1 -1  1  1  -1   1  -1   1  -1   1    -1    -1     1
+14           1  1  1 -1  1   1  -1  -1   1   1  -1    -1     1    -1
+15           1 -1  1  1  1  -1  -1   1  -1   1   1    -1    -1    -1
+16           1  1  1  1  1   1   1   1   1   1   1     1     1     1
+   B:C:D A:B:C:D
+1     -1       1
+2     -1      -1
+3      1      -1
+4      1      -1
+5      1      -1
+6      1       1
+7      1       1
+8      1       1
+9     -1       1
+10    -1       1
+11    -1       1
+12    -1      -1
+13    -1      -1
+14    -1      -1
+15     1      -1
+16     1       1
+attr(,&quot;assign&quot;)
+ [1]  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15</code></pre>
+</div>
+<p>We can also check the dimension and orthogonality of this matrix.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 16 16</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='va'>X</span>
+</code></pre>
+</div>
+<pre><code>            (Intercept)  A  B  C  D A:B A:C B:C A:D B:D C:D A:B:C
+(Intercept)          16  0  0  0  0   0   0   0   0   0   0     0
+A                     0 16  0  0  0   0   0   0   0   0   0     0
+B                     0  0 16  0  0   0   0   0   0   0   0     0
+C                     0  0  0 16  0   0   0   0   0   0   0     0
+D                     0  0  0  0 16   0   0   0   0   0   0     0
+A:B                   0  0  0  0  0  16   0   0   0   0   0     0
+A:C                   0  0  0  0  0   0  16   0   0   0   0     0
+B:C                   0  0  0  0  0   0   0  16   0   0   0     0
+A:D                   0  0  0  0  0   0   0   0  16   0   0     0
+B:D                   0  0  0  0  0   0   0   0   0  16   0     0
+C:D                   0  0  0  0  0   0   0   0   0   0  16     0
+A:B:C                 0  0  0  0  0   0   0   0   0   0   0    16
+A:B:D                 0  0  0  0  0   0   0   0   0   0   0     0
+A:C:D                 0  0  0  0  0   0   0   0   0   0   0     0
+B:C:D                 0  0  0  0  0   0   0   0   0   0   0     0
+A:B:C:D               0  0  0  0  0   0   0   0   0   0   0     0
+            A:B:D A:C:D B:C:D A:B:C:D
+(Intercept)     0     0     0       0
+A               0     0     0       0
+B               0     0     0       0
+C               0     0     0       0
+D               0     0     0       0
+A:B             0     0     0       0
+A:C             0     0     0       0
+B:C             0     0     0       0
+A:D             0     0     0       0
+B:D             0     0     0       0
+C:D             0     0     0       0
+A:B:C           0     0     0       0
+A:B:D          16     0     0       0
+A:C:D           0    16     0       0
+B:C:D           0     0    16       0
+A:B:C:D         0     0     0      16</code></pre>
+</div>
+Let’s make sure that the formula we derived above is exactly what <code>lm</code> is doing.
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fl'>1</span> <span class='op'>/</span> <span class='fl'>16</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='va'>drill</span><span class='op'>$</span><span class='va'>rate</span>
+</code></pre>
+</div>
+<pre><code>               [,1]
+(Intercept) 6.15250
+A           0.45875
+B           3.21875
+C           1.64625
+D           1.14500
+A:B         0.29500
+A:C         0.07750
+B:C         0.75500
+A:D         0.41875
+B:D         0.79625
+C:D         0.22375
+A:B:C       0.08125
+A:B:D       0.38000
+A:C:D       0.29250
+B:C:D       0.08750
+A:B:C:D     0.27125</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span> <span class='co'># hand computation agrees</span>
+</code></pre>
+</div>
+<pre><code>(Intercept)           A           B           C           D 
+    6.15250     0.45875     3.21875     1.64625     1.14500 
+        A:B         A:C         B:C         A:D         B:D 
+    0.29500     0.07750     0.75500     0.41875     0.79625 
+        C:D       A:B:C       A:B:D       A:C:D       B:C:D 
+    0.22375     0.08125     0.38000     0.29250     0.08750 
+    A:B:C:D 
+    0.27125 </code></pre>
+</div>
+Finally, let’s compare the fitted <span class="math inline">\(\hat{\beta}\)</span> with our original effect estimates (at least, for the effect <span class="math inline">\(A\)</span>).
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>drill</span><span class='op'>$</span><span class='va'>A</span>
+</code></pre>
+</div>
+<pre><code> [1] -1  1 -1 -1 -1  1  1  1 -1 -1 -1  1  1  1 -1  1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>est_A</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>/</span> <span class='fl'>8</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>drill</span><span class='op'>[</span><span class='va'>drill</span><span class='op'>$</span><span class='va'>A</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='op'>]</span><span class='op'>$</span><span class='va'>rate</span> <span class='op'>-</span> <span class='va'>drill</span><span class='op'>[</span><span class='va'>drill</span><span class='op'>$</span><span class='va'>A</span> <span class='op'>==</span> <span class='op'>-</span><span class='fl'>1</span>, <span class='op'>]</span><span class='op'>$</span><span class='va'>rate</span><span class='op'>)</span>
+<span class='va'>est_A</span> <span class='op'>/</span> <span class='fl'>2</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.45875</code></pre>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

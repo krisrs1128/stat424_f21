@@ -86,18 +86,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: Two-Factorial Factorial Design</title>
+<title>Statistical Experimental Design: $2^{K - 1}$ Fractional Factorial Designs</title>
 
 <meta property="description" itemprop="description" content="A short description of the post."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-16"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-16"/>
+<meta property="article:published" itemprop="datePublished" content="2021-08-17"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-08-17"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: Two-Factorial Factorial Design"/>
+<meta property="og:title" content="Statistical Experimental Design: $2^{K - 1}$ Fractional Factorial Designs"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="A short description of the post."/>
 <meta property="og:locale" content="en_US"/>
@@ -105,19 +105,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: Two-Factorial Factorial Design"/>
+<meta property="twitter:title" content="Statistical Experimental Design: $2^{K - 1}$ Fractional Factorial Designs"/>
 <meta property="twitter:description" content="A short description of the post."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Two-Factorial Factorial Design"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-16-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["$2^{K - 1}$ Fractional Factorial Designs"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week7-1_files/anchor-4.2.2/anchor.min.js","week7-1_files/bowser-1.9.3/bowser.min.js","week7-1_files/distill-2.2.21/template.v2.js","week7-1_files/header-attrs-2.8/header-attrs.js","week7-1_files/jquery-1.11.3/jquery.min.js","week7-1_files/popper-2.6.0/popper.min.js","week7-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week7-1_files/tippy-6.2.7/tippy-light-border.css","week7-1_files/tippy-6.2.7/tippy.css","week7-1_files/tippy-6.2.7/tippy.umd.min.js","week7-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week10-4_files/figure-html5/unnamed-chunk-10-1.png"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Two-Factorial Factorial Design","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-16T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"$2^{K - 1}$ Fractional Factorial Designs","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-17T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,7 +2276,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Two-Factorial Factorial Design</h1>
+<h1>2^{K - 1} Fractional Factorial Designs</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>A short description of the post.</p></p>
@@ -2285,61 +2285,339 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-16-2021
+<br/>08-17-2021
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">5.3</a>, <a href="">Rmarkdown</a></em></p>
-<ol type="1">
-<li><p>Recall that in a factorial design, we want to study the influences of multiple experimental factors on some responses of interest. The simplest situation is when there are two factors of interest, and the associated designs are two-factor factorial designs.</p></li>
-<li><p>We will assume a model of the form, <span class="math display">\[
-y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
-\]</span> where <span class="math inline">\(\epsilon_{ijk} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> independently. For identifiability, we have to assume that the sums <span class="math inline">\(\sum_{i} \tau_i =  \sum_{j} \beta_{j}= \sum_{ij} \left(\tau\beta\right)_{ij}=0\)</span>. We’ll suppose <span class="math inline">\(i\)</span> ranges from <span class="math inline">\(1, \dots, a\)</span>, <span class="math inline">\(j\)</span> ranges from <span class="math inline">\(1, \dots, b\)</span> and <span class="math inline">\(k\)</span> ranges from <span class="math inline">\(1,\dots, n\)</span>.</p></li>
-<li><p>What do the indices mean?</p>
+<p><em>Readings <a href="">8.1 - 8.2</a>, <a href="">Rmarkdown</a></em></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># helper functions</span>
+<span class='va'>code</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>'-'</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>daniel_plot</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>effects</span>, <span class='va'>probs</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.6</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span> 
+  <span class='va'>qq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqnorm</a></span><span class='op'>(</span><span class='va'>effects</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqline</a></span><span class='op'>(</span><span class='va'>effects</span>, col <span class='op'>=</span> <span class='st'>"red"</span>, probs <span class='op'>=</span> <span class='va'>probs</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span><span class='op'>(</span><span class='va'>qq</span><span class='op'>$</span><span class='va'>x</span>, <span class='va'>qq</span><span class='op'>$</span><span class='va'>y</span>, <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>effects</span><span class='op'>)</span>, pos<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<p>The trouble with <span class="math inline">\(2^{K}\)</span> designs is that the number of samples required grows exponentially with the number of factors <span class="math inline">\(K\)</span>. The differences between 4 and 7 factors doesn’t sound like a lot, but it’s the difference between 16 and 128 experimental runs. Fractional factorial designs show how to study extra factors without having to make as many runs. There is no free lunch, but the tradeoffs that it creates are often worth it.</p>
+<h3 id="principles">Principles</h3>
+<p>There are two central ideas,</p>
 <ul>
-<li><span class="math inline">\(i\)</span> indexes levels of the first factor (temperature).</li>
-<li><span class="math inline">\(j\)</span> indexes levels of the second factor (material).</li>
-<li><span class="math inline">\(k\)</span> indexes multiple replicates at a particular combination factor combination <span class="math inline">\(ij\)</span> (battery lifetimes, for fixed temperature <span class="math inline">\(\times\)</span> material combination)</li>
-</ul></li>
-<li><p>What do the greek letters mean?</p>
-<ul>
-<li><span class="math inline">\(\mu\)</span>: An intercept term, representing a global mean.</li>
-<li><span class="math inline">\(\tau_i\)</span>: The effect of the <span class="math inline">\(i^{th}\)</span> level of factor 1 on the average response (effect of temperature setting <span class="math inline">\(i\)</span>)</li>
-<li><span class="math inline">\(\beta_{j}\)</span>: The effect of the <span class="math inline">\(j^{th}\)</span> level of factor 2 on the average response (effect of material <span class="math inline">\(j\)</span>)</li>
-<li><span class="math inline">\(\left(\tau\beta\right)_{ij}\)</span>:The interaction / synergy between the ith level of factor 1 and thejth level of factor 2. (especially long / short response times, depending on particular material and temperature settings)</li>
-<li><span class="math inline">\(\epsilon_{ijk}\)</span>: The random variation we’d observe if we drew many samples at a fixed setting of the two factors. <strong>Caution</strong>: <span class="math inline">\(\beta_j\)</span> now indexes a treatment of interest. It is <em>not</em> just nuisance blocking variation.</li>
-</ul></li>
-</ol>
-<h3 id="testing">Testing</h3>
-<ol start="4" type="1">
-<li>Up until now, we’ve only asked whether one particular factor had an influence on the response, as the levels were changed. Now, we care about each of the factors, and each gets a hypothesis test.</li>
-</ol>
-<ul>
-<li><p>(Hypothesis A) For the first factor, <span class="math display">\[
-H_0 &amp;: \tau_1 = \dots = \tau_a = 0 \\
-H_{1} &amp;: \tau_{i} \neq 0 \text{ for at least one } i
-\]</span></p></li>
-<li><p>(Hypothesis B) For the second factor, <span class="math display">\[
-H_0 &amp;: \beta_1 = \dots = \beta_{b} = 0 \\
-H_{1} &amp;: \beta_{j} \neq 0 \text{ for at least one } j
-\]</span></p></li>
-<li><p>(Hypothesis AB) Are there interaction effects? <span class="math display">\[
-H_0: \left(\tau\beta\right)_{ij}= \dots = \left(\tau\beta\right)_{ij} = 0 \\
-H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ combination}
-\]</span></p></li>
+<li><p>Sparsity of Effects: It’s often safe to assume that high-order interactions are rare.</p></li>
+<li><p>Heredity: It is unusual for an interaction to be significant without the corresponding main effects also being significant. For example, it would be unusual to have <span class="math inline">\(A \times B\)</span> be significant without at least one of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> being significant.</p></li>
 </ul>
-<ol start="5" type="1">
-<li><p>For each of these hypothesis tests, we’re going to need a test statistic that’s sensitive to departures from the null. We’re also going to need their reference distributions.</p></li>
-<li><p>Miraculously, we have the identity, <span class="math display">\[\begin{align*}
-\sum_{i j k}\left(y_{i j k}-\bar{y}\right)^{2}=&amp; b n \sum_{i}\left(\bar{y}_{i . .}-\bar{y}\right)^{2}+\\
-&amp; a n \sum_{j}\left(\bar{y}_{j} .-\bar{y}\right)^{2}+\\
-&amp; n \sum_{i, j}\left(\bar{y}_{i j}-\bar{y}_{i .}-\bar{y}_{. j}-\bar{y}\right)^{2}+\\
-&amp; \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j} .\right)^{2}
-\end{align*}\]</span> which we’ll denote <span class="math inline">\(SS_{\text{Total}}=SS_{A}+SS_{B}+SS_{AB}+SS_{E}\)</span>.</p></li>
-<li><p>The punchline is that if <span class="math inline">\(SS_{A}\)</span> is large, we have evidence against hypothesis A, if <span class="math inline">\(SS_{B}\)</span> is large we have evidence against hypothesis B, and if <span class="math inline">\(SS_{AB}\)</span> is large, we have evidence against hypothesis AB.</p></li>
-<li><p>We can define corresponding mean squares by dividing by the degrees of freedom. For each hypothesis, we get a corresponding F-statistic.</p></li>
+<h3 id="initial-exploration">Initial Exploration</h3>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/gu87vet64i970eonsbvtds7bsb31qbuy.png"))</span>
+</code></pre>
+</div>
+</div>
+<p>Suppose we want to study <span class="math inline">\(A, B\)</span> and <span class="math inline">\(C\)</span>, but we only have a budget of 4 runs. We need to choose four corners of the cube to sample. Some choices are obviously bad. E.g., if we chose all the samples on one face, we wouldn’t see any variation in one factor. Here’s an idea that will lead us on the right path. Recall our old notation,</p>
+<table>
+<thead>
+<tr class="header">
+<th>label</th>
+<th>A</th>
+<th>B</th>
+<th>AB</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(1)</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr class="even">
+<td>a</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>b</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>ab</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+</tbody>
+</table>
+<p>Acting on the sparsity of effects principle, let’s suppose that AB is null and invent a contrast for C that exactly matches AB. We’ll update the label to match the associated corner of the cube.</p>
+<table>
+<thead>
+<tr class="header">
+<th>label</th>
+<th>A</th>
+<th>B</th>
+<th>AB</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(c)</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr class="even">
+<td>a</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>b</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>abc</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+</tbody>
+</table>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/mmj9mcixl4y0o95hwf7h93vayw0eooc0.png"))</span>
+</code></pre>
+</div>
+</div>
+<p>This seems like a reasonable choice of 4 corners, making it possible to estimate at least all the main effects. This turns out to be a general strategy for subsetting the full design. But before we do another example, we need to define some vocabulary.</p>
+<h3 id="vocabulary">Vocabulary</h3>
+<ul>
+<li><p><span class="math inline">\(2^{K - 1}\)</span>: This denotes a fractional factorial design where we take <span class="math inline">\(\frac{1}{2}\)</span> of the samples in a <span class="math inline">\(2^{K}\)</span> design.</p></li>
+<li><p>Aliases: Above, we assumed that AB was null. Suppose that it weren’t, though. Notice that the contrasts used for the pairs below are all equal, <span class="math display">\[\begin{align*}
+   \left[AB\right] &amp;= \frac{1}{2}\left(c - a + b + abc\right) = \left[C\right] \\
+      \left[BC\right] &amp;= \frac{1}{2}\left(-c + a - b + abc\right) = \left[A\right] \\
+      \left[AC\right] &amp;= \frac{1}{2}\left(-c - a + b + abc\right) = \left[B\right]
+\end{align*}\]</span></p></li>
+</ul>
+<p>and we have no conclusive way of distinguishing between these <em>aliased</em> effects, besides appeals to the hereditary principle or domain knowledge. To denote this unidentifiability, we will use bracket notation, for example, <span class="math display">\[\begin{align*}
+\left[A\right] &amp;= A + BC.
+\end{align*}\]</span></p>
+<ul>
+<li>Generators: In the example, we set <span class="math inline">\(C = AB\)</span>. Multiplying both sides by <span class="math inline">\(C\)</span> and using the fact that <span class="math inline">\(C^2 = I\)</span>, we find <span class="math inline">\(ABC = I\)</span>. The <em>word</em> ABC will be called the generator for this fraction.</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/pffnjyav7wexbujzf32vlhorcfxhfa6w.png"))</span>
+</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Complementary designs: The complementary fraction of a fractional factorial design are the corners on which we didn’t take samples. Often, if there are strong aliased effects in an initial fractional design, the complementary fraction will be run in the next experiment.</p></li>
+<li><p>Resolution: A fractional design has resolution <span class="math inline">\(R\)</span> if no <span class="math inline">\(p\)</span>-factor is aliased with an effect containing less than <span class="math inline">\(R - p\)</span> factors.</p></li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 25%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(R\)</span></th>
+<th><span class="math inline">\(p\)</span></th>
+<th><span class="math inline">\(&lt; R - p\)</span></th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3</td>
+<td>1</td>
+<td><span class="math inline">\(\leq 2\)</span></td>
+<td>Main effects aren’t aliased with other main effects, but could be aliased with two-way interactions</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>1</td>
+<td><span class="math inline">\(\leq 3\)</span></td>
+<td>Main effects aren’t aliased with any other main effects or with any two-way interactions, but could be aliased with three-way interactions</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>2</td>
+<td><span class="math inline">\(\leq 2\)</span></td>
+<td>Two-way interactions aren’t aliased with main effects.</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>1</td>
+<td><span class="math inline">\(\leq 4\)</span></td>
+<td>Main effects aren’t aliased with other main effects, two-way, or three way interactions.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>2</td>
+<td><span class="math inline">\(\leq 3\)</span></td>
+<td>Two-way interactions aren’t aliased with with main effects or two-way interactions.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Projection: In a fractional factorial, if we decided that we don’t care about a factor after all, we automatically end up with a <span class="math inline">\(2 ^ {K - 1}\)</span> full-factorial for free.
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg"))</span>
+</code></pre>
+</div></li>
+</ul>
+</div>
+<ul>
+<li>Sequences: If we find a strong contrast for an aliased effect, it’s natural to try a follow-up experiment to resolve the ambiguity.</li>
+</ul>
+<h3 id="code-example">Code Example</h3>
+<p>Let’s suppose we only had only run half of the runs in the filtration example from week 9 [1]. The original experiment is a <span class="math inline">\(2^ 4\)</span> design; we will choose the fraction corresponding to the word<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="math inline">\(I = ABCD\)</span></p>
+<p>This is a general principle for <span class="math inline">\(2 ^ {K - 1}\)</span> designs: choose which configurations to run by defining the relation <span class="math inline">\(K = A B C \dots J\)</span>. This turns a full <span class="math inline">\(2^{K - 1}\)</span> factorial design, which only studied <span class="math inline">\(K - 1\)</span> factors into a fractional <span class="math inline">\(2^{K - 1}\)</span> factorial that studies <span class="math inline">\(K\)</span> factors.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+We can perform the fit. Note that there missing values in the estimated coefficients because some effects are aliased.
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>filtration</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 8 5</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Rate</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>filtration</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = Rate ~ A * B * C * D, data = filtration)
+
+Residuals:
+ALL 8 residuals are 0: no residual degrees of freedom!
+
+Coefficients: (8 not defined because of singularities)
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)    70.75        NaN     NaN      NaN
+A               9.50        NaN     NaN      NaN
+B               0.75        NaN     NaN      NaN
+C               7.00        NaN     NaN      NaN
+D               8.25        NaN     NaN      NaN
+A:B            -0.50        NaN     NaN      NaN
+A:C            -9.25        NaN     NaN      NaN
+B:C             9.50        NaN     NaN      NaN
+A:D               NA         NA      NA       NA
+B:D               NA         NA      NA       NA
+C:D               NA         NA      NA       NA
+A:B:C             NA         NA      NA       NA
+A:B:D             NA         NA      NA       NA
+A:C:D             NA         NA      NA       NA
+B:C:D             NA         NA      NA       NA
+A:B:C:D           NA         NA      NA       NA
+
+Residual standard error: NaN on 0 degrees of freedom
+Multiple R-squared:      1, Adjusted R-squared:    NaN 
+F-statistic:   NaN on 7 and 0 DF,  p-value: NA</code></pre>
+</div>
+To back out which terms are aliased, let’s look carefully at the design matrix.
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='va'>X</span> <span class='op'>!=</span> <span class='fl'>0</span> <span class='co'># TRUE on off diagonals are aliases</span>
+</code></pre>
+</div>
+<pre><code>            (Intercept)     A     B     C     D   A:B   A:C   B:C
+(Intercept)        TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+A                 FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+B                 FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+C                 FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+D                 FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+A:B               FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+A:C               FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+B:C               FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+A:D               FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+B:D               FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+C:D               FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+A:B:C             FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+A:B:D             FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+A:C:D             FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+B:C:D             FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+A:B:C:D            TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+              A:D   B:D   C:D A:B:C A:B:D A:C:D B:C:D A:B:C:D
+(Intercept) FALSE FALSE FALSE FALSE FALSE FALSE FALSE    TRUE
+A           FALSE FALSE FALSE FALSE FALSE FALSE  TRUE   FALSE
+B           FALSE FALSE FALSE FALSE FALSE  TRUE FALSE   FALSE
+C           FALSE FALSE FALSE FALSE  TRUE FALSE FALSE   FALSE
+D           FALSE FALSE FALSE  TRUE FALSE FALSE FALSE   FALSE
+A:B         FALSE FALSE  TRUE FALSE FALSE FALSE FALSE   FALSE
+A:C         FALSE  TRUE FALSE FALSE FALSE FALSE FALSE   FALSE
+B:C          TRUE FALSE FALSE FALSE FALSE FALSE FALSE   FALSE
+A:D          TRUE FALSE FALSE FALSE FALSE FALSE FALSE   FALSE
+B:D         FALSE  TRUE FALSE FALSE FALSE FALSE FALSE   FALSE
+C:D         FALSE FALSE  TRUE FALSE FALSE FALSE FALSE   FALSE
+A:B:C       FALSE FALSE FALSE  TRUE FALSE FALSE FALSE   FALSE
+A:B:D       FALSE FALSE FALSE FALSE  TRUE FALSE FALSE   FALSE
+A:C:D       FALSE FALSE FALSE FALSE FALSE  TRUE FALSE   FALSE
+B:C:D       FALSE FALSE FALSE FALSE FALSE FALSE  TRUE   FALSE
+A:B:C:D     FALSE FALSE FALSE FALSE FALSE FALSE FALSE    TRUE</code></pre>
+</div>
+<p>So, revisiting the estimated fit, we can conclude that. <span class="math display">\[\begin{align*}
+\widehat{\mu}+\widehat{A B C D} &amp;=70.75 \\
+\widehat{A}+\widehat{B C D} &amp;=9.5 \times 2=19 \\
+\widehat{B}+\widehat{A C D} &amp;=0.75 \times 2=1.5 \\
+\widehat{C}+\widehat{A B D} &amp;=7 \times 2=14 \\
+\widehat{D}+\widehat{A B C} &amp;=8.25 \times 2=16.5 \\
+\widehat{A B}+\widehat{C D} &amp;=-0.5 \times 2=-1 \\
+\widehat{A C}+\widehat{B D}=&amp;-9.25 \times 2=-18.5 \\
+\widehat{B C}+\widehat{A D} &amp;=9.5 \times 2=19
+\end{align*}\]</span></p>
+Let’s see which of the effects are important, and see whether we can draw any reasonable conclusions, based on the hereditary principle.
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="week10-4_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+</div>
+<p>The important effects look like,</p>
+<ul>
+<li><p><span class="math inline">\(A + BCD\)</span></p></li>
+<li><p><span class="math inline">\(BC + AD\)</span></p></li>
+<li><p><span class="math inline">\(D + ABC\)</span></p></li>
+<li><p><span class="math inline">\(C + ABD\)</span></p></li>
+<li><p><span class="math inline">\(AC + BD\)</span></p></li>
+</ul>
+<p>It seems like we should believe in the main effects <span class="math inline">\(A, D\)</span>, and <span class="math inline">\(C\)</span>. For the two-way interactions, <span class="math inline">\(AC\)</span> and <span class="math inline">\(AD\)</span> are more plausible, because the main effect for <span class="math inline">\(B\)</span> was not significant.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>The word <span class="math inline">\(I = ABCD\)</span> emerged from defining <span class="math inline">\(D = ABC\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

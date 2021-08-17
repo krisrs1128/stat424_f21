@@ -86,18 +86,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: Two-Factorial Factorial Design</title>
+<title>Statistical Experimental Design: Projection and Blocking in $2^{K - p}$ Designs</title>
 
 <meta property="description" itemprop="description" content="A short description of the post."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-16"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-16"/>
+<meta property="article:published" itemprop="datePublished" content="2021-08-17"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-08-17"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: Two-Factorial Factorial Design"/>
+<meta property="og:title" content="Statistical Experimental Design: Projection and Blocking in $2^{K - p}$ Designs"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="A short description of the post."/>
 <meta property="og:locale" content="en_US"/>
@@ -105,19 +105,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: Two-Factorial Factorial Design"/>
+<meta property="twitter:title" content="Statistical Experimental Design: Projection and Blocking in $2^{K - p}$ Designs"/>
 <meta property="twitter:description" content="A short description of the post."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Two-Factorial Factorial Design"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-16-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Projection and Blocking in $2^{K - p}$ Designs"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week7-1_files/anchor-4.2.2/anchor.min.js","week7-1_files/bowser-1.9.3/bowser.min.js","week7-1_files/distill-2.2.21/template.v2.js","week7-1_files/header-attrs-2.8/header-attrs.js","week7-1_files/jquery-1.11.3/jquery.min.js","week7-1_files/popper-2.6.0/popper.min.js","week7-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week7-1_files/tippy-6.2.7/tippy-light-border.css","week7-1_files/tippy-6.2.7/tippy.css","week7-1_files/tippy-6.2.7/tippy.umd.min.js","week7-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"NULL"}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Two-Factorial Factorial Design","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-16T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Projection and Blocking in $2^{K - p}$ Designs","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-17T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,7 +2276,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Two-Factorial Factorial Design</h1>
+<h1>Projection and Blocking in 2^{K - p} Designs</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>A short description of the post.</p></p>
@@ -2285,60 +2285,917 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-16-2021
+<br/>08-17-2021
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">5.3</a>, <a href="">Rmarkdown</a></em></p>
-<ol type="1">
-<li><p>Recall that in a factorial design, we want to study the influences of multiple experimental factors on some responses of interest. The simplest situation is when there are two factors of interest, and the associated designs are two-factor factorial designs.</p></li>
-<li><p>We will assume a model of the form, <span class="math display">\[
-y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
-\]</span> where <span class="math inline">\(\epsilon_{ijk} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> independently. For identifiability, we have to assume that the sums <span class="math inline">\(\sum_{i} \tau_i =  \sum_{j} \beta_{j}= \sum_{ij} \left(\tau\beta\right)_{ij}=0\)</span>. We’ll suppose <span class="math inline">\(i\)</span> ranges from <span class="math inline">\(1, \dots, a\)</span>, <span class="math inline">\(j\)</span> ranges from <span class="math inline">\(1, \dots, b\)</span> and <span class="math inline">\(k\)</span> ranges from <span class="math inline">\(1,\dots, n\)</span>.</p></li>
-<li><p>What do the indices mean?</p>
+<p><em>Readings <a href="">8.3, 8.4</a>, <a href="">Rmarkdown</a></em></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/hadley/reshape'>reshape2</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg"))</span>
+</code></pre>
+</div>
+</div>
+<p>To be fluent in working with fractional factorial designs, it’s worth knowing how to project and block them. They provide useful alternative perspectives of the designs we have already constructed.</p>
+<h3 id="projection">Projection</h3>
 <ul>
-<li><span class="math inline">\(i\)</span> indexes levels of the first factor (temperature).</li>
-<li><span class="math inline">\(j\)</span> indexes levels of the second factor (material).</li>
-<li><span class="math inline">\(k\)</span> indexes multiple replicates at a particular combination factor combination <span class="math inline">\(ij\)</span> (battery lifetimes, for fixed temperature <span class="math inline">\(\times\)</span> material combination)</li>
-</ul></li>
-<li><p>What do the greek letters mean?</p>
-<ul>
-<li><span class="math inline">\(\mu\)</span>: An intercept term, representing a global mean.</li>
-<li><span class="math inline">\(\tau_i\)</span>: The effect of the <span class="math inline">\(i^{th}\)</span> level of factor 1 on the average response (effect of temperature setting <span class="math inline">\(i\)</span>)</li>
-<li><span class="math inline">\(\beta_{j}\)</span>: The effect of the <span class="math inline">\(j^{th}\)</span> level of factor 2 on the average response (effect of material <span class="math inline">\(j\)</span>)</li>
-<li><span class="math inline">\(\left(\tau\beta\right)_{ij}\)</span>:The interaction / synergy between the ith level of factor 1 and thejth level of factor 2. (especially long / short response times, depending on particular material and temperature settings)</li>
-<li><span class="math inline">\(\epsilon_{ijk}\)</span>: The random variation we’d observe if we drew many samples at a fixed setting of the two factors. <strong>Caution</strong>: <span class="math inline">\(\beta_j\)</span> now indexes a treatment of interest. It is <em>not</em> just nuisance blocking variation.</li>
-</ul></li>
-</ol>
-<h3 id="testing">Testing</h3>
-<ol start="4" type="1">
-<li>Up until now, we’ve only asked whether one particular factor had an influence on the response, as the levels were changed. Now, we care about each of the factors, and each gets a hypothesis test.</li>
-</ol>
-<ul>
-<li><p>(Hypothesis A) For the first factor, <span class="math display">\[
-H_0 &amp;: \tau_1 = \dots = \tau_a = 0 \\
-H_{1} &amp;: \tau_{i} \neq 0 \text{ for at least one } i
-\]</span></p></li>
-<li><p>(Hypothesis B) For the second factor, <span class="math display">\[
-H_0 &amp;: \beta_1 = \dots = \beta_{b} = 0 \\
-H_{1} &amp;: \beta_{j} \neq 0 \text{ for at least one } j
-\]</span></p></li>
-<li><p>(Hypothesis AB) Are there interaction effects? <span class="math display">\[
-H_0: \left(\tau\beta\right)_{ij}= \dots = \left(\tau\beta\right)_{ij} = 0 \\
-H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ combination}
-\]</span></p></li>
+<li><p>Projection makes it possible to turn a fractional factorial screening experiment into a full factorial experiment</p></li>
+<li><p>Effectively, you delete the columns of your design matrix involving the factors outside the ones you want to project down to</p></li>
+<li><p>Depending on what design you project, a <span class="math inline">\(2^{K - p}\)</span> design will become either (1) a full factorial design or (2) a <span class="math inline">\(2^{K - r}\)</span> fractional factorial design, where <span class="math inline">\(r &lt; p\)</span>.</p></li>
+<li><p>Beware that conclusions will be somewhat tentative, because effects in the full factorial could be aliased with high-order effects from factors that have been projected out</p></li>
 </ul>
-<ol start="5" type="1">
-<li><p>For each of these hypothesis tests, we’re going to need a test statistic that’s sensitive to departures from the null. We’re also going to need their reference distributions.</p></li>
-<li><p>Miraculously, we have the identity, <span class="math display">\[\begin{align*}
-\sum_{i j k}\left(y_{i j k}-\bar{y}\right)^{2}=&amp; b n \sum_{i}\left(\bar{y}_{i . .}-\bar{y}\right)^{2}+\\
-&amp; a n \sum_{j}\left(\bar{y}_{j} .-\bar{y}\right)^{2}+\\
-&amp; n \sum_{i, j}\left(\bar{y}_{i j}-\bar{y}_{i .}-\bar{y}_{. j}-\bar{y}\right)^{2}+\\
-&amp; \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j} .\right)^{2}
-\end{align*}\]</span> which we’ll denote <span class="math inline">\(SS_{\text{Total}}=SS_{A}+SS_{B}+SS_{AB}+SS_{E}\)</span>.</p></li>
-<li><p>The punchline is that if <span class="math inline">\(SS_{A}\)</span> is large, we have evidence against hypothesis A, if <span class="math inline">\(SS_{B}\)</span> is large we have evidence against hypothesis B, and if <span class="math inline">\(SS_{AB}\)</span> is large, we have evidence against hypothesis AB.</p></li>
-<li><p>We can define corresponding mean squares by dividing by the degrees of freedom. For each hypothesis, we get a corresponding F-statistic.</p></li>
-</ol>
+<p>Warm-up: (<em>Projecting a <span class="math inline">\(2 ^ {4 - 1}\)</span> Design</em>). Consider the <span class="math inline">\(2 ^ {4 - 1}\)</span> design with defining relation <span class="math inline">\(I = ABCD\)</span>.</p>
+<div style="page-break-after: always;"></div>
+<table>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+</tbody>
+</table>
+<p>What happens when you project out A?</p>
+<table>
+<thead>
+<tr class="header">
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+</tbody>
+</table>
+<p>You can check that this has all corners of the cube B-C-D, so it’s a full <span class="math inline">\(2^{3}\)</span> design.</p>
+<p>Example (<em>Different projections of <span class="math inline">\(2 ^ {6 - 2}\)</span> design</em>). Let’s consider the example from our previous lecture</p>
+<div style="page-break-after: always;"></div>
+<table>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E = ABC</th>
+<th>F = BCD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>The study examined 6 factors over 16 runs.</p></li>
+<li><p>The complete defining relations were <span class="math inline">\(I = ABCE = BCDF = ADEF\)</span>.</p></li>
+<li><p>What happens when we project out <span class="math inline">\(A\)</span>?</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+<th>F</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Each configuration appears once. Since we have 16 rows still, this is evidently a <span class="math inline">\(2^{5 - 1}\)</span> fractional factorial design.</p>
+<p>What happens if we project out <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> instead?</p>
+<ul>
+<li>This is exactly the original “basic design.” I.e., the the full <span class="math inline">\(2 ^ 4\)</span> factorial before using the generators.</li>
+</ul>
+<p>We could try to project out two factors that don’t have such an obvious answer. So let’s project out <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
+<ul>
+<li>It turns out we still get a <span class="math inline">\(2 ^ 4\)</span> full factorial, but now on <span class="math inline">\(C\)</span> through <span class="math inline">\(F\)</span>.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>C</th>
+<th>D</th>
+<th>E</th>
+<th>F</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>You might start suspecting that whenever we project out two variables, we will end up with a full <span class="math inline">\(2^{4}\)</span> factorial. But this is not the case!</p>
+<ul>
+<li>Consider projecting out <span class="math inline">\(A\)</span> and <span class="math inline">\(E\)</span>.</li>
+<li>Now we have a <span class="math inline">\(2 ^ {4 - 1}\)</span> fractional factorial with 2 replicates.</li>
+<li>Only half of the corners are present, but each one that appears is present twice.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>F</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>This ends up being a general rule. If none of the defining words contain all the factors that you’re projecting out, then you’re left with a full factorial design; otherwise you get a fractional factorial with replicates.</p>
+<ul>
+<li>E.g., <span class="math inline">\(AE\)</span> is part of the first defining relation, so we got a fractional factorial.</li>
+</ul>
+<p>Exercise: Try projecting onto <span class="math inline">\(A, B, C\)</span>. Is it a fractional or full factorial? How many replicates each? Could you have determined this, just by looking at the defining relations?</p>
+<ul>
+<li>A design is said to have <em>projectivity</em> <span class="math inline">\(v\)</span> is collapsing to any subset of <span class="math inline">\(v\)</span> factors will result in a full factorial design. The example above has projectivity 3.</li>
+</ul>
+<h3 id="blocking">Blocking</h3>
+<p>Let’s say we’ve subsetted to a set of runs corresponding to a fractional factorial design. But, we still have to break the runs into batches, we have too many runs to be able to reasonably run them in one block. How can we appropriately block a fractional factorial design?</p>
+<ul>
+<li><p>The typical solution is to choose a high-order effect and alias it with the batches. This divides the runs into two blocks, those where the effect is + and those where it is -.</p></li>
+<li><p>Ensure that the alias group doesn’t contain any low-order effects of interest (e.g., we don’t want the blocks to be confounded with any main effects)</p></li>
+<li><p>We effectively sacrifice the alias group that is confounded with the block.</p></li>
+</ul>
+<p>Example: For our <span class="math inline">\(2 ^{6 - 2}\)</span> design above, we can confound <span class="math inline">\(ACD\)</span> with the block, to avoid aliasing any main effects with the block effect. This let us divide our runs into two blocks of size 8.</p>
+<table>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+<th>F</th>
+<th>Block = ACD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>- (B1)</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+ (B2)</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>- (B1)</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>+ (B2)</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>+ (B2)</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+ (B2)</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>- (B1)</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>- (B1)</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+ (B2)</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+ (B2)</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>- (B1)</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>- (B1)</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>- (B1)</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+<td>+ (B2)</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>- (B1)</td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+ (B2)</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

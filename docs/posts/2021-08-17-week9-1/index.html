@@ -86,18 +86,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: Two-Factorial Factorial Design</title>
+<title>Statistical Experimental Design: Unreplicated $2^K$ Designs</title>
 
 <meta property="description" itemprop="description" content="A short description of the post."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-16"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-16"/>
+<meta property="article:published" itemprop="datePublished" content="2021-08-17"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-08-17"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: Two-Factorial Factorial Design"/>
+<meta property="og:title" content="Statistical Experimental Design: Unreplicated $2^K$ Designs"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="A short description of the post."/>
 <meta property="og:locale" content="en_US"/>
@@ -105,19 +105,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: Two-Factorial Factorial Design"/>
+<meta property="twitter:title" content="Statistical Experimental Design: Unreplicated $2^K$ Designs"/>
 <meta property="twitter:description" content="A short description of the post."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Two-Factorial Factorial Design"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-16-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Unreplicated $2^K$ Designs"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week7-1_files/anchor-4.2.2/anchor.min.js","week7-1_files/bowser-1.9.3/bowser.min.js","week7-1_files/distill-2.2.21/template.v2.js","week7-1_files/header-attrs-2.8/header-attrs.js","week7-1_files/jquery-1.11.3/jquery.min.js","week7-1_files/popper-2.6.0/popper.min.js","week7-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week7-1_files/tippy-6.2.7/tippy-light-border.css","week7-1_files/tippy-6.2.7/tippy.css","week7-1_files/tippy-6.2.7/tippy.umd.min.js","week7-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week9-1_files/figure-html5/unnamed-chunk-10-1.png","week9-1_files/figure-html5/unnamed-chunk-5-1.png","week9-1_files/figure-html5/unnamed-chunk-9-1.png"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Two-Factorial Factorial Design","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-16T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Unreplicated $2^K$ Designs","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-17T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,7 +2276,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Two-Factorial Factorial Design</h1>
+<h1>Unreplicated 2^K Designs</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>A short description of the post.</p></p>
@@ -2285,61 +2285,270 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-16-2021
+<br/>08-17-2021
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">5.3</a>, <a href="">Rmarkdown</a></em></p>
-<ol type="1">
-<li><p>Recall that in a factorial design, we want to study the influences of multiple experimental factors on some responses of interest. The simplest situation is when there are two factors of interest, and the associated designs are two-factor factorial designs.</p></li>
-<li><p>We will assume a model of the form, <span class="math display">\[
-y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
-\]</span> where <span class="math inline">\(\epsilon_{ijk} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> independently. For identifiability, we have to assume that the sums <span class="math inline">\(\sum_{i} \tau_i =  \sum_{j} \beta_{j}= \sum_{ij} \left(\tau\beta\right)_{ij}=0\)</span>. We’ll suppose <span class="math inline">\(i\)</span> ranges from <span class="math inline">\(1, \dots, a\)</span>, <span class="math inline">\(j\)</span> ranges from <span class="math inline">\(1, \dots, b\)</span> and <span class="math inline">\(k\)</span> ranges from <span class="math inline">\(1,\dots, n\)</span>.</p></li>
-<li><p>What do the indices mean?</p>
+<p><em>Readings <a href="">6.5</a>, <a href="">Rmarkdown</a></em></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>BsMD</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># helper functions</span>
+<span class='va'>code</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>'-'</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>daniel_plot</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>effects</span><span class='op'>)</span> <span class='op'>{</span> 
+  <span class='va'>qq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqnorm</a></span><span class='op'>(</span><span class='va'>effects</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqline</a></span><span class='op'>(</span><span class='va'>effects</span>, col <span class='op'>=</span> <span class='st'>"red"</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.3</span>, <span class='fl'>0.7</span><span class='op'>)</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span><span class='op'>(</span><span class='va'>qq</span><span class='op'>$</span><span class='va'>x</span>, <span class='va'>qq</span><span class='op'>$</span><span class='va'>y</span>, <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>effects</span><span class='op'>)</span>, pos<span class='op'>=</span><span class='fl'>4</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
 <ul>
-<li><span class="math inline">\(i\)</span> indexes levels of the first factor (temperature).</li>
-<li><span class="math inline">\(j\)</span> indexes levels of the second factor (material).</li>
-<li><span class="math inline">\(k\)</span> indexes multiple replicates at a particular combination factor combination <span class="math inline">\(ij\)</span> (battery lifetimes, for fixed temperature <span class="math inline">\(\times\)</span> material combination)</li>
+<li><p>Sometimes, people will only take only one measurement per factor configuration</p>
+<ul>
+<li><p>When <span class="math inline">\(K\)</span> is large, replication can increase the number of samples needed substantially</p></li>
+<li><p>E.g., changing n from 1 to 2 when K = 5 means 32 more runs</p></li>
 </ul></li>
-<li><p>What do the greek letters mean?</p>
-<ul>
-<li><span class="math inline">\(\mu\)</span>: An intercept term, representing a global mean.</li>
-<li><span class="math inline">\(\tau_i\)</span>: The effect of the <span class="math inline">\(i^{th}\)</span> level of factor 1 on the average response (effect of temperature setting <span class="math inline">\(i\)</span>)</li>
-<li><span class="math inline">\(\beta_{j}\)</span>: The effect of the <span class="math inline">\(j^{th}\)</span> level of factor 2 on the average response (effect of material <span class="math inline">\(j\)</span>)</li>
-<li><span class="math inline">\(\left(\tau\beta\right)_{ij}\)</span>:The interaction / synergy between the ith level of factor 1 and thejth level of factor 2. (especially long / short response times, depending on particular material and temperature settings)</li>
-<li><span class="math inline">\(\epsilon_{ijk}\)</span>: The random variation we’d observe if we drew many samples at a fixed setting of the two factors. <strong>Caution</strong>: <span class="math inline">\(\beta_j\)</span> now indexes a treatment of interest. It is <em>not</em> just nuisance blocking variation.</li>
-</ul></li>
-</ol>
-<h3 id="testing">Testing</h3>
-<ol start="4" type="1">
-<li>Up until now, we’ve only asked whether one particular factor had an influence on the response, as the levels were changed. Now, we care about each of the factors, and each gets a hypothesis test.</li>
-</ol>
-<ul>
-<li><p>(Hypothesis A) For the first factor, <span class="math display">\[
-H_0 &amp;: \tau_1 = \dots = \tau_a = 0 \\
-H_{1} &amp;: \tau_{i} \neq 0 \text{ for at least one } i
-\]</span></p></li>
-<li><p>(Hypothesis B) For the second factor, <span class="math display">\[
-H_0 &amp;: \beta_1 = \dots = \beta_{b} = 0 \\
-H_{1} &amp;: \beta_{j} \neq 0 \text{ for at least one } j
-\]</span></p></li>
-<li><p>(Hypothesis AB) Are there interaction effects? <span class="math display">\[
-H_0: \left(\tau\beta\right)_{ij}= \dots = \left(\tau\beta\right)_{ij} = 0 \\
-H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ combination}
-\]</span></p></li>
+<li><p>For factor screening experiments, typically want to allocate samples to understanding new factors, rather than replicating known configurations</p></li>
 </ul>
-<ol start="5" type="1">
-<li><p>For each of these hypothesis tests, we’re going to need a test statistic that’s sensitive to departures from the null. We’re also going to need their reference distributions.</p></li>
-<li><p>Miraculously, we have the identity, <span class="math display">\[\begin{align*}
-\sum_{i j k}\left(y_{i j k}-\bar{y}\right)^{2}=&amp; b n \sum_{i}\left(\bar{y}_{i . .}-\bar{y}\right)^{2}+\\
-&amp; a n \sum_{j}\left(\bar{y}_{j} .-\bar{y}\right)^{2}+\\
-&amp; n \sum_{i, j}\left(\bar{y}_{i j}-\bar{y}_{i .}-\bar{y}_{. j}-\bar{y}\right)^{2}+\\
-&amp; \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j} .\right)^{2}
-\end{align*}\]</span> which we’ll denote <span class="math inline">\(SS_{\text{Total}}=SS_{A}+SS_{B}+SS_{AB}+SS_{E}\)</span>.</p></li>
-<li><p>The punchline is that if <span class="math inline">\(SS_{A}\)</span> is large, we have evidence against hypothesis A, if <span class="math inline">\(SS_{B}\)</span> is large we have evidence against hypothesis B, and if <span class="math inline">\(SS_{AB}\)</span> is large, we have evidence against hypothesis AB.</p></li>
-<li><p>We can define corresponding mean squares by dividing by the degrees of freedom. For each hypothesis, we get a corresponding F-statistic.</p></li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Without replicates to gauge measurement noise, we may encounter two opposite problems,</p>
+<ul>
+<li>Missing a true effect</li>
+<li>Spurious effects</li>
+</ul>
+<p>Let’s see how these problems arise, and discuss some solutions.</p>
+<h2 id="missing-true-effects">Missing True Effects</h2>
+<ul>
+<li><p>If the effect is weak, then if only nearby levels are tested, the effect will be easy to miss</p></li>
+<li><p>Fix: We can space out the levels at which we test each factor</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/aoles/EBImage'>"EBImage"</a></span><span class='op'>)</span>
+<span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/41twf6fdi67knj7xi9eivccxpwo4wu82.png"))</span>
+<span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/gnrwjf27ji5ld239odkmxl3836jy2imd.png"))</span>
+</code></pre>
+</div></li>
+</ul>
+</div>
+<h2 id="spurious-effects">Spurious Effects</h2>
+<ul>
+<li><p>If there are no replicates, then we can perfectly interpolate the data</p></li>
+<li><p>Leaves us with no degrees-of-freedom for estimating <span class="math inline">\(\sigma^2\)</span></p>
+<ul>
+<li><span class="math inline">\(\sigma^2\)</span> is needed to perform ANOVA</li>
+</ul></li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/rsp26h445gji26x2fsxr9qrshp1m23vi.png"))</span>
+<span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/jb4cte8l2glri1i845c4ftrzsua5jybp.png"))</span>
+</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Fix: Pool together higher-order interactions</p>
+<ul>
+<li><p>High-order interactions are typically rare (sparsity of effects principle)</p></li>
+<li><p>Can use pooled interaction estimates to obtain <span class="math inline">\(\sigma^2\)</span></p></li>
+<li><p>Pooling can only make testing more conservative</p></li>
+</ul></li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>filtration</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_table.html'>read_table2</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/xxh05ngikmscnddbhg2l3v268jnu4jtc.txt"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>Rate</span><span class='op'>)</span>, <span class='va'>as.factor</span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>filtration</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>A</span>, y <span class='op'>=</span> <span class='va'>Rate</span>, col <span class='op'>=</span> <span class='va'>C</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_color_brewer</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set2"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>B</span> <span class='op'>~</span> <span class='va'>D</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week9-1_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+</div>
+<h2 id="data-example">Data Example</h2>
+<p>This is what happens when we try to estimate all interactions, even though there is only one replicate per factor configuration. We’ll use the filtration dataset, which asks how temperature (A), pressure (B), formaldehyde (C), and stirring rate (D) affect the filtration rate of the resulting product.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Rate</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>filtration</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = Rate ~ A * B * C * D, data = filtration)
+
+Residuals:
+ALL 16 residuals are 0: no residual degrees of freedom!
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)       45        NaN     NaN      NaN
+A+                26        NaN     NaN      NaN
+B+                 3        NaN     NaN      NaN
+C+                23        NaN     NaN      NaN
+D+                -2        NaN     NaN      NaN
+A+:B+             -9        NaN     NaN      NaN
+A+:C+            -34        NaN     NaN      NaN
+B+:C+              9        NaN     NaN      NaN
+A+:D+             31        NaN     NaN      NaN
+B+:D+             -1        NaN     NaN      NaN
+C+:D+              9        NaN     NaN      NaN
+A+:B+:C+           2        NaN     NaN      NaN
+A+:B+:D+          11        NaN     NaN      NaN
+A+:C+:D+         -12        NaN     NaN      NaN
+B+:C+:D+         -16        NaN     NaN      NaN
+A+:B+:C+:D+       11        NaN     NaN      NaN
+
+Residual standard error: NaN on 0 degrees of freedom
+Multiple R-squared:      1, Adjusted R-squared:    NaN 
+F-statistic:   NaN on 15 and 0 DF,  p-value: NA</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Analysis of Variance Table
+
+Response: Rate
+          Df  Sum Sq Mean Sq F value Pr(&gt;F)
+A          1 1870.56 1870.56     NaN    NaN
+B          1   39.06   39.06     NaN    NaN
+C          1  390.06  390.06     NaN    NaN
+D          1  855.56  855.56     NaN    NaN
+A:B        1    0.06    0.06     NaN    NaN
+A:C        1 1314.06 1314.06     NaN    NaN
+B:C        1   22.56   22.56     NaN    NaN
+A:D        1 1105.56 1105.56     NaN    NaN
+B:D        1    0.56    0.56     NaN    NaN
+C:D        1    5.06    5.06     NaN    NaN
+A:B:C      1   14.06   14.06     NaN    NaN
+A:B:D      1   68.06   68.06     NaN    NaN
+A:C:D      1   10.56   10.56     NaN    NaN
+B:C:D      1   27.56   27.56     NaN    NaN
+A:B:C:D    1    7.56    7.56     NaN    NaN
+Residuals  0    0.00     NaN               </code></pre>
+</div>
+<p>If we instead assume that all interactions terms of order 3 or higher are null, we can perform again perform ANOVA.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Rate</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>A</span> <span class='op'>+</span> <span class='va'>B</span> <span class='op'>+</span> <span class='va'>C</span> <span class='op'>+</span> <span class='va'>D</span><span class='op'>)</span> <span class='op'>^</span> <span class='fl'>2</span>, data <span class='op'>=</span> <span class='va'>filtration</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = Rate ~ (A + B + C + D)^2, data = filtration)
+
+Residuals:
+      1       2       3       4       5       6       7       8 
+-0.1875  2.8125  1.8125 -4.4375 -3.9375  1.3125  2.3125  0.3125 
+      9      10      11      12      13      14      15      16 
+-1.6875 -0.9375  0.0625  2.5625  5.8125 -3.1875 -4.1875  1.5625 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   45.188      4.192  10.779 0.000119 ***
+A+            23.000      5.056   4.549 0.006117 ** 
+B+             1.000      5.056   0.198 0.851001    
+C+            26.750      5.056   5.291 0.003216 ** 
+D+            -0.500      5.056  -0.099 0.925065    
+A+:B+          0.250      5.056   0.049 0.962478    
+A+:C+        -36.250      5.056  -7.170 0.000821 ***
+A+:D+         33.250      5.056   6.576 0.001220 ** 
+B+:C+          4.750      5.056   0.939 0.390613    
+B+:D+         -0.750      5.056  -0.148 0.887871    
+C+:D+         -2.250      5.056  -0.445 0.674909    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 5.056 on 5 degrees of freedom
+Multiple R-squared:  0.9777,    Adjusted R-squared:  0.9331 
+F-statistic: 21.92 on 10 and 5 DF,  p-value: 0.001634</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Analysis of Variance Table
+
+Response: Rate
+          Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+A          1 1870.56 1870.56 73.1760 0.0003596 ***
+B          1   39.06   39.06  1.5281 0.2712969    
+C          1  390.06  390.06 15.2592 0.0113371 *  
+D          1  855.56  855.56 33.4694 0.0021718 ** 
+A:B        1    0.06    0.06  0.0024 0.9624777    
+A:C        1 1314.06 1314.06 51.4059 0.0008208 ***
+A:D        1 1105.56 1105.56 43.2494 0.0012200 ** 
+B:C        1   22.56   22.56  0.8826 0.3906126    
+B:D        1    0.56    0.56  0.0220 0.8878710    
+C:D        1    5.06    5.06  0.1980 0.6749089    
+Residuals  5  127.81   25.56                      
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<h2 id="design-projections">Design Projections</h2>
+<ul>
+<li><p>Related to pooling, sometimes it is clear that a certain factor has no bearing on the response</p></li>
+<li><p>In this case, we may consider removing that factor and all the interaction terms that include it</p></li>
+<li><p>By collapsing the factor, we double the number of effective replicates</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/8h0vt5kcb5ss0l9dlghsswnpf88q8267.png"))</span>
+</code></pre>
+</div></li>
+</ul>
+</div>
+<h2 id="visualing-effects">Visualing Effects</h2>
+<p>Graphical methods provide useful summaries for evaluating interactions in the <span class="math inline">\(2^K\)</span> model.</p>
+<ul>
+<li><p>Daniel Plots</p>
+<ul>
+<li><p>If none of the factors had any influence on the response, then the effects would all be normally distributed around 0.</p></li>
+<li><p>Idea: make a normal probability plot of the effects, and look for those which deviate from identity line. These are likely real effects.</p></li>
+</ul></li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># estimate effects</span>
+<span class='va'>filtration_coded</span> <span class='op'>&lt;-</span> <span class='va'>filtration</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>Rate</span><span class='op'>)</span>, <span class='va'>code</span><span class='op'>)</span>
+<span class='va'>fit_coded</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Rate</span><span class='op'>~</span><span class='va'>A</span><span class='op'>*</span><span class='va'>B</span><span class='op'>*</span><span class='va'>C</span><span class='op'>*</span><span class='va'>D</span>, data<span class='op'>=</span><span class='va'>filtration_coded</span><span class='op'>)</span>
+<span class='va'>effects</span> <span class='op'>&lt;-</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit_coded</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span> <span class='co'># exclude intercept</span>
+<span class='fu'>daniel_plot</span><span class='op'>(</span><span class='va'>effects</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week9-1_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
+</div>
+<ul>
+<li><p>Lenth Plots</p>
+<ul>
+<li>An alternative is to simply plot the effect sizes directly</li>
+</ul></li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/BsMD/man/LenthPlot.html'>LenthPlot</a></span><span class='op'>(</span><span class='va'>fit_coded</span>, cex.fac <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week9-1_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+<pre><code>    alpha       PSE        ME       SME 
+ 0.050000  2.625000  6.747777 13.698960 </code></pre>
+</div>
+<p>Let <span class="math inline">\(s_0 = 1.5 \times \text{median}\left(\text{Contrast}_j\right)\)</span>. Then, the notation here refers to</p>
+<ul>
+<li>Pseudostandard error (PSE): <span class="math inline">\(1.5 \times \text{median}\left(\left|c_j\right| : \left|c_j\right| &lt; 2.5 s_0\right)\)</span> serves as an alternative to the usual standard error over contrasts, which is robust to outliers (it completely ignores <span class="math inline">\(c_j\)</span>’s that are larger than <span class="math inline">\(2.5 s_0\)</span>.)</li>
+<li>Margin of error (ME): A version of the critical <span class="math inline">\(t\)</span>-value that relies on the robust standard error. Defined as <span class="math inline">\(t_{0.025,\frac{m}{3}}\times PSE\)</span>, where <span class="math inline">\(m\)</span> is the total number of effect estimates (columns in the Lenth plot).</li>
+<li>Simultaneous margin of error (SME): A more conservative version of ME, to protect against multiple comparisons.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

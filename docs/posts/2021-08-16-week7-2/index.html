@@ -2301,7 +2301,9 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </code></pre>
 </div>
 </div>
-<p>We’ll cover the analogs of performing multiple comparisons, and doing model diagnostics for the two-factor model. Almost everything will be familiar from our experience with single-factor models.</p>
+<ol type="1">
+<li>We’ll cover the analogs of performing multiple comparisons, and doing model diagnostics for the two-factor model. Almost everything will be familiar from our experience with single-factor models.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># background from last time</span>
@@ -2315,15 +2317,20 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 </div>
 <h2 id="multiple-comparisons">Multiple Comparisons</h2>
-<p>We may want to use contrasts, to find out exactly how a particular factor is associated with the response.</p>
+<ol start="2" type="1">
+<li>We may want to use contrasts, to find out exactly how a particular factor is associated with the response.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<ul>
-<li><p><em>Subtlety</em>: If the factor under investigation interacts with the other one, its effects will depend on that other factor.</p></li>
-<li><p><em>Solution</em>: Fix a level for the other factor, and study the influence of levels for the factor of interest.</p></li>
-<li><p>Example: Fix temperature, and use Tukey’s HSD to study pairwise difference between materials, for that fixed temperature.</p></li>
-</ul>
+<pre><code>* _Subtlety_: If the factor under investigation interacts with the other one,
+its effects will depend on that other factor.
+
+* _Solution_: Fix a level for the other factor, and study the influence of
+levels for the factor of interest.
+
+* Example: Fix temperature, and use Tukey’s HSD to study pairwise difference
+between materials, for that fixed temperature.</code></pre>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/emmeans/man/emmeans.html'>emmeans</a></span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>pairwise</span> <span class='op'>~</span> <span class='va'>Material</span> <span class='op'>|</span> <span class='va'>Temperature</span><span class='op'>)</span><span class='op'>$</span><span class='va'>contrasts</span>
@@ -2350,7 +2357,9 @@ Temperature = 125:
 P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
 </div>
 <h2 id="model-checking">Model Checking</h2>
-<p>Our key assumptions are independence, normality, and equal variances for the <span class="math inline">\(\epsilon_{ijk}\)</span>’s. Our diagnostics are based on residuals.</p>
+<ol start="3" type="1">
+<li>Our key assumptions are independence, normality, and equal variances for the <span class="math inline">\(\epsilon_{ijk}\)</span>’s. Our diagnostics are based on residuals.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="week7-2_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
 </div>
@@ -2370,11 +2379,13 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 <li>Make normal probability plots</li>
 </ul>
 <h2 id="choosing-the-sample-size">Choosing the Sample Size</h2>
-<p>How should you choose how many replicates to have at each combination of the two factors?</p>
+<ol start="4" type="1">
+<li><p>How should you choose how many replicates to have at each combination of the two factors?</p>
 <ul>
 <li>Simulate a model using a particular configuration of coefficients.</li>
 <li>See how your power to detect effects varies as you increase the sample size.</li>
-</ul>
+</ul></li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
@@ -2388,14 +2399,11 @@ P value adjustment: tukey method for comparing a family of 3 estimates </code></
 
 </div>
 <h2 id="interactions">Interactions</h2>
-<ul>
-<li><p>Note 1: If we only have one replicate per cell, we can’t estimate an interaction effect. (If we tried, we’d be able to perfectly fit the data, so no way to estimate <span class="math inline">\(\sigma^2\)</span>).</p></li>
-<li><p>Note 2: To check for interactions, perform residual analysis on the main effects model.</p>
-<ul>
-<li>Alternatively, use Tukey’s additivity test. It checks whether a multiplicative form of the interaction is present, i.e., does <span class="math display">\[~y_{ijk} = \mu + \tau_i + \beta_j + \gamma \tau_i \beta_j~\]</span> fit significantly better than the main effects model?</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div></li>
-</ul>
+<ol start="5" type="1">
+<li><p>If we only have one replicate per cell, then we can’t estimate an interaction effect. If we tried, we’d be able to perfectly fit the data, so there would be no way to estimate <span class="math inline">\(\sigma^2\)</span>.</p></li>
+<li><p>As a general recipe, to check for interactions, we can perform residual analysis on the main effects model. Alternatively, we coudl use Tukey’s additivity test, which checks whether a multiplicative form of the interaction is present, i.e., does <span class="math display">\[y_{ijk} = \mu + \tau_i + \beta_j + \gamma \tau_i \beta_j\]</span> fit significantly better than the main effects model?</p></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
