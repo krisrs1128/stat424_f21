@@ -28,7 +28,7 @@ theme_set(theme_bw() + theme(legend.position = "bottom"))
 ```
 
 ```{r, fig.cap = "The optimality definitions from our earlier discussion on factorial design."}
-###display(readImage("https://uwmadison.box.com/shared/static/6xoe5onf01gdpaef6g0qtcstbhb9w72n.png"))
+display(readImage("https://uwmadison.box.com/shared/static/6xoe5onf01gdpaef6g0qtcstbhb9w72n.png"))
 ```
 
 In Chapter 6, we saw that $2^{K}$ factorial designs are optimal in the linear
@@ -63,11 +63,11 @@ over the experiment space $R$.
 
 ### Heuristics
 ```{r, fig.cap = "One iteration of the point exchange algorithm, for a constrained response surface design."}
-#display(readImage("https://uwmadison.box.com/shared/static/9pgowo8mgly6d8mm97t8sm324ggcio0y.png"))
+display(readImage("https://uwmadison.box.com/shared/static/9pgowo8mgly6d8mm97t8sm324ggcio0y.png"))
 ```
 
 ```{r, fig.cap = "One iteration of the point coordinate exchange algorithm, in the same setup."}
-#display(readImage("https://uwmadison.box.com/shared/static/yr2dyd75we3ebp1gwe36r5xe3p8841h8.png"))
+display(readImage("https://uwmadison.box.com/shared/static/yr2dyd75we3ebp1gwe36r5xe3p8841h8.png"))
 ```
 
 Once a candidate design is proposed, we can evaluate its quality using the

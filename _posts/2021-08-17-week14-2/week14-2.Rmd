@@ -34,7 +34,7 @@ in conjunction with factors.
 
 ### General Nested Designs
 ```{r, fig.cap = "A three level nested design."}
-#display(readImage("https://uwmadison.box.com/shared/static/hacac7wv04k9ua657et7hzd8wg1827ln.png"))
+display(readImage("https://uwmadison.box.com/shared/static/hacac7wv04k9ua657et7hzd8wg1827ln.png"))
 ```
 
 Almost the same methodology used in 2-level nested designs carries over to more

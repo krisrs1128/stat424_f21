@@ -64,8 +64,8 @@ be easy to miss
 * Fix: We can space out the levels at which we test each factor
 ```{r, fig.margin = TRUE}
 library("EBImage")
-#display(readImage("https://uwmadison.box.com/shared/static/41twf6fdi67knj7xi9eivccxpwo4wu82.png"))
-#display(readImage("https://uwmadison.box.com/shared/static/gnrwjf27ji5ld239odkmxl3836jy2imd.png"))
+display(readImage("https://uwmadison.box.com/shared/static/olbjp5fubt4mm6j1fa7rthe0uoctymef.pnghttps://uwmadison.box.com/shared/static/8h0vt5kcb5ss0l9dlghsswnpf88q8267.png"))
+display(readImage("https://uwmadison.box.com/shared/static/099eopgmbncci9ob9zjo1mvvguxinibn.png"))
 ```
 
 ## Spurious Effects
@@ -77,8 +77,8 @@ library("EBImage")
 	* $\sigma^2$ is needed to perform ANOVA
 	
 ```{r, fig.margin = TRUE}
-#display(readImage("https://uwmadison.box.com/shared/static/rsp26h445gji26x2fsxr9qrshp1m23vi.png"))
-#display(readImage("https://uwmadison.box.com/shared/static/jb4cte8l2glri1i845c4ftrzsua5jybp.png"))
+display(readImage("https://uwmadison.box.com/shared/static/fcujd4j9ano0ypij18w9jy70amtr00p3.png"))
+display(readImage("https://uwmadison.box.com/shared/static/rfdz734pv6rxolgwz5fx215qb41qm0k6.png"))
 ```
 	
 * Fix: Pool together higher-order interactions
@@ -129,7 +129,7 @@ terms that include it
 
 * By collapsing the factor, we double the number of effective replicates
 ```{r, fig.margin = TRUE}
-#display(readImage("https://uwmadison.box.com/shared/static/8h0vt5kcb5ss0l9dlghsswnpf88q8267.png"))
+display(readImage("https://uwmadison.box.com/shared/static/yhc2w1698namew8r0vgn7ej7546ev2wg.png"))
 ```
 
 ## Visualing Effects

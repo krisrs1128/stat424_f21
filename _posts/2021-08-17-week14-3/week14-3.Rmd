@@ -28,11 +28,11 @@ library("reshape2")
 theme_set(theme_bw() + theme(legend.position = "bottom"))
 ```
 ```{r, fig.cap = "A single field from a true factorial design in the irrigation example."}
-#display(readImage("https://uwmadison.box.com/shared/static/qtxsckab5vcxffrhbpepj9peq28m7zwn.png"))
+display(readImage("https://uwmadison.box.com/shared/static/qtxsckab5vcxffrhbpepj9peq28m7zwn.png"))
 ```
 
 ```{r, fig.cap = "An alternative split plot structure. The irrigation strategies are now rows, and each cell is a subplot."}
-#display(readImage("https://uwmadison.box.com/shared/static/9s2cmkmgc45po62yzm8eltry8cy7rv42.png"))
+display(readImage("https://uwmadison.box.com/shared/static/9s2cmkmgc45po62yzm8eltry8cy7rv42.png"))
 ```
 
 There are times when we would like to perform a two-factor factorial experiment

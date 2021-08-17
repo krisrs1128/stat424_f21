@@ -30,7 +30,7 @@ theme_set(theme_bw() + theme(legend.position = "bottom"))
 ```
 
 ```{r, fig.cap = "The nested structure in the suppliers example"}
-#display(readImage("https://uwmadison.box.com/shared/static/kbs80435ds41u0qp7typvmuiaibyjlpm.png"))
+display(readImage("https://uwmadison.box.com/shared/static/kbs80435ds41u0qp7typvmuiaibyjlpm.png"))
 ```
 
 Factorial designs cover the situation where effects from multiple sources are
@@ -49,7 +49,7 @@ effect is nested within the alloy effect.
 ### Model
 
 ```{r, fig.cap = "Notation used in nested designs. Parentheses denote the parent branch."}
-#display(readImage("https://uwmadison.box.com/shared/static/g6yb4uu8nncnqc39rbjhh3kz8bv9jzwc.png"))
+display(readImage("https://uwmadison.box.com/shared/static/g6yb4uu8nncnqc39rbjhh3kz8bv9jzwc.png"))
 ```
 
 We will consider the two-stage design here. The data are imagined to be drawn
@@ -59,7 +59,7 @@ y_{ijk} &= \mu + \alpha_{i} + \beta_{j\left(i\right)} + \epsilon_{ijk}.
 \end{align*}
 
 ```{r, fig.cap = "Another way to look at the nested coefficient structure.", out.width = "80%"}
-#display(readImage("https://uwmadison.box.com/shared/static/fy3jwyeou1bu6nyo1i2lypg8juj80z8k.png"))
+display(readImage("https://uwmadison.box.com/shared/static/fy3jwyeou1bu6nyo1i2lypg8juj80z8k.png"))
 ```
 
 * $\alpha_i$ is the parent-effect (e.g., supplier effect). For identifiability,
@@ -82,7 +82,7 @@ First, imagine treating all the effects as fixed. In this case, there are two
 typical hypotheses of interest.
 
 ```{r, fig.cap = "The nested effect term looks at the variation across child means along a single branch."}
-#display(readImage("https://uwmadison.box.com/shared/static/6bona7dg8dl6fbnfvetovq2cl9l5zo11.png"))
+display(readImage("https://uwmadison.box.com/shared/static/6bona7dg8dl6fbnfvetovq2cl9l5zo11.png"))
 ```
 
 * Null parent-effect,
@@ -144,7 +144,7 @@ about the typical size of batch-to-batch variation. In this case, it makes sense
 to use random effects. We can use a random effect for just the nested factors,
 
 ```{r, fig.margin = FALSE, fig.cap = "We might imagine the batch effects are drawn from some distribution, and do inference on the variance of that distribution."}
-#display(readImage("https://uwmadison.box.com/shared/static/twey7ufa1zeaq8lgjpdg1uu66a7fi2l4.png"))
+display(readImage("https://uwmadison.box.com/shared/static/twey7ufa1zeaq8lgjpdg1uu66a7fi2l4.png"))
 ```
 
 

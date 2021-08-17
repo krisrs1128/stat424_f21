@@ -61,7 +61,7 @@ being significant.
 ### Initial Exploration
 
 ```{r, fig.cap = "A bad choice of samples to subset down to, which would make it impossible to estimate effects from $C$."}
-#display(readImage("https://uwmadison.box.com/shared/static/gu87vet64i970eonsbvtds7bsb31qbuy.png"))
+display(readImage("https://uwmadison.box.com/shared/static/gu87vet64i970eonsbvtds7bsb31qbuy.png"))
 ```
 Suppose we want to study $A, B$ and $C$, but we only have a budget of 4 runs. We
 need to choose four corners of the cube to sample. Some choices are obviously
@@ -88,9 +88,8 @@ the associated corner of the cube.
 | abc | + | + | + | + |
 
 ```{r, fig.cap="A more sensible fraction of samples to take."}
-#display(readImage("https://uwmadison.box.com/shared/static/mmj9mcixl4y0o95hwf7h93vayw0eooc0.png"))
+display(readImage("https://uwmadison.box.com/shared/static/mmj9mcixl4y0o95hwf7h93vayw0eooc0.png"))
 ```
-
 
 This seems like a reasonable choice of 4 corners, making it possible to estimate
 at least all the main effects. This turns out to be a general strategy for

@@ -58,13 +58,13 @@ simulate <- function(x, f, n_runs=1000) {
 ```
 
 ```{r}
-#display(readImage("https://uwmadison.box.com/shared/static/9qhkn4dnuqoou7dm02zgkexze5mlaz6z.png"))
+display(readImage("https://uwmadison.box.com/shared/static/9qhkn4dnuqoou7dm02zgkexze5mlaz6z.png"))
 ```
 ```{r}
-#display(readImage("https://uwmadison.box.com/shared/static/ywt9gxdakwz558bl6j57y1v25uncjjil.png"))
+display(readImage("https://uwmadison.box.com/shared/static/ywt9gxdakwz558bl6j57y1v25uncjjil.png"))
 ```
 ```{r, fig.cap="Three candidate designs when studying 2 factors, all using 4 samples. The $2^2$ design is at the bottom."}
-#display(readImage("https://uwmadison.box.com/shared/static/mpi36bkvrhpuf3ls66jxkqy4mvqoqzfm.png"))
+display(readImage("https://uwmadison.box.com/shared/static/mpi36bkvrhpuf3ls66jxkqy4mvqoqzfm.png"))
 ```
 
 This seems like a bold claim, before we can justify it, we need a sense of (1) the setting, i.e., what are alternative designs are up for consideration and (2) the criteria that will be used to call one design better than an another.
@@ -90,13 +90,13 @@ For simplicity, let’s consider $K = 1$.
 * How should we distributed our four points in order to achieve a good estimate of the underlying linear regression?
 
 ```{r}
-#display(readImage("https://uwmadison.box.com/shared/static/zm5ork632pktbbryzvs4ex6fbvd78z72.png"))
+display(readImage("https://uwmadison.box.com/shared/static/zm5ork632pktbbryzvs4ex6fbvd78z72.png"))
 ```
 ```{r}
-#display(readImage("https://uwmadison.box.com/shared/static/48czl1on1krut0gquz5arqdb5a81ft40.png"))
+display(readImage("https://uwmadison.box.com/shared/static/48czl1on1krut0gquz5arqdb5a81ft40.png"))
 ```
 ```{r, fig.cap="Three candidate designs explored in our $K = 1$ simulation."}
-#display(readImage("https://uwmadison.box.com/shared/static/0s7m67r9k447irxr8jdzmta8h0ea2seg.png"))
+display(readImage("https://uwmadison.box.com/shared/static/0s7m67r9k447irxr8jdzmta8h0ea2seg.png"))
 ```
 
 Here are three candidates,
@@ -172,7 +172,7 @@ ggplot(sim_df) +
 ### Definitions
 
 ```{r, fig.cap = "Summary of alternative optimality definitions."}
-#display(readImage("https://uwmadison.box.com/shared/static/6xoe5onf01gdpaef6g0qtcstbhb9w72n.png"))
+display(readImage("https://uwmadison.box.com/shared/static/6xoe5onf01gdpaef6g0qtcstbhb9w72n.png"))
 ```
 
 * A design is _$D$-optimal_ if $\left|\text{Cov}\left(\hat{\beta}\right)\right|$ is minimized.

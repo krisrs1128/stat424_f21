@@ -31,15 +31,15 @@ theme_set(theme_bw() + theme(legend.position = "bottom"))
 ```
 
 ```{r fig.cap = "First order models have no isolated optima."}
-##display(readImage("https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lzt6gq5fkjfn.png"))
+display(readImage("https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lzt6gq5fkjfn.png"))
 ```
 
 ```{r fig.cap = "Second order model with a local minimum."}
-##display(readImage("https://uwmadison.box.com/shared/static/qn1f8hrbb8uwtbflv02axa817m6tcmb7.png"))
+display(readImage("https://uwmadison.box.com/shared/static/qn1f8hrbb8uwtbflv02axa817m6tcmb7.png"))
 ```
 
 ```{r fig.cap = "Second order model with a saddle point."}
-##display(readImage("https://uwmadison.box.com/shared/static/x81swx5xslpzziywsupkuwpkyfggagis.png"))
+display(readImage("https://uwmadison.box.com/shared/static/x81swx5xslpzziywsupkuwpkyfggagis.png"))
 ```
 
 One we are in the vicinity of a potentially optimal point, we need more subtle
@@ -97,7 +97,7 @@ we’ll use the generalization of the second-derivative test, called...
 
 ### Canonical Representation
 ```{r, fig.cap = "Geometric representation of the eigendecomposition."}
-#display(readImage("https://uwmadison.box.com/shared/static/ngiy01l2mtvem1o9e6diwawhypgf3jst.png"))
+display(readImage("https://uwmadison.box.com/shared/static/ngiy01l2mtvem1o9e6diwawhypgf3jst.png"))
 ```
 
 Since $\hat{B}$ is symmetric, we can find an eigendecomposition,

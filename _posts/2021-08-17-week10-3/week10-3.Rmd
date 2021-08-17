@@ -29,19 +29,19 @@ theme_set(theme_bw() + theme(legend.position = "bottom"))
 ```
 
 ```{r}
-#display(readImage("https://uwmadison.box.com/shared/static/n751tnavv2xgg50cj3z535t3s3dsbel0.png"))
+display(readImage("https://uwmadison.box.com/shared/static/n751tnavv2xgg50cj3z535t3s3dsbel0.png"))
 ```
 ```{r, fig.cap="The main lesson from section 6.7"}
-#display(readImage("https://uwmadison.box.com/shared/static/g6ge54chmmlv1guftm15fz4o4j8dz7ek.png"))
+display(readImage("https://uwmadison.box.com/shared/static/g6ge54chmmlv1guftm15fz4o4j8dz7ek.png"))
 ```
 
 In section 6.7, we said that if we wanted an optimal design, we should place all our test points at the boundaries of factor’s values. This is certainly true when you have a linear factor effect. But what if the linearity assumption doesn’t hold? Which design should we pick?
 
 ```{r}
-#display(readImage("https://uwmadison.box.com/shared/static/6s1qw3mjzok5zrm7l384undexkb2ga2u.png"))
+display(readImage("https://uwmadison.box.com/shared/static/6s1qw3mjzok5zrm7l384undexkb2ga2u.png"))
 ```
 ```{r, fig.cap="What if our effect is nonlinear?"}
-#display(readImage("https://uwmadison.box.com/shared/static/z0rpppgsnte77f3vsl5dsrbvtyrtqne0.png"))
+display(readImage("https://uwmadison.box.com/shared/static/z0rpppgsnte77f3vsl5dsrbvtyrtqne0.png"))
 ```
 
 At least in the first design, we would know that something is off! We could then include polynomial terms to fit curvature in the factor effect.
@@ -59,18 +59,18 @@ where $\bar{y}_{C}$ is the average of the $n_{C}$ samples at the center point an
 ### Central Composite Design
 
 ```{r}
-#display(readImage("https://uwmadison.box.com/shared/static/53o5ytugsbmpgvxcwmfy6053dfvrh3kv.png"))
+display(readImage("https://uwmadison.box.com/shared/static/53o5ytugsbmpgvxcwmfy6053dfvrh3kv.png"))
 ```
 ```{r, fig.cap="Added center points in the $K = 1$ and $K = 2$ cases."}
-#display(readImage("https://uwmadison.box.com/shared/static/gz504o59rs4212x3v8mip87wbglq4xmw.png"))
+display(readImage("https://uwmadison.box.com/shared/static/gz504o59rs4212x3v8mip87wbglq4xmw.png"))
 ```
 
 ```{r, fig.cap = "Geometry of the curvature test statistic."}
-#display(readImage("https://uwmadison.box.com/shared/static/w03xrmafmle36svbr4h3mpjrcjprgef7.png"))
+display(readImage("https://uwmadison.box.com/shared/static/w03xrmafmle36svbr4h3mpjrcjprgef7.png"))
 ```
 
 ```{r, fig.cap = "A central composite design."}
-#display(readImage("https://uwmadison.box.com/shared/static/ini2lw3vb7i89fga7ph3ywkygszaqgj6.png"))
+display(readImage("https://uwmadison.box.com/shared/static/ini2lw3vb7i89fga7ph3ywkygszaqgj6.png"))
 ```
 
 If we have an unreplicated design, then we cannot fit quadratic terms — we would have more parameters than samples, and the linear system would be underdetermined. 

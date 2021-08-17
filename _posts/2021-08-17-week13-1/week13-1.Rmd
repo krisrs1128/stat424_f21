@@ -31,7 +31,7 @@ theme_set(theme_bw() + theme(legend.position = "bottom"))
 ```
 
 ```{r, fig.cap = "By tying sampling center points in both the axial and factorial blocks, it becomes possible to estimate and correct for block effects."}
-#display(readImage("https://uwmadison.box.com/shared/static/hxsz37wvxcj93osymlckvep6da6ipoqy.png"))
+display(readImage("https://uwmadison.box.com/shared/static/hxsz37wvxcj93osymlckvep6da6ipoqy.png"))
 ```
 
 It’s often impossible to collect all the samples for an experiment at once,

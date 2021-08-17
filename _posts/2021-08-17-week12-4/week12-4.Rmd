@@ -29,7 +29,7 @@ library(rsm)
 theme_set(theme_bw() + theme(legend.position = "bottom"))
 ```
 ```{r, fig.cap = "Initial runs are using a factorial design, while later runs use a CCD."}
-#display(readImage("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png"))
+display(readImage("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png"))
 ```
 
 We have been fitting surfaces to find some configuration of factors that optimizes a response. Sometimes we found the optimum just from one experiment, but more often, we ran a series of experiments, gradually refining our understanding of the response surface.

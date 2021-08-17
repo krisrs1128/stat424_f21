@@ -29,7 +29,7 @@ library(ggplot2)
 theme_set(theme_bw() + theme(legend.position = "bottom"))
 ```
 ```{r, fig.cap = "Our earlier picture of projection from 3 to 2 factors in a complete factorial design."}
-#display(readImage("https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg"))
+display(readImage("https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg"))
 ```
 
 To be fluent in working with fractional factorial designs, it’s worth knowing
