@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week13-1_files/figure-html5/unnamed-chunk-4-1.png","week13-1_files/figure-html5/unnamed-chunk-6-1.png"]}
+  {"type":"character","attributes":{},"value":["week13-1_files/anchor-4.2.2/anchor.min.js","week13-1_files/bowser-1.9.3/bowser.min.js","week13-1_files/distill-2.2.21/template.v2.js","week13-1_files/figure-html5/unnamed-chunk-2-1.png","week13-1_files/figure-html5/unnamed-chunk-4-1.png","week13-1_files/figure-html5/unnamed-chunk-6-1.png","week13-1_files/header-attrs-2.8/header-attrs.js","week13-1_files/jquery-1.11.3/jquery.min.js","week13-1_files/popper-2.6.0/popper.min.js","week13-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week13-1_files/tippy-6.2.7/tippy-light-border.css","week13-1_files/tippy-6.2.7/tippy.css","week13-1_files/tippy-6.2.7/tippy.umd.min.js","week13-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2304,8 +2304,14 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/hxsz37wvxcj93osymlckvep6da6ipoqy.png"))</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/hxsz37wvxcj93osymlckvep6da6ipoqy.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="week13-1_files/figure-html5/unnamed-chunk-2-1.png" alt="By tying sampling center points in both the axial and factorial blocks, it becomes possible to estimate and correct for block effects." width="624" />
+<p class="caption">
+Figure 1: By tying sampling center points in both the axial and factorial blocks, it becomes possible to estimate and correct for block effects.
+</p>
 </div>
 </div>
 <p>It’s often impossible to collect all the samples for an experiment at once, which can lead to batch effects downstream. This motivates the use of blocked designs — how should we think of blocked designs in the context of response surface experiments?</p>
@@ -2335,21 +2341,21 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </code></pre>
 </div>
 <pre><code>   run.order std.order     time     temp Block
-1          1         2 40.00000 145.0000     1
-2          2         3 30.00000 155.0000     1
-3          3         7 35.00000 150.0000     1
-4          4         4 40.00000 155.0000     1
+1          1         7 35.00000 150.0000     1
+2          2         2 40.00000 145.0000     1
+3          3         3 30.00000 155.0000     1
+4          4         6 35.00000 150.0000     1
 5          5         1 30.00000 145.0000     1
-6          6         8 35.00000 150.0000     1
-7          7         5 35.00000 150.0000     1
-8          8         6 35.00000 150.0000     1
-9          1         6 35.00000 150.0000     2
-10         2         3 35.00000 142.9289     2
-11         3         7 35.00000 150.0000     2
-12         4         1 27.92893 150.0000     2
-13         5         5 35.00000 150.0000     2
-14         6         4 35.00000 157.0711     2
-15         7         2 42.07107 150.0000     2
+6          6         5 35.00000 150.0000     1
+7          7         4 40.00000 155.0000     1
+8          8         8 35.00000 150.0000     1
+9          1         5 35.00000 150.0000     2
+10         2         4 35.00000 157.0711     2
+11         3         6 35.00000 150.0000     2
+12         4         7 35.00000 150.0000     2
+13         5         2 42.07107 150.0000     2
+14         6         1 27.92893 150.0000     2
+15         7         3 35.00000 142.9289     2
 16         8         8 35.00000 150.0000     2
 
 Data are stored in coded form using these coding formulas ...

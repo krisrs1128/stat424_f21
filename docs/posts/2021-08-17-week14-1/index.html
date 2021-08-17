@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week14-1_files/figure-html5/unnamed-chunk-7-1.png"]}
+  {"type":"character","attributes":{},"value":["week14-1_files/anchor-4.2.2/anchor.min.js","week14-1_files/bowser-1.9.3/bowser.min.js","week14-1_files/distill-2.2.21/template.v2.js","week14-1_files/figure-html5/unnamed-chunk-10-1.png","week14-1_files/figure-html5/unnamed-chunk-2-1.png","week14-1_files/figure-html5/unnamed-chunk-3-1.png","week14-1_files/figure-html5/unnamed-chunk-4-1.png","week14-1_files/figure-html5/unnamed-chunk-5-1.png","week14-1_files/figure-html5/unnamed-chunk-7-1.png","week14-1_files/header-attrs-2.8/header-attrs.js","week14-1_files/jquery-1.11.3/jquery.min.js","week14-1_files/popper-2.6.0/popper.min.js","week14-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week14-1_files/tippy-6.2.7/tippy-light-border.css","week14-1_files/tippy-6.2.7/tippy.css","week14-1_files/tippy-6.2.7/tippy.umd.min.js","week14-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2304,8 +2304,14 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/kbs80435ds41u0qp7typvmuiaibyjlpm.png"))</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/kbs80435ds41u0qp7typvmuiaibyjlpm.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="week14-1_files/figure-html5/unnamed-chunk-2-1.png" alt="The nested structure in the suppliers example" width="624" />
+<p class="caption">
+Figure 1: The nested structure in the suppliers example
+</p>
 </div>
 </div>
 <p>Factorial designs cover the situation where effects from multiple sources are crossed with one another. In many situations, however, effects are nested within each other.</p>
@@ -2316,8 +2322,14 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h3 id="model">Model</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/g6yb4uu8nncnqc39rbjhh3kz8bv9jzwc.png"))</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/g6yb4uu8nncnqc39rbjhh3kz8bv9jzwc.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="week14-1_files/figure-html5/unnamed-chunk-3-1.png" alt="Notation used in nested designs. Parentheses denote the parent branch." width="624" />
+<p class="caption">
+Figure 2: Notation used in nested designs. Parentheses denote the parent branch.
+</p>
 </div>
 </div>
 <p>We will consider the two-stage design here. The data are imagined to be drawn according to <span class="math display">\[\begin{align*}
@@ -2325,8 +2337,14 @@ y_{ijk} &amp;= \mu + \alpha_{i} + \beta_{j\left(i\right)} + \epsilon_{ijk}.
 \end{align*}\]</span></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/fy3jwyeou1bu6nyo1i2lypg8juj80z8k.png"))</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/fy3jwyeou1bu6nyo1i2lypg8juj80z8k.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="week14-1_files/figure-html5/unnamed-chunk-4-1.png" alt="Another way to look at the nested coefficient structure." width="80%" />
+<p class="caption">
+Figure 3: Another way to look at the nested coefficient structure.
+</p>
 </div>
 </div>
 <ul>
@@ -2340,8 +2358,14 @@ y_{ijk} &amp;= \mu + \alpha_{i} + \beta_{j\left(i\right)} + \epsilon_{ijk}.
 <p>First, imagine treating all the effects as fixed. In this case, there are two typical hypotheses of interest.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/6bona7dg8dl6fbnfvetovq2cl9l5zo11.png"))</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/6bona7dg8dl6fbnfvetovq2cl9l5zo11.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="week14-1_files/figure-html5/unnamed-chunk-5-1.png" alt="The nested effect term looks at the variation across child means along a single branch." width="624" />
+<p class="caption">
+Figure 4: The nested effect term looks at the variation across child means along a single branch.
+</p>
 </div>
 </div>
 <ul>
@@ -2380,7 +2404,7 @@ SS_{B\left(A\right)} &amp;= \sum_{i = 1}^{a}\sum_{j = 1}^{b} \left(\bar{y}_{ij\c
 <div class="figure"><span id="fig:unnamed-chunk-7"></span>
 <img src="week14-1_files/figure-html5/unnamed-chunk-7-1.png" alt="Data from the supplier example." width="624" />
 <p class="caption">
-Figure 1: Data from the supplier example.
+Figure 5: Data from the supplier example.
 </p>
 </div>
 </div>
@@ -2421,8 +2445,14 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>Rather than caring about specific parent or nested effects, we may simply want to know the typical variation due to either factor. For example, we may not care about the effect of the 2nd batch in the 3rd supplier, but we may be curious about the typical size of batch-to-batch variation. In this case, it makes sense to use random effects. We can use a random effect for just the nested factors,</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/twey7ufa1zeaq8lgjpdg1uu66a7fi2l4.png"))</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/twey7ufa1zeaq8lgjpdg1uu66a7fi2l4.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="week14-1_files/figure-html5/unnamed-chunk-10-1.png" alt="We might imagine the batch effects are drawn from some distribution, and do inference on the variance of that distribution." width="624" />
+<p class="caption">
+Figure 6: We might imagine the batch effects are drawn from some distribution, and do inference on the variance of that distribution.
+</p>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">

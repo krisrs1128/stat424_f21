@@ -86,18 +86,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: Examples of $2^K$ Designs</title>
+<title>Statistical Experimental Design: An Introduction to Response Surfaces</title>
 
 <meta property="description" itemprop="description" content="A short description of the post."/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-17"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-17"/>
+<meta property="article:published" itemprop="datePublished" content="2021-08-16"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-08-16"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: Examples of $2^K$ Designs"/>
+<meta property="og:title" content="Statistical Experimental Design: An Introduction to Response Surfaces"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="A short description of the post."/>
 <meta property="og:locale" content="en_US"/>
@@ -105,19 +105,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: Examples of $2^K$ Designs"/>
+<meta property="twitter:title" content="Statistical Experimental Design: An Introduction to Response Surfaces"/>
 <meta property="twitter:description" content="A short description of the post."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Examples of $2^K$ Designs"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["An Introduction to Response Surfaces"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-16-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week9-2_files/anchor-4.2.2/anchor.min.js","week9-2_files/bowser-1.9.3/bowser.min.js","week9-2_files/distill-2.2.21/template.v2.js","week9-2_files/figure-html5/unnamed-chunk-10-1.png","week9-2_files/figure-html5/unnamed-chunk-10-2.png","week9-2_files/figure-html5/unnamed-chunk-11-1.png","week9-2_files/figure-html5/unnamed-chunk-11-2.png","week9-2_files/figure-html5/unnamed-chunk-11-3.png","week9-2_files/figure-html5/unnamed-chunk-12-1.png","week9-2_files/figure-html5/unnamed-chunk-13-1.png","week9-2_files/figure-html5/unnamed-chunk-13-2.png","week9-2_files/figure-html5/unnamed-chunk-13-3.png","week9-2_files/figure-html5/unnamed-chunk-3-1.png","week9-2_files/figure-html5/unnamed-chunk-4-1.png","week9-2_files/figure-html5/unnamed-chunk-4-2.png","week9-2_files/figure-html5/unnamed-chunk-5-1.png","week9-2_files/figure-html5/unnamed-chunk-5-2.png","week9-2_files/figure-html5/unnamed-chunk-6-1.png","week9-2_files/figure-html5/unnamed-chunk-7-1.png","week9-2_files/figure-html5/unnamed-chunk-7-2.png","week9-2_files/figure-html5/unnamed-chunk-9-1.png","week9-2_files/header-attrs-2.8/header-attrs.js","week9-2_files/jquery-1.11.3/jquery.min.js","week9-2_files/popper-2.6.0/popper.min.js","week9-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","week9-2_files/tippy-6.2.7/tippy-light-border.css","week9-2_files/tippy-6.2.7/tippy.css","week9-2_files/tippy-6.2.7/tippy.umd.min.js","week9-2_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week7-4_files/figure-html5/unnamed-chunk-3-1.png"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Examples of $2^K$ Designs","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-17T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"An Introduction to Response Surfaces","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-16T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,7 +2276,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Examples of 2^K Designs</h1>
+<h1>An Introduction to Response Surfaces</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>A short description of the post.</p></p>
@@ -2285,351 +2285,111 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-17-2021
+<br/>08-16-2021
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">6.6</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="">5.5</a>, <a href="">Rmarkdown</a></em></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyr.tidyverse.org'>tidyr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>rsm</span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># helper functions</span>
-<span class='va'>code</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>'-'</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>daniel_plot</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>effects</span>, <span class='va'>probs</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.3</span>, <span class='fl'>0.7</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span> 
-  <span class='va'>qq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqnorm</a></span><span class='op'>(</span><span class='va'>effects</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqline</a></span><span class='op'>(</span><span class='va'>effects</span>, col <span class='op'>=</span> <span class='st'>"red"</span>, probs <span class='op'>=</span> <span class='va'>probs</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span><span class='op'>(</span><span class='va'>qq</span><span class='op'>$</span><span class='va'>x</span>, <span class='va'>qq</span><span class='op'>$</span><span class='va'>y</span>, <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>effects</span><span class='op'>)</span>, pos<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>}</span>
-</code></pre>
-</div>
-</div>
-<p>Like the corresponding section in the book, these notes introduce no new technical material. Instead, they illustrate end-to-end analysis workflows for <span class="math inline">\(2^K\)</span> designs and highlight the types of judgments that need to be exercised in practice.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>drill</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/7l8bpcu36a12a8c0chlh4id0qezdnnoe.csv"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>rate</span><span class='op'>)</span>, <span class='va'>code</span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>drill</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>B</span>, y <span class='op'>=</span> <span class='va'>rate</span>, col <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>C</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_color_brewer</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set2"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>A</span> <span class='op'>~</span> <span class='va'>D</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week9-2_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
-</div>
-<h2 id="example-6.3">Example 6.3</h2>
-<p>An experiment was done to see how the “advance rate of a drill” varied as a function of four factors<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, which we will call A, B, C, and D.</p>
-<p>As a first pass at the analysis, we fit a full <span class="math inline">\(2^4\)</span> model. The Daniel plot is below.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>rate</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>drill</span><span class='op'>)</span>
-<span class='va'>effects</span> <span class='op'>&lt;-</span> <span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>
-<span class='fu'>daniel_plot</span><span class='op'>(</span><span class='va'>effects</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.35</span>, <span class='fl'>0.65</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="week9-2_files/figure-html5/unnamed-chunk-4-1.png" width="40%" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>rate</span> <span class='op'>~</span> <span class='va'>B</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>C</span> <span class='op'>+</span> <span class='va'>D</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>drill</span><span class='op'>)</span>
-<span class='va'>drill_resid</span> <span class='op'>&lt;-</span> <span class='va'>drill</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>
-    residual <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/residuals.html'>resid</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>,
-    y_hat <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-  <span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>drill_resid</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>y_hat</span>, y <span class='op'>=</span> <span class='va'>residual</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week9-2_files/figure-html5/unnamed-chunk-4-2.png" width="40%" /></p>
-</div>
-<p>This suggests dropping factor <span class="math inline">\(A\)</span> in the fit. However, when we study the residuals, we notice they are heteroskedastic, with larger residuals associated with higher predicted values.</p>
-<p>Since the data are rates, we take a log-transform. We refit the full model, which suggests a much simpler set of factors, with no interactions. The residuals of the associated submodel also look much better now.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rate</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>drill</span><span class='op'>)</span>
-<span class='fu'>daniel_plot</span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="week9-2_files/figure-html5/unnamed-chunk-5-1.png" width="40%" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rate</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>B</span> <span class='op'>+</span> <span class='va'>C</span> <span class='op'>+</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>drill</span><span class='op'>)</span>
-<span class='va'>drill_resid</span> <span class='op'>&lt;-</span> <span class='va'>drill</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>
-    residual <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/residuals.html'>resid</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>,
-    y_hat <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-  <span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>drill_resid</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>y_hat</span>, y <span class='op'>=</span> <span class='va'>residual</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week9-2_files/figure-html5/unnamed-chunk-5-2.png" width="40%" /></p>
-</div>
-<p><em>Lessons</em>:</p>
+<ol type="1">
+<li><p>We’ve really pushed a particular recipe for all our hypothesis testing approaches,</p>
 <ul>
-<li><p>Examining residuals can motivate useful transformations of the data.</p></li>
-<li><p>It’s a good thing replicates were made.</p></li>
-</ul>
-<h2 id="example-6.4">Example 6.4</h2>
-<p>An experiment was done to see how defect rate in airplane windows varied according to four factors: temperature (A), clamp time (B), resin flow (C), and press closing time (D).</p>
-<p>The estimated effects are displayed in the margin. The story seems simple,</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>windows</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/62phufkeprheu9gu35mu1e75x6rc2shv.csv"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>defects</span><span class='op'>)</span>, <span class='va'>code</span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>windows</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>A</span>, y <span class='op'>=</span> <span class='va'>defects</span>, col <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>C</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_color_brewer</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set2"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>B</span> <span class='op'>~</span> <span class='va'>D</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week9-2_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>defects</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>windows</span><span class='op'>)</span>
-<span class='fu'>daniel_plot</span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="week9-2_files/figure-html5/unnamed-chunk-7-1.png" width="40%" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>defects</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>+</span> <span class='va'>C</span>, data <span class='op'>=</span> <span class='va'>windows</span><span class='op'>)</span>
-<span class='va'>windows</span><span class='op'>$</span><span class='va'>residual</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/residuals.html'>resid</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>windows</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>B</span>, y <span class='op'>=</span> <span class='va'>residual</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week9-2_files/figure-html5/unnamed-chunk-7-2.png" width="40%" /></p>
-</div>
-<ul>
-<li><p>Temperature (A) has a strong positive effect</p></li>
-<li><p>Resin (C) flow has a slight negative effect.</p></li>
-</ul>
-<p>As usual, we examine residuals. This reveals a kind of heteroskedasticity,</p>
-<ul>
-<li>We don’t do any transforms, but instead recommend low temperature, high resin flow, and low clamp time (because lower clamp time -&gt; lower variability)</li>
-</ul>
-<p><em>Lessons</em>:</p>
-<ul>
-<li><p>In practice, it’s often useful to take variability into account, rather than just average response</p></li>
-<li><p>A residual plot can be directly actionable</p></li>
-</ul>
-<h2 id="aside-dispersion-estimates">Aside: Dispersion estimates</h2>
-<ul>
-<li><p>The heuristic in the previous example can be formalized.</p></li>
-<li><p>Let <span class="math inline">\(S^2\left(j^{+}\right)\)</span> be an estimated standard deviation of responses when contrast <span class="math inline">\(j\)</span> is active.</p></li>
-<li><p>Theory predicts that <span class="math inline">\(\log\left(\frac{S^{2}\left(j^{+}\right)}{S^{2}\left(j^{-}\right)}\right)\)</span> will be approximately normal.</p>
-<ul>
-<li>We call these the <em>dispersions</em></li>
+<li>Write down a model with various factor level effects</li>
+<li>Write down a sum-of-squares identity, and get the corresponding degrees-of-freedom</li>
+<li>Get a test statistic and its reference distribution, for testing each factor We’ve used this in ANOVA, RCBD, general factorial designs…</li>
 </ul></li>
-<li><p>Motivates looking at normal probability plots of dispersions, to see if any factors have high discrepancies in spread, as a function of level</p></li>
-</ul>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>M</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>defects</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>windows</span><span class='op'>)</span><span class='op'>[</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span> <span class='co'># remove intercept</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>M</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code>    A  B  C  D A:B A:C B:C A:D B:D C:D A:B:C A:B:D A:C:D B:C:D
-1  -1 -1 -1 -1   1   1   1   1   1   1    -1    -1    -1    -1
-2   1 -1 -1 -1  -1  -1   1  -1   1   1     1     1     1    -1
-3  -1  1 -1 -1  -1   1  -1   1  -1   1     1     1    -1     1
-4  -1 -1  1 -1   1  -1  -1   1   1  -1     1    -1     1     1
-5  -1 -1 -1  1   1   1   1  -1  -1  -1    -1     1     1     1
-6   1  1 -1 -1   1  -1  -1  -1  -1   1    -1    -1     1     1
-7   1 -1  1 -1  -1   1  -1  -1   1  -1    -1     1    -1     1
-8   1 -1 -1  1  -1  -1   1   1  -1  -1     1    -1    -1     1
-9  -1  1  1 -1  -1  -1   1   1  -1  -1    -1     1     1    -1
-10 -1  1 -1  1  -1   1  -1  -1   1  -1     1    -1     1    -1
-11 -1 -1  1  1   1  -1  -1  -1  -1   1     1     1    -1    -1
-12  1  1  1 -1   1   1   1  -1  -1  -1     1    -1    -1    -1
-13  1 -1  1  1  -1   1  -1   1  -1   1    -1    -1     1    -1
-14  1  1 -1  1   1  -1  -1   1   1  -1    -1     1    -1    -1
-15 -1  1  1  1  -1  -1   1  -1   1   1    -1    -1    -1     1
-16  1  1  1  1   1   1   1   1   1   1     1     1     1     1
-   A:B:C:D
-1        1
-2       -1
-3       -1
-4       -1
-5       -1
-6        1
-7        1
-8        1
-9        1
-10       1
-11       1
-12      -1
-13      -1
-14      -1
-15      -1
-16       1</code></pre>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='kw'>for</span> <span class='op'>(</span><span class='va'>k</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>M</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>S</span><span class='op'>[[</span><span class='va'>k</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
-    <span class='st'>"effect"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span><span class='op'>(</span><span class='va'>M</span><span class='op'>)</span><span class='op'>[</span><span class='va'>k</span><span class='op'>]</span>,
-    <span class='st'>"sd_plus"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>windows</span><span class='op'>$</span><span class='va'>residual</span><span class='op'>[</span><span class='va'>M</span><span class='op'>[</span>, <span class='va'>k</span><span class='op'>]</span> <span class='op'>==</span> <span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>,
-    <span class='st'>"sd_minus"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>windows</span><span class='op'>$</span><span class='va'>residual</span><span class='op'>[</span><span class='va'>M</span><span class='op'>[</span>, <span class='va'>k</span><span class='op'>]</span> <span class='op'>==</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
-  <span class='op'>)</span>
-<span class='op'>}</span>
-<span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span><span class='op'>(</span><span class='va'>rbind</span>, <span class='va'>S</span><span class='op'>)</span>
-<span class='va'>s_ratio</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/setNames.html'>setNames</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>S</span><span class='op'>$</span><span class='va'>sd_plus</span> <span class='op'>/</span> <span class='va'>S</span><span class='op'>$</span><span class='va'>sd_minus</span><span class='op'>)</span>, <span class='va'>S</span><span class='op'>$</span><span class='va'>effect</span><span class='op'>)</span>
-<span class='fu'>daniel_plot</span><span class='op'>(</span><span class='va'>s_ratio</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week9-2_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
-</div>
-<h2 id="example-6.5">Example 6.5</h2>
-<p>An <span class="math inline">\(2^{4}\)</span> experiment is setup to improve semiconductor manufacturing.</p>
+<li><p>We’re now going to introduce a quite different approach based on response surfaces. The idea is simple: use a flexible (nonlinear) function from experimental inputs (combinations of factor levels) to the response of interest. This will work as long as the response varies smoothly as factor inputs are perturbed. The estimated function will be a good representation of how varying the factors affects the response.</p></li>
+<li><p>Moreover, if we have successfully estimated this function, then we’ll be able to use the fit to (a) determine important influences and (b) find configurations that optimize the response (e.g., maximize profit[^Or if you are disgruntled, minimize profit]).</p></li>
+<li><p>How should we fit these flexible functions?</p>
 <ul>
-<li><p>Question: How do temperature (A), time (B), pressure (C), and gas flow (D) affect oxide thickness of the wafers?</p></li>
-<li><p>Four wafers are put in the furnace at a time</p>
-<ul>
-<li><p>These are repeated measures, not replicates!</p></li>
-<li><p>Therefore, take the average of the wafers, and treat this as an unreplicated design</p></li>
+<li>Polynomial regression: include terms like <span class="math inline">\(x_i^2, x_i^3, x_i^2 x_j, ...\)</span></li>
+<li>Spline regression: Include polynomial terms, but split across different regions of the input space. This is generally more stable than polynomial regression.</li>
+<li>Really, you can use whatever function fitter that you want. Unfortunately, this idea will have to wait till near the end of the course for a more complete elaboration.</li>
 </ul></li>
-</ul>
-<p>An analysis of the variation in average thickness across factor configurations is displayed below.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>oxide</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/vyk6uoe3zbnonv4n6jcusbrocmt4cvru.csv"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span><span class='op'>(</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"wafer"</span><span class='op'>)</span>, names_to <span class='op'>=</span> <span class='st'>"variable"</span><span class='op'>)</span>
-<span class='va'>oxide_collapse</span> <span class='op'>&lt;-</span> <span class='va'>oxide</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>B</span>, <span class='va'>C</span>, <span class='va'>D</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span>, var <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>var</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>oxide</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>A</span>, y <span class='op'>=</span> <span class='va'>value</span>, col <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>B</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_color_brewer</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set2"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>C</span> <span class='op'>~</span> <span class='va'>D</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="week9-2_files/figure-html5/unnamed-chunk-10-1.png" width="624" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mean</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>oxide_collapse</span><span class='op'>)</span>
-<span class='fu'>daniel_plot</span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="week9-2_files/figure-html5/unnamed-chunk-10-2.png" width="624" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>mean</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>B</span> <span class='op'>+</span> <span class='va'>C</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>oxide_collapse</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span> <span class='co'># compare with Table 6.20</span>
-</code></pre>
-</div>
-<pre><code>
-Call:
-lm(formula = mean ~ A * (B + C), data = oxide_collapse)
-
-Residuals:
-   Min     1Q Median     3Q    Max 
--7.125 -2.469  1.000  2.250  6.625 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  399.188      1.049 380.475  &lt; 2e-16 ***
-A             21.562      1.049  20.552 1.64e-09 ***
-B              9.063      1.049   8.638 5.98e-06 ***
-C             -5.187      1.049  -4.944 0.000583 ***
-A:B            8.437      1.049   8.042 1.12e-05 ***
-A:C           -5.313      1.049  -5.063 0.000489 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-Residual standard error: 4.197 on 10 degrees of freedom
-Multiple R-squared:  0.9839,    Adjusted R-squared:  0.9759 
-F-statistic: 122.3 on 5 and 10 DF,  p-value: 1.237e-08</code></pre>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>fit</span>,  <span class='op'>~</span> <span class='va'>A</span> <span class='op'>+</span> <span class='va'>B</span> <span class='op'>+</span> <span class='va'>C</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week9-2_files/figure-html5/unnamed-chunk-11-1.png" width="30%" /><img src="week9-2_files/figure-html5/unnamed-chunk-11-2.png" width="30%" /><img src="week9-2_files/figure-html5/unnamed-chunk-11-3.png" width="30%" /></p>
-</div>
-<p>In addition to modeling the average across wafers, we can model the standard deviation. Potentially useful if we want to find configurations with more consistency in oxide thickness. The estimated effects for this model are shown below.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>var</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>oxide_collapse</span><span class='op'>)</span>
-<span class='fu'>daniel_plot</span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="week9-2_files/figure-html5/unnamed-chunk-12-1.png" width="624" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>var</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>+</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>oxide_collapse</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<p>We can now use the two response surfaces jointly to determine factor combinations that will have a target oxide thickness, and low variability around that.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>fit</span>, <span class='op'>~</span> <span class='va'>A</span> <span class='op'>+</span> <span class='va'>B</span> <span class='op'>+</span> <span class='va'>D</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week9-2_files/figure-html5/unnamed-chunk-13-1.png" width="30%" /><img src="week9-2_files/figure-html5/unnamed-chunk-13-2.png" width="30%" /><img src="week9-2_files/figure-html5/unnamed-chunk-13-3.png" width="30%" /></p>
-</div>
-<p>Warning: What would have happened if we treated the repeated measures as true replicates?</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>value</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>oxide</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code>
-Call:
-lm(formula = value ~ A * B * C * D, data = oxide)
-
-Residuals:
-   Min     1Q Median     3Q    Max 
-    -6     -1      0      1      8 
-
-Coefficients:
-            Estimate Std. Error  t value Pr(&gt;|t|)    
-(Intercept) 399.1875     0.3094 1290.369  &lt; 2e-16 ***
-A            21.5625     0.3094   69.701  &lt; 2e-16 ***
-B             9.0625     0.3094   29.294  &lt; 2e-16 ***
-C            -5.1875     0.3094  -16.769  &lt; 2e-16 ***
-D            -0.8125     0.3094   -2.626   0.0115 *  
-A:B           8.4375     0.3094   27.274  &lt; 2e-16 ***
-A:C          -5.3125     0.3094  -17.173  &lt; 2e-16 ***
-B:C           1.9375     0.3094    6.263 9.93e-08 ***
-A:D           0.5625     0.3094    1.818   0.0753 .  
-B:D          -1.9375     0.3094   -6.263 9.93e-08 ***
-C:D           0.5625     0.3094    1.818   0.0753 .  
-A:B:C        -0.1875     0.3094   -0.606   0.5473    
-A:B:D         1.4375     0.3094    4.647 2.65e-05 ***
-A:C:D        -0.0625     0.3094   -0.202   0.8407    
-B:C:D        -0.3125     0.3094   -1.010   0.3175    
-A:B:C:D       0.0625     0.3094    0.202   0.8407    
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-Residual standard error: 2.475 on 48 degrees of freedom
-Multiple R-squared:  0.9933,    Adjusted R-squared:  0.9912 
-F-statistic: 476.8 on 15 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-<p>We would incorrectly include that many factors are relevant when they aren’t — this happens because our estimate of <span class="math inline">\(\sigma^2\)</span> is too small. Can lead to lots of wasted effort.</p>
-<p><em>Lessons</em>:</p>
-<ul>
-<li><p>Don’t treat repeated measures as replicates, or we risk many false positive effects</p></li>
-<li><p>It can be useful to model the variance of the response, rather than simply the mean</p></li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<section class="footnotes" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1" role="doc-endnote"><p>The factors are drill load, flow rate, rotational speed, and drilling mud, in case you’re curious.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section>
+<h2 id="data-example">Data Example</h2>
+<ol start="5" type="1">
+<li>Let’s look at this idea using the battery data from before. We’ll treat temperature as a continuous variable, so that it makes sense to talk about a response surface[^really, a curve over temperature].</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>battery</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_table.html'>read_table2</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/vmxs2wcsdxkdjujp85nw5kvk83xz4gl9.txt"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span> Material <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>Material</span><span class='op'>)</span> <span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<ol start="6" type="1">
+<li>We fit a quadratic regression to define the surface. The result let’s us make predictions for battery life at temperatures that we haven’t observed.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Life</span> <span class='op'>~</span> <span class='va'>Material</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/poly.html'>poly</a></span><span class='op'>(</span><span class='va'>Temperature</span>, <span class='fl'>2</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>battery</span><span class='op'>)</span>
+<span class='va'>surface</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span><span class='op'>(</span>
+  Material <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>battery</span><span class='op'>$</span><span class='va'>Material</span><span class='op'>)</span>, 
+  Temperature <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>15</span>, <span class='fl'>125</span>, by <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+  <span class='op'>)</span>
+<span class='va'>surface</span><span class='op'>$</span><span class='va'>Life</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>surface</span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>battery</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Temperature</span>, y <span class='op'>=</span> <span class='va'>Life</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>surface</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Temperature</span>, y <span class='op'>=</span> <span class='va'>Life</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span> <span class='va'>Material</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week7-4_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<ol start="7" type="1">
+<li>Compare the associated fit with Table 5.15.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = Life ~ Material * poly(Temperature, 2), data = battery)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-60.750 -14.625   1.375  17.937  45.250 
+
+Coefficients:
+                                Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                       83.167      7.501  11.087 1.48e-11
+Material2                         25.167     10.608   2.372 0.025059
+Material3                         41.917     10.608   3.951 0.000503
+poly(Temperature, 2)1           -189.223     45.007  -4.204 0.000257
+poly(Temperature, 2)2            109.955     45.007   2.443 0.021385
+Material2:poly(Temperature, 2)1  -71.035     63.650  -1.116 0.274242
+Material3:poly(Temperature, 2)1   45.928     63.650   0.722 0.476759
+Material2:poly(Temperature, 2)2 -158.392     63.650  -2.488 0.019293
+Material3:poly(Temperature, 2)2 -197.636     63.650  -3.105 0.004434
+                                   
+(Intercept)                     ***
+Material2                       *  
+Material3                       ***
+poly(Temperature, 2)1           ***
+poly(Temperature, 2)2           *  
+Material2:poly(Temperature, 2)1    
+Material3:poly(Temperature, 2)1    
+Material2:poly(Temperature, 2)2 *  
+Material3:poly(Temperature, 2)2 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 25.98 on 27 degrees of freedom
+Multiple R-squared:  0.7652,    Adjusted R-squared:  0.6956 
+F-statistic:    11 on 8 and 27 DF,  p-value: 9.426e-07</code></pre>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

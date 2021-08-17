@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week10-4_files/figure-html5/unnamed-chunk-10-1.png"]}
+  {"type":"character","attributes":{},"value":["week10-4_files/anchor-4.2.2/anchor.min.js","week10-4_files/bowser-1.9.3/bowser.min.js","week10-4_files/distill-2.2.21/template.v2.js","week10-4_files/figure-html5/unnamed-chunk-10-1.png","week10-4_files/figure-html5/unnamed-chunk-3-1.png","week10-4_files/figure-html5/unnamed-chunk-4-1.png","week10-4_files/header-attrs-2.8/header-attrs.js","week10-4_files/jquery-1.11.3/jquery.min.js","week10-4_files/popper-2.6.0/popper.min.js","week10-4_files/tippy-6.2.7/tippy-bundle.umd.min.js","week10-4_files/tippy-6.2.7/tippy-light-border.css","week10-4_files/tippy-6.2.7/tippy.css","week10-4_files/tippy-6.2.7/tippy.umd.min.js","week10-4_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2323,8 +2323,14 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h3 id="initial-exploration">Initial Exploration</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/gu87vet64i970eonsbvtds7bsb31qbuy.png"))</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/gu87vet64i970eonsbvtds7bsb31qbuy.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="week10-4_files/figure-html5/unnamed-chunk-3-1.png" alt="A bad choice of samples to subset down to, which would make it impossible to estimate effects from $C$." width="624" />
+<p class="caption">
+Figure 1: A bad choice of samples to subset down to, which would make it impossible to estimate effects from <span class="math inline">\(C\)</span>.
+</p>
 </div>
 </div>
 <p>Suppose we want to study <span class="math inline">\(A, B\)</span> and <span class="math inline">\(C\)</span>, but we only have a budget of 4 runs. We need to choose four corners of the cube to sample. Some choices are obviously bad. E.g., if we chose all the samples on one face, we wouldn’t see any variation in one factor. Here’s an idea that will lead us on the right path. Recall our old notation,</p>
@@ -2408,8 +2414,14 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </table>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/mmj9mcixl4y0o95hwf7h93vayw0eooc0.png"))</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/mmj9mcixl4y0o95hwf7h93vayw0eooc0.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="week10-4_files/figure-html5/unnamed-chunk-4-1.png" alt="A more sensible fraction of samples to take." width="624" />
+<p class="caption">
+Figure 2: A more sensible fraction of samples to take.
+</p>
 </div>
 </div>
 <p>This seems like a reasonable choice of 4 corners, making it possible to estimate at least all the main effects. This turns out to be a general strategy for subsetting the full design. But before we do another example, we need to define some vocabulary.</p>
