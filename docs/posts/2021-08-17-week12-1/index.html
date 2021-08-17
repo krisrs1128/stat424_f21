@@ -86,7 +86,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: $2^{K - p}$ Fractional Factorial Designs</title>
+<title>Statistical Experimental Design: Method of Steepest Ascent</title>
 
 <meta property="description" itemprop="description" content="A short description of the post."/>
 
@@ -97,7 +97,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: $2^{K - p}$ Fractional Factorial Designs"/>
+<meta property="og:title" content="Statistical Experimental Design: Method of Steepest Ascent"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="A short description of the post."/>
 <meta property="og:locale" content="en_US"/>
@@ -105,19 +105,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: $2^{K - p}$ Fractional Factorial Designs"/>
+<meta property="twitter:title" content="Statistical Experimental Design: Method of Steepest Ascent"/>
 <meta property="twitter:description" content="A short description of the post."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["$2^{K - p}$ Fractional Factorial Designs"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Method of Steepest Ascent"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week11-1_files/anchor-4.2.2/anchor.min.js","week11-1_files/bowser-1.9.3/bowser.min.js","week11-1_files/distill-2.2.21/template.v2.js","week11-1_files/figure-html5/unnamed-chunk-3-1.png","week11-1_files/figure-html5/unnamed-chunk-4-1.png","week11-1_files/figure-html5/unnamed-chunk-5-1.png","week11-1_files/figure-html5/unnamed-chunk-6-1.png","week11-1_files/figure-html5/unnamed-chunk-7-1.png","week11-1_files/header-attrs-2.8/header-attrs.js","week11-1_files/jquery-1.11.3/jquery.min.js","week11-1_files/popper-2.6.0/popper.min.js","week11-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week11-1_files/tippy-6.2.7/tippy-light-border.css","week11-1_files/tippy-6.2.7/tippy.css","week11-1_files/tippy-6.2.7/tippy.umd.min.js","week11-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week12-1_files/anchor-4.2.2/anchor.min.js","week12-1_files/bowser-1.9.3/bowser.min.js","week12-1_files/distill-2.2.21/template.v2.js","week12-1_files/figure-html5/unnamed-chunk-10-1.png","week12-1_files/figure-html5/unnamed-chunk-11-1.png","week12-1_files/figure-html5/unnamed-chunk-4-1.png","week12-1_files/figure-html5/unnamed-chunk-9-1.png","week12-1_files/header-attrs-2.8/header-attrs.js","week12-1_files/jquery-1.11.3/jquery.min.js","week12-1_files/popper-2.6.0/popper.min.js","week12-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week12-1_files/tippy-6.2.7/tippy-light-border.css","week12-1_files/tippy-6.2.7/tippy.css","week12-1_files/tippy-6.2.7/tippy.umd.min.js","week12-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"$2^{K - p}$ Fractional Factorial Designs","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-17T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Method of Steepest Ascent","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-17T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,7 +2276,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>2^{K - p} Fractional Factorial Designs</h1>
+<h1>Method of Steepest Ascent</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>A short description of the post.</p></p>
@@ -2289,463 +2289,240 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">8.3, 8.4</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="">11.1, 11.2</a>, <a href="">Rmarkdown</a></em></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/hadley/reshape'>reshape2</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>code</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>'-'</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>plot_aliases</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>n_keep</span> <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>n_sample</span><span class='op'>=</span><span class='fl'>16</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-  <span class='va'>aliases</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>/</span> <span class='va'>n_sample</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='va'>X</span>
-  
-  <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>n_keep</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='va'>aliases</span> <span class='op'>&lt;-</span> <span class='va'>aliases</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='va'>n_keep</span>, <span class='fl'>1</span><span class='op'>:</span><span class='va'>n_keep</span><span class='op'>]</span>
-  <span class='op'>}</span>
-  
-  <span class='va'>maliases</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/reshape2/man/melt.html'>melt</a></span><span class='op'>(</span><span class='va'>aliases</span><span class='op'>)</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>maliases</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Var1</span>, y <span class='op'>=</span> <span class='va'>Var2</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span><span class='op'>)</span>, col <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_fill_brewer</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set3"</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>
-      legend.position <span class='op'>=</span> <span class='st'>"none"</span>,
-      axis.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
-      axis.ticks <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
-      axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>,
-      axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='op'>-</span><span class='fl'>90</span><span class='op'>)</span>
-    <span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_fixed</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-<span class='va'>daniel_plot</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>effects</span>, <span class='va'>probs</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.6</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span> 
-  <span class='va'>qq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqnorm</a></span><span class='op'>(</span><span class='va'>effects</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqline</a></span><span class='op'>(</span><span class='va'>effects</span>, col <span class='op'>=</span> <span class='st'>"red"</span>, probs <span class='op'>=</span> <span class='va'>probs</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span><span class='op'>(</span><span class='va'>qq</span><span class='op'>$</span><span class='va'>x</span>, <span class='va'>qq</span><span class='op'>$</span><span class='va'>y</span>, <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>effects</span><span class='op'>)</span>, pos<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>}</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#display(readImage("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png"))</span>
 </code></pre>
 </div>
 </div>
-<p><span class="math inline">\(2^{K - 1}\)</span> designs allow us to draw conclusions about <span class="math inline">\(K\)</span> factors using only half of the runs that would be required for a full <span class="math inline">\(2^{K}\)</span> factorial. It’s possible to generalize these ideas so that smaller fractions (<span class="math inline">\(\frac{1}{4}, \frac{1}{8}, \dots\)</span> of samples are required. When only a fraction <span class="math inline">\(\frac{1}{2^{p}}\)</span> is required, we call the resulting design a <span class="math inline">\(2^{K - p}\)</span> fractional factorial design.</p>
-<h3 id="recipe">Recipe</h3>
+<p>When we last discussed response surfaces (in Chapter 5), we showed how to fit a regression surface to a fixed set of runs. This let us find configurations of factors that optimized some response of interest.</p>
+<p>However, the real power of response surfaces emerges when we think sequentially, using the results from one fit to plan a series of follow-up experiments, each bringing us closer to an optimal configuration of factors.</p>
+<h3 id="first-and-second-order-models">First and Second-Order Models</h3>
+<p>It makes sense to gradually refine our designs as we approach a potential optimal point. At the start of experimentation, even a few small runs are likely to point us in the right direction. Near the end, we’ll want to tune a good configuration of factors into an optimal one.</p>
+<p>One approach is to divide experimentation into two phases. We can start with first-order models, and then proceed to second-order when in the vicinity of the optimum.</p>
 <ul>
-<li><p>We can begin constructing a <span class="math inline">\(2^{K - p}\)</span> design by building a full factorial design from <span class="math inline">\(K - p\)</span> of the factors</p>
-<ul>
-<li>The associated full factorial is called the <em>basic design</em></li>
-</ul></li>
-<li><p>We then need <span class="math inline">\(p\)</span> generating relations, which confound the remaining <span class="math inline">\(p\)</span> factors with terms from the full factorial design</p>
-<ul>
-<li><p>The <em>complete defining relation</em> for a design is the set of columns that equal <span class="math inline">\(I\)</span>, the identity column</p></li>
-<li><p>These can be found by looking at generating relations and their products</p></li>
-</ul></li>
+<li>A first-order model is a linear model without any interactions or nonlinearities. It can be fit using relatively few samples; for example, unreplicated or fractional factorial designs. It is defined as, <span class="math display">\[\begin{align*}
+y_{i} &amp;= \beta_{0} + \sum_{k = 1}^{K}\beta_{k}x_{ik} + \epsilon_{i} \\
+&amp;= x_{i}^{T}b + \epsilon_{i}
+\end{align*}\]</span></li>
 </ul>
-<p>Here’s the recipe in action.</p>
-<ul>
-<li><p>Suppose we want a <span class="math inline">\(2^{6 - 2}\)</span> design.</p>
-<ul>
-<li>Study 6 factors using 16 (not 64) runs.</li>
-</ul></li>
-<li><p>Create a full factorial on the first four factors</p>
-<ul>
-<li><p>I’m only writing contrasts for the main effects</p></li>
-<li><p>You can get the corresponding corner of the cube by isolating the positive signs for that row. E., the first two rows are <span class="math inline">\((1)\)</span> and <span class="math inline">\(a\)</span>, and the last two are <span class="math inline">\(bcd\)</span> and <span class="math inline">\(abcd\)</span>.</p></li>
-</ul></li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th>A</th>
-<th>B</th>
-<th>C</th>
-<th>D</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p>Study the last two factors through the defining relations <span class="math inline">\(E = ABC\)</span> and <span class="math inline">\(F = BCD\)</span>. Our hope is that by defining them as high-order interactions, we have a chance at higher resolution.</p>
-<ul>
-<li><p>The associated complete defining relations are <span class="math inline">\(I = ABCE = BCDF = ADEF\)</span>.</p></li>
-<li><p>To see this, notice <span class="math inline">\(E^2 = ABCE\)</span>, but any term squared is just <span class="math inline">\(I\)</span>. The last relation comes from multiplying the two previous ones together.</p></li>
-</ul></li>
-</ul>
-<p>The resulting design is</p>
-<table>
-<thead>
-<tr class="header">
-<th>A</th>
-<th>B</th>
-<th>C</th>
-<th>D</th>
-<th>E = ABC</th>
-<th>F = BCD</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-</tr>
-</tbody>
-</table>
-<p>Let’s analyze this design,</p>
-<ul>
-<li><p>The alias groups are complicated looking, but they can be found by mindlessly multiplying the defining relations by each of the factors and combinations of factors.</p>
-<ul>
-<li>In practice, you would use code to find the aliases (see below)</li>
-</ul></li>
-</ul>
-<p><span class="math display">\[\begin{align*}
-I&amp;=A B C E=B C D F=A D E F \\
-A&amp;=B C E=D E F=A B C D F \\
-B&amp;=A C E=C D F=A B D E F \\
-C&amp;=A B E=B D F=A C D E F \\
-D&amp;=B C F=A E F=A B C D E \\
-E&amp;=A B C=A D F=B C D E F \\
-F&amp;=B C D=A D E=A B C E F \\
-A B&amp;=C E=A C D F=B D E F \\
-A C&amp;=B E=A B D F=C D E F \\
-A D&amp;=E F=B C D E=A B C F \\
-A E&amp;=B C=D F=A B C D E F \\
-A F&amp;=D E=B C E F=A B C D \\
-B D&amp;=C F=A C D E=A B E F \\
-B F&amp;=C D=A C E F=A B D E \\
-A C D&amp;=B D E=A B F=C E F \\
-A B D&amp;=C D E=A C F=B E F
+<p>where we defined <span class="math display">\[\begin{align*}
+x_{i} = \begin{pmatrix} 1 \\
+x_{i1} \\
+\vdots \\
+x_{iK}
+\end{pmatrix},
+\end{align*}\]</span> and <span class="math display">\[\begin{align*}
+b = \begin{pmatrix}
+\beta_0 \\
+\beta_1 \\
+\vdots \\
+\beta_{K}
+\end{pmatrix}
 \end{align*}\]</span></p>
 <ul>
-<li>From the alias groups, we can tell that the resolution is 4. Two-way interactions are confounded with one another, but not with any main effects.</li>
+<li>A second-order model is a linear model with interactions and quadratic terms. These surfaces are more complex, so require more involved sampling, like replicated factorial or central composite designs. It is defined as, <span class="math display">\[\begin{align*}
+y_{i} &amp;= \beta_0 + \sum_{k = 1}^{K}\beta_{kk}x_{k}^{2} + \sum_{k &lt; k_{\prime}} \beta_{k k^{\prime}} x_{k}x_{k^{\prime}} + \epsilon_{i} \\
+&amp;= x_{i}^{T}b + x_{i}^{T} B x_i + \epsilon_{i}
+\end{align*}\]</span></li>
 </ul>
-<p>For an exercise, you can try going through this process using an alternative confounding structure: Set <span class="math inline">\(E = ABCD\)</span>, and <span class="math inline">\(F = ABC\)</span>. It’s somewhat tedious, but will build your confidence with this type of design.</p>
+<p>where we defined <span class="math inline">\(B\)</span> as the symmetric <span class="math inline">\(K \times K\)</span> matrix with diagonal entries <span class="math inline">\(\beta_{kk}\)</span> and off-diagonal elements <span class="math inline">\(\frac{1}{2}\beta_{kl} = \frac{1}{2}\beta_{lk}\)</span>.</p>
+<h3 id="method-of-steepest-ascent">Method of Steepest Ascent</h3>
+<p>The method of steepest ascent uses the results of a first-order model to propose a new configuration of factors that brings us closer to the optimum. Specifically, we use the following recipe,</p>
+<ol type="1">
+<li><p>Using the current set of sampled factor configurations, fit the first-order (linear) surface, <span class="math display">\[\begin{align*}
+\hat{y}\left(x\right) &amp;= x^{T}\hat{b}
+\end{align*}\]</span></p></li>
+<li><p>Find the coordinate <span class="math inline">\(k^{\ast}\)</span> of the coefficient that has the largest magnitude, <span class="math display">\[\begin{align*}
+ k^{\ast} &amp;= \arg \max_{k \in \{1, \dots, K\}} \left|\hat{\beta}_{k}\right|
+\end{align*}\]</span></p></li>
+</ol>
+<p>which represents the factor to which the response is most sensitive. Define some reasonable stepsize <span class="math inline">\(\Delta x_{k^{\ast}}\)</span> for this particular factor, so that the next run brings us closer to the optimum without being so far that the first-order model may not hold.</p>
+<ol start="3" type="1">
+<li>Update each factor’s sampling values according to the sensitivities <span class="math inline">\(\hat{\beta_{k}}\)</span> of the response to that factor, and adjusting for the stepsize defined in step (2). <span class="math display">\[\begin{align*}
+x \leftarrow x + \frac{\Delta x_{k^{\ast}}}{\beta_{k^{\ast}}} b
+\end{align*}\]</span></li>
+</ol>
 <h3 id="code-example">Code Example</h3>
-Let’s use the <span class="math inline">\(2^{6 - 2}\)</span> design that we just constructed on a dataset about injection molding. `r tufte::margin_note(“Apparently this is how paper clips are made.”) In any case, it’s the example in the book (Example 8.4). The 6 factors are, * A: mold temperature * B: screw speed * C: holding time * D: cycle time * E: gate size * F: holding pressure
+<p>Let’s work through example 11.1. Here, an experimenter is trying to optimize yield as a function of reaction time and temperature. The current time / temperature setting is at 35 minutes and 155 degrees. A <span class="math inline">\(2^{2}\)</span> factorial is run with four center points. Let’s visualize the data.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>injection</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_table.html'>read_table2</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/uxd6sryqz32gbubwfhbdvsnqqkplqqef.txt"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>Shrinkage</span><span class='op'>)</span>, <span class='va'>code</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>injection</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>chem</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/4x9v5wtgu8w8i2kuzjdhtlhkj1tda701.csv"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_split.html'>group_split</a></span><span class='op'>(</span><span class='va'>seq</span><span class='op'>)</span> <span class='co'># split main from follow-up experiments</span>
 </code></pre>
 </div>
-<pre><code># A tibble: 6 × 7
-      A     B     C     D     E     F Shrinkage
-  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
-1    -1    -1    -1    -1    -1    -1         6
-2     1    -1    -1    -1     1    -1        10
-3    -1     1    -1    -1     1     1        32
-4     1     1    -1    -1    -1     1        60
-5    -1    -1     1    -1     1     1         4
-6     1    -1     1    -1    -1     1        15</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mdesign</span> <span class='op'>&lt;-</span> <span class='va'>injection</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>id <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/ranking.html'>row_number</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>Shrinkage</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/reshape2/man/melt.html'>melt</a></span><span class='op'>(</span>id.vars <span class='op'>=</span> <span class='st'>"id"</span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>mdesign</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>variable</span>, y <span class='op'>=</span> <span class='va'>id</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>chem</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
+    position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_jitter.html'>position_jitter</a></span><span class='op'>(</span>w <span class='op'>=</span> <span class='fl'>0.5</span>, h <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>,
+    size <span class='op'>=</span> <span class='fl'>3</span>
+  <span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_fixed</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_fill_brewer</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set3"</span><span class='op'>)</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_color_viridis_c</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>p</span>
 </code></pre>
 </div>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="week11-1_files/figure-html5/unnamed-chunk-3-1.png" alt="Visualizing a $2 ^ {6 - 2}$ design for the injection experiment. Each column is a factor, each row is a run." width="624" />
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="week12-1_files/figure-html5/unnamed-chunk-4-1.png" alt="$2^2$ factorial experiment around current operating conditions." width="624" />
 <p class="caption">
-Figure 1: Visualizing a <span class="math inline">\(2 ^ {6 - 2}\)</span> design for the injection experiment. Each column is a factor, each row is a run.
+Figure 1: <span class="math inline">\(2^2\)</span> factorial experiment around current operating conditions.
 </p>
 </div>
 </div>
-<p>We can look at the aliasing structure by inspecting the design matrix.</p>
+<p>Let’s code the data – this is a bit more involved than in factorial experiments, because the data don’t simply lie on the corners of a cube. We’ll use the <code>coded.data</code> function from the <code>rsm</code> package to handle this.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Shrinkage</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span> <span class='op'>*</span> <span class='va'>E</span> <span class='op'>*</span> <span class='cn'>F</span>, data <span class='op'>=</span> <span class='va'>injection</span><span class='op'>)</span>
-<span class='fu'>plot_aliases</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'>"rsm"</span><span class='op'>)</span>
+<span class='va'>chem_coded</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/coded.data.html'>coded.data</a></span><span class='op'>(</span><span class='va'>chem</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>, <span class='va'>time_coded</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>time</span> <span class='op'>-</span> <span class='fl'>35</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>5</span>, <span class='va'>temp_coded</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>temp</span> <span class='op'>-</span> <span class='fl'>155</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>5</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
+<p>Now we can fit a first-order (<code>FO</code>) model to these data.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>plot_aliases</span><span class='op'>(</span><span class='va'>fit</span>, <span class='fl'>22</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/rsm.html'>rsm</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>FO</a></span><span class='op'>(</span><span class='va'>time_coded</span> , <span class='va'>temp_coded</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>chem_coded</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+<pre><code>
+Call:
+rsm(formula = yield ~ FO(time_coded, temp_coded), data = chem_coded)
+
+             Estimate Std. Error  t value  Pr(&gt;|t|)    
+(Intercept) 40.444444   0.057288 705.9869 5.451e-16 ***
+time_coded   0.775000   0.085932   9.0188  0.000104 ***
+temp_coded   0.325000   0.085932   3.7821  0.009158 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Multiple R-squared:  0.941, Adjusted R-squared:  0.9213 
+F-statistic: 47.82 on 2 and 6 DF,  p-value: 0.0002057
+
+Analysis of Variance Table
+
+Response: yield
+                           Df  Sum Sq Mean Sq F value    Pr(&gt;F)
+FO(time_coded, temp_coded)  2 2.82500 1.41250 47.8213 0.0002057
+Residuals                   6 0.17722 0.02954                  
+Lack of fit                 2 0.00522 0.00261  0.0607 0.9419341
+Pure error                  4 0.17200 0.04300                  
+
+Direction of steepest ascent (at radius 1):
+time_coded temp_coded 
+ 0.9221944  0.3867267 
+
+Corresponding increment in original units:
+    time     temp 
+4.610972 1.933633 </code></pre>
 </div>
-<p>Let’s make a Daniel plot and look at effects.</p>
+<p>The output looks almost exactly the same as the output for <code>lm</code>, except it also includes the direction of steepest ascent.</p>
+<p>From visual inspection, and based on this model’s <span class="math inline">\(R^{2}\)</span>, the linear fit seems quite good. But for reference, we can compare with a model with both two-way interactions (<code>TWI</code>) and a quadratic component (<code>PQ</code>). Neither of these terms seem to improve fit, so we’ll stick to the original first-order model. Compare the ANVOA with table 11.2.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>daniel_plot</span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
-</div>
-<p>Let’s refit to just the submodel.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Shrinkage</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span>, data <span class='op'>=</span> <span class='va'>injection</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit_iq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/rsm.html'>rsm</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>FO</a></span><span class='op'>(</span><span class='va'>time_coded</span>, <span class='va'>temp_coded</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>TWI</a></span><span class='op'>(</span><span class='va'>time_coded</span> , <span class='va'>temp_coded</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>PQ</a></span><span class='op'>(</span><span class='va'>time_coded</span>, <span class='va'>temp_coded</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>chem_coded</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span><span class='op'>(</span><span class='va'>fit_iq</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code>Analysis of Variance Table
 
-Response: Shrinkage
-          Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-A          1  770.1   770.1  37.149 5.377e-05 ***
-B          1 5076.6  5076.6 244.899 2.392e-09 ***
-A:B        1  564.1   564.1  27.211  0.000216 ***
-Residuals 12  248.8    20.7                      
+Response: yield
+                            Df  Sum Sq Mean Sq F value   Pr(&gt;F)   
+FO(time_coded, temp_coded)   2 2.82500 1.41250 32.8488 0.003294 **
+TWI(time_coded, temp_coded)  1 0.00250 0.00250  0.0581 0.821316   
+PQ(time_coded, temp_coded)   1 0.00272 0.00272  0.0633 0.813741   
+Residuals                    4 0.17200 0.04300                    
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>injection</span> <span class='op'>&lt;-</span> <span class='va'>injection</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>residual <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/residuals.html'>resid</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>injection</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>C</span>, y <span class='op'>=</span> <span class='va'>residual</span>, col <span class='op'>=</span> <span class='va'>Shrinkage</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_color_viridis_c</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>A</span> <span class='op'>~</span> <span class='va'>B</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>ascent</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/steepest.html'>steepest</a></span><span class='op'>(</span><span class='va'>fit</span>, dist <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>0.4</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+<pre><code>Path of steepest ascent from ridge analysis:</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>ascent_long</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/steepest.html'>steepest</a></span><span class='op'>(</span><span class='va'>fit</span>, dist <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>10</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
 </div>
-<p>Notice that the residuals have lower variance at the setting <span class="math inline">\(C = -1\)</span>. Even though <span class="math inline">\(C\)</span> doesn’t have a strong effect, that might be a useful fact, in case you want to select a configuration with the optimal response and low variability around that response.</p>
-<h3 id="evaluating-designs">Evaluating Designs</h3>
-<p>In general, there will be several ways of constructing any <span class="math inline">\(2^{p}\)</span> design. How do we know which one to use? Here are some criteria.</p>
-<ul>
-<li><p>Resolution: We’ve discussed this before. Remember, a design has resolution <span class="math inline">\(R\)</span> if no <span class="math inline">\(p\)</span>-factor effect is aliased with an effect with fewer than <span class="math inline">\(R - p\)</span> factors.</p></li>
-<li><p>Aberration: This is the number of defining words of length equal to the resolution. Lower is better.</p>
-<ul>
-<li>The example above had words <span class="math inline">\(ABCE, BCDF\)</span> and <span class="math inline">\(ADEF\)</span> and resolution 4, so aberration is 3.</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div></li>
-</ul>
+<pre><code>Path of steepest ascent from ridge analysis:</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>p</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
+    data <span class='op'>=</span> <span class='va'>ascent</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>`|`</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yhat</span><span class='op'>)</span>,
+    shape <span class='op'>=</span> <span class='fl'>2</span> 
+  <span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-9"></span>
+<img src="week12-1_files/figure-html5/unnamed-chunk-9-1.png" alt="A short extrapolation along the direction of steepest ascent." width="624" />
+<p class="caption">
+Figure 2: A short extrapolation along the direction of steepest ascent.
+</p>
+</div>
+</div>
+<p>The experimenter follows this path and finds that at each point, the yield does increase, up to a time of 85 and temperature of 175. At this new point, it seems worth running a second factorial experiment.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>p</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
+    data <span class='op'>=</span> <span class='va'>ascent_long</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>`|`</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yhat</span><span class='op'>)</span>,
+    shape <span class='op'>=</span> <span class='fl'>2</span> 
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
+    position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_jitter.html'>position_jitter</a></span><span class='op'>(</span>w <span class='op'>=</span> <span class='fl'>0.4</span>, h <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>,
+    size <span class='op'>=</span> <span class='fl'>3</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
+    data <span class='op'>=</span> <span class='va'>chem</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>,
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
+    position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_jitter.html'>position_jitter</a></span><span class='op'>(</span>w <span class='op'>=</span> <span class='fl'>0.4</span>, h <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>,
+    size <span class='op'>=</span> <span class='fl'>3</span>
+  <span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="week12-1_files/figure-html5/unnamed-chunk-10-1.png" alt="A longer extrapolation, up to the point where the experimenter noticed a decrease in yield, along with the follow-up experiment at that location." width="624" />
+<p class="caption">
+Figure 3: A longer extrapolation, up to the point where the experimenter noticed a decrease in yield, along with the follow-up experiment at that location.
+</p>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>chem</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
+    position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_jitter.html'>position_jitter</a></span><span class='op'>(</span>w <span class='op'>=</span> <span class='fl'>0.4</span>, h <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>,
+    size <span class='op'>=</span> <span class='fl'>3</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_fixed</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_color_viridis_c</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week12-1_files/figure-html5/unnamed-chunk-11-1.png" width="624" /></p>
+</div>
+<p>At this point, it seems like we might be at a local maximum. We will likely want to perform more intensive sampling – more than just a <span class="math inline">\(2^2\)</span> design with center points – in order to more precisely localize the optimum. For that, we’ll need to understand second-order methods and canonical analysis.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

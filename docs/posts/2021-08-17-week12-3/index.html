@@ -86,7 +86,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: $2^{K - p}$ Fractional Factorial Designs</title>
+<title>Statistical Experimental Design: Optimizing Multiple Responses</title>
 
 <meta property="description" itemprop="description" content="A short description of the post."/>
 
@@ -97,7 +97,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: $2^{K - p}$ Fractional Factorial Designs"/>
+<meta property="og:title" content="Statistical Experimental Design: Optimizing Multiple Responses"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="A short description of the post."/>
 <meta property="og:locale" content="en_US"/>
@@ -105,19 +105,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: $2^{K - p}$ Fractional Factorial Designs"/>
+<meta property="twitter:title" content="Statistical Experimental Design: Optimizing Multiple Responses"/>
 <meta property="twitter:description" content="A short description of the post."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["$2^{K - p}$ Fractional Factorial Designs"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Optimizing Multiple Responses"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week11-1_files/anchor-4.2.2/anchor.min.js","week11-1_files/bowser-1.9.3/bowser.min.js","week11-1_files/distill-2.2.21/template.v2.js","week11-1_files/figure-html5/unnamed-chunk-3-1.png","week11-1_files/figure-html5/unnamed-chunk-4-1.png","week11-1_files/figure-html5/unnamed-chunk-5-1.png","week11-1_files/figure-html5/unnamed-chunk-6-1.png","week11-1_files/figure-html5/unnamed-chunk-7-1.png","week11-1_files/header-attrs-2.8/header-attrs.js","week11-1_files/jquery-1.11.3/jquery.min.js","week11-1_files/popper-2.6.0/popper.min.js","week11-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week11-1_files/tippy-6.2.7/tippy-light-border.css","week11-1_files/tippy-6.2.7/tippy.css","week11-1_files/tippy-6.2.7/tippy.umd.min.js","week11-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week12-3_files/anchor-4.2.2/anchor.min.js","week12-3_files/bowser-1.9.3/bowser.min.js","week12-3_files/distill-2.2.21/template.v2.js","week12-3_files/figure-html5/unnamed-chunk-12-1.png","week12-3_files/figure-html5/unnamed-chunk-13-1.png","week12-3_files/figure-html5/unnamed-chunk-4-1.png","week12-3_files/figure-html5/unnamed-chunk-5-1.png","week12-3_files/figure-html5/unnamed-chunk-6-1.png","week12-3_files/figure-html5/unnamed-chunk-7-1.png","week12-3_files/figure-html5/unnamed-chunk-8-1.png","week12-3_files/figure-html5/unnamed-chunk-9-1.png","week12-3_files/header-attrs-2.8/header-attrs.js","week12-3_files/jquery-1.11.3/jquery.min.js","week12-3_files/popper-2.6.0/popper.min.js","week12-3_files/tippy-6.2.7/tippy-bundle.umd.min.js","week12-3_files/tippy-6.2.7/tippy-light-border.css","week12-3_files/tippy-6.2.7/tippy.css","week12-3_files/tippy-6.2.7/tippy.umd.min.js","week12-3_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"$2^{K - p}$ Fractional Factorial Designs","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-17T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Optimizing Multiple Responses","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-17T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,7 +2276,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>2^{K - p} Fractional Factorial Designs</h1>
+<h1>Optimizing Multiple Responses</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 <p><p>A short description of the post.</p></p>
@@ -2289,463 +2289,200 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">8.3, 8.4</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="">11.3</a>, <a href="">Rmarkdown</a></em></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/topepo/desirability'>desirability</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/hadley/reshape'>reshape2</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>rsm</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://stringr.tidyverse.org'>stringr</a></span><span class='op'>)</span>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>code</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>'-'</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>plot_aliases</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>n_keep</span> <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>n_sample</span><span class='op'>=</span><span class='fl'>16</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-  <span class='va'>aliases</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>/</span> <span class='va'>n_sample</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='va'>X</span>
-  
-  <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>n_keep</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='va'>aliases</span> <span class='op'>&lt;-</span> <span class='va'>aliases</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='va'>n_keep</span>, <span class='fl'>1</span><span class='op'>:</span><span class='va'>n_keep</span><span class='op'>]</span>
-  <span class='op'>}</span>
-  
-  <span class='va'>maliases</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/reshape2/man/melt.html'>melt</a></span><span class='op'>(</span><span class='va'>aliases</span><span class='op'>)</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>maliases</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Var1</span>, y <span class='op'>=</span> <span class='va'>Var2</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span><span class='op'>)</span>, col <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_fill_brewer</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set3"</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>
-      legend.position <span class='op'>=</span> <span class='st'>"none"</span>,
-      axis.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
-      axis.ticks <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
-      axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>,
-      axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='op'>-</span><span class='fl'>90</span><span class='op'>)</span>
-    <span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_fixed</a></span><span class='op'>(</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>chem</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/nbaj1m8j7tuaqmznjlrsgbzyhp9k61i8.csv"</span><span class='op'>)</span>
+<span class='va'>std</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='op'>(</span><span class='va'>x</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>/</span> <span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 <span class='op'>}</span>
-<span class='va'>daniel_plot</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>effects</span>, <span class='va'>probs</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.6</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span> 
-  <span class='va'>qq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqnorm</a></span><span class='op'>(</span><span class='va'>effects</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqline</a></span><span class='op'>(</span><span class='va'>effects</span>, col <span class='op'>=</span> <span class='st'>"red"</span>, probs <span class='op'>=</span> <span class='va'>probs</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span><span class='op'>(</span><span class='va'>qq</span><span class='op'>$</span><span class='va'>x</span>, <span class='va'>qq</span><span class='op'>$</span><span class='va'>y</span>, <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>effects</span><span class='op'>)</span>, pos<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>}</span>
+<span class='va'>mchem</span> <span class='op'>&lt;-</span> <span class='va'>chem</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='va'>yield</span>, <span class='va'>viscosity</span>, <span class='va'>molecular_weight</span><span class='op'>)</span>, <span class='va'>std</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/reshape2/man/melt.html'>melt</a></span><span class='op'>(</span>measure.vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"yield"</span>, <span class='st'>"viscosity"</span>, <span class='st'>"molecular_weight"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-</div>
-<p><span class="math inline">\(2^{K - 1}\)</span> designs allow us to draw conclusions about <span class="math inline">\(K\)</span> factors using only half of the runs that would be required for a full <span class="math inline">\(2^{K}\)</span> factorial. It’s possible to generalize these ideas so that smaller fractions (<span class="math inline">\(\frac{1}{4}, \frac{1}{8}, \dots\)</span> of samples are required. When only a fraction <span class="math inline">\(\frac{1}{2^{p}}\)</span> is required, we call the resulting design a <span class="math inline">\(2^{K - p}\)</span> fractional factorial design.</p>
-<h3 id="recipe">Recipe</h3>
-<ul>
-<li><p>We can begin constructing a <span class="math inline">\(2^{K - p}\)</span> design by building a full factorial design from <span class="math inline">\(K - p\)</span> of the factors</p>
-<ul>
-<li>The associated full factorial is called the <em>basic design</em></li>
-</ul></li>
-<li><p>We then need <span class="math inline">\(p\)</span> generating relations, which confound the remaining <span class="math inline">\(p\)</span> factors with terms from the full factorial design</p>
-<ul>
-<li><p>The <em>complete defining relation</em> for a design is the set of columns that equal <span class="math inline">\(I\)</span>, the identity column</p></li>
-<li><p>These can be found by looking at generating relations and their products</p></li>
-</ul></li>
-</ul>
-<p>Here’s the recipe in action.</p>
-<ul>
-<li><p>Suppose we want a <span class="math inline">\(2^{6 - 2}\)</span> design.</p>
-<ul>
-<li>Study 6 factors using 16 (not 64) runs.</li>
-</ul></li>
-<li><p>Create a full factorial on the first four factors</p>
-<ul>
-<li><p>I’m only writing contrasts for the main effects</p></li>
-<li><p>You can get the corresponding corner of the cube by isolating the positive signs for that row. E., the first two rows are <span class="math inline">\((1)\)</span> and <span class="math inline">\(a\)</span>, and the last two are <span class="math inline">\(bcd\)</span> and <span class="math inline">\(abcd\)</span>.</p></li>
-</ul></li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th>A</th>
-<th>B</th>
-<th>C</th>
-<th>D</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p>Study the last two factors through the defining relations <span class="math inline">\(E = ABC\)</span> and <span class="math inline">\(F = BCD\)</span>. Our hope is that by defining them as high-order interactions, we have a chance at higher resolution.</p>
-<ul>
-<li><p>The associated complete defining relations are <span class="math inline">\(I = ABCE = BCDF = ADEF\)</span>.</p></li>
-<li><p>To see this, notice <span class="math inline">\(E^2 = ABCE\)</span>, but any term squared is just <span class="math inline">\(I\)</span>. The last relation comes from multiplying the two previous ones together.</p></li>
-</ul></li>
-</ul>
-<p>The resulting design is</p>
-<table>
-<thead>
-<tr class="header">
-<th>A</th>
-<th>B</th>
-<th>C</th>
-<th>D</th>
-<th>E = ABC</th>
-<th>F = BCD</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>-</td>
-<td>+</td>
-</tr>
-<tr class="even">
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-<td>+</td>
-</tr>
-</tbody>
-</table>
-<p>Let’s analyze this design,</p>
-<ul>
-<li><p>The alias groups are complicated looking, but they can be found by mindlessly multiplying the defining relations by each of the factors and combinations of factors.</p>
-<ul>
-<li>In practice, you would use code to find the aliases (see below)</li>
-</ul></li>
-</ul>
-<p><span class="math display">\[\begin{align*}
-I&amp;=A B C E=B C D F=A D E F \\
-A&amp;=B C E=D E F=A B C D F \\
-B&amp;=A C E=C D F=A B D E F \\
-C&amp;=A B E=B D F=A C D E F \\
-D&amp;=B C F=A E F=A B C D E \\
-E&amp;=A B C=A D F=B C D E F \\
-F&amp;=B C D=A D E=A B C E F \\
-A B&amp;=C E=A C D F=B D E F \\
-A C&amp;=B E=A B D F=C D E F \\
-A D&amp;=E F=B C D E=A B C F \\
-A E&amp;=B C=D F=A B C D E F \\
-A F&amp;=D E=B C E F=A B C D \\
-B D&amp;=C F=A C D E=A B E F \\
-B F&amp;=C D=A C E F=A B D E \\
-A C D&amp;=B D E=A B F=C E F \\
-A B D&amp;=C D E=A C F=B E F
-\end{align*}\]</span></p>
-<ul>
-<li>From the alias groups, we can tell that the resolution is 4. Two-way interactions are confounded with one another, but not with any main effects.</li>
-</ul>
-<p>For an exercise, you can try going through this process using an alternative confounding structure: Set <span class="math inline">\(E = ABCD\)</span>, and <span class="math inline">\(F = ABC\)</span>. It’s somewhat tedious, but will build your confidence with this type of design.</p>
-<h3 id="code-example">Code Example</h3>
-Let’s use the <span class="math inline">\(2^{6 - 2}\)</span> design that we just constructed on a dataset about injection molding. `r tufte::margin_note(“Apparently this is how paper clips are made.”) In any case, it’s the example in the book (Example 8.4). The 6 factors are, * A: mold temperature * B: screw speed * C: holding time * D: cycle time * E: gate size * F: holding pressure
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>injection</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_table.html'>read_table2</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/uxd6sryqz32gbubwfhbdvsnqqkplqqef.txt"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>Shrinkage</span><span class='op'>)</span>, <span class='va'>code</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>injection</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code># A tibble: 6 × 7
-      A     B     C     D     E     F Shrinkage
-  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
-1    -1    -1    -1    -1    -1    -1         6
-2     1    -1    -1    -1     1    -1        10
-3    -1     1    -1    -1     1     1        32
-4     1     1    -1    -1    -1     1        60
-5    -1    -1     1    -1     1     1         4
-6     1    -1     1    -1    -1     1        15</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mdesign</span> <span class='op'>&lt;-</span> <span class='va'>injection</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>id <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/ranking.html'>row_number</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>Shrinkage</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/reshape2/man/melt.html'>melt</a></span><span class='op'>(</span>id.vars <span class='op'>=</span> <span class='st'>"id"</span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>mdesign</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>variable</span>, y <span class='op'>=</span> <span class='va'>id</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_fixed</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_fill_brewer</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set3"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>chem_coded</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/coded.data.html'>coded.data</a></span><span class='op'>(</span><span class='va'>chem</span>, <span class='va'>time_coded</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>time</span> <span class='op'>-</span> <span class='fl'>35</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>5</span>, <span class='va'>temp_coded</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>temp</span> <span class='op'>-</span> <span class='fl'>155</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>fits</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+  <span class='st'>"yield"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/rsm.html'>rsm</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>SO</a></span><span class='op'>(</span><span class='va'>temp_coded</span>, <span class='va'>time_coded</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>chem_coded</span><span class='op'>)</span>,
+  <span class='st'>"viscosity"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/rsm.html'>rsm</a></span><span class='op'>(</span><span class='va'>viscosity</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>SO</a></span><span class='op'>(</span><span class='va'>temp_coded</span>, <span class='va'>time_coded</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>chem_coded</span><span class='op'>)</span>,
+  <span class='st'>"molecular_weight"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/rsm.html'>rsm</a></span><span class='op'>(</span><span class='va'>molecular_weight</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>SO</a></span><span class='op'>(</span><span class='va'>temp_coded</span>, <span class='va'>time_coded</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>chem_coded</span><span class='op'>)</span>
+<span class='op'>)</span>
 </code></pre>
 </div>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="week11-1_files/figure-html5/unnamed-chunk-3-1.png" alt="Visualizing a $2 ^ {6 - 2}$ design for the injection experiment. Each column is a factor, each row is a run." width="624" />
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/contour.html'>contour</a></span><span class='op'>(</span><span class='va'>fits</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>, <span class='op'>~</span> <span class='va'>time_coded</span> <span class='op'>+</span> <span class='va'>temp_coded</span>, image <span class='op'>=</span> <span class='cn'>TRUE</span>, asp <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week12-3_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/contour.html'>contour</a></span><span class='op'>(</span><span class='va'>fits</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>, <span class='op'>~</span> <span class='va'>time_coded</span> <span class='op'>+</span> <span class='va'>temp_coded</span>, image <span class='op'>=</span> <span class='cn'>TRUE</span>, asp <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week12-3_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/contour.html'>contour</a></span><span class='op'>(</span><span class='va'>fits</span><span class='op'>[[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>]</span>, <span class='op'>~</span> <span class='va'>time_coded</span> <span class='op'>+</span> <span class='va'>temp_coded</span>, image <span class='op'>=</span> <span class='cn'>TRUE</span>, asp <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="week12-3_files/figure-html5/unnamed-chunk-6-1.png" alt="Three separate response surfaces, fit to yield, viscosity, and molecular weight, respectively." width="624" />
 <p class="caption">
-Figure 1: Visualizing a <span class="math inline">\(2 ^ {6 - 2}\)</span> design for the injection experiment. Each column is a factor, each row is a run.
+Figure 1: Three separate response surfaces, fit to yield, viscosity, and molecular weight, respectively.
 </p>
 </div>
 </div>
-<p>We can look at the aliasing structure by inspecting the design matrix.</p>
+<p>In more complicated systems, we may want to optimize several objectives simultaneously. More often than not, the goals will be at odds with one another. For example, in our running chemical process example, we want to maximize yield while maintaining a target viscosity and minimizing molecular weight. How can we use response surface methods when we have several competing objectives?</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Shrinkage</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span> <span class='op'>*</span> <span class='va'>E</span> <span class='op'>*</span> <span class='cn'>F</span>, data <span class='op'>=</span> <span class='va'>injection</span><span class='op'>)</span>
-<span class='fu'>plot_aliases</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>plot_aliases</span><span class='op'>(</span><span class='va'>fit</span>, <span class='fl'>22</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
-</div>
-<p>Let’s make a Daniel plot and look at effects.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>daniel_plot</span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
-</div>
-<p>Let’s refit to just the submodel.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Shrinkage</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span>, data <span class='op'>=</span> <span class='va'>injection</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-</code></pre>
-</div>
-<pre><code>Analysis of Variance Table
-
-Response: Shrinkage
-          Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-A          1  770.1   770.1  37.149 5.377e-05 ***
-B          1 5076.6  5076.6 244.899 2.392e-09 ***
-A:B        1  564.1   564.1  27.211  0.000216 ***
-Residuals 12  248.8    20.7                      
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>injection</span> <span class='op'>&lt;-</span> <span class='va'>injection</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>residual <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/residuals.html'>resid</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>injection</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>C</span>, y <span class='op'>=</span> <span class='va'>residual</span>, col <span class='op'>=</span> <span class='va'>Shrinkage</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>mchem</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>value</span><span class='op'>)</span>,
+    position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_jitter.html'>position_jitter</a></span><span class='op'>(</span>w <span class='op'>=</span> <span class='fl'>0.3</span>, h <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>.</span> <span class='op'>~</span> <span class='va'>variable</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_fixed</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_color_viridis_c</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>A</span> <span class='op'>~</span> <span class='va'>B</span><span class='op'>)</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"none"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+<p><img src="week12-3_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
 </div>
-<p>Notice that the residuals have lower variance at the setting <span class="math inline">\(C = -1\)</span>. Even though <span class="math inline">\(C\)</span> doesn’t have a strong effect, that might be a useful fact, in case you want to select a configuration with the optimal response and low variability around that response.</p>
-<h3 id="evaluating-designs">Evaluating Designs</h3>
-<p>In general, there will be several ways of constructing any <span class="math inline">\(2^{p}\)</span> design. How do we know which one to use? Here are some criteria.</p>
+<h3 id="overlaying-contours">Overlaying Contours</h3>
 <ul>
-<li><p>Resolution: We’ve discussed this before. Remember, a design has resolution <span class="math inline">\(R\)</span> if no <span class="math inline">\(p\)</span>-factor effect is aliased with an effect with fewer than <span class="math inline">\(R - p\)</span> factors.</p></li>
-<li><p>Aberration: This is the number of defining words of length equal to the resolution. Lower is better.</p>
+<li><p>The most direct approach is to simply fit several response surfaces.</p></li>
+<li><p>Visually inspect results to find factor configurations with desirable values across each response.</p></li>
+</ul>
+<h3 id="constrained-optimization">Constrained Optimization</h3>
+<p>Whenever visual inspection is challenging, mathematical formalizations can offer support. One idea is to frame the multiple response surface problem as a constrained optimization.</p>
 <ul>
-<li>The example above had words <span class="math inline">\(ABCE, BCDF\)</span> and <span class="math inline">\(ADEF\)</span> and resolution 4, so aberration is 3.</li>
+<li><p>Define acceptable ranges for responses <span class="math inline">\(y_{2}\left(x\right), \dots, y_{R}\left(x\right)\)</span> that are important, but not our main focus.</p></li>
+<li><p>Optimize the response <span class="math inline">\(y_{1}\left(x\right)\)</span> that’s our main focus.</p></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div></li>
-</ul>
+<p>Formally, we look for a configuration of factors <span class="math inline">\(x_{\ast}\)</span> that solves the optimization <span class="math display">\[\begin{align*}
+\underset{x}{\text{maximize}}\medspace &amp;y_{1}\left(x\right) \\
+\text{subject to }\medspace &amp;\left(y_{2}\left(x\right), \dots, y_{R}\left(x\right)\right) \in \mathcal{C}
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(C\)</span> is the predefined acceptable region for the secondary responses.</p>
+<h3 id="desirability-functions">Desirability Functions</h3>
+<p>The main downside of the constrained optimization approach is that it forces us to choose one response to prioritize over all others. What if we care about each response more or less equally?</p>
+<p>One idea is to optimize a sort of (geometric) averaged response, <span class="math display">\[\begin{align*}
+\underset{x}{\text{maximize}}\medspace \left[\prod_{r = 1}^{R} y_{r}\left(x\right)\right]^{\frac{1}{R}}
+\end{align*}\]</span></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x_grid</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>.01</span><span class='op'>)</span>
+<span class='va'>example_funs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
+  x <span class='op'>=</span> <span class='va'>x_grid</span>,
+  d_max_0.5 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dMax</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span><span class='op'>)</span>,  <span class='va'>x_grid</span><span class='op'>)</span>,
+  d_max_1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dMax</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>,  <span class='va'>x_grid</span><span class='op'>)</span>,
+  d_max_2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dMax</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='va'>x_grid</span><span class='op'>)</span>,
+  d_min_0.5 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dMin</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0.5</span><span class='op'>)</span>, <span class='va'>x_grid</span><span class='op'>)</span>,
+  d_min_1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dMin</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, <span class='va'>x_grid</span><span class='op'>)</span>,
+  d_min_2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dMin</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='va'>x_grid</span><span class='op'>)</span>,
+  d_target_0.5 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dTarget</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0.5</span>, <span class='fl'>0.5</span><span class='op'>)</span>, <span class='va'>x_grid</span><span class='op'>)</span>,
+  d_target_1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dTarget</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, <span class='va'>x_grid</span><span class='op'>)</span>,
+  d_target_2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dTarget</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='va'>x_grid</span><span class='op'>)</span>
+<span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/reshape2/man/melt.html'>melt</a></span><span class='op'>(</span>id.vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"x"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>
+    type <span class='op'>=</span> <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_replace.html'>str_replace</a></span><span class='op'>(</span><span class='va'>variable</span>, <span class='st'>"[\\.0-9]+"</span>, <span class='st'>""</span><span class='op'>)</span>,
+    scale <span class='op'>=</span> <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_extract.html'>str_extract</a></span><span class='op'>(</span><span class='va'>variable</span>, <span class='st'>"[\\.0-9]+"</span><span class='op'>)</span>
+  <span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>example_funs</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span>, y <span class='op'>=</span> <span class='va'>value</span>, col <span class='op'>=</span> <span class='va'>scale</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_color_brewer</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set2"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>type</span> <span class='op'>~</span> <span class='va'>.</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="week12-3_files/figure-html5/unnamed-chunk-8-1.png" alt="Example desirability functions, for maximizing, minimizing, and achieving a target response." width="624" />
+<p class="caption">
+Figure 2: Example desirability functions, for maximizing, minimizing, and achieving a target response.
+</p>
+</div>
+</div>
+<p>The issue with this idea is that it treats all responses exactly equally. What if we want to maximize some, but minimize others? What if we want some to be near some target value?</p>
+<p>The solution is to use <em>desirability functions</em>. A few are plotted below. You can adjust their shape so that the <span class="math inline">\(r^{th}\)</span> desirability function is large for the values of <span class="math inline">\(y_{r}\left(x\right)\)</span> which are good (sloping down when you want to minimize, sloping up when you want to maximize).</p>
+<p>Then, instead of optimizing the raw averaged response, we optimize the averaged response after first passing through the desirability functions, <span class="math display">\[\begin{align*}
+\underset{x}{\text{maximize}} \medspace \left[\prod_{r = 1}^{R} d_{r}\left(y_{r}\left(x\right)\right)\right]^{\frac{1}{R}}
+\end{align*}\]</span></p>
+<h3 id="data-example">Data Example</h3>
+<p>For the chemical problem, we can define a desirability function per response, and then combine them into an overall objective. This is done using the <code>desirability</code> package.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>d_yield</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dMax</a></span><span class='op'>(</span><span class='fl'>70</span>, <span class='fl'>95</span><span class='op'>)</span> <span class='co'># min / max / scale</span>
+<span class='va'>d_viscosity</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dTarget</a></span><span class='op'>(</span><span class='fl'>55</span>, <span class='fl'>65</span>, <span class='fl'>75</span><span class='op'>)</span> <span class='co'># min / target / max</span>
+<span class='va'>d_weight</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dMin</a></span><span class='op'>(</span><span class='fl'>2750</span>, <span class='fl'>4000</span><span class='op'>)</span> <span class='co'># min / max</span>
+<span class='va'>objective</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/desirability/man/dMax.html'>dOverall</a></span><span class='op'>(</span><span class='va'>d_yield</span>, <span class='va'>d_viscosity</span>, <span class='va'>d_weight</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>Now, we can apply this objective function to predictions made by the three response surface fits we made above, in the section on overlaying contours. We’re evaluating the predictions over a grid of values in the range of the coded time and temperature.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>coded</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>chem_coded</span><span class='op'>)</span>
+<span class='va'>x_grid</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span><span class='op'>(</span>
+  time_coded <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>coded</span><span class='op'>$</span><span class='va'>time_coded</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>coded</span><span class='op'>$</span><span class='va'>time_coded</span><span class='op'>)</span>, <span class='fl'>.1</span><span class='op'>)</span>,
+  temp_coded <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>coded</span><span class='op'>$</span><span class='va'>temp_coded</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>coded</span><span class='op'>$</span><span class='va'>temp_coded</span><span class='op'>)</span>, <span class='fl'>0.1</span><span class='op'>)</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>desirabilities</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span>
+  <span class='va'>x_grid</span>,
+  y1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>fits</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>, <span class='va'>x_grid</span><span class='op'>)</span>,
+  y2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>fits</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>, <span class='va'>x_grid</span><span class='op'>)</span>,
+  y3 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>fits</span><span class='op'>[[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>]</span>, <span class='va'>x_grid</span><span class='op'>)</span>
+<span class='op'>)</span>
+<span class='va'>y_hat</span> <span class='op'>&lt;-</span> <span class='va'>desirabilities</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/starts_with.html'>starts_with</a></span><span class='op'>(</span><span class='st'>"y"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>desirabilities</span><span class='op'>$</span><span class='va'>objective</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>objective</span>, <span class='va'>y_hat</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>At this point, we can plot the desirability of each point in the time / temperature configuration space. Note that a second mode emerges along the low-temperature region – these are regions which have good viscosity and molecular weight properties, even though their yield isn’t as high. Try increasing the scale for yield to see what happens when you make the requirement for high yield more stringent.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>desirabilities</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time_coded</span>, y<span class='op'>=</span> <span class='va'>temp_coded</span>, fill <span class='op'>=</span> <span class='va'>objective</span><span class='op'>)</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_fixed</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_fill_viridis_c</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-12"></span>
+<img src="week12-3_files/figure-html5/unnamed-chunk-12-1.png" alt="Overall desirability, considering yield, viscosity, and molecular weight." width="624" />
+<p class="caption">
+Figure 3: Overall desirability, considering yield, viscosity, and molecular weight.
+</p>
+</div>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
