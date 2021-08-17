@@ -34,26 +34,26 @@ $$
   from $1,\dots, n$.
 
 2. What do the indices mean?
-  * $i$ indexes levels of the first factor (temperature).
-  * $j$ indexes levels of the second factor (material).
-  * $k$ indexes multiple replicates at a particular combination factor
-  combination $ij$ (battery lifetimes, for fixed temperature $\times$ material
-  combination)
+    * $i$ indexes levels of the first factor (temperature).
+    * $j$ indexes levels of the second factor (material).
+    * $k$ indexes multiple replicates at a particular combination factor
+    combination $ij$ (battery lifetimes, for fixed temperature $\times$ material
+    combination)
   
 3. What do the greek letters mean?
-* $\mu$: An intercept term, representing a global mean.
-* $\tau_i$: The effect of the $i^{th}$ level of factor 1 on the average response
-(effect of temperature setting $i$)
-* $\beta_{j}$: The effect of the $j^{th}$ level of factor 2 on the average
-response (effect of material $j$)
-* $\left(\tau\beta\right)_{ij}$:The interaction / synergy between the ith level
-of factor 1 and thejth level of factor 2. (especially long / short response
-times, depending on particular material and temperature settings)
-* $\epsilon_{ijk}$: The random variation we’d observe if we drew many samples at
-a fixed setting of the two factors.
-  __Caution__: $\beta_j$ now indexes a treatment of interest. It is *not* just
-  nuisance blocking variation.
-
+    * $\mu$: An intercept term, representing a global mean.
+    * $\tau_i$: The effect of the $i^{th}$ level of factor 1 on the average response
+    (effect of temperature setting $i$)
+    * $\beta_{j}$: The effect of the $j^{th}$ level of factor 2 on the average
+    response (effect of material $j$)
+    * $\left(\tau\beta\right)_{ij}$:The interaction / synergy between the ith level
+    of factor 1 and thejth level of factor 2. (especially long / short response
+    times, depending on particular material and temperature settings)
+    * $\epsilon_{ijk}$: The random variation we’d observe if we drew many samples at
+    a fixed setting of the two factors.
+      __Caution__: $\beta_j$ now indexes a treatment of interest. It is *not* just
+      nuisance blocking variation.
+  
 ### Testing
 
 4. Up until now, we’ve only asked whether one particular factor had an influence

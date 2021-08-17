@@ -1,0 +1,252 @@
+---
+title: "Examples of $2^K$ Designs"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-17-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+
+_Readings [6.6](), [Rmarkdown]()_
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(EBImage)
+library(tidyr)
+library(rsm)
+theme_set(theme_bw() + theme(legend.position = "bottom"))
+```
+
+```{r}
+# helper functions
+code <- function(x) ifelse(x == '-', -1, 1)
+daniel_plot <- function(effects, probs = c(0.3, 0.7)) { 
+  qq <- qqnorm(effects, datax = TRUE)
+  qqline(effects, col = "red", probs = probs, datax = TRUE)
+  text(qq$x, qq$y, names(effects), pos=1)
+}
+```
+
+Like the corresponding section in the book, these notes introduce no new
+technical material. Instead, they illustrate end-to-end analysis workflows for
+$2^K$ designs and highlight the types of judgments that need to be exercised in
+practice.
+
+```{r}
+drill <- read_csv("https://uwmadison.box.com/shared/static/7l8bpcu36a12a8c0chlh4id0qezdnnoe.csv") %>%
+  mutate_at(vars(-rate), code)
+ggplot(drill) +
+  geom_point(aes(x = B, y = rate, col = as.factor(C))) +
+  scale_color_brewer(palette = "Set2") +
+  facet_grid(A ~ D)
+```
+
+## Example 6.3
+
+An experiment was done to see how the "advance rate of a drill" varied as a
+function of four factors^[The factors are drill load, flow rate, rotational speed, and drilling mud, in case you're curious.], which we will call A, B, C, and D.
+
+As a first pass at the analysis, we fit a full $2^4$ model. The Daniel plot is
+below.
+
+```{r, fig.margin = FALSE, out.width = "40%", fig.hold = TRUE}
+fit <- lm(rate ~ A * B * C * D, data = drill)
+effects <- 2 * coef(fit)[-1]
+daniel_plot(effects, c(0.35, 0.65))
+fit <- lm(rate ~ B * (C + D), data = drill)
+drill_resid <- drill %>%
+  mutate(
+    residual = resid(fit),
+    y_hat = predict(fit)
+  )
+ggplot(drill_resid) +
+  geom_point(aes(x = y_hat, y = residual))
+```
+
+This suggests dropping factor $A$ in the fit. However, when we study the
+residuals, we notice they are heteroskedastic, with larger residuals associated
+with higher predicted values.
+
+
+Since the data are rates, we take a log-transform. We refit the full model,
+which suggests a much simpler set of factors, with no interactions. The
+residuals of the associated submodel also look much better now.
+
+```{r, fig.margin = FALSE, out.width = "40%", fig.hold = TRUE}
+fit <- lm(log(rate) ~ A * B * C * D, data = drill)
+daniel_plot(2 * coef(fit)[-1])
+fit <- lm(log(rate) ~ B + C + D, data = drill)
+drill_resid <- drill %>%
+  mutate(
+    residual = resid(fit),
+    y_hat = predict(fit)
+  )
+ggplot(drill_resid) +
+  geom_point(aes(x = y_hat, y = residual))
+```
+
+_Lessons_: 
+
+* Examining residuals can motivate useful transformations of the data.
+
+* It’s a good thing replicates were made.
+
+## Example 6.4
+
+An experiment was done to see how defect rate in airplane windows varied
+according to four factors: temperature (A), clamp time (B), resin flow (C), and
+press closing time (D).
+
+The estimated effects are displayed in the margin. The story seems simple,
+
+```{r, fig.margin = TRUE}
+windows <- read_csv("https://uwmadison.box.com/shared/static/62phufkeprheu9gu35mu1e75x6rc2shv.csv") %>%
+  mutate_at(vars(-defects), code)
+ggplot(windows) +
+  geom_point(aes(x = A, y = defects, col = as.factor(C))) +
+  scale_color_brewer(palette = "Set2") +
+  facet_grid(B ~ D)
+```
+
+```{r, fig.margin = FALSE, out.width = "40%", fig.hold = TRUE}
+fit <- lm(defects ~ A * B * C * D, data = windows)
+daniel_plot(2 * coef(fit)[-1])
+fit <- lm(defects ~ A + C, data = windows)
+windows$residual <- resid(fit)
+ggplot(windows) +
+  geom_point(aes(x = B, y = residual))
+```
+
+* Temperature (A) has a strong positive effect
+
+* Resin (C) flow has a slight negative effect.
+
+As usual, we examine residuals. This reveals a kind of heteroskedasticity,
+
+* We don’t do any transforms, but instead recommend low temperature, high resin
+flow, and low clamp time (because lower clamp time -> lower variability)
+
+_Lessons_:
+
+* In practice, it’s often useful to take variability into account, rather than
+just average response
+
+* A residual plot can be directly actionable
+
+## Aside: Dispersion estimates
+
+* The heuristic in the previous example can be formalized.
+
+* Let $S^2\left(j^{+}\right)$ be an estimated standard deviation of responses when contrast $j$ is active.
+
+* Theory predicts that
+$\log\left(\frac{S^{2}\left(j^{+}\right)}{S^{2}\left(j^{-}\right)}\right)$ will
+be approximately normal.
+
+	* We call these the _dispersions_
+	
+* Motivates looking at normal probability plots of dispersions, to see if any
+factors have high discrepancies in spread, as a function of level
+
+```{r, size = "tiny"}
+M <- model.matrix(defects ~ A * B * C * D, data = windows)[, -1] # remove intercept
+print(M)
+```
+
+```{r}
+S <- list()
+for (k in seq_len(ncol(M))) {
+  S[[k]] <- data.frame(
+    "effect" = colnames(M)[k],
+    "sd_plus" = sd(windows$residual[M[, k] == 1]),
+    "sd_minus" = sd(windows$residual[M[, k] == -1])
+  )
+}
+S <- do.call(rbind, S)
+s_ratio <- setNames(log(S$sd_plus / S$sd_minus), S$effect)
+daniel_plot(s_ratio)
+```
+
+## Example 6.5
+
+An $2^{4}$ experiment is setup to improve semiconductor manufacturing.
+
+* Question: How do temperature (A), time (B), pressure (C), and gas flow (D) affect oxide thickness of the wafers?
+
+* Four wafers are put in the furnace at a time
+
+	* These are repeated measures, not replicates!
+	
+	* Therefore, take the average of the wafers, and treat this as an unreplicated design
+	
+An analysis of the variation in average thickness across factor configurations is displayed below.
+
+```{r, size = "scriptsize"}
+oxide <- read_csv("https://uwmadison.box.com/shared/static/vyk6uoe3zbnonv4n6jcusbrocmt4cvru.csv") %>%
+  pivot_longer(starts_with("wafer"), names_to = "variable")
+oxide_collapse <- oxide %>%
+  group_by(A, B, C, D) %>%
+  summarise(mean = mean(value), var = var(value))
+ggplot(oxide) +
+  geom_point(aes(x = A, y = value, col = as.factor(B))) +
+  scale_color_brewer(palette = "Set2") +
+  facet_grid(C ~ D)
+fit <- lm(mean ~ A * B * C * D, data = oxide_collapse)
+daniel_plot(2 * coef(fit)[-1])
+fit <- lm(mean ~ A * (B + C), data = oxide_collapse)
+summary(fit) # compare with Table 6.20
+```
+
+```{r, out.width = "30%", fig.margin = FALSE}
+image(fit,  ~ A + B + C)
+```
+
+In addition to modeling the average across wafers, we can model the standard
+deviation. Potentially useful if we want to find configurations with more
+consistency in oxide thickness. The estimated effects for this model are shown
+below.
+
+```{r}
+fit <- lm(var ~ A * B * C * D, data = oxide_collapse)
+daniel_plot(2 * coef(fit)[-1])
+fit <- lm(var ~ A + B * D, data = oxide_collapse)
+```
+
+We can now use the two response surfaces jointly to determine factor
+combinations that will have a target oxide thickness, and low variability around
+that.
+
+```{r, out.width = "30%", fig.margin = FALSE}
+image(fit, ~ A + B + D)
+```
+
+Warning: What would have happened if we treated the repeated measures as true replicates?
+
+```{r, size = "scriptsize"}
+fit <- lm(value ~ A * B * C * D, data = oxide)
+summary(fit)
+```
+
+We would incorrectly include that many factors are relevant when they aren’t —
+this happens because our estimate of $\sigma^2$ is too small. Can lead to lots
+of wasted effort.
+
+_Lessons_:
+
+* Don't treat repeated measures as replicates, or we risk many false positive
+effects
+
+* It can be useful to model the variance of the response, rather than simply the
+mean

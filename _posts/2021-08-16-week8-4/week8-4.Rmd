@@ -24,9 +24,8 @@ library(readr)
 theme_set(theme_bw())
 ```
 
-* As before, the $SS$ terms can be obtained by squaring the contrasts and dividing by the number of data points
-
-	* Can build associated ANOVA tables
+1. As before, the $SS$ terms can be obtained by squaring the contrasts and
+dividing by the number of data points. This lets us build the associated ANOVA table,
 
 ```{r, echo = FALSE}
 plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1vq7uv7omp4pjdg.txt", header = TRUE) %>%
@@ -41,27 +40,28 @@ plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1
 fit <- lm(Rate ~ A * B * C, data = plasma)
 anova(fit)
 ```
-* We can view the data through a regression. The full model would be
+
+2. Consider the regression view of this situation. The full model would be
 $$y_{i} = \beta_0 + \sum_{k = 1}^{3} \beta_k x_{ik} + \sum_{\text{pairs } k, k^\prime} \beta_{k k^\prime} x_{ik}x_{ik^{\prime}} + \epsilon_{i}$$
 though we will often be interested in whether a submodel (which discards some of
 the main or interaction effects) can do as well.
 	
-* To compare a full and a submodel, use the relative sums of squares,
+3. To compare a full model with a submodel, we can use the relative sums of squares,
 
-$$R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{E}}{SS_{Total}}$$
+$$R^2 = \frac{SS_{\text{Model}}}{SS_{\text{Total}}} = 1 - \frac{SS_{E}}{SS_{\text{Total}}}$$
 
 ```{r, echo = FALSE, fig.margin = TRUE}
 library("EBImage")
-display(readImage("https://uwmadison.box.com/shared/static/jfuio2kkqrf2nd4p0o2qo4xeeqsevf4w.png"))
-display(readImage("https://uwmadison.box.com/shared/static/fduofd4qc486n2vzqmg6uchw63cl2h5t.png"))
+#display(readImage("https://uwmadison.box.com/shared/static/jfuio2kkqrf2nd4p0o2qo4xeeqsevf4w.png"))
+#display(readImage("https://uwmadison.box.com/shared/static/fduofd4qc486n2vzqmg6uchw63cl2h5t.png"))
 ```
 
+4. Instead of trying to understand the entire model’s importance, we might want
+to understand the importance of specific terms. For this, it’s useful to have an
+uncertainty estimate. Here is an example calculation,
 
-* Instead of trying to understand the entire model’s importance, we might want
-to understand the importance of specific terms
-* For this, it’s useful to have an uncertainty estimate
+__Variance estimate for effect of A__
 
-_Example calculation_: Variance estimate for effect of A.
 \begin{align*}
 \text{Var}\left(\text{Effect }A\right) &= \text{Var}\left(\frac{1}{2^{K - 1} n}\left(a - b - c + ab + ...\right)\right) \\
 &= \left(\frac{1}{2^{K - 1} n}\right)^2\text{Var}\left(a - b - ac + ab + ...\right)
@@ -87,9 +87,9 @@ effects.
 summary(fit)
 ```
 
-## Generalization: $2^K$ designs
+### Generalization: $2^K$ designs
 
-Everything we’ve spoken about can be generalized to the case of arbitrary
+5. Everything we’ve spoken about can be generalized to the case of arbitrary
 numbers of factors. For example, the table notation can be used to get effect
 estimate for interaction ABCD listed before equation 6.22 in the book, and the
 sum of squares remain just the normalized square of the contrasts.

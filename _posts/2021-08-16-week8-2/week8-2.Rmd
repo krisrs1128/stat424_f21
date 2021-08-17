@@ -26,33 +26,34 @@ library(EBImage)
 theme_set(theme_bw())
 ```
 
-We will often want to know whether estimated main or interaction effects are
-significant. We can use ANOVA, though be wary when $n$ is small.
+1. We will often want to know whether estimated main or interaction effects are
+significant. We can use ANOVA, though we have to be cautious when $n$ is small.
+    * The numerators in the effect estimate expressions will be called _contrasts_
+    for the estimated effect
+    * For example, the contrast for the effect of $A$ is $ab + a - b -
+    \left(1\right)$.
+    
+2. The associated sum of squares is
+    $$
+    \frac{1}{2^2 n}\left(\text{Contrast}\right)^2
+    $$
+    for example,
+    $$
+    SS_A = \frac{1}{2^2 n}\left[ab + a - b - (1)\right]^2
+    $$
+    
+3. The associated ANOVA decomposition is
+    $$
+    SS_{\text{Total}} = SS_A + SS_B + SS_{AB} + SS_E
+    $$
+    and since the factors all have two levels, the df’s for the main and interaction
+    terms are all 1. The df of $SS_T$ is $n 2^2 - 1$ (number of samples minus one).
+    Taking the ratio between main and interaction $SS$ terms and $SS_E$ gives the
+    basis for F-statistics in the ANOVA table.
 
-* The numerators in the effect estimate expressions will be called _contrasts_
-for the estimated effect
-* For example, the contrast for the effect of $A$ is $ab + a - b -
-\left(1\right)$.
-* The associated sum of squares is
-$$
-\frac{1}{2^2 n}\left(\text{Contrast}\right)^2
-$$
-for example,
-$$
-SS_A = \frac{1}{2^2 n}\left[ab + a - b - (1)\right]^2
-$$
-The associated ANOVA decomposition is
-$$
-SS_T = SS_A + SS_B + SS_{AB} + SS_E
-$$
-and since the factors all have two levels, the df’s for the main and interaction
-terms are all 1. The df of $SS_T$ is $n 2^2 - 1$ (number of samples minus one).
-Taking the ratio between main and interaction $SS$ terms and $SS_E$ gives the
-basis for F-statistics in the ANOVA table.
+### Regression View
 
-## Regression View
-
-Another way of summarizing the $2^2$ model is to write a regression,
+4. Another way of summarizing the $2^2$ model is to write a regression,
 $$
 y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon
 $$
@@ -62,17 +63,14 @@ where the $x_k$’s take on one of two values, depending on whether or not facto
 #display(readImage("https://uwmadison.box.com/shared/static/8bs3ypma9dl3mh7amnlnxrxb0sgnmxho.png"))
 ```
 
-* We’ve only included main effects. An interaction would be added via $\beta_{12} x_{1}x_{2}$
+    * We’ve only included main effects. An interaction would be added via $\beta_{12} x_{1}x_{2}$
+    * If the factors are binary (on vs. off), we can use a binary encoding. 
 
-* If the factors are binary (on vs. off), we can use a binary encoding. 
-
-* What if they are actually continuous?
-
-	* _Code_ the variables, converting low and high levels to ${-1, 1}$.
-	
-	* Model will apply to all values in interval $[-1, 1]$.
-	
-	* Further: makes scales comparable, and induces orthogonality
+5. What if our factors are actually continuous?
+	* We could _code_ the variables, converting low and high levels to ${-1, 1}$.
+	* The model will still apply to all values in interval $[-1, 1]$.
+	* An added benefit is that this coding (a) makes scales comparable and (b)
+	induces orthogonality (roughly, it makes variables less correlated)
 	
 ```{r}
 yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt") %>%
@@ -81,6 +79,7 @@ yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzf
     B = as.factor(B)
   )
 ```
+
 ```{r, echo = TRUE}
 coded <- function(x) ifelse(x == '-', -1, 1)
 yield <- yield %>%
@@ -90,7 +89,7 @@ summary(fit)
 anova(fit)
 ```
 	
-We can use this fit to build a response surface as well.
+6. We can use this fit to build a response surface as well.
 
 ```{r}
 coef(fit)

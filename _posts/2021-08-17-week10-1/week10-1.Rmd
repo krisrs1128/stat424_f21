@@ -1,0 +1,179 @@
+---
+title: "$2^K$ Designs and Regression"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-17-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [6.7](), [Rmarkdown]()_
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(EBImage)
+library(ggplot2)
+theme_set(theme_bw() + theme(legend.position = "bottom"))
+```
+
+In all the code examples, we’ve been fitting $2^K$ designs using the `lm`
+function. Why does this work? In these notes, we’ll see how our effect estimates
+can be viewed through the lens of linear regression.
+
+## The Design Matrix
+
+Let’s write our contrasts summary table linear algebraically. Remember our
+notation,
+
+| A | B | C | AB | label |
+|---|---| --- | --- | --- |
+| - | - | - | + | (1) |
+| + | - | - | - | a |
+| - | + | - | - | b |
+| - | - | + | + | c |
+| + | + | - | + | ab |
+| + | - | + | - | ac |
+| - | + | + | - |  bc |
+| + | + | + | + | abc |
+
+We’ll translate this into
+
+\begin{align*}
+X &= \begin{pmatrix}
+1 & -1 & -1 & - 1 & 1 \\
+1 & 1 & -1 & -1 & -1 \\
+1 & -1 & 1 & -1 & -1 \\
+1 & -1 & -1 & 1 & 1 \\
+1 & 1 & 1 & -1 & 1 \\
+1 & 1 & -1 & 1 & -1 \\
+1 & -1 & 1 & 1 & -1 \\
+1 & 1 & 1 & 1 & 1
+\end{pmatrix} \\
+\end{align*}
+\begin{align*}
+y &= \begin{pmatrix}
+(1) \\
+a \\
+b \\
+c \\
+ab \\
+ac \\
+bc \\
+abc
+\end{pmatrix}
+\end{align*}
+
+For $X$, we’ve just added an intercept column of $1$’s and concatenated it
+with the contrasts written as $\pm 1$’s. As before, $(1)$ means the value of the
+sample taken at that corner of the cube, $a$ means the sample at the $a$ corner,
+etc.
+
+```{r, fig.margin = FALSE}
+display(readImage("https://uwmadison.box.com/shared/static/8euuywv5ay4x7przznhsxdo269865h2a.png"))
+```
+
+Let’s observe some properties of this matrix,
+
+* It has $2^{K}$ rows, one per replicate on each corner of the cube.
+
+* It has $2^{K}$ columns. To see why, notice that there are
+
+	* 1 intercept, $K$ main effects, and ${K \choose 2}$ two-way interactions, which adds up to $2 ^ K$.
+	
+	* Moreover, if our $K > 2$, we’d have ${K \choose 3}$ three-way interactions,
+	etc. and that, by the binomial theorem, $\left(1 + 1\right)^{K} = \sum_{j \leq
+	K} {K \choose j}1^{j}1^{K - j}$
+	
+* The columns are orthogonal. Their norms are all $2^{K}$. Hence $X^{T}X = 2^{K}I_{2^{K}}$.
+
+## $\hat{\beta}$ and Effect Estimates
+
+In linear regression, the least squares solution $\hat{\beta}$ is the vector
+that optimizes
+
+\begin{align*}
+\hat{beta} := \arg\min_{\beta \in \mathbb{R}^{2^{K}}} \|y - X\beta\|_{2}^{2}
+\end{align*}
+
+To minimize a quadratic like this, we can differentiate and use the chain rule,
+
+\begin{align*}
+\frac{\partial}{\partial \beta}\left[\|y - X\beta\|_{2}^{2}\right] &= 0 \\
+\iff 2X^{T}\left(y - X\beta\right) &= 0
+\end{align*}
+
+which implies that $\hat{\beta} = \left(X^{T}X\right)^{-1}X^{T}y$. However, by
+the observations above, this means,
+
+\begin{align*}
+\hat{\beta} &= \left(2^{K}I_{2^{K}}\right)^{-1}X^T y \\
+&= \frac{1}{2^{K}}X^{T}y.
+\end{align*}
+
+But $X^{T}y$ are exactly our contrasts (!),
+
+\begin{align*}
+X^{T}y &= \begin{pmatrix}
+1 &  1 &  1 &  1 & 1 & 1 &  1 & 1 \\
+-1 & 1 & -1 & -1 & 1 & 1 & -1 & 1 \\
+-1 & -1 & 1 & -1 & 1 & -1 & 1 & 1 \\
+\vdots & & & & & & & \vdots
+\end{pmatrix}
+\begin{pmatrix}
+\left(1\right) \\
+a \\
+b \\
+c \\
+\vdots 
+\end{pmatrix}
+\end{align*}
+
+e.g., $A = \frac{1}{2^{K - 1}}\left[-(1) + a - b -c + ab + ac - bc +
+abc\right]$. The only difference between $\hat{\beta}$ and our effect estimates
+is a factor of 2 in the scaling. Therefore, to estimate the effects in a $2^{K}$
+design, it’s enough to construct the $X, y$ matrices above and plug them into
+standard linear regression programs.
+
+## Code Example
+
+To complete this discussion, let's revisit the $2 ^ 4$ design in the drill
+example. First, let's verify that the $X$ matrix used by `lm` is the same as the
+one in our conceptual discussion.
+```{r, echo = TRUE, size="scriptsize"}
+code <- function(x) ifelse(x == '-', -1, 1)
+drill <- read_csv("https://uwmadison.box.com/shared/static/7l8bpcu36a12a8c0chlh4id0qezdnnoe.csv") %>%
+  mutate_at(vars(-rate), code)
+fit <- lm(rate ~ A * B * C * D, drill)
+X <- model.matrix(fit)
+X
+```
+We can also check the dimension and orthogonality of this matrix.
+
+```{r, echo = TRUE, size="scriptsize"}
+dim(X)
+t(X) %*% X
+```
+Let's make sure that the formula we derived above is exactly what `lm` is doing.
+```{r}
+(1 / 16) * t(X) %*% drill$rate
+coef(fit) # hand computation agrees
+```
+Finally, let's compare the fitted $\hat{\beta}$ with our original effect
+estimates (at least, for the effect $A$).
+```{r}
+drill$A
+est_A <- (1 / 8) * sum(drill[drill$A == 1, ]$rate - drill[drill$A == -1, ]$rate)
+est_A / 2
+```

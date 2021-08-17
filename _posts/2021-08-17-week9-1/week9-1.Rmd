@@ -1,0 +1,175 @@
+---
+title: "Unreplicated $2^K$ Designs"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-17-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+_Readings [6.5](), [Rmarkdown]()_
+
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+
+```{r}
+library(BsMD)
+library(dplyr)
+library(ggplot2)
+library(readr)
+theme_set(theme_bw())
+```
+
+```{r}
+# helper functions
+code <- function(x) ifelse(x == '-', -1, 1)
+daniel_plot <- function(effects) { 
+  qq <- qqnorm(effects, datax = TRUE)
+  qqline(effects, col = "red", probs = c(0.3, 0.7), datax = TRUE)
+  text(qq$x, qq$y, names(effects), pos=4)
+}
+```
+
+
+* Sometimes, people will only take only one measurement per factor configuration
+
+	* When $K$ is large, replication can increase the number of samples needed
+	substantially
+	
+	*  E.g., changing n from 1 to 2 when K = 5 means 32 more runs
+	
+* For factor screening experiments, typically want to allocate samples to
+understanding new factors, rather than replicating known configurations
+
+Without replicates to gauge measurement noise, we may encounter two opposite problems,
+
+* Missing a true effect
+* Spurious effects
+
+Let’s see how these problems arise, and discuss some solutions.
+
+## Missing True Effects
+
+* If the effect is weak, then if only nearby levels are tested, the effect will
+be easy to miss
+
+* Fix: We can space out the levels at which we test each factor
+```{r, fig.margin = TRUE}
+library("EBImage")
+#display(readImage("https://uwmadison.box.com/shared/static/41twf6fdi67knj7xi9eivccxpwo4wu82.png"))
+#display(readImage("https://uwmadison.box.com/shared/static/gnrwjf27ji5ld239odkmxl3836jy2imd.png"))
+```
+
+## Spurious Effects
+
+* If there are no replicates, then we can perfectly interpolate the data
+
+* Leaves us with no degrees-of-freedom for estimating $\sigma^2$
+
+	* $\sigma^2$ is needed to perform ANOVA
+	
+```{r, fig.margin = TRUE}
+#display(readImage("https://uwmadison.box.com/shared/static/rsp26h445gji26x2fsxr9qrshp1m23vi.png"))
+#display(readImage("https://uwmadison.box.com/shared/static/jb4cte8l2glri1i845c4ftrzsua5jybp.png"))
+```
+	
+* Fix: Pool together higher-order interactions
+
+	* High-order interactions are typically rare (sparsity of effects principle)
+	
+	* Can use pooled interaction estimates to obtain $\sigma^2$
+	
+	* Pooling can only make testing more conservative
+	
+```{r, fig.margin = TRUE, fig.height = 4}
+filtration <- read_table2("https://uwmadison.box.com/shared/static/xxh05ngikmscnddbhg2l3v268jnu4jtc.txt") %>%
+  mutate_at(vars(-Rate), as.factor)
+ggplot(filtration) +
+  geom_point(aes(x = A, y = Rate, col = C)) +
+  scale_color_brewer(palette = "Set2") +
+  facet_grid(B ~ D)
+```
+
+## Data Example
+
+This is what happens when we try to estimate all interactions, even though there
+is only one replicate per factor configuration. We'll use the filtration
+dataset, which asks how temperature (A), pressure (B), formaldehyde (C), and
+stirring rate (D) affect the filtration rate of the resulting product. 
+
+```{r}
+fit <- lm(Rate ~ A * B * C * D, data = filtration)
+summary(fit)
+anova(fit)
+```
+If we instead assume that all interactions terms of order 3 or higher are null,
+we can perform again perform ANOVA.
+
+```{r}
+fit <- lm(Rate ~ (A + B + C + D) ^ 2, data = filtration)
+summary(fit)
+anova(fit)
+```
+
+## Design Projections
+
+* Related to pooling, sometimes it is clear that a certain factor has no bearing
+on the response
+
+* In this case, we may consider removing that factor and all the interaction
+terms that include it
+
+* By collapsing the factor, we double the number of effective replicates
+```{r, fig.margin = TRUE}
+#display(readImage("https://uwmadison.box.com/shared/static/8h0vt5kcb5ss0l9dlghsswnpf88q8267.png"))
+```
+
+## Visualing Effects
+
+Graphical methods provide useful summaries for evaluating interactions in the $2^K$ model.
+
+* Daniel Plots
+
+  * If none of the factors had any influence on the response, then the effects
+  would all be normally distributed around 0.
+  
+  * Idea: make a normal probability plot of the effects, and look for those which
+  deviate from identity line. These are likely real effects.
+  
+```{r, fig.margin = TRUE, fig.height = 5}
+# estimate effects
+filtration_coded <- filtration %>%
+  mutate_at(vars(-Rate), code)
+fit_coded <- lm(Rate~A*B*C*D, data=filtration_coded)
+effects <- 2 * coef(fit_coded)[-1] # exclude intercept
+daniel_plot(effects)
+```
+
+* Lenth Plots
+
+  * An alternative is to simply plot the effect sizes directly
+  
+```{r, fig.margin = TRUE, fig.height = 5}
+LenthPlot(fit_coded, cex.fac = 0.4)
+```
+
+Let $s_0 = 1.5 \times \text{median}\left(\text{Contrast}_j\right)$.  Then, the
+notation here refers to
+
+* Pseudostandard error (PSE): $1.5 \times \text{median}\left(\left|c_j\right| :
+\left|c_j\right| < 2.5 s_0\right)$ serves as an alternative to the usual
+standard error over contrasts, which is robust to outliers (it completely
+ignores $c_j$'s that are larger than $2.5 s_0$.)
+* Margin of error (ME): A version of the critical $t$-value that relies on the
+robust standard error. Defined as $t_{0.025,\frac{m}{3}}\times PSE$, where $m$
+is the total number of effect estimates (columns in the Lenth plot).
+* Simultaneous margin of error (SME): A more conservative version of ME, to
+protect against multiple comparisons. 

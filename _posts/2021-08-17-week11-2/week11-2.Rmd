@@ -1,0 +1,245 @@
+---
+title: "Projection and Blocking in $2^{K - p}$ Designs"
+description: |
+  A short description of the post.
+author:
+  - name: Kris Sankaran
+    url: {}
+date: 08-17-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+```
+
+_Readings [8.3, 8.4](), [Rmarkdown]()_
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(EBImage)
+library(reshape2)
+library(ggplot2)
+theme_set(theme_bw() + theme(legend.position = "bottom"))
+```
+```{r, fig.cap = "Our earlier picture of projection from 3 to 2 factors in a complete factorial design."}
+#display(readImage("https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg"))
+```
+
+To be fluent in working with fractional factorial designs, it’s worth knowing
+how to project and block them. They provide useful alternative perspectives of
+the designs we have already constructed.
+
+### Projection
+
+* Projection makes it possible to turn a fractional factorial screening
+experiment into a full factorial experiment
+
+* Effectively, you delete the columns of your design matrix involving the
+factors outside the ones you want to project down to
+
+* Depending on what design you project, a $2^{K - p}$ design will become
+either (1) a full factorial design or (2) a $2^{K - r}$ fractional factorial
+design, where $r < p$.
+
+* Beware that conclusions will be somewhat tentative, because effects in the
+full factorial could be aliased with high-order effects from factors that have
+been projected out
+
+Warm-up: (*Projecting a $2 ^ {4 - 1}$ Design*). Consider the $2 ^ {4 - 1}$
+design with defining relation $I = ABCD$.
+
+\newpage
+
+| A | B | C | D |
+| --- | --- | --- | --- |
+| - | - | - | - |
+| + | - | - | + |
+| - | + | - | + |
+| - | - | + | + |
+| + | + | - | - |
+| + | - | + | - | 
+| - | + | + | - |
+|+ | + | + | + |
+
+What happens when you project out A?
+
+| B | C | D |
+| --- | --- | --- |
+| - | - | - |
+| - | - | + |
+| + | - | + |
+| - | + | + |
+| + | - | - |
+| - | + | - | 
+| + | + | - |
+| + | + | + |
+
+You can check that this has all corners of the cube B-C-D, so it’s a full $2^{3}$ design.
+
+Example (*Different projections of $2 ^ {6 - 2}$ design*). Let's consider the
+example from our previous lecture
+
+\newpage
+
+| A | B | C	| D | E = ABC | F = BCD |
+| --- | --- | --- | --- | --- | --- |
+| - | - | - | - | - | - |
+| + | - | - | - | + | - |
+| - | + | - | - | + | + |
+| - | - | + | - | + | + |
+| - | - | - | + | - | + |
+| + | + | - | - | - | + |
+| + | - | + | - | - | + |
+| + | - | - | + | + |  + 
+| - | + | + | - | - | - |
+| - | + | - | + | + | - |
+| - | - | + | + | + | - |
+| + | + | + | - | + | - |
+| + | + | - | + | - | - |
+| + | - | + | + | - | - |
+| - | + | + | + | - | + |
+| + | + | + | + | + | + |
+
+* The study examined 6 factors over 16 runs. 
+
+* The complete defining relations were $I = ABCE = BCDF = ADEF$.
+
+* What happens when we project out $A$?
+
+| B | C| D | E | F |
+| --- | --- | --- | --- | --- | --- |
+ | - | - | - | - | - |
+ | - | - | - | + | - |
+ | + | - | - | + | + |
+ | - | + | - | + | + |
+ | - | - | + | - | + |
+ | + | - | - | - | + |
+ | - | + | - | - | + |
+ | - | - | + | + |  + |
+ | + | + | - | - | - |
+ | + | - | + | + | - |
+ | - | + | + | + | - |
+ | + | + | - | + | - |
+ | + | - | + | - | - |
+ | - | + | + | - | - |
+ | + | + | + | - | + |
+ | + | + | + | + | + |
+
+Each configuration appears once. Since we have 16 rows still, this is evidently
+a $2^{5 - 1}$ fractional factorial design.
+ 
+What happens if we project out $E$ and $F$ instead? 
+
+* This is exactly the original "basic design." I.e., the the full $2 ^ 4$
+factorial before using the generators.
+
+We could try to project out two factors that don't have such an obvious answer. So let's project out $A$ and $B$.
+
+* It turns out we still get a $2 ^ 4$ full factorial, but now on $C$ through $F$.
+
+| C| D | E | F |
+| --- | --- | --- | --- | --- | --- |
+ | - | - | - | - |
+ | - | - | + | - |
+ | - | - | + | + |
+ | + | - | + | + |
+ | - | + | - | + |
+ | - | - | - | + |
+ | + | - | - | + |
+ | - | + | + |  + |
+ | + | - | - | - |
+ | - | + | + | - |
+ | + | + | + | - |
+ | + | - | + | - |
+ | - | + | - | - |
+ | + | + | - | - |
+ | + | + | - | + |
+ | + | + | + | + |
+ 
+You might start suspecting that whenever we project out two variables, we will
+end up with a full $2^{4}$ factorial. But this is not the case! 
+
+* Consider projecting out $A$ and $E$.
+* Now we have a $2 ^ {4 - 1}$ fractional factorial with 2 replicates. 
+* Only half of the corners are present, but each one that appears is present
+twice.
+
+| B | C | D | F |
+| --- | --- | --- | --- | --- | --- |
+ | - | - | - | - |
+ | - | - | - | - |
+ | + | - | - | + |
+ | - | + | - | + |
+ | - | - | + | + |
+ | + | - | - | + |
+ | - | + | - | + |
+ | - | - | + |  + |
+ | + | + | - | - |
+ | + | - | + | - |
+ | - | + | + | - |
+ | + | + | - | - |
+ | + | - | + | - |
+ | - | + | + | - |
+ | + | + | + | + |
+ | + | + | + | + |
+ 
+This ends up being a general rule. If none of the defining words contain all the
+factors that you’re projecting out, then you’re left with a full factorial
+design; otherwise you get a fractional factorial with replicates.
+
+* E.g., $AE$ is part of the first defining relation, so we got a fractional
+factorial.
+
+Exercise: Try projecting onto $A, B, C$. Is it a fractional or full factorial? How
+many replicates each? Could you have determined this, just by looking at the
+defining relations?
+
+* A design is said to have _projectivity_ $v$ is collapsing to any subset of
+$v$ factors will result in a full factorial design. The example above has
+projectivity 3.
+
+### Blocking
+
+Let’s say we’ve subsetted to a set of runs corresponding to a fractional
+factorial design. But, we still have to break the runs into batches, we have too
+many runs to be able to reasonably run them in one block. How can we
+appropriately block a fractional factorial design?
+
+* The typical solution is to choose a high-order effect and alias it with the
+batches. This divides the runs into two blocks, those where the effect is + and
+those where it is -.
+
+* Ensure that the alias group doesn’t contain any low-order effects of interest
+(e.g., we don’t want the blocks to be confounded with any main effects)
+
+* We effectively sacrifice the alias group that is confounded with the block.
+
+Example: For our $2 ^{6 - 2}$ design above, we can confound $ACD$ with the
+block, to avoid aliasing any main effects with the block effect. This let us
+divide our runs into two blocks of size 8.
+
+| A | B | C	| D | E | F | Block = ACD |
+| --- | --- | --- | --- | --- | --- | --- |
+| - | - | - | - | - | - | - (B1) | 
+| + | - | - | - | + | - | + (B2) |
+| - | + | - | - | + | + | - (B1) |
+| - | - | + | - | + | + | + (B2) |
+| - | - | - | + | - | + | + (B2) |
+| + | + | - | - | - | + | + (B2) |
+| + | - | + | - | - | + | - (B1) |
+| + | - | - | + | + |  + | - (B1) |
+| - | + | + | - | - | - | + (B2) |
+| - | + | - | + | + | - | + (B2) |
+| - | - | + | + | + | - | - (B1) |
+| + | + | + | - | + | - | - (B1) |
+| + | + | - | + | - | - | - (B1) |
+| + | - | + | + | - | - | + (B2) |
+| - | + | + | + | - | + | - (B1) |
+| + | + | + | + | + | + | + (B2)|

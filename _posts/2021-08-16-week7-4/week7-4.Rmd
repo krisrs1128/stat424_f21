@@ -1,5 +1,5 @@
 ---
-title: "Response Surfaces (Intro)"
+title: An Introduction to Response Surfaces
 description: |
   A short description of the post.
 author:
@@ -25,50 +25,38 @@ library(readr)
 theme_set(theme_bw())
 ```
 
-We’ve really pushed a particular recipe for all our hypothesis testing
+1. We’ve really pushed a particular recipe for all our hypothesis testing
 approaches,
-
-* Write down a model with various factor level effects
-
-* Write down a sum-of-squares identity, and get the corresponding
-degrees-of-freedom
-
-* Get a test statistic and its reference distribution, for testing each factor
-
+    * Write down a model with various factor level effects
+    * Write down a sum-of-squares identity, and get the corresponding
+    degrees-of-freedom
+    * Get a test statistic and its reference distribution, for testing each factor
 We’ve used this in ANOVA, RCBD, general factorial designs…
 
-It’s been a while coming, but we’re finally going to have a new idea. The new
-idea is to fit response surfaces. The idea is simple: use a flexible (nonlinear)
-function from experimental inputs (combinations of factor levels) to the
-response of interest.
+2. We’re now going to introduce a quite different approach based on response
+surfaces. The idea is simple: use a flexible (nonlinear) function from
+experimental inputs (combinations of factor levels) to the response of interest.
+This will work as long as the response varies smoothly as factor inputs are
+perturbed. The estimated function will be a good representation of how varying
+the factors affects the response.
 
-* If we can assume the response varies smoothly as factor inputs are perturbed,
-then this will work
+3. Moreover, if we have successfully estimated this function, then we’ll be able
+to use the fit to (a) determine important influences and (b) find configurations
+that optimize the response (e.g., maximize profit[^Or if you are disgruntled,
+minimize profit]).
 
-* We’ll be able to use the fit to determine important influences as well as find
-configurations that optimize the response (e.g., maximize profit[^Or if you are
-disgruntled, minimize profit]).
-
-* If we can assume that small changes in the levels of a factor don’t result in
-very dramatic changes in the response, then we’ll have a good representation of
-how varying factors affects the response.
-
-How should we fit these flexible functions?
-
-* Polynomial regression: include terms like $x_i^2, x_i^3, x_i^2 x_j, ...$
-
-* Spline regression: Include polynomial terms, but split across different
-regions of the input space. This is generally more stable than polynomial
-regression.
-
-* Really, you can use whatever function fitter that you want.
-
+4. How should we fit these flexible functions?
+    * Polynomial regression: include terms like $x_i^2, x_i^3, x_i^2 x_j, ...$
+    * Spline regression: Include polynomial terms, but split across different
+    regions of the input space. This is generally more stable than polynomial
+    regression.
+    * Really, you can use whatever function fitter that you want.
 Unfortunately, this idea will have to wait till near the end of the course for a
 more complete elaboration.
 
 ## Data Example
 
-Let's look at this idea using the battery data from before. We'll treat
+5. Let's look at this idea using the battery data from before. We'll treat
 temperature as a continuous variable, so that it makes sense to talk about a
 response surface[^really, a curve over temperature].
 
@@ -77,7 +65,7 @@ battery <- read_table2("https://uwmadison.box.com/shared/static/vmxs2wcsdxkdjujp
   mutate( Material = as.factor(Material) )
 ```
 
-We fit a quadratic regression to define the surface. The result let's us make
+6. We fit a quadratic regression to define the surface. The result let's us make
 predictions for battery life at temperatures that we haven't observed.
 
 ```{r}
@@ -93,7 +81,7 @@ ggplot() +
   facet_wrap(~ Material)
 ```
 
-Compare the associated fit with Table 5.15.
+7. Compare the associated fit with Table 5.15.
 
 ```{r}
 summary(fit)
