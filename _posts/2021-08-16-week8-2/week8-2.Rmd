@@ -60,7 +60,7 @@ $$
 where the $x_k$’s take on one of two values, depending on whether or not factor $k$ is active.
 
 ```{r, fig.margin = TRUE}
-#display(readImage("https://uwmadison.box.com/shared/static/8bs3ypma9dl3mh7amnlnxrxb0sgnmxho.png"))
+display(readImage("https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepards9fv0cqvbmc.png"))
 ```
 
     * We’ve only included main effects. An interaction would be added via $\beta_{12} x_{1}x_{2}$

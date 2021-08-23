@@ -1,11 +1,11 @@
 ---
 title: "Introduction to Factorial Designs"
 description: |
-  A short description of the post.
+  Characterizing multiple facotrs in a single experiment.
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-16-2021
+date: 10-12-2021
 output:
   distill::distill_article:
     self_contained: false

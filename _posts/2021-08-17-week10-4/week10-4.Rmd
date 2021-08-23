@@ -120,7 +120,7 @@ using the fact that $C^2 = I$, we find $ABC = I$. The *word* ABC will be called
 the generator for this fraction. 
 
 ```{r, fig.cap = "An example complementary fraction."}
-#display(readImage("https://uwmadison.box.com/shared/static/pffnjyav7wexbujzf32vlhorcfxhfa6w.png"))
+display(readImage("https://uwmadison.box.com/shared/static/pffnjyav7wexbujzf32vlhorcfxhfa6w.png"))
 ```
 
 * Complementary designs: The complementary fraction of a fractional factorial
@@ -143,7 +143,7 @@ with an effect containing less than $R - p$ factors.
 a factor after all, we automatically end up with a $2 ^ {K - 1}$  full-factorial
 for free.
 ```{r fig.cap="Three projections of $2^3$ designs into $2^2$ designs, from the textbook."}
-#display(readImage("https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg"))
+display(readImage("https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg"))
 ```
 
 * Sequences: If we find a strong contrast for an aliased effect, it’s natural to

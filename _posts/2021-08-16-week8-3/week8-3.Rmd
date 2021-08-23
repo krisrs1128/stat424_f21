@@ -18,7 +18,7 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 
 ```{r, fig.margin = TRUE}
 library(EBImage)
-#display(readImage("https://uwmadison.box.com/shared/static/sie5e1b8v005l5ow8wzbtpehfdpn7wnf.png"))
+display(readImage("https://uwmadison.box.com/shared/static/vxvzawk89r2m08um53dbfoka5md0bsnf.png"))
 ```
 
 ```{r}
@@ -99,8 +99,8 @@ $$
 columns in the table above.
 
 ```{r, fig.margin = TRUE}
-#display(readImage("https://uwmadison.box.com/shared/static/3j76s251jeervxrqheo8dqrm5vvq7e63.png"))
-#display(readImage("https://uwmadison.box.com/shared/static/8h0vt5kcb5ss0l9dlghsswnpf88q8267.png"))
+display(readImage("https://uwmadison.box.com/shared/static/wwsniua1ce0q376oy2ffrtzf4ivzup99.png"))
+display(readImage("https://uwmadison.box.com/shared/static/hapjw92oqij5oiyddt29nvtq6y1xzxxu.png"))
 ```
 
   

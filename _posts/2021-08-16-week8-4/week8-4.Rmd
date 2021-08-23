@@ -52,8 +52,8 @@ $$R^2 = \frac{SS_{\text{Model}}}{SS_{\text{Total}}} = 1 - \frac{SS_{E}}{SS_{\tex
 
 ```{r, echo = FALSE, fig.margin = TRUE}
 library("EBImage")
-#display(readImage("https://uwmadison.box.com/shared/static/jfuio2kkqrf2nd4p0o2qo4xeeqsevf4w.png"))
-#display(readImage("https://uwmadison.box.com/shared/static/fduofd4qc486n2vzqmg6uchw63cl2h5t.png"))
+display(readImage("https://uwmadison.box.com/shared/static/j2ya0idl19qtdwb991oq14hak97f8qla.png"))
+display(readImage("https://uwmadison.box.com/shared/static/ckwb70swk9c0nr1h5nkt44wh8emzw07k.png"))
 ```
 
 4. Instead of trying to understand the entire model’s importance, we might want

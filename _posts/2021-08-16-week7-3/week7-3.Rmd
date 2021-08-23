@@ -1,11 +1,11 @@
 ---
 title: "General Factorial Designs"
 description: |
-  A short description of the post.
+  Factorial designs with arbitrary numbers of factors
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-16-2021
+date: 10-21-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -41,10 +41,10 @@ second, and third factors have $a, b$, and $c$ levels, respectively.
 symmetries,
 
 ```{r, fig.margin = TRUE, echo = FALSE}
-#display(readImage("https://uwmadison.box.com/shared/static/1mun8fg94m86cl9yxm1u7597js1jdcdg.png"), raster = TRUE)
-#display(readImage("https://uwmadison.box.com/shared/static/xybpzb3td8ojijuidng5ghpbycea6lz8.png"), raster = TRUE)
-#display(readImage("https://uwmadison.box.com/shared/static/8bs3ypma9dl3mh7amnlnxrxb0sgnmxho.png"), raster = TRUE)
-#display(readImage("https://uwmadison.box.com/shared/static/t1jgtvnjvjw8vadc5swsu835zpenh6yi.png"), raster = TRUE)
+display(readImage("https://uwmadison.box.com/shared/static/b42kbwxdggtmf2krqr7uoj5r23fglfuo.png"))
+display(readImage("https://uwmadison.box.com/shared/static/gnoa5i4w5qp6ehbweh30n3a2v91qpi89.png"))
+display(readImage("https://uwmadison.box.com/shared/static/yqqhfc2kzk3egfvad8dvufed09t9m3tx.png"))
+display(readImage("https://uwmadison.box.com/shared/static/goaewwcs61ewtrmfp4pcymzje1fdrbsb.png"))
 ```
 
     * We have main effects for each factor

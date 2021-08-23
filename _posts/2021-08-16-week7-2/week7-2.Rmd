@@ -1,11 +1,11 @@
 ---
 title: Following-up Two-Factor Fits
 description: |
-  A short description of the post.
+  Multiple comparisons, model checking, and other post-estimation checks.
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-16-2021
+date: 10-19-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -48,7 +48,7 @@ associated with the response.
 
 ```{r, fig.margin=TRUE, echo = FALSE}
 library("EBImage")
-#display(readImage("https://uwmadison.box.com/shared/static/3j76s251jeervxrqheo8dqrm5vvq7e63.png"), method = "raster")
+display(readImage("https://uwmadison.box.com/shared/static/oqhdg1jvjwo4x4g5z0y294555xb1nnz3.png"))
 ```
 
     * _Subtlety_: If the factor under investigation interacts with the other one,

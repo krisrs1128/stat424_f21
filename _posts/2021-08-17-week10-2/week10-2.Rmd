@@ -127,7 +127,7 @@ p <- ggplot(sim_df %>% filter(rep < 100)) +
   scale_color_brewer(palette = "Set2") +
   facet_grid(design ~ .) +
   transition_time(rep)
-animate(p, fps=6)
+animate(p, fps=10)
 ```
 
 To illustrate this idea, consider the animation

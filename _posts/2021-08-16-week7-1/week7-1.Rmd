@@ -1,11 +1,11 @@
 ---
-title: "Two-Factorial Factorial Design"
+title: "Two-Factor Factorial Design"
 description: |
-  A short description of the post.
+  Modeling and testing with two factors of interest
 author:
   - name: Kris Sankaran
     url: {}
-date: 08-16-2021
+date: 10-19-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -32,6 +32,11 @@ $$
   \sum_{j} \beta_{j}= \sum_{ij} \left(\tau\beta\right)_{ij}=0$. We’ll suppose
   $i$ ranges from $1, \dots, a$, $j$ ranges from $1, \dots, b$ and $k$ ranges
   from $1,\dots, n$.
+  
+```{r}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/7qgi74t4kkleybceodksuroyaavn9zoq.png"))
+```
 
 2. What do the indices mean?
     * $i$ indexes levels of the first factor (temperature).
@@ -97,3 +102,13 @@ $SS_{AB}$ is large, we have evidence against hypothesis AB.
 
 8. We can define corresponding mean squares by dividing by the degrees of
 freedom. For each hypothesis, we get a corresponding F-statistic.
+
+```{r}
+display(readImage("https://uwmadison.box.com/shared/static/yvkgkdc6qy3zjhxzi895if0kmvlmb1nu.png"))
+display(readImage("https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png"))
+display(readImage("https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png"))
+display(readImage("https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png"))
+display(readImage("https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png"))
+display(readImage("https://uwmadison.box.com/shared/static/ty9vmqu5m6ajdc1l5roc55hill06mv3y.png"))
+```
+

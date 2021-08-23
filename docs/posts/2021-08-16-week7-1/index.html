@@ -86,38 +86,38 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Statistical Experimental Design: Two-Factorial Factorial Design</title>
+<title>Statistical Experimental Design: Two-Factor Factorial Design</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Modeling and testing with two factors of interest"/>
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-16"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-16"/>
+<meta property="article:published" itemprop="datePublished" content="2021-10-19"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-10-19"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Statistical Experimental Design: Two-Factorial Factorial Design"/>
+<meta property="og:title" content="Statistical Experimental Design: Two-Factor Factorial Design"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Modeling and testing with two factors of interest"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Statistical Experimental Design: Two-Factorial Factorial Design"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:title" content="Statistical Experimental Design: Two-Factor Factorial Design"/>
+<meta property="twitter:description" content="Modeling and testing with two factors of interest"/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Two-Factorial Factorial Design"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-16-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Two-Factor Factorial Design"]},{"type":"character","attributes":{},"value":["Modeling and testing with two factors of interest"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["10-19-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week7-1_files/anchor-4.2.2/anchor.min.js","week7-1_files/bowser-1.9.3/bowser.min.js","week7-1_files/distill-2.2.21/template.v2.js","week7-1_files/header-attrs-2.8/header-attrs.js","week7-1_files/jquery-1.11.3/jquery.min.js","week7-1_files/popper-2.6.0/popper.min.js","week7-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week7-1_files/tippy-6.2.7/tippy-light-border.css","week7-1_files/tippy-6.2.7/tippy.css","week7-1_files/tippy-6.2.7/tippy.umd.min.js","week7-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week7-1_files/anchor-4.2.2/anchor.min.js","week7-1_files/bowser-1.9.3/bowser.min.js","week7-1_files/distill-2.2.21/template.v2.js","week7-1_files/figure-html5/unnamed-chunk-1-1.png","week7-1_files/figure-html5/unnamed-chunk-2-1.png","week7-1_files/figure-html5/unnamed-chunk-2-2.png","week7-1_files/figure-html5/unnamed-chunk-2-3.png","week7-1_files/figure-html5/unnamed-chunk-2-4.png","week7-1_files/figure-html5/unnamed-chunk-2-5.png","week7-1_files/header-attrs-2.8/header-attrs.js","week7-1_files/jquery-1.11.3/jquery.min.js","week7-1_files/popper-2.6.0/popper.min.js","week7-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week7-1_files/tippy-6.2.7/tippy-light-border.css","week7-1_files/tippy-6.2.7/tippy.css","week7-1_files/tippy-6.2.7/tippy.umd.min.js","week7-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Two-Factorial Factorial Design","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-16T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Two-Factor Factorial Design","description":"Modeling and testing with two factors of interest","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-10-19T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2276,16 +2276,16 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Two-Factorial Factorial Design</h1>
+<h1>Two-Factor Factorial Design</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>Modeling and testing with two factors of interest</p></p>
 </div>
 
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-16-2021
+<br/>10-19-2021
 </div>
 
 <div class="d-article">
@@ -2295,13 +2295,23 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li><p>We will assume a model of the form, <span class="math display">\[
 y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
 \]</span> where <span class="math inline">\(\epsilon_{ijk} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> independently. For identifiability, we have to assume that the sums <span class="math inline">\(\sum_{i} \tau_i =  \sum_{j} \beta_{j}= \sum_{ij} \left(\tau\beta\right)_{ij}=0\)</span>. We’ll suppose <span class="math inline">\(i\)</span> ranges from <span class="math inline">\(1, \dots, a\)</span>, <span class="math inline">\(j\)</span> ranges from <span class="math inline">\(1, \dots, b\)</span> and <span class="math inline">\(k\)</span> ranges from <span class="math inline">\(1,\dots, n\)</span>.</p></li>
-<li><p>What do the indices mean?</p>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/7qgi74t4kkleybceodksuroyaavn9zoq.png"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week7-1_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+</div>
+<ol start="2" type="1">
+<li>What do the indices mean?
 <ul>
 <li><span class="math inline">\(i\)</span> indexes levels of the first factor (temperature).</li>
 <li><span class="math inline">\(j\)</span> indexes levels of the second factor (material).</li>
 <li><span class="math inline">\(k\)</span> indexes multiple replicates at a particular combination factor combination <span class="math inline">\(ij\)</span> (battery lifetimes, for fixed temperature <span class="math inline">\(\times\)</span> material combination)</li>
 </ul></li>
-<li><p>What do the greek letters mean?</p>
+<li>What do the greek letters mean?
 <ul>
 <li><span class="math inline">\(\mu\)</span>: An intercept term, representing a global mean.</li>
 <li><span class="math inline">\(\tau_i\)</span>: The effect of the <span class="math inline">\(i^{th}\)</span> level of factor 1 on the average response (effect of temperature setting <span class="math inline">\(i\)</span>)</li>
@@ -2339,6 +2349,34 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 <li><p>The punchline is that if <span class="math inline">\(SS_{A}\)</span> is large, we have evidence against hypothesis A, if <span class="math inline">\(SS_{B}\)</span> is large we have evidence against hypothesis B, and if <span class="math inline">\(SS_{AB}\)</span> is large, we have evidence against hypothesis AB.</p></li>
 <li><p>We can define corresponding mean squares by dividing by the degrees of freedom. For each hypothesis, we get a corresponding F-statistic.</p></li>
 </ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/yvkgkdc6qy3zjhxzi895if0kmvlmb1nu.png"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="week7-1_files/figure-html5/unnamed-chunk-2-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="week7-1_files/figure-html5/unnamed-chunk-2-2.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="week7-1_files/figure-html5/unnamed-chunk-2-3.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="week7-1_files/figure-html5/unnamed-chunk-2-4.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ty9vmqu5m6ajdc1l5roc55hill06mv3y.png"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week7-1_files/figure-html5/unnamed-chunk-2-5.png" width="624" /></p>
+</div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
