@@ -92,8 +92,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-08-17"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-08-17"/>
+<meta property="article:published" itemprop="datePublished" content="2021-12-02"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-12-02"/>
 <meta name="article:author" content="Kris Sankaran"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -112,7 +112,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Designs for Response Surfaces"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["08-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Designs for Response Surfaces"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["12-02-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Designs for Response Surfaces","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-08-17T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Designs for Response Surfaces","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-12-02T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2285,7 +2285,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-byline">
   Kris Sankaran true 
   
-<br/>08-17-2021
+<br/>12-02-2021
 </div>
 
 <div class="d-article">
@@ -2345,13 +2345,13 @@ Figure 1: Initial runs are using a factorial design, while later runs use a CCD.
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>ccd_design</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>  run.order std.order time     temp
-1         1         4   35 157.0711
-2         2         1   30 145.0000
-3         3         6   35 150.0000
-4         4         8   35 150.0000
-5         5         2   40 145.0000
-6         6         8   35 150.0000
+<pre><code>  run.order std.order     time     temp
+1         1         4 40.00000 155.0000
+2         2         8 35.00000 150.0000
+3         3         4 35.00000 157.0711
+4         4         6 35.00000 150.0000
+5         5         2 40.00000 145.0000
+6         6         2 42.07107 150.0000
 
 Data are stored in coded form using these coding formulas ...
 time_coded ~ (time - 35)/5
