@@ -134,6 +134,7 @@ $$
 
 10. This phenomenon is called the central limit theorem.
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png")
+```{r, preview = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png"))
 ```

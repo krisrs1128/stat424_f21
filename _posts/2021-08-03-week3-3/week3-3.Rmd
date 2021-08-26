@@ -17,10 +17,15 @@ library("knitr")
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-https://docs.google.com/document/d/12jrrcuA4oGYoVqSR-eqNhWYf0pW09ISaMgibEugwf8w/edit
-```{r}
-include_graphics("https://www.airmeet.com/event/3124e6e0-8b3d-11eb-adfc-b1c12ad96800?code=ffbe7ca8-0134-473b-9f02-83856e75c8f4")
-include_graphics("https://www.airmeet.com/event/3124e6e0-8b3d-11eb-adfc-b1c12ad96800?code=ffbe7ca8-0134-473b-9f02-83856e75c8f4")
+
+```{r, preview=TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/ti2ukjamosvu0quvhgauvre1idm3mjfa.png"))
+```
+
+
+```{r, preview=TRUE}
+display(readImage("https://uwmadison.box.com/shared/static/tmez3gdyre3lth822zm2wimmes3nujyy.png"))
 ```
 
 _Readings [3.5](), [Rmarkdown]()_

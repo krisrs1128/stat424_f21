@@ -64,6 +64,7 @@ $$
 Since chi-squares arise whenever we have sums of squares, this distribution will
 come in handy whenever we need to compare two different sums of squares.
 	
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/dv5tvok0m9vkqqmkd3c0woam5is7gzse.png")
+```{r, preview = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/dv5tvok0m9vkqqmkd3c0woam5is7gzse.png"))
 ```

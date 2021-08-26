@@ -20,8 +20,12 @@ _Readings [4.1](), [Rmarkdown]()_
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/qezu75a0hv1qhqyeoz8wb7sbb294vrsm.png")
-include_graphics("https://uwmadison.box.com/shared/static/dmob9sjh8my7l8hez390o7gnn3vu1oe6.png")
+```
 
+
+```{r, preview = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/dmob9sjh8my7l8hez390o7gnn3vu1oe6.png"))
 ```
 
 ### Multiple Comparisons

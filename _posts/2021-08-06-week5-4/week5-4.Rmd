@@ -62,9 +62,9 @@ First, randomly choose a $p\times p$ latin square
 ### Model Setting
 
 6. Instead of just one set of block effects, we’ll have two sets, $\alpha_i$ and $\beta_k$. This results in,
-$$
+\begin{align*}
 y_{ijk} &= \mu + \alpha_i + \tau_j + \beta_k + \epsilon_{ijk}
-$$
+\end{align*}
     where $\epsilon_{ijk} \mathcal{N}\left(0,\sigma^2\right)$ independently. Note that
   each of the indices $i, j$ and $k$ range from $1, \dots, p$.
 

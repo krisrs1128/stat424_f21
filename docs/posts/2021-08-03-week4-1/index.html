@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week4-1_files/anchor-4.2.2/anchor.min.js","week4-1_files/bowser-1.9.3/bowser.min.js","week4-1_files/distill-2.2.21/template.v2.js","week4-1_files/header-attrs-2.8/header-attrs.js","week4-1_files/jquery-1.11.3/jquery.min.js","week4-1_files/popper-2.6.0/popper.min.js","week4-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week4-1_files/tippy-6.2.7/tippy-light-border.css","week4-1_files/tippy-6.2.7/tippy.css","week4-1_files/tippy-6.2.7/tippy.umd.min.js","week4-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week4-1_files/anchor-4.2.2/anchor.min.js","week4-1_files/bowser-1.9.3/bowser.min.js","week4-1_files/distill-2.2.21/template.v2.js","week4-1_files/figure-html5/unnamed-chunk-2-1.png","week4-1_files/header-attrs-2.8/header-attrs.js","week4-1_files/jquery-1.11.3/jquery.min.js","week4-1_files/popper-2.6.0/popper.min.js","week4-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week4-1_files/tippy-6.2.7/tippy-light-border.css","week4-1_files/tippy-6.2.7/tippy.css","week4-1_files/tippy-6.2.7/tippy.umd.min.js","week4-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2299,12 +2299,17 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png" /><!-- -->
+<p><img src="https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png" /><!-- --></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png" /><!-- -->
+<p><img src="week4-1_files/figure-html5/unnamed-chunk-2-1.png" width="624" data-distill-preview=1 /></p>
+</div>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png"</span><span class='op'>)</span>
 </code></pre>
@@ -2335,10 +2340,10 @@ y_{ij} = \mu + \tau_i + \epsilon_{ij}
 </ol>
 <h3 id="hypothesis-testing">Hypothesis Testing</h3>
 <ol start="6" type="1">
-<li><p>We may want to test whether there is any variation in response across factor levels. Formally, <span class="math display">\[
-H_0: \sigma_\tau^2 &amp;= 0 \\
-H_1: \sigma^2 &gt; 0
-\]</span></p></li>
+<li><p>We may want to test whether there is any variation in response across factor levels. Formally, <span class="math display">\[\begin{align*}
+H_0:&amp; \sigma_\tau^2 = 0 \\
+H_1:&amp; \sigma^2 &gt; 0
+\end{align*}\]</span></p></li>
 <li><p>For our test statistic, we can use the same one as before, <span class="math inline">\(\frac{MS_{\text{treatments}}}{MS_{E}}\)</span> and for the same reasons as in fixed-effect ANOVA, this is <span class="math inline">\(F\)</span>-distributed with <span class="math inline">\((a - 1, N - a)\)</span> d.f. – we reject the null when this quantity is large.</p></li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>

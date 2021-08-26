@@ -2322,9 +2322,9 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </ul>
 <h3 id="model-setting">Model Setting</h3>
 <ol start="6" type="1">
-<li><p>Instead of just one set of block effects, we’ll have two sets, <span class="math inline">\(\alpha_i\)</span> and <span class="math inline">\(\beta_k\)</span>. This results in, <span class="math display">\[
+<li><p>Instead of just one set of block effects, we’ll have two sets, <span class="math inline">\(\alpha_i\)</span> and <span class="math inline">\(\beta_k\)</span>. This results in, <span class="math display">\[\begin{align*}
 y_{ijk} &amp;= \mu + \alpha_i + \tau_j + \beta_k + \epsilon_{ijk}
-\]</span> where <span class="math inline">\(\epsilon_{ijk} \mathcal{N}\left(0,\sigma^2\right)\)</span> independently. Note that each of the indices <span class="math inline">\(i, j\)</span> and <span class="math inline">\(k\)</span> range from <span class="math inline">\(1, \dots, p\)</span>.</p></li>
+\end{align*}\]</span> where <span class="math inline">\(\epsilon_{ijk} \mathcal{N}\left(0,\sigma^2\right)\)</span> independently. Note that each of the indices <span class="math inline">\(i, j\)</span> and <span class="math inline">\(k\)</span> range from <span class="math inline">\(1, \dots, p\)</span>.</p></li>
 <li><p>To make the model identifiable, we assume <span class="math display">\[
 \sum_{i = 1}^{p} \alpha_i = \sum_{j = 1}^{p} \tau_j = \sum_{k = 1}^{p} \beta_{k} = 0
 \]</span></p></li>

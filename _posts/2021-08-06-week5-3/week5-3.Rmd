@@ -19,7 +19,8 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 _Readings [4.1](), [Rmarkdown]()_
 
 ```{r}
-include_graphics("https://uwmadison.box.com/s/gu58jurmhyraebsdyh4txlpyxegxn9xf")
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/gu58jurmhyraebsdyh4txlpyxegxn9xf.png"))
 ```
 
 1. As in standard random effects, sometimes the blocks are from a larger population. For example, in the medical device example, we care about a ``resin effect,'' but don’t care about each individual batch. 

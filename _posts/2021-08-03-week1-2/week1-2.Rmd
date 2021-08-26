@@ -32,8 +32,9 @@ levels, this would be called a $2^2$ design.
 2. We can visualize the 4 possible configurations as corners of a square The
 golf score is the height of the plane.
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/nl6161tped9imsph7qc8c830mmh4ru02.png")
+```{r, preview = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/nl6161tped9imsph7qc8c830mmh4ru02.png"))
 ```
 
 Mathematically,

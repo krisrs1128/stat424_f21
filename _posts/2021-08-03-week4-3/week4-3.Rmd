@@ -22,8 +22,9 @@ _Readings [3.11](), [Rmarkdown]()_
 Imagine all attempts to transform the data have failed. An alternative is to use
 nonparametric ANOVA.
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/kdv2ayi2heooodf0a0j15swxld4ofll7.png")
+```{r, preview = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/kdv2ayi2heooodf0a0j15swxld4ofll7.png"))
 ```
 
 

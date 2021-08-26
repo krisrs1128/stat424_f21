@@ -26,8 +26,8 @@ include_graphics("https://uwmadison.box.com/shared/static/tmez3gdyre3lth822zm2wi
 include_graphics("https://uwmadison.box.com/shared/static/lc34pprk90p7evabiycjiw5c22xsm666.png")
 ```
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow05carx9uwna.png")
+```{r, preview = TRUE}
+display(readImage("https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow05carx9uwna.png"))
 ```
 
 1. If we planned in advance which contrasts we want to use, we are fine. But

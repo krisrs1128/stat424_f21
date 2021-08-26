@@ -26,7 +26,16 @@ of that factor.
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png")
-include_graphics("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png")
+```
+
+
+```{r, preview = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png"))
+```
+
+
+```{r}
 include_graphics("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png")
 include_graphics("https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png")
 ```
@@ -56,10 +65,10 @@ $$
 
 6. We may want to test whether there is any variation in response across factor
 levels. Formally,
-$$
-H_0: \sigma_\tau^2 &= 0 \\
-H_1: \sigma^2 > 0
-$$
+\begin{align*}
+H_0:& \sigma_\tau^2 = 0 \\
+H_1:& \sigma^2 > 0
+\end{align*}
 
 6. For our test statistic, we can use the same one as before,
 $\frac{MS_{\text{treatments}}}{MS_{E}}$ and for the same reasons as in

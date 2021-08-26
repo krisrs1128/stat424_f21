@@ -19,8 +19,9 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 
 _Readings [3.4](), [Rmarkdown]()_
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/ka2t5b3awtqt0mqdqtm8o5zbzs8ur7xp.png")
+```{r, preview = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/ka2t5b3awtqt0mqdqtm8o5zbzs8ur7xp.png"))
 ```
 
 1. Recall the ANOVA model,

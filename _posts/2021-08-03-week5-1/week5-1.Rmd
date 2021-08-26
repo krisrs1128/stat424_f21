@@ -19,7 +19,12 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 include_graphics("https://uwmadison.box.com/shared/static/pq0v9wj2z63szngnxqm0mjfiq323q28k.png")
 include_graphics("https://uwmadison.box.com/shared/static/35mmpml4az9ztv2wd5zp45mxiun11gja.png")
 include_graphics("https://uwmadison.box.com/shared/static/rp2oe5pq19cxxvgps7hie04c3tni14r2.png")
-include_graphics("https://uwmadison.box.com/shared/static/fgtpgaimnwwlm5s63bmj9f8ahe1nq4qp.png")
+```
+
+
+```{r, preview = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/fgtpgaimnwwlm5s63bmj9f8ahe1nq4qp.png"))
 ```
 
 _Readings [4.1](), [Rmarkdown]()_

@@ -78,7 +78,7 @@ variation we'd expect even when fixing the influential factors. Moreover, if we
 can get many replicates, our estimates of hte mean will improve (orange -> red)
 
 ```{r}
-include_graphics("https://uwmadison.box.com/s/vwu2gz8cm01l1fa2u3vc5fha8rsvxycx")
+include_graphics("https://uwmadison.box.com/shared/static/vwu2gz8cm01l1fa2u3vc5fha8rsvxycx.png")
 ```
 
 8. The book highlights a distinction between replicates and repeated measures.
@@ -122,7 +122,12 @@ of walking each person did In the blocked design, consistent effects within
 individuals become detectable. In this example, blocking helped remove nuiscance
 variation resulting from some people walking more than others.
 
-```{r}
+```{r,  preview = TRUE}
 include_graphics("https://uwmadison.box.com/shared/static/rnuet4s27hhidnxde2ys5n3taw9ygjhy.png")
-include_graphics("https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png")
+```
+
+
+```{r, preview = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png"))
 ```
