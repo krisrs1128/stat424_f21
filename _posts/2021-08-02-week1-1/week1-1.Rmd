@@ -75,7 +75,7 @@ include_graphics("https://uwmadison.box.com/shared/static/t4btwq8hyhkt14kcn0p2o8
 7. Replication is important because it helps us understand run-to-run variation.
 If we had only grown the plant once, we’d have no idea about the range of
 variation we'd expect even when fixing the influential factors. Moreover, if we
-can get many replicates, our estimates of hte mean will improve (orange -> red)
+can get many replicates, our estimates of the mean will improve (orange -> red)
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/vwu2gz8cm01l1fa2u3vc5fha8rsvxycx.png")

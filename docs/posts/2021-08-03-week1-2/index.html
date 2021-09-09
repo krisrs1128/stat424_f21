@@ -2299,12 +2299,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li>We can visualize the 4 possible configurations as corners of a square The golf score is the height of the plane.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/nl6161tped9imsph7qc8c830mmh4ru02.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week1-2_files/figure-html5/unnamed-chunk-1-1.png" width="624" data-distill-preview=1 /></p>
+<p><img src="week1-2_files/figure-html5/unnamed-chunk-1-1.png" width="500px" data-distill-preview=1 /></p>
 </div>
 <p>Mathematically,</p>
 <p><span class="math display">\[
@@ -2319,11 +2314,7 @@ y = \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \beta_{12}x_{1}x_{2} + \epsilo
 \]</span></p>
 <p>because now the slopes can change depending on the value of the other factor.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png" /><!-- --></p>
+<p><img src="https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png" width="500px" /></p>
 </div>
 <ol start="4" type="1">
 <li>For example, rearranging terms, we can see that the slope for <span class="math inline">\(x_1\)</span> depends on the value of <span class="math inline">\(x_2\)</span>,</li>
@@ -2335,6 +2326,9 @@ y = \beta_{0} + \left(\beta_{1} + \beta_{12}x_2\right)x_{1} + \beta_{2}x_{2} + \
 <ol start="5" type="1">
 <li>For each configuration of factors, it is better to play several rounds of golf. The more rounds we play, the better our estimates of the effects for each factor. This is a special case of what we discussed in the last notes; the more replicates, the better our estimates.</li>
 </ol>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="https://uwmadison.box.com/shared/static/2w0x5hzg03zk8113e3rcto58tocc4y6w.png" width="500px" /></p>
+</div>
 <h3 id="more-than-2-factors">More than 2 factors</h3>
 <ol start="6" type="1">
 <li><p>Suppose we want to see how K different binary factors influence golf score. We can no longer visualize the effects as corners of a square, but we can still collect samples for each configuration of factors. This is called a <span class="math inline">\(2^K\)</span> experiment.</p></li>
@@ -2346,46 +2340,20 @@ y = \beta_{0} + \left(\beta_{1} + \beta_{12}x_2\right)x_{1} + \beta_{2}x_{2} + \
 <li>etc.</li>
 </ul>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png" /><!-- --></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/2w0x5hzg03zk8113e3rcto58tocc4y6w.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/2w0x5hzg03zk8113e3rcto58tocc4y6w.png" /><!-- --></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/yzxaz23mgvezuny1ybgydrvpxazn3pm2.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/yzxaz23mgvezuny1ybgydrvpxazn3pm2.png" /><!-- --></p>
+<p><img src="https://uwmadison.box.com/shared/static/yzxaz23mgvezuny1ybgydrvpxazn3pm2.png" width="500px" /></p>
 </div>
 <ol start="8" type="1">
 <li>Experimental design is often used in characterizing a process; i.e., how do each of the knobs affect the outcome? Alternatively, we may ask a simpler question – are there knobs that have no effect on the outcome? This is called factor screening. An example is the soldering experiment.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/da48ixumvvvh51y2mi0b6vkaeczqnsmb.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/da48ixumvvvh51y2mi0b6vkaeczqnsmb.png" /><!-- --></p>
+<p><img src="https://uwmadison.box.com/shared/static/da48ixumvvvh51y2mi0b6vkaeczqnsmb.png" width="500px" /></p>
 </div>
 <ol start="9" type="1">
 <li><p>Sometimes we care more about optimization. In this case, we don’t care so much about how each factor influences an outcome; we just want a combination of factors that maximizes it. We can visualize the outcome of hte process as a function of several continuous variables.</p></li>
 <li><p>Intuitively, our experimentation should proceed by first making a preliminary test and then proceeding in the direction of the max. This intuition is formalized in response surface methodology.</p></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/stgfkm41btsdbnzdxkxs7osnd37hahdj.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/stgfkm41btsdbnzdxkxs7osnd37hahdj.png" /><!-- --></p>
+<p><img src="https://uwmadison.box.com/shared/static/stgfkm41btsdbnzdxkxs7osnd37hahdj.png" width="500px" /></p>
 </div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

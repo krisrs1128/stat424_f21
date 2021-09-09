@@ -12,28 +12,28 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+library(knitr)
+library(EBImage)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE, out.width = "500px")
 ```
 
 _Readings [1.1, 1.2, 1.4](), [Rmarkdown]()_
 
 1. [**Golf**] We can imagine someone’s golf score as being a function of many
 factors,
+  
+  ```
+  golf score = f(driver type, type of ball, ...)
+  ```
 
-```
-golf score = f(driver type, type of ball, ...)
-```
-
-In theory, we could manipulate these factors to see how they influenced golf
-score. If we considered only two factors at a time, each with two possible
-levels, this would be called a $2^2$ design.
+  In theory, we could manipulate these factors to see how they influenced golf
+  score. If we considered only two factors at a time, each with two possible
+  levels, this would be called a $2^2$ design.
 
 2. We can visualize the 4 possible configurations as corners of a square The
 golf score is the height of the plane.
 
 ```{r, preview = TRUE}
-library(EBImage)
 display(readImage("https://uwmadison.box.com/shared/static/nl6161tped9imsph7qc8c830mmh4ru02.png"))
 ```
 
@@ -72,6 +72,11 @@ Can you write an expression showing how the slope for $x_{2}$ depends on $x_{1}$
 golf. The more rounds we play, the better our estimates of the effects for each
 factor. This is a special case of what we discussed in the last notes; the more replicates, the better our estimates.
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/2w0x5hzg03zk8113e3rcto58tocc4y6w.png")
+```
+
+
 ### More than 2 factors
 
 6. Suppose we want to see how K different binary factors influence golf score.
@@ -83,14 +88,6 @@ experiment.
 * K = 3 means 8 configurations
 * K = 4 means 16
 * etc.
-
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png")
-```
-
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/2w0x5hzg03zk8113e3rcto58tocc4y6w.png")
-```
 
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/yzxaz23mgvezuny1ybgydrvpxazn3pm2.png")
