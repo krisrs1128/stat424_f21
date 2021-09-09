@@ -17,7 +17,7 @@ library(EBImage)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE, out.width = "500px")
 ```
 
-_Readings [1.1, 1.2, 1.4](), [Rmarkdown]()_
+_Readings [1.1, 1.2, 1.4](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-02-week1-2/week1-2.Rmd)_
 
 1. [**Golf**] We can imagine someone’s golf score as being a function of many
 factors,

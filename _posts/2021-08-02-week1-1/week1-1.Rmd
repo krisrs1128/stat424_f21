@@ -13,10 +13,10 @@ output:
 
 ```{r setup, include=FALSE}
 library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE, out.width = "500px")
 ```
 
-_Readings [1.1, 1.3](), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/master/_posts/2021-08-02-week1-1/week1-1.Rmd)_ 
+_Readings [1.1, 1.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/master/_posts/2021-08-02-week1-1/week1-1.Rmd)_ 
 
 1. What is an experiment?
 
@@ -33,7 +33,7 @@ configurations of factors. At the end, we hope we can arrive at generalizable
 knowledge about which configurations we should use during future growing
 seasons.
 
-```{r, fig.hold = TRUE, out.width = "40%"}
+```{r, fig.hold = TRUE}
 include_graphics("https://uwmadison.box.com/shared/static/hzv2nghaxm87u7s0awfqttmsh2k3963h.png")
 include_graphics("https://uwmadison.box.com/shared/static/c9dof66gs3b2fwp3rhx353e6tpojhqdn.png")
 ```
@@ -60,7 +60,7 @@ average, then we might underestimate the effectiveness of our treatment.
 amount of sickness) will cancel out. However, if the treatment does have an
 effect, we will be able to detect it.
 
-```{r, out.width = "40%", fig.hold = TRUE}
+```{r, fig.hold = TRUE}
 include_graphics("https://uwmadison.box.com/shared/static/cmm759fivv4g0xsg85k25b1cq32zn7gp.png")
 include_graphics("https://uwmadison.box.com/shared/static/y531b9lly0twl9i987978dqp8kwzfze5.png")
 include_graphics("https://uwmadison.box.com/shared/static/t4btwq8hyhkt14kcn0p2o8rwzg2magqa.png")
@@ -90,10 +90,11 @@ conditions.
 repeated measures would be several measurements on the same chip. Replicates
 would be completely independent chips.
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/rqu00u66f4szo40wfevwmesslkniz2d6.png")
-include_graphics("https://uwmadison.box.com/shared/static/inwjp3ntywaoim7vs88wehl6m73wu3pb.png")
-```
+<div class "layout-chunk" data-layout="l-body side">
+<img src="https://uwmadison.box.com/shared/static/rqu00u66f4szo40wfevwmesslkniz2d6.png" width="250"/>
+<img src="https://uwmadison.box.com/shared/static/inwjp3ntywaoim7vs88wehl6m73wu3pb.png" width="600"/>
+</div>
+
 
 ### Blocking
 
@@ -107,7 +108,6 @@ from nuisance factors.
 purple and green shoe sole types (which wears down faster?).
 
 ```{r}
-include_graphics("https://uwmadison.box.com/shared/static/iimo8kf3idq1s9rjb8i853zbrlg989c2.png")
 include_graphics("https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png")
 ```
 
@@ -119,15 +119,13 @@ wears on on the left / right foot.
 
 12. Under design 1, any true shoe sole effect would be drowned out by the amount
 of walking each person did In the blocked design, consistent effects within
-individuals become detectable. In this example, blocking helped remove nuiscance
+individuals become detectable. In this example, blocking helped remove nuisance
 variation resulting from some people walking more than others.
 
-```{r,  preview = TRUE}
-include_graphics("https://uwmadison.box.com/shared/static/rnuet4s27hhidnxde2ys5n3taw9ygjhy.png")
+```{r, fig.cap = "Each nearby pair of dots is a person assigned two of the same sole type. Differences between sole types are washed out by differences in how much people walk."}
+display(readImage("https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png"))
 ```
 
-
-```{r, preview = TRUE}
-library(EBImage)
-display(readImage("https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png"))
+```{r,  preview = TRUE, fig.cap = "When each person is assigned one of each type, consistent improvements in the purple shoe sole become clearer."}
+include_graphics("https://uwmadison.box.com/shared/static/rnuet4s27hhidnxde2ys5n3taw9ygjhy.png")
 ```
