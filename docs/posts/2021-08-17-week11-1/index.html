@@ -2677,7 +2677,7 @@ Let’s use the <span class="math inline">\(2^{6 - 2}\)</span> design that we ju
 </code></pre>
 </div>
 <div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="week11-1_files/figure-html5/unnamed-chunk-3-1.png" alt="Visualizing a $2 ^ {6 - 2}$ design for the injection experiment. Each column is a factor, each row is a run." width="624" />
+<img src="week11-1_files/figure-html5/unnamed-chunk-3-1.png" alt="Visualizing a $2 ^ {6 - 2}$ design for the injection experiment. Each column is a factor, each row is a run." width="500px" />
 <p class="caption">
 Figure 1: Visualizing a <span class="math inline">\(2 ^ {6 - 2}\)</span> design for the injection experiment. Each column is a factor, each row is a run.
 </p>
@@ -2690,14 +2690,14 @@ Figure 1: Visualizing a <span class="math inline">\(2 ^ {6 - 2}\)</span> design 
 <span class='fu'>plot_aliases</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+<p><img src="week11-1_files/figure-html5/unnamed-chunk-4-1.png" width="500px" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>plot_aliases</span><span class='op'>(</span><span class='va'>fit</span>, <span class='fl'>22</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+<p><img src="week11-1_files/figure-html5/unnamed-chunk-5-1.png" width="500px" /></p>
 </div>
 <p>Let’s make a Daniel plot and look at effects.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2705,7 +2705,7 @@ Figure 1: Visualizing a <span class="math inline">\(2 ^ {6 - 2}\)</span> design 
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>daniel_plot</span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+<p><img src="week11-1_files/figure-html5/unnamed-chunk-6-1.png" width="500px" /></p>
 </div>
 <p>Let’s refit to just the submodel.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2733,7 +2733,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>A</span> <span class='op'>~</span> <span class='va'>B</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week11-1_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+<p><img src="week11-1_files/figure-html5/unnamed-chunk-7-1.png" width="500px" /></p>
 </div>
 <p>Notice that the residuals have lower variance at the setting <span class="math inline">\(C = -1\)</span>. Even though <span class="math inline">\(C\)</span> doesn’t have a strong effect, that might be a useful fact, in case you want to select a configuration with the optimal response and low variability around that response.</p>
 <h3 id="evaluating-designs">Evaluating Designs</h3>

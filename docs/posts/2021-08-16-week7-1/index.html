@@ -2302,7 +2302,7 @@ y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
 <span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/7qgi74t4kkleybceodksuroyaavn9zoq.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week7-1_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+<p><img src="week7-1_files/figure-html5/unnamed-chunk-1-1.png" width="500px" data-distill-preview=1 /></p>
 </div>
 <ol start="2" type="1">
 <li>What do the indices mean?
@@ -2316,7 +2316,7 @@ y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
 <li><span class="math inline">\(\mu\)</span>: An intercept term, representing a global mean.</li>
 <li><span class="math inline">\(\tau_i\)</span>: The effect of the <span class="math inline">\(i^{th}\)</span> level of factor 1 on the average response (effect of temperature setting <span class="math inline">\(i\)</span>)</li>
 <li><span class="math inline">\(\beta_{j}\)</span>: The effect of the <span class="math inline">\(j^{th}\)</span> level of factor 2 on the average response (effect of material <span class="math inline">\(j\)</span>)</li>
-<li><span class="math inline">\(\left(\tau\beta\right)_{ij}\)</span>:The interaction / synergy between the ith level of factor 1 and thejth level of factor 2. (especially long / short response times, depending on particular material and temperature settings)</li>
+<li><span class="math inline">\(\left(\tau\beta\right)_{ij}\)</span>:The interaction / synergy between the ith level of factor 1 and the <span class="math inline">\(j^{th}\)</span> level of factor 2. (especially long / short response times, depending on particular material and temperature settings)</li>
 <li><span class="math inline">\(\epsilon_{ijk}\)</span>: The random variation we’d observe if we drew many samples at a fixed setting of the two factors. <strong>Caution</strong>: <span class="math inline">\(\beta_j\)</span> now indexes a treatment of interest. It is <em>not</em> just nuisance blocking variation.</li>
 </ul></li>
 </ol>
@@ -2355,27 +2355,27 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 <span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="week7-1_files/figure-html5/unnamed-chunk-2-1.png" width="624" />
+<img src="week7-1_files/figure-html5/unnamed-chunk-2-1.png" width="500px" />
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="week7-1_files/figure-html5/unnamed-chunk-2-2.png" width="624" />
+<img src="week7-1_files/figure-html5/unnamed-chunk-2-2.png" width="500px" />
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="week7-1_files/figure-html5/unnamed-chunk-2-3.png" width="624" />
+<img src="week7-1_files/figure-html5/unnamed-chunk-2-3.png" width="500px" />
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="week7-1_files/figure-html5/unnamed-chunk-2-4.png" width="624" />
+<img src="week7-1_files/figure-html5/unnamed-chunk-2-4.png" width="500px" />
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ty9vmqu5m6ajdc1l5roc55hill06mv3y.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week7-1_files/figure-html5/unnamed-chunk-2-5.png" width="624" /></p>
+<p><img src="week7-1_files/figure-html5/unnamed-chunk-2-5.png" width="500px" /></p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

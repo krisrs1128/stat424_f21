@@ -91,7 +91,7 @@ formulas for estimating main and interaction effects.
     which is the average of the responses on the edge where A is active minus the
     average when A is inactive. The definition for B is analogous.
     
-```{r, echo = FALSE, fig.margin = TRUE}
+```{r, echo = FALSE}
 display(readImage("https://uwmadison.box.com/shared/static/32pelq6o9jz7nnnavkdx1kjuxfjkvzrc.png"))
 display(readImage("https://uwmadison.box.com/shared/static/hvedijshgaw7so91kqcl1l8eunml4m9v.png"))
 ```

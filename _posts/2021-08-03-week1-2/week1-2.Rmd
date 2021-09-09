@@ -33,7 +33,7 @@ factors,
 2. We can visualize the 4 possible configurations as corners of a square The
 golf score is the height of the plane.
 
-```{r, preview = TRUE}
+```{r}
 display(readImage("https://uwmadison.box.com/shared/static/nl6161tped9imsph7qc8c830mmh4ru02.png"))
 ```
 
@@ -72,8 +72,9 @@ Can you write an expression showing how the slope for $x_{2}$ depends on $x_{1}$
 golf. The more rounds we play, the better our estimates of the effects for each
 factor. This is a special case of what we discussed in the last notes; the more replicates, the better our estimates.
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/2w0x5hzg03zk8113e3rcto58tocc4y6w.png")
+```{r, preview = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/2w0x5hzg03zk8113e3rcto58tocc4y6w.png"))
 ```
 
 

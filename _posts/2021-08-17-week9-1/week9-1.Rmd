@@ -64,8 +64,8 @@ be easy to miss
 * Fix: We can space out the levels at which we test each factor
 ```{r, fig.margin = TRUE}
 library("EBImage")
+display(readImage("https://uwmadison.box.com/shared/static/hvedijshgaw7so91kqcl1l8eunml4m9v.png"))
 display(readImage("https://uwmadison.box.com/shared/static/olbjp5fubt4mm6j1fa7rthe0uoctymef.pnghttps://uwmadison.box.com/shared/static/8h0vt5kcb5ss0l9dlghsswnpf88q8267.png"))
-display(readImage("https://uwmadison.box.com/shared/static/099eopgmbncci9ob9zjo1mvvguxinibn.png"))
 ```
 
 ## Spurious Effects
@@ -77,7 +77,7 @@ display(readImage("https://uwmadison.box.com/shared/static/099eopgmbncci9ob9zjo1
 	* $\sigma^2$ is needed to perform ANOVA
 	
 ```{r, fig.margin = TRUE}
-display(readImage("https://uwmadison.box.com/shared/static/fcujd4j9ano0ypij18w9jy70amtr00p3.png"))
+display(readImage("https://uwmadison.box.com/shared/static/099eopgmbncci9ob9zjo1mvvguxinibn.png"))
 display(readImage("https://uwmadison.box.com/shared/static/rfdz734pv6rxolgwz5fx215qb41qm0k6.png"))
 ```
 	

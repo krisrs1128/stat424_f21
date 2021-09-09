@@ -33,7 +33,7 @@ $$
   $i$ ranges from $1, \dots, a$, $j$ ranges from $1, \dots, b$ and $k$ ranges
   from $1,\dots, n$.
   
-```{r}
+```{r, preview = TRUE}
 library(EBImage)
 display(readImage("https://uwmadison.box.com/shared/static/7qgi74t4kkleybceodksuroyaavn9zoq.png"))
 ```
@@ -52,7 +52,7 @@ display(readImage("https://uwmadison.box.com/shared/static/7qgi74t4kkleybceodksu
     * $\beta_{j}$: The effect of the $j^{th}$ level of factor 2 on the average
     response (effect of material $j$)
     * $\left(\tau\beta\right)_{ij}$:The interaction / synergy between the ith level
-    of factor 1 and thejth level of factor 2. (especially long / short response
+    of factor 1 and the $j^{th}$ level of factor 2. (especially long / short response
     times, depending on particular material and temperature settings)
     * $\epsilon_{ijk}$: The random variation we’d observe if we drew many samples at
     a fixed setting of the two factors.
