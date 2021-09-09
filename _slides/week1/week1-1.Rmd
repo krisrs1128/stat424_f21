@@ -38,19 +38,12 @@ style_mono_light(base_color = "#5f558e")
 
 ---
 
-### Rules of Conduct
-
-* For everyone
-* For students
-* For instructors
-
----
-
 ### Today's Learning Outcomes
 
 - Discuss potential confounding in an observed association
 - Distinguish between a repeated measure and a true replicate
 - Recognize situations where nuisance factors might wash out interesting variation
+- Decide when an interaction term would be useful to include
 
 ---
 ### Today's Learning Outcomes
@@ -112,7 +105,7 @@ accurately.
 ---
 
 
-### Canvas Lecture 1 - Discussion 1
+### Canvas Lecture 1 - Exercise 1
 
 .pull-left[
 1. Are there explanations for this pattern that are not "more recent music
@@ -137,6 +130,14 @@ genres are more dangerous"?
 plants grow
 * Suppose we assign exactly one plant to each combination of factors
 
+```{r}
+data.frame(
+  sunlight = c("low", "low", "high", "high"),
+  water = c("low", "high", "low", "high"),
+  height = 5 + 2 * runif(4)
+)
+```
+
 ---
 
 ### Replication
@@ -145,7 +146,49 @@ plants grow
 have been random chance that the plant in one configuration grew so tall.
 * There is no way of telling whether one combination is better than another
 
+```{r}
+data.frame(
+  sunlight = c("low", "low", "high", "high"),
+  water = c("low", "high", "low", "high"),
+  height = 5 + 2 * runif(4)
+)
+```
+
 ---
+
+### Replication
+
+* We have no estimate of typical variation within a factor combination. It could
+have been random chance that the plant in one configuration grew so tall.
+* There is no way of telling whether one combination is better than another
+
+```{r}
+data.frame(
+  sunlight = c("low", "low", "high", "high"),
+  water = c("low", "high", "low", "high"),
+  height = 5 + 2 * runif(4)
+)
+```
+
+---
+
+### Replication
+
+* We have no estimate of typical variation within a factor combination. It could
+have been random chance that the plant in one configuration grew so tall.
+* There is no way of telling whether one combination is better than another
+
+```{r}
+data.frame(
+  sunlight = c("low", "low", "high", "high"),
+  water = c("low", "high", "low", "high"),
+  height = 5 + 2 * runif(4)
+)
+```
+
+
+---
+
 
 ### Replication
 
@@ -167,16 +210,20 @@ measurements per factor combination
 
 .pull-right[
 <img src="https://uwmadison.box.com/shared/static/rqu00u66f4szo40wfevwmesslkniz2d6.png" width=200/>
-<img src="https://uwmadison.box.com/shared/static/inwjp3ntywaoim7vs88wehl6m73wu3pb.png" width=500/>
 ]
 
 ---
 
 ### Replication vs. Repeated Measures
 
+.pull-left[
 * This fails to account for chip-to-chip variation
 * Having 10 measurements each for 2 chips is not the same as having measurements
 for 20 different chips
+]
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/inwjp3ntywaoim7vs88wehl6m73wu3pb.png" width=500/>
+]
 
 ---
 
@@ -220,7 +267,7 @@ per-person level
 ]
 ---
 
-### Canvas Lecture 1 - Discussion 2
+### Canvas Lecture 1 - Exercise 2
 
 .pull-left[
 Charles Darwin wanted to compare two the growth of two varieties of corn (Zea

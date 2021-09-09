@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Welcome to STAT 424!</title>
+    <title>Motivating Examples</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Kris Sankaran | UW Madison | 9 September 2021" />
     <script src="libs/header-attrs-2.8/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
@@ -13,9 +12,9 @@
 
 
 
-# Welcome to STAT 424!
+# Motivating Examples
 
-&lt;img src="https://uwmadison.box.com/shared/static/ns7dwfx9a86krbgb87rio4ttbmxormia.png" width="250px"/&gt;
+&lt;img src="https://krisrs1128.github.io/stat424_f21/posts/2021-08-03-week1-2/week1-2_files/figure-html5/unnamed-chunk-1-1.png" width="500px"/&gt;
 
 ### Statistical Experimental Design
 
@@ -23,215 +22,121 @@
 
 ---
 
-### Plan for today
+## Manipulating Factors
 
-1. Introductions (5 min)
-2. Review syllabus (10 min)
-3. Rules of conduct (10 min)
-4. 3 Principles of Expeirmental Design (50 min)
+Most of experimental design abstracts away a system into a series of input
+factors and an outcome of interest,
 
----
-
-### Introductions
-
-* Your name
-* What is one topic you would like to learn / skill you you would like to develop in this course?
-* Something you enjoy doing outside of studying?
+$$
+\text{outcome} = f\left(\text{factor}_1, \dots, \text{factor}_K \right)
+$$
 
 ---
 
-### Rules of Conduct
+## Manipulating Factors
 
-* For everyone
-* For students
-* For instructors
+Most of experimental design abstracts away a system into a series of input
+factors and an outcome of interest,
 
----
-
-### Today's Learning Outcomes
-
-- Discuss potential confounding in an observed association
-- Distinguish between a repeated measure and a true replicate
-- Recognize situations where nuisance factors might wash out interesting variation
-
----
-### Today's Learning Outcomes
-
-In other words,
-
-&gt; Realize that drawing correct inferences can be tricky -- but we'll spend the
-semester learning useful problem solving strategies
+$$
+\text{golf score} = f\left(\text{driver type}, \text{type of ball}\right)
+$$
 
 ---
 
-# Randomization
+## Manipulating Factors
+
+Most of experimental design abstracts away a system into a series of input
+factors and an outcome of interest,
+
+$$
+\text{number popped popcorns} = f\left(\text{microwave time}, \text{brand}, \text{butter}\right)
+$$
 
 ---
 
-### Randomization
+## Manipulating Factors
+
+Most of experimental design abstracts away a system into a series of input
+factors and an outcome of interest,
+
+$$
+\text{battery capacity} = f\left(\text{material used}, \text{charging protocol}, \dots\right)
+$$
+
+---
+
+## `\(2^2\)` Design
 
 .pull-left[
-* Suppose we are comparing a new disease treatment with a control, to see
-whether the treatment improves outcomes
-* The randomization principle says we should flip a coin to decide who does /
-doesn't get the treatment
+* Two binary factors = corners of a square
+* We could try approximating the responses using 
+$$
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon,
+$$
+  where `\(x_j \in \{0, 1\}\)` encodes whether factor `\(j\)` is on or off and `\(\epsilon\)` is random noise from one run to the next.
 ]
 
 .pull-right[
-.highlight-comment[
-Why??
-🪙
-]
+&lt;img src="https://krisrs1128.github.io/stat424_f21/posts/2021-08-03-week1-2/week1-2_files/figure-html5/unnamed-chunk-1-1.png" width="800" /&gt;
 ]
 
 ---
 
-### Randomization
-
-* Suppose we only give the treatment to the sickest people
-* They have the most room to improve, no matter the treatment
-* We might believe in a treatment effect that doesn't exist
-
-&lt;img src="https://uwmadison.box.com/shared/static/cmm759fivv4g0xsg85k25b1cq32zn7gp.png" width=800/&gt;
-
----
-
-### Randomization
-
-If we randomly assign treatments, we would not see the (spurious) effect.
-
-&lt;img src="https://uwmadison.box.com/shared/static/y531b9lly0twl9i987978dqp8kwzfze5.png" width=800/&gt;
-
----
-
-### Randomization
-
-If an effect does exist (on average, across all people), we will estimate it
-accurately.
-
-&lt;img src="https://uwmadison.box.com/shared/static/t4btwq8hyhkt14kcn0p2o8rwzg2magqa.png" width=800/&gt;
-
----
-
-
-### Canvas Lecture 1 - Discussion 1
+## Interaction Terms
 
 .pull-left[
-1. Are there explanations for this pattern that are not "more recent music
-genres are more dangerous"?
-2. What would the hypothetical randomized experiment look like?
+* The approximation is poor if the edges are not parallel
+* Consider the richer model, 
+`\begin{align}
+y = &amp;\beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} +\\
+&amp;\beta_{12}x_{1}x_{2} + \epsilon.
+\end{align}`
+* What are the slopes in the figure to the right?
 ]
 
 .pull-right[
-&lt;img src="https://www.callingbullshit.org/case_studies/img/musician_mortality.jpeg" width=475/&gt;
+&lt;img src="https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png" width="800" /&gt;
 ]
 
-
 ---
 
-# Replication
-
----
-
-### Replication
-
-* We are measuring what types of factors (sunlight, water, soil type) help
-plants grow
-* Suppose we assign exactly one plant to each combination of factors
-
----
-
-### Replication
-
-* We have no estimate of typical variation within a factor combination. It could
-have been random chance that the plant in one configuration grew so tall.
-* There is no way of telling whether one combination is better than another
-
----
-
-### Replication
-
-The more measurements we make, the better our estimates will be
-
-&lt;img src="https://uwmadison.box.com/shared/static/vwu2gz8cm01l1fa2u3vc5fha8rsvxycx.png" width="800" /&gt;
-
----
-
-### Replication vs. Repeated Measures
+## Samples to Distributions
 
 .pull-left[
-* A computer chip manufacturer wants many 
-measurements per factor combination
-* Building chips is expensive, so they take many measurements from the same chip
+We could imagine a distribution of response values for each
+factor combination, even though we only have finite samples.
 ]
 
 .pull-right[
-&lt;img src="https://uwmadison.box.com/shared/static/rqu00u66f4szo40wfevwmesslkniz2d6.png" width=200/&gt;
-&lt;img src="https://uwmadison.box.com/shared/static/inwjp3ntywaoim7vs88wehl6m73wu3pb.png" width=500/&gt;
+&lt;img src="https://uwmadison.box.com/shared/static/2w0x5hzg03zk8113e3rcto58tocc4y6w.png" width="800" /&gt;
 ]
 
 ---
 
-### Replication vs. Repeated Measures
-
-* This fails to account for chip-to-chip variation
-* Having 10 measurements each for 2 chips is not the same as having measurements
-for 20 different chips
-
----
-
-# Blocking
-
----
-
-### Blocking
-
-* Suppose you work for a shoe company that wants to compare two new types of
-shoe soles (A and B). Which one wears out the fastest?
-* Our colleague, having heard about randomization, says we should randomly
-assign each person to either A or B
-* What could go wrong? 
-
-&lt;img src="https://uwmadison.box.com/shared/static/0ey2uiyz70ka6ooeieyuoq212tcollbt.png" width=200/&gt;
-&lt;img src="https://uwmadison.box.com/shared/static/c3wesfk1kjwlhh0k01ngnbmk58a05pba.png" width=200/&gt;
----
-
-### Blocking
-
-.pull-left[There is so much person-to-person variation, that it might be hard to tell
-whether the sole type had any effect]
-
-.pull-right[
-&lt;img src="https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png"/&gt;
-]
-
----
-
-### Blocking
+## `\(2^K\)` Design
 
 .pull-left[
-* We instead give each person one of each sole type
-* We can now see whether one sole always lasts longer than the other, on a
-per-person level
+If we had `\(K\)` binary factors, we could still imagine a different distribution
+for each factor combination.
 ]
 
 .pull-right[
-&lt;img src="https://uwmadison.box.com/shared/static/rnuet4s27hhidnxde2ys5n3taw9ygjhy.png"/&gt;
+&lt;img src="https://uwmadison.box.com/shared/static/yzxaz23mgvezuny1ybgydrvpxazn3pm2.png" width="800" /&gt;
 ]
+
 ---
 
-### Canvas Lecture 1 - Discussion 2
+## `\(2^K\)` Design
 
 .pull-left[
-Charles Darwin wanted to compare two the growth of two varieties of corn (Zea
-mays). He grew the plants in pots, but thought there might be effects coming
-from the soil and amount of sunlight each pot received.
- 
-How do you think he accounted for this pot-to-pot variation in his experiments?
+* What is the influence of each individual factor?
+* Are there factors that have no effect? (Factor Screening)
+* Are there combinations that maximize the response? (Process Optimization)
 ]
 
 .pull-right[
-&lt;img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Corncobs_edit1.jpg"/&gt;
+&lt;img src="https://uwmadison.box.com/shared/static/yzxaz23mgvezuny1ybgydrvpxazn3pm2.png" width="800" /&gt;
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

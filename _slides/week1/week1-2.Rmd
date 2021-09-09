@@ -1,0 +1,156 @@
+---
+title: "Motivating Examples"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/xaringan-themer.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+    seal: false  
+---
+```{r echo = FALSE}
+library(knitr)
+library(xaringanthemer)
+opts_chunk$set(echo = FALSE, out.width = 800)
+style_mono_light(base_color = "#5f558e")
+```
+
+# Motivating Examples
+
+<img src="https://krisrs1128.github.io/stat424_f21/posts/2021-08-03-week1-2/week1-2_files/figure-html5/unnamed-chunk-1-1.png" width="500px"/>
+
+### Statistical Experimental Design
+
+.large[Kris Sankaran | UW Madison | 9 September 2021]
+
+---
+
+## Manipulating Factors
+
+Most of experimental design abstracts away a system into a series of input
+factors and an outcome of interest,
+
+$$
+\text{outcome} = f\left(\text{factor}_1, \dots, \text{factor}_K \right)
+$$
+
+---
+
+## Manipulating Factors
+
+Most of experimental design abstracts away a system into a series of input
+factors and an outcome of interest,
+
+$$
+\text{golf score} = f\left(\text{driver type}, \text{type of ball}\right)
+$$
+
+---
+
+## Manipulating Factors
+
+Most of experimental design abstracts away a system into a series of input
+factors and an outcome of interest,
+
+$$
+\text{number popped popcorns} = f\left(\text{microwave time}, \text{brand}, \text{butter}\right)
+$$
+
+---
+
+## Manipulating Factors
+
+Most of experimental design abstracts away a system into a series of input
+factors and an outcome of interest,
+
+$$
+\text{battery capacity} = f\left(\text{material used}, \text{charging protocol}, \dots\right)
+$$
+
+---
+
+## $2^2$ Design
+
+.pull-left[
+* Two binary factors = corners of a square
+* We could try approximating the responses using 
+$$
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon,
+$$
+  where $x_j \in \{0, 1\}$ encodes whether factor $j$ is on or off and $\epsilon$ is random noise from one run to the next.
+]
+
+.pull-right[
+```{r}
+include_graphics("https://krisrs1128.github.io/stat424_f21/posts/2021-08-03-week1-2/week1-2_files/figure-html5/unnamed-chunk-1-1.png")
+```
+]
+
+---
+
+## Interaction Terms
+
+.pull-left[
+* The approximation is poor if the edges are not parallel
+* Consider the richer model, 
+\begin{align}
+y = &\beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} +\\
+&\beta_{12}x_{1}x_{2} + \epsilon.
+\end{align}
+* What are the slopes in the figure to the right?
+]
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/hwusoeowryssz905tm5qsf6s9vbkxvd9.png")
+```
+]
+
+---
+
+## Samples to Distributions
+
+.pull-left[
+We could imagine a distribution of response values for each
+factor combination, even though we only have finite samples.
+]
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/2w0x5hzg03zk8113e3rcto58tocc4y6w.png")
+```
+]
+
+---
+
+## $2^K$ Design
+
+.pull-left[
+If we had $K$ binary factors, we could still imagine a different distribution
+for each factor combination.
+]
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/yzxaz23mgvezuny1ybgydrvpxazn3pm2.png")
+```
+]
+
+---
+
+## $2^K$ Design
+
+.pull-left[
+* What is the influence of each individual factor?
+* Are there factors that have no effect? (Factor Screening)
+* Are there combinations that maximize the response? (Process Optimization)
+]
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/yzxaz23mgvezuny1ybgydrvpxazn3pm2.png")
+```
+]
