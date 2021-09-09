@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Welcome to STAT 424!</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Kris Sankaran | UW Madison | 9 September 2021" />
+    <script src="libs/header-attrs-2.8/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+# Welcome to STAT 424!
+
+&lt;img src="https://uwmadison.box.com/shared/static/ns7dwfx9a86krbgb87rio4ttbmxormia.png" width="250px"/&gt;
+
+### Statistical Experimental Design
+
+.large[Kris Sankaran | UW Madison | 9 September 2021]
+
+---
+
+### Plan for today
+
+1. Introductions (5 min)
+2. Review syllabus (10 min)
+3. Rules of conduct (10 min)
+4. 3 Principles of Expeirmental Design (50 min)
+
+---
+
+### Introductions
+
+* Your name
+* What is one topic you would like to learn / skill you you would like to develop in this course?
+* Something you enjoy doing outside of studying?
+
+---
+
+### Rules of Conduct
+
+* For everyone
+* For students
+* For instructors
+
+---
+
+### Today's Learning Outcomes
+
+- Discuss potential confounding in an observed association
+- Distinguish between a repeated measure and a true replicate
+- Recognize situations where nuisance factors might wash out interesting variation
+
+---
+### Today's Learning Outcomes
+
+In other words,
+
+&gt; Realize that drawing correct inferences can be tricky -- but we'll spend the
+semester learning useful problem solving strategies
+
+---
+
+# Randomization
+
+---
+
+### Randomization
+
+.pull-left[
+* Suppose we are comparing a new disease treatment with a control, to see
+whether the treatment improves outcomes
+* The randomization principle says we should flip a coin to decide who does /
+doesn't get the treatment
+]
+
+.pull-right[
+.highlight-comment[
+Why??
+🪙
+]
+]
+
+---
+
+### Randomization
+
+* Suppose we only give the treatment to the sickest people
+* They have the most room to improve, no matter the treatment
+* We might believe in a treatment effect that doesn't exist
+
+&lt;img src="https://uwmadison.box.com/shared/static/cmm759fivv4g0xsg85k25b1cq32zn7gp.png" width=800/&gt;
+
+---
+
+### Randomization
+
+If we randomly assign treatments, we would not see the (spurious) effect.
+
+&lt;img src="https://uwmadison.box.com/shared/static/y531b9lly0twl9i987978dqp8kwzfze5.png" width=800/&gt;
+
+---
+
+### Randomization
+
+If an effect does exist (on average, across all people), we will estimate it
+accurately.
+
+&lt;img src="https://uwmadison.box.com/shared/static/t4btwq8hyhkt14kcn0p2o8rwzg2magqa.png" width=800/&gt;
+
+---
+
+
+### Canvas Lecture 1 - Discussion 1
+
+.pull-left[
+1. Are there explanations for this pattern that are not "more recent music
+genres are more dangerous"?
+2. What would the hypothetical randomized experiment look like?
+]
+
+.pull-right[
+&lt;img src="https://www.callingbullshit.org/case_studies/img/musician_mortality.jpeg" width=475/&gt;
+]
+
+
+---
+
+# Replication
+
+---
+
+### Replication
+
+* We are measuring what types of factors (sunlight, water, soil type) help
+plants grow
+* Suppose we assign exactly one plant to each combination of factors
+
+---
+
+### Replication
+
+* We have no estimate of typical variation within a factor combination. It could
+have been random chance that the plant in one configuration grew so tall.
+* There is no way of telling whether one combination is better than another
+
+---
+
+### Replication
+
+The more measurements we make, the better our estimates will be
+
+&lt;img src="https://uwmadison.box.com/shared/static/vwu2gz8cm01l1fa2u3vc5fha8rsvxycx.png" width="800" /&gt;
+
+---
+
+### Replication vs. Repeated Measures
+
+.pull-left[
+* A computer chip manufacturer wants many 
+measurements per factor combination
+* Building chips is expensive, so they take many measurements from the same chip
+]
+
+.pull-right[
+&lt;img src="https://uwmadison.box.com/shared/static/rqu00u66f4szo40wfevwmesslkniz2d6.png" width=200/&gt;
+&lt;img src="https://uwmadison.box.com/shared/static/inwjp3ntywaoim7vs88wehl6m73wu3pb.png" width=500/&gt;
+]
+
+---
+
+### Replication vs. Repeated Measures
+
+* This fails to account for chip-to-chip variation
+* Having 10 measurements each for 2 chips is not the same as having measurements
+for 20 different chips
+
+---
+
+# Blocking
+
+---
+
+### Blocking
+
+* Suppose you work for a shoe company that wants to compare two new types of
+shoe soles (A and B). Which one wears out the fastest?
+* Our colleague, having heard about randomization, says we should randomly
+assign each person to either A or B
+* What could go wrong? 
+
+&lt;img src="https://uwmadison.box.com/shared/static/0ey2uiyz70ka6ooeieyuoq212tcollbt.png" width=200/&gt;
+&lt;img src="https://uwmadison.box.com/shared/static/c3wesfk1kjwlhh0k01ngnbmk58a05pba.png" width=200/&gt;
+---
+
+### Blocking
+
+.pull-left[There is so much person-to-person variation, that it might be hard to tell
+whether the sole type had any effect]
+
+.pull-right[
+&lt;img src="https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png"/&gt;
+]
+
+---
+
+### Blocking
+
+.pull-left[
+* We instead give each person one of each sole type
+* We can now see whether one sole always lasts longer than the other, on a
+per-person level
+]
+
+.pull-right[
+&lt;img src="https://uwmadison.box.com/shared/static/rnuet4s27hhidnxde2ys5n3taw9ygjhy.png"/&gt;
+]
+---
+
+### Canvas Lecture 1 - Discussion 2
+
+.pull-left[
+Charles Darwin wanted to compare two the growth of two varieties of corn (Zea
+mays). He grew the plants in pots, but thought there might be effects coming
+from the soil and amount of sunlight each pot received.
+ 
+How do you think he accounted for this pot-to-pot variation in his experiments?
+]
+
+.pull-right[
+&lt;img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Corncobs_edit1.jpg"/&gt;
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

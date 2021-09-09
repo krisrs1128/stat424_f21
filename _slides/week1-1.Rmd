@@ -1,0 +1,235 @@
+---
+title: "Welcome to STAT 424!"
+subtitle: "<br><br> Statistical Experimental Design"
+author: "Kris Sankaran | UW Madison | 9 September 2021"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/xaringan-themer.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+    seal: false  
+---
+```{r echo = FALSE}
+library(knitr)
+library(xaringanthemer)
+opts_chunk$set(echo = FALSE, out.width = 800)
+style_mono_light(base_color = "#5f558e")
+```
+
+# Welcome to STAT 424!
+
+<img src="https://uwmadison.box.com/shared/static/ns7dwfx9a86krbgb87rio4ttbmxormia.png" width="250px"/>
+
+### Statistical Experimental Design
+
+.large[Kris Sankaran | UW Madison | 9 September 2021]
+
+---
+
+### Plan for today
+
+1. Review syllabus (10 min)
+2. Motivation and Expectations (20 min)
+3. Principles of Experimental Design (45 min)
+
+---
+
+### Rules of Conduct
+
+* For everyone
+* For students
+* For instructors
+
+---
+
+### Today's Learning Outcomes
+
+- Discuss potential confounding in an observed association
+- Distinguish between a repeated measure and a true replicate
+- Recognize situations where nuisance factors might wash out interesting variation
+
+---
+### Today's Learning Outcomes
+
+In other words,
+
+> Realize that drawing correct inferences can be tricky -- but we'll spend the
+semester learning useful problem solving strategies
+
+---
+
+# Randomization
+
+---
+
+### Randomization
+
+.pull-left[
+* Suppose we are comparing a new disease treatment with a control, to see
+whether the treatment improves outcomes
+* The randomization principle says we should flip a coin to decide who does /
+doesn't get the treatment
+]
+
+.pull-right[
+.highlight-comment[
+Why??
+🪙
+]
+]
+
+---
+
+### Randomization
+
+* Suppose we only give the treatment to the sickest people
+* They have the most room to improve, no matter the treatment
+* We might believe in a treatment effect that doesn't exist
+
+<img src="https://uwmadison.box.com/shared/static/cmm759fivv4g0xsg85k25b1cq32zn7gp.png" width=800/>
+
+---
+
+### Randomization
+
+If we randomly assign treatments, we would not see the (spurious) effect.
+
+<img src="https://uwmadison.box.com/shared/static/y531b9lly0twl9i987978dqp8kwzfze5.png" width=800/>
+
+---
+
+### Randomization
+
+If an effect does exist (on average, across all people), we will estimate it
+accurately.
+
+<img src="https://uwmadison.box.com/shared/static/t4btwq8hyhkt14kcn0p2o8rwzg2magqa.png" width=800/>
+
+---
+
+
+### Canvas Lecture 1 - Discussion 1
+
+.pull-left[
+1. Are there explanations for this pattern that are not "more recent music
+genres are more dangerous"?
+2. What would the hypothetical randomized experiment look like?
+]
+
+.pull-right[
+<img src="https://www.callingbullshit.org/case_studies/img/musician_mortality.jpeg" width=475/>
+]
+
+
+---
+
+# Replication
+
+---
+
+### Replication
+
+* We are measuring what types of factors (sunlight, water, soil type) help
+plants grow
+* Suppose we assign exactly one plant to each combination of factors
+
+---
+
+### Replication
+
+* We have no estimate of typical variation within a factor combination. It could
+have been random chance that the plant in one configuration grew so tall.
+* There is no way of telling whether one combination is better than another
+
+---
+
+### Replication
+
+The more measurements we make, the better our estimates will be
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/vwu2gz8cm01l1fa2u3vc5fha8rsvxycx.png")
+```
+
+---
+
+### Replication vs. Repeated Measures
+
+.pull-left[
+* A computer chip manufacturer wants many 
+measurements per factor combination
+* Building chips is expensive, so they take many measurements from the same chip
+]
+
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/rqu00u66f4szo40wfevwmesslkniz2d6.png" width=200/>
+<img src="https://uwmadison.box.com/shared/static/inwjp3ntywaoim7vs88wehl6m73wu3pb.png" width=500/>
+]
+
+---
+
+### Replication vs. Repeated Measures
+
+* This fails to account for chip-to-chip variation
+* Having 10 measurements each for 2 chips is not the same as having measurements
+for 20 different chips
+
+---
+
+# Blocking
+
+---
+
+### Blocking
+
+* Suppose you work for a shoe company that wants to compare two new types of
+shoe soles (A and B). Which one wears out the fastest?
+* Our colleague, having heard about randomization, says we should randomly
+assign each person to either A or B
+* What could go wrong? 
+
+<img src="https://uwmadison.box.com/shared/static/0ey2uiyz70ka6ooeieyuoq212tcollbt.png" width=200/>
+<img src="https://uwmadison.box.com/shared/static/c3wesfk1kjwlhh0k01ngnbmk58a05pba.png" width=200/>
+---
+
+### Blocking
+
+.pull-left[There is so much person-to-person variation, that it might be hard to tell
+whether the sole type had any effect]
+
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png"/>
+]
+
+---
+
+### Blocking
+
+.pull-left[
+* We instead give each person one of each sole type
+* We can now see whether one sole always lasts longer than the other, on a
+per-person level
+]
+
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/rnuet4s27hhidnxde2ys5n3taw9ygjhy.png"/>
+]
+---
+
+### Canvas Lecture 1 - Discussion 2
+
+.pull-left[
+Charles Darwin wanted to compare two the growth of two varieties of corn (Zea
+mays). He grew the plants in pots, but thought there might be effects coming
+from the soil and amount of sunlight each pot received.
+ 
+How do you think he accounted for this pot-to-pot variation in his experiments?
+]
+
+.pull-right[
+<img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Corncobs_edit1.jpg"/>
+]
