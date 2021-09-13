@@ -13,22 +13,22 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [](), [Rmarkdown]()_
+_Readings [2.1 - 2.2](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week2-1/week2-1.Rmd)_
 
 1. The most basic idea of statistics is that if you ran an experiment again, you
-would get different results i.e., there is randomness Probability is the
-calculus of randomness
+would get different results i.e., there is randomness. Probability is the
+calculus of randomness.
 
 ### Definitions
 
 2. If $y$ is a discrete random variable taking on values $y_{k}$ with
-probability $p_{k}$, then its mean is defined as $\matbf{E}\left[y\right] =
+probability $p_{k}$, then its mean is defined as $\mathbf{E}\left[y\right] =
 \sum_{k} p_{k}y_{k}$. If it is a continuous variable with density
 $p\left(y\right)$, the corresponding quantity is $\mathbf{E}\left[y\right] =
-\int_{\mathbf{R}} y p\left(y) dy$. Think of integral in the continuous case like
+\int_{\mathbf{R}} y p\left(y\right) dy$. Think of integral in the continuous case like
 the limit of a Riemann sum in calculus
 
 ```{r}
@@ -39,20 +39,20 @@ include_graphics("https://uwmadison.box.com/shared/static/rrvufphhkjkvqjkwgvu4pj
 include_graphics("https://uwmadison.box.com/shared/static/8truwe0fd247iuq7m5p56f2ylx4nmewn.png")
 ```
 
+
+3. To build intuition about this formula, consider some special cases, 
+  * If there are just two values with equal probability, it’s just a midpoint
+  * If one of the probability weights is larger, it’s closer to the larger weight
+  * If you have many values, it’s closer to the ones with large weight
+  
+  
+4. The variance of a random variable $Y$ is defined as $\text{Var}\left[y\right] =
+\mathbf{E}\left[y - \mathbf{E}\left[y\right]\right]^2$. This measures the
+typical distance of $Y$ around its mean.
+
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/plbcevhwx1sq8f9rzvn1vdwr7x70syk5.png")
 ```
-
-3. To build intuition about this formula, consider some special cases, 
-
-* If there are just two values with equal probability, it’s just a midpoint
-* If one of the probability weights is larger, it’s closer to the larger weight
-* If you have many values, it’s closer to the ones with large weight
-
-
-4. The variance of a random variable Y is defined as $\mathbf{V}\left[y\right] =
-\mathbf{E}\left[y - \mathbf{E}\left[y\right]\right]^2$. This measures the
-typical distance of $Y$ around its mean.
 
 ### Useful properties
 
@@ -72,16 +72,16 @@ Variance is not linear, but the variance of a linear combination of two
 random variables can be found simply enough,
 
 $$
-\mathbf{V}\left[c_1 y_1 + c_2 y_2\right] = c_1^2 \mathbf{V}\left[y_1\right] + 
-  c_2^2 \mathbf{V}\left[y_2\right] +
-  c_1 c_2 \textbf{Cov}\left[y_1, y_2\right]
+\text{Var}\left[c_1 y_1 + c_2 y_2\right] = c_1^2 \text{Var}\left[y_1\right] + 
+  c_2^2 \text{Var}\left[y_2\right] +
+  c_1 c_2 \text{Cov}\left[y_1, y_2\right]
 $$
 
 
 where we define the covariance as,
 
 $$
-\textbf{Cov}\left[y_1, y_2\right] = \mathbf{E}\left[\left(y_1 - \mathbf{E}\left[y_1\right]\right)\left(
+\text{Cov}\left[y_1, y_2\right] = \mathbf{E}\left[\left(y_1 - \mathbf{E}\left[y_1\right]\right)\left(
 y_2 - \mathbf{E}\left[y_2\right]\right)\right]
 $$
 

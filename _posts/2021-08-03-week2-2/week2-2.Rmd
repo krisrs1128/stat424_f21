@@ -1,11 +1,11 @@
 ---
 title: "Common Distributions"
 description: |
-  A short description of the post.
+  Distributions that appear across experimental design.
 author:
   - name: Kris Sankaran
     url: {}
-date: 09-14-2021
+date: 09-15-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -16,7 +16,7 @@ library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-_Readings [2.3](), [Rmarkdown]()_
+_Readings [2.3](), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week2-2/week2-2.Rmd)_
 
 1. Don’t try to memorize the formulas for all the probability distributions! Instead, it's much more useful to learn,
 * The relationships between distributions
