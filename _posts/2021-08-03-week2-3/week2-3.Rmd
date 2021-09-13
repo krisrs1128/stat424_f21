@@ -14,7 +14,8 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+library(EBImage)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
 _Readings [2.4](), [Rmarkdown]()_
@@ -110,7 +111,7 @@ $t$-distribution characterization
 from the probability-review lecture,
 
 $$
-P\left(\left(\frac{\bar{y}_1 - \bar{y}_2\right) - \left(\mu_1 - \mu_2\right)}{S_p\sqrt{\frac{2}{n}}} \in \left[t_{0.025, 2\left(n - 1\right), t_{0.975, 2\left(n - 1\right)}}\right]  \right) = 0.95
+P\left(\frac{\left(\bar{y}_1 - \bar{y}_2\right) - \left(\mu_1 - \mu_2\right)}{S_p\sqrt{\frac{2}{n}}} \in \left[t_{0.025, 2\left(n - 1\right), t_{0.975, 2\left(n - 1\right)}}\right]  \right) = 0.95
 $$
 
 To simplify the algebra, let
