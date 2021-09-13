@@ -35,7 +35,7 @@ the limit of a Riemann sum in calculus
 include_graphics("https://uwmadison.box.com/shared/static/rrvufphhkjkvqjkwgvu4pj712hn9tigt.png")
 ```
 
-```{r}
+```{r, fig.cap = "The expectation in a two-valued random variable is a weighted average between the values it can take on."}
 include_graphics("https://uwmadison.box.com/shared/static/8truwe0fd247iuq7m5p56f2ylx4nmewn.png")
 ```
 
@@ -49,7 +49,7 @@ include_graphics("https://uwmadison.box.com/shared/static/8truwe0fd247iuq7m5p56f
 \mathbf{E}\left[y - \mathbf{E}\left[y\right]\right]^2$. This measures the
 typical distance of $Y$ around its mean.
 
-```{r}
+```{r, fig.cap = "Variance measures the typical distance of an observation from the distribution's mean."}
 include_graphics("https://uwmadison.box.com/shared/static/plbcevhwx1sq8f9rzvn1vdwr7x70syk5.png")
 ```
 
@@ -63,9 +63,6 @@ $$
 \mathbf{E}\left[c_{1}y_{1} + c_{2}y_{2}\right] = c_{1}\mathbf{E}\left[y_{1}\right] + c_{2}\mathbf{E}\left[y_{2}\right].
 $$
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/pvfua6rtht3vubmz50yi3xry02t2elo3.png")
-```
 
 Variance is not linear, but the variance of a linear combination of two
 random variables can be found simply enough,
@@ -78,11 +75,15 @@ $$
 
 
 where we define the covariance as,
-
 $$
 \text{Cov}\left[y_1, y_2\right] = \mathbf{E}\left[\left(y_1 - \mathbf{E}\left[y_1\right]\right)\left(
 y_2 - \mathbf{E}\left[y_2\right]\right)\right]
 $$
+
+```{r, fig.cap = "If two variables have high covariance, then whether or not they are above their means is often synchronized."}
+include_graphics("https://uwmadison.box.com/shared/static/pvfua6rtht3vubmz50yi3xry02t2elo3.png")
+```
+
 
 ### Sampling and Estimators
 
