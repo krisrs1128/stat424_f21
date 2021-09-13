@@ -39,7 +39,6 @@ include_graphics("https://uwmadison.box.com/shared/static/rrvufphhkjkvqjkwgvu4pj
 include_graphics("https://uwmadison.box.com/shared/static/8truwe0fd247iuq7m5p56f2ylx4nmewn.png")
 ```
 
-
 3. To build intuition about this formula, consider some special cases, 
   * If there are just two values with equal probability, it’s just a midpoint
   * If one of the probability weights is larger, it’s closer to the larger weight
