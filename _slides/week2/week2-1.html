@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Probability Review</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Kris Sankaran | UW Madison | 14 September 2021" />
+    <script src="libs/header-attrs-2.8/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+# Probability Review
+
+&lt;img src="https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png" width="250px"/&gt;
+
+### Statistical Experimental Design
+
+.large[Kris Sankaran | UW Madison | 14 September 2021]
+
+---
+
+### Why Probability?
+
+* Statistics helps us draw inferences from the specific to the general
+* Starting from a sample, we would like to say something true about the
+population
+* Hypothesis tests and confidence intervals use results from probability
+
+---
+
+### Sample `\(\rightarrow\)` Population Properties
+
+* The distribution `\(\mathbf{P}\)` summarizes our model of the world
+* We will be happy if we can make precise statements about it
+  - Where is the center?
+  - How spread out is it?
+  - What is its shape?
+  - How many peaks does it have? 
+  - ...
+
+---
+
+### Statistical Estimators
+
+* We only have access to a sample `\(x_1, \dots, x_n\)` from `\(P\)`.
+  - Assume they are all independent replicates
+* We can define functions of the sample in order to estimate properties of
+`\(\mathbf{P}\)`
+  - `\(\bar{x} \approx \mu\left(\mathbf{P}\right)\)`
+  - `\(\frac{1}{n - 1}\sum_{i = 1}^{n} \left(x_i - \bar{x}\right)^2 \approx \sigma^2\left(\mathbf{P}\right)\)`
+
+---
+
+### How to evaluate estimators?
+
+* Suppose we have 100 samples from a random normal distribution with unknown
+mean `\(\mu\)`?
+* Which is a better estimator of the mean? Why?
+
+\begin{align*}
+\text{Option 1:   }&amp;\bar{x}_{10} = \frac{1}{10}\sum_{i = 1}^{10} x_i \\
+\text{Option 2:   }&amp;\bar{x}_{100} = \frac{1}{100}\sum_{i = 1}^{100} x_i
+\end{align*}
+
+---
+
+### Low Bias and Variance
+
+The code below generates 5000 datasets with population means 2.5, then computes
+the two estimators.
+
+
+```r
+n_sim &lt;- 50
+datasets &lt;- matrix(rnorm(n_sim * 100, 2.5), n_sim, 100)
+means &lt;- data.frame(
+  id = 1:n_sim,
+  full = rowMeans(datasets[, 1:10]),
+  partial = rowMeans(datasets)
+)
+```
+
+---
+
+### Low Bias and Variance
+
+The code below generates 5000 datasets with population means 2.5, then computes
+the two estimators.
+
+
+```r
+head(means)
+```
+
+```
+##   id     full  partial
+## 1  1 2.207579 2.560667
+## 2  2 2.804884 2.491687
+## 3  3 2.856189 2.511063
+## 4  4 2.971329 2.481178
+## 5  5 2.201920 2.495320
+## 6  6 2.280324 2.518018
+```
+
+---
+
+
+
+### Low Bias and Variance
+
+.pull-left[
+* Unbiased: The statistic is centered around the truth
+* Low Variance: The spread of the statistic is low
+* Using all the data gives an estimate with lower variance than using only a
+fraction
+]
+
+.pull-right[
+![](week2-1_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+]
+
+
+### Discussion (if time)
+
+* Can you come up with two estimates of the population mean, one of which is biased
+but low variance, and the other which has low / no bias and high variance?
+* Can you design a simulation to compare the bias and variance of the following
+estimates of the population standard deviation?
+
+\begin{align*}
+\text{Option 1:   }&amp; \sqrt{\frac{1}{n - 1}\sum_{i = 1}^{n}\left(x_i - \bar{x}\right)^2}
+\text{Option 2:   }&amp; 1.483\left[\frac{1}{n}\sum_{i = 1}^{n} \abs{x_i - \bar{x}_i}\right]
+\end{align*}
+
+
+\end{align*}
+
+---
+
+# Central Limit Theorem
+
+---
+
+### Theorem Statement
+
+If `\(y_i\)` are drawn i.i.d. from some distribution with mean `\(\mu\)` and variance
+`\(\sigma^2\)`, then
+
+\begin{align*}
+\frac{\sqrt{n}\left(\bar{y} - \mu\right)}{\sigma} \to \mathcal{N}\left(0, 1\right).
+\end{align*}
+
+This is important because it reduces calculations across a very large class of
+distributions (arbitrary shapes) into calculations with normal distributions.
+
+---
+
+### Exercise Warm-Up
+
+What will be the shape of the histogram in the block below? Why?
+
+
+```r
+#hist(runif(1000))
+```
+
+---
+
+### Exercise Warm-Up
+
+What will be the shape of the histogram in the block below? Why?
+
+
+```r
+hist(runif(1000))
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+---
+
+### Exercise Warm-Up
+
+What will be the shape of the `hist` command in the code block below? Why?
+
+
+```r
+datasets &lt;- matrix(n_sim * 1000, nrow = n_sim, ncol = 1000)
+#hist(rowMeans(datasets), breaks = 100)
+```
+
+---
+
+### Exercise Warm-Up
+
+What will be the shape of the `hist` command in the code block below? Why?
+
+
+```r
+datasets &lt;- matrix(n_sim * 1000, nrow = n_sim, ncol = 1000)
+hist(rowMeans(datasets), breaks = 100)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+### Exercise
+
+What will be the differences between the three histograms below? Why?
+
+
+```r
+plot_hist &lt;- function(sample_size) {
+  matrix(runif(n_sim * sample_size), n_sim, sample_size) %&gt;%
+    rowMeans() %&gt;%
+    hist(breaks = 50)
+}
+
+#plot_hist(1)
+#plot_hist(2)
+#plot_hist(1000)
+```
+
+---
+
+### Exercise
+
+What will be the differences between the two histograms below? Why?
+
+
+```r
+plot_hist(1)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+---
+
+### Exercise
+
+What will be the differences between the two histograms below? Why?
+
+
+```r
+plot_hist(2)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+---
+
+### Exercise
+
+What will be the differences between the two histograms below? Why?
+
+
+```r
+plot_hist(1000)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+---
+
+# Useful Distributions
+
+---
+
+### `\(t\)` Distribution
+
+You can use the `dt` function in R to get density for the `\(t\)` distribution.
+
+
+```r
+x &lt;- seq(-3, 3, length.out = 100)
+data.frame(x, density = dt(x, df=2)) %&gt;%
+  ggplot() +
+  geom_line(aes(x, density))
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+---
+
+### `\(t\)` Distribution
+
+It has a hyperparameter, called the "degrees-of-freedom."
+
+
+```r
+densities &lt;- map_dfr(
+  seq(1, 10, .5), 
+  ~ data.frame(x, density = dt(x, .), df = .)
+)
+
+ggplot(densities) +
+  geom_line(aes(x, density, col = df, group = df)) +
+  theme(legend.position = "right")
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+
+---
+
+### `\(t\)` Distribution
+
+We can generate samples from this using the `rt` function.
+
+
+```r
+hist(rt(1000, df = 4), breaks = 100)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+
+---
+
+### chi-square Distribution
+
+
+* `dchisq` gets the density
+* `rchisq` simulates samples
+* `pchisq` gets the probability below
+
+![](week2-1_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+
+---
+
+`\(F\)` Distribution
+
+* `df` gets the density 
+* `rf` simulates samples
+* `pf` gets the probability below
+
+
+```r
+hist(rf(1000, 1, 100), breaks = 100)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+
+---
+
+`\(F\)` Distribution
+
+* `df` gets the density 
+* `rf` simulates samples
+* `pf` gets the probability below
+
+
+```r
+hist(rf(1000, 10, 10), breaks = 100)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+
+---
+
+# Where these distributions arise
+
+---
+
+### Main Idea
+
+* We will often want the distribution of a particular statistic
+* We may know the distribution of individual terms within the statistic
+* Learning how one distribution arises as a function of another is key
+
+---
+
+### Chi-square Distribution
+
+.pull-left[
+This distribution arises as the sum-of-squares of standard normals. If 
+`\(z_k \sim \mathcal{N}\left(0, 1\right)\)`, then `\(\sum_{k = 1}^{K} z_k^2 \sim \chi^2_{K}\)`.
+]
+
+.pull-right[
+
+```r
+rchisq(n_sim, 5) %&gt;%
+  hist(breaks = 50)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+### Chi-square Distribution
+
+.pull-left[
+This distribution arises as the sum-of-squares of standard normals. If 
+`\(z_k \sim \mathcal{N}\left(0, 1\right)\)`, then `\(\sum_{k = 1}^{K} z_k^2 \sim \chi^2_{K}\)`.
+]
+
+.pull-right[
+
+```r
+matrix(rnorm(n_sim * 5), n_sim, 5)^2 %&gt;%
+  rowSums() %&gt;%
+  hist(breaks = 50)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+### Chi-square Distribution
+
+A related (but nontrivial) fact is that if `\(y_i \sim \mathcal{N}\left(\mu, \sigma^2\right)\)`,
+
+\begin{align}
+\frac{1}{\sigma^2}\sum_{i = 1}^{n}\left(y_i - \bar{y}\right)^2 \sim \chi^2_{n - 1}
+\end{align}
+
+---
+
+### Chi-square Distribution
+
+
+```r
+hist(rchisq(n_sim, 9), breaks = 50, col = rgb(0, 0, 1, .6))
+datasets &lt;- rerun(n_sim, rnorm(10, 2.5, 1))
+ss &lt;- map_dbl(datasets, ~ sum((. - mean(.)) ^ 2))
+hist(ss, breaks = 50, col = rgb(0, 1, 0, 0.6), add = TRUE)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+
+---
+
+### t Distribution
+
+The `\(t\)` distribution can be formed as the ratio, 
+
+$$
+\frac{\mathcal{N}\left(0, 1\right)}{\sqrt{\frac{\chi^2_{K}}{K}}}
+$$
+
+This ratio often occurs when we standardize using an estimate of the standard
+deviation,
+
+$$
+\frac{\sqrt{n}\left(\bar{y} - \mu\right)}{S}
+$$
+
+---
+
+### Exercise
+
+Write a small simulation to generate `\(t\)`-distributed variables (with whatever
+d.f. you want), without using `rt`. 
+  - Bonus: Make a histogram
+  - Bonus: Use only `rnorm()`.
+
+---
+
+### Solution 1
+
+
+```r
+df &lt;- 3
+(rnorm(n_sim) / sqrt(rchisq(n_sim, df) / df)) %&gt;%
+  hist(breaks = 100)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+
+
+---
+
+### Solution 2
+
+
+```r
+normalized_stat &lt;- function(n) {
+  y &lt;- rnorm(n)
+  sqrt(n) * mean(y) / sd(y)
+}
+
+rerun(n_sim, normalized_stat(df + 1)) %&gt;%
+  unlist() %&gt;%
+  hist(breaks = 100)
+```
+
+![](week2-1_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
+
+---
+
+### `\(F\)` Distribution
+
+This distribution arises as the ratio,
+
+$$
+F_{u, v} = \frac{\frac{1}{u}\chi^2_u}{\frac{1}{v}\chi^2_v}.
+$$
+
+Since chi-squares come up whenever we compute sums-of-squares of normals, this
+statistic will arise whenever we want to compare two different sums-of-squares.
+
+---
+
+### Summary
+
+&lt;img src="https://uwmadison.box.com/shared/static/dv5tvok0m9vkqqmkd3c0woam5is7gzse.png"/&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

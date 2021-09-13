@@ -1,0 +1,495 @@
+---
+title: "Probability Review"
+author: "Kris Sankaran | UW Madison | 14 September 2021"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/xaringan-themer.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+    seal: false  
+---
+```{r echo = FALSE}
+library(knitr)
+library(xaringanthemer)
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, dpi = 500, cache = TRUE)
+style_mono_light(base_color = "#5f558e")
+```
+
+```{r, echo = FALSE}
+library(purrr)
+library(tidyr)
+library(ggplot2)
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
+```
+
+# Probability Review
+
+<img src="https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png" width="250px"/>
+
+### Statistical Experimental Design
+
+.large[Kris Sankaran | UW Madison | 14 September 2021]
+
+---
+
+### Why Probability?
+
+* Statistics helps us draw inferences from the specific to the general
+* Starting from a sample, we would like to say something true about the
+population
+* Hypothesis tests and confidence intervals use results from probability
+
+---
+
+### Sample $\rightarrow$ Population Properties
+
+* The distribution $\mathbf{P}$ summarizes our model of the world
+* We will be happy if we can make precise statements about it
+  - Where is the center?
+  - How spread out is it?
+  - What is its shape?
+  - How many peaks does it have? 
+  - ...
+
+---
+
+### Statistical Estimators
+
+* We only have access to a sample $x_1, \dots, x_n$ from $P$.
+  - Assume they are all independent replicates
+* We can define functions of the sample in order to estimate properties of
+$\mathbf{P}$
+  - $\bar{x} \approx \mu\left(\mathbf{P}\right)$
+  - $\frac{1}{n - 1}\sum_{i = 1}^{n} \left(x_i - \bar{x}\right)^2 \approx \sigma^2\left(\mathbf{P}\right)$
+
+---
+
+### How to evaluate estimators?
+
+* Suppose we have 100 samples from a random normal distribution with unknown
+mean $\mu$?
+* Which is a better estimator of the mean? Why?
+
+\begin{align*}
+\text{Option 1:   }&\bar{x}_{10} = \frac{1}{10}\sum_{i = 1}^{10} x_i \\
+\text{Option 2:   }&\bar{x}_{100} = \frac{1}{100}\sum_{i = 1}^{100} x_i
+\end{align*}
+
+---
+
+### Low Bias and Variance
+
+The code below generates 5000 datasets with population means 2.5, then computes
+the two estimators.
+
+```{r}
+n_sim <- 50
+datasets <- matrix(rnorm(n_sim * 100, 2.5), n_sim, 100)
+means <- data.frame(
+  id = 1:n_sim,
+  full = rowMeans(datasets[, 1:10]),
+  partial = rowMeans(datasets)
+)
+```
+
+---
+
+### Low Bias and Variance
+
+The code below generates 5000 datasets with population means 2.5, then computes
+the two estimators.
+
+```{r}
+head(means)
+```
+
+---
+
+```{r, echo = FALSE}
+p <- means %>%
+  pivot_longer(-id, names_to = "estimator")
+```
+
+### Low Bias and Variance
+
+.pull-left[
+* Unbiased: The statistic is centered around the truth
+* Low Variance: The spread of the statistic is low
+* Using all the data gives an estimate with lower variance than using only a
+fraction
+]
+
+.pull-right[
+```{r, include = TRUE, echo = FALSE}
+ggplot(p) +
+  geom_histogram(
+    aes(value, fill = estimator),
+    position = "identity",
+    bins = 100,
+    alpha = 0.6
+  )
+```
+]
+
+
+### Discussion (if time)
+
+* Can you come up with two estimates of the population mean, one of which is biased
+but low variance, and the other which has low / no bias and high variance?
+* Can you design a simulation to compare the bias and variance of the following
+estimates of the population standard deviation?
+
+\begin{align*}
+\text{Option 1:   }& \sqrt{\frac{1}{n - 1}\sum_{i = 1}^{n}\left(x_i - \bar{x}\right)^2}
+\text{Option 2:   }& 1.483\left[\frac{1}{n}\sum_{i = 1}^{n} \abs{x_i - \bar{x}_i}\right]
+\end{align*}
+
+
+\end{align*}
+
+---
+
+# Central Limit Theorem
+
+---
+
+### Theorem Statement
+
+If $y_i$ are drawn i.i.d. from some distribution with mean $\mu$ and variance
+$\sigma^2$, then
+
+\begin{align*}
+\frac{\sqrt{n}\left(\bar{y} - \mu\right)}{\sigma} \to \mathcal{N}\left(0, 1\right).
+\end{align*}
+
+This is important because it reduces calculations across a very large class of
+distributions (arbitrary shapes) into calculations with normal distributions.
+
+---
+
+### Exercise Warm-Up
+
+What will be the shape of the histogram in the block below? Why?
+
+```{r}
+#hist(runif(1000))
+```
+
+---
+
+### Exercise Warm-Up
+
+What will be the shape of the histogram in the block below? Why?
+
+```{r, fig.width = 7, fig.height = 4}
+hist(runif(1000))
+```
+
+---
+
+### Exercise Warm-Up
+
+What will be the shape of the `hist` command in the code block below? Why?
+
+```{r}
+datasets <- matrix(n_sim * 1000, nrow = n_sim, ncol = 1000)
+#hist(rowMeans(datasets), breaks = 100)
+```
+
+---
+
+### Exercise Warm-Up
+
+What will be the shape of the `hist` command in the code block below? Why?
+
+```{r, fig.width = 7, fig.height = 3}
+datasets <- matrix(n_sim * 1000, nrow = n_sim, ncol = 1000)
+hist(rowMeans(datasets), breaks = 100)
+```
+
+---
+
+### Exercise
+
+What will be the differences between the three histograms below? Why?
+
+```{r, fig.width = 7, fig.height = 2}
+plot_hist <- function(sample_size) {
+  matrix(runif(n_sim * sample_size), n_sim, sample_size) %>%
+    rowMeans() %>%
+    hist(breaks = 50)
+}
+
+#plot_hist(1)
+#plot_hist(2)
+#plot_hist(1000)
+```
+
+---
+
+### Exercise
+
+What will be the differences between the two histograms below? Why?
+
+```{r, fig.width = 7.5, fig.height = 3.8}
+plot_hist(1)
+```
+
+---
+
+### Exercise
+
+What will be the differences between the two histograms below? Why?
+
+```{r, fig.width = 7.5, fig.height = 3.8}
+plot_hist(2)
+```
+
+---
+
+### Exercise
+
+What will be the differences between the two histograms below? Why?
+
+```{r, fig.width = 7.5, fig.height = 3.8}
+plot_hist(1000)
+```
+
+---
+
+# Useful Distributions
+
+---
+
+### $t$ Distribution
+
+You can use the `dt` function in R to get density for the $t$ distribution.
+
+```{r, fig.height = 2.5, fig.width = 7}
+x <- seq(-3, 3, length.out = 100)
+data.frame(x, density = dt(x, df=2)) %>%
+  ggplot() +
+  geom_line(aes(x, density))
+```
+
+---
+
+### $t$ Distribution
+
+It has a hyperparameter, called the "degrees-of-freedom."
+
+```{r, fig.height = 2, fig.width = 5.5}
+densities <- map_dfr(
+  seq(1, 10, .5), 
+  ~ data.frame(x, density = dt(x, .), df = .)
+)
+
+ggplot(densities) +
+  geom_line(aes(x, density, col = df, group = df)) +
+  theme(legend.position = "right")
+```
+
+---
+
+### $t$ Distribution
+
+We can generate samples from this using the `rt` function.
+
+```{r, fig.height = 3.5, fig.width = 7}
+hist(rt(1000, df = 4), breaks = 100)
+```
+
+---
+
+### chi-square Distribution
+
+
+* `dchisq` gets the density
+* `rchisq` simulates samples
+* `pchisq` gets the probability below
+
+```{r, echo = FALSE, fig.height = 3, fig.width = 7}
+x <- seq(1e-1, 15, length.out = 100)
+densities <- map_dfr(seq(3, 10, .5), ~ data.frame(x, density = dchisq(x, .), df = .))
+
+ggplot(densities) +
+  geom_line(aes(x, density, col = df, group = df)) +
+  scale_color_viridis_c()
+```
+
+---
+
+$F$ Distribution
+
+* `df` gets the density 
+* `rf` simulates samples
+* `pf` gets the probability below
+
+```{r, fig.height = 3.3, fig.width = 7}
+hist(rf(1000, 1, 100), breaks = 100)
+```
+
+---
+
+$F$ Distribution
+
+* `df` gets the density 
+* `rf` simulates samples
+* `pf` gets the probability below
+
+```{r, fig.height = 3.3, fig.width = 7}
+hist(rf(1000, 10, 10), breaks = 100)
+```
+
+---
+
+# Where these distributions arise
+
+---
+
+### Main Idea
+
+* We will often want the distribution of a particular statistic
+* We may know the distribution of individual terms within the statistic
+* Learning how one distribution arises as a function of another is key
+
+---
+
+### Chi-square Distribution
+
+.pull-left[
+This distribution arises as the sum-of-squares of standard normals. If 
+$z_k \sim \mathcal{N}\left(0, 1\right)$, then $\sum_{k = 1}^{K} z_k^2 \sim \chi^2_{K}$.
+]
+
+.pull-right[
+```{r, fig.height = 3, fig.width = 3.5}
+rchisq(n_sim, 5) %>%
+  hist(breaks = 50)
+```
+
+]
+
+---
+
+### Chi-square Distribution
+
+.pull-left[
+This distribution arises as the sum-of-squares of standard normals. If 
+$z_k \sim \mathcal{N}\left(0, 1\right)$, then $\sum_{k = 1}^{K} z_k^2 \sim \chi^2_{K}$.
+]
+
+.pull-right[
+```{r, fig.height = 3, fig.width = 3.5}
+matrix(rnorm(n_sim * 5), n_sim, 5)^2 %>%
+  rowSums() %>%
+  hist(breaks = 50)
+```
+
+]
+
+---
+
+### Chi-square Distribution
+
+A related (but nontrivial) fact is that if $y_i \sim \mathcal{N}\left(\mu, \sigma^2\right)$,
+
+\begin{align}
+\frac{1}{\sigma^2}\sum_{i = 1}^{n}\left(y_i - \bar{y}\right)^2 \sim \chi^2_{n - 1}
+\end{align}
+
+---
+
+### Chi-square Distribution
+
+```{r, fig.width = 7, fig.height = 3.3}
+hist(rchisq(n_sim, 9), breaks = 50, col = rgb(0, 0, 1, .6))
+datasets <- rerun(n_sim, rnorm(10, 2.5, 1))
+ss <- map_dbl(datasets, ~ sum((. - mean(.)) ^ 2))
+hist(ss, breaks = 50, col = rgb(0, 1, 0, 0.6), add = TRUE)
+```
+
+---
+
+### t Distribution
+
+The $t$ distribution can be formed as the ratio, 
+
+$$
+\frac{\mathcal{N}\left(0, 1\right)}{\sqrt{\frac{\chi^2_{K}}{K}}}
+$$
+
+This ratio often occurs when we standardize using an estimate of the standard
+deviation,
+
+$$
+\frac{\sqrt{n}\left(\bar{y} - \mu\right)}{S}
+$$
+
+---
+
+### Exercise
+
+Write a small simulation to generate $t$-distributed variables (with whatever
+d.f. you want), without using `rt`. 
+  - Bonus: Make a histogram
+  - Bonus: Use only `rnorm()`.
+
+---
+
+### Solution 1
+
+```{r, fig.height = 3.6, fig.width = 7}
+df <- 3
+(rnorm(n_sim) / sqrt(rchisq(n_sim, df) / df)) %>%
+  hist(breaks = 100)
+```
+
+
+---
+
+### Solution 2
+
+```{r, fig.height = 2.6, fig.width = 6}
+normalized_stat <- function(n) {
+  y <- rnorm(n)
+  sqrt(n) * mean(y) / sd(y)
+}
+
+rerun(n_sim, normalized_stat(df + 1)) %>%
+  unlist() %>%
+  hist(breaks = 100)
+```
+
+---
+
+### $F$ Distribution
+
+This distribution arises as the ratio,
+
+$$
+F_{u, v} = \frac{\frac{1}{u}\chi^2_u}{\frac{1}{v}\chi^2_v}.
+$$
+
+Since chi-squares come up whenever we compute sums-of-squares of normals, this
+statistic will arise whenever we want to compare two different sums-of-squares.
+
+---
+
+### Summary
+
+<img src="https://uwmadison.box.com/shared/static/dv5tvok0m9vkqqmkd3c0woam5is7gzse.png"/>
+
