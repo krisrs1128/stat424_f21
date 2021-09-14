@@ -85,8 +85,8 @@ and $S_1$ and $S_2$ are the usual standard deviations for each group
 individually. (consider what happens when $n_1 = n_2 = n$)
 
 6. Under the null hypothesis, this is a ratio between a standard normal and
-chi-square, so $t_0$ is $t$-distributed with $n - 2$ d.f. This gives reference
-distribution under the null.
+chi-square, so $t_0$ is $t$-distributed with $n_1 + n_2 - 2$ d.f. This gives
+reference distribution under the null.
 
 ### Confidence intervals
 
