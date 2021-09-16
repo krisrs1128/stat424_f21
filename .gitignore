@@ -1,3 +1,7 @@
 _posts/*/*.html
 _posts/*/*files*
 .Rproj.user
+_slides/*/*.html
+*.RData
+*.rdb
+*.rdx
