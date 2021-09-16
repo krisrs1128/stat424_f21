@@ -1,0 +1,521 @@
+---
+title: "Two-Sample Testing"
+author: "Kris Sankaran | UW Madison | 16 September 2021"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/xaringan-themer.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+    seal: false  
+---
+
+```{r echo = FALSE}
+library(knitr)
+library(xaringanthemer)
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, dpi = 500, cache = FALSE)
+style_mono_light(base_color = "#5f558e")
+```
+
+```{r, echo = FALSE}
+library(BSDA)
+library(broom)
+library(ggplot2)
+library(purrr)
+library(tidyr)
+
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
+```
+
+# Hypothesis Testing
+
+<img src="/Users/ksankaran/Desktop/stat424_f21/docs/posts/2021-08-03-week2-3/week2-3_files/figure-html5/unnamed-chunk-111-1.png" width="450px"/>
+
+### Statistical Experimental Design
+
+.large[Kris Sankaran | UW Madison | 16 September 2021]
+
+---
+
+
+### Motivation
+
+* Experimental design is concerned with the way many factors (each with many
+levels) can affect a response
+* Simplification: One factor with only two levels
+* This still requires key conceptual developments,
+  - Hypothesis testing
+  - $p$-values
+  - Confidence intervals
+  - Power analysis
+  - Model-checking
+---
+
+### Settings
+
+.pull-left[
+* Two-sample testing is also important in its own right
+* The two sample $t$-test is probably the most widely used statistical procedure
+from the last 100 years
+* Famous applications: Clinical trials, Internet A/B Tests
+]
+
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/gih2fx8094j5qiitfo1wjc12pq8ji341.png" width="320px"/>
+]
+
+---
+
+### Settings
+
+.pull-left[
+* Two-sample testing is also important in its own right
+* The two sample $t$-test is probably the most widely used statistical procedure
+from the last 100 years
+* Famous applications: Clinical trials, Internet A/B Tests
+]
+
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/7ry7lchyvieb39pf449l5vmmirdgy0qt.png" width="700px"/>
+]
+
+---
+
+
+### Philosophy
+
+* Goal: How can we make general conclusions, based only on specific evidence?
+* Main idea: 
+  - Propose a model of the world (the null hypothesis).
+  - See whether data you collect is consistent with that theory
+
+---
+
+### Recipe
+
+.pull-left[
+* Pose a null hypothesis about the world
+* Define a test statistic that should detect departures from that null
+hypothesis
+* Determine that statistic's reference distribution
+* Compute the test statistic on real data, and see if it’s plausibly from
+the reference
+]
+
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/e2vep3vvfvnz8v4kiilim1pjxe2w2upr.png" width=750/>
+]
+
+---
+
+### Example: Concrete Mortars
+
+.pull-left[
+* Compare two mortars
+* We assume 
+\begin{align*}
+y^{(1)}_{1}, \dots, y^{(1)}_{n_{1}} &\sim \mathcal{N}\left(\mu_1, 1\right) \\
+y^{(2)}_{1}, \dots, y^{(2)}_{n_{2}} &\sim \mathcal{N}\left(\mu_2, 1\right)
+\end{align*}
+for some unknown $\mu_1$ and $\mu_2$.
+* The null and alternative hypotheses are,
+
+\begin{align*}
+H_0:& \mu_1 = \mu_2 \\
+H_1:& \mu_1 \neq \mu_2
+\end{align*}
+]
+
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/66793m770ob31z53fpgc4xoci4y0s7fi.png"/>
+]
+
+---
+
+### Example: Concrete Mortars
+
+.pull-left[
+* Compare two mortars
+* We assume 
+\begin{align*}
+y^{(1)}_{1}, \dots, y^{(1)}_{n_{1}} &\sim \mathcal{N}\left(\mu_1, 1\right) \\
+y^{(2)}_{1}, \dots, y^{(2)}_{n_{2}} &\sim \mathcal{N}\left(\mu_2, 1\right)
+\end{align*}
+for some unknown $\mu_1$ and $\mu_2$.
+* The null and alternative hypotheses are,
+
+\begin{align*}
+H_0:& \mu_1 = \mu_2 \\
+H_1:& \mu_1 \neq \mu_2
+\end{align*}
+]
+
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/r9dzi8ar8l7ic7h2xarnrdiwoab6tojz.png"/>
+]
+
+---
+
+### Test Statistic
+
+* We are free to choose a test statistic. Let's consider,
+
+$$
+T\left(\mathbf{y}^1, \mathbf{y}^2\right) = \frac{\bar{y}_1 - \bar{y}_2}{\sqrt{\frac{2}{5}}}
+$$
+
+* The statistic is standardized. Under the null, the statistic has mean 0 and
+variance 1. This follows from,
+
+\begin{align*}
+\text{Var}\left(\bar{y}_1 - \bar{y}_2\right) &= \text{Var}\left(\bar{y}_1\right) + \text{Var}\left(\bar{y}_2\right) \\
+&= \frac{1}{5} + \frac{1}{5}
+\end{align*}
+
+---
+
+### Simulating a Reference Distribution
+
+```{r, fig.height = 2.6, fig.width = 6}
+test_stat <- function(y1, y2, n = 5) {
+  (mean(y1) - mean(y2)) / sqrt(2 / n)
+}
+
+reference <- rerun(5e4, test_stat(rnorm(5), rnorm(5))) %>%
+  unlist()
+hist(reference, breaks = 100, freq = FALSE)
+```
+
+---
+
+### Reference Distribution
+
+We could have found the reference distribution theoretically,
+because it is a linear combination of (independent) Gaussians.
+```{r, fig.height = 2.6, fig.width = 6}
+hist(reference, breaks = 100, freq = FALSE)
+lines(seq(-5, 5, .1), dnorm(seq(-5, 5, .1)), col = "red", lw = 1)
+```
+
+---
+
+### Plausibility on Real Data
+
+In the final step, we compute the test statistic on real data and see whether
+the value is plausible, with respect to the reference.
+
+```{r, fig.height = 1.4, fig.width = 5}
+real_data <- data.frame(
+  mortar = c(rep("A", 5), rep("B", 5)),
+  y = c(rnorm(5), rnorm(5, 1.5))
+)
+
+ggplot(real_data) +
+  geom_point(aes(mortar, y))
+```
+
+---
+
+### Plausibility on Real Data
+
+* The magenta is the observed test statistic. What is blue?
+
+```{r, fig.height = 2.5, fig.width = 7}
+t_observed <- test_stat(real_data$y[1:5], real_data$y[6:10])
+hist(reference, breaks = 100, freq = FALSE)
+lines(seq(-5, 5, .1), dnorm(seq(-5, 5, .1)), col = "red", lw = 1)
+abline(v = t_observed, col = "magenta", lw = 3)
+abline(v = qnorm(0.975), col = "blue", lw = 3)
+abline(v = qnorm(0.025), col = "blue", lw = 3)
+```
+
+---
+
+### Plausibility on Real Data
+
+* $p$-values are a measure of the plausibility of the observed statistic.
+* It is the probability of observing (under the reference) a test-statistic as
+or more extreme than the one we did observe
+
+```{r}
+2 * (pnorm(t_observed))
+```
+
+---
+
+### Package Implementation
+
+This type of two-sample test where the variances are known is called a $z$-test.
+
+```{r}
+library(BSDA)
+library(broom)
+z.test(real_data$y[1:5], real_data$y[6:10], "two.sided", sigma.x = 1, sigma.y = 1) %>%
+  tidy()
+```
+
+---
+
+# $t$ Tests
+
+---
+
+### Estimating $\sigma^2$
+
+What if we hadn't known that variance of the $y_i$?
+
+We could try plugging-in an estimate,
+
+$$
+T\left(\mathbf{y}^1, \mathbf{y}^2\right) = \frac{\bar{y}_1 - \bar{y}_2}{\sqrt{\frac{2\hat{\sigma}^2}{5}}}
+$$
+
+---
+
+### Simulating Reference Distribution
+
+```{r, fig.height = 2.5, fig.width = 7}
+test_stat <- function(y1, y2, n = 5) {
+  sigma <- sqrt((var(y1) + var(y2)) / 2)
+  (mean(y1) - mean(y2)) / (sigma * sqrt(2 / n))
+}
+
+reference <- rerun(5e4, test_stat(rnorm(5), rnorm(5))) %>%
+  unlist()
+hist(reference, breaks = 100, freq = FALSE)
+```
+
+---
+
+### Exercise
+
+These distributions don't quite match...
+
+- Does this fact have any consequences for testing?
+- Why is this reference distribution different anyways?
+
+```{r, fig.height = 2.5, fig.width = 7}
+hist(reference, breaks = 100, freq = FALSE)
+lines(seq(-5, 5, .1), dnorm(seq(-5, 5, .1)), col = "red", lw = 1)
+```
+
+---
+
+### $t$-test
+
+* Since the true reference's tails are heavier than Normal, our $p$-values would
+be over-optimistic
+* The issue is that $\hat{\sigma}$ is itself a random quantity
+
+```{r, fig.height = 2.5, fig.width = 7}
+hist(reference, breaks = 100, freq = FALSE)
+lines(seq(-5, 5, .1), dt(seq(-5, 5, .1), df=8), col = "red", lw = 1)
+```
+
+---
+
+### Direct Implementation
+
+* We can use the $t$-distribution as a reference, and then compute test results
+and $p$-values as before.
+* This is implemented by the `t.test` function in R
+
+```{r}
+t.test(real_data$y[1:5], real_data$y[6:10], var.equal = TRUE) %>%
+  tidy()
+```
+
+---
+
+# Confidence Intervals
+
+---
+
+### Definition
+
+* Hypothesis testing seems a bit roundabout.
+* A 95% confidence interval is a (random) interval $\left[L, U\right]$
+satisfying
+
+$$
+\mathbf{P}\left(\theta \in \left[L, U\right]\right) = 0.95
+$$
+
+---
+
+### Computation
+
+* For the two-sample testing problem, our earlier code returned intervals for
+the difference $\bar{y}_1 - \bar{y}_2$
+* If you know the distribution for a test statistic, you can often back out an
+associated confidence interval
+
+```{r}
+t.test(real_data$y[1:5], real_data$y[6:10], var.equal = TRUE) %>%
+  tidy() %>%
+  select(starts_with("conf"))
+```
+
+---
+
+### Example
+
+The true difference between the groups is 0.
+
+```{r}
+intervals <- rerun(500, tidy(t.test(rnorm(10), rnorm(10)))) %>%
+  bind_rows(.id = "id") %>%
+  mutate(false_alarm = (conf.low > 0) | (conf.high < 0)) %>%
+  select(id, starts_with("conf"), false_alarm)
+head(intervals, 3)
+mean(intervals$false_alarm)
+```
+
+---
+
+### Example
+
+```{r, fig.width = 7, fig.height = 3, dpi = 500}
+ggplot(intervals) +
+  geom_segment(aes(id, conf.low, col = false_alarm, xend = id, yend = conf.high)) +
+  scale_color_brewer(palette = "Set2") +
+  labs(y = "Confidence Interval") +
+  theme(axis.text.x = element_blank(), panel.grid.major.x = element_blank())
+  
+```
+
+---
+
+
+### Derivation (if time)
+
+Define the quantities,
+
+\begin{align*}
+T\left(\mathbf{y}^1, \mathbf{y}^2\right) &:= \bar{y}_1 - \bar{y}_2 \\
+\theta &:= \mu_1 - \mu_2 \\ 
+\hat{\sigma} &:= S_p\sqrt{\frac{2}{n}} \\ 
+t_{0.025, 2\left(n - 1\right)} &:= t_{\text{left}} \\ 
+t_{0.975, 2\left(n - 1\right)} &:= t_{\text{right}}
+\end{align*}
+
+---
+
+### Derivation (if time)
+
+The centered and scaled difference in means is $t$-distributed,
+
+\begin{align}
+\mathbf{P}\left(\frac{T\left(y\right) - \theta}{\hat{\sigma}} \in \left[t_{\text{left}}, t_{\text{right}}\right]\right) = 0.95
+\end{align}
+
+so rearranging terms and using the fact $t_{\text{left}} = -t_{\text{right}}$,
+
+\begin{align}
+\mathbf{P}\left(\theta \in \left[T\left(y\right) - \hat{\sigma}t_{\text{right}}, T\left(y\right) + \hat{\sigma}t_{\text{right}}\right]\right) = 0.95
+\end{align}
+
+i.e., this interval is a confidence interval.
+
+---
+
+### Exercise
+
+Compute a 95% confidence interval for the difference in means of samples from
+group A vs. B.
+
+```{r}
+obs <- data.frame(
+  group = c(rep("A", 8), rep("B", 8)),
+  y = c(0.97, 1.28, -0.29, -0.20, -1.43, 0.67, -0.14, 0.81, 3.51, 1.55, 1.38, 1.54, 3.17, 2.70, 2.13, 1.97)
+)
+```
+
+---
+
+# Diagnostics and Power
+
+---
+
+### Assumptions
+
+Our tests depend on three assumptions,
+
+* Samples are independent
+* The standard deviations are equal
+* The populations are normally distributed
+
+---
+
+### QQ Plots
+
+We can check the second two assumptions using Quantile-Quantile (a.k.a. normal
+probability) plots
+
+<img src="https://uwmadison.box.com/shared/static/n1a3bdzspet06ibsd1yebc1r6w7kzf3o.png" width = 550/>
+
+---
+
+### Actually Normal
+
+```{r, fig.height = 3.3, fig.width = 7}
+qqnorm(rnorm(1000))
+abline(0, 1, col = "red")
+```
+
+---
+
+### Also Actually Normal
+
+```{r, fig.height = 3.3, fig.width = 7}
+qqnorm(rnorm(100))
+abline(0, 1, col = "red")
+```
+
+---
+
+### Heavy Tails
+
+```{r, fig.height = 3.3, fig.width = 7}
+qqnorm(rt(1000, 2))
+abline(0, 1, col = "red")
+```
+
+---
+
+### Exercise
+
+Without making a histogram, determine this distribution's shape.
+
+```{r, fig.height = 3.3, fig.width = 7}
+qqnorm(scale(exp(rnorm(100))))
+abline(0, 1, col = "red")
+```
+
+---
+
+### Power
+
+.pull-left[
+* The power of a test is the probability it can detect a difference when one
+exists
+* It depends on a few things: sample size, effect size, and test statistic used
+* Sometimes you can compute this probability by hand, but often it will be
+necessary to simulate
+]
+
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/06qu4t1q6jemmwto01vgd95jtzd0if3e.png" width=700/>
+]

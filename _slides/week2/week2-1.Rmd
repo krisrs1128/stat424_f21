@@ -15,7 +15,7 @@ output:
 ```{r echo = FALSE}
 library(knitr)
 library(xaringanthemer)
-opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, dpi = 500, cache = TRUE)
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, dpi = 500, cache = FALSE)
 style_mono_light(base_color = "#5f558e")
 ```
 
@@ -37,20 +37,11 @@ theme_set(theme424)
 
 # Probability Review
 
-<img src="https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png" width="250px"/>
+<img src="https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png" width="350px"/>
 
 ### Statistical Experimental Design
 
 .large[Kris Sankaran | UW Madison | 14 September 2021]
-
----
-
-### Why Probability?
-
-* Statistics helps us draw inferences from the specific to the general
-* Starting from a sample, we would like to say something true about the
-population
-* Hypothesis tests and confidence intervals use results from probability
 
 ---
 
@@ -68,7 +59,7 @@ population
 
 ### Statistical Estimators
 
-* We only have access to a sample $x_1, \dots, x_n$ from $P$.
+* We only have access to a sample $x_1, \dots, x_n$ from $\mathbf{P}$.
   - Assume they are all independent replicates
 * We can define functions of the sample in order to estimate properties of
 $\mathbf{P}$
@@ -80,13 +71,10 @@ $\mathbf{P}$
 ### How to evaluate estimators?
 
 * Suppose we have 100 samples from a random normal distribution with unknown
-mean $\mu$?
+mean $\mu$
 * Which is a better estimator of the mean? Why?
 
-\begin{align*}
-\text{Option 1:   }&\bar{x}_{10} = \frac{1}{10}\sum_{i = 1}^{10} x_i \\
-\text{Option 2:   }&\bar{x}_{100} = \frac{1}{100}\sum_{i = 1}^{100} x_i
-\end{align*}
+$$\text{Option 1: } \bar{x} = \frac{1}{10}\sum_{i = 1}^{10} x_i \\ \text{Option 2: } \bar{x} = \frac{1}{100}\sum_{i = 1}^{100} x_i$$
 
 ---
 
@@ -96,12 +84,12 @@ The code below generates 5000 datasets with population means 2.5, then computes
 the two estimators.
 
 ```{r}
-n_sim <- 50
+n_sim <- 5e3
 datasets <- matrix(rnorm(n_sim * 100, 2.5), n_sim, 100)
 means <- data.frame(
   id = 1:n_sim,
-  full = rowMeans(datasets[, 1:10]),
-  partial = rowMeans(datasets)
+  partial = rowMeans(datasets[, 1:10]),
+  full = rowMeans(datasets)
 )
 ```
 
@@ -144,6 +132,7 @@ ggplot(p) +
 ```
 ]
 
+---
 
 ### Discussion (if time)
 
@@ -152,13 +141,7 @@ but low variance, and the other which has low / no bias and high variance?
 * Can you design a simulation to compare the bias and variance of the following
 estimates of the population standard deviation?
 
-\begin{align*}
-\text{Option 1:   }& \sqrt{\frac{1}{n - 1}\sum_{i = 1}^{n}\left(x_i - \bar{x}\right)^2}
-\text{Option 2:   }& 1.483\left[\frac{1}{n}\sum_{i = 1}^{n} \abs{x_i - \bar{x}_i}\right]
-\end{align*}
-
-
-\end{align*}
+$$\text{Option 1:   } \sqrt{\frac{1}{n - 1}\sum_{i = 1}^{n}\left(x_i - \bar{x}\right)^2} \\ \text{Option 2:   } 1.483\left[\frac{1}{n}\sum_{i = 1}^{n} \left|x_i - \bar{x}_i\right|\right]$$
 
 ---
 
@@ -175,8 +158,14 @@ $\sigma^2$, then
 \frac{\sqrt{n}\left(\bar{y} - \mu\right)}{\sigma} \to \mathcal{N}\left(0, 1\right).
 \end{align*}
 
-This is important because it reduces calculations across a very large class of
-distributions (arbitrary shapes) into calculations with normal distributions.
+---
+
+### Theorem Importance
+
+This theorem reduces calculations across arbitrary distributions into
+calculations with normal distributions.
+
+<img src="https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png" width="350px"/>
 
 ---
 
@@ -194,7 +183,7 @@ What will be the shape of the histogram in the block below? Why?
 
 What will be the shape of the histogram in the block below? Why?
 
-```{r, fig.width = 7, fig.height = 4}
+```{r, fig.width = 7, fig.height = 2.4}
 hist(runif(1000))
 ```
 
@@ -202,10 +191,10 @@ hist(runif(1000))
 
 ### Exercise Warm-Up
 
-What will be the shape of the `hist` command in the code block below? Why?
+What will be the shape of the histogram in the block below? Why?
 
 ```{r}
-datasets <- matrix(n_sim * 1000, nrow = n_sim, ncol = 1000)
+datasets <- matrix(runif(n_sim * 1000), nrow = n_sim, ncol = 1000)
 #hist(rowMeans(datasets), breaks = 100)
 ```
 
@@ -213,10 +202,10 @@ datasets <- matrix(n_sim * 1000, nrow = n_sim, ncol = 1000)
 
 ### Exercise Warm-Up
 
-What will be the shape of the `hist` command in the code block below? Why?
+What will be the shape of the histogram in the block below? Why?
 
-```{r, fig.width = 7, fig.height = 3}
-datasets <- matrix(n_sim * 1000, nrow = n_sim, ncol = 1000)
+```{r, fig.width = 7, fig.height = 2.5}
+datasets <- matrix(runif(n_sim * 1000), nrow = n_sim, ncol = 1000)
 hist(rowMeans(datasets), breaks = 100)
 ```
 
@@ -226,7 +215,7 @@ hist(rowMeans(datasets), breaks = 100)
 
 What will be the differences between the three histograms below? Why?
 
-```{r, fig.width = 7, fig.height = 2}
+```{r}
 plot_hist <- function(sample_size) {
   matrix(runif(n_sim * sample_size), n_sim, sample_size) %>%
     rowMeans() %>%
@@ -242,9 +231,9 @@ plot_hist <- function(sample_size) {
 
 ### Exercise
 
-What will be the differences between the two histograms below? Why?
+What will be the differences between the three histograms below? Why?
 
-```{r, fig.width = 7.5, fig.height = 3.8}
+```{r, fig.width = 7.5, fig.height = 2.8}
 plot_hist(1)
 ```
 
@@ -252,9 +241,9 @@ plot_hist(1)
 
 ### Exercise
 
-What will be the differences between the two histograms below? Why?
+What will be the differences between the three histograms below? Why?
 
-```{r, fig.width = 7.5, fig.height = 3.8}
+```{r, fig.width = 7.5, fig.height = 2.8}
 plot_hist(2)
 ```
 
@@ -262,9 +251,9 @@ plot_hist(2)
 
 ### Exercise
 
-What will be the differences between the two histograms below? Why?
+What will be the differences between the three histograms below? Why?
 
-```{r, fig.width = 7.5, fig.height = 3.8}
+```{r, fig.width = 7.5, fig.height = 2.8}
 plot_hist(1000)
 ```
 
@@ -274,11 +263,22 @@ plot_hist(1000)
 
 ---
 
+### R Syntax
+
+* `r{name of density}(n)` will sample $n$ points
+* `d{name of density}(x)` will compute the probability density at at $x$
+* `p{name of density}(x)` will integrate the density up to $x$
+* `q{name of density}(p)` will find the $x$ value of the density at the $p$
+quantile
+
+---
+
 ### $t$ Distribution
 
-You can use the `dt` function in R to get density for the $t$ distribution.
+* We can use the `dt` function to compute the density of the $t$ distribution.
+* Evaluate over a grid of `x` values to make a plot
 
-```{r, fig.height = 2.5, fig.width = 7}
+```{r, fig.height = 2.5, fig.width = 8}
 x <- seq(-3, 3, length.out = 100)
 data.frame(x, density = dt(x, df=2)) %>%
   ggplot() +
@@ -289,9 +289,10 @@ data.frame(x, density = dt(x, df=2)) %>%
 
 ### $t$ Distribution
 
-It has a hyperparameter, called the "degrees-of-freedom."
+It has a hyperparameter, called the "degrees-of-freedom" (df). Smaller df means
+heavier tails.
 
-```{r, fig.height = 2, fig.width = 5.5}
+```{r, fig.height = 1.6, fig.width = 8}
 densities <- map_dfr(
   seq(1, 10, .5), 
   ~ data.frame(x, density = dt(x, .), df = .)
@@ -306,22 +307,21 @@ ggplot(densities) +
 
 ### $t$ Distribution
 
-We can generate samples from this using the `rt` function.
+Here are examples generating samples and computing quantiles.
 
-```{r, fig.height = 3.5, fig.width = 7}
+```{r, fig.height = 2.6, fig.width = 7}
 hist(rt(1000, df = 4), breaks = 100)
+qt(0.975, df = 4)
 ```
 
 ---
 
 ### chi-square Distribution
 
+The chi-square distribution is nonnegative with one parameter and can be
+referenced using `(prefix)chisq`.
 
-* `dchisq` gets the density
-* `rchisq` simulates samples
-* `pchisq` gets the probability below
-
-```{r, echo = FALSE, fig.height = 3, fig.width = 7}
+```{r, echo = FALSE, fig.height = 2.2, fig.width = 7}
 x <- seq(1e-1, 15, length.out = 100)
 densities <- map_dfr(seq(3, 10, .5), ~ data.frame(x, density = dchisq(x, .), df = .))
 
@@ -332,25 +332,19 @@ ggplot(densities) +
 
 ---
 
-$F$ Distribution
+### $F$ Distribution
 
-* `df` gets the density 
-* `rf` simulates samples
-* `pf` gets the probability below
+The F distribution is also nonnegative, but has two parameters.
 
-```{r, fig.height = 3.3, fig.width = 7}
+```{r, fig.height = 2.3, fig.width = 7}
 hist(rf(1000, 1, 100), breaks = 100)
 ```
 
 ---
 
-$F$ Distribution
+### $F$ Distribution
 
-* `df` gets the density 
-* `rf` simulates samples
-* `pf` gets the probability below
-
-```{r, fig.height = 3.3, fig.width = 7}
+```{r, fig.height = 2.3, fig.width = 7}
 hist(rf(1000, 10, 10), breaks = 100)
 ```
 
@@ -376,9 +370,9 @@ $z_k \sim \mathcal{N}\left(0, 1\right)$, then $\sum_{k = 1}^{K} z_k^2 \sim \chi^
 ]
 
 .pull-right[
-```{r, fig.height = 3, fig.width = 3.5}
+```{r, fig.height = 2.8, fig.width = 3.5}
 rchisq(n_sim, 5) %>%
-  hist(breaks = 50)
+  hist(breaks = 50, freq=F, ylim = c(0, .18))
 ```
 
 ]
@@ -393,10 +387,10 @@ $z_k \sim \mathcal{N}\left(0, 1\right)$, then $\sum_{k = 1}^{K} z_k^2 \sim \chi^
 ]
 
 .pull-right[
-```{r, fig.height = 3, fig.width = 3.5}
-matrix(rnorm(n_sim * 5), n_sim, 5)^2 %>%
+```{r, fig.height = 2.8, fig.width = 3.5}
+matrix(rnorm(n_sim * 5)^2, n_sim, 5) %>%
   rowSums() %>%
-  hist(breaks = 50)
+  hist(breaks = 50, freq=F, ylim = c(0, .18))
 ```
 
 ]
@@ -415,7 +409,7 @@ A related (but nontrivial) fact is that if $y_i \sim \mathcal{N}\left(\mu, \sigm
 
 ### Chi-square Distribution
 
-```{r, fig.width = 7, fig.height = 3.3}
+```{r, fig.width = 7, fig.height = 2.8}
 hist(rchisq(n_sim, 9), breaks = 50, col = rgb(0, 0, 1, .6))
 datasets <- rerun(n_sim, rnorm(10, 2.5, 1))
 ss <- map_dbl(datasets, ~ sum((. - mean(.)) ^ 2))
@@ -441,41 +435,6 @@ $$
 
 ---
 
-### Exercise
-
-Write a small simulation to generate $t$-distributed variables (with whatever
-d.f. you want), without using `rt`. 
-  - Bonus: Make a histogram
-  - Bonus: Use only `rnorm()`.
-
----
-
-### Solution 1
-
-```{r, fig.height = 3.6, fig.width = 7}
-df <- 3
-(rnorm(n_sim) / sqrt(rchisq(n_sim, df) / df)) %>%
-  hist(breaks = 100)
-```
-
-
----
-
-### Solution 2
-
-```{r, fig.height = 2.6, fig.width = 6}
-normalized_stat <- function(n) {
-  y <- rnorm(n)
-  sqrt(n) * mean(y) / sd(y)
-}
-
-rerun(n_sim, normalized_stat(df + 1)) %>%
-  unlist() %>%
-  hist(breaks = 100)
-```
-
----
-
 ### $F$ Distribution
 
 This distribution arises as the ratio,
@@ -493,3 +452,39 @@ statistic will arise whenever we want to compare two different sums-of-squares.
 
 <img src="https://uwmadison.box.com/shared/static/dv5tvok0m9vkqqmkd3c0woam5is7gzse.png"/>
 
+---
+
+### Exercise
+
+Write a small simulation to generate $t$-distributed variables (with whatever
+d.f. you want), without using `rt`. 
+  - Bonus: Make a histogram
+  - Bonus: Use only `rnorm()`.
+
+---
+
+### Solution 1
+```{r, echo = FALSE}
+par(mar=c(0, 0, 0, 0))
+```
+
+```{r, fig.height = 2.5, fig.width = 6.8}
+df <- 3
+(rnorm(n_sim) / sqrt(rchisq(n_sim, df) / df)) %>%
+  hist(breaks = 100, freq = F, xlab = NULL, main = NULL)
+```
+
+
+---
+
+### Solution 2
+
+```{r, fig.height = 2.5, fig.width = 6.8}
+normalized_stat <- function(n) {
+  y <- rnorm(n)
+  sqrt(n) * mean(y) / sd(y)
+}
+
+unlist(rerun(n_sim, normalized_stat(df + 1))) %>%
+  hist(breaks = 100, freq = F, xlab = NULL, main = NULL)
+```

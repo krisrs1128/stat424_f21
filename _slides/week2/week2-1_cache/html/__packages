@@ -1,0 +1,12 @@
+base
+dplyr
+purrr
+ggplot2
+lattice
+BSDA
+broom
+rmarkdown
+knitr
+EBImage
+xaringanthemer
+tidyr
