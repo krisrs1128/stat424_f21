@@ -108,9 +108,7 @@ etch_rate$power <- as.factor(etch_rate$power) # consider as discrete levels
 fit <- lm(rate ~ power, data = etch_rate)
 ```
 
-10. Let's say we're interested in the contrast between power levels of 160 and
-180. We have to encode this as a contrast object, and then pass it to the
-`fit.contrast` function.
+10. Let's say we're interested in the contrast between power levels of 160 and 180. We have to encode the contrast as a vector, and then pass it to the `fit.contrast` function. The choice `c(1, -1, 0, 0)` comes from the fact that we want the difference between the first two power levels (160 and 180) and are ignoring all the rest (the two 0's at the end).
 
 ```{r}
 library(gmodels)
