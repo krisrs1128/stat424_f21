@@ -14,92 +14,112 @@ output:
 
 ```{r setup, include=FALSE}
 library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE)
 ```
 
 
-```{r, preview=TRUE}
+_Readings [3.5](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week3-3/week3-3.Rmd)_
+
+1. When we reject the null in ANOVA, we know at least one of the treatments
+deviates from the global average. But which one(s)? Contrasts address this
+question. A contrast is a linear combination of the means,
+    $$
+    \Gamma(c)=\sum_{i=1}^{a} c_{i} \mu_{i}
+    $$
+    For any particular $c$, we test
+    $$
+    \begin{aligned}
+    &H_{0}: \Gamma(c)=0 \\
+    &H_{1}: \Gamma(c) \neq 0
+    \end{aligned}
+    $$
+
+```{r, preview=TRUE, fig.cap = "Is there a difference between group 2 and the average of groups 1 and 3?", echo = FALSE}
 library(EBImage)
 display(readImage("https://uwmadison.box.com/shared/static/ti2ukjamosvu0quvhgauvre1idm3mjfa.png"))
 ```
 
-
-```{r, preview=TRUE}
-display(readImage("https://uwmadison.box.com/shared/static/tmez3gdyre3lth822zm2wimmes3nujyy.png"))
-```
-
-_Readings [3.5](), [Rmarkdown]()_
-
-1. What is a contrast? When we reject the null in ANOVA, we know at least one of
-the treatments deviates from the global average. But which one(s)?
-
-2. Contrasts address this question. A contrast is a linear combination of the
-means,
-$$
-\Gamma(c)=\sum_{i=1}^{a} c_{i} \mu_{i}
-$$
-  For any particular $c$, we test
-$$
-\begin{aligned}
-&H_{0}: \Gamma(c)=0 \\
-&H_{1}: \Gamma(c) \neq 0
-\end{aligned}
-$$
-
-3. To see that this is actually something worth doing, consider the case that we
-have 4 different means, $\mu_1, \mu_2, \mu_3, \mu_4$,
-    * c = (1, 1, -1, -1): Are the first two means different from the last two, on average?
-    * c = (1, -1, 0, 0): Are the first two means equal to each other?
-    * etc.
+2. To motivate this, suppose we have 4 different means, $\mu_1, \mu_2, \mu_3,
+\mu_4$,
+      * c = (1, 1, -1, -1): Are the first two means different from the last two, on average?
+      * c = (1, -1, 0, 0): Are the first two means equal to each other?
+      * etc.
     
 ### Testing Contrasts
 
-4. Remember the hypothesis testing recipe. We need, (a) a test statistic and (b) a reference distribution for that statistic.
+3. Recall the hypothesis testing recipe. We need, (a) a test statistic and (b) a
+reference distribution for that statistic. Our best guess at $\mu_i$ is $\bar{y}_i$, so a reasonable statistic is,
+  $$
+  \hat{\Gamma}(c)=\sum_{i=1}^{a} c_{i} \bar{y}_{i}
+  $$
 
-5. Our best guess at $\mu_i$ is $\bar{y}_i$, so a reasonable statistic is,
-
-$$
-\hat{\Gamma}(c)=\sum_{i=1}^{a} c_{i} \bar{y}_{i}
-$$
-
-6. How will we find its reference distribution? Under the null, this statistic
+4. How will we find its reference distribution? Under the null, this statistic
 is normally distributed with mean 0 and variance,
-$$
-\begin{aligned}
-\operatorname{Var}(\hat{\Gamma}(c)) &=\sum_{i=1}^{a} c_{i}^{2} \operatorname{Var}\left(\bar{y}_{i}\right) \\
-&=\frac{\sigma^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}
-\end{aligned}
-$$
-    Standardizing our original statistic, we obtain,
-\begin{aligned}
-\frac{\hat{\Gamma}(c)}{\sqrt{\operatorname{Var}(\hat{\Gamma}(c))}} &=\frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}}{\sqrt{\frac{\sigma^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}} \\
-& \approx \frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}}{\sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}}
-\end{aligned}
-
-7. To estimate $\sigma^2$, we can use $\hat{\sigma}^2 := MS_E$. This is a good
+    $$
+    \begin{aligned}
+    \operatorname{Var}(\hat{\Gamma}(c)) &=\sum_{i=1}^{a} c_{i}^{2} \operatorname{Var}\left(\bar{y}_{i}\right) \\
+    &=\frac{\sigma^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}
+    \end{aligned}
+    $$
+        Standardizing our original statistic, we obtain,
+    \begin{aligned}
+    \frac{\hat{\Gamma}(c)}{\sqrt{\operatorname{Var}(\hat{\Gamma}(c))}} &=\frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}}{\sqrt{\frac{\sigma^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}} \\
+    & \approx \frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}}{\sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}}
+    \end{aligned}
+  
+5. To estimate $\sigma^2$, we can use $\hat{\sigma}^2 := MS_E$. This is a good
 choice, because it remains valid even when the null is untrue.
 
-8. Since we plugged-in the estimate $\hat{\sigma}^2$, we have divided our normal distribution by the square root of a chi-square. The result is therefore t-distributed, with $N - a$ df.
-
+6. Since we plugged-in the estimate $\hat{\sigma}^2$, we have divided our normal
+distribution by the square root of a chi-square. Therefore, the reference
+distribution is a t-distribution with $N - a$ df.
 
 ### Confidence Intervals for Contrasts
 
-9. If we make the same computations as above, but without assuming that the null
+7. If we make the same computations as above, but without assuming that the null
 is true, we would find that,
-$$
-\mathbf{P}\left(\frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}-\sum_{i=1}^{a} c_{i} \mu_{i}}{\sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}} \in\left[t_{\text {left }}, t_{\text {right }}\right]\right)=0.95
-$$
-    where we choose $t_{\text{left}}$ and $t_{\text{right}}$ to be the 0.025 and
-    0.975 quantiles of a $t$-distribution with $N - a$ df.
+    $$
+    \mathbf{P}\left(\frac{\sum_{i=1}^{a} c_{i} \bar{y}_{i}-\sum_{i=1}^{a} c_{i} \mu_{i}}{\sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}} \in\left[t_{\text {left }}, t_{\text {right }}\right]\right)=0.95
+    $$
+        where we choose $t_{\text{left}}$ and $t_{\text{right}}$ to be the 0.025 and
+      0.975 quantiles of a $t$-distribution with $N - a$ df.
+  
+8. The resulting  confidence interval is,
+    $$
+    \left[\sum_{i=1}^{a} c_{i} \bar{y}_{i}-t_{\text {right }} \sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}, \sum_{i=1}^{a} c_{i} \bar{y}_{i}+t_{\text {right }} \sqrt{\left.\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}\right]}\right.
+    $$
+      This is an explicit formula that you can use in your computations, but don’t let the complexity of the symbols here confuse you. Returning to our original definitions, this is just,
+      $$
+    \left[\hat{\Gamma}(c)-t_{\mathrm{left}} \sqrt{\widehat{\operatorname{Var}}(\hat{\Gamma}(c))}, \hat{\Gamma}(c)+t_{\mathrm{left}} \sqrt{\widehat{\operatorname{Var}}(\hat{\Gamma}(c))}\right]
+    $$
+    which is our point estimate plus and minus $t_{\text{left}}$ standard
+    deviations (we’re writing $\hat{\text{Var}}$ instead of $\text{Var}$ because
+    we don't know the true variance and have plugged in the estimate
+    $\hat{\sigma}^2)$.
+  
+### Code Example
 
-10. The resulting  confidence interval is,
+9. We will continue the etch rate example. Let's refit the same model from before.
 
-$$
-\left[\sum_{i=1}^{a} c_{i} \bar{y}_{i}-t_{\text {right }} \sqrt{\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}}, \sum_{i=1}^{a} c_{i} \bar{y}_{i}+t_{\text {right }} \sqrt{\left.\frac{\hat{\sigma}^{2}}{n} \sum_{i=1}^{a} c_{i}^{2}\right]}\right.
-$$
-    This is an explicit formula that you can use in your computations, but don’t let the complexity of the symbols here confuse you. Returning to our original definitions, this is just,
-$$
-\left[\hat{\Gamma}(c)-t_{\mathrm{left}} \sqrt{\widehat{\operatorname{Var}}(\hat{\Gamma}(c))}, \hat{\Gamma}(c)+t_{\mathrm{left}} \sqrt{\widehat{\operatorname{Var}}(\hat{\Gamma}(c))}\right]
-$$
-    where we’re writing $\hat{\text{Var}}$ instead of $\text{Var}$ because we’re
-plugging in the estimate $\hat{\sigma}^2$.
+```{r}
+library(readr)
+etch_rate <- read_csv("https://uwmadison.box.com/shared/static/vw3ldbgvgn7rupt4tz3ditl1mpupw44h.csv")
+etch_rate$power <- as.factor(etch_rate$power) # consider as discrete levels
+fit <- lm(rate ~ power, data = etch_rate)
+```
+
+10. Let's say we're interested in the contrast between power levels of 160 and
+180. We have to encode this as a contrast object, and then pass it to the
+`fit.contrast` function.
+
+```{r}
+library(gmodels)
+contrast <- c(1, -1, 0, 0)
+fit.contrast(fit, "power", contrast)
+```
+
+11. We can get a confidence interval using the `conf.int` parameter.
+
+```{r}
+fit.contrast(fit, "power", contrast, conf.int = 0.95)
+```
