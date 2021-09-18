@@ -12,128 +12,177 @@ output:
 ---
 
 
-```{r setup, include=FALSE}
-library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
-```
-
-_Readings [3.1 - 3.3](), [Rmarkdown]()_
-
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/h3bbv7cjo0our7syhlsc0tdn5c22xyme.png")
-```
-
-
-```{r, preview = TRUE}
+```{r setup, echo=FALSE}
 library(EBImage)
-display(readImage("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png"))
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE, fig.align = "center")
+
+# custom ggplot color theme
+my_theme <- function() {
+  th <- theme_minimal() +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.background = element_rect(fill = "#f7f7f7"),
+      panel.border = element_rect(
+        fill = NA, color = "#0c0c0c", size = 0.6
+      ),
+      legend.position = "bottom"
+  )
+  theme_set(th)
+}
+my_theme()
 ```
 
+_Readings [3.1 - 3.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week3-1/week3-1.Rmd)_
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/znpaeugwi14nxhuvz2lkmoo2ovv2jtx1.png")
-```
-
-
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/n836t4q718m2o16hluvglplqi4lshgcm.png")
-```
-
-
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/7prsedegwnp6wdghcw6vfv2rs7zsr7nj.png")
-```
-
-
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png")
-```
 
 1. ANOVA is used when we want to compare the effect of different treatments on a
 continuous response. For example,
-* How does the etch rate of a tool depend on its power setting?
-* How do an opera company’s different donation strategies compare with one
-another?
-* How does the average rental time compare across cars?
+    * How does the etch rate of a tool depend on its power setting?
+    * How do an opera company’s different donation strategies compare with one
+    another?
+    * How does the average rental time compare across cars?
+  
+    It is an extension of two sample testing when there are more than two levels
+  possible for a single factor.
 
-2. Visually, it can be used whenever the data can be arranged as a series of
-boxplots.
+```{r, out.width = 100}
+include_graphics("https://uwmadison.box.com/shared/static/h3bbv7cjo0our7syhlsc0tdn5c22xyme.png")
+```
 
 ### Model and Test Setup
 
-3. Formally, consider the model
-
-$$
-y_{ij} = \mu + \tau_i + \epsilon_{ij}
-$$
-where $i=1 \dots a$ and $j=1, \dots, n$ and the errors $\epsilon_{ij} \sim
+2. Formally, consider the model,
+  $$
+  y_{ij} = \mu + \tau_i + \epsilon_{ij}
+  $$
+    where $i=1 \dots a$ and $j=1, \dots, n$ and the errors $\epsilon_{ij} \sim
 \mathcal{N}\left(0, \sigma^2\right)$ are independent.
+    * $i$ indexes different groups
+    * $j$ indexes the samples within groups
+    * $a$ is the number of groups
+    * $n$ is the number of samples in each group 
+    * $N=na$ is the total number of samples
 
-* $i$ indexes different groups
-* $j$ indexes the samples within groups. 
-* $a$ is the number of groups
-* $n$ is the number of samples in each group 
-* $N=na$ is the total number of samples
+```{r, fig.cap = "The underlying distributions in the ANOVA model. Under the null, all the distributions have the same vertical offset.", out.width = 300, preview = TRUE}
+display(readImage("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png"))
+```
 
-4. Our null hypothesis is that none of the groups deviate from the global mean.
+3. Our null hypothesis is that none of the groups deviate from the global mean.
 The alternative is that at least one of the groups is different. Formally,
-
-$$
-H_0: \tau_1 = \dots, = \tau_{a} = 0 \\
-H_1: \tau_{i} \neq 0 \text{ for at least one }i.
-$$
-
+  $$
+  H_0: \tau_1 = \dots, = \tau_{a} = 0 \\
+  H_1: \tau_{i} \neq 0 \text{ for at least one }i.
+  $$
+  
 ### Important Identities
 
-5. The word "analysis" in ANOVA is used in the classical sense of to break
+4. The word "analysis" in ANOVA is used in the classical sense of to break
 something into its parts^[i.e. the oppositive of "synthesis."]. ANOVA breaks the
 observed variation into distinct components,
+    $$
+    \sum_{ij} \color{#ff8200}{\left(y_{ij} - \bar{y}\right)}^2 = n\sum_{i} \color{#447583}{\left(\bar{y}_i - \bar{y}\right)}^2 + \sum_{i,j} \color{#b090c2}{\left(y_{ij} - \bar{y}_{i}\right)}^2
+    $$
+    which is abbreviated as
+  
+    $$
+    \color{#ff8200}{SS_{\text{total}}} = \color{#447583}{SS_{\text{treatments}}} + \color{#b090c2}{SS_{\text{error}}}.
+    $$
+    This is usually called the "ANOVA identity."
 
-$$
-\sum_{ij} \color{#ff8200}{\left(y_{ij} - \bar{y}\right)}^2 = n\sum_{i} \color{#447583}{\left(\bar{y}_i - \bar{y}\right)}^2 + \sum_{i,j} \color{#b090c2}{\left(y_{ij} - \bar{y}_{i}\right)}^2
-$$
-which is abbreviated as
+```{r, fig.cap = "Visual representation of the three terms in the ANOVA identity.", fig.show = "hold", out.width = 150}
+include_graphics("https://uwmadison.box.com/shared/static/znpaeugwi14nxhuvz2lkmoo2ovv2jtx1.png")
+include_graphics("https://uwmadison.box.com/shared/static/n836t4q718m2o16hluvglplqi4lshgcm.png")
+include_graphics("https://uwmadison.box.com/shared/static/7prsedegwnp6wdghcw6vfv2rs7zsr7nj.png")
+```
 
-$$
-\color{#ff8200}{SS_{\text{total}}} = \color{#447583}{SS_{\text{treatments}}} + \color{#b090c2}{SS_{\text{error}}}.
-$$
-This is usually called the "ANOVA identity."
-
-
-5. If any of the groups had a mean that was different from the global mean, then you’d expect the \color{#447583}{treatment} term to be larger than it would otherwise be.  How large is large enough to reject?
+5. If any of the groups had a mean that was different from the global mean, then
+we’d expect the \color{#447583}{treatment} term to be larger than it would
+otherwise be.  How large is large enough to reject?
 
 6. Since the variance within each group is $\sigma^2$, the variance of each
 $\bar{y}_i$ is $\frac{\sigma^2}{n}$. The blue term looks like how we would
 usually estimate the variances of the $y_i$, i.e.,
 
 $$
-\frac{1}{a}\sum_{i}\color{#447583}{\left(y_i - \bar{y}\right)}^2 \approx \frac{\sigma^2}{n}
+\frac{1}{a - 1}\sum_{i}\color{#447583}{\left(\bar{y}_i - \bar{y}\right)}^2 \approx \frac{\sigma^2}{n}
 $$
 7. On the other hand, under the null, all the $y_{ij} \sim \mathcal{N}\left(\mu, \sigma^2\right)$, so we would also know,
-
-$$
-\frac{1}{N-a} \sum_{i, j}\color{#b090c2}{\left(y_{i, j}-\bar{y}_{i}\right)}^{2} \approx \sigma^{2},
-$$
-
-so under the null, 
-
-$$
-\frac{\frac{\color{#447583}{SS_{\text {treatments }}}}{a-1}}{\color{#b090c2}{\frac{SS_{\text {error }}}{N-a}}} \approx 1.
-$$
-
-Note that under the alternative, it would be larger than 1.
-
+      $$
+      \frac{1}{N-a} \sum_{i, j}\color{#b090c2}{\left(y_{i, j}-\bar{y}_{i}\right)}^{2} \approx \sigma^{2},
+      $$
+      so under the null, 
+      $$
+      \frac{\frac{\color{#447583}{SS_{\text {treatments }}}}{a-1}}{\color{#b090c2}{\frac{SS_{\text {error }}}{N-a}}} \approx 1.
+      $$
+      Note that under the alternative, it would be larger than 1.
+    
 8. From our results in the probability review lectures, both the
 \color{#447583}{numerator} and \color{#b090c2}{denominator} are chi-squares,
 with $a - 1$ and $N - a$ d.f., respectively. It’s not obvious, but they’re also
 independent (this is called Cochran’s theorem). Therefore, the null reference
 distribution is an $F$ distribution with $(a - 1, N - a)$ d.f.
 
-### The ANOVA Table
+```{r, fig.cap = "Under the null, the scaling between the treatment and error sums of squares is known.", out.width = 300}
+include_graphics("https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png")
+```
 
-9. If we introduce $\color{#447583}{MS_{\text{treatments}}}$ and
-$\color{#b090c2}{MS_{E}}$ for the numerator and denominator in the ratio above,
-we can organize this information as,
+9. We usually call the numerator and denominator above $\color{#447583}{MS_{\text{treatments}}}$ and
+$\color{#b090c2}{MS_{E}}$.
 
+### Code Example
 
-This is also how most computer output will be displayed, so it’s worth being familiar with.
+10. Let's read in an example dataset. We are looking at the etch rate of a
+machine under three different power settings. We want to know whether there is
+any difference in the rates, as a function of the power.
+
+```{r, echo = TRUE}
+library(readr)
+
+etch_rate <- read_csv("https://uwmadison.box.com/shared/static/vw3ldbgvgn7rupt4tz3ditl1mpupw44h.csv")
+etch_rate$power <- as.factor(etch_rate$power) # consider as discrete levels
+etch_rate
+```
+```{r, fig.cap = "Etch rate as a function of power."}
+library(ggplot2)
+ggplot(etch_rate) +
+  geom_point(aes(power, rate))
+```
+
+11. To compute all the quantities above, we can use the `lm` and `anova`
+functions. The column `statistic` is the F statistic, and the $p$-value is
+derived from the reference distribution of that statistic under the null.
+
+```{r, echo = TRUE}
+fit <- lm(rate ~ power, data = etch_rate)
+anova(fit)
+```
+
+12. To extract terms from this table, it is helpful to first convert it to a
+`data.frame` using `tidy()` in the `broom` package.
+
+```{r, echo = TRUE}
+library(broom)
+aov_table <- tidy(anova(fit))
+aov_table$meansq
+aov_table
+```
+
+13. What if our data were arranged like the data.frame below? We can no longer
+use the `lm` function, because the outcome of interest isn't isolated into a
+single column.
+
+```{r, echo = TRUE}
+etch <- read_csv("https://uwmadison.box.com/shared/static/3ltmo89ea0xowsh1386x9fk58qc51ned.txt")
+etch$Power <- as.factor(etch$Power)
+etch
+```
+
+14. To reorganize the data into an acceptable form, we can use the
+`pivot_longer` function from the `tidyr` package.
+
+```{r, echo = TRUE}
+library(tidyr)
+pivot_longer(etch, -Power, names_to = "replicate", values_to = "etch_rate")
+```
+
