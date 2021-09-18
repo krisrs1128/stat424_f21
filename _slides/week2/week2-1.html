@@ -25,6 +25,17 @@
 
 ---
 
+### Announcements
+
+* For today's exercises, we have groups assigned on canvas
+  - Sorted according to whether project group is found
+  - Arrangement around room
+* If you do not find a group, we will randomly assign you (there is no penalty)
+* Let us know if you have a midterm conflict by Sunday 9/19
+* There is a week 2 feedback form on Canvas
+
+---
+
 ### Sample `\(\rightarrow\)` Population Properties
 
 * The distribution `\(\mathbf{P}\)` summarizes our model of the world
@@ -88,12 +99,12 @@ head(means)
 
 ```
 ##   id  partial     full
-## 1  1 2.291631 2.450778
-## 2  2 2.864438 2.627423
-## 3  3 2.207296 2.504182
-## 4  4 2.610049 2.636441
-## 5  5 2.148647 2.391529
-## 6  6 2.178199 2.409121
+## 1  1 2.615488 2.688658
+## 2  2 2.026779 2.503644
+## 3  3 1.561872 2.319888
+## 4  4 3.065502 2.612235
+## 5  5 2.665711 2.546388
+## 6  6 1.921372 2.593992
 ```
 
 ---
@@ -110,19 +121,8 @@ fraction
 ]
 
 .pull-right[
-![](week2-1_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 ]
-
----
-
-### Discussion (if time)
-
-* Can you come up with two estimates of the population mean, one of which is biased
-but low variance, and the other which has low / no bias and high variance?
-* Can you design a simulation to compare the bias and variance of the following
-estimates of the population standard deviation?
-
-`$$\text{Option 1:   } \sqrt{\frac{1}{n - 1}\sum_{i = 1}^{n}\left(x_i - \bar{x}\right)^2} \\ \text{Option 2:   } 1.483\left[\frac{1}{n}\sum_{i = 1}^{n} \left|x_i - \bar{x}_i\right|\right]$$`
 
 ---
 
@@ -143,10 +143,12 @@ If `\(y_i\)` are drawn i.i.d. from some distribution with mean `\(\mu\)` and var
 
 ### Theorem Importance
 
-* This theorem reduces calculations across arbitrary distributions into
-calculations with normal distributions.
-* It helps in finding approximate reference distributions without having to
-resort to simulation
+.pull-left[This theorem reduces calculations across arbitrary distributions into
+calculations with normal distributions.]
+
+.pull-right[
+&lt;img src="https://uwmadison.box.com/shared/static/2nue43dk0rw0v25swmbd552qk1bz1jze.png" width="500px"/&gt;
+]
 
 ---
 
@@ -170,7 +172,7 @@ What will be the shape of the histogram in the block below? Why?
 hist(runif(1000))
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -196,7 +198,7 @@ datasets &lt;- matrix(runif(n_sim * 1000), nrow = n_sim, ncol = 1000)
 hist(rowMeans(datasets), breaks = 100)
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -228,7 +230,7 @@ What will be the differences between the three histograms below? Why?
 plot_hist(1)
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -241,7 +243,7 @@ What will be the differences between the three histograms below? Why?
 plot_hist(2)
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -254,7 +256,7 @@ What will be the differences between the three histograms below? Why?
 plot_hist(1000)
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -285,7 +287,7 @@ data.frame(x, density = dt(x, df=2)) %&gt;%
   geom_line(aes(x, density))
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-27-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -306,7 +308,7 @@ ggplot(densities) +
   theme(legend.position = "right")
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -319,7 +321,7 @@ Here are examples generating samples and computing quantiles.
 hist(rt(1000, df = 4), breaks = 100)
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
 
 ```r
 qt(0.975, df = 4)
@@ -336,7 +338,7 @@ qt(0.975, df = 4)
 The chi-square distribution is nonnegative with one parameter and can be
 referenced using `(prefix)chisq`.
 
-![](week2-1_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -349,7 +351,7 @@ The F distribution is also nonnegative, but has two parameters.
 hist(rf(1000, 1, 100), breaks = 100)
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -360,7 +362,7 @@ hist(rf(1000, 1, 100), breaks = 100)
 hist(rf(1000, 10, 10), breaks = 100)
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -390,7 +392,7 @@ rchisq(n_sim, 5) %&gt;%
   hist(breaks = 50, freq=F, ylim = c(0, .18))
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -411,7 +413,7 @@ matrix(rnorm(n_sim * 5)^2, n_sim, 5) %&gt;%
   hist(breaks = 50, freq=F, ylim = c(0, .18))
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -437,7 +439,7 @@ ss &lt;- map_dbl(datasets, ~ sum((. - mean(.)) ^ 2))
 hist(ss, breaks = 50, col = rgb(0, 1, 0, 0.6), add = TRUE)
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -496,7 +498,7 @@ df &lt;- 3
   hist(breaks = 100, freq = F, xlab = NULL, main = NULL)
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-37-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
 
 
 ---
@@ -514,7 +516,7 @@ unlist(rerun(n_sim, normalized_stat(df + 1))) %&gt;%
   hist(breaks = 100, freq = F, xlab = NULL, main = NULL)
 ```
 
-![](week2-1_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
+![](week2-1_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
