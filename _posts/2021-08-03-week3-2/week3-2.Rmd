@@ -11,18 +11,27 @@ output:
     self_contained: false
 ---
 
-
 ```{r setup, include=FALSE}
 library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
+
+# custom ggplot color theme
+my_theme <- function() {
+  th <- theme_minimal() +
+    theme(
+      panel.grid.minor = element_blank(),
+      panel.background = element_rect(fill = "#f7f7f7"),
+      panel.border = element_rect(
+        fill = NA, color = "#0c0c0c", size = 0.6
+      ),
+      legend.position = "bottom"
+  )
+  theme_set(th)
+}
+my_theme()
 ```
 
-_Readings [3.4](), [Rmarkdown]()_
-
-```{r, preview = TRUE}
-library(EBImage)
-display(readImage("https://uwmadison.box.com/shared/static/ka2t5b3awtqt0mqdqtm8o5zbzs8ur7xp.png"))
-```
+_Readings [3.4](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week3-2/week3-2.Rmd)_
 
 1. Recall the ANOVA model,
 $$
@@ -42,14 +51,34 @@ e_{i j} &=y_{i j}-\hat{y}_{i j} \\
 &=y_{i j}-\bar{y}_{i}.
 \end{align*}
     Residuals are our best guess of what the true random error $\epsilon_{ij}$ is
-like.
+like. 
+
+```{r, preview = TRUE, fig.cap = "The true error depends on the unknown means for each group; however, residuals can give a close approximation."}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/ka2t5b3awtqt0mqdqtm8o5zbzs8ur7xp.png"))
+```
+
+
+3. We can extract this using the `resid` function; the example below continues
+the etch rate example.
+
+```{r, echo = TRUE}
+library(readr)
+etch_rate <- read_csv("https://uwmadison.box.com/shared/static/vw3ldbgvgn7rupt4tz3ditl1mpupw44h.csv")
+etch_rate$power <- as.factor(etch_rate$power) # consider as discrete levels
+fit <- lm(rate ~ power, data = etch_rate)
+resid(fit)
+```
 
 ### Normal Probability Plots
 
-3. We can’t check normality of $\epsilon_{ij}$ directly, but we can check
+4. We can’t check normality of $\epsilon_{ij}$ directly, but we can check
 normality of the residuals $e_{ij}$ using normal probability plots.
 
-4. In the plot to the right, it looks like the data are somewhat more tightly clustered near the middle, though the most extreme points are more extreme than expected. Do you see why?
+```{r, echo = TRUE, fig.cap = "A qqplot for the etch rate data."}
+qqnorm(resid(fit))
+qqline(resid(fit))
+```
 
 5. Of the ways that the model can fail, normality of the residuals is not the
 most severe, because you can often count on the central limit theorem to make
@@ -61,6 +90,12 @@ the reference $F$ distribution still approximately correct.
 residuals against measured variables. If you see "patterns," those may
 correspond to missing terms in the model.
 
+```{r, fig.cap = "There doesn't seem to be a relationship between the measured variable and the residuals, so there is no reason to suspect missing terms in the model. (The third power level has slightly higher variance, but it's barely noticeable.)", echo = TRUE}
+etch_rate$residual <- resid(fit)
+ggplot(etch_rate) +
+  geom_point(aes(power, residual))
+```
+
 7. We can use plots to check for independence. For example, if you plot the
 residuals over time and you see clear trends, then the errors are likely
 correlated over time.
@@ -68,9 +103,16 @@ correlated over time.
 8. It's often useful to plot residuals against the fitted values. This can
 reveal nonconstant variance across the groups $i$.
 
+```{r, fig.cap = "An example plotting residuals against the fitted values.", echo = TRUE}
+etch_rate$fitted <- predict(fit)
+ggplot(etch_rate) +
+  geom_point(aes(fitted, residual))
+```
+
 ### Testing Equality of Variances
 
-9. There are formal tests to test whether the equal variance assumption of the ANOVA is valid (it’s very meta). The most common are,
+9. There are formal tests to test whether the equal variance assumption of the
+ANOVA is valid (it’s very meta). The most common are,
     * Bartlett’s test
     * The Modified Levene test
 
@@ -82,12 +124,20 @@ reveal nonconstant variance across the groups $i$.
 common fix is to use a variance stabilizing transformation. That is, apply some
 function $f(x)$ to each data point and then perform the ANOVA.
 
-11. There are various rules of thumb^[It’s not at all obvious why any of these transformations are effective --
+10. There are various rules of thumb^[It’s not at all obvious why any of these transformations are effective --
 they are typically derived in introductory mathematical statistics courses.], though the process is still somewhat
 informal,
-    * $f(x) = \sqrt{x}$ or $f(x) = \sqrt{1 + x}$ if the data seem Poisson
+    * $f(x) = \sqrt{x}$ or $f(x) = \sqrt{1 + x}$ if the data are counts
     * $f(x) = \log x$ if the data seem lognormal
     * $f(x) = \arcsin\left(\sqrt{x}\right)$ if the data are binomial-derived fractions
-  
-12. These are special cases. More generally, if you notice $\sigma \propto
-\mu^\alpha$, then setting $f(x) = x^{1 - \alpha}$ will stabilize the variance.
+    
+```{r, fig.cap = "An example of using a transformation to bring counts data closer to normality.", echo = TRUE}
+x <- rpois(4000, 5)
+x <- data.frame(x)
+
+ggplot(x) +
+  geom_histogram(aes(x = x), binwidth = 0.5)
+
+ggplot(x) +
+  geom_histogram(aes(x = sqrt(1 + x)), binwidth = 0.1)
+```

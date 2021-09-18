@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week3-2_files/anchor-4.2.2/anchor.min.js","week3-2_files/bowser-1.9.3/bowser.min.js","week3-2_files/distill-2.2.21/template.v2.js","week3-2_files/figure-html5/unnamed-chunk-1-1.png","week3-2_files/header-attrs-2.8/header-attrs.js","week3-2_files/jquery-1.11.3/jquery.min.js","week3-2_files/popper-2.6.0/popper.min.js","week3-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","week3-2_files/tippy-6.2.7/tippy-light-border.css","week3-2_files/tippy-6.2.7/tippy.css","week3-2_files/tippy-6.2.7/tippy.umd.min.js","week3-2_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week3-2_files/anchor-4.2.2/anchor.min.js","week3-2_files/bowser-1.9.3/bowser.min.js","week3-2_files/distill-2.2.21/template.v2.js","week3-2_files/figure-html5/unnamed-chunk-1-1.png","week3-2_files/figure-html5/unnamed-chunk-3-1.png","week3-2_files/figure-html5/unnamed-chunk-4-1.png","week3-2_files/figure-html5/unnamed-chunk-5-1.png","week3-2_files/figure-html5/unnamed-chunk-6-1.png","week3-2_files/figure-html5/unnamed-chunk-6-2.png","week3-2_files/header-attrs-2.8/header-attrs.js","week3-2_files/jquery-1.11.3/jquery.min.js","week3-2_files/popper-2.6.0/popper.min.js","week3-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","week3-2_files/tippy-6.2.7/tippy-light-border.css","week3-2_files/tippy-6.2.7/tippy.css","week3-2_files/tippy-6.2.7/tippy.umd.min.js","week3-2_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2289,15 +2289,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">3.4</a>, <a href="">Rmarkdown</a></em></p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ka2t5b3awtqt0mqdqtm8o5zbzs8ur7xp.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week3-2_files/figure-html5/unnamed-chunk-1-1.png" width="500px" data-distill-preview=1 /></p>
-</div>
+<p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">3.4</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week3-2/week3-2.Rmd">Rmarkdown</a></em></p>
 <ol type="1">
 <li><p>Recall the ANOVA model, <span class="math display">\[
 y_{i j}=\mu+\tau_{i}+\epsilon_{i j}
@@ -2313,18 +2305,87 @@ e_{i j} &amp;=y_{i j}-\hat{y}_{i j} \\
 &amp;=y_{i j}-\bar{y}_{i}.
 \end{align*}\]</span> Residuals are our best guess of what the true random error <span class="math inline">\(\epsilon_{ij}\)</span> is like.</p></li>
 </ol>
-<h3 id="normal-probability-plots">Normal Probability Plots</h3>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<img src="week3-2_files/figure-html5/unnamed-chunk-1-1.png" alt="The true error depends on the unknown means for each group; however, residuals can give a close approximation." width="624" data-distill-preview=1 />
+<p class="caption">
+Figure 1: The true error depends on the unknown means for each group; however, residuals can give a close approximation.
+</p>
+</div>
+</div>
 <ol start="3" type="1">
-<li><p>We can’t check normality of <span class="math inline">\(\epsilon_{ij}\)</span> directly, but we can check normality of the residuals <span class="math inline">\(e_{ij}\)</span> using normal probability plots.</p></li>
-<li><p>In the plot to the right, it looks like the data are somewhat more tightly clustered near the middle, though the most extreme points are more extreme than expected. Do you see why?</p></li>
-<li><p>Of the ways that the model can fail, normality of the residuals is not the most severe, because you can often count on the central limit theorem to make the reference <span class="math inline">\(F\)</span> distribution still approximately correct.</p></li>
+<li>We can extract this using the <code>resid</code> function; the example below continues the etch rate example.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='va'>etch_rate</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/vw3ldbgvgn7rupt4tz3ditl1mpupw44h.csv"</span><span class='op'>)</span>
+<span class='va'>etch_rate</span><span class='op'>$</span><span class='va'>power</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>etch_rate</span><span class='op'>$</span><span class='va'>power</span><span class='op'>)</span> <span class='co'># consider as discrete levels</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>rate</span> <span class='op'>~</span> <span class='va'>power</span>, data <span class='op'>=</span> <span class='va'>etch_rate</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/residuals.html'>resid</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>    1     2     3     4     5     6     7     8     9    10    11 
+ 23.8  -9.2 -21.2 -12.2  18.8 -22.4   5.6   2.6  -8.4  22.6 -25.4 
+   12    13    14    15    16    17    18    19    20 
+ 25.6 -15.4  11.6   3.6  18.0  -7.0   8.0 -22.0   3.0 </code></pre>
+</div>
+<h3 id="normal-probability-plots">Normal Probability Plots</h3>
+<ol start="4" type="1">
+<li>We can’t check normality of <span class="math inline">\(\epsilon_{ij}\)</span> directly, but we can check normality of the residuals <span class="math inline">\(e_{ij}\)</span> using normal probability plots.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqnorm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/residuals.html'>resid</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqline</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/residuals.html'>resid</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="week3-2_files/figure-html5/unnamed-chunk-3-1.png" alt="A qqplot for the etch rate data." width="624" />
+<p class="caption">
+Figure 2: A qqplot for the etch rate data.
+</p>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Of the ways that the model can fail, normality of the residuals is not the most severe, because you can often count on the central limit theorem to make the reference <span class="math inline">\(F\)</span> distribution still approximately correct.</li>
 </ol>
 <h3 id="plotting-residuals">Plotting Residuals</h3>
 <ol start="6" type="1">
-<li><p>The way to check for systematic variation beyond the <span class="math inline">\(\tau_i\)</span>’s, try plotting residuals against measured variables. If you see “patterns,” those may correspond to missing terms in the model.</p></li>
+<li>The way to check for systematic variation beyond the <span class="math inline">\(\tau_i\)</span>’s, try plotting residuals against measured variables. If you see “patterns,” those may correspond to missing terms in the model.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>etch_rate</span><span class='op'>$</span><span class='va'>residual</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/residuals.html'>resid</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>etch_rate</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>power</span>, <span class='va'>residual</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="week3-2_files/figure-html5/unnamed-chunk-4-1.png" alt="There doesn't seem to be a relationship between the measured variable and the residuals, so there is no reason to suspect missing terms in the model. (The third power level has slightly higher variance, but it's barely noticeable.)" width="624" />
+<p class="caption">
+Figure 3: There doesn’t seem to be a relationship between the measured variable and the residuals, so there is no reason to suspect missing terms in the model. (The third power level has slightly higher variance, but it’s barely noticeable.)
+</p>
+</div>
+</div>
+<ol start="7" type="1">
 <li><p>We can use plots to check for independence. For example, if you plot the residuals over time and you see clear trends, then the errors are likely correlated over time.</p></li>
 <li><p>It’s often useful to plot residuals against the fitted values. This can reveal nonconstant variance across the groups <span class="math inline">\(i\)</span>.</p></li>
 </ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>etch_rate</span><span class='op'>$</span><span class='va'>fitted</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>etch_rate</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>fitted</span>, <span class='va'>residual</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="week3-2_files/figure-html5/unnamed-chunk-5-1.png" alt="An example plotting residuals against the fitted values." width="624" />
+<p class="caption">
+Figure 4: An example plotting residuals against the fitted values.
+</p>
+</div>
+</div>
 <h3 id="testing-equality-of-variances">Testing Equality of Variances</h3>
 <ol start="9" type="1">
 <li>There are formal tests to test whether the equal variance assumption of the ANOVA is valid (it’s very meta). The most common are,
@@ -2339,13 +2400,39 @@ The main difference is that the Modified Levene test is still valid even when th
 <li><p>What can you do if you detect nonconstant variance across groups? The most common fix is to use a variance stabilizing transformation. That is, apply some function <span class="math inline">\(f(x)\)</span> to each data point and then perform the ANOVA.</p></li>
 <li><p>There are various rules of thumb<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, though the process is still somewhat informal,</p>
 <ul>
-<li><span class="math inline">\(f(x) = \sqrt{x}\)</span> or <span class="math inline">\(f(x) = \sqrt{1 + x}\)</span> if the data seem Poisson</li>
+<li><span class="math inline">\(f(x) = \sqrt{x}\)</span> or <span class="math inline">\(f(x) = \sqrt{1 + x}\)</span> if the data are counts</li>
 <li><span class="math inline">\(f(x) = \log x\)</span> if the data seem lognormal</li>
 <li><span class="math inline">\(f(x) = \arcsin\left(\sqrt{x}\right)\)</span> if the data are binomial-derived fractions</li>
 </ul></li>
-<li><p>These are special cases. More generally, if you notice <span class="math inline">\(\sigma \propto \mu^\alpha\)</span>, then setting <span class="math inline">\(f(x) = x^{1 - \alpha}\)</span> will stabilize the variance.</p></li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Poisson.html'>rpois</a></span><span class='op'>(</span><span class='fl'>4000</span>, <span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span>, binwidth <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6-1"></span>
+<img src="week3-2_files/figure-html5/unnamed-chunk-6-1.png" alt="An example of using a transformation to bring counts data closer to normality." width="624" />
+<p class="caption">
+Figure 5: An example of using a transformation to bring counts data closer to normality.
+</p>
+</div>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>+</span> <span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>, binwidth <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6-2"></span>
+<img src="week3-2_files/figure-html5/unnamed-chunk-6-2.png" alt="An example of using a transformation to bring counts data closer to normality." width="624" />
+<p class="caption">
+Figure 6: An example of using a transformation to bring counts data closer to normality.
+</p>
+</div>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
