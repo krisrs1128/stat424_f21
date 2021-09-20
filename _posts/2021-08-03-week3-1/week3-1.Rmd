@@ -78,7 +78,7 @@ The alternative is that at least one of the groups is different. Formally,
 ### Important Identities
 
 4. The word "analysis" in ANOVA is used in the classical sense of to break
-something into its parts^[i.e. the oppositive of "synthesis."]. ANOVA breaks the
+something into its parts^[i.e. the opposite of "synthesis."]. ANOVA breaks the
 observed variation into distinct components,
     $$
     \sum_{ij} \color{#ff8200}{\left(y_{ij} - \bar{y}\right)}^2 = n\sum_{i} \color{#447583}{\left(\bar{y}_i - \bar{y}\right)}^2 + \sum_{i,j} \color{#b090c2}{\left(y_{ij} - \bar{y}_{i}\right)}^2
@@ -113,7 +113,7 @@ $$
       $$
       so under the null, 
       $$
-      \frac{\frac{\color{#447583}{SS_{\text {treatments }}}}{a-1}}{\color{#b090c2}{\frac{SS_{\text {error }}}{N-a}}} \approx 1.
+      \frac{\frac{\color{#447583}{SS_{\text {treatment }}}}{a-1}}{\color{#b090c2}{\frac{SS_{\text {error }}}{N-a}}} \approx 1.
       $$
       Note that under the alternative, it would be larger than 1.
     
@@ -127,7 +127,7 @@ distribution is an $F$ distribution with $(a - 1, N - a)$ d.f.
 include_graphics("https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png")
 ```
 
-9. We usually call the numerator and denominator above $\color{#447583}{MS_{\text{treatments}}}$ and
+9. We usually call the numerator and denominator above $\color{#447583}{MS_{\text{treatment}}}$ and
 $\color{#b090c2}{MS_{E}}$.
 
 ### Code Example

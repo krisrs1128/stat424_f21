@@ -124,7 +124,7 @@ ANOVA is valid (it’s very meta). The most common are,
 common fix is to use a variance stabilizing transformation. That is, apply some
 function $f(x)$ to each data point and then perform the ANOVA.
 
-10. There are various rules of thumb^[It’s not at all obvious why any of these transformations are effective --
+11. There are various rules of thumb^[It’s not at all obvious why any of these transformations are effective --
 they are typically derived in introductory mathematical statistics courses.], though the process is still somewhat
 informal,
     * $f(x) = \sqrt{x}$ or $f(x) = \sqrt{1 + x}$ if the data are counts
