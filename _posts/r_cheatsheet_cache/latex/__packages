@@ -1,0 +1,10 @@
+base
+rmarkdown
+knitr
+lattice
+BSDA
+ggplot2
+broom
+tidyr
+gmodels
+DescTools

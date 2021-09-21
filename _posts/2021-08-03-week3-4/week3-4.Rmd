@@ -1,7 +1,7 @@
 ---
 title: "Multiple Comparisons"
 description: |
-  A short description of the post.
+  The multiple comparisons problem and some solutions.
 author:
   - name: Kris Sankaran
     url: {}
@@ -16,19 +16,10 @@ library("knitr")
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-_Readings [3.5](), [Rmarkdown]()_
+_Readings [3.5](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week3-3/week3-3.Rmd)_
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/tmez3gdyre3lth822zm2wimmes3nujyy.png")
-```
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/lc34pprk90p7evabiycjiw5c22xsm666.png")
-```
 
-```{r, preview = TRUE}
-display(readImage("https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow05carx9uwna.png"))
-```
 
 1. If we planned in advance which contrasts we want to use, we are fine. But
 what if we hadn’t planned any, and go in search for significant results using
@@ -44,7 +35,7 @@ positive.
 
 ### Scheffe’s Method
 
-4. Let’s say we’re interested in $m$ contrasts, $c_1, ,c_m$. The idea is to widen
+4. Let’s say we’re interested in $m$ contrasts, $c_1, \cdots ,c_m$. The idea is to widen
 our confidence intervals slightly, to make false positives rarer.
 
 5. How much should the intervals be widened? It’s not obvious, but Scheffe found
@@ -53,6 +44,10 @@ $$
 \sqrt{\left(a - 1\right)F_{0.025, a - 1, N - a}}
 $$
     (this is for 95% confidence intervals).
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/tmez3gdyre3lth822zm2wimmes3nujyy.png")
+```
 
 ### Tukey’s Method
 
@@ -63,11 +58,15 @@ $$
 \Gamma\left(c\right) = \mu_i - \mu_j
 $$
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/lc34pprk90p7evabiycjiw5c22xsm666.png")
+```
+
 7. We’re going to make confidence intervals for these, and it’s natural to
 center them around,
-$$
+\begin{align*}
 \hat{\Gamma}\left(c\right) &= \bar{y}_i - \bar{y}_j.
-$$
+\end{align*}
 
 8. How wide should the intervals be? Tukey found a reference distribution for
 $$
@@ -80,6 +79,10 @@ derived from these quantiles,
 $$
 \left[\left(\bar{y}_{i}-\bar{y}_{j}\right)-q_{\alpha}(a, \text{df}) \frac{\hat{\sigma}}{\sqrt{n}},\left(\bar{y}_{i}-\bar{y}_{j}\right)+q_{\alpha}(a, \text{df}) \frac{\hat{\sigma}}{\sqrt{n}}\right]
 $$
+
+```{r, preview = TRUE}
+display(readImage("https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow05carx9uwna.png"))
+```
 
 10. This works because if the difference between the max and min group averages is
 contained within this interval, then all pairs $i, j$ of differences are also

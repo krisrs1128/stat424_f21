@@ -1,0 +1,404 @@
+---
+title: "Experimental Design R Cheatsheet"
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 2
+---
+```{r, echo = FALSE}
+library(knitr)
+opts_chunk$set(size="footnotesize", cache = TRUE, fig.width = 6, fig.height = 3, dpi = 200, echo = TRUE)
+options(width = 300)
+```
+
+# Format
+
+This cheatsheet includes R recipes that are useful for experimental design. The general format is,
+
+## `function_name`
+
+_package (if necessary)_
+
+Brief description
+
+```{r}
+# code_example
+```
+I welcome you to leave comments or propose changes to the document on github,
+using either an issue or pull request.
+
+# Chapter 2
+
+## `mean`
+
+Computes the sample mean $\frac{1}{n}\sum_{i = 1}^{n} x_i$ of a vector of $n$ numeric
+values.
+```{r}
+mean(1:10)
+```
+
+## `sd`
+
+Computes the sample standard deviation $\frac{1}{n - 1}\sum_{i = 1}^{n}\left(x_i - \bar{x}\right)^2$ of a vector of $n$ numeric values.
+```{r}
+sd(1:10)
+```
+
+## `rnorm`, `rt`, `rchisq`, `rf`
+
+Simulates $n$ samples from a normal, $t$, chi-square, or $F$-distribution,
+respectively. The parameters of the normal are the mean and standard deviation.
+The other distributions require degrees-of-freedom parameters.
+```{r}
+n <- 5
+rnorm(n, 0, 1)
+rt(n, 1)
+rchisq(n, 1)
+rf(n, 1, 2)
+```
+
+## `pnorm`, `pt`, `pchisq`, `pf`
+
+Computes the total probability of landing below $x$ in a normal, $t$,
+chi-square, or $F$-distribution, respectively. Accepts the same parameters as the `r`-prefixed functions above.
+```{r}
+x <- -1.96
+pnorm(x, 0, 1)
+pt(x, 1)
+
+x <- 10
+pchisq(x, 1)
+pt(x, 1)
+pf(x, 1, 2)
+```
+
+
+## `qnorm`, `qt`, `qchisq`, `qf`
+
+Computes the $x$-coordinate such that a probability $q$ of the distribution lies
+below $x$. Especially useful for computing cutoff values in hypothesis tests.
+
+```{r}
+q <- 0.05 / 2
+qnorm(q)
+qt(q, 1)
+qchisq(q, 1)
+qf(q, 1, 2)
+```
+
+
+## `dnorm`, `dt`, `dchisq`, `df`
+
+Computes the probability density of a distribution at a specific value $x$.
+
+```{r}
+x <- 2
+dnorm(x)
+dt(x, 1)
+dchisq(x, 1)
+df(x, 1, 2)
+```
+
+
+## `z.test`
+
+_`library(BSDA)`_
+
+Performs a two-sample `z`-test, testing for the difference in two means when the
+variance of both groups is known. Returns the estimate of the group means, the
+test statistic, a $p$-value, and a confidence interval (whose level is specified
+by the `conf.level` parameter).
+
+```{r}
+library(BSDA)
+test_result <- z.test(rnorm(5), rnorm(5, 1), sigma.x = 1, sigma.y = 1)
+test_result
+test_result$p.value # p.value
+test_result$conf.int # confidence interval for the difference
+```
+
+## `t.test`
+
+Performs a two-sample `t`-test, testing for the difference in two means when the
+variance of both groups are *unknown*. We typically assume equal variance
+(`var.equal = TRUE`) unless an initial / diagnostic analysis explicitly suggests
+to do otherwise. Returns the estimate of the group means, the test statistic, a
+$p$-value, and a confidence interval (whose level is specified by the
+`conf.level` parameter).
+
+```{r}
+test_result <- t.test(rnorm(10), rnorm(10, 1), var.equal = TRUE)
+test_result
+test_result$p.value
+test_result$conf.int
+```
+## `hist`
+
+Built-in function to make histograms in R.
+
+```{r}
+hist(rnorm(10))
+```
+
+
+## `geom_histogram`
+
+_`library(ggplot2)`_
+
+`ggplot2` alternative to making histograms. The data must be input as a
+data.frame.
+
+```{r}
+library(ggplot2)
+df <- data.frame(x = rnorm(10))
+ggplot(df) +
+  geom_histogram(aes(x))
+```
+
+## `plot(x, type = "l")`
+
+Base R approach to generating a line plot.
+
+```{r}
+plot(rnorm(10), type = "l")
+```
+
+## `geom_line`
+
+_`library(ggplot2)`_
+
+`ggplot2` approach to generating a line plot. Expects a `data.frame` with at
+least two columns as input, used to specify the $x$ and $y$ coordinates.
+
+```{r}
+library(ggplot2)
+df <- data.frame(x = 1:10, y = rnorm(10))
+ggplot(df) +
+  geom_line(aes(x, y))
+```
+
+# Chapter 3
+
+## `lm` and `aov`
+
+Compute an ANOVA table describing how multiple levels of a factor are related to
+a response. Expects as input a `data.frame` whose columns include the response
+values and factor levels. Beware that if the levels are written as numeric
+values, then R will not treat each value as a separate group (use `as.factor` to
+convert into discrete groups). Note that the `anova()` function returns
+comparable output, but is not well-suited to contrast calculations.
+
+```{r}
+experiment <- data.frame(
+  levels = rep(c("A", "B", "C"), each = 5),
+  y = rnorm(15)
+)
+
+fit <- lm(y ~ levels, data = experiment)
+aov_table <- aov(fit)
+summary(aov_table) # print the test results
+```
+## `tidy`
+
+_`library(broom)`_
+
+Convert the results from a base R test into a data.frame. Useful for extracting
+test results.
+
+```{r}
+library(broom)
+aov_df <- tidy(aov_table) # uses result from previous example
+aov_df
+aov_df$p.value
+```
+
+## `resid`
+
+Extracts the residuals $e_{ij} = y_{ij} - \hat{y}_{ij}$ associated with a model. This is useful for checking model
+assumptions.
+
+```{r}
+experiment <- data.frame(
+  levels = rep(c("A", "B", "C"), each = 5),
+  y = rnorm(15)
+)
+
+fit <- lm(y ~ levels, data = experiment)
+resid(fit)
+```
+
+## `predict`
+
+Extracts the fitted values $\hat{y}_{ij} = \hat{\mu} + \hat{\tau}_i$ associated
+with a model. Often useful when performing model checks.
+
+```{r}
+experiment <- data.frame(
+  levels = rep(c("A", "B", "C"), each = 5),
+  y = rnorm(15)
+)
+
+fit <- lm(y ~ levels, data = experiment)
+predict(fit)
+```
+
+## `qqnorm` and `qqline`
+
+Used to make QQ plots against a theoretical normal distribution. Usuall applied
+to the residuals of a fitted model.
+
+```{r}
+qqnorm(resid(fit))
+qqline(resid(fit), col = "red")
+```
+
+## `pivot_longer`
+
+_`library(tidyr)`_
+
+Used to transform a "wide" dataset into a "tall" one. This is often useful for
+moving the replicates for an experimental factor into a single column, so that
+it can be used by the `lm` function.
+
+```{r}
+library(tidyr)
+
+experiment <- data.frame(
+  levels = c("A", "B", "C"),
+  rep1 = rnorm(3),
+  rep2 = rnorm(3)
+)
+experiment_tall <- pivot_longer(experiment, -levels, names_to = "replicate")
+
+experiment
+experiment_tall
+```
+
+## `geom_point`
+
+_`library(ggplot2)`_
+
+`ggplot2` approach to drawing scatterplots. Often useful for plotting response
+values against a factor of interest.
+
+```{r}
+experiment <- data.frame(
+  levels = rep(c("A", "B", "C"), each = 5),
+  y = rnorm(15)
+)
+
+ggplot(experiment) +
+  geom_point(aes(levels, y))
+```
+
+## `fit.contrast`
+
+_`library(gmodels)`_
+
+Conduct a hypothesis test for a specific contrast ($H_0: \Gamma\left(c\right) =
+0$ in an ANOVA model. Can be applied to multiple contrasts simultaneously by
+passing the vectors $c_1, \dots, c_m$ as rows of a matrix.
+
+
+```{r}
+library(gmodels)
+
+experiment <- data.frame(
+  levels = rep(c("A", "B", "C"), each = 5),
+  y = rnorm(15)
+)
+
+# fit an anova model -- see entry on `aov` and `lm`
+fit <- lm(y ~ levels, data = experiment)
+aov_table <- aov(fit)
+
+# contrast between levels A and B
+contrast <- c(1, -1, 0)
+fit.contrast(aov_table, "levels", contrast)
+
+# several contrasts
+contrasts <- matrix(c(1, -1, 0, 1, 1, -1),  nrow = 2, byrow = TRUE)
+fit.contrast(aov_table, "levels", contrasts)
+```
+
+## `fit.contrast(..., conf.int = T)`
+
+_`library(gmodels)`_
+
+Compute the confidence interval for a contrast. Used in the exact same way as
+`fit.contrast`, but setting the `conf.int` parameter to the desired confidence
+level.
+
+```{r}
+# continues from previous example
+fit.contrast(aov_table, "levels", contrast, conf.int = 0.95)
+```
+
+## `PostHocTest(..., method = "scheffe")`
+
+_`library(DescTools)`_
+
+Adjust the widths of confidence intervals for multiple contrasts using Scheffe's
+method.
+
+```{r}
+library(DescTools)
+
+experiment <- data.frame(
+  levels = rep(c("A", "B", "C"), each = 5),
+  y = rnorm(15)
+)
+
+# fit an anova model -- see entry on `aov` and `lm`
+fit <- lm(y ~ levels, data = experiment)
+aov_table <- aov(fit)
+
+# two contrasts
+contrasts <- matrix(c(1, -1, 0, 1, 1, -1),  nrow = 2, byrow = TRUE)
+PostHocTest(aov_table, method = "scheffe", contrast = t(contrasts))
+```
+
+## `TukeyHSD`
+
+_`library(DescTools)`_
+
+Use Tukey's Honest Significant Difference method to build experimentwise-valid
+confidence intervals for the contrast between all pairs of factor levels.
+
+```{r}
+library(DescTools)
+experiment <- data.frame(
+  levels = rep(c("A", "B", "C"), each = 5),
+  y = rnorm(15)
+)
+
+# fit an anova model -- see entry on `aov` and `lm`
+aov_table <- aov(lm(y ~ levels, data = experiment))
+TukeyHSD(aov_table)
+```
+
+## `PostHocTest(..., method = "lsd")`
+
+_`library(DescTools)`_
+
+Use Fisher's Least Significance Difference method to perform tests for the
+differences between all pairs of factor levels. Note that Fisher's method does
+not control the experimentwise error rate, like Tukey's or Scheffe's methods do.
+
+```{r}
+library(DescTools)
+
+experiment <- data.frame(
+  levels = rep(c("A", "B", "C"), each = 5),
+  y = rnorm(15)
+)
+
+# fit an anova model -- see entry on `aov` and `lm`
+fit <- lm(y ~ levels, data = experiment)
+aov_table <- aov(fit)
+
+# two contrasts
+PostHocTest(aov_table, method = "lsd")
+```
+
+# Chapter 4
