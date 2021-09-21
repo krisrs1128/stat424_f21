@@ -5,3 +5,6 @@ _slides/*/*.html
 *.RData
 *.rdb
 *.rdx
+*.pdf
+*files*
+*cache*
