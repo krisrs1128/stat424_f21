@@ -9,3 +9,6 @@ gmodels
 DescTools
 xaringanBuilder
 tidyr
+lattice
+BSDA
+broom

@@ -33,9 +33,12 @@ theme_set(theme424)
 
 # Contrasts and Multiple Comparisons
 
+<img src="https://uwmadison.box.com/shared/static/ti2ukjamosvu0quvhgauvre1idm3mjfa.png" width=400/>
+
+
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison | 16 September 2021]
+.large[Kris Sankaran | UW Madison | 23 September 2021]
 
 ---
 
@@ -71,18 +74,22 @@ a rejection.
 
 We may instead define a follow-up hypothesis test.
 
-For example, imagine we had 4 groups,
+.pull-left[Imagine we had 4 groups,
 * Are the first two means different from the last two? $H_0: \tau_1 + \tau_2 = \tau_3 + \tau_4$
 * Are the first two means equal to each other? $H_0 : \tau_1 = \tau_2$
 * ...
+]
 
-<img src="https://uwmadison.box.com/shared/static/ti2ukjamosvu0quvhgauvre1idm3mjfa.png"/>
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/ti2ukjamosvu0quvhgauvre1idm3mjfa.png" width=400/>
+]
 
 ---
 
 ### Contrasts
 
-* Fortunately, the same framework covers all these cases.
+A single framework covers all these cases.
+
 * Let $\mu_i = \mu + \tau_i$ be the mean of group $i$.
 * A contrast is a linear combination of the means,
 \begin{align}
@@ -94,9 +101,9 @@ For example, imagine we had 4 groups,
 &H_{0}: \Gamma(c)=0 \\
 &H_{1}: \Gamma(c) \neq 0
 \end{aligned}
-
-for $c = (1, 1, -1, -1)$ and $c = \left(-1, -1, 0, 0\right)$, respectively.
-
+  
+  for $c = (1, 1, -1, -1)$ and $c = \left(1, -1, 0, 0\right)$, respectively.
+  
 ---
 
 ### Plug-In Approximations
@@ -128,7 +135,7 @@ In fact, under the null, it's possible to derive that
 \frac{\hat{\Gamma}\left(c\right)}{\sqrt{\widehat{\operatorname{Var}}\left(\hat{\Gamma}(c)\right)}}
 \end{align*}
 is $t$-distributed with $N - a$ degrees of freedom (the proof is unimportant in
-this class).
+this class). This gives the basis for a $t$-test for any specific contrast.
 
 ---
 
@@ -148,12 +155,12 @@ interval,
 ### Multiple Comparisons
 
 .pull-left[
-* If we knew the interest contrasts in advance, we will be fine
+* If we knew the interesting contrasts in advance, we will be fine
 * But what if we go in search for significant results using different contrasts?
 ]
 
 .pull-right[
-<img src="https://imgs.xkcd.com/comics/significant.png" width=200/>
+<img src="https://imgs.xkcd.com/comics/significant.png" width=180/>
 ]
 
 ---
@@ -163,10 +170,9 @@ interval,
 * We need to adapt our methodology to account for the search over contrasts
 * The quantity of interest is the experimentwise error rate, the probability
 that we get at least one false positive across the entire experiment
-* Three methods, each with different properties,
+* Two methods, each with different properties,
   - Scheffe's method
   - Tukey's Honest Significant Difference
-  - Fisher's Least Significant Difference
 
 ---
 
@@ -180,12 +186,15 @@ error
 \sqrt{\left(a - 1\right)F_{\frac{\alpha}{2}, a - 1, N - a}}
 \end{align}
 
-<img src="https://uwmadison.box.com/shared/static/tmez3gdyre3lth822zm2wimmes3nujyy.png"/>
+```{r, out.width = 500, fig.align = "center"}
+include_graphics("https://uwmadison.box.com/shared/static/tmez3gdyre3lth822zm2wimmes3nujyy.png")
+```
 
 ---
 
 ### Tukey's Honest Significant Difference
 
+.pull-left[
 * A common special case is when we're interest in all pairwise comparisons,
 
 $$
@@ -199,8 +208,11 @@ $$
 \end{align*}
 
 but how wide should they be?
+]
 
-<img src="https://uwmadison.box.com/shared/static/lc34pprk90p7evabiycjiw5c22xsm666.png"/>
+.pull-right[
+<img src="https://uwmadison.box.com/shared/static/lc34pprk90p7evabiycjiw5c22xsm666.png" width=350/>
+]
 
 ---
 
@@ -215,13 +227,17 @@ group means
 * Therefore, we can rescale our confidence intervals based on the reference
 distribution for the difference $\bar{y}_{\max} - \bar{y}_{\min}$
 
-<img src="https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow05carx9uwna.png"/>
+```{r, out.width = 500, fig.align = "center"}
+include_graphics("https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow05carx9uwna.png")
+```
 
 ---
 
 ### Fisher's Least Significant Difference
 
-Notice that the variance of the differences between two group's means is,
+* A final method, closely related to Tukey's HSD is Fisher's LSD
+* It also tests for all pairwise differences, but does not control experimentwise error rate
+* Notice that the variance of the differences between two group's means is,
 
 \begin{aligned}
 \operatorname{Var}\left(\bar{y}_{i}-\bar{y}_{j}\right) &=\operatorname{Var}\left(\bar{y}_{i}\right)+\operatorname{Var}\left(\bar{y}_{j}\right) \\
@@ -239,8 +255,8 @@ t_{\text {right }} \sqrt{\hat{\sigma}^{2}\left(\frac{1}{n_{i}}+\frac{1}{n_{j}}\r
 \end{align}
 and rejects the null that the pairs have equal means if the difference is larger.
 
-Though, like Tukey's method, it considers all pairs of means, it *does not*
-control the experimentwise error.
+Unlike the two-sample $t$-test, it accounts for the total number of samples in
+each group.
 
 ---
 
@@ -348,16 +364,85 @@ PostHocTest(aov_fit, method = "lsd")
 
 This walks through parts of problem 3.9.
 
+.pull-left[
 The tensile strength of Portland cement is being studied. Four different mixing
 techniques can be used economically. An experiment was conducted and the
 following data were collected.
+]
 
-```{r}
+.pull-right[
+```{r, echo = TRUE}
 cement <- data.frame(
   method = c("1", "2", "3", "4"),
-  rep1 = c(3129, 3200, 2800, 2600)
+  rep1 = c(3129, 3200, 2800, 2600),
+  rep2 = c(3000, 3300, 2900, 2700),
+  rep3 = c(2865, 2975, 2985, 2600),
+  rep4 = c(2890, 3150, 3050, 2765)
 )
+cement
+```
+]
+
+---
+
+(1) Use `pivot_longer` to reshape the data so that the outcome is in a single
+column.
+
+(2) Use `lm` and `aov` to make an ANOVA table. Does the method detect any
+difference in the means across the four groups?
+
+(3) Use `PostHocTest` to compare between all pairs of means using Fisher's LSD.
+
+(4) Make  QQ plot of the residuals. What can you conclude about the validity of
+the ANOVA assumptions?
+
+---
+
+### Solution
+
+(1) The `pivot_longer` method reshapes the data, creating a new column for the
+replicate indicator.
+
+```{r, echo = TRUE}
+cement <- pivot_longer(cement, -method, names_to = "replicate")
+head(cement)
+```
+
+---
+
+### Solution
+
+(2) Yes, since the F-statistic has a very small $p$-value, we can conclude that
+there is a difference between the cement types.
+
+```{r, echo = TRUE}
+aov_table <- aov(lm(value ~ method, data = cement))
+summary(aov_table)
 ```
 
 
 ---
+
+### Solution
+
+(3) We find 5 significant pairwise differences using Fisher's method, but these
+should be interpreted with a grain of salt, since the method does not control
+for multiple comparisons.
+
+```{r, echo = TRUE}
+library(DescTools)
+PostHocTest(aov_table, method = "lsd")
+```
+
+---
+
+### Solution
+
+(4) There is an unusual jump in the residuals, possibly due to a difference in
+the variance of the residuals across groups. This plot should be followed-up by
+a direct plot of the residuals to see whether any transformations might help.
+
+```{r, echo = TRUE, fig.width = 14, fig.height = 3.5}
+qqnorm(resid(fit))
+qqline(resid(fit), col = "red")
+```

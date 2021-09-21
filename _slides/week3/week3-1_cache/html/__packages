@@ -5,3 +5,10 @@ readr
 ggplot2
 tidyr
 xaringanBuilder
+lattice
+BSDA
+broom
+gmodels
+DescTools
+EBImage
+Cairo
