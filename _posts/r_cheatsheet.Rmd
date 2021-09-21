@@ -4,6 +4,7 @@ output:
   pdf_document:
     toc: true
     toc_depth: 2
+urlcolor: magenta
 ---
 ```{r, echo = FALSE}
 library(knitr)
@@ -24,7 +25,7 @@ Brief description
 ```{r}
 # code_example
 ```
-I welcome you to leave comments or propose changes to the document on github,
+I welcome you to leave comments or propose changes to the document on [github](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/r_cheatsheet.Rmd),
 using either an issue or pull request.
 
 # Chapter 2
