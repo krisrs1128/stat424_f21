@@ -1,0 +1,11 @@
+base
+knitr
+EBImage
+rmarkdown
+ggplot2
+Cairo
+readr
+gmodels
+DescTools
+xaringanBuilder
+tidyr

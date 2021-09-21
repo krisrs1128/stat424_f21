@@ -1,0 +1,7 @@
+base
+rmarkdown
+knitr
+readr
+ggplot2
+tidyr
+xaringanBuilder
