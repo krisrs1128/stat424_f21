@@ -1,0 +1,536 @@
+---
+title: "ANOVA"
+author: "Kris Sankaran | UW Madison | 21 September 2021"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    lib_dir: libs
+    nature:
+      beforeInit: "cols_macro.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+    seal: false  
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(ggplot2)
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
+```
+
+
+# ANOVA
+
+```{r, out.width = 200}
+include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```
+### Statistical Experimental Design
+
+.large[Kris Sankaran | UW Madison | 21 September 2021]
+
+---
+
+## Feedback Response
+
+* Restructuring lectures: Separating conceptual and code elements
+* R Code: Only including essential R code
+  - Have started an "R Cheatsheet"
+* Pace / Volume: I will try to enunciate clearly, but please do raise your hand
+if I should slow down or repeat!
+* R Review Session: 9/27 from 6:30 - 7:30pm
+  - Hybrid: 1210 Medical Sciences Center and Zoom
+* We will drop your lowest HW score
+
+---
+
+### Today
+
+* Book Sections: 3.1 - 3.4 
+* Online Notes: Week 3 [1] and [2]
+
+---
+
+### Motivation
+
+.pull-left[
+* ANOVA helps gauge the effects of $\geq 3$ different treatments on a continuous
+response
+    - How does the etch rate of a tool depend on its power?
+    - How do different foods affect blood sugar?
+    - How do several job training programs compare?
+* It is an extension of two sample testing when there are 3 or more levels
+]
+
+.pull-right[
+```{r, out.width = 250}
+include_graphics("https://uwmadison.box.com/shared/static/h3bbv7cjo0our7syhlsc0tdn5c22xyme.png")
+```
+]
+
+---
+
+### Motivation
+
+<img src="https://uwmadison.box.com/shared/static/4mucc9ln03x5612p5qc83eudinvdf1wu.png"/>
+<img src="https://uwmadison.box.com/shared/static/4m57hjv9d98m7lu8fvy0fs59votolxtn.png"/>
+
+---
+
+### Model
+
+.pull-left[
+ANOVA assumes,
+\begin{align}
+y_{ij} = \mu + \tau_i + \epsilon_{ij}
+\end{align}
+where $i=1, \dots, a$ and $j=1, \dots, n$ and the errors $\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)$ are independent.
+
+  * $i$ indexes different groups
+  * $j$ indexes the samples within groups
+  * $N = na$ is the total number of samples
+]
+    
+.pull-right[
+```{r, out.width = 300}
+include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```
+]
+
+---
+
+### Hypothesis Testing
+
+> Is there at least one group that differs from the rest?
+
+Formally,
+
+\begin{align}
+&H_0: \tau_1 = \dots = \tau_{a} = 0 \\
+&H_1: \tau_{i} \neq 0 \text{ for at least one }i.
+\end{align}
+
+Q: What would be the version of the picture on the previous slide, if the null
+hypothesis were true?
+
+---
+
+### ANOVA Identity
+
+Before designing a test statistic, it helps to observe this identity,
+
+\begin{align}
+\sum_{ij} \color{#ff8200}{\left(y_{ij} - \bar{y}\right)}^2 = n\sum_{i} \color{#447583}{\left(\bar{y}_i - \bar{y}\right)}^2 + \sum_{i,j} \color{#b090c2}{\left(y_{ij} - \bar{y}_{i}\right)}^2
+\end{align}
+which is usually abbreviated as
+\begin{align}
+\color{#ff8200}{SS_{\text{total}}} = \color{#447583}{SS_{\text{treatment}}} + \color{#b090c2}{SS_{\text{E}}}.
+\end{align}
+
+![:col_row 
+```{r, out.width = 120}
+include_graphics("https://uwmadison.box.com/shared/static/znpaeugwi14nxhuvz2lkmoo2ovv2jtx1.png")
+```
+,
+  
+```{r, out.width = 120}
+include_graphics("https://uwmadison.box.com/shared/static/n836t4q718m2o16hluvglplqi4lshgcm.png")
+```
+,
+  
+```{r, out.width = 120}
+include_graphics("https://uwmadison.box.com/shared/static/7prsedegwnp6wdghcw6vfv2rs7zsr7nj.png")
+```
+]
+
+---
+
+### Test Statistic
+
+* If any of the groups are different from the global mean, then we expect
+$\color{#447583}{SS_{\text{treatment}}}$ to be large
+* How large is large enough?
+* Consider the statistic,
+\begin{align*}
+\frac{\color{#447583}{MS_{\text{treatment}}}}{\color{#b090c2}{MS_{E}}}
+\end{align*}
+  where we define,
+  
+\begin{align*}
+{\color{#447583}{MS_{\text{treatment}}}} &:= {\color{#447583}{\frac{1}{a - 1}{SS}_{\text{treatment}}}} \\
+{\color{#b090c2}{MS_{E}}} &:= {\color{#b090c2}{\frac{1}{N - a}{SS}_{E}}}
+\end{align*}
+
+---
+
+### Test Statistic
+
+.pull-left[
+* It is not obvious, but reference distribution for this statistic is $F\left(a - 1, N - a\right)$.
+* If this statistic is at a large quantile of that distribution, we conclude
+$\tau_i \neq 0$ for at least one $i$
+]
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png")
+```
+]
+
+---
+
+## Model Checking
+
+.pull-left[
+We assumed,
+
+\begin{align*}
+y_{i j}=\mu+\tau_{i}+\epsilon_{i j}
+\end{align*}
+
+with i.i.d. errors $\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)$
+]
+
+.pull-right[
+What could fail?
+   * The errors might not be normally distributed
+   * The variance might not be the same in each group
+   * The errors might not be independent
+   * There might be systematic variations besides the group deviations $\tau_i$.
+ ]
+ 
+---
+
+### Residuals
+
+.pull-left[
+Residuals are our best guess of what the true random error $\epsilon_{ij}$, and
+so are useful for model checking,
+
+\begin{align*}
+e_{i j} &=y_{i j}-\hat{y}_{i j} \\
+&=y_{i j}-\left(\hat{\mu} + \hat{\tau}_i\right)
+\end{align*}
+]
+
+.pull-right[
+```{r, out.width = 400}
+include_graphics("https://uwmadison.box.com/shared/static/ka2t5b3awtqt0mqdqtm8o5zbzs8ur7xp.png")
+```
+]
+
+---
+
+### Normality assumption?
+
+We can’t check normality of $\epsilon_{ij}$ directly, but we can check normality
+of the residuals $e_{ij}$.
+
+```{r, echo = FALSE, fig.height = 4.3, fig.width = 10, fig.align = "center"}
+library(readr)
+etch_rate <- read_csv("https://uwmadison.box.com/shared/static/vw3ldbgvgn7rupt4tz3ditl1mpupw44h.csv")
+etch_rate$power <- as.factor(etch_rate$power) # want to think of power as distinct groups
+fit <- lm(rate ~ power, data = etch_rate)
+qqnorm(resid(fit))
+qqline(resid(fit), col = "red")
+```
+
+---
+
+### Equal variance across groups?
+
+* Plot residuals against measured variables
+* Plot residuals against fitted means
+
+.pull-left[
+```{r, fig.width = 5, fig.height = 4}
+etch_rate$residual <- resid(fit)
+etch_rate$predicted <- predict(fit)
+ggplot(etch_rate) +
+  geom_point(aes(x = power, y = residual)) +
+  labs(title = "Residual against measurement")
+```
+]
+.pull-right[
+```{r, fig.width = 5, fig.height = 4}
+ggplot(etch_rate) +
+  geom_point(aes(x = predicted, y = residual)) +
+  labs(title = "Residual against fit")
+```
+]
+
+---
+
+### Unmeasured variation?
+
+* Plot residuals against measured variables
+* Plot residuals against fitted means
+
+.pull-left[
+```{r, fig.width = 5, fig.height = 4}
+etch_rate$residual <- resid(fit)
+etch_rate$predicted <- predict(fit)
+ggplot(etch_rate) +
+  geom_point(aes(x = power, y = residual)) +
+  labs(title = "Residual against measurement")
+```
+]
+.pull-right[
+```{r, fig.width = 5, fig.height = 4}
+ggplot(etch_rate) +
+  geom_point(aes(x = predicted, y = residual)) +
+  labs(title = "Residual against fit")
+```
+]
+
+---
+
+### What if a check fails?
+
+Transform the response variable to make it more bell-shaped
+  * Skewed, nonnegative data: Use $\log\left(x\right)$ or $\log\left(1 + x\right)$
+  * Count data: $\sqrt{x}, \sqrt{1 + x}$
+  * Proportions: $\arcsin\left(\sqrt{x}\right)$
+  
+.pull-left[
+```{r, fig.width = 6, fig.height = 3}
+x <- data.frame(value = exp(rnorm(5e2)))
+ggplot(x) +
+  geom_histogram(aes(value)) +
+  labs(title = "Before log Transformation")
+```
+]
+.pull-right[
+```{r, fig.width = 6, fig.height = 3}
+ggplot(x) +
+  geom_histogram(aes(log(value))) +
+  labs(title = "After log Transformation")
+```
+]
+
+---
+
+# Code Implementation
+
+---
+
+### Etch Rate Dataset
+
+```{r, echo = TRUE}
+library(readr)
+etch_rate <- read_csv("https://uwmadison.box.com/shared/static/vw3ldbgvgn7rupt4tz3ditl1mpupw44h.csv")
+etch_rate$power <- as.factor(etch_rate$power) # want to think of power as distinct groups
+head(etch_rate, 10)
+```
+
+---
+
+### Plot the Data
+
+* `ggplot()` expects a data.frame with the whole dataset
+* `geom_point()` asks which columns to use for the $x$ and $y$ axis.
+
+```{r, echo = TRUE, fig.width = 10, fig.height = 3, fig.align = "center"}
+library(ggplot2)
+ggplot(etch_rate) +
+  geom_point(aes(power, rate))
+```
+
+---
+
+### ANOVA Hypothesis Test
+
+* Which element in the table corresponds to $SS_{\text{treatment}}$?
+* Which element in the table corresponds to $MS_{\text{treatment}}$?
+
+```{r, echo = TRUE}
+fit <- lm(rate ~ power, data = etch_rate)
+summary(aov(fit))
+```
+
+---
+
+### Check normality of residuals
+
+* Use the `qqnorm` and `qqline` pair to make a QQ Plot
+
+```{r, echo = TRUE, fig.height = 4, fig.width = 11, fig.align = "center"}
+qqnorm(resid(fit))
+qqline(resid(fit), col = "red")
+```
+
+* If we needed a transformation, we could have used
+
+```{r, echo = TRUE, results = "hide"}
+lm(log(rate) ~ power, data = etch_rate)
+lm(sqrt(rate) ~ power, data = etch_rate)
+```
+for example.
+
+---
+
+### Plot residuals against factor
+
+* First add the residual to the `data.frame`
+* Then make the $y$-axis the residual
+
+```{r, echo = TRUE, fig.height = 2.5, fig.width = 8, fig.align = "center"}
+etch_rate$residual <- resid(fit)
+ggplot(etch_rate) +
+  geom_point(aes(power, residual))
+```
+
+---
+
+### Plot residuals against predicted value
+
+* First add the fitted value to the `data.frame`
+* Then make the $x$-axis the fitted value
+
+```{r, echo = TRUE, fig.height = 2.5, fig.width = 8, fig.align = "center"}
+etch_rate$predicted <- predict(fit)
+ggplot(etch_rate) +
+  geom_point(aes(predicted, residual))
+```
+
+---
+
+### Hint: Reshaping data
+
+What if the etch dataset had been sent to us like this?
+
+```{r}
+etch <- read_csv("https://uwmadison.box.com/shared/static/3ltmo89ea0xowsh1386x9fk58qc51ned.txt")
+etch$Power <- as.factor(etch$Power)
+etch
+```
+
+The `lm` function expects the outcome of interest to be in a single
+column.
+
+---
+
+### Hint: Reshaping data
+
+To reorganize the data into an acceptable form, we can use the `pivot_longer`
+function from the `tidyr` package.
+
+```{r, echo = TRUE}
+library(tidyr)
+etch <- pivot_longer(etch, -Power, names_to = "replicate", values_to = "etch_rate")
+head(etch)
+```
+
+---
+
+# Exercise
+
+This walks through problem 3.29 in the book.
+
+.pull-left[A semiconductor manufacturer has developed three different methods for reducing
+particle counts on wafers. All three methods are tested on five different wafers
+and the after treatment particle count is obtained.]
+
+.pull-right[
+```{r, echo = TRUE}
+particles <- data.frame(
+  method = c("1", "2", "3"),
+  rep1 = c(31, 62, 53),
+  rep2 = c(10, 40, 27),
+  rep3 = c(21, 24, 120),
+  rep4 = c(4, 30, 97),
+  rep5 = c(1, 35, 68)
+)
+
+particles
+```
+]
+
+---
+
+### Exercise
+
+(1) Use `pivot_longer(particles, -method, ...)` to reshape the data so that the
+outcome is in a single column.
+
+(2) Use `lm` and `aov` to make an ANOVA table. Does the method detect any
+difference in the means across the three groups?
+
+(3) Plot the residuals against the group. Are the assumptions satisfied?
+
+(4) Apply a transformation to the response, fit an ANOVA model, and recheck
+normality of the residuals with a QQ plot. Stop when you are satisfied that the
+assumptions are met.
+
+---
+
+### Solution
+
+(1) `pivot_longer` can reshape the data.
+
+```{r, echo = TRUE}
+library(tidyr)
+particles <- pivot_longer(particles, -method, names_to = "replicate")
+head(particles)
+```
+
+---
+
+### Solution
+
+(2) The $MS_{\text{treatment}}$ is much larger than $MS_{E}$ (4481.9 vs. 566.3),
+and the $F$ test indicates a difference between methods at the $0.01$ level.
+
+```{r, echo = TRUE}
+fit <- lm(value ~ method, data = particles)
+summary(aov(fit))
+```
+
+---
+
+### Solution
+
+(3) There appears to be very nonconstant variance across groups.
+
+```{r, echo = TRUE, fig.height = 2.8, fig.width = 10, fig.align = "center"}
+particles$residual <- resid(fit)
+ggplot(particles) +
+  geom_point(aes(method, residual))
+```
+
+---
+
+### Solution
+
+(4) If we use a $\sqrt{x}$ transformation, the difference between groups seems to be
+somewhat reduced, though not completely removed.
+
+```{r, echo = TRUE, fig.height = 2.8, fig.width = 10, fig.align = "center"}
+fit <- lm(sqrt(value) ~ method, data = particles)
+particles$residual <- resid(fit)
+ggplot(particles) +
+  geom_point(aes(method, residual))
+```
+
+---
+
+### Solution
+
+(4) Nonetheless, there still appears to be a significant difference between the
+groups' means.
+
+```{r}
+summary(aov(fit))
+```
+

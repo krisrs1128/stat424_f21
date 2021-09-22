@@ -105,34 +105,36 @@ df(x, 1, 2)
 
 _`library(BSDA)`_
 
-Performs a two-sample `z`-test, testing for the difference in two means when the
-variance of both groups is known. Returns the estimate of the group means, the
-test statistic, a $p$-value, and a confidence interval (whose level is specified
-by the `conf.level` parameter).
+Performs a one or two-sample `z`-test when the variance of the data is known.
+Returns the estimate of the (group) means, the test statistic, a $p$-value, and
+a confidence interval (whose level is specified by the `conf.level` parameter).
 
 ```{r}
 library(BSDA)
-test_result <- z.test(rnorm(5), rnorm(5, 1), sigma.x = 1, sigma.y = 1)
-test_result
-test_result$p.value # p.value
-test_result$conf.int # confidence interval for the difference
+one_sample <- z.test(rnorm(5, 1), mu = 0, sigma.x = 1)
+two_sample <- z.test(rnorm(5), rnorm(5, 1), sigma.x = 1, sigma.y = 1)
+two_sample
+two_sample$p.value # p.value
+two_sample$conf.int # confidence interval for the difference
 ```
 
 ## `t.test`
 
-Performs a two-sample `t`-test, testing for the difference in two means when the
-variance of both groups are *unknown*. We typically assume equal variance
-(`var.equal = TRUE`) unless an initial / diagnostic analysis explicitly suggests
-to do otherwise. Returns the estimate of the group means, the test statistic, a
+Performs a one or two-sample `t`-test, testing when the variance is unknown. We
+typically assume equal variance (`var.equal = TRUE`) when testing for a
+difference in means unless an initial / diagnostic analysis explicitly suggests
+to do otherwise. Returns the estimate of the means, the test statistic, a
 $p$-value, and a confidence interval (whose level is specified by the
 `conf.level` parameter).
 
 ```{r}
-test_result <- t.test(rnorm(10), rnorm(10, 1), var.equal = TRUE)
-test_result
-test_result$p.value
-test_result$conf.int
+one_sample <- t.test(rnorm(10, 1), mu = 0)
+two_sample <- t.test(rnorm(10), rnorm(10, 1), var.equal = TRUE)
+two_sample
+two_sample$p.value
+two_sample$conf.int
 ```
+
 ## `hist`
 
 Built-in function to make histograms in R.
@@ -400,6 +402,52 @@ aov_table <- aov(fit)
 
 # two contrasts
 PostHocTest(aov_table, method = "lsd")
+```
+
+## `lmer`
+
+_`library(lme4)`_
+
+Fits a random effects model using the restricted maximum likelihood method. The
+syntax is the same as for `lm`, except that random effects terms can be
+specified using `(1 | random_term)`.
+
+```{r}
+library(lme4)
+
+experiment <- data.frame(
+  levels = rep(c("A", "B", "C"), each = 5),
+  y = rnorm(15)
+)
+
+fit <- lmer(y ~ (1 | levels), data = experiment)
+fit
+```
+## `confint`
+
+Compute confidence intervals for $\sigma_{\tau}$ and $\sigma$ in a random
+effects model fitted using the restricted maximum likelihood method. Note that
+to get confidence intervals on $\sigma_{\tau}^2$ and $\sigma^2$, both endpoints
+of these intervals have to be squared.
+
+```{r}
+confint(fit) # continuation of previous example
+```
+
+## `kruskal.test`
+
+Performs a nonparametric ANOVA test, based on ranks rather than any assumed
+probability model. The input syntax is exactly the same as `lm` for ordinary
+ANOVA.
+
+```{r}
+experiment <- data.frame(
+  levels = rep(c("A", "B", "C"), each = 5),
+  y = rnorm(15)
+)
+
+fit <- kruskal.test(y ~ levels, data = experiment)
+fit
 ```
 
 # Chapter 4

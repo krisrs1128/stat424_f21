@@ -3,10 +3,9 @@ title: "Random Effects"
 author: "Kris Sankaran | UW Madison | 28 September 2021"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -17,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 6, fig.height = 4, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 6, fig.height = 4, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -32,6 +31,10 @@ theme_set(theme424)
 
 
 # Random Effects
+
+```{r, out.width = 800}
+include_graphics("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png")
+```
 
 ### Statistical Experimental Design
 
@@ -53,17 +56,15 @@ theme_set(theme424)
 ### Motivation
 
 .pull-left[
-* In many problems, there are a large number of levels for a given factor
-  - We may not be able to get measurements for all of them
-  - Even if we could estimate an effect for each level, it might not be that
-    interpretable
-* The goal is to discover whether a factor has an effect on average, not in any
-specific instance
+* Suppose there are a large number of levels for a factor
+  - We may not be able to get measurements for them all
+  - It could be hard to interpret each $\hat{\tau}_i$
+* New Q: Does a factor has an effect on average?
 * There are random effects versions of many models, not just ANOVA
 ]
 
 .pull-right[
-```{r, out.width = 250}
+```{r, out.width = 700}
 include_graphics("https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png")
 ```
 ]
@@ -82,17 +83,21 @@ include_graphics("https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kr
 ### Model
 
 .pull-left[
-Random Effects ANOVA is a version of ANOVA where the treatment effect is random,
+Random Effects ANOVA is a version of ANOVA where *the treatment effect is
+random*,
 
 \begin{align}
 y_{ij} &= \mu + \tau_i + \epsilon_{ij} \\ \\
 \tau_i &\sim \mathcal{N}\left(0, \sigma^2_{\tau}\right) \\
 \epsilon_{ij} &\sim \mathcal{N}\left(0, \sigma^2\right)
 \end{align}
+
+As before, $i$ indexes groups and $j$ indexes observations within groups.
+
 ]
 
 .pull-right[
-```{r, out.width = 300}
+```{r, out.width = 2000}
 include_graphics("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png")
 ```
 ]
@@ -117,17 +122,16 @@ In random effects ANOVA, observations within the same group are correlated.
 \begin{align}
 \text{Cov}\left(y_{ij}, y_{i^\prime j^\prime}\right) = \begin{cases} \sigma^2 + \sigma_{\tau}^2 &\text{ if } i = i^{\prime}, j = j^{\prime} \\  
 \sigma_{\tau}^2 &\text{ if } i = i^{\prime}, j \neq j^{\prime} \\
-\\ 0 &\text{otherwise}. \end{cases}
+0 &\text{otherwise}. \end{cases}
 \end{align}
 
 ---
 
-### Within-Group Covariances
+### Within-Group Covariance
 
-Building a covariance matrix up from these entries, we find a block diagonal
-structure,
+The associated covariance has a block diagonal structure,
 
-```{r}
+```{r, out.width = 620, fig.align = "center"}
 include_graphics("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png")
 ```
 
@@ -144,18 +148,18 @@ Some terms are frequently used in reports that use random effects models,
 * The proportion $\frac{\sigma^2_{\tau}}{\sigma^2_{\tau} + \sigma^2}$ is
 sometimes called the "Intraclass Correlation Coefficient" (ICC)
 
-
+---
 
 ### Hypothesis Testing
 
 Given this model, we may interested in the test,
 
 \begin{align*}
-H_0:& \sigma_\tau^2 = 0 \\
-H_1:& \sigma^2 > 0
+H_0:&\space \sigma_\tau^2 = 0 \\
+H_1:&\space \sigma^2_{\tau} > 0
 \end{align*}
 
-```{r}
+```{r, out.width = 900}
 include_graphics("https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png")
 ```
 
@@ -193,7 +197,7 @@ loom
 
 There seems to be an effect. Can we quantify it?
 
-```{r}
+```{r, echo = TRUE, fig.height = 3, fig.align = "center"}
 ggplot(loom) +
   geom_point(aes(loom, strength))
 ```
@@ -211,7 +215,7 @@ ggplot(loom) +
 ```{r, echo = TRUE}
 library(lme4)
 fit <- lmer(strength ~ (1 | loom), data = loom)
-summary(fit)
+fit
 ```
 ]
 
@@ -220,14 +224,14 @@ summary(fit)
 ### Interpretation
 
 .pull-left[
-* The most important parts of the output is the column called `Variance`. This
-are $\sigma^2_{\tau}$ and $\sigma^2$
-* Though the variation in strength for any given loom is small (s.d. $\approx \sqrt{1.9}$) the loom-to-loom variation is large (s.d. $\approx \sqrt{7.0}$).
+* The most important parts of the output is the column called `Std. Dev.`. These
+are $\sigma_{\tau}$ and $\sigma$.
+* Though the variation in strength for any given loom is small (s.d. $\approx 1.3$) the loom-to-loom variation is large (s.d. $\approx 2.6$).
 ]
 
 .pull-right[
 ```{r, echo = TRUE}
-summary(fit)
+fit
 ```
 ]
 
@@ -238,7 +242,7 @@ summary(fit)
 * We can perform a hypothesis test just like in the earlier notes.
 * The results are consistent with our interpretation of fitted parameters
 
-```{r}
+```{r, echo = TRUE}
 aov_table <- aov(lm(strength ~ loom, data = loom))
 summary(aov_table)
 ```
@@ -274,8 +278,8 @@ head(experiment)
 (1) Frame this problem as a random effects ANOVA problem. What is the
 interpretation of $\tau_i$ and $\sigma_{\tau}^2$ in this context?
 
-(2) Use `lmer` with a random effect for oven (i.e. `(1 | oven)`) to fit a random
-effects model to this data. What are the variance components?
+(2) Use `lmer` with a random effect for oven, i.e. `(1 | oven)`, to fit a random
+effects ANOVA model to this data. What are the variance components?
 
 (3) Interpret the results. Is there any concerning oven-to-oven variation?
 
@@ -295,12 +299,13 @@ to the next.
 
 ### Solution (2)
 
-The variance components are $\sigma^2_{\tau} = 52.01$ and $\sigma^2 = 34.22$.
+The variance components are $\sigma^2_{\tau} \approx 7.2^2 \approx 52$ and
+$\sigma^2 \approx 5.9 ^ 2 \approx 34$.
 
-```{r}
+```{r, echo = TRUE}
 library(lme4)
 fit <- lmer(temperature ~ (1 | oven), data = experiment)
-summary(fit)
+fit
 ```
 
 ---
@@ -310,17 +315,17 @@ summary(fit)
 There appears to be a noticeable oven-to-oven effect, on the same order of
 magnitude as the within-oven variation.
 
+---
+
 ### Bonus
 
-Though there isn't much more we can say based on this data, a brief look at the
-data might raise some suspicions.
+A brief look at the raw data raises suspicions.
 
   * The first oven seems quite different from the other two. Is it an outlier
   oven? It might be helpful to gather data from more ovens.
-  * The variance in temperature within ovens do not seem comparable. Some sort
-  of transformation might be necessary.
+  * The variance in temperature within ovens do not seem comparable.
 
-```{r}
+```{r, echo = TRUE, fig.height = 2.3}
 ggplot(experiment) +
   geom_point(aes(oven, temperature))
 ```
