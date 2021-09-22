@@ -18,15 +18,19 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 
 _Readings [3.9](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week4-1/week4-1.Rmd)_
 
-1. Sometimes a factor has so many levels, that we can’t collect observations for all of them. Or, even if we could collect them, having one parameter for each would lead to a clumsy model.
+1. Sometimes a factor has so many levels, that we can’t collect observations for
+all of them. Or, even if we could collect them, having one parameter for each
+would lead to a clumsy model.
 
 2. In this case, we typically settle for saying the effect of the factor on
 average, rather than than trying to estimating the effects of every single level
 of that factor.
 
 3. Examples,
-    * Is there a high school effect on college GPA? (instead of effects for individual schools)
+    * Is there a middle school effect on high school graduation? (instead of effects for individual schools)
     * Is there a loom effect on fiber strength? (don’t care about individual looms)
+    * Is there a microbiome effect on preterm births?
+    * Is there a county effect on election outcomes?
 
 ```{r, fig.cap = "In random effects, the groups (schools, looms, ...) we observe are assumed sampled from a larger population."}
 include_graphics("https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png")
@@ -35,9 +39,9 @@ include_graphics("https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kr
 ### Model
 
 4. Random effects models have the form,
-$$
+\begin{align}
 y_{ij} = \mu + \tau_i + \epsilon_{ij}
-$$
+\end{align}
     where $\tau_i \sim \mathcal{N}\left(0, \sigma_\tau^2\right)$ and
     $\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)$.  The crucial
     difference is that $\tau_i$ is now thought of as random, not fixed.

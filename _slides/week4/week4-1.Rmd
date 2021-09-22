@@ -1,0 +1,327 @@
+---
+title: "Random Effects"
+author: "Kris Sankaran | UW Madison | 28 September 2021"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    lib_dir: libs
+    nature:
+      beforeInit: "cols_macro.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+    seal: false  
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(ggplot2)
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 6, fig.height = 4, dev = 'svg', dev.args = list(bg = "transparent"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
+```
+
+
+# Random Effects
+
+### Statistical Experimental Design
+
+.large[Kris Sankaran | UW Madison | 28 September 2021]
+
+---
+
+## Announcements
+
+---
+
+### Today
+
+* Book Sections: 3.9
+* Online Notes: Week 4 [1]
+
+---
+
+### Motivation
+
+.pull-left[
+* In many problems, there are a large number of levels for a given factor
+  - We may not be able to get measurements for all of them
+  - Even if we could estimate an effect for each level, it might not be that
+    interpretable
+* The goal is to discover whether a factor has an effect on average, not in any
+specific instance
+* There are random effects versions of many models, not just ANOVA
+]
+
+.pull-right[
+```{r, out.width = 250}
+include_graphics("https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png")
+```
+]
+
+---
+
+### Some examples
+
+- Is there a loom effect on fiber strength?
+- Is there a microbiome effect on preterm births?
+- Is there a county effect on election outcomes?
+- Is there a middle school effect on high school graduation?
+
+---
+
+### Model
+
+.pull-left[
+Random Effects ANOVA is a version of ANOVA where the treatment effect is random,
+
+\begin{align}
+y_{ij} &= \mu + \tau_i + \epsilon_{ij} \\ \\
+\tau_i &\sim \mathcal{N}\left(0, \sigma^2_{\tau}\right) \\
+\epsilon_{ij} &\sim \mathcal{N}\left(0, \sigma^2\right)
+\end{align}
+]
+
+.pull-right[
+```{r, out.width = 300}
+include_graphics("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png")
+```
+]
+
+---
+
+### Within-Group Covariance
+
+In ordinary ("fixed-effects") ANOVA, all the observations are uncorrelated,
+because the $\epsilon_{ij}$'s are independent,
+
+\begin{align}
+\text{Cov}\left(y_{ij}, y_{i^\prime j^\prime}\right) = \begin{cases} \sigma^2 &\text{ if } i = i^{\prime}, j = j^{\prime} \\0 &\text{otherwise}. \end{cases}
+\end{align}
+
+---
+
+### Within-Group Covariance
+
+In random effects ANOVA, observations within the same group are correlated.
+
+\begin{align}
+\text{Cov}\left(y_{ij}, y_{i^\prime j^\prime}\right) = \begin{cases} \sigma^2 + \sigma_{\tau}^2 &\text{ if } i = i^{\prime}, j = j^{\prime} \\  
+\sigma_{\tau}^2 &\text{ if } i = i^{\prime}, j \neq j^{\prime} \\
+\\ 0 &\text{otherwise}. \end{cases}
+\end{align}
+
+---
+
+### Within-Group Covariances
+
+Building a covariance matrix up from these entries, we find a block diagonal
+structure,
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png")
+```
+
+In fact, the vector $\left(y_{11}, \dots, y_{an}\right)$ is normally distributed
+with mean $\mu$ and this covariance. This will be useful in our next lecture.
+
+---
+
+### Terminology
+
+Some terms are frequently used in reports that use random effects models,
+
+* The parameters $\sigma^2_{\tau}$ and $\sigma^2$ are called "variance components"
+* The proportion $\frac{\sigma^2_{\tau}}{\sigma^2_{\tau} + \sigma^2}$ is
+sometimes called the "Intraclass Correlation Coefficient" (ICC)
+
+
+
+### Hypothesis Testing
+
+Given this model, we may interested in the test,
+
+\begin{align*}
+H_0:& \sigma_\tau^2 = 0 \\
+H_1:& \sigma^2 > 0
+\end{align*}
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png")
+```
+
+---
+
+### Hypothesis Testing
+
+* The statistic $\frac{MS_{\text{treatment}}}{MS_{E}}$ from fixed-effects ANOVA
+can still be used here
+* The reference distribution is unchanged (an $F\left(a - 1, N - a\right)$)
+* Everything you know for fixed-effects ANOVA can be used for testing in random
+effects ANOVA
+
+---
+
+### Code Implementation
+
+---
+
+###  Loom Dataset
+
+We will illustrate this on a dataset of fabric strength across looms in a
+textile manufacturing plant. It is from Example 3.10 of the textbook.
+
+```{r, echo = TRUE}
+library(readr)
+loom <- read_csv("https://uwmadison.box.com/shared/static/ezp3i2pflhi96si7u6rfn3dg3lb5cl3z.csv")
+loom$loom <- as.factor(loom$loom)
+loom
+```
+
+---
+
+### Plot the data
+
+There seems to be an effect. Can we quantify it?
+
+```{r}
+ggplot(loom) +
+  geom_point(aes(loom, strength))
+```
+
+---
+
+### `lmer`
+
+.pull-left[
+* To fit the model, we use `lmer` from the `lme4` package
+* The syntax `(1 | variable)` means that variable should be treated as a random
+]
+
+.pull-right[
+```{r, echo = TRUE}
+library(lme4)
+fit <- lmer(strength ~ (1 | loom), data = loom)
+summary(fit)
+```
+]
+
+---
+
+### Interpretation
+
+.pull-left[
+* The most important parts of the output is the column called `Variance`. This
+are $\sigma^2_{\tau}$ and $\sigma^2$
+* Though the variation in strength for any given loom is small (s.d. $\approx \sqrt{1.9}$) the loom-to-loom variation is large (s.d. $\approx \sqrt{7.0}$).
+]
+
+.pull-right[
+```{r, echo = TRUE}
+summary(fit)
+```
+]
+
+---
+
+### Hypothesis Test
+
+* We can perform a hypothesis test just like in the earlier notes.
+* The results are consistent with our interpretation of fitted parameters
+
+```{r}
+aov_table <- aov(lm(strength ~ loom, data = loom))
+summary(aov_table)
+```
+
+---
+
+### Exercise
+
+This walks through problem 3.30 in the book.
+
+.pull-left[
+Several ovens in a metal working shop are used to heat metal specimens. All the
+ovens are supposed to operate at the same temperature, although it is suspected
+that this may not be true. Three ovens are selected at random, and their
+temperatures on successive heats are noted. The data are collected as follows,
+]
+
+.pull-right[
+```{r, echo = TRUE}
+experiment <- data.frame(
+  "oven" = c(rep("1", 5), rep("2", 4), rep("3", 6)),
+  "temperature" = c(491.5, 498.3, 498.1, 493.5, 493.6,
+                    488.5, 484.65, 479.9, 477.35, 
+                    490.1, 484.4, 488.25, 473, 471.85, 478.65)
+)
+
+head(experiment)
+```
+]
+
+---
+
+(1) Frame this problem as a random effects ANOVA problem. What is the
+interpretation of $\tau_i$ and $\sigma_{\tau}^2$ in this context?
+
+(2) Use `lmer` with a random effect for oven (i.e. `(1 | oven)`) to fit a random
+effects model to this data. What are the variance components?
+
+(3) Interpret the results. Is there any concerning oven-to-oven variation?
+
+---
+
+### Solution (1)
+
+Since the ovens are sampled from a larger population of ovens, it's natural to
+think of the oven effects as being random.
+
+We model $\tau_i \sim \mathcal{N}\left(0, \sigma^2_{\tau}\right)$, where
+$\tau_i$ represents the deviation of oven $i$'s temperature from the global mean
+and $\sigma^2_{\tau}$ controls the variation in mean temperatures from one oven
+to the next.
+
+---
+
+### Solution (2)
+
+The variance components are $\sigma^2_{\tau} = 52.01$ and $\sigma^2 = 34.22$.
+
+```{r}
+library(lme4)
+fit <- lmer(temperature ~ (1 | oven), data = experiment)
+summary(fit)
+```
+
+---
+
+### Solution (3)
+
+There appears to be a noticeable oven-to-oven effect, on the same order of
+magnitude as the within-oven variation.
+
+### Bonus
+
+Though there isn't much more we can say based on this data, a brief look at the
+data might raise some suspicions.
+
+  * The first oven seems quite different from the other two. Is it an outlier
+  oven? It might be helpful to gather data from more ovens.
+  * The variance in temperature within ovens do not seem comparable. Some sort
+  of transformation might be necessary.
+
+```{r}
+ggplot(experiment) +
+  geom_point(aes(oven, temperature))
+```
+
