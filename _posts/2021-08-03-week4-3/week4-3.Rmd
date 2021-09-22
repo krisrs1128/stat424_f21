@@ -12,58 +12,70 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+library(knitr)
+library(EBImage)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [3.11](), [Rmarkdown]()_
+_Readings [3.11](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week4-3/week4-3.Rmd)_
 
 1. What can we do when the errors seem very far from normally distributed?
 Imagine all attempts to transform the data have failed. An alternative is to use
-nonparametric ANOVA.
+nonparametric ANOVA. The figure below gives an example of highly skewed data,
+for which a standard ANOVA might not be appropriate.
 
-```{r, preview = TRUE}
-library(EBImage)
-display(readImage("https://uwmadison.box.com/shared/static/kdv2ayi2heooodf0a0j15swxld4ofll7.png"))
-```
-
-
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5lvoajju3ekf.png")
-```
-
-
-```{r}
+```{r, out.width = "50%", fig.align = "center"}
 include_graphics("https://uwmadison.box.com/shared/static/a2evjeib97ay362iue2vhkxk18gbh7l4.png")
 ```
 
 2. The intuition is that, if all the groups have the same means, then no group
-should be consistently ranked higher than another. To implement this idea
-quantitatively,
-  * Transform the data to their ranks. The smallest of the $y_ij$ becomes 1, the
-next smallest becomes 2, etc. Denote these ranks by $R_{ij}$. 
-  * Compute the test statistic
-$$
-\frac{1}{S^2}\left[\sum_{i = 1}^{a} \frac{R_{i\cdot}^2}{n_{i}} - \frac{N\left(N + 1\right)^2}{4}\right]
-$$
-  where we define $R_{i\cdot}$ to be the sum of the ranks in the $i^{th}$ group,
-and
-$$
-S^2 = \frac{1}{N - 1} \left[\sum_{i, j} R_{ij}^2 - \frac{N\left(N + 1\right)^2}{4}\right].
-$$
-  * Compare the test statistic to a $\chi^2_{a -1}$ reference distribution. If
-  it seems too large to be plausible, reject the null hypothesis.
+should be consistently ranked higher than another. Consider hte figure below. In
+the left case, there seems to be a difference in the groups, just by looking at
+the ranks. In the right, the groups seem more or less comparable.
 
+```{r, fig.hold = TRUE, out.width = "48%"}
+include_graphics("https://uwmadison.box.com/shared/static/kdv2ayi2heooodf0a0j15swxld4ofll7.png")
+include_graphics("https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5lvoajju3ekf.png")
+```
+
+3. To implement this idea quantitatively,
+    * Transform the data to their ranks. The smallest of the $y_{ij}$ becomes 1, the
+  next smallest becomes 2, etc. Denote these ranks by $R_{ij}$. 
+    * Compute the test statistic
+  $$
+  \frac{1}{S^2}\left[\sum_{i = 1}^{a} \frac{R_{i\cdot}^2}{n_{i}} - \frac{N\left(N + 1\right)^2}{4}\right]
+  $$
+    where we define $R_{i\cdot}$ to be the sum of the ranks in the $i^{th}$ group,
+  and
+  $$
+  S^2 = \frac{1}{N - 1} \left[\sum_{i, j} R_{ij}^2 - \frac{N\left(N + 1\right)^2}{4}\right].
+  $$
+    * Compare the test statistic to a $\chi^2_{a -1}$ reference distribution. If
+    it seems too large to be plausible, reject the null hypothesis.
+  
 3. Where did this test statistic come from? It’s possible to show that the statistic is equivalent to
+  $$
+  \frac{\sum_{i} n_{i}\left(\bar{R}_{i} - \bar{R}\right)^2}{\frac{1}{N - 1}\sum_{i, j} \left(R_{ij} - \bar{R}\right)^2}
+  $$
+    which compares the average rank in group $i$ to the average rank overall, and
+    standardizes by the overall variance of the ranks. The first formula is the one
+    presented in the book, though, and it’s easier to calculate by hand.
 
-$$
-\frac{\sum_{i} n_{i}\left(\bar{R}_{i} - \bar{R}\right)^2}{\frac{1}{N - 1}\sum_{i, j} \left(R_{ij} - \bar{R}\right)^2}
-$$
-which compares the average rank in group $i$ to the average rank overall, and
-standardizes by the overall variance of the ranks. The first formula is the one
-presented in the book, though, and it’s easier to calculate by hand.
-
-4. Why not always use nonparametric ANOVA? If the data are actually normal, than
+5. Why not always use nonparametric ANOVA? If the data are actually normal, than
 this approach has less power than standard ANOVA. If you have doubts about
 validity, a safe approach is to try both. If the approaches approximately agree,
 default to standard ANOVA.
+
+### Code Example
+
+6. This test is implemented by the `kruskal.test` function. It expects input in
+the same form as `lm` in the earlier ANOVA examples. Below, we apply the test to
+the etch rate data. The $p$-value indicates that the groups have significantly
+different ranks, which is consistent with our previous findings.
+
+```{r, echo = TRUE}
+library(readr)
+etch_rate <- read_csv("https://uwmadison.box.com/shared/static/vw3ldbgvgn7rupt4tz3ditl1mpupw44h.csv")
+etch_rate$power <- as.factor(etch_rate$power) # want to think of power as distinct groups
+kruskal.test(rate ~ power, data = etch_rate)
+```

@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week4-1_files/anchor-4.2.2/anchor.min.js","week4-1_files/bowser-1.9.3/bowser.min.js","week4-1_files/distill-2.2.21/template.v2.js","week4-1_files/figure-html5/unnamed-chunk-2-1.png","week4-1_files/header-attrs-2.8/header-attrs.js","week4-1_files/jquery-1.11.3/jquery.min.js","week4-1_files/popper-2.6.0/popper.min.js","week4-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week4-1_files/tippy-6.2.7/tippy-light-border.css","week4-1_files/tippy-6.2.7/tippy.css","week4-1_files/tippy-6.2.7/tippy.umd.min.js","week4-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week4-1_files/anchor-4.2.2/anchor.min.js","week4-1_files/bowser-1.9.3/bowser.min.js","week4-1_files/distill-2.2.21/template.v2.js","week4-1_files/figure-html5/unnamed-chunk-2-1.png","week4-1_files/figure-html5/unnamed-chunk-7-1.png","week4-1_files/header-attrs-2.8/header-attrs.js","week4-1_files/jquery-1.11.3/jquery.min.js","week4-1_files/popper-2.6.0/popper.min.js","week4-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week4-1_files/tippy-6.2.7/tippy-light-border.css","week4-1_files/tippy-6.2.7/tippy.css","week4-1_files/tippy-6.2.7/tippy.umd.min.js","week4-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2289,64 +2289,125 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">3.9</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">3.9</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week4-1/week4-1.Rmd">Rmarkdown</a></em></p>
 <ol type="1">
 <li><p>Sometimes a factor has so many levels, that we can’t collect observations for all of them. Or, even if we could collect them, having one parameter for each would lead to a clumsy model.</p></li>
-<li><p>In this ase, we typically settle for saying the effect of the factor on average, rather than than trying to estimating the effects of every single level of that factor.</p></li>
-</ol>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png" width="500px" /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week4-1_files/figure-html5/unnamed-chunk-2-1.png" width="500px" data-distill-preview=1 /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<img src="https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png" width="500px" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png" width="500px" /></p>
-</div>
-<ol start="3" type="1">
-<li>Examples,
+<li><p>In this case, we typically settle for saying the effect of the factor on average, rather than than trying to estimating the effects of every single level of that factor.</p></li>
+<li><p>Examples,</p>
 <ul>
 <li>Is there a high school effect on college GPA? (instead of effects for individual schools)</li>
 <li>Is there a loom effect on fiber strength? (don’t care about individual looms)</li>
 </ul></li>
 </ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<img src="https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png" alt="In random effects, the groups (schools, looms, ...) we observe are assumed sampled from a larger population."  />
+<p class="caption">
+Figure 1: In random effects, the groups (schools, looms, …) we observe are assumed sampled from a larger population.
+</p>
+</div>
+</div>
 <h3 id="model">Model</h3>
 <ol start="4" type="1">
-<li><p>Random effects models have the form, <span class="math display">\[
+<li>Random effects models have the form, <span class="math display">\[
 y_{ij} = \mu + \tau_i + \epsilon_{ij}
-\]</span> where <span class="math inline">\(\tau_i \sim \mathcal{N}\left(0, 2\right)\)</span> and <span class="math inline">\(\epsilon_{ij} \sim  \mathcal{N}\left(0, \sigma^2\right)\)</span>. The crucial difference is that <span class="math inline">\(i\)</span> is now thought of as random, not fixed.</p></li>
-<li><p>Notice that <span class="math display">\[\begin{align}
+\]</span> where <span class="math inline">\(\tau_i \sim \mathcal{N}\left(0, \sigma_\tau^2\right)\)</span> and <span class="math inline">\(\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span>. The crucial difference is that <span class="math inline">\(\tau_i\)</span> is now thought of as random, not fixed.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="week4-1_files/figure-html5/unnamed-chunk-2-1.png" width="624" data-distill-preview=1 /></p>
+</div>
+<ol start="5" type="1">
+<li>Notice that <span class="math display">\[\begin{align}
 \text{Var}\left(y_{ij}\right) &amp;= \text{Var}\left(\tau_j\right) + \text{Var}\left(\epsilon_{ij}\right) \\
 &amp;= \sigma_{\tau}^2 + \sigma^2
-\end{align}\]</span> More generally, the covariance matrix is block diagonal, with blocks of <span class="math inline">\(\sigma_{\tau}^2\)</span> within groups.</p></li>
+\end{align}\]</span> More generally, the covariance matrix is block diagonal, with blocks of <span class="math inline">\(\sigma_{\tau}^2\)</span> within groups.</li>
 </ol>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png" /><!-- --></p>
+</div>
 <h3 id="hypothesis-testing">Hypothesis Testing</h3>
 <ol start="6" type="1">
-<li><p>We may want to test whether there is any variation in response across factor levels. Formally, <span class="math display">\[\begin{align*}
+<li>We may want to test whether there is any variation in response across factor levels. Formally, <span class="math display">\[\begin{align*}
 H_0:&amp; \sigma_\tau^2 = 0 \\
 H_1:&amp; \sigma^2 &gt; 0
-\end{align*}\]</span></p></li>
-<li><p>For our test statistic, we can use the same one as before, <span class="math inline">\(\frac{MS_{\text{treatments}}}{MS_{E}}\)</span> and for the same reasons as in fixed-effect ANOVA, this is <span class="math inline">\(F\)</span>-distributed with <span class="math inline">\((a - 1, N - a)\)</span> d.f. – we reject the null when this quantity is large.</p></li>
+\end{align*}\]</span></li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png" alt="Under the null, there is no difference between any of the groups."  />
+<p class="caption">
+Figure 2: Under the null, there is no difference between any of the groups.
+</p>
+</div>
+</div>
+<ol start="6" type="1">
+<li>For our test statistic, we can use the same one as before, <span class="math inline">\(\frac{MS_{\text{treatments}}}{MS_{E}}\)</span> and for the same reasons as in fixed-effect ANOVA, this is <span class="math inline">\(F\)</span>-distributed with <span class="math inline">\((a - 1, N - a)\)</span> d.f. – we reject the null when this quantity is large.</li>
+</ol>
+<h3 id="code-example">Code Example</h3>
+<ol start="7" type="1">
+<li>We will illustrate this method on a dataset about the strength of looms in a factory. The block below reads in the data.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='va'>loom</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ezp3i2pflhi96si7u6rfn3dg3lb5cl3z.csv"</span><span class='op'>)</span>
+<span class='va'>loom</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 16 × 3
+    loom replicate strength
+   &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
+ 1     1 Ob1             98
+ 2     2 Ob1             91
+ 3     3 Ob1             96
+ 4     4 Ob1             95
+ 5     1 Ob2             97
+ 6     2 Ob2             90
+ 7     3 Ob2             95
+ 8     4 Ob2             96
+ 9     1 Ob3             99
+10     2 Ob3             93
+11     3 Ob3             97
+12     4 Ob3             99
+13     1 Ob4             96
+14     2 Ob4             92
+15     3 Ob4             95
+16     4 Ob4             98</code></pre>
+</div>
+<ol start="8" type="1">
+<li>To fit a random effects model, we can use the <code>lmer</code> function in the <code>lme4</code> package. The syntax <code>(1 | variable)</code> means that this variable should be treated as a random effect. Compare the result with Example 3.10 in the textbook.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/lme4/lme4/'>lme4</a></span><span class='op'>)</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>strength</span> <span class='op'>~</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>loom</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>loom</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Linear mixed model fit by REML [&#39;lmerMod&#39;]
+Formula: strength ~ (1 | loom)
+   Data: loom
+
+REML criterion at convergence: 63.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-1.38018 -0.57260 -0.04342  0.82574  1.52491 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ loom     (Intercept) 6.958    2.638   
+ Residual             1.896    1.377   
+Number of obs: 16, groups:  loom, 4
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   95.437      1.363   70.01</code></pre>
+</div>
+<ol start="9" type="1">
+<li>The most important quantities in this computer output are entries of the <code>Variance</code> column. These are the <span class="math inline">\(\sigma^2_{\tau}\)</span> and <span class="math inline">\(\sigma^2\)</span> quantities in the model above; they are sometimes called “variance components.” We would interpret this result as meaning that there is quite a large variation in strength from one loom to the next. Even though the average fabric strength is around 95.4 across all looms (the <code>Intercept</code> field), if you drew a new loom, its typical fabric strength might be several points higher or lower. Precisely, the distribution of loom mean strengths is approximately <span class="math inline">\(\mathcal{N}\left(95, 7\right)\)</span>. Within any given loom, though, the strength is not too variable, with a variance of only <span class="math inline">\(\approx 2\)</span>.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

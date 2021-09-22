@@ -2289,54 +2289,55 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">3.11</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">3.11</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week4-3/week4-3.Rmd">Rmarkdown</a></em></p>
 <ol type="1">
-<li>What can we do when the errors seem very far from normally distributed? Imagine all attempts to transform the data have failed. An alternative is to use nonparametric ANOVA.</li>
+<li>What can we do when the errors seem very far from normally distributed? Imagine all attempts to transform the data have failed. An alternative is to use nonparametric ANOVA. The figure below gives an example of highly skewed data, for which a standard ANOVA might not be appropriate.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/kdv2ayi2heooodf0a0j15swxld4ofll7.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week4-3_files/figure-html5/unnamed-chunk-1-1.png" width="500px" data-distill-preview=1 /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5lvoajju3ekf.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5lvoajju3ekf.png" width="500px" /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/a2evjeib97ay362iue2vhkxk18gbh7l4.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/a2evjeib97ay362iue2vhkxk18gbh7l4.png" width="500px" /></p>
+<p><img src="https://uwmadison.box.com/shared/static/a2evjeib97ay362iue2vhkxk18gbh7l4.png" width="50%" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="2" type="1">
-<li>The intuition is that, if all the groups have the same means, then no group should be consistently ranked higher than another. To implement this idea quantitatively,</li>
+<li>The intuition is that, if all the groups have the same means, then no group should be consistently ranked higher than another. Consider hte figure below. In the left case, there seems to be a difference in the groups, just by looking at the ranks. In the right, the groups seem more or less comparable.</li>
 </ol>
-<ul>
-<li>Transform the data to their ranks. The smallest of the <span class="math inline">\(y_ij\)</span> becomes 1, the next smallest becomes 2, etc. Denote these ranks by <span class="math inline">\(R_{ij}\)</span>.</li>
-<li>Compute the test statistic <span class="math display">\[
-\frac{1}{S^2}\left[\sum_{i = 1}^{a} \frac{R_{i\cdot}^2}{n_{i}} - \frac{N\left(N + 1\right)^2}{4}\right]
-\]</span> where we define <span class="math inline">\(R_{i\cdot}\)</span> to be the sum of the ranks in the <span class="math inline">\(i^{th}\)</span> group, and <span class="math display">\[
-S^2 = \frac{1}{N - 1} \left[\sum_{i, j} R_{ij}^2 - \frac{N\left(N + 1\right)^2}{4}\right].
-\]</span></li>
-<li>Compare the test statistic to a <span class="math inline">\(\chi^2_{a -1}\)</span> reference distribution. If it seems too large to be plausible, reject the null hypothesis.</li>
-</ul>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="https://uwmadison.box.com/shared/static/kdv2ayi2heooodf0a0j15swxld4ofll7.png" width="48%" /><img src="https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5lvoajju3ekf.png" width="48%" /></p>
+</div>
 <ol start="3" type="1">
-<li>Where did this test statistic come from? It’s possible to show that the statistic is equivalent to</li>
+<li><p>To implement this idea quantitatively,</p>
+<ul>
+<li>Transform the data to their ranks. The smallest of the <span class="math inline">\(y_{ij}\)</span> becomes 1, the next smallest becomes 2, etc. Denote these ranks by <span class="math inline">\(R_{ij}\)</span>.</li>
+<li>Compute the test statistic <span class="math display">\[
+  \frac{1}{S^2}\left[\sum_{i = 1}^{a} \frac{R_{i\cdot}^2}{n_{i}} - \frac{N\left(N + 1\right)^2}{4}\right]
+  \]</span> where we define <span class="math inline">\(R_{i\cdot}\)</span> to be the sum of the ranks in the <span class="math inline">\(i^{th}\)</span> group, and <span class="math display">\[
+  S^2 = \frac{1}{N - 1} \left[\sum_{i, j} R_{ij}^2 - \frac{N\left(N + 1\right)^2}{4}\right].
+  \]</span></li>
+<li>Compare the test statistic to a <span class="math inline">\(\chi^2_{a -1}\)</span> reference distribution. If it seems too large to be plausible, reject the null hypothesis.</li>
+</ul></li>
+<li><p>Where did this test statistic come from? It’s possible to show that the statistic is equivalent to <span class="math display">\[
+  \frac{\sum_{i} n_{i}\left(\bar{R}_{i} - \bar{R}\right)^2}{\frac{1}{N - 1}\sum_{i, j} \left(R_{ij} - \bar{R}\right)^2}
+  \]</span> which compares the average rank in group <span class="math inline">\(i\)</span> to the average rank overall, and standardizes by the overall variance of the ranks. The first formula is the one presented in the book, though, and it’s easier to calculate by hand.</p></li>
+<li><p>Why not always use nonparametric ANOVA? If the data are actually normal, than this approach has less power than standard ANOVA. If you have doubts about validity, a safe approach is to try both. If the approaches approximately agree, default to standard ANOVA.</p></li>
 </ol>
-<p><span class="math display">\[
-\frac{\sum_{i} n_{i}\left(\bar{R}_{i} - \bar{R}\right)^2}{\frac{1}{N - 1}\sum_{i, j} \left(R_{ij} - \bar{R}\right)^2}
-\]</span> which compares the average rank in group <span class="math inline">\(i\)</span> to the average rank overall, and standardizes by the overall variance of the ranks. The first formula is the one presented in the book, though, and it’s easier to calculate by hand.</p>
-<ol start="4" type="1">
-<li>Why not always use nonparametric ANOVA? If the data are actually normal, than this approach has less power than standard ANOVA. If you have doubts about validity, a safe approach is to try both. If the approaches approximately agree, default to standard ANOVA.</li>
+<h3 id="code-example">Code Example</h3>
+<ol start="6" type="1">
+<li>This test is implemented by the <code>kruskal.test</code> function. It expects input in the same form as <code>lm</code> in the earlier ANOVA examples. Below, we apply the test to the etch rate data. The <span class="math inline">\(p\)</span>-value indicates that the groups have significantly different ranks, which is consistent with our previous findings.</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='va'>etch_rate</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/vw3ldbgvgn7rupt4tz3ditl1mpupw44h.csv"</span><span class='op'>)</span>
+<span class='va'>etch_rate</span><span class='op'>$</span><span class='va'>power</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>etch_rate</span><span class='op'>$</span><span class='va'>power</span><span class='op'>)</span> <span class='co'># want to think of power as distinct groups</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/kruskal.test.html'>kruskal.test</a></span><span class='op'>(</span><span class='va'>rate</span> <span class='op'>~</span> <span class='va'>power</span>, data <span class='op'>=</span> <span class='va'>etch_rate</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+    Kruskal-Wallis rank sum test
+
+data:  rate by power
+Kruskal-Wallis chi-squared = 16.907, df = 3, p-value =
+0.0007386</code></pre>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

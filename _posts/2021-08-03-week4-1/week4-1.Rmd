@@ -13,10 +13,10 @@ output:
 
 ```{r setup, include=FALSE}
 library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [3.9](), [Rmarkdown]()_
+_Readings [3.9](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week4-1/week4-1.Rmd)_
 
 1. Sometimes a factor has so many levels, that we can’t collect observations for all of them. Or, even if we could collect them, having one parameter for each would lead to a clumsy model.
 
@@ -24,25 +24,13 @@ _Readings [3.9](), [Rmarkdown]()_
 average, rather than than trying to estimating the effects of every single level
 of that factor.
 
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png")
-```
-
-
-```{r, preview = TRUE}
-library(EBImage)
-display(readImage("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png"))
-```
-
-
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png")
-include_graphics("https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png")
-```
-
 3. Examples,
     * Is there a high school effect on college GPA? (instead of effects for individual schools)
     * Is there a loom effect on fiber strength? (don’t care about individual looms)
+
+```{r, fig.cap = "In random effects, the groups (schools, looms, ...) we observe are assumed sampled from a larger population."}
+include_graphics("https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png")
+```
 
 ### Model
 
@@ -50,9 +38,14 @@ include_graphics("https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aa
 $$
 y_{ij} = \mu + \tau_i + \epsilon_{ij}
 $$
-    where $\tau_i \sim \mathcal{N}\left(0, 2\right)$ and $\epsilon_{ij} \sim
-    \mathcal{N}\left(0, \sigma^2\right)$.  The crucial difference is that $i$ is
-    now thought of as random, not fixed.
+    where $\tau_i \sim \mathcal{N}\left(0, \sigma_\tau^2\right)$ and
+    $\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)$.  The crucial
+    difference is that $\tau_i$ is now thought of as random, not fixed.
+
+```{r, preview = TRUE}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png"))
+```
 
 5. Notice that 
 \begin{align}
@@ -60,6 +53,11 @@ $$
 &= \sigma_{\tau}^2 + \sigma^2
 \end{align}
     More generally, the covariance matrix is block diagonal, with blocks of $\sigma_{\tau}^2$ within groups.
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png")
+```
+
 
 ### Hypothesis Testing
 
@@ -70,7 +68,44 @@ H_0:& \sigma_\tau^2 = 0 \\
 H_1:& \sigma^2 > 0
 \end{align*}
 
+```{r, fig.cap = "Under the null, there is no difference between any of the groups."}
+include_graphics("https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png")
+```
+
 6. For our test statistic, we can use the same one as before,
 $\frac{MS_{\text{treatments}}}{MS_{E}}$ and for the same reasons as in
 fixed-effect ANOVA, this is $F$-distributed with $(a - 1, N - a)$ d.f. -- we
 reject the null when this quantity is large.
+
+### Code Example
+
+7. We will illustrate this method on a dataset about the strength of looms in a
+factory. The block below reads in the data.
+
+```{r, echo = TRUE}
+library(readr)
+loom <- read_csv("https://uwmadison.box.com/shared/static/ezp3i2pflhi96si7u6rfn3dg3lb5cl3z.csv")
+loom$loom <- as.factor(loom$loom)
+loom
+```
+
+8. To fit a random effects model, we can use the `lmer` function in the `lme4`
+package. The syntax `(1 | variable)` means that this variable should be treated
+as a random effect. Compare the result with Example 3.10 in the textbook.
+
+```{r, echo = TRUE}
+library(lme4)
+fit <- lmer(strength ~ (1 | loom), data = loom)
+summary(fit)
+```
+
+9. The most important quantities in this computer output are entries of the
+`Variance` column. These are the $\sigma^2_{\tau}$ and $\sigma^2$ quantities in
+the model above; they are sometimes called "variance components." We would
+interpret this result as meaning that there is quite a large variation in
+strength from one loom to the next. Even though the average fabric strength is
+around 95.4 across all looms (the `Intercept` field), if you drew a new loom,
+its typical fabric strength might be several points higher or lower. Precisely,
+the distribution of loom mean strengths is approximately $\mathcal{N}\left(95,
+7\right)$. Within any given loom, though, the strength is not too variable, with
+a variance of only $\approx 2$.

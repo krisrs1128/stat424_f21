@@ -13,29 +13,19 @@ output:
 
 ```{r setup, include=FALSE}
 library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [3.9](), [Rmarkdown]()_
-
-```{r}
-display(readImage("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii24s9tegnqb.png"))
-```
+_Readings [3.9](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week4-2/week4-2.Rmd)_
 
 
-```{r, preview = TRUE}
-display(readImage("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png"))
-```
-
-
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/0au3iwj17u49ueqor5djqg58rensvmqo.png")
-include_graphics("https://uwmadison.box.com/shared/static/kqgsua08wh8n2h6zhssbmxf4byldcq2o.png")
-```
 
 1. In random effects models, there are three key parameters: $\mu,
 \sigma^2_{\tau}, \sigma^2$. Two ways to fit them are (1) the method of moments
-and (2) maximum likelihood.
+and (2) maximum likelihood. The different approaches to estimation have
+different properties, so even though knowing the intricate details of the
+computation is not necessary, having a basic understanding of how the approaches
+work can help make sure we use appropriate software implementations.
 
 ### Method of Moments
 
@@ -47,9 +37,9 @@ and (2) maximum likelihood.
 \mathbf{E}\left[MS_{E}\right] &= \sigma^2
 \end{align*}
 
-4. We can approximate the expected values through,
+4. We can approximate the expected values using,
 \begin{align*}
-MS_{\text{treatments} \approx \sigma^2 + n \sigma_{\tau}^2 \\
+MS_{\text{treatment}} \approx \sigma^2 + n \sigma_{\tau}^2 \\
 MS_{E} \approx \sigma^2
 \end{align*}
 
@@ -62,9 +52,9 @@ as the solutions to that system of equations.
 \end{align}
 
 6. How can we get confidence intervals for these estimates?
-    * For $\hat{\mu} = \bar{y}$, we can use $\text{Var}\left(y\right) &= \frac{1}{N} \text{Var}\left(y_{ij}\right)=\frac{1}{N}\left(\sigma^2 + n\sigma^2_{\tau}\right)$
+    * For $\hat{\mu} = \bar{y}$, we can use $\text{Var}\left(y\right) = \frac{1}{N} \text{Var}\left(y_{ij}\right)=\frac{1}{N}\left(\sigma^2 + n\sigma^2_{\tau}\right)$
     * For $\hat{\sigma}^2$, we can use the fact that $\frac{N - a}{\sigma^2}MS_{E} \sim \chi^2_{N - a}$.
-    * For $\hat{\sigma}^2_{\tau}, we’re out of luck, though some papers give
+    * For $\hat{\sigma}^2_{\tau}$, we’re out of luck, though some papers give
     approximate confidence intervals.
 
 ### Maximum Likelihood Estimation
@@ -86,6 +76,13 @@ y_{a n}
 \mathbf{0} & \mathbf{0} & \ldots & \sigma^{2} I_{n}+\sigma_{\tau}^{2} 1_{n} 1_{n}^{T}
 \end{array}\right)\right)
 $$
+  Here, $1_{n}$ refers to a vector of $n$ 1's stacked in a column and $I_{n}$
+  refers to the $n\times n$ identity matrix.
+
+```{r, preview = TRUE}
+display(readImage("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png"))
+```
+
 
 8. The specific form of the covariance isn’t important. What is important is
 that we can exactly evaluate the probability of $y_{11}, y_{12},\dots, y_{an}$ under
@@ -95,8 +92,76 @@ any choice of the parameters $\mu, \sigma^2, \sigma^2_{\tau}$.
 dataset $y_{11}, y_{12}, \dots y_{an}$ viewed as a function of the normal
 distribution’s parameters. A good estimate for these parameters comes from
 finding the configuration that maximizes $L\left(\mu, \sigma^2,
-\sigma^2_{\tau}\right)$. The maximizers can’t be found analytically, but algorithms exist to find the maximizers. 
+\sigma^2_{\tau}\right)$. The maximizers can’t be found analytically, but
+algorithms exist to find the maximizers.
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/0au3iwj17u49ueqor5djqg58rensvmqo.png")
+```
 
 10. Software also gives a confidence interval for the estimates. It works by
-studying the curvature of the likelihood function at the maximizer, though we
-don’t need to worry about the details.
+studying the curvature of the likelihood function at the maximizer.
+
+```{r, fig.cap = "A highly peaked likelihood surface will give a smaller confidence interval, because there is a smaller set parameters that gives a good probability to the observed data."}
+include_graphics("https://uwmadison.box.com/shared/static/kqgsua08wh8n2h6zhssbmxf4byldcq2o.png")
+```
+
+### Code Implementation
+
+11. Which method should we use in practice? There are a few considerations,
+  * If confidence intervals are necessary for more than just $\hat{\mu}$ and
+  $\hat{\sigma}^2$, then maximum likelihood should be used.
+  * It can turn out that the method of moments returns negative values for
+  $\hat{\sigma}^2$. It is solving an algebraic equation and has no prior
+  knowledge that variances should always be positive. If a negative variance is
+  likely to be problematic, then maximum likelihood should be used.
+  * Maximum likelihood is slow, because it requires an iterative
+  optimization. The method of moments only requires the solution to a system of
+  equations, though, and so is very fast. It is often the method of choice in
+  large scale problems.
+  
+12. The `lme4` package implements the maximum likelihood approach to random
+effects model estimation; this package is reviewed in the previous notes.
+
+13. To estimate the method of moments, we can do all the calculations by hand --
+we just need the results from an ANOVA table.
+
+```{r, echo = TRUE}
+library(readr)
+library(broom)
+loom <- read_csv("https://uwmadison.box.com/shared/static/ezp3i2pflhi96si7u6rfn3dg3lb5cl3z.csv")
+loom$loom <- as.factor(loom$loom)
+N <- nrow(loom)
+a <- nlevels(loom$loom)
+n <- N / a
+
+aov_table <- aov(lm(strength ~ loom, data = loom)) %>%
+  tidy()
+```
+
+14. The code below computes point estimates for $\sigma^2$ and $\sigma_{\tau}^2$
+based on the formulas above, using the `MSE` quantities available in the ANOVA
+table. It also computes the intraclass correlation coefficient (ICC), which is
+defined in the reading.
+
+```{r, echo = TRUE}
+sigma_sqs = vector(length = 2)
+sigma_sqs[1] <- aov_table$meansq[2] # estimate for sigma^2
+sigma_sqs[2] <- (aov_table$meansq[1] - aov_table$meansq[2]) / n # estimate for sigma^2_tau
+
+sigma_sqs
+sigma_sqs[2] / sum(sigma_sqs) # ICC
+```
+
+15. We can also use the formulas above to compute confidence intervals for
+$\hat{\sigma}^2$. We use a formula from the book to build an analogous interval
+for the ICC.
+
+```{r, echo = TRUE}
+int_bounds <- c(0.975, 0.025)
+(N - a) * sigma_sqs[1] / qchisq(int_bounds, N - a) # CI for sigma^2
+
+ratio_bounds <- 1 / n * (aov_table$statistic[1] / qf(int_bounds, a - 1, N - a) - 1)
+ratio_bounds / (1 + ratio_bounds) # CI for ICC
+```
+
