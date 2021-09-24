@@ -33,7 +33,7 @@ theme_set(theme424)
 
 # Contrasts and Multiple Comparisons
 
-<img src="https://uwmadison.box.com/shared/static/ti2ukjamosvu0quvhgauvre1idm3mjfa.png" width=400/>
+<img src="https://uwmadison.box.com/shared/static/ti2ukjamosvu0quvhgauvre1idm3mjfa.png" width=350/>
 
 
 ### Statistical Experimental Design
@@ -197,17 +197,16 @@ include_graphics("https://uwmadison.box.com/shared/static/tmez3gdyre3lth822zm2wi
 .pull-left[
 * A common special case is when we're interest in all pairwise comparisons,
 
-$$
-\Gamma\left(c\right) = \mu_i - \mu_j
-$$
+\begin{align}
+\Gamma\left(c\right) = \mu_i - \mu_{i'}
+\end{align}
 
 * If we want to make confidence intervals, we should center them around,
-
 \begin{align*}
-\hat{\Gamma}\left(c\right) &= \bar{y}_i - \bar{y}_j.
+\hat{\Gamma}\left(c\right) &= \bar{y}_i - \bar{y}_{i'}
 \end{align*}
 
-but how wide should they be?
+  but how wide should they be?
 ]
 
 .pull-right[
@@ -222,7 +221,7 @@ but how wide should they be?
 group means
 * Notice that
 \begin{align}
-\left|\bar{y}_i - \bar{y}_j\right| \leq \bar{y}_{\max} - \bar{y}_{\min}
+\left|\bar{y}_i - \bar{y}_{i^\prime}\right| \leq \bar{y}_{\max} - \bar{y}_{\min}
 \end{align}
 * Therefore, we can rescale our confidence intervals based on the reference
 distribution for the difference $\bar{y}_{\max} - \bar{y}_{\min}$
@@ -240,23 +239,23 @@ include_graphics("https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow0
 * Notice that the variance of the differences between two group's means is,
 
 \begin{aligned}
-\operatorname{Var}\left(\bar{y}_{i}-\bar{y}_{j}\right) &=\operatorname{Var}\left(\bar{y}_{i}\right)+\operatorname{Var}\left(\bar{y}_{j}\right) \\
-&=\frac{\sigma^{2}}{n_{i}}+\frac{\sigma^{2}}{n_{j}} \\
-& \approx \hat{\sigma}^{2}\left(\frac{1}{n_{i}}+\frac{1}{n_{j}}\right)
+\operatorname{Var}\left(\bar{y}_{i}-\bar{y}_{i^\prime}\right) &=\operatorname{Var}\left(\bar{y}_{i}\right)+\operatorname{Var}\left(\bar{y}_{i^\prime}\right) \\
+&=\frac{\sigma^{2}}{n_{i}}+\frac{\sigma^{2}}{n_{i'}} \\
+& \approx \hat{\sigma}^{2}\left(\frac{1}{n_{i}}+\frac{1}{n_{i'}}\right)
 \end{aligned}
 
 ---
 
 ### Fisher's LSD
 
-Fisher’s LSD compares each difference $\left|y_i - y_j\right|$ to the cutoff,
+Fisher’s LSD compares each difference $\left|\bar{y}_i - \bar{y}_i'\right|$ to the cutoff,
 \begin{align}
-t_{\text {right }} \sqrt{\hat{\sigma}^{2}\left(\frac{1}{n_{i}}+\frac{1}{n_{j}}\right)}
+t_{\text {right }} \sqrt{\hat{\sigma}^{2}\left(\frac{1}{n_{i}}+\frac{1}{n_{i'}}\right)}
 \end{align}
 and rejects the null that the pairs have equal means if the difference is larger.
 
-Unlike the two-sample $t$-test, it accounts for the total number of samples in
-each group.
+Unlike the two-sample $t$-test, it estimates variances using _all_ the groups,
+not just the current pair under comparison.
 
 ---
 
@@ -274,6 +273,7 @@ etch_rate <- read_csv("https://uwmadison.box.com/shared/static/vw3ldbgvgn7rupt4t
 etch_rate$power <- as.factor(etch_rate$power)
 fit <- lm(rate ~ power, data = etch_rate)
 aov_fit <- aov(fit)
+summary(aov_fit)
 ```
 
 ---
@@ -289,6 +289,7 @@ library(gmodels)
 contrast <- c(1, -1, 0, 0)
 fit.contrast(aov_fit, "power", contrast)
 ```
+
 ---
 
 ### Confidence Intervals
@@ -322,6 +323,7 @@ contrasts <- matrix(
 fit.contrast(aov_fit, "power", contrasts, conf.int = 0.95)
 ```
 
+
 ---
 
 ### Scheffe's Method
@@ -337,9 +339,19 @@ PostHocTest(aov_fit, method = "scheffe", contrast = t(contrasts))
 
 ---
 
+### All Pairwise Tests
+
+If we want all pairwise comparisons without any correction, we can use  `pairwise.t.test`
+
+```{r, echo = TRUE}
+pairwise.t.test(etch_rate$rate, etch_rate$power, p.adjust = "none", pooled.sd = FALSE)
+```
+
+---
+
 ### Tukey's Method
 
-* All the intervals for Tukey's method can be found using the `TukeyHSD` function.
+* All the intervals for Tukey's method can be found using the `TukeyHSD`
 * Each row gives an interval for a $\mu_i - \mu_j$.
 
 ```{r, echo = TRUE}
@@ -412,7 +424,7 @@ head(cement)
 
 ### Solution
 
-(2) Yes, since the F-statistic has a very small $p$-value, we can conclude that
+(2) Yes, since the $F$-statistic has a very small $p$-value, we can conclude that
 there is a difference between the cement types.
 
 ```{r, echo = TRUE}
@@ -430,7 +442,6 @@ should be interpreted with a grain of salt, since the method does not control
 for multiple comparisons.
 
 ```{r, echo = TRUE}
-library(DescTools)
 PostHocTest(aov_table, method = "lsd")
 ```
 

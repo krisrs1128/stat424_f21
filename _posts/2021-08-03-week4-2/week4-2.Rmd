@@ -46,7 +46,7 @@ equations with two unknowns. The method of moments defines parameter estimates
 as the solutions to that system of equations.
 \begin{align}
 \hat{\sigma}^2 &= MS_{E} \\
-\hat{\sigma}^2_{\tau} &= \frac{1}{n}\left[MS_{\text{treatments}} - MS_{E}\right]
+\hat{\sigma}^2_{\tau} &= \frac{1}{n}\left[MS_{\text{treatment}} - MS_{E}\right]
 \end{align}
 
 6. How can we get confidence intervals for these estimates?
@@ -143,7 +143,7 @@ table. It also computes the intraclass correlation coefficient (ICC), which is
 defined in the reading.
 
 ```{r, echo = TRUE}
-sigma_sqs = vector(length = 2)
+sigma_sqs <- vector(length = 2)
 sigma_sqs[1] <- aov_table$meansq[2] # estimate for sigma^2
 sigma_sqs[2] <- (aov_table$meansq[1] - aov_table$meansq[2]) / n # estimate for sigma^2_tau
 

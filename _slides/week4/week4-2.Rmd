@@ -1,6 +1,6 @@
 ---
-title: "ANOVA"
-author: "Kris Sankaran | UW Madison | 21 September 2021"
+title: "ANOVA Extensions"
+author: "Kris Sankaran | UW Madison | 23 September 2021"
 output:
   xaringan::moon_reader:
     css: ["default", "css/xaringan-themer.css", "cols.css"]
@@ -30,294 +30,188 @@ theme424 <- theme_minimal() +
 theme_set(theme424)
 ```
 
-
-# ANOVA
+# ANOVA Extensions
 
 ```{r, out.width = 200}
 include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
 ```
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison | 21 September 2021]
-
----
-
-## Feedback Response
-
-* Restructuring lectures: Separating conceptual and code elements
-* R Code: Only including essential R code
-  - Have started an "R Cheatsheet"
-* Pace / Volume: I will try to enunciate clearly, but please do raise your hand
-if I should slow down or repeat!
-* R Review Session: 9/27 from 6:30 - 7:30pm
-  - Hybrid: 1210 Medical Sciences Center and Zoom
-* We will drop your lowest HW score
+.large[Kris Sankaran | UW Madison | 23 September 2021]
 
 ---
 
 ### Today
 
-* Book Sections: 3.1 - 3.4 
-* Online Notes: Week 3 [1] and [2]
+* Book Sections: 3.9 & 3.11
+* Online Notes: Week 4 [2] and [3]
 
 ---
 
 ### Motivation
 
-.pull-left[
-* ANOVA helps gauge the effects of $\geq 3$ different treatments on a continuous
-response
-    - How does the etch rate of a tool depend on its power?
-    - How do different foods affect blood sugar?
-    - How do several job training programs compare?
-* It is an extension of two sample testing when there are 3 or more levels
-]
-
-.pull-right[
-```{r, out.width = 250}
-include_graphics("https://uwmadison.box.com/shared/static/h3bbv7cjo0our7syhlsc0tdn5c22xyme.png")
-```
-]
-
----
-
-### Motivation
-
-<img src="https://uwmadison.box.com/shared/static/4mucc9ln03x5612p5qc83eudinvdf1wu.png"/>
-<img src="https://uwmadison.box.com/shared/static/4m57hjv9d98m7lu8fvy0fs59votolxtn.png"/>
-
----
-
-### Model
-
-.pull-left[
-ANOVA assumes,
-\begin{align}
-y_{ij} = \mu + \tau_i + \epsilon_{ij}
-\end{align}
-where $i=1, \dots, a$ and $j=1, \dots, n$ and the errors $\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)$ are independent.
-
-  * $i$ indexes different groups
-  * $j$ indexes the samples within groups
-  * $N = na$ is the total number of samples
-]
-    
-.pull-right[
-```{r, out.width = 300}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
-```
-]
-
----
-
-### Hypothesis Testing
-
-> Is there at least one group that differs from the rest?
-
-Formally,
-
-\begin{align}
-&H_0: \tau_1 = \dots = \tau_{a} = 0 \\
-&H_1: \tau_{i} \neq 0 \text{ for at least one }i.
-\end{align}
-
-Q: What would be the version of the picture on the previous slide, if the null
-hypothesis were true?
-
----
-
-### ANOVA Identity
-
-Before designing a test statistic, it helps to observe this identity,
-
-\begin{align}
-\sum_{ij} \color{#ff8200}{\left(y_{ij} - \bar{y}\right)}^2 = n\sum_{i} \color{#447583}{\left(\bar{y}_i - \bar{y}\right)}^2 + \sum_{i,j} \color{#b090c2}{\left(y_{ij} - \bar{y}_{i}\right)}^2
-\end{align}
-which is usually abbreviated as
-\begin{align}
-\color{#ff8200}{SS_{\text{total}}} = \color{#447583}{SS_{\text{treatment}}} + \color{#b090c2}{SS_{\text{E}}}.
-\end{align}
-
-![:col_row 
-```{r, out.width = 120}
-include_graphics("https://uwmadison.box.com/shared/static/znpaeugwi14nxhuvz2lkmoo2ovv2jtx1.png")
-```
-,
+* Nonparametric ANOVA
+  - We may not believe the assumed model for ANOVA
+  - Transformations may not help
+* Estimation of Random Effects
+  - Different algorithms provide different outputs
+  - Conceptual understanding can guide the choice of software
   
-```{r, out.width = 120}
-include_graphics("https://uwmadison.box.com/shared/static/n836t4q718m2o16hluvglplqi4lshgcm.png")
-```
-,
-  
-```{r, out.width = 120}
-include_graphics("https://uwmadison.box.com/shared/static/7prsedegwnp6wdghcw6vfv2rs7zsr7nj.png")
-```
-]
-
----
-
-### Test Statistic
-
-* If any of the groups are different from the global mean, then we expect
-$\color{#447583}{SS_{\text{treatment}}}$ to be large
-* How large is large enough?
-* Consider the statistic,
-\begin{align*}
-\frac{\color{#447583}{MS_{\text{treatment}}}}{\color{#b090c2}{MS_{E}}}
-\end{align*}
-  where we define,
-  
-\begin{align*}
-{\color{#447583}{MS_{\text{treatment}}}} &:= {\color{#447583}{\frac{1}{a - 1}{SS}_{\text{treatment}}}} \\
-{\color{#b090c2}{MS_{E}}} &:= {\color{#b090c2}{\frac{1}{N - a}{SS}_{E}}}
-\end{align*}
-
----
-
-### Test Statistic
-
-.pull-left[
-* It is not obvious, but reference distribution for this statistic is $F\left(a - 1, N - a\right)$.
-* If this statistic is at a large quantile of that distribution, we conclude
-$\tau_i \neq 0$ for at least one $i$
-]
-
 .pull-right[
 ```{r}
-include_graphics("https://uwmadison.box.com/shared/static/l40cisieegn7u37ite50eu1yeoed8v88.png")
+include_graphics("https://uwmadison.box.com/shared/static/a2evjeib97ay362iue2vhkxk18gbh7l4.png")
 ```
 ]
 
 ---
 
-## Model Checking
+### Nonparametric ANOVA
 
-.pull-left[
-We assumed,
+* We can compare groups based on the ranks of the observations they contain
+* Ranks are not sensitive to outliers or distributional assumptions
 
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/kdv2ayi2heooodf0a0j15swxld4ofll7.png")
+include_graphics("https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5lvoajju3ekf.png")
+```
+
+---
+
+### Nonparametric ANOVA
+
+* Transform the data to their ranks. The smallest of the $y_{ij}$ becomes 1, the
+next smallest becomes 2, etc. Denote these ranks by $R_{ij}$. 
+* Compute the test statistic
 \begin{align*}
-y_{i j}=\mu+\tau_{i}+\epsilon_{i j}
-\end{align*}
-
-with i.i.d. errors $\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)$
-]
-
-.pull-right[
-What could fail?
-   * The errors might not be normally distributed
-   * The variance might not be the same in each group
-   * The errors might not be independent
-   * There might be systematic variations besides the group deviations $\tau_i$.
- ]
- 
----
-
-### Residuals
-
-.pull-left[
-Residuals are our best guess of what the true random error $\epsilon_{ij}$, and
-so are useful for model checking,
-
-\begin{align*}
-e_{i j} &=y_{i j}-\hat{y}_{i j} \\
-&=y_{i j}-\left(\hat{\mu} + \hat{\tau}_i\right)
-\end{align*}
-]
-
-.pull-right[
-```{r, out.width = 400}
-include_graphics("https://uwmadison.box.com/shared/static/ka2t5b3awtqt0mqdqtm8o5zbzs8ur7xp.png")
-```
-]
-
----
-
-### Normality assumption?
-
-We can’t check normality of $\epsilon_{ij}$ directly, but we can check normality
-of the residuals $e_{ij}$.
-
-```{r, echo = FALSE, fig.height = 4.3, fig.width = 10, fig.align = "center"}
-library(readr)
-etch_rate <- read_csv("https://uwmadison.box.com/shared/static/vw3ldbgvgn7rupt4tz3ditl1mpupw44h.csv")
-etch_rate$power <- as.factor(etch_rate$power) # want to think of power as distinct groups
-fit <- lm(rate ~ power, data = etch_rate)
-qqnorm(resid(fit))
-qqline(resid(fit), col = "red")
-```
-
----
-
-### Equal variance across groups?
-
-* Plot residuals against measured variables
-* Plot residuals against fitted means
-
-.pull-left[
-```{r, fig.width = 5, fig.height = 4}
-etch_rate$residual <- resid(fit)
-etch_rate$predicted <- predict(fit)
-ggplot(etch_rate) +
-  geom_point(aes(x = power, y = residual)) +
-  labs(title = "Residual against measurement")
-```
-]
-.pull-right[
-```{r, fig.width = 5, fig.height = 4}
-ggplot(etch_rate) +
-  geom_point(aes(x = predicted, y = residual)) +
-  labs(title = "Residual against fit")
-```
-]
-
----
-
-### Unmeasured variation?
-
-* Plot residuals against measured variables
-* Plot residuals against fitted means
-
-.pull-left[
-```{r, fig.width = 5, fig.height = 4}
-etch_rate$residual <- resid(fit)
-etch_rate$predicted <- predict(fit)
-ggplot(etch_rate) +
-  geom_point(aes(x = power, y = residual)) +
-  labs(title = "Residual against measurement")
-```
-]
-.pull-right[
-```{r, fig.width = 5, fig.height = 4}
-ggplot(etch_rate) +
-  geom_point(aes(x = predicted, y = residual)) +
-  labs(title = "Residual against fit")
-```
-]
-
----
-
-### What if a check fails?
-
-Transform the response variable to make it more bell-shaped
-  * Skewed, nonnegative data: Use $\log\left(x\right)$ or $\log\left(1 + x\right)$
-  * Count data: $\sqrt{x}, \sqrt{1 + x}$
-  * Proportions: $\arcsin\left(\sqrt{x}\right)$
+  \frac{\sum_{i} n_{i}\left(\bar{R}_{i} - \bar{R}\right)^2}{\frac{1}{N - 1}\sum_{i, j} \left(R_{ij} - \bar{R}\right)^2}
+\end{align}
+  where $\bar{R}_{i}$ is the average rank in group $i$ and $\bar{R}$ is the
+  average rank overall
   
-.pull-left[
-```{r, fig.width = 6, fig.height = 3}
-x <- data.frame(value = exp(rnorm(5e2)))
-ggplot(x) +
-  geom_histogram(aes(value)) +
-  labs(title = "Before log Transformation")
+---
+
+### Hypothesis Test
+
+* If this statistic is above a chi-square cutoff, then reject the null
+hypothesis of equality in group means
+* The test is valid even if the errors are highly non-normal
+  - However, this procedure may have lower power
+
+---
+
+## Fitting Random Effects
+
+\begin{align*}
+y_{ij} &= \mu + \tau_i + \epsilon_{ij} \\
+\tau_i &\sim \mathcal{N}\left(0, \sigma^2_{\tau}\right) \\
+\epsilon_{ij} &\sim \mathcal{N}\left(0, \sigma^2\right) \\
+\end{align*}
+
+There are three (nonrandom) parameters to estimate: $\mu, \sigma^2_{\tau}, \sigma^2$. Two main approaches are,
+* Method of Moments
+* (Restricted) Maximum Likelihood
+
+---
+
+## Method of Moments
+
+Main idea: Write an equation relating unknown, population means with observed
+sample means. Then solve for unknowns.
+
+For example,
+\begin{align*}
+\mu = \mathbf{E}\left[y\right] \approx \bar{y}
+\end{align*}
+which leads to the estimator $\hat{\mu} := \bar{y}$ 
+
+---
+
+## Method of Moments
+
+It is not obvious, but the expected value of the mean squared errors in random
+effects models can be found in closed form,
+
+\begin{align*}
+\mathbf{E}\left[MS_{\text{treatment}}\right] &= \sigma^2 + n \sigma_{\tau}^2 \\
+\mathbf{E}\left[MS_{E}\right] &= \sigma^2
+\end{align*}
+
+---
+
+### Method of Moments
+
+If we approximate the expected values by the value we observed, we are left with
+two equations for our two unknowns ($\sigma^2_{\tau}$ and $\sigma^2$).
+
+\begin{align*}
+MS_{\text{treatment}} &\approx \mathbf{E}\left[MS_{\text{treatment}}\right] = \sigma^2 + n \sigma_{\tau}^2 \\
+\MS_{E} &\approx \mathbf{E}\left[MS_{E}\right] = \sigma^2
+\end{align*}
+
+Solving for the unknowns gives estimators $\hat{\sigma}^2$ and
+$\hat{\sigma}_{\tau}^2$.
+
+---
+
+### Confidence Intervals
+
+* In addition to estimates of the parameters, it would be nice to have a sense
+of our uncertainty
+* There are formulas that give valid confidence intervals for $\hat{\mu},
+\hat{\sigma}^2$, but not for $\hat{\sigma}_{\tau}^2$
+* We will use the formulas in the code example below
+
+---
+
+### Pros & Cons: Method of Moments
+
+* Pros: Very fast, since just solving system of equations
+* Can give negative variance estimates (and intervals)
+* No confidence intervals for $\hat{\sigma}_{\tau}^2$
+
+---
+
+### Maximum Likelihood
+
+* Define $L(\mu, \sigma^2, \sigma^2_{\tau})$ to be the probability of the
+dataset $y_{11}, y_{12}, \dots y_{an}$ given the choice of parameters $\mu, \sigma^2$, and $\sigma^2_{\tau}$
+* A good choice for the parameters is one that maximizes $L\left(\mu, \sigma^2, \sigma^2_{\tau}\right)$.
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/0au3iwj17u49ueqor5djqg58rensvmqo.png")
 ```
-]
-.pull-right[
-```{r, fig.width = 6, fig.height = 3}
-ggplot(x) +
-  geom_histogram(aes(log(value))) +
-  labs(title = "After log Transformation")
+
+---
+
+### Maximum Likliehood
+
+From the previous lecture, we know,
+* Given the parameters, the data are multivariate normally distributed
+* The mean is $\mu$, and covariance is block diagonal, depending on $\sigma^2, \sigma_{\tau}$
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png")
 ```
-]
+
+---
+
+### Confidence Intervals
+
+Confidence intervals can be constructed based on the curvature of the likelihood function.
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/kqgsua08wh8n2h6zhssbmxf4byldcq2o.png")
+```
+
+---
+
+### Maximum Likelihood: Pros and Cons
+
+* Pros
+  - Confidence intervals for all parameters
+  - Never gives negative variance estimates
+* Cons
+  - Optimization can be slow
 
 ---
 
@@ -325,212 +219,95 @@ ggplot(x) +
 
 ---
 
-### Etch Rate Dataset
+### Loom Dataset
+
+We will use the same dataset as last lecture, taken from Example 3.10 of the
+textbook.
 
 ```{r, echo = TRUE}
 library(readr)
-etch_rate <- read_csv("https://uwmadison.box.com/shared/static/vw3ldbgvgn7rupt4tz3ditl1mpupw44h.csv")
-etch_rate$power <- as.factor(etch_rate$power) # want to think of power as distinct groups
-head(etch_rate, 10)
+loom <- read_csv("https://uwmadison.box.com/shared/static/ezp3i2pflhi96si7u6rfn3dg3lb5cl3z.csv")
+loom$loom <- as.factor(loom$loom)
+loom
 ```
+
+`lmer` actually uses maximum likelihood estimation, so we will focus on the
+method of moments and nonparametric ANOVA.
 
 ---
 
-### Plot the Data
+### Method of Moments Setup
 
-* `ggplot()` expects a data.frame with the whole dataset
-* `geom_point()` asks which columns to use for the $x$ and $y$ axis.
-
-```{r, echo = TRUE, fig.width = 10, fig.height = 3, fig.align = "center"}
-library(ggplot2)
-ggplot(etch_rate) +
-  geom_point(aes(power, rate))
-```
-
----
-
-### ANOVA Hypothesis Test
-
-* Which element in the table corresponds to $SS_{\text{treatment}}$?
-* Which element in the table corresponds to $MS_{\text{treatment}}$?
-
-```{r, echo = TRUE}
-fit <- lm(rate ~ power, data = etch_rate)
-summary(aov(fit))
-```
-
----
-
-### Check normality of residuals
-
-* Use the `qqnorm` and `qqline` pair to make a QQ Plot
-
-```{r, echo = TRUE, fig.height = 4, fig.width = 11, fig.align = "center"}
-qqnorm(resid(fit))
-qqline(resid(fit), col = "red")
-```
-
-* If we needed a transformation, we could have used
-
-```{r, echo = TRUE, results = "hide"}
-lm(log(rate) ~ power, data = etch_rate)
-lm(sqrt(rate) ~ power, data = etch_rate)
-```
-for example.
-
----
-
-### Plot residuals against factor
-
-* First add the residual to the `data.frame`
-* Then make the $y$-axis the residual
-
-```{r, echo = TRUE, fig.height = 2.5, fig.width = 8, fig.align = "center"}
-etch_rate$residual <- resid(fit)
-ggplot(etch_rate) +
-  geom_point(aes(power, residual))
-```
-
----
-
-### Plot residuals against predicted value
-
-* First add the fitted value to the `data.frame`
-* Then make the $x$-axis the fitted value
-
-```{r, echo = TRUE, fig.height = 2.5, fig.width = 8, fig.align = "center"}
-etch_rate$predicted <- predict(fit)
-ggplot(etch_rate) +
-  geom_point(aes(predicted, residual))
-```
-
----
-
-### Hint: Reshaping data
-
-What if the etch dataset had been sent to us like this?
+Before we can solve the equations for the method of moments, we need to obtain
+the values that appear in the equations.
 
 ```{r}
-etch <- read_csv("https://uwmadison.box.com/shared/static/3ltmo89ea0xowsh1386x9fk58qc51ned.txt")
-etch$Power <- as.factor(etch$Power)
-etch
+library(dplyr)
+library(broom)
+N <- nrow(loom)
+a <- nlevels(loom$loom)
+n <- N / a
+
+aov_table <- aov(lm(strength ~ loom, data = loom)) %>%
+  tidy()
+aov_table
 ```
 
-The `lm` function expects the outcome of interest to be in a single
-column.
+### Method of Moments Equations
+
+Solving for unknowns in the method of moments gives these estimates for
+$\sigma^2_{\tau}$ and $\sigma^2$.
+
+```{r}
+sigma_sqs <- vector(length = 2)
+sigma_sqs[1] <- aov_table$meansq[2] # estimate for sigma^2
+sigma_sqs[2] <- (aov_table$meansq[1] - aov_table$meansq[2]) / n # estimate for sigma^2_tau
+sigma_sqs
+```
+
+The results are very similar as those from LMER in the last lecture.
 
 ---
 
-### Hint: Reshaping data
+### Method of Moments: Confidence Intervals
 
-To reorganize the data into an acceptable form, we can use the `pivot_longer`
-function from the `tidyr` package.
+The formulas below compute 95\% confidence intervals for $\hat{\mu}$ and
+$\hat{\sigma}^2$.
 
-```{r, echo = TRUE}
-library(tidyr)
-etch <- pivot_longer(etch, -Power, names_to = "replicate", values_to = "etch_rate")
-head(etch)
+```{r}
+int_bounds <- c(0.975, 0.025)
+(N - a) * sigma_sqs[1] / qchisq(int_bounds, N - a) # CI for sigma^2
+```
+
+
+---
+
+### Maximum Likelihood: Confidence Intervals
+
+To get a confidence interval from the maximum likelihood approach, we can use
+the `confint` function.
+
+```{r}
+library(lme4)
+fit <- lmer(strength ~ (1 | loom), data = loom)
+confint(fit)^2
 ```
 
 ---
 
-# Exercise
+### Nonparametric ANOVA
 
-This walks through problem 3.29 in the book.
+To conduct a hypothesis test using nonparametric ANOVA, we can use the
+`kruskal.test` function,
 
-.pull-left[A semiconductor manufacturer has developed three different methods for reducing
-particle counts on wafers. All three methods are tested on five different wafers
-and the after treatment particle count is obtained.]
-
-.pull-right[
-```{r, echo = TRUE}
-particles <- data.frame(
-  method = c("1", "2", "3"),
-  rep1 = c(31, 62, 53),
-  rep2 = c(10, 40, 27),
-  rep3 = c(21, 24, 120),
-  rep4 = c(4, 30, 97),
-  rep5 = c(1, 35, 68)
-)
-
-particles
+```{r}
+kruskal.test(strength ~ loom, data = loom)
 ```
-]
 
 ---
 
 ### Exercise
 
-(1) Use `pivot_longer(particles, -method, ...)` to reshape the data so that the
-outcome is in a single column.
-
-(2) Use `lm` and `aov` to make an ANOVA table. Does the method detect any
-difference in the means across the three groups?
-
-(3) Plot the residuals against the group. Are the assumptions satisfied?
-
-(4) Apply a transformation to the response, fit an ANOVA model, and recheck
-normality of the residuals with a QQ plot. Stop when you are satisfied that the
-assumptions are met.
+This walks through Problem [] in the textbook.
 
 ---
-
-### Solution
-
-(1) `pivot_longer` can reshape the data.
-
-```{r, echo = TRUE}
-library(tidyr)
-particles <- pivot_longer(particles, -method, names_to = "replicate")
-head(particles)
-```
-
----
-
-### Solution
-
-(2) The $MS_{\text{treatment}}$ is much larger than $MS_{E}$ (4481.9 vs. 566.3),
-and the $F$ test indicates a difference between methods at the $0.01$ level.
-
-```{r, echo = TRUE}
-fit <- lm(value ~ method, data = particles)
-summary(aov(fit))
-```
-
----
-
-### Solution
-
-(3) There appears to be very nonconstant variance across groups.
-
-```{r, echo = TRUE, fig.height = 2.8, fig.width = 10, fig.align = "center"}
-particles$residual <- resid(fit)
-ggplot(particles) +
-  geom_point(aes(method, residual))
-```
-
----
-
-### Solution
-
-(4) If we use a $\sqrt{x}$ transformation, the difference between groups seems to be
-somewhat reduced, though not completely removed.
-
-```{r, echo = TRUE, fig.height = 2.8, fig.width = 10, fig.align = "center"}
-fit <- lm(sqrt(value) ~ method, data = particles)
-particles$residual <- resid(fit)
-ggplot(particles) +
-  geom_point(aes(method, residual))
-```
-
----
-
-### Solution
-
-(4) Nonetheless, there still appears to be a significant difference between the
-groups' means.
-
-```{r}
-summary(aov(fit))
-```
-

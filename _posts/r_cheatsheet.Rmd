@@ -336,6 +336,22 @@ level.
 # continues from previous example
 fit.contrast(aov_table, "levels", contrast, conf.int = 0.95)
 ```
+## `pairwise.t.test`
+
+Tests for equality in means between all pairs of levels of a factor, without any
+multiple comparison adjustment. The first argument is a vector of response
+values, the second is a vector containing the group membership. Results are
+typically similar to Fisher's LSD, unless some of the groups are very small.
+
+```{r}
+experiment <- data.frame(
+  levels = rep(c("A", "B", "C"), each = 5),
+  y = rnorm(15)
+)
+
+pairwise.t.test(experiment$y, experiment$levels)
+```
+
 
 ## `PostHocTest(..., method = "scheffe")`
 

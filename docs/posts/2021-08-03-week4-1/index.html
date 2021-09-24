@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week4-1_files/anchor-4.2.2/anchor.min.js","week4-1_files/bowser-1.9.3/bowser.min.js","week4-1_files/distill-2.2.21/template.v2.js","week4-1_files/figure-html5/unnamed-chunk-2-1.png","week4-1_files/figure-html5/unnamed-chunk-7-1.png","week4-1_files/header-attrs-2.8/header-attrs.js","week4-1_files/jquery-1.11.3/jquery.min.js","week4-1_files/popper-2.6.0/popper.min.js","week4-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week4-1_files/tippy-6.2.7/tippy-light-border.css","week4-1_files/tippy-6.2.7/tippy.css","week4-1_files/tippy-6.2.7/tippy.umd.min.js","week4-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week4-1_files/anchor-4.2.2/anchor.min.js","week4-1_files/bowser-1.9.3/bowser.min.js","week4-1_files/distill-2.2.21/template.v2.js","week4-1_files/figure-html5/unnamed-chunk-16-1.svg","week4-1_files/figure-html5/unnamed-chunk-2-1.png","week4-1_files/figure-html5/unnamed-chunk-7-1.png","week4-1_files/header-attrs-2.8/header-attrs.js","week4-1_files/jquery-1.11.3/jquery.min.js","week4-1_files/popper-2.6.0/popper.min.js","week4-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week4-1_files/tippy-6.2.7/tippy-light-border.css","week4-1_files/tippy-6.2.7/tippy.css","week4-1_files/tippy-6.2.7/tippy.umd.min.js","week4-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2295,12 +2295,14 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li><p>In this case, we typically settle for saying the effect of the factor on average, rather than than trying to estimating the effects of every single level of that factor.</p></li>
 <li><p>Examples,</p>
 <ul>
-<li>Is there a high school effect on college GPA? (instead of effects for individual schools)</li>
+<li>Is there a middle school effect on high school graduation? (instead of effects for individual schools)</li>
 <li>Is there a loom effect on fiber strength? (don’t care about individual looms)</li>
+<li>Is there a microbiome effect on preterm births?</li>
+<li>Is there a county effect on election outcomes?</li>
 </ul></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<div class="figure"><span id="fig:unnamed-chunk-15"></span>
 <img src="https://uwmadison.box.com/shared/static/ig50uxftq5mz19t15w74kryh9ko0jm6e.png" alt="In random effects, the groups (schools, looms, ...) we observe are assumed sampled from a larger population."  />
 <p class="caption">
 Figure 1: In random effects, the groups (schools, looms, …) we observe are assumed sampled from a larger population.
@@ -2309,12 +2311,12 @@ Figure 1: In random effects, the groups (schools, looms, …) we observe are ass
 </div>
 <h3 id="model">Model</h3>
 <ol start="4" type="1">
-<li>Random effects models have the form, <span class="math display">\[
+<li>Random effects models have the form, <span class="math display">\[\begin{align}
 y_{ij} = \mu + \tau_i + \epsilon_{ij}
-\]</span> where <span class="math inline">\(\tau_i \sim \mathcal{N}\left(0, \sigma_\tau^2\right)\)</span> and <span class="math inline">\(\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span>. The crucial difference is that <span class="math inline">\(\tau_i\)</span> is now thought of as random, not fixed.</li>
+\end{align}\]</span> where <span class="math inline">\(\tau_i \sim \mathcal{N}\left(0, \sigma_\tau^2\right)\)</span> and <span class="math inline">\(\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span>. The crucial difference is that <span class="math inline">\(\tau_i\)</span> is now thought of as random, not fixed.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="week4-1_files/figure-html5/unnamed-chunk-2-1.png" width="624" data-distill-preview=1 /></p>
+<p><img src="week4-1_files/figure-html5/unnamed-chunk-16-1.svg" width="624" data-distill-preview=1 /></p>
 </div>
 <ol start="5" type="1">
 <li>Notice that <span class="math display">\[\begin{align}
@@ -2333,7 +2335,7 @@ H_1:&amp; \sigma^2 &gt; 0
 \end{align*}\]</span></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<div class="figure"><span id="fig:unnamed-chunk-18"></span>
 <img src="https://uwmadison.box.com/shared/static/l9nclru13n0s5e52oiu1aasz66vbwr6m.png" alt="Under the null, there is no difference between any of the groups."  />
 <p class="caption">
 Figure 2: Under the null, there is no difference between any of the groups.
@@ -2351,28 +2353,29 @@ Figure 2: Under the null, there is no difference between any of the groups.
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
 <span class='va'>loom</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ezp3i2pflhi96si7u6rfn3dg3lb5cl3z.csv"</span><span class='op'>)</span>
+<span class='va'>loom</span><span class='op'>$</span><span class='va'>loom</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>loom</span><span class='op'>$</span><span class='va'>loom</span><span class='op'>)</span>
 <span class='va'>loom</span>
 </code></pre>
 </div>
 <pre><code># A tibble: 16 × 3
-    loom replicate strength
-   &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;
- 1     1 Ob1             98
- 2     2 Ob1             91
- 3     3 Ob1             96
- 4     4 Ob1             95
- 5     1 Ob2             97
- 6     2 Ob2             90
- 7     3 Ob2             95
- 8     4 Ob2             96
- 9     1 Ob3             99
-10     2 Ob3             93
-11     3 Ob3             97
-12     4 Ob3             99
-13     1 Ob4             96
-14     2 Ob4             92
-15     3 Ob4             95
-16     4 Ob4             98</code></pre>
+   loom  replicate strength
+   &lt;fct&gt; &lt;chr&gt;        &lt;dbl&gt;
+ 1 1     Ob1             98
+ 2 2     Ob1             91
+ 3 3     Ob1             96
+ 4 4     Ob1             95
+ 5 1     Ob2             97
+ 6 2     Ob2             90
+ 7 3     Ob2             95
+ 8 4     Ob2             96
+ 9 1     Ob3             99
+10 2     Ob3             93
+11 3     Ob3             97
+12 4     Ob3             99
+13 1     Ob4             96
+14 2     Ob4             92
+15 3     Ob4             95
+16 4     Ob4             98</code></pre>
 </div>
 <ol start="8" type="1">
 <li>To fit a random effects model, we can use the <code>lmer</code> function in the <code>lme4</code> package. The syntax <code>(1 | variable)</code> means that this variable should be treated as a random effect. Compare the result with Example 3.10 in the textbook.</li>
