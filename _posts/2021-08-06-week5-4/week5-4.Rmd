@@ -16,8 +16,7 @@ library("knitr")
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-_Readings [4.2, 4.3](), [Rmarkdown]()_
-
+_Readings [4.2, 4.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-06-week5-4/week5-4.Rmd)_
 
 1. RCBD is useful when we have one nuisance factor. But what if we have two?
   * We’re testing a manufacturing procedure, but raw materials come in batches and different operators have different skills.
@@ -112,3 +111,31 @@ $$
 $$
   which forms the basis for the test: reject the null if the ratio lies above the
 $1 -  \alpha$ quantile of this $F$-distribution.
+
+### Code Example
+
+12. We'll analyze the results of a study that used a latin square in its design. Compare the table below with table 4.9 in the book.
+
+```{r}
+library(readr)
+library(dplyr)
+rocket <- read_table2("https://uwmadison.box.com/shared/static/ac68766l3zcjog1ldrzki3lis74bbd71.txt") %>%
+  mutate_at(vars(-BurningRate), as.factor) # convert all but BurningRate to factor
+rocket
+```
+
+13. Given this design, we can fit the model using a linear model. Here,
+$$\alpha_{i}, \tau_{j}$$, and $$\beta_{k}$$ are the batch, formulation, and
+operator, respectively. We'll use the shorthand `y ~ .` to refer to the model
+using all the other variables in the data frame as inputs. Compare the ANOVA
+table below with Table 4.12.
+
+```{r}
+#fit <- lm(BurningRate ~ Batch + Operator + Formulation, data = rocket) # gives exact same result
+fit <- lm(BurningRate ~ ., data = rocket)
+summary(aov(fit))
+```
+
+13. There is an operator effect, but no detectable variation across batches.
+Controlling for batch and operatur, there is a significant difference across
+formulations.

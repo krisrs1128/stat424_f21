@@ -12,16 +12,12 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+library(knitr)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [4.1](), [Rmarkdown]()_
+_Readings [4.1](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-06-week5-3/week5-3.Rmd)_
 
-```{r}
-library(EBImage)
-display(readImage("https://uwmadison.box.com/shared/static/gu58jurmhyraebsdyh4txlpyxegxn9xf.png"))
-```
 
 1. As in standard random effects, sometimes the blocks are from a larger population. For example, in the medical device example, we care about a ``resin effect,'' but don’t care about each individual batch. 
 
@@ -30,8 +26,13 @@ display(readImage("https://uwmadison.box.com/shared/static/gu58jurmhyraebsdyh4tx
 $$
 y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
 $$
-  except now both $\beta_j \sim \mathcal{N}\left(0, \sigma^2\right)$ and
-  $\epsilon_{ij} \sim \mathcal{N}\left(0, 2\right)$, all independently.
+  except now both $\beta_j \sim \mathcal{N}\left(0, \sigma_{\beta}^2\right)$ and
+  $\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)$, all independently.
+
+```{r}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/gu58jurmhyraebsdyh4txlpyxegxn9xf.png"))
+```
 
 3. Observations are correlated within each block are correlated. The calculation
 to demonstrate this is similar to the one used to show that observations $i$
@@ -73,3 +74,33 @@ the method of moments or maximum likelihood. The method of moments estimators ar
 8. Finding confidence intervals continues to be a challenge for the method of
 moments approach. In this case, maximum likelihood is preferred. This method is
 shown in the computer example accompanying these notes.
+
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
+### Code Example
+
+9. We'll continue with the graft dataset. This reads in the data as in the
+previous notes.
+
+```{r}
+library(readr)
+library(tidyr)
+graft <- read_table2("https://uwmadison.box.com/shared/static/0ciblk4z2f3k6zizbj4plg3q33w1d0n6.txt") %>%
+  pivot_longer(-Pressure, names_to = "batch", values_to = "yield")
+graft$Pressure <- as.factor(graft$Pressure)
+```
+
+10. As with ordinary random effects ANOVA, we can fit an RCBD with random block
+effects using `lmer`. Notice that we only use the `(1 | -)` notation for the
+batch variable. This means that the batches are viewed as random but pressure is
+considered fixed. This is why in the summary output, we have a variance
+component $\sigma^2_{\beta}$ for the batches, but separate fixed effects for
+across pressure levels.
+
+```{r}
+library(lme4)
+fit <- lmer(yield ~ Pressure + (1 | batch), data = graft)
+fit
+```
