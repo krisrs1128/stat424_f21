@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week5-2_files/anchor-4.2.2/anchor.min.js","week5-2_files/bowser-1.9.3/bowser.min.js","week5-2_files/distill-2.2.21/template.v2.js","week5-2_files/figure-html5/unnamed-chunk-2-1.png","week5-2_files/header-attrs-2.8/header-attrs.js","week5-2_files/jquery-1.11.3/jquery.min.js","week5-2_files/popper-2.6.0/popper.min.js","week5-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","week5-2_files/tippy-6.2.7/tippy-light-border.css","week5-2_files/tippy-6.2.7/tippy.css","week5-2_files/tippy-6.2.7/tippy.umd.min.js","week5-2_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week5-2_files/anchor-4.2.2/anchor.min.js","week5-2_files/bowser-1.9.3/bowser.min.js","week5-2_files/distill-2.2.21/template.v2.js","week5-2_files/figure-html5/unnamed-chunk-2-1.png","week5-2_files/figure-html5/unnamed-chunk-6-1.png","week5-2_files/header-attrs-2.8/header-attrs.js","week5-2_files/jquery-1.11.3/jquery.min.js","week5-2_files/popper-2.6.0/popper.min.js","week5-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","week5-2_files/tippy-6.2.7/tippy-light-border.css","week5-2_files/tippy-6.2.7/tippy.css","week5-2_files/tippy-6.2.7/tippy.umd.min.js","week5-2_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2289,22 +2289,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">4.1</a>, <a href="">Rmarkdown</a></em></p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/qezu75a0hv1qhqyeoz8wb7sbb294vrsm.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="https://uwmadison.box.com/shared/static/qezu75a0hv1qhqyeoz8wb7sbb294vrsm.png" width="500px" /></p>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/dmob9sjh8my7l8hez390o7gnn3vu1oe6.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week5-2_files/figure-html5/unnamed-chunk-2-1.png" width="500px" data-distill-preview=1 /></p>
-</div>
+<p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">4.1</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-06-week5-2/week5-2.Rmd">Rmarkdown</a></em></p>
 <h3 id="multiple-comparisons">Multiple Comparisons</h3>
 <ol type="1">
 <li>As before, we may want to use contrasts to decide on which treatment effects are different We can continue to use the same multiple comparisons procedures as before, but have to account for a few differences,</li>
@@ -2313,6 +2298,9 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li>The number of samples per treatment <span class="math inline">\(n\)</span> is replaced by the number of blocks <span class="math inline">\(b\)</span>.</li>
 <li>The d.f. for <span class="math inline">\(MS_{E}\)</span> is now <span class="math inline">\((a - 1)(b - 1)\)</span>, not <span class="math inline">\(N - a\)</span>.</li>
 </ul>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="https://uwmadison.box.com/shared/static/qezu75a0hv1qhqyeoz8wb7sbb294vrsm.png" /><!-- --></p>
+</div>
 <ol start="2" type="1">
 <li>For example, the cutoff in Fisher’s LSD becomes <span class="math display">\[
 t_{\frac{\alpha}{2}, \left(a - 1\right)\left(b - 1\right)}\sqrt{\frac{2 MS_{E}}{b}}
@@ -2326,6 +2314,14 @@ t_{\frac{\alpha}{2}, \left(a - 1\right)\left(b - 1\right)}\sqrt{\frac{2 MS_{E}}{
 <li><span class="math inline">\(\epsilon \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> are independently distributed. Note that this also implies homoskedasticity (the variances are not changing from sample to sample).</li>
 <li>Additivity (i.e. “no interaction”). The treatment effects <span class="math inline">\(\tau_i\)</span> need to be the same across all blocks.</li>
 </ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="week5-2_files/figure-html5/unnamed-chunk-2-1.png" alt="An example where the additivity assumption fails." width="624" data-distill-preview=1 />
+<p class="caption">
+Figure 1: An example where the additivity assumption fails.
+</p>
+</div>
+</div>
 <ol start="4" type="1">
 <li><p>We’ve seen the first assumption before, and can continue to use normal probability plots and residual analysis to check it.</p></li>
 <li><p>One way to check additivity is to look at residuals, and see whether they are consistently lower / higher in some blocks.</p></li>
@@ -2335,7 +2331,108 @@ t_{\frac{\alpha}{2}, \left(a - 1\right)\left(b - 1\right)}\sqrt{\frac{2 MS_{E}}{
 <li>Sometimes the interaction effects will disappear after transforming the response (e.g., using <span class="math inline">\(\log\)</span> or <span class="math inline">\(\sqrt\)</span>)</li>
 <li>Otherwise, another design may be necessary. Factorial designs (to be discussed soon) allow for inference even in the presence of interactions.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h3 id="code-example">Code Example</h3>
+<ol start="7" type="1">
+<li>We will continue the graft example from the previous notes. First, let’s refit the RCBD model.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyr.tidyverse.org'>tidyr</a></span><span class='op'>)</span>
+<span class='va'>graft</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_table.html'>read_table2</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/0ciblk4z2f3k6zizbj4plg3q33w1d0n6.txt"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>Pressure</span>, names_to <span class='op'>=</span> <span class='st'>"batch"</span>, values_to <span class='op'>=</span> <span class='st'>"yield"</span><span class='op'>)</span>
+<span class='va'>graft</span><span class='op'>$</span><span class='va'>Pressure</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>graft</span><span class='op'>$</span><span class='va'>Pressure</span><span class='op'>)</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='va'>Pressure</span> <span class='op'>+</span> <span class='va'>batch</span>, <span class='va'>graft</span><span class='op'>)</span>
+<span class='va'>aov_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<ol start="8" type="1">
+<li>We can fit contrasts and correct for multiple comparisons using the same type of code as for ANOVA without batch effects.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>contrasts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span>,
+    <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>,
+  nrow <span class='op'>=</span> <span class='fl'>2</span>, byrow<span class='op'>=</span><span class='cn'>TRUE</span>
+<span class='op'>)</span>
+
+<span class='fu'>PostHocTest</span><span class='op'>(</span><span class='va'>aov_table</span>, method <span class='op'>=</span> <span class='st'>"scheffe"</span>, contrasts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>contrasts</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+  Posthoc multiple comparisons of means: Scheffe Test 
+    95% family-wise confidence level
+
+$Pressure
+                        diff     lwr.ci   upr.ci   pval    
+8500,8700-8900,9100 9.816667 -0.3409755 19.97431 0.0627 .  
+8500-9100           7.050000 -0.1325377 14.23254 0.0567 .  
+
+$batch
+                                            diff    lwr.ci   upr.ci
+Batch1,Batch2,Batch5,Batch6-Batch3,Batch4 -4.100 -16.54052 8.340520
+Batch1,Batch5-Batch4                      -4.425 -13.22178 4.371776
+                                            pval    
+Batch1,Batch2,Batch5,Batch6-Batch3,Batch4 0.9600    
+Batch1,Batch5-Batch4                      0.7118    
+
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/TukeyHSD.html'>TukeyHSD</a></span><span class='op'>(</span><span class='va'>aov_table</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = fit)
+
+$Pressure
+               diff        lwr       upr     p adj
+8700-8500 -1.133333  -5.637161  3.370495 0.8854831
+8900-8500 -3.900000  -8.403828  0.603828 0.1013084
+9100-8500 -7.050000 -11.553828 -2.546172 0.0020883
+8900-8700 -2.766667  -7.270495  1.737161 0.3245644
+9100-8700 -5.916667 -10.420495 -1.412839 0.0086667
+9100-8900 -3.150000  -7.653828  1.353828 0.2257674
+
+$batch
+                diff         lwr        upr     p adj
+Batch2-Batch1  2.050  -4.1680828  8.2680828 0.8853016
+Batch3-Batch1  3.300  -2.9180828  9.5180828 0.5376297
+Batch4-Batch1  2.850  -3.3680828  9.0680828 0.6757699
+Batch5-Batch1 -2.375  -8.5930828  3.8430828 0.8105903
+Batch6-Batch1  6.750   0.5319172 12.9680828 0.0297368
+Batch3-Batch2  1.250  -4.9680828  7.4680828 0.9845521
+Batch4-Batch2  0.800  -5.4180828  7.0180828 0.9980198
+Batch5-Batch2 -4.425 -10.6430828  1.7930828 0.2483499
+Batch6-Batch2  4.700  -1.5180828 10.9180828 0.1986961
+Batch4-Batch3 -0.450  -6.6680828  5.7680828 0.9998784
+Batch5-Batch3 -5.675 -11.8930828  0.5430828 0.0837504
+Batch6-Batch3  3.450  -2.7680828  9.6680828 0.4925715
+Batch5-Batch4 -5.225 -11.4430828  0.9930828 0.1263042
+Batch6-Batch4  3.900  -2.3180828 10.1180828 0.3674672
+Batch6-Batch5  9.125   2.9069172 15.3430828 0.0027838</code></pre>
+</div>
+<ol start="9" type="1">
+<li>To check the normality and additivity assumptions, we can plot the residuals against the batch. Even though additivity doesn’t seem to be a problem (no group of residuals is consistently <span class="math inline">\(&gt; 0\)</span> or <span class="math inline">\(&lt; 0\)</span>), equality of variance across batches seems to be violated. The variance of Batch 6’s residuals is too small.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>graft</span><span class='op'>$</span><span class='va'>residual</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/residuals.html'>resid</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>graft</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>batch</span>, y <span class='op'>=</span> <span class='va'>residual</span>, col <span class='op'>=</span> <span class='va'>Pressure</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_brewer</span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set2"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week5-2_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
