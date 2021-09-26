@@ -303,7 +303,6 @@ summary(aov(fit))
 
 ---
 
-
 ### Exercise
 
 ---
