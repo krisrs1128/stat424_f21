@@ -1,6 +1,6 @@
 ---
-title: "ANOVA Extensions"
-author: "Kris Sankaran | UW Madison | 23 September 2021"
+title: "RCBD with Random Blocks and Latin Squares"
+author: "Kris Sankaran | UW Madison | 7 October 2021"
 output:
   xaringan::moon_reader:
     css: ["default", "css/xaringan-themer.css", "cols.css"]
@@ -17,7 +17,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 6, fig.height = 2.7, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -33,29 +33,276 @@ theme_set(theme424)
 # ANOVA Extensions
 
 ```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
 ```
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison | 23 September 2021]
+.large[Kris Sankaran | UW Madison | 7 October 2021]
 
 ---
 
 ### Today
 
-* Book Sections: 3.9 & 3.11
-* Online Notes: Week 4 [2] and [3]
+* Book Sections: 4.1 - 4.3
+* Online Notes: Week 5 [3], [4], [5]
 
 ---
 
 ### Motivation
 
+Though useful, Randomized Complete Block Designs cannot be applied in a variety
+of realistic settings,
+1. If there are many blocks, estimation becomes cumbersome
+2. There might be more than one source of nuisance variation
+3. The number of samples per batch must equal the number of treatments
+
+---
+
+### Overview
+
+This lecture $\rightarrow 1, 2$. Next week $\arrow 3$.
+
+1. Working with many blocks $\rightarrow$ RCBD with Random Block Effects
+2. Multiple sources of nuisance variation $rightarrow$ Latin Squares
+3. Fewer samples than treatments $\rightarrow$ Incomplete Block Designs
+
+---
+
+### RCBD with Random Blocks
+
+.center[
+ANOVA $rightarrow$ Random Effects ANOVA
+RCBD $rightarrow$ RCBD with Random Block Effects
+]
+
+* ANOVA with Random Effects: Imagine that group effects are drawn from a large
+population
+* RCBD with Random Block Effects: Imagine that block effects are drawn from a
+large population
+
+---
+
+### Model
+
+.pull-left[
+* Block effects $\beta_{j}$ are imagined to be drawn from a large population of
+effects.
+* Treatment effects $\tau_i$ are still fixed parameters.
+
+\begin{align}
+y_{ij} &= \mu + \tau_i + \beta_j + \epsilon_{ij} \\
+\beta_{j} &\sim \mathcal{N}\left(0, \sigma_{\beta}^2\right) \\
+\epsilon_{ij} &\sim \mathcal{N}\left(0, \sigma^2\right)
+\end{align}
+]
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/gu58jurmhyraebsdyh4txlpyxegxn9xf.png")
+```
+
+---
+
+### Hypothesis Testing
+
+The test of interest (and its interpretation) are exactly the same as for
+ordinary RCBDs.
+
+\begin{align*}
+H_0 &: \tau_1 = \dots = \tau_a = 0 \\
+H_{1} &: \tau_{i} \neq 0 \text{ for at least one } i
+\end{align*}
+
+In fact, we can use the same test statistic
+($\frac{MS_{\text{Treatment}}}{MS_{E}}$) and cutoffs as in the fixed block case.
+
+---
+
+### Latin Squares
+
+Imagine there are two sources of nuisance variation in an experiment,
+
+  * We’re testing a manufacturing procedure, but raw materials come in batches
+  and different operators have different skills.
+  * We’re testing different diets on cows over a series of days, but there will
+  both cow and day effects.
+
+---
+
+### Intuition
+
+> Make sure to run each treatment on each nuisance factor exactly once.
+
+  * Each operator should see each treatment once, and each batch of materials should be used for each treatment
+  * Don't want any particular treatment to get lucky and have a "good" batch of
+  material or operator
+
+---
+
+### Setup
+
+Latin Squares are $p\times p$ arrays, filled with $p$ letters, so that each
+letter appears exactly once in each row and each column.
+
+  | A | B | C |
+  | B | C | A |
+  | C | A | B |
+  
+It is like Sudoku.
+
+---
+
+### Recipe
+
+* The rows are levels of the first blocking factor.
+* The columns are levels of the second blocking factor.
+* The letters are the treatment levels
+
+Then, the experiment consists of $p^2$ runs, one for each of the pairs of
+blocking levels, with treatment specified by the cell’s label
+
+---
+
+### Model
+
+We now have two sets of block effects, $\alpha_i$ and $\beta_k$.
+
+\begin{align*}
+y_{ijk} &= \mu + \alpha_i + \tau_j + \beta_k + \epsilon_{ijk} \\
+\epsilon_{ijk} \mathcal{N}\left(0,\sigma^2\right)
+\end{align*}
+
+Note that each of the indices $i, j$ and $k$ range from $1, \dots, p$.
+
+---
+
+### Hypothesis Testing
+
+We are still interested in the same hypothesis test, though now we are
+controlling for two sources of nuisance variation.
+
+\begin{align*}
+H_0 &: \tau_1 = \dots = \tau_a = 0 \\
+H_{1} &: \tau_{i} \neq 0 \text{ for at least one } i
+\end{align*}
+
+---
+
+### ANOVA-like Identity
+
+.pull-left[
+\begin{align*}
+SS_{\text{Total}} = &SS_{\text{Rows}} + \\
+&SS_{\text{Columns}} +\\
+&SS_{\text{Treatment}} + \\
+&SS_{E}
+\end{align*}
+]
+
+.pull-right[
+In analogy to ANOVA, define
+* $MS_{\text{Rows}}=\frac{1}{p - 1}SS_{\text{Rows}}$
+* $MS_{\text{Treatment}}=\frac{1}{p - 1}SS_{\text{Treatment}}$
+* $MS_{\text{Columns}}=\frac{1}{p - 1}SS_{\text{Columns}}$
+* $MS_{E}=\frac{1}{(p - 1)(p - 2)}SS_{E}$
+]
+
+---
+
+### Hypothesis Testing
+
+Under the null hypothesis, it can be shown that,
+
+$$
+\frac{MS_{\text{Treatment}}}{MS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 2\right)\right)
+$$
+
+Therefore, we reject the null if the ratio lies above the $1 -  \alpha$ quantile
+of this $F$-distribution.
 
 ---
 
 ### Code Implementation
 
 ---
+
+### RCBD with Random Blocks
+
+We will reanalyze the graft dataset, but treating the batches as random samples
+from a larger population.
+
+```{r}
+library(readr)
+library(tidyr)
+graft <- read_table2("https://uwmadison.box.com/shared/static/0ciblk4z2f3k6zizbj4plg3q33w1d0n6.txt") %>%
+  pivot_longer(-Pressure, names_to = "batch", values_to = "yield")
+graft$Pressure <- as.factor(graft$Pressure)
+```
+
+---
+
+* We can continue to use the `lmer` function from `lme4`.
+* `(1 | variable)` indicates that a variable should be treated as random
+* We estimate a fixed effect for `Pressure` but a random effect for `batch` 
+
+```{r}
+library(lme4)
+fit <- lmer(yield ~ Pressure + (1 | batch), data = graft)
+fit
+```
+
+---
+
+### Confidence Intervals
+
+We can compute confidence intervals using the same `confint` function as before.
+
+```{r}
+confint(fit)
+```
+
+---
+
+### Latin Squares
+
+* In the rocket dataset, both operator and batch are nuisance factors
+* The `mutate_at` line is a shortcut to using `as.factor` for the `Batch`,
+`Operator`, and `Formulation` columns
+
+```{r}
+library(dplyr)
+rocket <- read_table2("https://uwmadison.box.com/shared/static/ac68766l3zcjog1ldrzki3lis74bbd71.txt") %>%
+  mutate_at(vars(-BurningRate), as.factor) # convert all but BurningRate to factor
+head(rocket)
+```
+
+---
+
+### Hypothesis Test
+
+* We can use `lm` to fit the Latin Squares model
+* The `.` notation is a shortcut for including a term for every column
+
+```{r}
+#fit <- lm(BurningRate ~ Batch + Operator + Formulation, data = rocket) # gives exact same result
+fit <- lm(BurningRate ~ ., data = rocket)
+summary(aov(fit))
+```
+
+---
+
+### Hypothesis Test
+
+* There is an operator effect, but no detectable variation across batches.
+* Controlling for batch and operater, there is a significant difference across
+formulations.
+
+```{r}
+#fit <- lm(BurningRate ~ Batch + Operator + Formulation, data = rocket) # gives exact same result
+fit <- lm(BurningRate ~ ., data = rocket)
+summary(aov(fit))
+```
+
+---
+
 
 ### Exercise
 

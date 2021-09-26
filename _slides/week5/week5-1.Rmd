@@ -131,6 +131,19 @@ include_graphics("https://uwmadison.box.com/shared/static/fgtpgaimnwwlm5s63bmj9f
 
 ---
 
+### Discussion
+
+Imagine you are working with project team to study the effect of listen to music
+(no music, only instrumental, and with vocals) on short math quizzes. Members of
+your team have varying test-taking skills. Discuss,
+
+* Why might an RCBD design be appropriate?
+* If an RCBD were used, how many quizzes would each person have to take?
+* Interpret the greek letters on the previous page within context of this study
+
+
+---
+
 ### Hypothesis Testing
 
 Do any of the treatments have any effect, after controlling for nuisance

@@ -2302,8 +2302,9 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li><p>The intuition for Latin Squares is similar to the intuition for RCBD,</p></li>
 </ol>
 <blockquote>
-<p>Make sure to run each treatment on each nuisance factor. For example, in the manufacturing example, each operator should see each treatment once, and each batch of materials should be used for each treatment</p>
+<p>Make sure to run each treatment on each nuisance factor exactly once.</p>
 </blockquote>
+<p>For example, in the manufacturing example, each operator should see each treatment once, and each batch of materials should be used for each treatment</p>
 <h3 id="setup">Setup</h3>
 <ol start="4" type="1">
 <li>Latin Squares are <span class="math inline">\(p\times p\)</span> arrays, filled with <span class="math inline">\(p\)</span> letters, so that each letter appears exactly once in each row and each column. Here are three tables when <span class="math inline">\(p = 3\)</span>.</li>
@@ -2351,9 +2352,9 @@ H_{1} &amp;: \tau_{i} \neq 0 \text{ for at least one } i
 <p><span class="math display">\[\begin{align*}
 SS_{\text{Total}} = &amp;SS_{\text{Rows}} + \\
 &amp;SS_{\text{Columns}} +\\
-&amp;SS_{\text{Treatments}} + \\
+&amp;SS_{\text{Treatment}} + \\
 &amp;SS_{E}
-\end{align*}\]</span> and we define * <span class="math inline">\(MS_{\text{Rows}}=\frac{1}{p - 1}SS_{\text{Rows}}\)</span> * <span class="math inline">\(MS_{\text{Treatments}}=\frac{1}{p - 1}SS_{\text{Treatments}}\)</span> * <span class="math inline">\(MS_{\text{Columns}}=\frac{1}{p - 1}SS_{\text{Columns}}\)</span> * <span class="math inline">\(MS_{E}=\frac{1}{(p - 1)(p - 2)}SS_{E}\)</span></p>
+\end{align*}\]</span> and we define * <span class="math inline">\(MS_{\text{Rows}}=\frac{1}{p - 1}SS_{\text{Rows}}\)</span> * <span class="math inline">\(MS_{\text{Treatment}}=\frac{1}{p - 1}SS_{\text{Treatment}}\)</span> * <span class="math inline">\(MS_{\text{Columns}}=\frac{1}{p - 1}SS_{\text{Columns}}\)</span> * <span class="math inline">\(MS_{E}=\frac{1}{(p - 1)(p - 2)}SS_{E}\)</span></p>
 <ol start="11" type="1">
 <li>It turns out that <span class="math display">\[
 \frac{MS_{\text{Treatment}}}{MS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 2\right)\right)
@@ -2406,7 +2407,7 @@ Residuals   12    128   10.67
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 <ol start="13" type="1">
-<li>There is an operator effect, but no detectable variation across batches. Controlling for batch and operatur, there is a significant difference across formulations.</li>
+<li>There is an operator effect, but no detectable variation across batches. Controlling for batch and operater, there is a significant difference across formulations.</li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

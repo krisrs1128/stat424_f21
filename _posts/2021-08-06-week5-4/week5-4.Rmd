@@ -27,7 +27,8 @@ we care about $p$ different treatments.
 
 3. The intuition for Latin Squares is similar to the intuition for RCBD,
 
-> Make sure to run each treatment on each nuisance factor.
+> Make sure to run each treatment on each nuisance factor exactly once.
+
   For example, in the manufacturing example, each operator should see each
   treatment once, and each batch of materials should be used for each treatment
 
@@ -96,12 +97,12 @@ $$
 \begin{align*}
 SS_{\text{Total}} = &SS_{\text{Rows}} + \\
 &SS_{\text{Columns}} +\\
-&SS_{\text{Treatments}} + \\
+&SS_{\text{Treatment}} + \\
 &SS_{E}
 \end{align*}
 and we define
 * $MS_{\text{Rows}}=\frac{1}{p - 1}SS_{\text{Rows}}$
-* $MS_{\text{Treatments}}=\frac{1}{p - 1}SS_{\text{Treatments}}$
+* $MS_{\text{Treatment}}=\frac{1}{p - 1}SS_{\text{Treatment}}$
 * $MS_{\text{Columns}}=\frac{1}{p - 1}SS_{\text{Columns}}$
 * $MS_{E}=\frac{1}{(p - 1)(p - 2)}SS_{E}$
 
@@ -137,5 +138,5 @@ summary(aov(fit))
 ```
 
 13. There is an operator effect, but no detectable variation across batches.
-Controlling for batch and operatur, there is a significant difference across
+Controlling for batch and operater, there is a significant difference across
 formulations.
