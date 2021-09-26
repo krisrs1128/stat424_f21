@@ -27,7 +27,7 @@ $a$ of samples as we have treatments ($a=2 \to$ pairing)
 and wants to see the effect of manufacturing pressure on defect rate. But the resin
 used to make the graft arrives in batches, and may itself contribute to defects.
 
-> Idea: Randomly assign each of the a treatments to the units within each block. This is called the RCBD.
+> Idea: Randomly assign each of the $a$ treatments to the units within each block. This is called a Randomized Complete Block Design (RCBD).
 
 3. This is a restriction on randomization. Only random treatment assignments
 where each block has each treatment are allowed. In the medical example, we
@@ -103,11 +103,13 @@ quantile of an $F$ distribution with $(a - 1, (a - 1)(b - 1))$ d.f.
 
 ### Code Example
 
-11. In this code example, we'll study a vascular graft data. We want to know the
-effect of pressure on yield, controlling for possible batch effects. We first
-download the data and reshape it so that batches are not spread across columns.
-Judging from a plot, there might be batch effects; for example, the purple batch
-seems to have a lower yield across all pressure levels.
+11. In this code example, we'll study a vascular graft dataset. We want to know
+the effect of pressure on yield, controlling for possible batch effects. We
+first download the data and reshape it so that batches are not spread across
+columns. Judging from a plot, there appear to be batch effects. For example,
+batch 5 always has lower yield than batch 6, across all pressure levels. There
+nonetheless appears to be a possible pressure effect. For example, runs with
+pressure level 9100 (the purple points) always seem to have lower yield.
 
 ```{r}
 opts_chunk$set(echo = TRUE)

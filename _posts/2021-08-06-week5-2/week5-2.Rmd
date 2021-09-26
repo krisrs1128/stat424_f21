@@ -83,13 +83,17 @@ aov_table <- aov(fit)
 of code as for ANOVA without batch effects.
 
 ```{r}
+library(gmodels)
+library(DescTools)
+
 contrasts <- matrix(
   c(1, 1, -1, -1,
     1, 0, 0, -1),
   nrow = 2, byrow=TRUE
 )
 
-PostHocTest(aov_table, method = "scheffe", contrasts = t(contrasts))
+fit.contrast(aov_table, "Pressure", contrasts)
+PostHocTest(aov_table, method = "scheffe", contrasts = contrasts)
 TukeyHSD(aov_table)
 ```
 

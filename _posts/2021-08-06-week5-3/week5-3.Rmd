@@ -18,7 +18,6 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 
 _Readings [4.1](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-06-week5-3/week5-3.Rmd)_
 
-
 1. As in standard random effects, sometimes the blocks are from a larger population. For example, in the medical device example, we care about a ``resin effect,'' but don’t care about each individual batch. 
 
 2. The model is setup as before,
