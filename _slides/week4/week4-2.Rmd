@@ -395,7 +395,21 @@ context.
 
 ---
 
-### Option (B) - (1)
+### Option B - (1)
+
+Nonparametric ANOVA tests the same hypothesis as ordinary ANOVA,
+
+\begin{align}
+&H_0: \tau_1 = \dots = \tau_{a} = 0 \\
+&H_1: \tau_{i} \neq 0 \text{ for at least one }i.
+\end{align}
+
+In this context, the null is that all the fluids have the same mean lifetime.
+The alternative is that at least one is different from the rest.
+
+---
+
+### Option B - (2)
 
 ```{r}
 kruskal.test(fluids$life, fluids$type)
@@ -403,15 +417,44 @@ kruskal.test(fluids$life, fluids$type)
 
 ---
 
-### Option (A) - 
+### Option B - (3)
+
+The $p$-value is 0.105, which is above any typical threshold (e.g., 0.1 or
+0.05). We don't have much evidence that there is any difference in lifetimes
+between the fluid types.
+
+---
+
+### Option A - (1)
+
+* $n$ refers to the number of replicates
+* $a$ is the number of levels
 
 ```{r}
-bounds <- c(0.025, 0.975)
-n <- 1
-a <- 1
-  
-ratio_bounds <- 1 / n * (MSE / qf(bounds, a - 1, N - a) - 1)
-ratio_bounds / (1 + ratio_bounds)
+n <- 3
+a <- 4
+N <- n * a
 ```
 
 ---
+
+### Option A - (2)
+
+* $MS_{E} = \frac{SS_{E}}{a - 1}$ 
+* See the "Test Statistic" slide for fixed effects ANOVA for this definition
+
+```{r}
+MSE <- (330.56 - 250.65) / (a - 1)
+```
+
+---
+
+### Option A - (3)
+
+We can use the same code for computing the ICC interval from above.
+
+```{r}
+bounds <- c(0.975, 0.025)
+ratio_bounds <- 1 / n * (MSE / qf(bounds, a - 1, N - a) - 1)
+ratio_bounds / (1 + ratio_bounds)
+```

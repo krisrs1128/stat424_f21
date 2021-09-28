@@ -28,6 +28,17 @@ samples be collected, and how is the replicated design analyzed?
         * Equivalently, can keep rows, but different columns
     * \color{green}{We can have different row and different column levels}
   Note that in each case, we use a different latin square in each replicate.
+  
+```{r, fig.cap = "Design where all the row and column levels are reused."}
+include_graphics("figure/ls-1.png")
+```
+
+```{r, fig.cap = "Design where only the column levels are reused. Pay attention to the difference in row labels from one group to the next."}
+include_graphics("figure/ls-2.png")
+```
+```{r, fig.cap = "Design where neither the row nor column levels are reused."}
+include_graphics("figure/ls-2.png")
+```
 
 3. Fortunately, the analysis is conceptually unified. We continue to have row,
 column, and treatment mean squares. Then, we have to add in replicate mean squares, to
@@ -43,10 +54,14 @@ lm(Y ~ Replicate + W1 + W2 + X)
 simultaneously. What if we have 3? We could go on forever…. That said, the
 transition from 2 to 3 is not hard
 
-4. Introduce $p$ greek letters to represent the third blocking factor. When $p=5$, we would have $\alpha, \beta, \gamma, \delta, \epsilon$, for example.
+4. Introduce $p$ greek letters to represent the third blocking factor. When
+$p=5$, we would have $\alpha, \beta, \gamma, \delta, \epsilon$, for example.
 
 5. A Graeco-Latin square is like two Latin Squares overlaid on one another,
 
+```{r, fig.cap = "An example graeco-latin square."}
+include_graphics("figure/gl.png")
+```
 
 with one additional requirement: each latin and each greek letter must only appear together once.
 This last requirement is called __orthogonality__.
