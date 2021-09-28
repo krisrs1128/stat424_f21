@@ -3,10 +3,9 @@ title: "ANOVA Extensions"
 author: "Kris Sankaran | UW Madison | 23 September 2021"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -17,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -33,7 +32,7 @@ theme_set(theme424)
 # ANOVA Extensions
 
 ```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+include_graphics("https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5lvoajju3ekf.png")
 ```
 ### Statistical Experimental Design
 
@@ -50,15 +49,17 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 
 ### Motivation
 
+.pull-left[
 * Nonparametric ANOVA
   - We may not believe the assumed model for ANOVA
   - Transformations may not help
 * Estimation of Random Effects
   - Different algorithms provide different outputs
   - Conceptual understanding can guide the choice of software
+]
   
 .pull-right[
-```{r}
+```{r, out.width = "80%"}
 include_graphics("https://uwmadison.box.com/shared/static/a2evjeib97ay362iue2vhkxk18gbh7l4.png")
 ```
 ]
@@ -67,13 +68,17 @@ include_graphics("https://uwmadison.box.com/shared/static/a2evjeib97ay362iue2vhk
 
 ### Nonparametric ANOVA
 
+.pull-left[
 * We can compare groups based on the ranks of the observations they contain
 * Ranks are not sensitive to outliers or distributional assumptions
+]
 
-```{r}
+.pull-right[
+```{r, fig.show = "hold", out.width = "50%"}
 include_graphics("https://uwmadison.box.com/shared/static/kdv2ayi2heooodf0a0j15swxld4ofll7.png")
 include_graphics("https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5lvoajju3ekf.png")
 ```
+]
 
 ---
 
@@ -82,9 +87,11 @@ include_graphics("https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5l
 * Transform the data to their ranks. The smallest of the $y_{ij}$ becomes 1, the
 next smallest becomes 2, etc. Denote these ranks by $R_{ij}$. 
 * Compute the test statistic
+
 \begin{align*}
   \frac{\sum_{i} n_{i}\left(\bar{R}_{i} - \bar{R}\right)^2}{\frac{1}{N - 1}\sum_{i, j} \left(R_{ij} - \bar{R}\right)^2}
-\end{align}
+\end{align*}
+
   where $\bar{R}_{i}$ is the average rank in group $i$ and $\bar{R}$ is the
   average rank overall
   
@@ -140,16 +147,17 @@ effects models can be found in closed form,
 
 ### Method of Moments
 
-If we approximate the expected values by the value we observed, we are left with
-two equations for our two unknowns ($\sigma^2_{\tau}$ and $\sigma^2$).
+If we approximate the expected values by the value we observed, we get two
+equations with two unknowns,
+$\sigma_{\tau}^2$ and $\sigma^2$.
 
 \begin{align*}
 MS_{\text{treatment}} &\approx \mathbf{E}\left[MS_{\text{treatment}}\right] = \sigma^2 + n \sigma_{\tau}^2 \\
-\MS_{E} &\approx \mathbf{E}\left[MS_{E}\right] = \sigma^2
+MS_{E} &\approx \mathbf{E}\left[MS_{E}\right] = \sigma^2
 \end{align*}
 
-Solving for the unknowns gives estimators $\hat{\sigma}^2$ and
-$\hat{\sigma}_{\tau}^2$.
+Solving for the unknowns gives estimators $\hat{\sigma}^2_{\tau}$ and
+$\hat{\sigma}^2$.
 
 ---
 
@@ -157,9 +165,10 @@ $\hat{\sigma}_{\tau}^2$.
 
 * In addition to estimates of the parameters, it would be nice to have a sense
 of our uncertainty
-* There are formulas that give valid confidence intervals for $\hat{\mu},
-\hat{\sigma}^2$, but not for $\hat{\sigma}_{\tau}^2$
-* We will use the formulas in the code example below
+* There are formulas that give valid confidence intervals for $\hat{\mu}, \hat{\sigma}^2$, and the Intraclass Correlation (ICC),
+$\widehat{\frac{\sigma^2_{\tau}}{\sigma_{\tau}^2 + \sigma^2}}$, but not
+for $\hat{\sigma}_{\tau}^2$
+* We demonstrate use of the formulas in a code example below
 
 ---
 
@@ -174,10 +183,11 @@ of our uncertainty
 ### Maximum Likelihood
 
 * Define $L(\mu, \sigma^2, \sigma^2_{\tau})$ to be the probability of the
-dataset $y_{11}, y_{12}, \dots y_{an}$ given the choice of parameters $\mu, \sigma^2$, and $\sigma^2_{\tau}$
+dataset $y_{11}, y_{12}, \dots y_{an}$ given the choice of parameters $\mu, \sigma^2$, and $\sigma^2_{\tau}$.
 * A good choice for the parameters is one that maximizes $L\left(\mu, \sigma^2, \sigma^2_{\tau}\right)$.
+  - This is usually found through iterative optimization
 
-```{r}
+```{r, fig.align = "center", out.width = 500}
 include_graphics("https://uwmadison.box.com/shared/static/0au3iwj17u49ueqor5djqg58rensvmqo.png")
 ```
 
@@ -187,9 +197,9 @@ include_graphics("https://uwmadison.box.com/shared/static/0au3iwj17u49ueqor5djqg
 
 From the previous lecture, we know,
 * Given the parameters, the data are multivariate normally distributed
-* The mean is $\mu$, and covariance is block diagonal, depending on $\sigma^2, \sigma_{\tau}$
+* The mean is $\mu$, and covariance is block diagonal, depending on $\sigma^2, \sigma_{\tau}^2$
 
-```{r}
+```{r, out.width = 500, fig.align = "center"}
 include_graphics("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drsgpgsu9lvjq.png")
 ```
 
@@ -199,7 +209,7 @@ include_graphics("https://uwmadison.box.com/shared/static/ujmby14i61prsex43i6drs
 
 Confidence intervals can be constructed based on the curvature of the likelihood function.
 
-```{r}
+```{r, out.width = 650, fig.align = "center"}
 include_graphics("https://uwmadison.box.com/shared/static/kqgsua08wh8n2h6zhssbmxf4byldcq2o.png")
 ```
 
@@ -217,22 +227,36 @@ include_graphics("https://uwmadison.box.com/shared/static/kqgsua08wh8n2h6zhssbmx
 
 # Code Implementation
 
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
 ---
 
 ### Loom Dataset
 
-We will use the same dataset as last lecture, taken from Example 3.10 of the
-textbook.
+We will use the same dataset as last lecture, taken from Example 3.10. `lmer`
+uses maximum likelihood estimation, so we will focus on the method of moments
+and nonparametric ANOVA.
+
 
 ```{r, echo = TRUE}
 library(readr)
 loom <- read_csv("https://uwmadison.box.com/shared/static/ezp3i2pflhi96si7u6rfn3dg3lb5cl3z.csv")
 loom$loom <- as.factor(loom$loom)
-loom
+head(loom, 4)
 ```
 
-`lmer` actually uses maximum likelihood estimation, so we will focus on the
-method of moments and nonparametric ANOVA.
+---
+
+### Nonparametric ANOVA
+
+To conduct a hypothesis test using nonparametric ANOVA, we can use the
+`kruskal.test` function,
+
+```{r}
+kruskal.test(strength ~ loom, data = loom)
+```
 
 ---
 
@@ -248,10 +272,12 @@ N <- nrow(loom)
 a <- nlevels(loom$loom)
 n <- N / a
 
-aov_table <- aov(lm(strength ~ loom, data = loom)) %>%
-  tidy()
+fit <- lm(strength ~ loom, data = loom)
+aov_table <- tidy(aov(fit))
 aov_table
 ```
+
+---
 
 ### Method of Moments Equations
 
@@ -271,14 +297,34 @@ The results are very similar as those from LMER in the last lecture.
 
 ### Method of Moments: Confidence Intervals
 
-The formulas below compute 95\% confidence intervals for $\hat{\mu}$ and
-$\hat{\sigma}^2$.
+The code below provides a confidence interval for $\hat{\mu}$, according to
+Equation 3.58 in the textbook,
+
+\begin{align*}
+\left[\bar{y} - t_{1 - \frac{\alpha}{2}, a\left(n - 1\right)}\sqrt{\frac{MS_{E}}{an}}, \bar{y} + t_{1 - \frac{\alpha}{2}, a\left(n - 1\right)}\sqrt{\frac{MS_{E}}{an}}\right]
+\end{align*}
 
 ```{r}
-int_bounds <- c(0.975, 0.025)
-(N - a) * sigma_sqs[1] / qchisq(int_bounds, N - a) # CI for sigma^2
+width <- sqrt(aov_table$meansq[2] / (n * a))
+mu_hat <- summary(fit)$coefficients[1]
+cutoff <- qt(0.975, a * (n - 1))
+c(mu_hat - cutoff * width, mu_hat + cutoff * width) # CI for mu_hat (Equation 3.58)
 ```
 
+---
+
+### Method of Moments: Confidence Intervals
+
+The code below confidence intervals for $\hat{\sigma}^2$ and the ICC, according
+to Equations 3.53 and 3.57 in the textbook, respectively.
+
+```{r}
+bounds <- c(0.975, 0.025)
+(N - a) * sigma_sqs[1] / qchisq(bounds, N - a) # CI for sigma^2
+
+ratio_bounds <- 1 / n * (aov_table$statistic[1] / qf(bounds, a - 1, N - a) - 1)
+ratio_bounds / (1 + ratio_bounds) # CI for ICC
+```
 
 ---
 
@@ -295,19 +341,77 @@ confint(fit)^2
 
 ---
 
-### Nonparametric ANOVA
+### Exercise - Option A
 
-To conduct a hypothesis test using nonparametric ANOVA, we can use the
-`kruskal.test` function,
+This walks through Problem 3.35 in the textbook.
+
+> A single factor completely randomized design has four levels of the factor.
+There are three replicates and the total sum of squares is 330.56. The treatment
+sum of squares is 250.65. Find a 95% confidence interval on the Intraclass
+Correlation Coefficient.
+
+---
+
+### Exercise - Option A
+
+(1) Based on the problem description, find the values of $n$ and $a$ from our notation above.
+(2) Based on the problem data, compute $MS_{E}$.
+(3) Using the formula from the code example, compute a confidence interval for the ICC.
+
+---
+
+### Exercise - Option B
+
+This walks through Problem 3.52 in the textbook.
+
+.pull-left[
+The effective life of insulating fluids at an accelerated load of 35kV is being
+studied. Test data have been obtained for four types of fluids. The results from
+a completely randomized experiment are on the right. Use the Kruskal-Wallis test
+to gauge whether the fluids differ.
+]
+
+.pull-right[
+```{r}
+fluids <- data.frame(
+  type = rep(c("1", "2", "3", "4"), each = 6),
+  life = c(17.6, 18.9, 16.3, 17.4, 20.1, 21.6,
+           16.9, 15.3, 18.6, 17.1, 19.5, 20.3,
+           21.4, 23.6, 19.4, 18.5, 20.5, 22.3,
+           19.3, 21.1, 16.9, 17.5, 18.3, 19.8)
+)
+```
+]
+
+---
+
+### Exercise - Option B
+
+(1) What is the null hypothesis that nonparametric ANOVA (i.e., the
+Kruskal-Wallis Test) tests? Interpret this null hypothesis in this application's
+context.
+(2) Use the `kruskal.test` function to gauge whether the fluids differ.
+(3) Interpret your results from (2) in context.
+
+---
+
+### Option (B) - (1)
 
 ```{r}
-kruskal.test(strength ~ loom, data = loom)
+kruskal.test(fluids$life, fluids$type)
 ```
 
 ---
 
-### Exercise
+### Option (A) - 
 
-This walks through Problem [] in the textbook.
+```{r}
+bounds <- c(0.025, 0.975)
+n <- 1
+a <- 1
+  
+ratio_bounds <- 1 / n * (MSE / qf(bounds, a - 1, N - a) - 1)
+ratio_bounds / (1 + ratio_bounds)
+```
 
 ---

@@ -3,10 +3,9 @@ title: "R Review Session"
 author: "Kris Sankaran | UW Madison | 27 September 2021"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -32,8 +31,8 @@ theme_set(theme424)
 
 # R Review Session
 
-```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```{r, out.width = 200, echo = FALSE}
+include_graphics("https://www.r-project.org/Rlogo.png")
 ```
 ### Statistical Experimental Design
 
@@ -133,22 +132,44 @@ We can access a vector's entries in two ways,
 * A numeric vector of coordinates to extract
 * A boolean vector with `TRUE`'s in the entries we want to extract
 
+The indices can themselves be stored as variables.
+
+.pull-left[
 ```{r}
 x[1:3]
-y[c(1, 4)]
+```
+]
+
+.pull-right[
+```{r}
 y[c(TRUE, FALSE, FALSE, TRUE)]
 ```
+]
+
 
 ---
 
 ### Access
 
+We can access a vector's entries in two ways,
+
+* A numeric vector of coordinates to extract
+* A boolean vector with `TRUE`'s in the entries we want to extract
+
 The indices can themselves be stored as variables.
 
+.pull-left[
+```{r}
+y[c(1, 4)]
+```
+]
+
+.pull-right[
 ```{r}
 indices <- c(1, 4)
 y[indices]
 ```
+]
 
 ---
 
@@ -156,14 +177,26 @@ y[indices]
 
 We can combine, difference, and apply functions to vectors.
 
+.pull-left[
 ```{r}
 x1 <- c(1, 2, 3)
 x2 <- c(4, 5, 6)
 c(x1, x2) # concatenation
 setdiff(x2, c(4, 7)) # differences
-x1 ^ 2
-sum(x1)
 ```
+]
+
+```{r}
+append(x1, 2)
+```
+
+
+.pull-right[
+```{r}
+x1 + x2
+x1 ^ 2
+```
+]
 
 ---
 
@@ -173,29 +206,60 @@ sum(x1)
 * They are mainly used for linear algebraic operations.
 * We will use them much less frequently in this class.
 
+.pull-left[
 ```{r}
 matrix(c(1, 2, 3, 4), nrow = 2)
-matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE)
-matrix(rnorm(4), nrow = 2)
-diag(2)
 ```
+]
+
+.pull-right[
+```{r}
+matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE)
+```
+]
 
 ---
 
 ### Matrices
 
-* Matrix elements are indexed using both their row and column coordinates.
+* Matrices are the two-dimensional analog of vectors.
+* They are mainly used for linear algebraic operations.
+* We will use them much less frequently in this class.
+
+.pull-left[
+```{r}
+matrix(rnorm(4), nrow = 2)
+```
+]
+
+.pull-right[
+```{r}
+diag(2)
+```
+]
+
+---
+
+### Matrices
+
+* Elements are indexed using both row and column coordinates.
 * Entire rows or columns can be extracted
 * The results can be saved into new variables
 
+.pull-left[
 ```{r}
 x <- matrix(rnorm(12), nrow = 4)
-x
 x[3, 1] # element at row 3, column 1
 x[1, ] # get the first row
+```
+]
+
+.pull-right[
+```{r}
 z <- x[, 3] # store the third column in a new variable
 z
 ```
+]
 
 ---
 
@@ -220,13 +284,26 @@ df
 * Elements can accessed either using `[row, column]` or `$column[row]` notation.
 * The `$column` notation extracts the column `column` as a vector.
 
+.pull-left[
 ```{r}
 df$numbers
 df[, "numbers"]
+```
+]
+
+
+.pull-right[
+```{r}
 df$numbers[1:2]
 df[1:2, "numbers"]
 # Q: how to get the entries "A" and "C"?
 ```
+]
+
+```{r}
+df[1:2, c("numbers", "letters")]
+```
+
 
 ---
 
@@ -288,11 +365,11 @@ y[[1]]$A[2] # element [[1]] is a data.frame with column "A"
 
 ---
 
-###
-
----
-
 ### `for` loops
+
+* For loops allow us to call a piece of code where a single parameter varies
+over a vector
+* The block below does not depend on the index `i`
 
 ```{r}
 for (i in 1:3) {
@@ -304,20 +381,64 @@ for (i in 1:3) {
 
 ### `for` loops
 
+In the loop below, the vector `y` is built referencing both the $i^{th}$
+coordinate of $i$ and the raw parameter value.
+
 ```{r}
-x <- c(4, 3, 2, 1)
+x <- c(10, 11, 12)
 y <- vector(length = 3)
 for (i in 1:3) {
-  y[i] <- x[i + 1]
+  y[i] <- x[i] + i
 }
 
-x
 y
 ```
 
 ---
 
+### `for` loops
+
+A shortcut for `i in 1:length(x)` is `i in seq_along(x)`.
+
+.pull-left[
+```{r}
+x <- c(1, 2, 3)
+for (i in 1:length(x)) {
+  print(i)
+}
+```
+]
+
+.pull-right[
+```{r}
+x <- c(1, 2, 3)
+for (i in seq_along(x)) {
+  print(i)
+}
+```
+]
+
+---
+
+### `for` loops
+
+We can also iterate directly over elements without any references to their
+indices.
+
+```{r}
+z <- c("A", "B", "C")
+for (letter in z) {
+  print(paste0(letter, "!"))
+}
+```
+
+
+---
+
 ### Nested `for` loops
+
+For loops can be nested to go over all combinations of elements between two
+vectors.
 
 ```{r}
 x <- list()
@@ -338,19 +459,27 @@ x
 
 ### `if` statements
 
+If we want a line to be executed only when a condition is met, we can use an
+`if` statement.
+
 ```{r}
-v <- TRUE
-#v <- FALSE # what happens if we use this instead?
+#v <- TRUE
+v <- FALSE # what happens if we use this instead?
 if (v) {
   print("hello!")
-} else {
+} else if (v) {
   print("goodbye!")
+} else {
+  print("here")
 }
 ```
 
 ---
 
 ### Combining statements
+
+The power of control flow comes from being able to combine different types of
+statements together.
 
 ```{r}
 for (i in 1:10) {
@@ -364,6 +493,12 @@ for (i in 1:10) {
 
 ### Functions
 
+* Whenever there is a block of code we might want to use in several contexts,
+it's a good idea to write a function that encapsulates that task.
+* If we ever need to change the way the task is done, we only need to change it
+in one place
+* The last line of a function is what the function returns
+
 ```{r}
 sum_of_squares <- function(x) {
   sum(x ^ 2)
@@ -376,6 +511,9 @@ sum_of_squares(c(1, 2, 3))
 
 ### Functions
 
+* Variables defined within a function are invisible outside of that function
+* Default arguments can be specified (e.g., `k = 3` below)
+
 ```{r}
 partial_sum_squares <- function(x, k = 3) {
   indices <- 1:k
@@ -386,11 +524,16 @@ partial_sum_squares <- function(x, k = 3) {
 partial_sum_squares(1:4)
 partial_sum_squares(1:4, k = 4)
 # Q: Is the subset_x variable accessible from here?
+
+subset_x
 ```
 
 ---
 
 ### Functions
+
+If you want a funtion to return several objects, it's possible to create a list
+that stores all of those objects.
 
 ```{r}
 partial_sum_squares <- function(x, k = 3) {
@@ -480,7 +623,7 @@ complex_task <- function() {
 
 In R, you can use `lintr`.
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, eval = FALSE}
 library(lintr)
 lint("test.R")
 ```
@@ -488,4 +631,26 @@ lint("test.R")
 You can also add plugins to many editors that highlight style issues as you
 code.
 
----
+
+
+
+
+```{r}
+t.test(row1, row2)
+t.test(row1, row3)
+t.test(row1, row4)
+```
+
+
+```{r}
+broken <- function() {
+  x <- 1
+  y <- "A"
+  u <- rnorm(10)
+  v <- rnorm(5)
+  x + y
+}
+
+broken()
+```
+
