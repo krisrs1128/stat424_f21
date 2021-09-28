@@ -172,6 +172,7 @@ apply a principled testing procedure. Compare the ANOVA table with Table 4.25.
 fit <- lm(Time ~ ., data = catalyst)
 aov_table <- aov(fit)
 summary(aov_table) # only the unadjusted block mean square
+confint(fit)
 ```
 
 14.  We can also compute contrasts in the way that we're used to. Here, we're
