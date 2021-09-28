@@ -1,6 +1,6 @@
 ---
 title: "ANOVA Extensions"
-author: "Kris Sankaran | UW Madison | 23 September 2021"
+author: "Kris Sankaran | UW Madison | 30 September 2021"
 output:
   xaringan::moon_reader:
     css: ["default", "css/xaringan-themer.css"]
@@ -31,12 +31,12 @@ theme_set(theme424)
 
 # ANOVA Extensions
 
-```{r, out.width = 200}
+```{r, out.width = 300}
 include_graphics("https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5lvoajju3ekf.png")
 ```
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison | 23 September 2021]
+.large[Kris Sankaran | UW Madison | 30 September 2021]
 
 ---
 
@@ -116,7 +116,7 @@ y_{ij} &= \mu + \tau_i + \epsilon_{ij} \\
 
 There are three (nonrandom) parameters to estimate: $\mu, \sigma^2_{\tau}, \sigma^2$. Two main approaches are,
 * Method of Moments
-* (Restricted) Maximum Likelihood
+* Maximum Likelihood
 
 ---
 
@@ -354,9 +354,13 @@ Correlation Coefficient.
 
 ### Exercise - Option A
 
-(1) Based on the problem description, find the values of $n$ and $a$ from our notation above.
+(1) Based on the problem description, find the values of $n$, $a$, and $N$ from
+our notation above.
+
 (2) Based on the problem data, compute $MS_{E}$.
-(3) Using the formula from the code example, compute a confidence interval for the ICC.
+
+(3) Using the formula from the code example, compute a confidence interval for
+the ICC.
 
 ---
 
@@ -380,6 +384,7 @@ fluids <- data.frame(
            21.4, 23.6, 19.4, 18.5, 20.5, 22.3,
            19.3, 21.1, 16.9, 17.5, 18.3, 19.8)
 )
+head(fluids)
 ```
 ]
 
@@ -390,8 +395,50 @@ fluids <- data.frame(
 (1) What is the null hypothesis that nonparametric ANOVA (i.e., the
 Kruskal-Wallis Test) tests? Interpret this null hypothesis in this application's
 context.
+
 (2) Use the `kruskal.test` function to gauge whether the fluids differ.
+
 (3) Interpret your results from (2) in context.
+
+---
+
+### Option A - (1)
+
+* $n$ refers to the number of replicates per level
+* $a$ is the number of levels
+* $N$ is the total number of samples
+
+```{r}
+n <- 3
+a <- 4
+N <- n * a
+```
+
+---
+
+### Option A - (2)
+
+* $MS_{E} = \frac{SS_{E}}{a - 1}$
+* This is the total squared distance from group means to the global mean,
+rescaled by $a - 1$ (so it becomes a chi-square)
+* See the "Test Statistic" slide for fixed effects ANOVA for this definition
+
+```{r}
+MSE <- (330.56 - 250.65) / (a - 1)
+```
+
+---
+
+### Option A - (3)
+
+We can use the same code for computing the ICC interval from above, substituting
+the manually computed $MS_{E}$ from above.
+
+```{r}
+bounds <- c(0.975, 0.025)
+ratio_bounds <- 1 / n * (MSE / qf(bounds, a - 1, N - a) - 1)
+ratio_bounds / (1 + ratio_bounds)
+```
 
 ---
 
@@ -419,42 +466,14 @@ kruskal.test(fluids$life, fluids$type)
 
 ### Option B - (3)
 
+.pull-left[
 The $p$-value is 0.105, which is above any typical threshold (e.g., 0.1 or
 0.05). We don't have much evidence that there is any difference in lifetimes
 between the fluid types.
+]
 
----
-
-### Option A - (1)
-
-* $n$ refers to the number of replicates
-* $a$ is the number of levels
-
-```{r}
-n <- 3
-a <- 4
-N <- n * a
+.pull-right[
+```{r, fig.cap = "XKCD sometimes hits a little too close to home."}
+include_graphics("https://imgs.xkcd.com/comics/p_values.png")
 ```
-
----
-
-### Option A - (2)
-
-* $MS_{E} = \frac{SS_{E}}{a - 1}$ 
-* See the "Test Statistic" slide for fixed effects ANOVA for this definition
-
-```{r}
-MSE <- (330.56 - 250.65) / (a - 1)
-```
-
----
-
-### Option A - (3)
-
-We can use the same code for computing the ICC interval from above.
-
-```{r}
-bounds <- c(0.975, 0.025)
-ratio_bounds <- 1 / n * (MSE / qf(bounds, a - 1, N - a) - 1)
-ratio_bounds / (1 + ratio_bounds)
-```
+]

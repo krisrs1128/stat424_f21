@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week6-1_files/anchor-4.2.2/anchor.min.js","week6-1_files/bowser-1.9.3/bowser.min.js","week6-1_files/distill-2.2.21/template.v2.js","week6-1_files/header-attrs-2.8/header-attrs.js","week6-1_files/jquery-1.11.3/jquery.min.js","week6-1_files/popper-2.6.0/popper.min.js","week6-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week6-1_files/tippy-6.2.7/tippy-light-border.css","week6-1_files/tippy-6.2.7/tippy.css","week6-1_files/tippy-6.2.7/tippy.umd.min.js","week6-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["figure/bibd-example1.png","figure/bibd-example2.png","figure/bibd-identity1.png","figure/bibd-identity2.png","figure/bibd-identity3.png","figure/bibd-sum-squares.png","figure/bibd.png","week6-1_files/anchor-4.2.2/anchor.min.js","week6-1_files/bowser-1.9.3/bowser.min.js","week6-1_files/distill-2.2.21/template.v2.js","week6-1_files/figure-html5/unnamed-chunk-11-1.png","week6-1_files/figure-html5/unnamed-chunk-14-1.png","week6-1_files/figure-html5/unnamed-chunk-17-1.png","week6-1_files/header-attrs-2.8/header-attrs.js","week6-1_files/jquery-1.11.3/jquery.min.js","week6-1_files/popper-2.6.0/popper.min.js","week6-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week6-1_files/tippy-6.2.7/tippy-light-border.css","week6-1_files/tippy-6.2.7/tippy.css","week6-1_files/tippy-6.2.7/tippy.umd.min.js","week6-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2289,7 +2289,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">4.4</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">4.4</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week6-1/week6-1.Rmd">Rmarkdown</a></em></p>
 <ol type="1">
 <li>Randomized Complete Block Designs are good when you can run each treatment in each block. What should we do if we have an upper limit on the number of samples we can obtain for each block? For example,</li>
 </ol>
@@ -2298,8 +2298,26 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li>We’re interested in three shoe sole types</li>
 </ul>
 <ol start="2" type="1">
-<li><p>We’ll have to settle on an Incomplete Block Design: not all treatments appear in each block. We should assign treatments randomly. We will call a design balanced if any pair of treatments appears together in a block the same number of times.</p></li>
-<li><p>Some helpful notation,</p>
+<li>We’ll have to settle on an Incomplete Block Design: not all treatments appear in each block. We should assign treatments randomly. We will call a design balanced if any pair of treatments appears together in a block the same number of times.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<img src="figure/bibd-example1.png" alt="An example BIBD with 3 treatments total and 2 treatments run per each block." width="200" />
+<p class="caption">
+Figure 1: An example BIBD with 3 treatments total and 2 treatments run per each block.
+</p>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="figure/bibd-example2.png" alt="An example BIBD with 4 treatments total and 2 treatments run per each block." width="250" />
+<p class="caption">
+Figure 2: An example BIBD with 4 treatments total and 2 treatments run per each block.
+</p>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Some helpful notation,
 <ul>
 <li><span class="math inline">\(a\)</span>: Number of treatment levels</li>
 <li><span class="math inline">\(b\)</span>: Number of blocks</li>
@@ -2307,13 +2325,49 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li><span class="math inline">\(r\)</span>: Number of blocks per treatment</li>
 <li><span class="math inline">\(\lambda\)</span>: Number of appearances for each level pair</li>
 </ul></li>
-<li><p>An identity that relates these variables is <span class="math inline">\(\lambda (a - 1) = r(k - 1)\)</span>. We can derive it by counting the number of samples that occur in blocks containing treatment A, excluding the samples given treatment A.</p></li>
 </ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="figure/bibd-identity1.png" alt="Circles mark which treatments are run in which blocks. We need to ensure balance across this diagram." width="500" />
+<p class="caption">
+Figure 3: Circles mark which treatments are run in which blocks. We need to ensure balance across this diagram.
+</p>
+</div>
+</div>
+<ol start="4" type="1">
+<li>An identity that relates these variables is <span class="math inline">\(\lambda (a - 1) = r(k - 1)\)</span>. We can derive it by counting the number of samples that occur in blocks containing treatment A, excluding the samples given treatment A.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="figure/bibd-identity2.png" alt="A way of counting samples that leads to the right hand side of the identity in item (4)." width="500" />
+<p class="caption">
+Figure 4: A way of counting samples that leads to the right hand side of the identity in item (4).
+</p>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="figure/bibd-identity3.png" alt="A way of counting samples that leads to the left hand side of the identity in item (4)." width="500" />
+<p class="caption">
+Figure 5: A way of counting samples that leads to the left hand side of the identity in item (4).
+</p>
+</div>
+</div>
 <h3 id="hypothesis-testing">Hypothesis Testing</h3>
 <ol start="5" type="1">
-<li><p>The model is the same as in the RCBD, <span class="math display">\[
+<li>The model is the same as in the RCBD, <span class="math display">\[
 y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
-\]</span> where <span class="math inline">\(\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> independently and <span class="math inline">\(\sum_{i} \tau_i= \sum_{j} \beta_{j}=0\)</span>. The difference is that we don’t observe <span class="math inline">\(y_{ij}\)</span> for all combinations of blocks and treatments.</p></li>
+\]</span> where <span class="math inline">\(\epsilon_{ij} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> independently and <span class="math inline">\(\sum_{i} \tau_i= \sum_{j} \beta_{j}=0\)</span>. The difference is that we don’t observe <span class="math inline">\(y_{ij}\)</span> for all combinations of blocks and treatments.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="figure/bibd.png" alt="Each column is a single block, colors are treatments. We choose only a subset of treatments within each block." width="400" />
+<p class="caption">
+Figure 6: Each column is a single block, colors are treatments. We choose only a subset of treatments within each block.
+</p>
+</div>
+</div>
+<ol start="6" type="1">
 <li><p>To test the hypothesis,</p>
 <span class="math display">\[\begin{aligned}
 H_0 &amp;: \tau_1 = \dots = \tau_a = 0 \\
@@ -2326,12 +2380,18 @@ SS_{\text{Total}} = SS_{\text{Treatments}\left(adjusted\right)} + SS_{\text{Bloc
 SS_{\text{Total}} &amp;= \sum_{i, j} \left(y_{ij} - \bar{y}_{\cdot\cdot}\right)^2 \\
 SS_{\text{Block}} &amp;= k \sum_{j} \left(\bar{y}_{\cdot j} - \bar{y}_{\cdot\cdot}\right)^2
 \end{align}\]</span></p></li>
-<li><p>But <span class="math inline">\(SS_{\text{Treatments}}\)</span> is not the expression you might guess at first. The reason is each treatment only appears in a subset of blocks, which might bias conclusions.</p></li>
+<li><p>But <span class="math inline">\(SS_{\text{Treatments}}\)</span> is not the expression you might guess at first. The reason is each treatment only appears in a subset of blocks, which might bias conclusions. An adjusted expression corrects for this bias, <span class="math display">\[\begin{align*}
+ SS_{\text{Treatments }(adjusted )}=\frac{k}{\lambda a} \sum_{i=1}^{a}\left(\bar{y}_{i}-\frac{1}{k} \sum_{j \in B(j)} \bar{y}_{\cdot j}\right)^2
+ \end{align*}\]</span> where <span class="math inline">\(B\left(j\right)\)</span> indexes the blocks within which treatment <span class="math inline">\(i\)</span> was administered.</p></li>
 </ol>
-<p>An adjusted expression corrects for this bias,</p>
-<p><span class="math display">\[\begin{align*}
-SS_{\text{Treatments }(adjusted )}=\frac{k}{\lambda a} \sum_{i=1}^{a}\left(\bar{y}_{i}-\frac{1}{k} \sum_{j \in B(j)} \bar{y}_{\cdot j}\right)^2
-\end{align*}\]</span> where <span class="math inline">\(B\left(j\right)\)</span> indexes the blocks within which treatment i was administered.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="figure/bibd-sum-squares.png" alt="The transparent points are not actually observed. Ignoring this fact might lead to incorrect treatment estimates (treatments in the 'high' blocks might be incorrectly be thought to be larger in general)." width="300" />
+<p class="caption">
+Figure 7: The transparent points are not actually observed. Ignoring this fact might lead to incorrect treatment estimates (treatments in the ‘high’ blocks might be incorrectly be thought to be larger in general).
+</p>
+</div>
+</div>
 <ol start="9" type="1">
 <li><span class="math inline">\(SS_E\)</span> is obtained through subtraction, and turns out to have <span class="math inline">\(N - a - b + 1\)</span> degrees of freedom. Therefore,
 <span class="math display">\[\begin{aligned}
@@ -2340,7 +2400,137 @@ SS_{\text{Treatments }(adjusted )}=\frac{k}{\lambda a} \sum_{i=1}^{a}\left(\bar{
 \end{aligned}\]</span>
 which can be used as the basis for a hypothesis test.</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h3 id="code-example">Code Example</h3>
+<ol start="10" type="1">
+<li>Before analyzing a BIBD experiment, it’s worth knowing how to construct a design given experimental constraints. Consider the following questions,
+<ul>
+<li>Suppose we have <span class="math inline">\(a\)</span> treatments and only <span class="math inline">\(k\)</span> can be applied per block. How many blocks would we need to collect before we could have a balanced design?</li>
+<li>Once we know how many blocks we need in an experiment, how can we find a specific configuration of treatments to run in each block?</li>
+</ul>
+The functions <code>BIBsize</code> and <code>find.BIB</code> answer these two questions. In the code below, we imagine having 5 treatments of interest, but can only run 3 in each block. The result of <code>BIBsize</code> is used to choose a specific design in <code>find.BIB</code>. Each row is a block, and the columns give the three treatments to run for each block.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>crossdes</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>daewr</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/daewr/man/BIBsize.html'>BIBsize</a></span><span class='op'>(</span>t <span class='op'>=</span> <span class='fl'>5</span>, k <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='co'># we should use 10 blocks</span>
+</code></pre>
+</div>
+<pre><code>Posible BIB design with b= 10  and r= 6  lambda= 3 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/crossdes/man/find.BIB.html'>find.BIB</a></span><span class='op'>(</span>trt <span class='op'>=</span> <span class='fl'>5</span>, k <span class='op'>=</span> <span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>      [,1] [,2] [,3]
+ [1,]    1    2    4
+ [2,]    1    3    5
+ [3,]    2    3    4
+ [4,]    3    4    5
+ [5,]    1    2    5
+ [6,]    1    3    4
+ [7,]    2    3    5
+ [8,]    1    4    5
+ [9,]    1    2    3
+[10,]    2    4    5</code></pre>
+</div>
+<ol start="11" type="1">
+<li>Next, we’ll analyze a BIBD experiment. We download the <code>catalyst</code> experiment, which studied the effect of different catalysts on chemical reaction time.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='va'>catalyst</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_table.html'>read_table2</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/2tfwo6oohyffw0x299105rj54iabkw4u.txt"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>Time</span><span class='op'>)</span>, <span class='va'>as.factor</span><span class='op'>)</span> <span class='co'># use as.factor on all but the Time column</span>
+</code></pre>
+</div>
+</div>
+<ol start="12" type="1">
+<li>To get a sense of the data, we’ll make some plots of reaction time, both against batch ID and catalyst type. Note that we only run three catalysts per batch. There seem to be definitive batch-to-batch differences, but it’s unclear whether any of these catalysts are really any different from the others.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/eclarke/ggbeeswarm'>ggbeeswarm</a></span><span class='op'>)</span>
+<span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>catalyst</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html'>geom_beeswarm</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Batch</span>, y <span class='op'>=</span> <span class='va'>Time</span>, col <span class='op'>=</span> <span class='va'>Catalyst</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_brewer</span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set2"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="week6-1_files/figure-html5/unnamed-chunk-11-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<ol start="13" type="1">
+<li>To estimate the effects for each catalyst, we can use <code>lm</code>. The associated ANOVA gives evidence against the null that the catalysts are equal, and the corresponding confidence intervals suggests that catalyst 4 has a longer reaction time than would be believable under the null. This is a nice situation in which something that wasn’t obvious visually becomes more clear when we apply a principled testing procedure. Compare the ANOVA table with Table 4.25.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Time</span> <span class='op'>~</span> <span class='va'>.</span>, data <span class='op'>=</span> <span class='va'>catalyst</span><span class='op'>)</span>
+<span class='va'>aov_table</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>aov_table</span><span class='op'>)</span> <span class='co'># only the unadjusted block mean square</span>
+</code></pre>
+</div>
+<pre><code>            Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+Batch        3  55.00  18.333   28.20 0.00147 **
+Catalyst     3  22.75   7.583   11.67 0.01074 * 
+Residuals    5   3.25   0.650                   
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<ol start="14" type="1">
+<li>We can also compute contrasts in the way that we’re used to. Here, we’re studying two hypotheses related to catalyst 4 (do it and catalyst 1 have larger reaction times than the others? is catalyst 4 larger than catalyst 3?).</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>gmodels</span><span class='op'>)</span>
+<span class='va'>contrasts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span>,
+    <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>,
+  nrow <span class='op'>=</span> <span class='fl'>2</span>, byrow<span class='op'>=</span><span class='cn'>TRUE</span>
+<span class='op'>)</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/gmodels/man/fit.contrast.html'>fit.contrast</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>, <span class='st'>"Catalyst"</span>, <span class='va'>contrasts</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>                         Estimate Std. Error   t value    Pr(&gt;|t|)
+Catalyst c=( 1 -1 -1 1 )     2.75  0.9874209  2.785033 0.038671213
+Catalyst c=( 0 0 1 -1 )     -3.00  0.6982120 -4.296689 0.007739734
+attr(,&quot;class&quot;)
+[1] &quot;fit_contrast&quot;</code></pre>
+</div>
+<ol start="15" type="1">
+<li>We can also control for multiple comparisons, but we need to use a different function, since our usual <code>PostHocTest</code> isn’t implemented to cover the case of incomplete block designs. Instead, we can use the <code>lsmeans</code> function. Unsurprisingly, the most significant tests seem to be highlighting the discrepancy between catalyst 4 and the others.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>lsmeans</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/lsmeans/man/ref.grid.html'>lsmeans</a></span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>pairwise</span> <span class='op'>~</span> <span class='va'>Catalyst</span>, adjust <span class='op'>=</span> <span class='st'>"Tukey"</span><span class='op'>)</span> <span class='co'># tukey's test</span>
+</code></pre>
+</div>
+<pre><code>$lsmeans
+ Catalyst lsmean    SE df lower.CL upper.CL
+ 1          71.4 0.487  5     70.1     72.6
+ 2          71.6 0.487  5     70.4     72.9
+ 3          72.0 0.487  5     70.7     73.3
+ 4          75.0 0.487  5     73.7     76.3
+
+Results are averaged over the levels of: Batch 
+Confidence level used: 0.95 
+
+$contrasts
+ contrast estimate    SE df t.ratio p.value
+ 1 - 2      -0.250 0.698  5  -0.358  0.9825
+ 1 - 3      -0.625 0.698  5  -0.895  0.8085
+ 1 - 4      -3.625 0.698  5  -5.192  0.0130
+ 2 - 3      -0.375 0.698  5  -0.537  0.9462
+ 2 - 4      -3.375 0.698  5  -4.834  0.0175
+ 3 - 4      -3.000 0.698  5  -4.297  0.0281
+
+Results are averaged over the levels of: Batch 
+P value adjustment: tukey method for comparing a family of 4 estimates </code></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

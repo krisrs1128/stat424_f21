@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week5-5_files/anchor-4.2.2/anchor.min.js","week5-5_files/bowser-1.9.3/bowser.min.js","week5-5_files/distill-2.2.21/template.v2.js","week5-5_files/header-attrs-2.8/header-attrs.js","week5-5_files/jquery-1.11.3/jquery.min.js","week5-5_files/popper-2.6.0/popper.min.js","week5-5_files/tippy-6.2.7/tippy-bundle.umd.min.js","week5-5_files/tippy-6.2.7/tippy-light-border.css","week5-5_files/tippy-6.2.7/tippy.css","week5-5_files/tippy-6.2.7/tippy.umd.min.js","week5-5_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["figure/gl.png","figure/ls-1.png","figure/ls-2.png","figure/ls-3.png","week5-5_files/anchor-4.2.2/anchor.min.js","week5-5_files/bowser-1.9.3/bowser.min.js","week5-5_files/distill-2.2.21/template.v2.js","week5-5_files/header-attrs-2.8/header-attrs.js","week5-5_files/jquery-1.11.3/jquery.min.js","week5-5_files/popper-2.6.0/popper.min.js","week5-5_files/tippy-6.2.7/tippy-bundle.umd.min.js","week5-5_files/tippy-6.2.7/tippy-light-border.css","week5-5_files/tippy-6.2.7/tippy.css","week5-5_files/tippy-6.2.7/tippy.umd.min.js","week5-5_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2300,7 +2300,45 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </ul></li>
 <li>Note that in each case, we use a different latin square in each replicate.</li>
 </ul></li>
-<li><p>Fortunately, the analysis is conceptually unified. We continue to have row, column, and treatment mean squares. Then, we have to add in replicate mean squares, to track variation from replicate-to-replicate. The code in each setting is the same,</p></li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"figure/ls-1.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<img src="figure/ls-1.png" alt="Design where all the row and column levels are reused." width="406" />
+<p class="caption">
+Figure 1: Design where all the row and column levels are reused.
+</p>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"figure/ls-2.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="figure/ls-2.png" alt="Design where only the column levels are reused. Pay attention to the difference in row labels from one group to the next." width="406" />
+<p class="caption">
+Figure 2: Design where only the column levels are reused. Pay attention to the difference in row labels from one group to the next.
+</p>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"figure/ls-2.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="figure/ls-2.png" alt="Design where neither the row nor column levels are reused." width="406" />
+<p class="caption">
+Figure 3: Design where neither the row nor column levels are reused.
+</p>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Fortunately, the analysis is conceptually unified. We continue to have row, column, and treatment mean squares. Then, we have to add in replicate mean squares, to track variation from replicate-to-replicate. The code in each setting is the same,</li>
 </ol>
 <pre><code>lm(Y ~ Replicate + W1 + W2 + X)</code></pre>
 <h3 id="graceo-latin-squares">Graceo-Latin Squares</h3>
@@ -2309,6 +2347,18 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li><p>Introduce <span class="math inline">\(p\)</span> greek letters to represent the third blocking factor. When <span class="math inline">\(p=5\)</span>, we would have <span class="math inline">\(\alpha, \beta, \gamma, \delta, \epsilon\)</span>, for example.</p></li>
 <li><p>A Graeco-Latin square is like two Latin Squares overlaid on one another,</p></li>
 </ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"figure/gl.png"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="figure/gl.png" alt="An example graeco-latin square." width="411" />
+<p class="caption">
+Figure 4: An example graeco-latin square.
+</p>
+</div>
+</div>
 <p>with one additional requirement: each latin and each greek letter must only appear together once. This last requirement is called <strong>orthogonality</strong>.</p>
 <ol start="6" type="1">
 <li>A hypothesis test can be defined, by using the decomposition, <span class="math display">\[

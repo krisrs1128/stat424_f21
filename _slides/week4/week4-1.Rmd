@@ -44,6 +44,9 @@ include_graphics("https://uwmadison.box.com/shared/static/f2e3b39odm4ejkyqinvpii
 
 ## Announcements
 
+* Added a hint to the computation problem on the HW2 Canvas page
+* All annotated notes are uploaded (including R review session)
+
 ---
 
 ### Today
