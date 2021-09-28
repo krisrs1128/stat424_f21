@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week7-1_files/anchor-4.2.2/anchor.min.js","week7-1_files/bowser-1.9.3/bowser.min.js","week7-1_files/distill-2.2.21/template.v2.js","week7-1_files/figure-html5/unnamed-chunk-1-1.png","week7-1_files/figure-html5/unnamed-chunk-2-1.png","week7-1_files/figure-html5/unnamed-chunk-2-2.png","week7-1_files/figure-html5/unnamed-chunk-2-3.png","week7-1_files/figure-html5/unnamed-chunk-2-4.png","week7-1_files/figure-html5/unnamed-chunk-2-5.png","week7-1_files/header-attrs-2.8/header-attrs.js","week7-1_files/jquery-1.11.3/jquery.min.js","week7-1_files/popper-2.6.0/popper.min.js","week7-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week7-1_files/tippy-6.2.7/tippy-light-border.css","week7-1_files/tippy-6.2.7/tippy.css","week7-1_files/tippy-6.2.7/tippy.umd.min.js","week7-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["figure/parameters.png","week7-1_files/anchor-4.2.2/anchor.min.js","week7-1_files/bowser-1.9.3/bowser.min.js","week7-1_files/distill-2.2.21/template.v2.js","week7-1_files/figure-html5/unnamed-chunk-1-1.png","week7-1_files/figure-html5/unnamed-chunk-17-1.png","week7-1_files/figure-html5/unnamed-chunk-2-1.png","week7-1_files/figure-html5/unnamed-chunk-2-2.png","week7-1_files/figure-html5/unnamed-chunk-2-3.png","week7-1_files/figure-html5/unnamed-chunk-2-4.png","week7-1_files/figure-html5/unnamed-chunk-2-5.png","week7-1_files/figure-html5/unnamed-chunk-22-1.png","week7-1_files/figure-html5/unnamed-chunk-5-1.png","week7-1_files/figure-html5/unnamed-chunk-6-1.png","week7-1_files/header-attrs-2.8/header-attrs.js","week7-1_files/jquery-1.11.3/jquery.min.js","week7-1_files/popper-2.6.0/popper.min.js","week7-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week7-1_files/tippy-6.2.7/tippy-light-border.css","week7-1_files/tippy-6.2.7/tippy.css","week7-1_files/tippy-6.2.7/tippy.umd.min.js","week7-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2289,29 +2289,19 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">5.3</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">5.3</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week7-1/week7-1.Rmd">Rmarkdown</a></em></p>
 <ol type="1">
 <li><p>Recall that in a factorial design, we want to study the influences of multiple experimental factors on some responses of interest. The simplest situation is when there are two factors of interest, and the associated designs are two-factor factorial designs.</p></li>
 <li><p>We will assume a model of the form, <span class="math display">\[
 y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
 \]</span> where <span class="math inline">\(\epsilon_{ijk} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> independently. For identifiability, we have to assume that the sums <span class="math inline">\(\sum_{i} \tau_i =  \sum_{j} \beta_{j}= \sum_{ij} \left(\tau\beta\right)_{ij}=0\)</span>. We’ll suppose <span class="math inline">\(i\)</span> ranges from <span class="math inline">\(1, \dots, a\)</span>, <span class="math inline">\(j\)</span> ranges from <span class="math inline">\(1, \dots, b\)</span> and <span class="math inline">\(k\)</span> ranges from <span class="math inline">\(1,\dots, n\)</span>.</p></li>
-</ol>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/7qgi74t4kkleybceodksuroyaavn9zoq.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week7-1_files/figure-html5/unnamed-chunk-1-1.png" width="500px" data-distill-preview=1 /></p>
-</div>
-<ol start="2" type="1">
-<li>What do the indices mean?
+<li><p>What do the indices mean?</p>
 <ul>
 <li><span class="math inline">\(i\)</span> indexes levels of the first factor (temperature).</li>
 <li><span class="math inline">\(j\)</span> indexes levels of the second factor (material).</li>
 <li><span class="math inline">\(k\)</span> indexes multiple replicates at a particular combination factor combination <span class="math inline">\(ij\)</span> (battery lifetimes, for fixed temperature <span class="math inline">\(\times\)</span> material combination)</li>
 </ul></li>
-<li>What do the greek letters mean?
+<li><p>What do the greek letters mean?</p>
 <ul>
 <li><span class="math inline">\(\mu\)</span>: An intercept term, representing a global mean.</li>
 <li><span class="math inline">\(\tau_i\)</span>: The effect of the <span class="math inline">\(i^{th}\)</span> level of factor 1 on the average response (effect of temperature setting <span class="math inline">\(i\)</span>)</li>
@@ -2320,23 +2310,31 @@ y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
 <li><span class="math inline">\(\epsilon_{ijk}\)</span>: The random variation we’d observe if we drew many samples at a fixed setting of the two factors. <strong>Caution</strong>: <span class="math inline">\(\beta_j\)</span> now indexes a treatment of interest. It is <em>not</em> just nuisance blocking variation.</li>
 </ul></li>
 </ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<img src="figure/parameters.png" alt="A graphical view of all the parameters in a factorial design." width="894" data-distill-preview=1 />
+<p class="caption">
+Figure 1: A graphical view of all the parameters in a factorial design.
+</p>
+</div>
+</div>
 <h3 id="testing">Testing</h3>
 <ol start="4" type="1">
 <li>Up until now, we’ve only asked whether one particular factor had an influence on the response, as the levels were changed. Now, we care about each of the factors, and each gets a hypothesis test.</li>
 </ol>
 <ul>
-<li><p>(Hypothesis A) For the first factor, <span class="math display">\[
+<li><p>(Hypothesis A) For the first factor, <span class="math display">\[\begin{align}
 H_0 &amp;: \tau_1 = \dots = \tau_a = 0 \\
 H_{1} &amp;: \tau_{i} \neq 0 \text{ for at least one } i
-\]</span></p></li>
-<li><p>(Hypothesis B) For the second factor, <span class="math display">\[
+\end{align}\]</span></p></li>
+<li><p>(Hypothesis B) For the second factor, <span class="math display">\[\begin{align}
 H_0 &amp;: \beta_1 = \dots = \beta_{b} = 0 \\
 H_{1} &amp;: \beta_{j} \neq 0 \text{ for at least one } j
-\]</span></p></li>
-<li><p>(Hypothesis AB) Are there interaction effects? <span class="math display">\[
+\end{align}\]</span></p></li>
+<li><p>(Hypothesis AB) Are there interaction effects? <span class="math display">\[\begin{align}
 H_0: \left(\tau\beta\right)_{ij}= \dots = \left(\tau\beta\right)_{ij} = 0 \\
 H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ combination}
-\]</span></p></li>
+\end{align}\]</span></p></li>
 </ul>
 <ol start="5" type="1">
 <li><p>For each of these hypothesis tests, we’re going to need a test statistic that’s sensitive to departures from the null. We’re also going to need their reference distributions.</p></li>
@@ -2347,37 +2345,88 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 &amp; \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j} .\right)^{2}
 \end{align*}\]</span> which we’ll denote <span class="math inline">\(SS_{\text{Total}}=SS_{A}+SS_{B}+SS_{AB}+SS_{E}\)</span>.</p></li>
 <li><p>The punchline is that if <span class="math inline">\(SS_{A}\)</span> is large, we have evidence against hypothesis A, if <span class="math inline">\(SS_{B}\)</span> is large we have evidence against hypothesis B, and if <span class="math inline">\(SS_{AB}\)</span> is large, we have evidence against hypothesis AB.</p></li>
-<li><p>We can define corresponding mean squares by dividing by the degrees of freedom. For each hypothesis, we get a corresponding F-statistic.</p></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/yvkgkdc6qy3zjhxzi895if0kmvlmb1nu.png"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+<p><img src="https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png" width="45%" /><img src="https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png" width="45%" /></p>
 </div>
-<img src="week7-1_files/figure-html5/unnamed-chunk-2-1.png" width="500px" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+<ol start="8" type="1">
+<li>We can define corresponding mean squares by dividing by the degrees of freedom. For each hypothesis, we get a corresponding F-statistic.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png" width="45%" /><img src="https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png" width="45%" /></p>
 </div>
-<img src="week7-1_files/figure-html5/unnamed-chunk-2-2.png" width="500px" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+<h3 id="code-example">Code Example</h3>
+<ol start="8" type="1">
+<li>We’ll consider an experiment that studied the effect of material and temperature on battery lifetimes. These are the two factors of interest, and each are measured at 3 levels.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+
 </div>
-<img src="week7-1_files/figure-html5/unnamed-chunk-2-3.png" width="500px" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code># A tibble: 36 × 3
+   Material Temperature  Life
+   &lt;fct&gt;    &lt;fct&gt;       &lt;dbl&gt;
+ 1 1        15            130
+ 2 1        15            155
+ 3 1        15             74
+ 4 1        15            180
+ 5 1        70             34
+ 6 1        70             40
+ 7 1        70             80
+ 8 1        70             75
+ 9 1        125            20
+10 1        125            70
+# … with 26 more rows</code></pre>
 </div>
-<img src="week7-1_files/figure-html5/unnamed-chunk-2-4.png" width="500px" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ty9vmqu5m6ajdc1l5roc55hill06mv3y.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+<ol start="9" type="1">
+<li>Before testing for effects, we can plot the influence of each factor. The code below uses <code>facet_wrap</code> to split the plot across the three material types. There seems to be a clear temperature effect, though the effects are not exactly the same across material. This suggests that an interaction is present, though we will need a test to quantify the strength of this pattern.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="week7-1_files/figure-html5/unnamed-chunk-6-1.png" width="480" /></p>
 </div>
-<p><img src="week7-1_files/figure-html5/unnamed-chunk-2-5.png" width="500px" /></p>
+<ol start="10" type="1">
+<li>We can fit the two factor model using <code>lm</code>. We use the syntax <code>Material * Temperature</code> to fit both all main effects and interactions involving those variables; it is shorthand for the more explicit notation <code>Material + Temperature + Material : Temperature</code> (here, the <code>:</code> denotes an interaction). The <code>Material</code> and <code>Temperature</code> rows of the ANOVA table give main effects, the <code>Material:Temperature</code> row gives the interaction effect, and the <code>Residuals</code> row corresponds to the <span class="math inline">\(SS_{E}\)</span> and <span class="math inline">\(MS_{E}\)</span> terms.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code>                     Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+Material              2  10684    5342   7.911  0.00198 ** 
+Temperature           2  39119   19559  28.968 1.91e-07 ***
+Material:Temperature  4   9614    2403   3.560  0.01861 *  
+Residuals            27  18231     675                     
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<ol start="11" type="1">
+<li>Based on the <span class="math inline">\(p\)</span>-values, we conclude that there is a very strong temperature effect, a strong material effect, and a noticeable (though slight) interaction. We can in fact develop more granular interpretations by looking at individual coefficients in the fitted model. The runs from the first material and lowest temperature are used as a reference point and absorbed into the intercept – everything else is viewed as the expected deviation from that reference. For example, it seems that, on average, the temperature 70 and 125 configurations are both about 80 life-units shorter than runs at temperature 15. The significant interaction between material 3 and temperature 70 suggests that this combination lives about 80 units longer than we would expect if no interaction were present.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code>
+Call:
+lm(formula = Life ~ Material * Temperature, data = battery)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-60.750 -14.625   1.375  17.938  45.250 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                134.75      12.99  10.371 6.46e-11 ***
+Material2                   21.00      18.37   1.143 0.263107    
+Material3                    9.25      18.37   0.503 0.618747    
+Temperature70              -77.50      18.37  -4.218 0.000248 ***
+Temperature125             -77.25      18.37  -4.204 0.000257 ***
+Material2:Temperature70     41.50      25.98   1.597 0.121886    
+Material3:Temperature70     79.25      25.98   3.050 0.005083 ** 
+Material2:Temperature125   -29.00      25.98  -1.116 0.274242    
+Material3:Temperature125    18.75      25.98   0.722 0.476759    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 25.98 on 27 degrees of freedom
+Multiple R-squared:  0.7652,    Adjusted R-squared:  0.6956 
+F-statistic:    11 on 8 and 27 DF,  p-value: 9.426e-07</code></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

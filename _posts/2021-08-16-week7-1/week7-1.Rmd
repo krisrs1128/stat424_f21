@@ -13,10 +13,10 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [5.3](), [Rmarkdown]()_
+_Readings [5.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week7-1/week7-1.Rmd)_
 
 1. Recall that in a factorial design, we want to study the influences of
 multiple experimental factors on some responses of interest. The simplest
@@ -33,11 +33,6 @@ $$
   $i$ ranges from $1, \dots, a$, $j$ ranges from $1, \dots, b$ and $k$ ranges
   from $1,\dots, n$.
   
-```{r, preview = TRUE}
-library(EBImage)
-display(readImage("https://uwmadison.box.com/shared/static/7qgi74t4kkleybceodksuroyaavn9zoq.png"))
-```
-
 2. What do the indices mean?
     * $i$ indexes levels of the first factor (temperature).
     * $j$ indexes levels of the second factor (material).
@@ -58,6 +53,10 @@ display(readImage("https://uwmadison.box.com/shared/static/7qgi74t4kkleybceodksu
     a fixed setting of the two factors.
       __Caution__: $\beta_j$ now indexes a treatment of interest. It is *not* just
       nuisance blocking variation.
+
+```{r, fig.cap = "A graphical view of all the parameters in a factorial design.", preview = TRUE}
+include_graphics("figure/parameters.png")
+```
   
 ### Testing
 
@@ -66,22 +65,22 @@ on the response, as the levels were changed. Now, we care about each of the
 factors, and each gets a hypothesis test.
 
   * (Hypothesis A) For the first factor, 
-$$
+\begin{align}
 H_0 &: \tau_1 = \dots = \tau_a = 0 \\
 H_{1} &: \tau_{i} \neq 0 \text{ for at least one } i
-$$
+\end{align}
 
   * (Hypothesis B) For the second factor,
-$$
+\begin{align}
 H_0 &: \beta_1 = \dots = \beta_{b} = 0 \\
 H_{1} &: \beta_{j} \neq 0 \text{ for at least one } j
-$$
+\end{align}
 
   * (Hypothesis AB) Are there interaction effects?
-$$
+\begin{align}
 H_0: \left(\tau\beta\right)_{ij}= \dots = \left(\tau\beta\right)_{ij} = 0 \\
 H_1: \left(\tau\beta\right)_{ij} &= 0 \text{ for at least one } ij \text{ combination}
-$$
+\end{align}
 
 5. For each of these hypothesis tests, we’re going to need a test statistic
 that’s sensitive to departures from the null. We’re also going to need their
@@ -100,15 +99,72 @@ reference distributions.
 hypothesis A, if $SS_{B}$ is large we have evidence against hypothesis B, and if
 $SS_{AB}$ is large, we have evidence against hypothesis AB.
 
+```{r, fig.show = "hold", out.width = "45%"}
+include_graphics("https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png")
+include_graphics("https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png")
+```
+
 8. We can define corresponding mean squares by dividing by the degrees of
 freedom. For each hypothesis, we get a corresponding F-statistic.
 
-```{r}
-display(readImage("https://uwmadison.box.com/shared/static/yvkgkdc6qy3zjhxzi895if0kmvlmb1nu.png"))
-display(readImage("https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png"))
-display(readImage("https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png"))
-display(readImage("https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png"))
-display(readImage("https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png"))
-display(readImage("https://uwmadison.box.com/shared/static/ty9vmqu5m6ajdc1l5roc55hill06mv3y.png"))
+```{r, fig.show = "hold", out.width = "45%"}
+include_graphics("https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png")
+include_graphics("https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png")
 ```
 
+### Code Example
+
+8. We'll consider an experiment that studied the effect of material and
+temperature on battery lifetimes. These are the two factors of interest, and
+each are measured at 3 levels.
+
+```{r}
+options(echo = TRUE)
+```
+
+
+```{r}
+battery <- read_table2("https://uwmadison.box.com/shared/static/vmxs2wcsdxkdjujp85nw5kvk83xz4gl9.txt") %>%
+  mutate_at(vars(-Life), as.factor)
+
+battery
+```
+
+9. Before testing for effects, we can plot the influence of each factor. The
+code below uses `facet_wrap` to split the plot across the three material types.
+There seems to be a clear temperature effect, though the effects are not exactly
+the same across material. This suggests that an interaction is present, though
+we will need a test to quantify the strength of this pattern.
+
+```{r, fig.height = 3, fig.width = 5}
+ggplot(battery) +
+  geom_point(aes(Temperature, Life)) +
+  facet_wrap(~ Material)
+```
+10. We can fit the two factor model using `lm`. We use the syntax `Material *
+Temperature` to fit both all main effects and interactions involving those
+variables; it is shorthand for the more explicit notation `Material + Temperature + Material : Temperature` (here, the `:` denotes an interaction).
+The `Material` and `Temperature` rows of the ANOVA table give main effects, the
+`Material:Temperature` row gives the interaction effect, and the `Residuals` row
+corresponds to the $SS_{E}$ and $MS_{E}$ terms.
+
+```{r}
+fit <- lm(Life ~ Material * Temperature, data = battery)
+summary(aov(fit))
+```
+
+11. Based on the $p$-values, we conclude that there is a very strong temperature
+effect, a strong material effect, and a noticeable (though slight) interaction.
+We can in fact develop more granular interpretations by looking at individual
+coefficients in the fitted model. The runs from the first material and lowest
+temperature are used as a reference point and absorbed into the intercept --
+everything else is viewed as the expected deviation from that reference. For
+example, it seems that, on average, the temperature 70 and 125 configurations
+are both about 80 life-units shorter than runs at temperature 15. The
+significant interaction between material 3 and temperature 70 suggests that this
+combination lives about 80 units longer than we would expect if no interaction
+were present.
+
+```{r}
+summary(fit)
+```

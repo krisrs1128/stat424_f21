@@ -159,7 +159,6 @@ library(ggbeeswarm)
 ggplot(catalyst) +
   geom_beeswarm(aes(x = Batch, y = Time, col = Catalyst)) +
   scale_color_brewer(palette = "Set2")
-
 ```
 
 13. To estimate the effects for each catalyst, we can use `lm`. The associated ANOVA

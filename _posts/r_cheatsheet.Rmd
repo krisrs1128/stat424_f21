@@ -467,3 +467,32 @@ fit
 ```
 
 # Chapter 4
+
+## `BIBsize`
+
+_`library(daewr)`_
+
+Uses the identity $\lambda (a - 1) = r(k - 1)$ from BIBD designs to determine
+possible balanced designs when fixing two of the values among $a, r, k$. Can be
+helpful when trying to see whether a BIBD can be applied under certain
+experimental contraints (like, the maximum number of samples that can be taken
+from each block).
+
+```{r}
+library(daewr)
+BIBsize(t = 5, k = 3) # we should use 10 blocks
+```
+
+## `find.BIB`
+
+_`library(crossdes)`_
+
+Given the three parameters $a, r, k$ from a BIBD, comes up with an assignment of
+treatments to blocks in a way that treatments are balanced across all blocks.
+Often used in conjunction with `BIBsize`.
+
+```{r}
+library(crossdes)
+find.BIB(trt = 5, k = 3, b = 10)
+```
+
