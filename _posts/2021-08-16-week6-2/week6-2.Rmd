@@ -13,7 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE, fig.align = "center", out.width = 400)
 ```
 
 _Readings [5.1 - 5.2](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week6-2/week6-2.Rmd)_
@@ -34,19 +34,27 @@ idea of factorial designs.
   
 ### Visualizing Factorial Designs
 
-4. When you have two factors and a continuous response, you can visualize the
+4. When we have two factors and a continuous response, we can visualize the
 relationship either in 3D, or from the top down.
      * If the factor has only two levels, the possible configurations are
      corners square (hypercube, in higher dimensions).
-    * If it can vary continuously, you get a surface
+    * If it can vary continuously, we get a surface.
     
-5. When you have more than two factors, you have to pick a subset of factors to
+```{r, fig.cap = "A two factor experiment viewed in 3D."}
+include_graphics("figure/22_factorial.png")
+```
+
+```{r, fig.cap = "A two factor experiment viewed from the top down."}
+include_graphics("figure/22_factorial_flat.png")
+```
+    
+5. When we have more than two factors, we have to pick a subset of factors to
 visualize at a time, and show multiple surfaces for each configuration of other
 factors.
 
 ### Main and Interaction Effects
 
-6. The main effect of a factor is the amount that the response changes when you
+6. The main effect of a factor is the amount that the response changes when we
 change its value by one unit. The main effect is defined as the average response
 change, where the average is taken over values of all other factors
 
@@ -54,7 +62,15 @@ change, where the average is taken over values of all other factors
 of other factors. In this case, we say there is an interaction between the
 factor and the factors that cause changes in effect sizes.
 
-8. You can encode an interaction through a regression equation
+```{r, fig.cap = "A two factor experiment with an interaction effect, viewed in 3D"}
+include_graphics("figure/22_factorial_interaction.png")
+```
+
+```{r, fig.cap = "A two factor experiment with an interaction effect, viewed from the top down"}
+include_graphics("figure/22_factorial_flat_interaction.png")
+```
+
+8. We can encode an interaction through a regression equation
 $$
 y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_{12} x_{1} x_{2}
 $$
