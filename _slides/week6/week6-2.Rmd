@@ -1,5 +1,5 @@
 ---
-title: "BIBD Continued"
+title: "Introduction to Factorial Design"
 author: "Kris Sankaran | UW Madison | 23 September 2021"
 output:
   xaringan::moon_reader:
@@ -30,7 +30,7 @@ theme424 <- theme_minimal() +
 theme_set(theme424)
 ```
 
-# BIBD Continued
+# Introduction to Factorial Design
 
 ```{r, out.width = 200}
 include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
@@ -43,20 +43,132 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 
 ### Today
 
-* Book Sections: 3.9 & 3.11
-* Online Notes: Week 4 [2] and [3]
+* Book Sections: 5.1 - 5.2
+* Online Notes: Week 6 [2]
 
 ---
 
 ### Motivation
 
+* So far, we've only ever had one factor of interest
+  - Other factors were always nuisance factors
+* What should we do when multiple factors are of interest?
+ - This is the most common situation in practice
+* This lecture introduces some useful terminology and visualizations
 
 ---
 
-### Code Implementation
+### Examples
+
+* How do temperature and material both influence battery life?
+* How do assembly line parameters affect product quality?
+* How does button placement and color affect click through rate?
+* How do several abiotic stresses (salinity, temperature, ...) affect plant
+growth?
+
+---
+
+### Two Factor Designs
+
+* The simplest multi-factor design is the two factor design
+* A design with $L$ levels per factor and $K$ factors is called an $L^K$ design
+  - We will usually have $L = 2$
+* The simplest two factor design has only two levels for each factor
+  - This is a $2^2$ design
+  
+---
+
+### Visualization
+
+* In the $2^2$ design, the configurations of factors can be organized as corners
+on a square
+* For general $2^K$ designs, a subset of factors has to be chosen for each plot
+    
+.pull-left[
+```{r, fig.cap = "A two factor experiment viewed in 3D."}
+include_graphics("figure/22_factorial.png")
+```
+]
+
+.pull-right[
+```{r, fig.cap = "A two factor experiment viewed from the top down."}
+include_graphics("figure/22_factorial_flat.png")
+```
+]
+
+---
+
+### Data Collection
+
+* To collect data for a factorial experiment, collect replicates from each
+configuration of the $K$ factors
+* For large $K$, there can be many configurations
+  - We will explore methods to avoid sampling every single configuration
+
+---
+
+### Main Effects
+
+* The _main effect_ of a factor is defined as the average change in the response
+when increasing that factor by one unit
+* The average is taken over values of all other factors
+
+---
+
+### Interaction Effects
+
+* The change in response when a factor is changed might depend on the specific
+configuration of another (or several other) factors
+* This is called an _interaction effect_ between factors
+
+```{r, fig.cap = "A two factor experiment with an interaction effect, viewed in 3D"}
+include_graphics("figure/22_factorial_interaction.png")
+```
+
+```{r, fig.cap = "A two factor experiment with an interaction effect, viewed from the top down"}
+include_graphics("figure/22_factorial_flat_interaction.png")
+```
+
+---
+
+### Model
+
+.pull-left[
+\begin{align*}
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_{12} x_{1} x_{2}
+\end{align*}
+]
+
+.pull-right[
+* When $\beta_{12}$ is nonzero, there is an interaction between $x_1$ and $x_2$.
+* In this case, the slopes of $x_1$ and $x_2$ are not fixed, and each depends on the value of the other variable.
+* This can be interpreted as a "synergy" effect
+* This results in curvature of the 3D surface
+]
+
+---
+
+### Interactions
+
+.pull-left[
+\begin{align*}
+y &= \beta_0 + \left(\beta_1 + x_{12}\right)x_1 + \beta_2 x_2 \\
+  &= \beta_0 + \beta_1 x_1 + \left(\beta_2 + \beta_{12}x_{1}\right) x_2
+\end{align*}
+]
+.pull-right[
+* When $\beta_{12}$ is nonzero, there is an interaction between $x_1$ and $x_2$.
+* In this case, the slopes of $x_1$ and $x_2$ are not fixed, and each depends on the value of the other variable.
+* This can be interpreted as a "synergy" effect
+* This results in curvature of the 3D surface
+]
 
 ---
 
 ### Exercise
 
----
+Option A: What is the interpretation of a coefficient $\beta_{12}$ that is large
+and positive? large and negative?
+Option B: An study of battery manufacturing data reports that there is a strong
+interaction between material and temperature factors when modeling battery
+lifetime. What does this mean, in your own words?
