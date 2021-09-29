@@ -21,11 +21,20 @@ library(EBImage)
 display(readImage("https://uwmadison.box.com/shared/static/vxvzawk89r2m08um53dbfoka5md0bsnf.png"))
 ```
 
-```{r}
-library(dplyr)
+_Readings [6.3 - 6.4](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week8-3/week8-3.Rmd)_
+
+```{r, echo = FALSE}
 library(ggplot2)
-library(readr)
-theme_set(theme_bw())
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 1. How can we generalize the $2^2$ analysis so that we can do studies that
@@ -38,23 +47,16 @@ general patterns
   	* Call the third factor $C$.
 	
 ```{r}
+library(readr)
+library(dplyr)
 plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1vq7uv7omp4pjdg.txt", header = TRUE) %>%
-  mutate(
-    A = as.factor(A),
-    B = as.factor(B),
-    C = as.factor(C)
-  )
+  mutate_at(vars(-Rate), as.factor)
 ```
 
 ```{r, fig.height = 5, fig.margin = TRUE}
 ggplot(plasma) +
-  geom_point(
-    aes(x = A, y = B, col = Rate),
-    position = position_jitter(w = 0.1, h = 0.1)
-  ) +
-  facet_grid(C ~ .) +
-  scale_color_viridis_c() +
-  theme(legend.position = "bottom")
+  geom_point(aes(A, Rate)) +
+  facet_grid(B ~ C)
 ```
 
 ### Effect Estimates

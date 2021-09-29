@@ -16,14 +16,23 @@ library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-_Readings [5.4](), [Rmarkdown]()_
+_Readings [5.4](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week7-3/week7-3.Rmd)_
 
 ```{r, echo = FALSE}
 library(dplyr)
 library(ggplot2)
 library(EBImage)
 library(readr)
-theme_set(theme_bw())
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 1. We’ll discuss three factor factorial designs, with the hope that what we
@@ -39,6 +48,12 @@ second, and third factors have $a, b$, and $c$ levels, respectively.
 
 2. We’re dangerously close to getting lost in index purgatory, but notice certain
 symmetries,
+    * We have main effects for each factor
+    	* $\tau_i, \beta_j, \gamma_k$
+    * We have two-way interactions for each pair of factors
+    	* $\left(\tau\beta\right)_{ij}, \dots$
+    * We have a three-way interaction, between all factors
+    	* $\left(\tau\beta\gamma\right)_{ijk}$
 
 ```{r, fig.margin = TRUE, echo = FALSE}
 display(readImage("https://uwmadison.box.com/shared/static/b42kbwxdggtmf2krqr7uoj5r23fglfuo.png"))
@@ -46,15 +61,6 @@ display(readImage("https://uwmadison.box.com/shared/static/gnoa5i4w5qp6ehbweh30n
 display(readImage("https://uwmadison.box.com/shared/static/yqqhfc2kzk3egfvad8dvufed09t9m3tx.png"))
 display(readImage("https://uwmadison.box.com/shared/static/goaewwcs61ewtrmfp4pcymzje1fdrbsb.png"))
 ```
-
-    * We have main effects for each factor
-    	* $\tau_i, \beta_j, \gamma_k$
-    
-    * We have two-way interactions for each pair of factors
-    	* $\left(\tau\beta\right)_{ij}, \dots$
-    	
-    * We have a three-way interaction, between all factors
-    	* $\left(\tau\beta\gamma\right)_{ijk}$
     
 3. We can calculate sum-of-squares terms for each of the terms. Notice that
 there are also certain symmetries in the degrees of freedom,
@@ -90,7 +96,7 @@ you go from one C configuration to the other.
 
 ```{r}
 ggplot(plasma) +
-  geom_point( aes(x = A, y = Rate) ) +
+  geom_point(aes(A, Rate)) +
   facet_grid(B ~ C)
 ```
 
@@ -100,5 +106,5 @@ interaction effects derived from the linked variables.
 
 ```{r}
 fit <- lm(Rate ~ A * B * C, plasma)
-anova(fit)
+summary(aov(fit))
 ```

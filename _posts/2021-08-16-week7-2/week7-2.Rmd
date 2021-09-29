@@ -13,18 +13,23 @@ output:
 
 ```{r setup, include=FALSE}
 library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE, fig.align = "center")
 ```
 
-_Readings [5.3](), [Rmarkdown]()_
+_Readings [5.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week7-2/week7-2.Rmd)_
 
-```{r}
-library(dplyr)
-library(broom)
-library(emmeans)
+```{r, echo = FALSE}
 library(ggplot2)
-library(readr)
-theme_set(theme_bw())
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 1. We’ll cover the analogs of performing multiple comparisons, and doing model
@@ -32,12 +37,10 @@ diagnostics for the two-factor model. Almost everything will be familiar from
 our experience with single-factor models.
 
 ```{r}
-# background from last time
+library(readr)
+library(dplyr)
 battery <- read_table2("https://uwmadison.box.com/shared/static/vmxs2wcsdxkdjujp85nw5kvk83xz4gl9.txt") %>%
-  mutate(
-    Material = as.factor(Material),
-    Temperature = as.factor(Temperature)
-  )
+  mutate_at(vars(-Life), as.factor)
 fit <- lm(Life ~ Material * Temperature, data=battery)
 ```
 
@@ -45,12 +48,6 @@ fit <- lm(Life ~ Material * Temperature, data=battery)
 
 2. We may want to use contrasts, to find out exactly how a particular factor is
 associated with the response.
-
-```{r, fig.margin=TRUE, echo = FALSE}
-library("EBImage")
-display(readImage("https://uwmadison.box.com/shared/static/oqhdg1jvjwo4x4g5z0y294555xb1nnz3.png"))
-```
-
     * _Subtlety_: If the factor under investigation interacts with the other one,
     its effects will depend on that other factor.
     
@@ -59,8 +56,15 @@ display(readImage("https://uwmadison.box.com/shared/static/oqhdg1jvjwo4x4g5z0y29
     
     * Example: Fix temperature, and use Tukey’s HSD to study pairwise difference
     between materials, for that fixed temperature.
+  
+
+```{r, fig.margin=TRUE, echo = FALSE, fig.cap = "All pairwise contrasts between levels of one factor, restricted to a single level of another.", fig.width = 2.6}
+library("EBImage")
+display(readImage("https://uwmadison.box.com/shared/static/oqhdg1jvjwo4x4g5z0y294555xb1nnz3.png"))
+```
 
 ```{r}
+library(emmeans)
 emmeans(fit, pairwise ~ Material | Temperature)$contrasts
 ```
 
@@ -69,27 +73,24 @@ emmeans(fit, pairwise ~ Material | Temperature)$contrasts
 3. Our key assumptions are independence, normality, and equal variances for the
 $\epsilon_{ijk}$’s. Our diagnostics are based on residuals.
 
-```{r, fig.margin = TRUE, echo = FALSE}
+```{r, }
 battery <- battery %>%
-  mutate(
-    resid = resid(fit),
-    y_hat = predict(fit)
-  )
+  mutate(resid = resid(fit), y_hat = predict(fit)) # create two new columns
 ggplot(battery) +
-  geom_point(aes(x = Temperature, y = resid))
+  geom_point(aes(Temperature, resid))
 ```
 
   * Plot residuals against each of the two factors
 
-```{r, fig.margin = TRUE, echo = FALSE}
+```{r, }
 ggplot(battery) +
-  geom_point(aes(x = y_hat, y = resid))
+  geom_point(aes(y_hat, resid))
 ```
 
   * Plot fitted vs. residual value
 
-```{r, fig.height = 3, fig.width = 3.5, fig.margin = TRUE, echo = FALSE}
-qqnorm(battery$resid, main = "")
+```{r, fig.height = 3, fig.width = 3.5, }
+qqnorm(battery$resid)
 qqline(battery$resid, col = "red")
 ```
 
@@ -104,11 +105,17 @@ two factors?
     * See how your power to detect effects varies as you increase the sample
     size.
 
-```{r, echo = FALSE}
+5. For example, in the block below, we simulate data from where the true
+$\tau_i$'s and $\beta_j$'s are $\left(0, 1, 2\right)$ and $\left(0, 1\right)$,
+respectively. We increase the number of samples from 2 to 10 and draw 50
+replicates each. Fitting a linear model to each dataset allows us to see how the
+sample size influences our final $p$-values.
+
+```{r}
 tau <- c(0, 1, 2)
 beta <- c(0, 1)
 ns <- seq(2, 10, by = 2)
-b <- 1
+b <- 1 # a counter variable
 sims <- list()
 for (k in seq_along(ns)) {
   for (sim_rep in seq_len(50)) {
@@ -130,43 +137,46 @@ for (k in seq_along(ns)) {
 sims <- bind_rows(sims)
 ```
 
+6. The block below visualizes an example replicate. We have 50 datasets like
+this for every value of $n$.
 
-```{r fig.margin = TRUE, fig.height = 5, fig.width = 2, echo = FALSE}
-ggplot(sims %>% filter(sim_rep == 1)) +
-  geom_point(aes(x = factor_1, y = value)) +
+```{r fig.height = 4.5, fig.width = 4}
+ggplot(sims %>% filter(sim_rep == 1)) + # visualize only the first replicate
+  geom_point(aes(factor_1, value)) +
   facet_grid(sample_size ~ factor_2)
-power <- sims %>%
-  group_by(sample_size, sim_rep) %>%
-  do(model = tidy(lm(value ~ factor_1 + factor_2, data = .))) %>%
-  tidyr::unnest()
 ```
 
+7. Next, we fit a linear model to each simulation replicate and plot the
+associated $p$-values. The code to split the datasets and fit an `lm` to each is
+somewhat complicated -- the important thing to takeaway here is that we can use
+a simulation to see exactly how the $p$-values decrease as a function of the
+sample size (and hence allow us to draw stronger conclusions).
 
-```{r echo = FALSE}
+```{r}
+library(broom)
+library(purrr)
+library(tidyr)
+
+power <- sims %>% # get p.values and estimates from every single run
+  split(list(.$sample_size, .$sim_rep)) %>%
+  map_dfr(~ tidy(lm(value ~ factor_1 + factor_2, data = .)), .id = "group") %>%
+  separate(group, c("sample_size", "sim_rep"), convert = TRUE)
+
 ggplot(power) +
-  geom_point(
-    aes(x = sample_size, y = p.value),
-    position = position_jitter(w = .5),
-    size = 0.5
-  ) +
+  geom_jitter(aes(sample_size, p.value)) +
   geom_hline(yintercept = 0.05, col = "red") +
   facet_wrap(~ term)
 ```
 
-```{r, fig.fullwidth = TRUE, echo = FALSE}
-#display(readImage("https://uwmadison.box.com/shared/static/sie5e1b8v005l5ow8wzbtpehfdpn7wnf.png"), method = "raster")
-```
-
-
 ## Interactions
 
-5. If we only have one replicate per cell, then we can’t estimate an interaction
+8. If we only have one replicate per cell, then we can’t estimate an interaction
 effect. If we tried, we’d be able to perfectly fit the data, so there would be
 no way to estimate $\sigma^2$.
 
-6. As a general recipe, to check for interactions, we can perform residual
-analysis on the main effects model. Alternatively, we coudl use Tukey's
+9. As a general recipe, to check for interactions, we can perform residual
+analysis on the main effects model. Alternatively, we could use Tukey's
 additivity test, which checks whether a multiplicative form of the interaction
-is present, i.e., does 
+is present, i.e., does
 $$y_{ijk} = \mu + \tau_i + \beta_j + \gamma \tau_i \beta_j$$ 
 fit significantly better than the main effects model?

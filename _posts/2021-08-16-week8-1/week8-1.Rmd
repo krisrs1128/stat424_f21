@@ -1,7 +1,7 @@
 ---
 title: "$2^2$ Factorial Designs"
 description: |
-  A short description of the post.
+  Two factors each with two levels.
 author:
   - name: Kris Sankaran
     url: {}
@@ -11,16 +11,25 @@ output:
     self_contained: false
 ---
 
+_Readings [6.1](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week8-1/week8-1.Rmd)_
+
 ```{r setup, include=FALSE}
 library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
 ```{r, echo = FALSE}
-library(dplyr)
 library(ggplot2)
-library(readr)
-theme_set(theme_bw())
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 ```{r, echo = FALSE, fig.margin = TRUE}
@@ -38,12 +47,11 @@ number of factors might be worth investigating further (factor screening).
 2. The simplest case of a $2^K$ design is when the number of factors $K = 2$. The
 experimental design can be represented by a square.
 
-```{r, echo = FALSE}
+```{r}
+library(readr)
+library(dplyr)
 yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt") %>%
-  mutate(
-    A = as.factor(A),
-    B = as.factor(B)
-  )
+  mutate_at(vars(-Yield), as.factor)
 ```
 
 
@@ -54,14 +62,7 @@ approach is to write + or - for whether we are at a low or high level for that
 factor. Alternatively, we can represent the corner by all the letters that are
 at high levels.
 
-```{r, echo = FALSE, fig.margin = TRUE}
-ggplot(yield) +
-  geom_point(
-    aes(x = A, y = B, col = Yield),
-    position = position_jitter(w = 0.1, h = 0.1)
-  ) +
-  scale_color_viridis_c() +
-  theme(legend.position = "bottom")
+```{r}
 ggplot(yield) +
   geom_point(aes(x = A, y = Yield)) +
   facet_wrap(~B)

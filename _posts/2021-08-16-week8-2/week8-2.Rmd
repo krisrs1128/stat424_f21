@@ -1,7 +1,7 @@
 ---
 title: "Interpreting Effects in $2^2$ Designs"
 description: |
-  A short description of the post.
+  Drawing conclusions from parameter estimates.
 author:
   - name: Kris Sankaran
     url: {}
@@ -16,14 +16,21 @@ library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
+_Readings [6.2](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week8-2/week8-2.Rmd)_
 
 ```{r}
-library(dplyr)
 library(ggplot2)
-library(readr)
-library(rsm)
 library(EBImage)
-theme_set(theme_bw())
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 1. We will often want to know whether estimated main or interaction effects are
@@ -73,25 +80,25 @@ display(readImage("https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepard
 	induces orthogonality (roughly, it makes variables less correlated)
 	
 ```{r}
+library(dplyr)
+library(readr)
 yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt") %>%
-  mutate(
-    A = as.factor(A),
-    B = as.factor(B)
-  )
+  mutate_at(vars(-Yield), as.factor)
 ```
 
-```{r, echo = TRUE}
+```{r}
 coded <- function(x) ifelse(x == '-', -1, 1)
 yield <- yield %>%
   mutate(cA = coded(A), cB = coded(B))
 fit <- lm(Yield ~ cA * cB, data = yield)
 summary(fit)
-anova(fit)
+summary(aov(fit))
 ```
 	
 6. We can use this fit to build a response surface as well.
 
 ```{r}
+library(rsm)
 coef(fit)
 image(fit, ~ cA + cB)
 ```

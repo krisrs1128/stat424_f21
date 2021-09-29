@@ -1,7 +1,7 @@
 ---
 title: An Introduction to Response Surfaces
 description: |
-  A short description of the post.
+  Flexibly modeling the relationship between factors and a response.
 author:
   - name: Kris Sankaran
     url: {}
@@ -16,13 +16,20 @@ library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-_Readings [5.5](), [Rmarkdown]()_
+_Readings [5.5](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week7-4/week7-4.Rmd)_
 
-```{r}
-library(dplyr)
+```{r, echo = FALSE}
 library(ggplot2)
-library(readr)
-theme_set(theme_bw())
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 1. We’ve really pushed a particular recipe for all our hypothesis testing
@@ -61,23 +68,33 @@ temperature as a continuous variable, so that it makes sense to talk about a
 response surface[^really, a curve over temperature].
 
 ```{r}
+library(dplyr)
+library(readr)
 battery <- read_table2("https://uwmadison.box.com/shared/static/vmxs2wcsdxkdjujp85nw5kvk83xz4gl9.txt") %>%
-  mutate( Material = as.factor(Material) )
+  mutate(Material = as.factor(Material))
 ```
 
 6. We fit a quadratic regression to define the surface. The result let's us make
-predictions for battery life at temperatures that we haven't observed.
+predictions for battery life at temperatures that we haven't observed. First, we
+fit a model that uses both `Material` and a quadratic expansion of `Temperature`.
 
 ```{r}
 fit <- lm(Life ~ Material * poly(Temperature, 2), data = battery)
+```
+
+  To visualize the response surface, we compute predictions across a find grid
+  of temperature values for each material.
+
+```{r}
 surface <- expand.grid(
-  Material = unique(battery$Material), 
-  Temperature = seq(15, 125, by = 1)
+  Temperature = seq(15, 125, by = 1),
+  Material = unique(battery$Material) 
   )
 surface$Life <- predict(fit, surface)
-ggplot() +
-  geom_point(data = battery, aes(x = Temperature, y = Life)) +
-  geom_line(data = surface, aes(x = Temperature, y = Life)) +
+
+ggplot(battery, aes(Temperature, Life)) +
+  geom_point() +
+  geom_line(data = surface) +
   facet_wrap(~ Material)
 ```
 

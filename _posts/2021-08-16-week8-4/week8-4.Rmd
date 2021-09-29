@@ -16,29 +16,35 @@ library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
+_Readings [6.3 - 6.4](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week8-4/week8-4.Rmd)_
 
 ```{r, echo = FALSE}
-library(dplyr)
 library(ggplot2)
-library(readr)
-theme_set(theme_bw())
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 1. As before, the $SS$ terms can be obtained by squaring the contrasts and
 dividing by the number of data points. This lets us build the associated ANOVA table,
 
-```{r, echo = FALSE}
+```{r}
+library(readr)
+library(dplyr)
 plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1vq7uv7omp4pjdg.txt", header = TRUE) %>%
-  mutate(
-    A = as.factor(A),
-    B = as.factor(B),
-    C = as.factor(C)
-  )
+  mutate_at(vars(-Rate), as.factor)
 ```
 
-```{r, echo = FALSE, margin_note=TRUE}
+```{r}
 fit <- lm(Rate ~ A * B * C, data = plasma)
-anova(fit)
+summary(aov(fit))
 ```
 
 2. Consider the regression view of this situation. The full model would be
@@ -83,7 +89,7 @@ and we can estimate $\sigma^2$ by the error sum fo squares $S^2$. From these
 variance estimates, we can build confidence intervals that summarize all the
 effects.
 
-```{r, echo = FALSE}
+```{r}
 summary(fit)
 ```
 

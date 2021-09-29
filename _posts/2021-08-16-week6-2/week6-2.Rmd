@@ -54,9 +54,9 @@ factors.
 
 ### Main and Interaction Effects
 
-6. The main effect of a factor is the amount that the response changes when we
-change its value by one unit. The main effect is defined as the average response
-change, where the average is taken over values of all other factors
+6. The main effect is defined as the average change in the response when
+increasing a factor by one unit, where the average is taken over values of all
+other factors
 
 7. It’s possible that the change in response of one factor depends on the value
 of other factors. In this case, we say there is an interaction between the
