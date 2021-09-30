@@ -14,6 +14,16 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 _Readings [5.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week7-1/week7-1.Rmd)_
@@ -36,9 +46,8 @@ $$
 2. What do the indices mean?
     * $i$ indexes levels of the first factor (temperature).
     * $j$ indexes levels of the second factor (material).
-    * $k$ indexes multiple replicates at a particular combination factor
-    combination $ij$ (battery lifetimes, for fixed temperature $\times$ material
-    combination)
+    * $k$ indexes multiple replicates at a particular factor combination $ij$
+    (battery lifetimes, for fixed temperature $\times$ material combination)
   
 3. What do the greek letters mean?
     * $\mu$: An intercept term, representing a global mean.
@@ -46,9 +55,10 @@ $$
     (effect of temperature setting $i$)
     * $\beta_{j}$: The effect of the $j^{th}$ level of factor 2 on the average
     response (effect of material $j$)
-    * $\left(\tau\beta\right)_{ij}$:The interaction / synergy between the ith level
-    of factor 1 and the $j^{th}$ level of factor 2. (especially long / short response
-    times, depending on particular material and temperature settings)
+    * $\left(\tau\beta\right)_{ij}$:The interaction / synergy between the
+    $i^{th}$ level of factor 1 and the $j^{th}$ level of factor 2. (e.g.
+    long / short response times, depending on particular material and
+    temperature settings)
     * $\epsilon_{ijk}$: The random variation we’d observe if we drew many samples at
     a fixed setting of the two factors.
       __Caution__: $\beta_j$ now indexes a treatment of interest. It is *not* just
@@ -105,7 +115,7 @@ include_graphics("https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo
 ```
 
 8. We can define corresponding mean squares by dividing by the degrees of
-freedom. For each hypothesis, we get a corresponding F-statistic.
+freedom. For each hypothesis, we get a corresponding $F$-statistic.
 
 ```{r, fig.show = "hold", out.width = "45%"}
 include_graphics("https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png")
@@ -116,7 +126,7 @@ include_graphics("https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswak
 
 8. We'll consider an experiment that studied the effect of material and
 temperature on battery lifetimes. These are the two factors of interest, and
-each are measured at 3 levels.
+each is measured at 3 levels.
 
 ```{r}
 options(echo = TRUE)
@@ -124,6 +134,8 @@ options(echo = TRUE)
 
 
 ```{r}
+library(readr)
+library(dplyr)
 battery <- read_table2("https://uwmadison.box.com/shared/static/vmxs2wcsdxkdjujp85nw5kvk83xz4gl9.txt") %>%
   mutate_at(vars(-Life), as.factor)
 
@@ -137,14 +149,17 @@ the same across material. This suggests that an interaction is present, though
 we will need a test to quantify the strength of this pattern.
 
 ```{r, fig.height = 3, fig.width = 5}
+library(ggplot2)
 ggplot(battery) +
   geom_point(aes(Temperature, Life)) +
   facet_wrap(~ Material)
 ```
+
 10. We can fit the two factor model using `lm`. We use the syntax `Material *
-Temperature` to fit both all main effects and interactions involving those
-variables; it is shorthand for the more explicit notation `Material + Temperature + Material : Temperature` (here, the `:` denotes an interaction).
-The `Material` and `Temperature` rows of the ANOVA table give main effects, the
+Temperature` to fit all main effects and interactions involving those variables;
+it is shorthand for the more explicit notation `Material + Temperature +
+Material : Temperature` (here, the `:` denotes an interaction). The `Material`
+and `Temperature` rows of the ANOVA table give main effects, the
 `Material:Temperature` row gives the interaction effect, and the `Residuals` row
 corresponds to the $SS_{E}$ and $MS_{E}$ terms.
 

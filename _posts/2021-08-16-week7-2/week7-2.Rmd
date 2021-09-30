@@ -57,7 +57,6 @@ associated with the response.
     * Example: Fix temperature, and use Tukey’s HSD to study pairwise difference
     between materials, for that fixed temperature.
   
-
 ```{r, fig.margin=TRUE, echo = FALSE, fig.cap = "All pairwise contrasts between levels of one factor, restricted to a single level of another.", fig.width = 2.6}
 library("EBImage")
 display(readImage("https://uwmadison.box.com/shared/static/oqhdg1jvjwo4x4g5z0y294555xb1nnz3.png"))

@@ -2299,14 +2299,14 @@ y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
 <ul>
 <li><span class="math inline">\(i\)</span> indexes levels of the first factor (temperature).</li>
 <li><span class="math inline">\(j\)</span> indexes levels of the second factor (material).</li>
-<li><span class="math inline">\(k\)</span> indexes multiple replicates at a particular combination factor combination <span class="math inline">\(ij\)</span> (battery lifetimes, for fixed temperature <span class="math inline">\(\times\)</span> material combination)</li>
+<li><span class="math inline">\(k\)</span> indexes multiple replicates at a particular factor combination <span class="math inline">\(ij\)</span> (battery lifetimes, for fixed temperature <span class="math inline">\(\times\)</span> material combination)</li>
 </ul></li>
 <li><p>What do the greek letters mean?</p>
 <ul>
 <li><span class="math inline">\(\mu\)</span>: An intercept term, representing a global mean.</li>
 <li><span class="math inline">\(\tau_i\)</span>: The effect of the <span class="math inline">\(i^{th}\)</span> level of factor 1 on the average response (effect of temperature setting <span class="math inline">\(i\)</span>)</li>
 <li><span class="math inline">\(\beta_{j}\)</span>: The effect of the <span class="math inline">\(j^{th}\)</span> level of factor 2 on the average response (effect of material <span class="math inline">\(j\)</span>)</li>
-<li><span class="math inline">\(\left(\tau\beta\right)_{ij}\)</span>:The interaction / synergy between the ith level of factor 1 and the <span class="math inline">\(j^{th}\)</span> level of factor 2. (especially long / short response times, depending on particular material and temperature settings)</li>
+<li><span class="math inline">\(\left(\tau\beta\right)_{ij}\)</span>:The interaction / synergy between the <span class="math inline">\(i^{th}\)</span> level of factor 1 and the <span class="math inline">\(j^{th}\)</span> level of factor 2. (e.g. long / short response times, depending on particular material and temperature settings)</li>
 <li><span class="math inline">\(\epsilon_{ijk}\)</span>: The random variation we’d observe if we drew many samples at a fixed setting of the two factors. <strong>Caution</strong>: <span class="math inline">\(\beta_j\)</span> now indexes a treatment of interest. It is <em>not</em> just nuisance blocking variation.</li>
 </ul></li>
 </ol>
@@ -2350,14 +2350,14 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 <p><img src="https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png" width="45%" /><img src="https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png" width="45%" /></p>
 </div>
 <ol start="8" type="1">
-<li>We can define corresponding mean squares by dividing by the degrees of freedom. For each hypothesis, we get a corresponding F-statistic.</li>
+<li>We can define corresponding mean squares by dividing by the degrees of freedom. For each hypothesis, we get a corresponding <span class="math inline">\(F\)</span>-statistic.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png" width="45%" /><img src="https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png" width="45%" /></p>
 </div>
 <h3 id="code-example">Code Example</h3>
 <ol start="8" type="1">
-<li>We’ll consider an experiment that studied the effect of material and temperature on battery lifetimes. These are the two factors of interest, and each are measured at 3 levels.</li>
+<li>We’ll consider an experiment that studied the effect of material and temperature on battery lifetimes. These are the two factors of interest, and each is measured at 3 levels.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -2385,7 +2385,7 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 <p><img src="week7-1_files/figure-html5/unnamed-chunk-6-1.png" width="480" /></p>
 </div>
 <ol start="10" type="1">
-<li>We can fit the two factor model using <code>lm</code>. We use the syntax <code>Material * Temperature</code> to fit both all main effects and interactions involving those variables; it is shorthand for the more explicit notation <code>Material + Temperature + Material : Temperature</code> (here, the <code>:</code> denotes an interaction). The <code>Material</code> and <code>Temperature</code> rows of the ANOVA table give main effects, the <code>Material:Temperature</code> row gives the interaction effect, and the <code>Residuals</code> row corresponds to the <span class="math inline">\(SS_{E}\)</span> and <span class="math inline">\(MS_{E}\)</span> terms.</li>
+<li>We can fit the two factor model using <code>lm</code>. We use the syntax <code>Material * Temperature</code> to fit all main effects and interactions involving those variables; it is shorthand for the more explicit notation <code>Material + Temperature + Material : Temperature</code> (here, the <code>:</code> denotes an interaction). The <code>Material</code> and <code>Temperature</code> rows of the ANOVA table give main effects, the <code>Material:Temperature</code> row gives the interaction effect, and the <code>Residuals</code> row corresponds to the <span class="math inline">\(SS_{E}\)</span> and <span class="math inline">\(MS_{E}\)</span> terms.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>                     Df Sum Sq Mean Sq F value   Pr(&gt;F)    
