@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week8-2_files/anchor-4.2.2/anchor.min.js","week8-2_files/bowser-1.9.3/bowser.min.js","week8-2_files/distill-2.2.21/template.v2.js","week8-2_files/figure-html5/unnamed-chunk-2-1.png","week8-2_files/figure-html5/unnamed-chunk-5-1.png","week8-2_files/header-attrs-2.8/header-attrs.js","week8-2_files/jquery-1.11.3/jquery.min.js","week8-2_files/popper-2.6.0/popper.min.js","week8-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","week8-2_files/tippy-6.2.7/tippy-light-border.css","week8-2_files/tippy-6.2.7/tippy.css","week8-2_files/tippy-6.2.7/tippy.umd.min.js","week8-2_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week8-2_files/anchor-4.2.2/anchor.min.js","week8-2_files/bowser-1.9.3/bowser.min.js","week8-2_files/distill-2.2.21/template.v2.js","week8-2_files/figure-html5/unnamed-chunk-2-1.png","week8-2_files/figure-html5/unnamed-chunk-2-1.svg","week8-2_files/figure-html5/unnamed-chunk-3-1.svg","week8-2_files/figure-html5/unnamed-chunk-5-1.png","week8-2_files/figure-html5/unnamed-chunk-6-1.svg","week8-2_files/figure-html5/unnamed-chunk-7-1.svg","week8-2_files/header-attrs-2.8/header-attrs.js","week8-2_files/jquery-1.11.3/jquery.min.js","week8-2_files/popper-2.6.0/popper.min.js","week8-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","week8-2_files/tippy-6.2.7/tippy-light-border.css","week8-2_files/tippy-6.2.7/tippy.css","week8-2_files/tippy-6.2.7/tippy.umd.min.js","week8-2_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2291,21 +2291,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="d-article">
 <p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">6.2</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week8-2/week8-2.Rmd">Rmarkdown</a></em></p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='va'>theme424</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> 
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>
-    panel.grid.minor <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
-    panel.background <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"#f7f7f7"</span><span class='op'>)</span>,
-    panel.border <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='cn'>NA</span>, color <span class='op'>=</span> <span class='st'>"#0c0c0c"</span>, size <span class='op'>=</span> <span class='fl'>0.6</span><span class='op'>)</span>,
-    axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>14</span><span class='op'>)</span>,
-    axis.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>16</span><span class='op'>)</span>,
-    legend.position <span class='op'>=</span> <span class='st'>"bottom"</span>
-  <span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='va'>theme424</span><span class='op'>)</span>
-</code></pre>
-</div>
+
 </div>
 <ol type="1">
 <li><p>We will often want to know whether estimated main or interaction effects are significant. We can use ANOVA, though we have to be cautious when <span class="math inline">\(n\)</span> is small.</p>
@@ -2326,17 +2312,15 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <ol start="4" type="1">
 <li>Another way of summarizing the <span class="math inline">\(2^2\)</span> model is to write a regression, <span class="math display">\[
 y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon
-\]</span> where the <span class="math inline">\(x_k\)</span>’s take on one of two values, depending on whether or not factor <span class="math inline">\(k\)</span> is active.</li>
+\]</span> where the <span class="math inline">\(x_k\)</span>’s take on one of two values, depending on whether or not factor <span class="math inline">\(k\)</span> is active.
+<ul>
+<li>We’ve only included main effects. An interaction would be added via <span class="math inline">\(\beta_{12} x_{1}x_{2}\)</span></li>
+<li>If the factors are binary (on vs. off), we can use a binary encoding.</li>
+</ul></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepards9fv0cqvbmc.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+<p><img src="week8-2_files/figure-html5/unnamed-chunk-2-1.svg" width="50%" style="display: block; margin: auto;" /></p>
 </div>
-<p><img src="week8-2_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
-</div>
-<pre><code>* We’ve only included main effects. An interaction would be added via $\beta_{12} x_{1}x_{2}$
-* If the factors are binary (on vs. off), we can use a binary encoding. </code></pre>
 <ol start="5" type="1">
 <li>What if our factors are actually continuous?
 <ul>
@@ -2344,23 +2328,57 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon
 <li>The model will still apply to all values in interval <span class="math inline">\([-1, 1]\)</span>.</li>
 <li>An added benefit is that this coding (a) makes scales comparable and (b) induces orthogonality (roughly, it makes variables less correlated)</li>
 </ul></li>
+<li>We will illustrate these ideas on a yield dataset. There are 12 samples total, three replicates at each corner of the square.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
-<span class='va'>yield</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_table.html'>read_table2</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>Yield</span><span class='op'>)</span>, <span class='va'>as.factor</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='va'>yield</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_table.html'>read_table2</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt"</span><span class='op'>)</span>
+<span class='va'>yield</span>
 </code></pre>
 </div>
+<pre><code># A tibble: 12 × 4
+   A     B     Rep   Yield
+   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+ 1 -     -     I        28
+ 2 +     -     I        36
+ 3 -     +     I        18
+ 4 +     +     I        31
+ 5 -     -     II       25
+ 6 +     -     II       32
+ 7 -     +     II       19
+ 8 +     +     II       30
+ 9 -     -     III      27
+10 +     -     III      32
+11 -     +     III      23
+12 +     +     III      29</code></pre>
 </div>
+<ol start="7" type="1">
+<li>The same <code>lm + aov</code> approach used in general factorial designs applies to <span class="math inline">\(2^{K}\)</span> designs. The only difficulty is that the data were originally coded as <code>+</code> and <code>-</code>, and we need -1 and 1’s. For this, we’ve prepared a small function called <code>coded</code> and used it to create new columns, <code>cA</code> and <code>cB</code> which convert those symbols into their numeric equivalents. From the ANOVA table below, we can see that both factors have strong effects, though A’s is stronger than B’s. We can also see that there is no detectable interaction effect, which is consistent with the plot from the previous notes.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>coded</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>'-'</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
 <span class='va'>yield</span> <span class='op'>&lt;-</span> <span class='va'>yield</span> <span class='op'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>cA <span class='op'>=</span> <span class='fu'>coded</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>, cB <span class='op'>=</span> <span class='fu'>coded</span><span class='op'>(</span><span class='va'>B</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Yield</span> <span class='op'>~</span> <span class='va'>cA</span> <span class='op'>*</span> <span class='va'>cB</span>, data <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+cA           1 208.33  208.33  53.191 8.44e-05 ***
+cB           1  75.00   75.00  19.149  0.00236 ** 
+cA:cB        1   8.33    8.33   2.128  0.18278    
+Residuals    8  31.33    3.92                     
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<ol start="8" type="1">
+<li>The ANOVA table only describes whether a factor has any relationship with the response – it doesn’t describe in what way the response changes when the factors are turned on or off. For this, we need to look at the full model summary. In the output below, the <code>Intercept</code> estimate (27.5) gives the response when all the factors are turned off. The <code>cA</code> and <code>cB</code> estimates (4.17 and -2.5) describe how the response changes when that factor is turned on. The interaction effect measures how the effect differs from the additive effect when both factors are active (it is 0.833 larger than what would be expected if we just added <code>cA</code> and <code>cB</code>).</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 </code></pre>
 </div>
 <pre><code>
@@ -2383,36 +2401,19 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 1.979 on 8 degrees of freedom
 Multiple R-squared:  0.903, Adjusted R-squared:  0.8666 
 F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
 </div>
-<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-cA           1 208.33  208.33  53.191 8.44e-05 ***
-cB           1  75.00   75.00  19.149  0.00236 ** 
-cA:cB        1   8.33    8.33   2.128  0.18278    
-Residuals    8  31.33    3.92                     
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-</div>
-<ol start="6" type="1">
-<li>We can use this fit to build a response surface as well.</li>
+<ol start="9" type="1">
+<li>We can use this fit to build a response surface as well. This is a plot of the yield from the top down – darker colors correspond to higher yields. If the interaction estimate was 0, the lines would be exactly parallel to one another.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>rsm</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>fit</span>, <span class='op'>~</span> <span class='va'>cA</span> <span class='op'>+</span> <span class='va'>cB</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>(Intercept)          cA          cB       cA:cB 
- 27.5000000   4.1666667  -2.5000000   0.8333333 </code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>fit</span>, <span class='op'>~</span> <span class='va'>cA</span> <span class='op'>+</span> <span class='va'>cB</span><span class='op'>)</span>
-</code></pre>
+<p><img src="week8-2_files/figure-html5/unnamed-chunk-6-1.svg" width="624" style="display: block; margin: auto;" /></p>
 </div>
-<p><img src="week8-2_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
-</div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

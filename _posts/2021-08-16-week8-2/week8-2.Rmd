@@ -13,12 +13,12 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE, fig.align = "center")
 ```
 
 _Readings [6.2](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week8-2/week8-2.Rmd)_
 
-```{r}
+```{r, echo = FALSE}
 library(ggplot2)
 library(EBImage)
 theme424 <- theme_minimal() + 
@@ -65,13 +65,13 @@ $$
 y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon
 $$
 where the $x_k$’s take on one of two values, depending on whether or not factor $k$ is active.
+    * We’ve only included main effects. An interaction would be added via $\beta_{12} x_{1}x_{2}$
+    * If the factors are binary (on vs. off), we can use a binary encoding. 
 
-```{r, fig.margin = TRUE}
+```{r, echo = FALSE, out.width = "50%"}
 display(readImage("https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepards9fv0cqvbmc.png"))
 ```
 
-    * We’ve only included main effects. An interaction would be added via $\beta_{12} x_{1}x_{2}$
-    * If the factors are binary (on vs. off), we can use a binary encoding. 
 
 5. What if our factors are actually continuous?
 	* We could _code_ the variables, converting low and high levels to ${-1, 1}$.
@@ -79,27 +79,52 @@ display(readImage("https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepard
 	* An added benefit is that this coding (a) makes scales comparable and (b)
 	induces orthogonality (roughly, it makes variables less correlated)
 	
+6. We will illustrate these ideas on a yield dataset. There are 12 samples
+total, three replicates at each corner of the square.
+	
 ```{r}
-library(dplyr)
 library(readr)
-yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt") %>%
-  mutate_at(vars(-Yield), as.factor)
+yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt")
+yield
 ```
+
+7. The same `lm + aov` approach used in general factorial designs applies to
+$2^{K}$ designs. The only difficulty is that the data were originally coded as
+`+` and `-`, and we need -1 and 1's. For this, we've prepared a small function
+called `coded` and used it to create new columns, `cA` and `cB` which convert
+those symbols into their numeric equivalents. From the ANOVA table below, we can
+see that both factors have strong effects, though A's is stronger than B's. We
+can also see that there is no detectable interaction effect, which is consistent
+with the plot from the previous notes.
 
 ```{r}
 coded <- function(x) ifelse(x == '-', -1, 1)
 yield <- yield %>%
   mutate(cA = coded(A), cB = coded(B))
 fit <- lm(Yield ~ cA * cB, data = yield)
-summary(fit)
 summary(aov(fit))
 ```
-	
-6. We can use this fit to build a response surface as well.
+
+8. The ANOVA table only describes whether a factor has any relationship with the
+response -- it doesn't describe in what way the response changes when the
+factors are turned on or off. For this, we need to look at the full model
+summary. In the output below, the `Intercept` estimate (27.5) gives the response
+when all the factors are turned off. The `cA` and `cB` estimates (4.17 and -2.5)
+describe how the response changes when that factor is turned on. The interaction
+effect measures how the effect differs from the additive effect when both
+factors are active (it is 0.833 larger than what would be expected if we just
+added `cA` and `cB`).
 
 ```{r}
+summary(fit)
+```
+	
+9. We can use this fit to build a response surface as well. This is a plot of
+the yield from the top down -- darker colors correspond to higher yields. If the
+interaction estimate was 0, the lines would be exactly parallel to one another.
+
+```{r, asp = 1}
 library(rsm)
-coef(fit)
 image(fit, ~ cA + cB)
 ```
  

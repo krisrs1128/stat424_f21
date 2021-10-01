@@ -31,12 +31,6 @@ theme424 <- theme_minimal() +
   )
 theme_set(theme424)
 ```
-
-```{r, echo = FALSE, fig.margin = TRUE}
-library(EBImage)
-display(readImage("https://uwmadison.box.com/shared/static/e6sprneaeamlav35csswq68t62p0xney.png"))
-display(readImage("https://uwmadison.box.com/shared/static/jst0ib619vjw386gnl2hs8pee5rkkbx1.png"))
-```
 1. A special case of general factorial design is the $2^K$ design. This arises
 when there are $K$ factors, but only 2 levels for each factor. We assume $n$
 samples at each configuration of factor levels. With only two levels for each
@@ -44,16 +38,14 @@ factor, these experiments aren’t useful for teasing out subtle variations acro
 levels of a factor. However they *are* useful for determining which of a large
 number of factors might be worth investigating further (factor screening).
 
-2. The simplest case of a $2^K$ design is when the number of factors $K = 2$. The
-experimental design can be represented by a square.
-
-```{r}
-library(readr)
-library(dplyr)
-yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt") %>%
-  mutate_at(vars(-Yield), as.factor)
+```{r, echo = FALSE, fig.hold = TRUE, out.width = "46%"}
+library(EBImage)
+display(readImage("https://uwmadison.box.com/shared/static/e6sprneaeamlav35csswq68t62p0xney.png"))
+display(readImage("https://uwmadison.box.com/shared/static/jst0ib619vjw386gnl2hs8pee5rkkbx1.png"))
 ```
 
+2. The simplest case of a $2^K$ design is when the number of factors $K = 2$. The
+experimental design can be represented by corners of a square.
 
 ### Notation
 
@@ -61,13 +53,6 @@ yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzf
 approach is to write + or - for whether we are at a low or high level for that
 factor. Alternatively, we can represent the corner by all the letters that are
 at high levels.
-
-```{r}
-ggplot(yield) +
-  geom_point(aes(x = A, y = Yield)) +
-  facet_wrap(~B)
-interaction.plot(yield$A, yield$B, yield$Yield)
-```
 
 | A | B | label |
 |---|---|---------|
@@ -83,7 +68,6 @@ values at the corner +-, rather than just the index of that corner.
 
 5. Since there are only two levels for each factor, there are transparent
 formulas for estimating main and interaction effects.
-  
     * The main effect for A summaries the average change in the response when A is
     activated. It is defined as
     \begin{align}
@@ -91,20 +75,20 @@ formulas for estimating main and interaction effects.
     \end{align}
     which is the average of the responses on the edge where A is active minus the
     average when A is inactive. The definition for B is analogous.
-    
-```{r, echo = FALSE}
-display(readImage("https://uwmadison.box.com/shared/static/32pelq6o9jz7nnnavkdx1kjuxfjkvzrc.png"))
-display(readImage("https://uwmadison.box.com/shared/static/hvedijshgaw7so91kqcl1l8eunml4m9v.png"))
-```
-
     * The interaction effect measures the degree to which the effect of A changes
     depending on whether or not B is active. It is defined as
     \begin{align}
     AB &= \frac{1}{2n}\left[\left(ab - b\right) + \left(a - \left(1\right)\right)\right]
     \end{align}
-    Notice that the role of A and B is symmetric — you could read the interaction as
-    how the effect of B changes depending on whether A is active.
+    Notice that the role of A and B is symmetric — we could read the interaction
+    as how the effect of B changes depending on whether A is active.
     
+```{r, echo = FALSE, fig.hold = TRUE, out.width = "46%"}
+display(readImage("https://uwmadison.box.com/shared/static/32pelq6o9jz7nnnavkdx1kjuxfjkvzrc.png"))
+display(readImage("https://uwmadison.box.com/shared/static/hvedijshgaw7so91kqcl1l8eunml4m9v.png"))
+```
+
+  
 6. All these effect estimates can be summarized by our tabular notation,
 
 |label | effect A | effect B | effect AB |
@@ -113,3 +97,30 @@ display(readImage("https://uwmadison.box.com/shared/static/hvedijshgaw7so91kqcl1
 | a | + | - | - |
 | b | - | + | - |
 | ab | + | + | + |
+
+### Code Example
+
+7. This code example shows how a plot can help detect an interaction effect. We
+read in a dataset on agricultural yield when varying two factors, A and B.
+
+```{r}
+library(readr)
+library(dplyr)
+yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt")
+```
+
+8. We can either use `facet_wrap` in `ggplot` to split a plot of the data into
+separate panels or use the base R `interaction.plot` function. Both plots show
+how the effect of factor A varies as the value of factor B changes. In this
+case, the effect of factor A is slightly smaller (lower slope) when factor B is
+inactive. In the next lecture though, we'll see that this difference is not
+significant (it could very well happen by change under the model with no
+interaction term).
+
+```{r}
+ggplot(yield) +
+  geom_point(aes(A, Yield)) +
+  facet_wrap(~B)
+
+interaction.plot(yield$A, yield$B, yield$Yield)
+```

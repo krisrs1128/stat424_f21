@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["figure/parameters.png","week7-1_files/anchor-4.2.2/anchor.min.js","week7-1_files/bowser-1.9.3/bowser.min.js","week7-1_files/distill-2.2.21/template.v2.js","week7-1_files/figure-html5/unnamed-chunk-1-1.png","week7-1_files/figure-html5/unnamed-chunk-17-1.png","week7-1_files/figure-html5/unnamed-chunk-2-1.png","week7-1_files/figure-html5/unnamed-chunk-2-2.png","week7-1_files/figure-html5/unnamed-chunk-2-3.png","week7-1_files/figure-html5/unnamed-chunk-2-4.png","week7-1_files/figure-html5/unnamed-chunk-2-5.png","week7-1_files/figure-html5/unnamed-chunk-22-1.png","week7-1_files/figure-html5/unnamed-chunk-5-1.png","week7-1_files/figure-html5/unnamed-chunk-6-1.png","week7-1_files/header-attrs-2.8/header-attrs.js","week7-1_files/jquery-1.11.3/jquery.min.js","week7-1_files/popper-2.6.0/popper.min.js","week7-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week7-1_files/tippy-6.2.7/tippy-light-border.css","week7-1_files/tippy-6.2.7/tippy.css","week7-1_files/tippy-6.2.7/tippy.umd.min.js","week7-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["figure/parameters.png","week7-1_files/anchor-4.2.2/anchor.min.js","week7-1_files/bowser-1.9.3/bowser.min.js","week7-1_files/distill-2.2.21/template.v2.js","week7-1_files/figure-html5/unnamed-chunk-1-1.png","week7-1_files/figure-html5/unnamed-chunk-11-1.svg","week7-1_files/figure-html5/unnamed-chunk-17-1.png","week7-1_files/figure-html5/unnamed-chunk-2-1.png","week7-1_files/figure-html5/unnamed-chunk-2-2.png","week7-1_files/figure-html5/unnamed-chunk-2-3.png","week7-1_files/figure-html5/unnamed-chunk-2-4.png","week7-1_files/figure-html5/unnamed-chunk-2-5.png","week7-1_files/figure-html5/unnamed-chunk-22-1.png","week7-1_files/figure-html5/unnamed-chunk-5-1.png","week7-1_files/figure-html5/unnamed-chunk-6-1.png","week7-1_files/figure-html5/unnamed-chunk-6-1.svg","week7-1_files/header-attrs-2.8/header-attrs.js","week7-1_files/jquery-1.11.3/jquery.min.js","week7-1_files/popper-2.6.0/popper.min.js","week7-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week7-1_files/tippy-6.2.7/tippy-light-border.css","week7-1_files/tippy-6.2.7/tippy.css","week7-1_files/tippy-6.2.7/tippy.umd.min.js","week7-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2340,9 +2340,9 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 <li><p>For each of these hypothesis tests, we’re going to need a test statistic that’s sensitive to departures from the null. We’re also going to need their reference distributions.</p></li>
 <li><p>Miraculously, we have the identity, <span class="math display">\[\begin{align*}
 \sum_{i j k}\left(y_{i j k}-\bar{y}\right)^{2}=&amp; b n \sum_{i}\left(\bar{y}_{i . .}-\bar{y}\right)^{2}+\\
-&amp; a n \sum_{j}\left(\bar{y}_{j} .-\bar{y}\right)^{2}+\\
-&amp; n \sum_{i, j}\left(\bar{y}_{i j}-\bar{y}_{i .}-\bar{y}_{. j}-\bar{y}\right)^{2}+\\
-&amp; \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j} .\right)^{2}
+&amp; a n \sum_{j}\left(\bar{y}_{.j.} -\bar{y}\right)^{2}+\\
+&amp; n \sum_{i, j}\left(\bar{y}_{i j.}-\bar{y}_{i. .}+\bar{y}_{. j.}-\bar{y}\right)^{2}+\\
+&amp; \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j.} .\right)^{2}
 \end{align*}\]</span> which we’ll denote <span class="math inline">\(SS_{\text{Total}}=SS_{A}+SS_{B}+SS_{AB}+SS_{E}\)</span>.</p></li>
 <li><p>The punchline is that if <span class="math inline">\(SS_{A}\)</span> is large, we have evidence against hypothesis A, if <span class="math inline">\(SS_{B}\)</span> is large we have evidence against hypothesis B, and if <span class="math inline">\(SS_{AB}\)</span> is large, we have evidence against hypothesis AB.</p></li>
 </ol>
@@ -2350,13 +2350,31 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 <p><img src="https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png" width="45%" /><img src="https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png" width="45%" /></p>
 </div>
 <ol start="8" type="1">
+<li>Dividing <span class="math inline">\(SS\)</span> terms by their degrees of freedom (d.f.) gives <span class="math inline">\(MS_{A}, MS_{B}, MS_{AB}\)</span>, and <span class="math inline">\(MS_{E}\)</span>. The d.f. are derived from the number of levels for each factor, but a proof is beyond the scope of this course.</li>
+</ol>
+<table style="width:8%;">
+<colgroup>
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>| term | d.f.|</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>| $SS_{A} | <span class="math inline">\(a - 1\)</span> | | $SS_{B} | <span class="math inline">\(b - 1\)</span> | | $SS_{AB} | <span class="math inline">\(\left(a - 1\right)\left(b - 1\right)\)</span> | | $SS_{E} | <span class="math inline">\(ab\left(n - 1\right)\)</span> |</td>
+</tr>
+</tbody>
+</table>
+<ol start="9" type="1">
 <li>We can define corresponding mean squares by dividing by the degrees of freedom. For each hypothesis, we get a corresponding <span class="math inline">\(F\)</span>-statistic.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png" width="45%" /><img src="https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png" width="45%" /></p>
 </div>
 <h3 id="code-example">Code Example</h3>
-<ol start="8" type="1">
+<ol start="10" type="1">
 <li>We’ll consider an experiment that studied the effect of material and temperature on battery lifetimes. These are the two factors of interest, and each is measured at 3 levels.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
@@ -2378,13 +2396,13 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 10 1        125            70
 # … with 26 more rows</code></pre>
 </div>
-<ol start="9" type="1">
+<ol start="11" type="1">
 <li>Before testing for effects, we can plot the influence of each factor. The code below uses <code>facet_wrap</code> to split the plot across the three material types. There seems to be a clear temperature effect, though the effects are not exactly the same across material. This suggests that an interaction is present, though we will need a test to quantify the strength of this pattern.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="week7-1_files/figure-html5/unnamed-chunk-6-1.png" width="480" /></p>
+<p><img src="week7-1_files/figure-html5/unnamed-chunk-6-1.svg" width="480" /></p>
 </div>
-<ol start="10" type="1">
+<ol start="12" type="1">
 <li>We can fit the two factor model using <code>lm</code>. We use the syntax <code>Material * Temperature</code> to fit all main effects and interactions involving those variables; it is shorthand for the more explicit notation <code>Material + Temperature + Material : Temperature</code> (here, the <code>:</code> denotes an interaction). The <code>Material</code> and <code>Temperature</code> rows of the ANOVA table give main effects, the <code>Material:Temperature</code> row gives the interaction effect, and the <code>Residuals</code> row corresponds to the <span class="math inline">\(SS_{E}\)</span> and <span class="math inline">\(MS_{E}\)</span> terms.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
@@ -2396,7 +2414,7 @@ Residuals            27  18231     675
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
-<ol start="11" type="1">
+<ol start="13" type="1">
 <li>Based on the <span class="math inline">\(p\)</span>-values, we conclude that there is a very strong temperature effect, a strong material effect, and a noticeable (though slight) interaction. We can in fact develop more granular interpretations by looking at individual coefficients in the fitted model. The runs from the first material and lowest temperature are used as a reference point and absorbed into the intercept – everything else is viewed as the expected deviation from that reference. For example, it seems that, on average, the temperature 70 and 125 configurations are both about 80 life-units shorter than runs at temperature 15. The significant interaction between material 3 and temperature 70 suggests that this combination lives about 80 units longer than we would expect if no interaction were present.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">

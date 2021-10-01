@@ -83,7 +83,7 @@ index.
 # Data Example
 
 5. Let's look at a $2^3$ design (3 factors with two levels each). The goal is to
-see how the etch rate on a chip varies as you change (A) gap between electrodes,
+see how the etch rate on a chip varies as we change (A) gap between electrodes,
 (B) power level, and (C) gas flow rate.
 
 ```{r}
@@ -92,7 +92,7 @@ plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1
 
 6. Looking at the data, there seems to be a strong interaction between A (the
 x-axis) and C (the pairs of columns): the slope of the effect of A switches when
-you go from one C configuration to the other.
+we go from one C configuration to the other.
 
 ```{r}
 ggplot(plasma) +

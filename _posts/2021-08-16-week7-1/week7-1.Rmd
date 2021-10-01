@@ -99,9 +99,9 @@ reference distributions.
 6. Miraculously, we have the identity,
 \begin{align*}
 \sum_{i j k}\left(y_{i j k}-\bar{y}\right)^{2}=& b n \sum_{i}\left(\bar{y}_{i . .}-\bar{y}\right)^{2}+\\
-& a n \sum_{j}\left(\bar{y}_{j} .-\bar{y}\right)^{2}+\\
-& n \sum_{i, j}\left(\bar{y}_{i j}-\bar{y}_{i .}-\bar{y}_{. j}-\bar{y}\right)^{2}+\\
-& \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j} .\right)^{2}
+& a n \sum_{j}\left(\bar{y}_{.j.} -\bar{y}\right)^{2}+\\
+& n \sum_{i, j}\left(\bar{y}_{i j.}-\bar{y}_{i. .}+\bar{y}_{. j.}-\bar{y}\right)^{2}+\\
+& \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j.} .\right)^{2}
 \end{align*}
   which we’ll denote $SS_{\text{Total}}=SS_{A}+SS_{B}+SS_{AB}+SS_{E}$.
 
@@ -114,7 +114,20 @@ include_graphics("https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7
 include_graphics("https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png")
 ```
 
-8. We can define corresponding mean squares by dividing by the degrees of
+8. Dividing $SS$ terms by their degrees of freedom (d.f.) gives $MS_{A}, MS_{B},
+MS_{AB}$, and $MS_{E}$. The d.f. are derived from the number of levels for each
+factor, but a proof is beyond the scope of this course.
+
+-----
+| term | d.f.|
+-----
+| $SS_{A} | $a - 1$ |
+| $SS_{B} | $b - 1$ |
+| $SS_{AB} | $\left(a - 1\right)\left(b - 1\right)$ |
+| $SS_{E} | $ab\left(n - 1\right)$ |
+-----
+
+9. We can define corresponding mean squares by dividing by the degrees of
 freedom. For each hypothesis, we get a corresponding $F$-statistic.
 
 ```{r, fig.show = "hold", out.width = "45%"}
@@ -124,7 +137,7 @@ include_graphics("https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswak
 
 ### Code Example
 
-8. We'll consider an experiment that studied the effect of material and
+10. We'll consider an experiment that studied the effect of material and
 temperature on battery lifetimes. These are the two factors of interest, and
 each is measured at 3 levels.
 
@@ -142,7 +155,7 @@ battery <- read_table2("https://uwmadison.box.com/shared/static/vmxs2wcsdxkdjujp
 battery
 ```
 
-9. Before testing for effects, we can plot the influence of each factor. The
+11. Before testing for effects, we can plot the influence of each factor. The
 code below uses `facet_wrap` to split the plot across the three material types.
 There seems to be a clear temperature effect, though the effects are not exactly
 the same across material. This suggests that an interaction is present, though
@@ -155,7 +168,7 @@ ggplot(battery) +
   facet_wrap(~ Material)
 ```
 
-10. We can fit the two factor model using `lm`. We use the syntax `Material *
+12. We can fit the two factor model using `lm`. We use the syntax `Material *
 Temperature` to fit all main effects and interactions involving those variables;
 it is shorthand for the more explicit notation `Material + Temperature +
 Material : Temperature` (here, the `:` denotes an interaction). The `Material`
@@ -168,7 +181,7 @@ fit <- lm(Life ~ Material * Temperature, data = battery)
 summary(aov(fit))
 ```
 
-11. Based on the $p$-values, we conclude that there is a very strong temperature
+13. Based on the $p$-values, we conclude that there is a very strong temperature
 effect, a strong material effect, and a noticeable (though slight) interaction.
 We can in fact develop more granular interpretations by looking at individual
 coefficients in the fitted model. The runs from the first material and lowest
