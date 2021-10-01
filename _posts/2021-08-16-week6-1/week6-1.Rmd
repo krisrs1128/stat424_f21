@@ -45,7 +45,7 @@ include_graphics("figure/bibd-example2.png")
     * $r$: Number of blocks per treatment
     * $\lambda$: Number of appearances for each level pair
   
-```{r, fig.cap = "Circles mark which treatments are run in which blocks. We need to ensure balance across this diagram.", out.width = 500}
+```{r, fig.cap = "Circles mark which treatments are run in which blocks. We need to ensure balance across this diagram.", out.width = 500, preview = TRUE}
 include_graphics("figure/bibd-identity1.png")
 ```
   

@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["figure/bibd-example1.png","figure/bibd-example2.png","figure/bibd-identity1.png","figure/bibd-identity2.png","figure/bibd-identity3.png","figure/bibd-sum-squares.png","figure/bibd.png","week6-1_files/anchor-4.2.2/anchor.min.js","week6-1_files/bowser-1.9.3/bowser.min.js","week6-1_files/distill-2.2.21/template.v2.js","week6-1_files/figure-html5/unnamed-chunk-11-1.png","week6-1_files/figure-html5/unnamed-chunk-14-1.png","week6-1_files/figure-html5/unnamed-chunk-17-1.png","week6-1_files/header-attrs-2.8/header-attrs.js","week6-1_files/jquery-1.11.3/jquery.min.js","week6-1_files/popper-2.6.0/popper.min.js","week6-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week6-1_files/tippy-6.2.7/tippy-light-border.css","week6-1_files/tippy-6.2.7/tippy.css","week6-1_files/tippy-6.2.7/tippy.umd.min.js","week6-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["figure/bibd-example1.png","figure/bibd-example2.png","figure/bibd-identity1.png","figure/bibd-identity2.png","figure/bibd-identity3.png","figure/bibd-sum-squares.png","figure/bibd.png","week6-1_files/anchor-4.2.2/anchor.min.js","week6-1_files/bowser-1.9.3/bowser.min.js","week6-1_files/distill-2.2.21/template.v2.js","week6-1_files/figure-html5/unnamed-chunk-11-1.png","week6-1_files/figure-html5/unnamed-chunk-11-1.svg","week6-1_files/figure-html5/unnamed-chunk-14-1.png","week6-1_files/figure-html5/unnamed-chunk-17-1.png","week6-1_files/header-attrs-2.8/header-attrs.js","week6-1_files/jquery-1.11.3/jquery.min.js","week6-1_files/popper-2.6.0/popper.min.js","week6-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","week6-1_files/tippy-6.2.7/tippy-light-border.css","week6-1_files/tippy-6.2.7/tippy.css","week6-1_files/tippy-6.2.7/tippy.umd.min.js","week6-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2328,7 +2328,7 @@ Figure 2: An example BIBD with 4 treatments total and 2 treatments run per each 
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
-<img src="figure/bibd-identity1.png" alt="Circles mark which treatments are run in which blocks. We need to ensure balance across this diagram." width="500" />
+<img src="figure/bibd-identity1.png" alt="Circles mark which treatments are run in which blocks. We need to ensure balance across this diagram." width="500" data-distill-preview=1 />
 <p class="caption">
 Figure 3: Circles mark which treatments are run in which blocks. We need to ensure balance across this diagram.
 </p>
@@ -2425,16 +2425,16 @@ The functions <code>BIBsize</code> and <code>find.BIB</code> answer these two qu
 </code></pre>
 </div>
 <pre><code>      [,1] [,2] [,3]
- [1,]    1    2    4
- [2,]    1    3    5
- [3,]    2    3    4
- [4,]    3    4    5
- [5,]    1    2    5
- [6,]    1    3    4
- [7,]    2    3    5
- [8,]    1    4    5
- [9,]    1    2    3
-[10,]    2    4    5</code></pre>
+ [1,]    1    3    5
+ [2,]    2    4    5
+ [3,]    1    2    4
+ [4,]    1    2    3
+ [5,]    3    4    5
+ [6,]    2    3    4
+ [7,]    1    4    5
+ [8,]    2    3    5
+ [9,]    1    3    4
+[10,]    1    2    5</code></pre>
 </div>
 <ol start="11" type="1">
 <li>Next, we’ll analyze a BIBD experiment. We download the <code>catalyst</code> experiment, which studied the effect of different catalysts on chemical reaction time.</li>
@@ -2459,7 +2459,7 @@ The functions <code>BIBsize</code> and <code>find.BIB</code> answer these two qu
   <span class='fu'>scale_color_brewer</span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set2"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week6-1_files/figure-html5/unnamed-chunk-11-1.png" width="624" style="display: block; margin: auto;" /></p>
+<p><img src="week6-1_files/figure-html5/unnamed-chunk-11-1.svg" width="624" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="13" type="1">
 <li>To estimate the effects for each catalyst, we can use <code>lm</code>. The associated ANOVA gives evidence against the null that the catalysts are equal, and the corresponding confidence intervals suggests that catalyst 4 has a longer reaction time than would be believable under the null. This is a nice situation in which something that wasn’t obvious visually becomes more clear when we apply a principled testing procedure. Compare the ANOVA table with Table 4.25.</li>
@@ -2477,6 +2477,18 @@ Catalyst     3  22.75   7.583   11.67 0.01074 *
 Residuals    5   3.25   0.650                   
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/confint.html'>confint</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>                 2.5 %     97.5 %
+(Intercept) 70.6671254 73.8328746
+Batch2       0.3301889  3.9198111
+Batch3      -6.5448111 -2.9551889
+Batch4      -2.6698111  0.9198111
+Catalyst2   -1.5448111  2.0448111
+Catalyst3   -1.1698111  2.4198111
+Catalyst4    1.8301889  5.4198111</code></pre>
 </div>
 <ol start="14" type="1">
 <li>We can also compute contrasts in the way that we’re used to. Here, we’re studying two hypotheses related to catalyst 4 (do it and catalyst 1 have larger reaction times than the others? is catalyst 4 larger than catalyst 3?).</li>
@@ -2530,7 +2542,7 @@ $contrasts
 Results are averaged over the levels of: Batch 
 P value adjustment: tukey method for comparing a family of 4 estimates </code></pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
