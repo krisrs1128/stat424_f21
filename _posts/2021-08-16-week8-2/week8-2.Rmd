@@ -54,9 +54,9 @@ significant. We can use ANOVA, though we have to be cautious when $n$ is small.
     SS_{\text{Total}} = SS_A + SS_B + SS_{AB} + SS_E
     $$
     and since the factors all have two levels, the df’s for the main and interaction
-    terms are all 1. The df of $SS_T$ is $n 2^2 - 1$ (number of samples minus one).
-    Taking the ratio between main and interaction $SS$ terms and $SS_E$ gives the
-    basis for F-statistics in the ANOVA table.
+    terms are all 1. The df of $SS_T$ is $n 2^2 - 1$ (number of samples minus
+    one). Taking the ratio between main and interaction $SS$ terms and $MS_{E} (= \frac{1}{4\left(n - 1\right)}SS_{E})$ gives the basis for $F$-statistics
+    in the ANOVA table.
 
 ### Regression View
 
@@ -110,7 +110,7 @@ response -- it doesn't describe in what way the response changes when the
 factors are turned on or off. For this, we need to look at the full model
 summary. In the output below, the `Intercept` estimate (27.5) gives the response
 when all the factors are turned off. The `cA` and `cB` estimates (4.17 and -2.5)
-describe how the response changes when that factor is turned on. The interaction
+describe how the response changes when those factors are turned on. The interaction
 effect measures how the effect differs from the additive effect when both
 factors are active (it is 0.833 larger than what would be expected if we just
 added `cA` and `cB`).

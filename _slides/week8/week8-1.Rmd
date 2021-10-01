@@ -1,5 +1,5 @@
 ---
-title: "ANOVA Extensions"
+title: "$2^2$ Factorial Designs"
 author: "Kris Sankaran | UW Madison | 23 September 2021"
 output:
   xaringan::moon_reader:
@@ -29,10 +29,9 @@ theme424 <- theme_minimal() +
 theme_set(theme424)
 ```
 
-# ANOVA Extensions
+# $2^2$ Factorial Designs in Depth
 
 ```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
 ```
 ### Statistical Experimental Design
 
@@ -42,17 +41,234 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 
 ### Today
 
-* Book Sections: 3.9 & 3.11
-* Online Notes: Week 4 [2] and [3]
+* Book Sections: 6.1 - 6.2
+* Online Notes: Week 8 [1] and [2]
 
 ---
 
 ### Motivation
 
+A $2^{K}$ design is a factorial design where each of the $K$ factors is tested
+at only two values (high and low).
+
+.pull-left[
+* These designs are useful for screening experiments
+* If the response does not change even when the factor is at its extremes, that factor likely doesn't matter
+* We can study the relationship important factors and the response in a follow-up experiment
+]
+
+.pull-right[
+General two factor vs. $2^{2}$ design.
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/e6sprneaeamlav35csswq68t62p0xney.png")
+include_graphics("https://uwmadison.box.com/shared/static/jst0ib619vjw386gnl2hs8pee5rkkbx1.png")
+```
+]
+
+---
+
+### Motivation
+
+* It may be possible to vary many parameters in a manufacturing process. Which
+avenues are worth pursuing in more depth?
+* The transportation department would like to encourage alternatives to driving
+to campus. Which particular levers are likely to influence commuters?
+* When training a machine learning model, many hyperparameters might impact
+performance. Which are the most important?
+
+---
+
+### Representations
+
+* A $2^{2}$ design samples data at corners of a square
+* We can represent corners using either `+ / -` or alphabetical notation
+* We often abuse notation and write a letter to represent the *sum* of the
+responses at that corner, not just its index
+
+| A | B | label |
+|---|---|---------|
+| - | - | (1)     |
+| + | - | a       |
+| - | + | b       |
+| + | + | ab      |
+
+---
+
+### Estimation: Main Effects
+
+Simple formulas summarize the main and interaction effects in a $2^{2}$ design.
+
+> "What is the average change in the response when A is activated?"
+
+\begin{align}
+A &= \frac{1}{2n}\left(\left(ab +a\right) - \left(b + (1)\right)\right)
+\end{align}
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/32pelq6o9jz7nnnavkdx1kjuxfjkvzrc.png")
+```
+]
+
+---
+
+### Estimation: Interaction Effects
+
+Simple formulas summarize the main and interaction effects in a $2^{2}$ design.
+
+> "Does the effect of A change depending on whether or not B is active?"
+
+\begin{align}
+AB &= \frac{1}{2n}\left[\left(ab - b\right) + \left(a - \left(1\right)\right)\right]
+\end{align}
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/hvedijshgaw7so91kqcl1l8eunml4m9v.png")
+```
+
+---
+
+### Notational Trick
+
+If we can remember the tabular representation, we don't need to memorize any
+formulas.
+
+|label | effect A | effect B | effect AB |
+| --- |---|---|---------|
+| (1) | - | - |  + |
+| a | + | - | - |
+| b | - | + | - |
+| ab | + | + | + |
+
+---
+
+### Hypothesis Testing
+
+How can we gauge if an estimated effect is significant?
+
+* Call the numerators in the effect estimates above "contrasts"
+* E.g., the contrast for A is $ab + a - b - \left(1\right)$
+* The associated sum of squares has a simple form,
+
+\begin{align*}
+SS_{\text{Factor}} &= \frac{1}{2^2 n}\left(\text{Contrast(Factor)}\right)^2
+\end{align*}
+
+Q: What is the form of $SS_{A}$?
+
+---
+
+### ANOVA-like Identity
+
+In the two factor case, we have the identity,
+
+\begin{align*}
+SS_{\text{Total}} = SS_A + SS_B + SS_{AB} + SS_E
+\end{align*}
+
+* The df’s for the main and interaction terms are all 1 (there are two levels for each)
+* The df of $SS_T$ is $n 2^2 - 1$ (number of samples minus one)
+* The df of $SS_{E}$ is $\left(n 2^2 - 1\right) - 3 = 4\left(n - 1\right)$
+* $F$-statistics are formed by taking the ratios between $SS$ and $MS_E$ terms
+
+---
+
+### Regression Perspective
+
+All the formulas we've shown are consistent with the effect estimates of a
+regression model,
+
+\begin{align*}
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon
+\end{align*}
+
+where the $x_k$’s take on one of two values.
+
+* This model only includes main effects
+* An interaction would require an extra $\beta_{12} x_{1}x_{2}$ term
+
+---
+
+### Coding
+
+.pull-left[
+* To use the regression approach, we need to _code_ the variables
+* Coding converts low and high levels to ${-1, 1}$.
+* This makes scales comparable and removes correlation between factors
+]
+
+.pull-right[
+```{r}
+display(readImage("https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepards9fv0cqvbmc.png"))
+```
+]
 
 ---
 
 ### Code Implementation
+
+---
+
+### Yield Dataset
+
+We will illustrate these ideas on a yield dataset. There are 12 samples total,
+three replicates at each corner of the square.
+
+```{r}
+library(readr)
+yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt")
+yield
+```
+
+---
+
+### Visualization
+
+We can use the `facet_wrap` command to plot the effect of A when B is or is not
+active. The slope changes slightly across panels, but it could be due to chance.
+
+```{r}
+ggplot(yield) +
+  geom_point(aes(A, Yield)) +
+  facet_wrap(~B)
+```
+
+---
+
+### Coding
+
+.pull-left[
+* For testing, we can still use the `lm + aov` approach from before
+* First though, we code the low and high values as -1 and 1
+]
+
+.pull-right[
+```{r}
+coded <- function(x) ifelse(x == '-', -1, 1)
+yield <- yield %>%
+  mutate(cA = coded(A), cB = coded(B))
+fit <- lm(Yield ~ cA * cB, data = yield)
+summary(aov(fit))
+```
+]
+
+Q: How to interpret this fit? Is there an interaction effect?
+
+---
+
+### Effect Estimates
+
+* The ANOVA table doesn't describe in what way the response changes when the
+factors are turned on or off.
+* `Intercept` estimate gives the response when all the factors are turned off 
+* `cA` and `cB` estimates describe how the response changes when those factors
+are turned on
+* The interaction effect measures how the effect differs from the additive
+effect
+
+```{r}
+summary(fit)
+```
 
 ---
 

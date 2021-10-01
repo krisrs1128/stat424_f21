@@ -416,6 +416,7 @@ the ANOVA assumptions?
 replicate indicator.
 
 ```{r, echo = TRUE}
+library(tidyr)
 cement <- pivot_longer(cement, -method, names_to = "replicate")
 head(cement)
 ```
@@ -431,8 +432,6 @@ there is a difference between the cement types.
 aov_table <- aov(lm(value ~ method, data = cement))
 summary(aov_table)
 ```
-
-
 ---
 
 ### Solution
