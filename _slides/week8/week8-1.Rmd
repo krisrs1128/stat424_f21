@@ -1,0 +1,61 @@
+---
+title: "ANOVA Extensions"
+author: "Kris Sankaran | UW Madison | 23 September 2021"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/xaringan-themer.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+    seal: false  
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(ggplot2)
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
+```
+
+# ANOVA Extensions
+
+```{r, out.width = 200}
+include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```
+### Statistical Experimental Design
+
+.large[Kris Sankaran | UW Madison | 23 September 2021]
+
+---
+
+### Today
+
+* Book Sections: 3.9 & 3.11
+* Online Notes: Week 4 [2] and [3]
+
+---
+
+### Motivation
+
+
+---
+
+### Code Implementation
+
+---
+
+### Exercise
+
+---

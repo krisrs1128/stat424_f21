@@ -1,12 +1,11 @@
 ---
-title: "ANOVA Extensions"
+title: "$K$ Factor Factorials and Basic Response Surfaces"
 author: "Kris Sankaran | UW Madison | 23 September 2021"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -17,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -30,10 +29,10 @@ theme424 <- theme_minimal() +
 theme_set(theme424)
 ```
 
-# ANOVA Extensions
+# $K$ Factor Factorials and Basic Response Surfaces
 
 ```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+include_graphics("https://uwmadison.box.com/shared/static/b42kbwxdggtmf2krqr7uoj5r23fglfuo.png")
 ```
 ### Statistical Experimental Design
 
@@ -43,17 +42,292 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 
 ### Today
 
-* Book Sections: 3.9 & 3.11
-* Online Notes: Week 4 [2] and [3]
+* Book Sections: 5.4 - 5.5
+* Online Notes: Week 7 [3] and [4]
 
 ---
 
 ### Motivation
 
+* We have only analyzed two factors at a time, but all the core ideas generalize
+  - We provide the details today
+* We have implicitly assumed all factors are linearly related to the response
+  - We'll discuss response surfaces, which remove this assumption
 
 ---
 
-### Code Implementation
+### Motivation
+
+Real-world problems often have nonlinearities and a range of relevant factors.
+
+* Factor effects might saturate eventually (e.g., drug dosage, online ads)
+* Understanding the landscape of interactions is necessary for studying emergent
+properties
+
+---
+
+### Three Factor Model
+
+To characterize $K$ factor models, we'll first examine symmetries in the 3
+factor model.
+
+\begin{align*}
+y_{ijkl} &= \mu + \tau_i + \beta_j + \gamma_k + \left(\tau \beta\right)_{ij} + \left(\tau \gamma\right)_{ik} + \left(\beta \gamma\right)_{jk} + \left(\tau \beta \gamma\right)_{ijk} + \epsilon_{ijkl}
+\epsilon_{ijkl}&\sim\mathcal{N}\left(0, \sigma^2\right)
+\end{align*}
+
+---
+
+### Symmetry
+
+.pull-left[
+* We have main effects for each factor
+    	* $\tau_i, \beta_j, \gamma_k$
+* We have two-way interactions for each pair of factors
+  	* $\left(\tau\beta\right)_{ij}, \dots$
+* We have a three-way interaction, between all factors
+  	* $\left(\tau\beta\gamma\right)_{ijk}$
+]
+
+.pull-right[
+```{r, fig.margin = TRUE, echo = FALSE}
+include_graphics("https://uwmadison.box.com/shared/static/b42kbwxdggtmf2krqr7uoj5r23fglfuo.png")
+```
+]
+    
+---
+
+### Symmetry
+
+.pull-left[
+* We have main effects for each factor
+    	* $\tau_i, \beta_j, \gamma_k$
+* We have two-way interactions for each pair of factors
+  	* $\left(\tau\beta\right)_{ij}, \dots$
+* We have a three-way interaction, between all factors
+  	* $\left(\tau\beta\gamma\right)_{ijk}$
+]
+
+.pull-right[
+```{r, fig.margin = TRUE, echo = FALSE}
+include_graphics("https://uwmadison.box.com/shared/static/gnoa5i4w5qp6ehbweh30n3a2v91qpi89.png")
+```
+]
+    
+---
+
+### Symmetry
+
+.pull-left[
+* We have main effects for each factor
+    	* $\tau_i, \beta_j, \gamma_k$
+* We have two-way interactions for each pair of factors
+  	* $\left(\tau\beta\right)_{ij}, \dots$
+* We have a three-way interaction, between all factors
+  	* $\left(\tau\beta\gamma\right)_{ijk}$
+]
+
+.pull-right[
+```{r, fig.margin = TRUE, echo = FALSE}
+include_graphics("https://uwmadison.box.com/shared/static/yqqhfc2kzk3egfvad8dvufed09t9m3tx.png")
+```
+]
+    
+---
+
+### Symmetry
+
+.pull-left[
+* We have main effects for each factor
+    	* $\tau_i, \beta_j, \gamma_k$
+* We have two-way interactions for each pair of factors
+  	* $\left(\tau\beta\right)_{ij}, \dots$
+* We have a three-way interaction, between all factors
+  	* $\left(\tau\beta\gamma\right)_{ijk}$
+]
+
+.pull-right[
+```{r, fig.margin = TRUE, echo = FALSE}
+include_graphics("https://uwmadison.box.com/shared/static/goaewwcs61ewtrmfp4pcymzje1fdrbsb.png")
+```
+]
+    
+---
+
+### Sums of Squares
+
+.pull-left[
+We can calculate sum-of-squares terms for each of the terms
+- Main effects: Group averages minus global averages
+- Interaction effects: Configuration averages minus main effect fits
+]
+
+.pull-right[
+\begin{align*}
+\text{Example main effect sum: } &\sum_{i}\left(\bar{y}_{i . .}-\bar{y}\right)^{2}\\
+\text{Example interaction sum: } & \sum_{i, j}\left(\bar{y}_{i j.}-\bar{y}_{i. .}+\bar{y}_{. j.}-\bar{y}\right)^{2}
+\end{align*}
+]
+
+---
+
+### Degrees of Freedom
+
+There is also symmetry in the degrees of freedom,
+    * $SS_A = a - 1$
+    * $SS_B = b - 1$
+    * $SS_C = c - 1$
+    * $SS_{AB} = (a - 1)(b - 1)$
+    * $SS_{BC} = (b - 1)(c - 1)$
+    * ...
+    * $SS_{ABC} = (a - 1)(b - 1)(c - 1)$
+
+By subtraction, $SS_{E}$ has $abc\left(n - 1\right)$ degrees of freedom.
+    
+Q: What do you think is the pattern for arbitrary $K$.
+
+---
+
+### Test Statistics
+
+* We can construct an $MS$ term by dividing the $SS$ term by its d.f.
+* We can test the null by comparing these $MS$ terms with $MS_{E}$
+* Each of these statistics is $F$-distributed under the null, with appropriate
+d.f. (numerator from previous slide, denominator always $abc\left(n - 1\right)$)
+
+---
+
+### Response Surfaces
+
+* All the models so far treat the levels of a factor as categorical
+  - Each group gets its own parameter, and we do not share information across
+  groups
+* If we expect nearby levels of a factor to give similar experimental outputs, then
+  - The response is a smooth function of inputs
+  - We should borrow evidence from nearby levels
+
+> Main Idea: Use a flexible (nonlinear) function from experimental inputs (combinations of factor levels) to the response of interest.
+
+---
+
+### Uses of Response Surfaces
+
+The response surface is a representation of how varying the factors change the
+response. This is helpful for,
+
+* Determining important influences 
+* Finding configurations that optimize the response
+
+---
+
+### Fitting Flexible Functions
+
+* Polynomial regression:include terms like $x_i^2, x_i^3, x_i^2 x_j, ...$
+* Spline regression: Include polynomial terms, but split across the input space
+  - More stable than polynomial regression.
+
+---
+
+# Code Implementation
+
+---
+
+### $2^3$ Design
+
+We'll study an experiment testing how etch rate on a chip varies as we change
+(A) gap between electrodes, (B) power level, and (C) gas flow rate. `+` and `-`
+denote whether the factor is at a low or high level.
+
+```{r}
+plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1vq7uv7omp4pjdg.txt", header=TRUE)
+plasma
+```
+---
+
+### Visualization
+
+* `facet_grid` lets us split the plot into panels depending on each factor
+* There seems to be a strong interaction effect between A and C
+  - The slope of the effect of A switches when we change C
+
+```{r}
+ggplot(plasma) +
+  geom_point(aes(A, Rate)) +
+  facet_grid(B ~ C)
+```
+
+---
+
+### ANOVA Table
+
+* The `A * B * C` syntax in `lm` computes main effects and interaction terms for
+all three factors
+* The ANOVA table computes $SS$ and $MS$ terms associated with the model
+* Changing the power level doesn't make much of a difference. The gas flow rate
+is very important, and the gap between electrodes also has an effect. We have
+also detected the interaction seen in the plot.
+
+
+```{r}
+fit <- lm(Rate ~ A * B * C, plasma)
+summary(aov(fit))
+```
+
+---
+
+### Response Surfaces
+
+We'll work with the battery data that we've used before. Instead of treating
+each temperature level as a separate group, we'll imagine that the battery
+lifetime varies smoothly as a function of time.
+
+```{r}
+library(dplyr)
+battery <- read_table2("https://uwmadison.box.com/shared/static/vmxs2wcsdxkdjujp85nw5kvk83xz4gl9.txt")
+battery$Material <- as.factor(battery$Material)
+```
+
+---
+
+### Flexible Functions
+
+* We continue to use `lm` to build a model from the predictors to the response
+* We use `poly` or `ns` to create polynomial or natural spline functions of a continuous variable
+
+```{r}
+fit <- lm(Life ~ Material * poly(Temperature, 2), data = battery) # quadratic polynomial
+
+#library(splines) # for quadratic spline
+#fit <- lm(Life ~ Material * ns(Temperature, 2), data = battery)
+```
+
+### Visualizing the Surface
+
+* To visualize the full surface, the idea is compute the response value along a fine grid.
+* To create a grid, we can use `seq` to create a sequence and `expand.grid` to build the cross-product
+* The second argument of `predict` tells where we should evaluate the fitted model
+
+```{r}
+surface <- expand.grid(Temperature = seq(15, 125, by = 1), Material = unique(battery$Material))
+surface$Life <- predict(fit, surface)
+```
+
+---
+
+### Visualizing the Surface
+
+* We can use `ggplot` to layer on both the raw data and the fitted surface
+* `geom_point` plots the raw data, in the `battery` data.frame
+* `geom_line` plots the fitted surface, computed in the previous slide
+* `facet_wrap` splits the plot into a separate panel for each material
+  - We could alternatively have also used color
+
+```{r}
+ggplot(battery, aes(Temperature, Life)) +
+  geom_point() +
+  geom_line(data = surface) +
+  facet_wrap(~ Material)
+```
 
 ---
 

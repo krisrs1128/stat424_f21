@@ -138,19 +138,38 @@ H_1: \left(\tau\beta\right)_{ij} &= 0 \text{ for at least one } ij \text{ combin
 
 .pull-left[
 * We’ll denote this by $SS_{\text{Total}}=SS_{A}+SS_{B}+SS_{AB}+SS_{E}$
-* Dividing terms on the right by their degrees of freedom gives $MS_{A}, MS_{B}, MS_{AB}$, and $MS_{E}$
 * *Don't* try memorizing the formulas, but *do* know how to relate the formulas to computer output
 ]
 
 .pull-right[
 \begin{align*}
 \sum_{i j k}\left(y_{i j k}-\bar{y}\right)^{2}=& b n \sum_{i}\left(\bar{y}_{i . .}-\bar{y}\right)^{2}+\\
-& a n \sum_{j}\left(\bar{y}_{j} .-\bar{y}\right)^{2}+\\
-& n \sum_{i, j}\left(\bar{y}_{i j}-\bar{y}_{i .}-\bar{y}_{. j}-\bar{y}\right)^{2}+\\
-& \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j} .\right)^{2}
+& a n \sum_{j}\left(\bar{y}_{.j.} -\bar{y}\right)^{2}+\\
+& n \sum_{i, j}\left(\bar{y}_{i j.}-\bar{y}_{i. .}+\bar{y}_{. j.}-\bar{y}\right)^{2}+\\
+& \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j.} .\right)^{2}
 \end{align*}
 ]
-  
+
+---
+
+### Degrees of Freedom
+
+* Dividing $SS$ terms by their degrees of freedom (d.f.) gives $MS_{A}, MS_{B},
+MS_{AB}$, and $MS_{E}$.
+* The d.f. are derived from the number of levels for each factor, but a proof is
+beyond the scope of this course
+* Under the null, the sums of squares are $\chi^2$ distributed, and the ratios
+are $F$ distributed
+
+-----
+| term | d.f.|
+-----
+| $SS_{A} | $a - 1$ |
+| $SS_{B} | $b - 1$ |
+| $SS_{AB} | $\left(a - 1\right)\left(b - 1\right)$ |
+| $SS_{E} | $ab\left(n - 1\right)$ |
+-----
+
 ---
 
 ### Test Statistics

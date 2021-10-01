@@ -40,6 +40,13 @@ include_graphics("https://uwmadison.box.com/shared/static/nn8v4t3ntvcsowvuy91b5l
 
 ---
 
+### Announcements
+
+* For HW, `.Rmd` files on Canvas and linked from readings will be useful
+* Stoplight activity
+
+---
+
 ### Today
 
 * Book Sections: 3.9 & 3.11
@@ -179,6 +186,17 @@ for $\hat{\sigma}_{\tau}^2$
 * No confidence intervals for $\hat{\sigma}_{\tau}^2$
 
 ---
+
+### Maximum Likelihood
+
+* Define $L(\mu, \sigma^2, \sigma^2_{\tau})$ to be the probability of the
+dataset $y_{11}, y_{12}, \dots y_{an}$ given the choice of parameters $\mu, \sigma^2$, and $\sigma^2_{\tau}$.
+* A good choice for the parameters is one that maximizes $L\left(\mu, \sigma^2, \sigma^2_{\tau}\right)$.
+  - This is usually found through iterative optimization
+  
+
+---
+
 
 ### Maximum Likelihood
 
