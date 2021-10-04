@@ -25,8 +25,8 @@ _Readings [3.5](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2
 what if we hadn’t planned any, and go in search for significant results using
 different contrasts?
 
-2. Imagine testing 100 hypothesis at = 0.05. Suppose they are all null). We
-would see 5 rejected null hypotheses on average. 
+2. Imagine testing 100 hypothesis at $\alpha = 0.05$. Suppose they are all null.
+We would see 5 rejected null hypotheses on average.
 
 3. Therefore, if we want to allow ourselves some flexibility in searching over
 contrasts, we need to adapt our methodology. We should control the
