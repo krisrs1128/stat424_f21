@@ -58,7 +58,7 @@ $$
 \Gamma\left(c\right) = \mu_i - \mu_j
 $$
 
-```{r}
+```{r, out.width = 400}
 include_graphics("https://uwmadison.box.com/shared/static/lc34pprk90p7evabiycjiw5c22xsm666.png")
 ```
 
@@ -80,8 +80,8 @@ $$
 \left[\left(\bar{y}_{i}-\bar{y}_{j}\right)-q_{\alpha}(a, \text{df}) \frac{\hat{\sigma}}{\sqrt{n}},\left(\bar{y}_{i}-\bar{y}_{j}\right)+q_{\alpha}(a, \text{df}) \frac{\hat{\sigma}}{\sqrt{n}}\right]
 $$
 
-```{r, preview = TRUE}
-display(readImage("https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow05carx9uwna.png"))
+```{r, preview = TRUE, out.width = 400}
+include_graphics("https://uwmadison.box.com/shared/static/alo5fgwmkwrniwejs32ow05carx9uwna.png")
 ```
 
 10. This works because if the difference between the max and min group averages is

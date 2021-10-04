@@ -14,6 +14,16 @@ output:
 ```{r setup, include=FALSE}
 library("knitr")
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 _Readings [4.1](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-03-week5-1/week5-1.Rmd)_
@@ -118,6 +128,7 @@ opts_chunk$set(echo = TRUE)
 ```{r}
 library(readr)
 library(tidyr)
+library(ggplot2)
 graft <- read_table2("https://uwmadison.box.com/shared/static/0ciblk4z2f3k6zizbj4plg3q33w1d0n6.txt") %>%
   pivot_longer(-Pressure, names_to = "batch", values_to = "yield")
 graft$Pressure <- as.factor(graft$Pressure)
