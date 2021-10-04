@@ -13,7 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE, fig.align = "center")
 ```
 
 _Readings [4.2, 4.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-06-week5-4/week5-4.Rmd)_

@@ -13,7 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE, fig.align = "center")
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -161,4 +161,3 @@ it had been before).
 ```{r}
 summary(aov(lm(yield ~ Pressure, graft)))
 ```
-

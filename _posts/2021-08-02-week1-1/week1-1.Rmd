@@ -123,6 +123,7 @@ individuals become detectable. In this example, blocking helped remove nuisance
 variation resulting from some people walking more than others.
 
 ```{r, fig.cap = "Each nearby pair of dots is a person assigned two of the same sole type. Differences between sole types are washed out by differences in how much people walk."}
+library(EBImage)
 display(readImage("https://uwmadison.box.com/shared/static/8rmn6uh1enadfmfriq646bjvr3q5hx0w.png"))
 ```
 
