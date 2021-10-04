@@ -1,10 +1,10 @@
 _posts/*/*.html
 _posts/*/*files*
+_slides/*/*files*
 .Rproj.user
 _slides/*/*.html
 *.RData
 *.rdb
 *.rdx
 *.pdf
-*files*
 *cache*
