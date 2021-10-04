@@ -1,5 +1,5 @@
 ---
-title: "ANOVA Extensions"
+title: "$2^3$ Designs (and beyond)"
 author: "Kris Sankaran | UW Madison | 23 September 2021"
 output:
   xaringan::moon_reader:
@@ -30,7 +30,7 @@ theme424 <- theme_minimal() +
 theme_set(theme424)
 ```
 
-# ANOVA Extensions
+# $2^3$ Designs (and beyond)
 
 ```{r, out.width = 200}
 include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
@@ -43,13 +43,202 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 
 ### Today
 
-* Book Sections: 3.9 & 3.11
-* Online Notes: Week 4 [2] and [3]
+* Book Sections: 6.3 - 6.4
+* Online Notes: Week 8 [3] and [4]
 
 ---
 
 ### Motivation
 
+* We motivated $2^{K}$ designs by discussing their value for screening across a large number of factors $K$
+* But we've only studied $K = 2$!
+* We will generalize those concepts to $K \geq 3$, so that we can actually run a screening experiment
+
+---
+
+### Representation
+
+.pull-left[
+For the $2^3$ design, we have 8 factor configurations
+	* Visualize as corners of a cube
+	* Call the third factor $C$.
+]
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/l4qdpymt13focsszf5krxwt447plyfxu.png")
+```
+]
+
+---
+
+### Representation
+
+.pull-left[
+For the $2^3$ design, we have 8 factor configurations
+	* Visualize as corners of a cube
+	* Call the third factor $C$.
+]
+
+.pull-right[
+| A | B | C | label |
+|---|---|--- | ---------|
+| - | - | - | (1) |
+| + | - | - | a       |
+| - | + | - | b       |
+| - | - | + | c       |
+| + | + | - | ab      |
+| + | - | + | ac      |
+| - | + | + | bc      |
+| + | + | + | abc   |
+]
+
+---
+
+### Estimates: Main Effects
+
+.pull-left[
+* The main effect estimates can be made by subtracting the + from the - corners.
+* Equivalently, this can be viewed as the difference in averages,
+ 	* when the factor is on vs. off
+	* between one face of the cube and its opposite
+]
+
+.pull-right[
+| A | B | C | label |
+|---|---|--- | ---------|
+| - | - | - | (1) |
+| + | - | - | a       |
+| - | + | - | b       |
+| - | - | + | c       |
+| + | + | - | ab      |
+| + | - | + | ac      |
+| - | + | + | bc      |
+| + | + | + | abc   |
+]
+
+---
+
+### Estimates: Main Effects
+
+.pull-left[
+For example, to estimate the main effect for $A$, we would compute
+
+\begin{align*}
+A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]
+\end{align*}
+]
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/wwsniua1ce0q376oy2ffrtzf4ivzup99.png")
+```
+]
+
+---
+
+### Estimates: Main Effects
+
+.pull-left[
+For example, to estimate the main effect for $A$, we would compute
+
+\begin{align*}
+A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]
+\end{align*}
+]
+
+
+.pull-right[
+| A | B | C | label |
+|---|---|--- | ---------|
+| - | - | - | (1) |
+| + | - | - | a       |
+| - | + | - | b       |
+| - | - | + | c       |
+| + | + | - | ab      |
+| + | - | + | ac      |
+| - | + | + | bc      |
+| + | + | + | abc   |
+]
+
+---
+
+### Estimates: Interactions
+
+For interactions, we compare how the average effects of a variable change when
+we condition on the value of another variable.
+
+.pull-left[
+| B | Average A Effect | 
+| --- | ------| 
+| + | $\frac{1}{2^2 n}\left[\left(abc - bc\right) + \left(ab - b\right)\right]$ |
+| - | $\frac{1}{2^2 n}\left[\left(ac - c\right) + \left(a - \left(1\right)\right)\right]$ |
+]
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/hapjw92oqij5oiyddt29nvtq6y1xzxxu.png")
+```
+]
+
+---
+
+
+### Estimates: Interactions
+
+For interactions, we compare how the average effects of a variable change when
+we condition on the value of another variable.
+
+.pull-left[
+| B | Average A Effect | 
+| --- | ------| 
+| + | $\frac{1}{2^2 n}\left[\left(abc - bc\right) + \left(ab - b\right)\right]$ |
+| - | $\frac{1}{2^2 n}\left[\left(ac - c\right) + \left(a - \left(1\right)\right)\right]$ |
+]
+
+.pull-right[
+\begin{align}
+AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
+\end{align}
+]
+
+---
+
+### Notational Trick
+
+* Notice that these contrasts can be formed by multiplying the appropriate columns
+* This works in general, even with for higher-order interactions when $K > 3$
+
+.pull-left[
+  | A | B | C | AB | label |
+  | --- | --- | --- | --- | ------| 
+  | - | - | - | + | (1) |
+  | + | - | - | - | a |
+  | - | + | - | - | b |
+  | - | - | + | + | c |
+  | + | + | - | + | ab |
+  | + | - | + | - | ac |
+  | - | + | + | - |  bc |
+  | + | + | + | + | abc |
+]
+
+.pull-right[
+\begin{align}
+AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
+\end{align}
+]
+
+---
+
+### Regression View
+
+For our code implementation, it will be useful to adopt a regression view,
+
+\begin{align}
+y_{i} = \beta_0 + \sum_{k = 1}^{3} \beta_k x_{ik} + \sum_{\text{pairs } k, k^\prime} \beta_{k k^\prime} x_{ik}x_{ik^{\prime}} + \epsilon_{i}
+\end{align}
+
+where each of the $x_{ik} \in \{-1, 1\}$.
 
 ---
 
