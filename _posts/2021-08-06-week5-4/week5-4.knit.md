@@ -11,10 +11,7 @@ output:
     self_contained: false
 ---
 
-```{r setup, include=FALSE}
-library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
-```
+
 
 _Readings [4.2, 4.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-06-week5-4/week5-4.Rmd)_
 
@@ -109,13 +106,33 @@ $$
 
 12. We'll analyze the results of a study that used a latin square in its design. Compare the table below with table 4.9 in the book.
 
-```{r}
-library(readr)
-library(dplyr)
-rocket <- read_table2("https://uwmadison.box.com/shared/static/ac68766l3zcjog1ldrzki3lis74bbd71.txt") %>%
-  mutate_at(vars(-BurningRate), as.factor) # convert all but BurningRate to factor
-rocket
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='va'>rocket</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_table.html'>read_table2</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ac68766l3zcjog1ldrzki3lis74bbd71.txt"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>BurningRate</span><span class='op'>)</span>, <span class='va'>as.factor</span><span class='op'>)</span> <span class='co'># convert all but BurningRate to factor</span>
+<span class='va'>rocket</span>
+</code></pre></div>
+
 ```
+# A tibble: 25 × 4
+   Batch Operator Formulation BurningRate
+   <fct> <fct>    <fct>             <dbl>
+ 1 1     1        a                    24
+ 2 1     2        b                    20
+ 3 1     3        c                    19
+ 4 1     4        d                    24
+ 5 1     5        e                    24
+ 6 2     1        b                    17
+ 7 2     2        c                    24
+ 8 2     3        d                    30
+ 9 2     4        e                    27
+10 2     5        a                    36
+# … with 15 more rows
+```
+
+</div>
+
 
 13. Given this design, we can fit the model using a linear model. Here,
 $\alpha_{i}, \tau_{j}$, and $\beta_{k}$ are the batch, formulation, and
@@ -123,12 +140,27 @@ operator, respectively. We'll use the shorthand `y ~ .` to refer to the model
 using all the other variables in the data frame as inputs. Compare the ANOVA
 table below with Table 4.12.
 
-```{r}
-#fit <- lm(BurningRate ~ Batch + Operator + Formulation, data = rocket) # gives exact same result
-fit <- lm(BurningRate ~ ., data = rocket)
-summary(aov(fit))
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#fit &lt;- lm(BurningRate ~ Batch + Operator + Formulation, data = rocket) # gives exact same result</span>
+<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>BurningRate</span> <span class='op'>~</span> <span class='va'>.</span>, data <span class='op'>=</span> <span class='va'>rocket</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre></div>
+
 ```
+            Df Sum Sq Mean Sq F value  Pr(>F)   
+Batch        4     68   17.00   1.594 0.23906   
+Operator     4    150   37.50   3.516 0.04037 * 
+Formulation  4    330   82.50   7.734 0.00254 **
+Residuals   12    128   10.67                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+</div>
+
 
 13. There is an operator effect, but no detectable variation across batches.
 Controlling for batch and operater, there is a significant difference across
 formulations.
+```{.r .distill-force-highlighting-css}
+```

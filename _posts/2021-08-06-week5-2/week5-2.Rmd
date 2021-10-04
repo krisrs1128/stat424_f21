@@ -33,8 +33,8 @@ _Readings [4.1](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2
 1. As before, we may want to use contrasts to decide on which treatment effects
 are different We can continue to use the same multiple comparisons procedures as
 before, but have to account for a few differences,
-  * The number of samples per treatment $n$ is replaced by the number of blocks $b$.
-  * The d.f. for $MS_{E}$ is now $(a - 1)(b - 1)$, not $N - a$.
+    * The number of samples per treatment $n$ is replaced by the number of blocks $b$.
+    * The d.f. for $MS_{E}$ is now $(a - 1)(b - 1)$, not $N - a$.
 
 ```{r, out.width = 350}
 include_graphics("https://uwmadison.box.com/shared/static/qezu75a0hv1qhqyeoz8wb7sbb294vrsm.png")
@@ -48,15 +48,14 @@ $$
 ### Model Diagnostics
 
 3. There are two key assumptions when we use RCBDs,
-  * $\epsilon \sim \mathcal{N}\left(0, \sigma^2\right)$ are independently
-  distributed. Note that this also implies homoskedasticity (the variances are
-  not changing from sample to sample).
-  * Additivity (i.e. "no interaction"). The treatment effects $\tau_i$ need to
-  be the same across all blocks.
-  
-```{r, preview = TRUE, fig.cap = "An example where the additivity assumption fails."}
-library(EBImage)
-display(readImage("https://uwmadison.box.com/shared/static/dmob9sjh8my7l8hez390o7gnn3vu1oe6.png"))
+    * $\epsilon \sim \mathcal{N}\left(0, \sigma^2\right)$ are independently
+    distributed. Note that this also implies homoskedasticity (the variances are
+    not changing from sample to sample).
+    * Additivity (i.e. "no interaction"). The treatment effects $\tau_i$ need to
+    be the same across all blocks.
+    
+```{r, preview = TRUE, fig.cap = "An example where the additivity assumption fails.", out.width = 350}
+include_graphics("https://uwmadison.box.com/shared/static/dmob9sjh8my7l8hez390o7gnn3vu1oe6.png")
 ```
 
 4. We’ve seen the first assumption before, and can continue to use normal
@@ -119,4 +118,3 @@ ggplot(graft) +
   geom_point(aes(x = batch, y = residual, col = Pressure)) +
   scale_color_brewer(palette = "Set2")
 ```
-

@@ -2292,12 +2292,12 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">4.1</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-06-week5-2/week5-2.Rmd">Rmarkdown</a></em></p>
 <h3 id="multiple-comparisons">Multiple Comparisons</h3>
 <ol type="1">
-<li>As before, we may want to use contrasts to decide on which treatment effects are different We can continue to use the same multiple comparisons procedures as before, but have to account for a few differences,</li>
-</ol>
+<li>As before, we may want to use contrasts to decide on which treatment effects are different We can continue to use the same multiple comparisons procedures as before, but have to account for a few differences,
 <ul>
 <li>The number of samples per treatment <span class="math inline">\(n\)</span> is replaced by the number of blocks <span class="math inline">\(b\)</span>.</li>
 <li>The d.f. for <span class="math inline">\(MS_{E}\)</span> is now <span class="math inline">\((a - 1)(b - 1)\)</span>, not <span class="math inline">\(N - a\)</span>.</li>
-</ul>
+</ul></li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="https://uwmadison.box.com/shared/static/qezu75a0hv1qhqyeoz8wb7sbb294vrsm.png" width="350" style="display: block; margin: auto;" /></p>
 </div>
@@ -2308,15 +2308,15 @@ t_{\frac{\alpha}{2}, \left(a - 1\right)\left(b - 1\right)}\sqrt{\frac{2 MS_{E}}{
 </ol>
 <h3 id="model-diagnostics">Model Diagnostics</h3>
 <ol start="3" type="1">
-<li>There are two key assumptions when we use RCBDs,</li>
-</ol>
+<li>There are two key assumptions when we use RCBDs,
 <ul>
 <li><span class="math inline">\(\epsilon \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> are independently distributed. Note that this also implies homoskedasticity (the variances are not changing from sample to sample).</li>
 <li>Additivity (i.e. “no interaction”). The treatment effects <span class="math inline">\(\tau_i\)</span> need to be the same across all blocks.</li>
-</ul>
+</ul></li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="week5-2_files/figure-html5/unnamed-chunk-2-1.svg" alt="An example where the additivity assumption fails." width="624" data-distill-preview=1 />
+<img src="https://uwmadison.box.com/shared/static/dmob9sjh8my7l8hez390o7gnn3vu1oe6.png" alt="An example where the additivity assumption fails." width="350" data-distill-preview=1 />
 <p class="caption">
 Figure 1: An example where the additivity assumption fails.
 </p>
