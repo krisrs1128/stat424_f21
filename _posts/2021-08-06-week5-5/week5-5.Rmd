@@ -13,7 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
 _Readings [4.2, 4.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-06-week5-5/week5-5.Rmd)_
@@ -23,11 +23,12 @@ can collect more than $p^2$ samples, we should. But how exactly should the
 samples be collected, and how is the replicated design analyzed?
 
 2. The design decision is context dependent,
-    * \color{purple}{We can use the same row and column levels}
-    * \color{red}{You can keep column levels, but have different row levels}
-        * Equivalently, can keep rows, but different columns
-    * \color{green}{We can have different row and different column levels}
-  Note that in each case, we use a different latin square in each replicate.
+    * We can use the same row and column levels.
+    * We can keep column levels, but have different row levels.
+        * Equivalently, can keep rows, but different columns.
+    * We can have different row and different column levels.
+    
+    Note that in each case, we use a different Latin square in each replicate.
   
 ```{r, fig.cap = "Design where all the row and column levels are reused."}
 include_graphics("figure/ls-1.png")
@@ -63,16 +64,16 @@ $p=5$, we would have $\alpha, \beta, \gamma, \delta, \epsilon$, for example.
 include_graphics("figure/gl.png")
 ```
 
-with one additional requirement: each latin and each greek letter must only appear together once.
-This last requirement is called __orthogonality__.
+with one additional requirement: each Latin and each Greek letter must only
+appear together once. This last requirement is called __orthogonality__.
 
 6. A hypothesis test can be defined, by using the decomposition,
 $$
-SS_{T} = SS_{\text{Rows}} + SS_{\text{Columns}} + SS_{\text{Trewatments}} + SS_{\text{Greek}} + 
+SS_{\text{Total}} = SS_{\text{Rows}} + SS_{\text{Columns}} + SS_{\text{Treatments}} + SS_{\text{Greek}} + 
 SS_{E}
 $$
   and noting that,
 
 $$
-\frac{MS_{\text{Treatment}}}{MS_{E}} = \frac{\frac{1}{p - 1}SS_{\text{Treatment}}}{\frac{1}{\left(p - 1\right)\left(p - 3\right)}SS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 3\right)\right)
+\frac{MS_{\text{Treatment}}}{MS_{E}} = \frac{\frac{1}{p - 1}SS_{\text{Treatment}}}{\frac{1}{\left(p - 1\right)\left(p - 3\right)}SS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 3\right)\right).
 $$

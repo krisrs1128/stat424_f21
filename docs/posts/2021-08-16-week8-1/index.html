@@ -2297,7 +2297,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li>A special case of general factorial design is the <span class="math inline">\(2^K\)</span> design. This arises when there are <span class="math inline">\(K\)</span> factors, but only 2 levels for each factor. We assume <span class="math inline">\(n\)</span> samples at each configuration of factor levels. With only two levels for each factor, these experiments aren’t useful for teasing out subtle variations across levels of a factor. However they <em>are</em> useful for determining which of a large number of factors might be worth investigating further (factor screening).</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="week8-1_files/figure-html5/unnamed-chunk-2-1.svg" width="46%" /><img src="week8-1_files/figure-html5/unnamed-chunk-2-2.svg" width="46%" /></p>
+<p><img src="week8-1_files/figure-html5/unnamed-chunk-2-1.svg" width="46%" style="display: block; margin: auto;" /><img src="week8-1_files/figure-html5/unnamed-chunk-2-2.svg" width="46%" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="2" type="1">
 <li>The simplest case of a <span class="math inline">\(2^K\)</span> design is when the number of factors <span class="math inline">\(K = 2\)</span>. The experimental design can be represented by corners of a square.</li>
@@ -2353,7 +2353,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </ul></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="week8-1_files/figure-html5/unnamed-chunk-3-1.svg" width="46%" /><img src="week8-1_files/figure-html5/unnamed-chunk-3-2.svg" width="46%" /></p>
+<p><img src="week8-1_files/figure-html5/unnamed-chunk-3-1.svg" width="46%" style="display: block; margin: auto;" /><img src="week8-1_files/figure-html5/unnamed-chunk-3-2.svg" width="46%" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="6" type="1">
 <li>All these effect estimates can be summarized by our tabular notation,</li>
@@ -2411,17 +2411,17 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>yield</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>Yield</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>facet_wrap</span><span class='op'>(</span><span class='op'>~</span><span class='va'>B</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>yield</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>Yield</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>B</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="week8-1_files/figure-html5/unnamed-chunk-5-1.svg" width="624" />
+<img src="week8-1_files/figure-html5/unnamed-chunk-5-1.svg" width="624" style="display: block; margin: auto;" />
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/interaction.plot.html'>interaction.plot</a></span><span class='op'>(</span><span class='va'>yield</span><span class='op'>$</span><span class='va'>A</span>, <span class='va'>yield</span><span class='op'>$</span><span class='va'>B</span>, <span class='va'>yield</span><span class='op'>$</span><span class='va'>Yield</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week8-1_files/figure-html5/unnamed-chunk-5-2.svg" width="624" /></p>
+<p><img src="week8-1_files/figure-html5/unnamed-chunk-5-2.svg" width="624" style="display: block; margin: auto;" /></p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

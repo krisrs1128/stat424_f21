@@ -2306,7 +2306,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
  \]</span></p></li>
 <li><p>The associated ANOVA decomposition is <span class="math display">\[
  SS_{\text{Total}} = SS_A + SS_B + SS_{AB} + SS_E
- \]</span> and since the factors all have two levels, the df’s for the main and interaction terms are all 1. The df of <span class="math inline">\(SS_T\)</span> is <span class="math inline">\(n 2^2 - 1\)</span> (number of samples minus one). Taking the ratio between main and interaction <span class="math inline">\(SS\)</span> terms and <span class="math inline">\(SS_E\)</span> gives the basis for F-statistics in the ANOVA table.</p></li>
+ \]</span> and since the factors all have two levels, the df’s for the main and interaction terms are all 1. The df of <span class="math inline">\(SS_T\)</span> is <span class="math inline">\(n 2^2 - 1\)</span> (number of samples minus one). Taking the ratio between main and interaction <span class="math inline">\(SS\)</span> terms and <span class="math inline">\(MS_{E} (= \frac{1}{4\left(n - 1\right)}SS_{E})\)</span> gives the basis for <span class="math inline">\(F\)</span>-statistics in the ANOVA table.</p></li>
 </ol>
 <h3 id="regression-view">Regression View</h3>
 <ol start="4" type="1">
@@ -2374,7 +2374,7 @@ Residuals    8  31.33    3.92
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 <ol start="8" type="1">
-<li>The ANOVA table only describes whether a factor has any relationship with the response – it doesn’t describe in what way the response changes when the factors are turned on or off. For this, we need to look at the full model summary. In the output below, the <code>Intercept</code> estimate (27.5) gives the response when all the factors are turned off. The <code>cA</code> and <code>cB</code> estimates (4.17 and -2.5) describe how the response changes when that factor is turned on. The interaction effect measures how the effect differs from the additive effect when both factors are active (it is 0.833 larger than what would be expected if we just added <code>cA</code> and <code>cB</code>).</li>
+<li>The ANOVA table only describes whether a factor has any relationship with the response – it doesn’t describe in what way the response changes when the factors are turned on or off. For this, we need to look at the full model summary. In the output below, the <code>Intercept</code> estimate (27.5) gives the response when all the factors are turned off. The <code>cA</code> and <code>cB</code> estimates (4.17 and -2.5) describe how the response changes when those factors are turned on. The interaction effect measures how the effect differs from the additive effect when both factors are active (it is 0.833 larger than what would be expected if we just added <code>cA</code> and <code>cB</code>).</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">

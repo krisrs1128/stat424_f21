@@ -3,10 +3,9 @@ title: "Randomized Complete Block Designs"
 author: "Kris Sankaran | UW Madison | October 5, 2021"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -17,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"), fig.align = "center")
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -32,7 +31,7 @@ theme_set(theme424)
 
 # Randomized Complete Block Designs
 
-```{r, out.width = 300}
+```{r, out.width = 300, fig.align = "left"}
 include_graphics("https://uwmadison.box.com/shared/static/fgtpgaimnwwlm5s63bmj9f8ahe1nq4qp.png")
 ```
 
@@ -78,7 +77,7 @@ Other examples,
 
 * This design is called a Randomized Complete Block Design.
 * It generalizes pairing to the case of $K > 2$ treatments.
-* Limitation: Need equal number of samples per blocks as there are treatments
+* Limitation: Need equal number of samples per blocks as there are treatments.
 ]
 .pull-right[
 ```{r, fig.hold = TRUE, out.width = "40%", out.extra='angle=90'}
@@ -95,7 +94,7 @@ include_graphics("https://uwmadison.box.com/shared/static/pq0v9wj2z63szngnxqm0mj
 
 * This design is called a Randomized Complete Block Design.
 * It generalizes pairing to the case of $K > 2$ treatments.
-* Limitation: Need equal number of samples per blocks as there are treatments
+* Limitation: Need equal number of samples per blocks as there are treatments.
 ]
 
 .pull-right[
@@ -120,7 +119,7 @@ As before,
   * $\epsilon_{ij}$ is the error term
   
 But now we also have
-  * $\beta_{j}$, the effect of the $j^{th}$ block
+  * $\beta_{j}$ the effect of the $j^{th}$ block
 ]
 
 .pull-right[
@@ -133,11 +132,11 @@ include_graphics("https://uwmadison.box.com/shared/static/fgtpgaimnwwlm5s63bmj9f
 
 ### Discussion
 
-Imagine you are working with project team to study the effect of listen to music
-(no music, only instrumental, and with vocals) on short math quizzes. Members of
-your team have varying test-taking skills. Discuss,
+Imagine you are working with project team to study the effect of listening to
+music (no music, only instrumental, and with vocals) on short math quizzes.
+Members of your team have varying test-taking skills. Discuss,
 
-* Why might an RCBD design be appropriate?
+* Why might an RCBD be appropriate?
 * If an RCBD were used, how many quizzes would each person have to take?
 * Interpret the greek letters on the previous page within context of this study
 
@@ -187,7 +186,7 @@ SS_{\text{Total}} = SS_{\text{Treatment}} + SS_{\text{Block}} + SS_{E}
 
 ### Derived Quantities
 
-* $MS_{\text{Total}}= \frac{1}{N - 1}SS_T$, which is the sample variance of all $y_{ij}$
+* $MS_{\text{Total}}= \frac{1}{N - 1}SS_{\text{Total}}$, which is the sample variance of all $y_{ij}$
 * $MS_{\text{Treatment}}=\frac{1}{a - 1}SS_{\text{Treatment}}$
 * $MS_{\text{Block}}=\frac{1}{b - 1}SS_{\text{Block}}$
 * $MS_{E}=\frac{1}{(a - 1)(b - 1)}SS_{E}$, which a good estimator for $\sigma^2$
@@ -218,6 +217,11 @@ we use the fact that under $H_0$,
 * $\epsilon \sim \mathcal{N}\left(0, \sigma^2\right)$ are independently distributed. (_Same as before_)
 * The treatment effects $\tau_i$ are the same across all blocks. (_New_)
   - Often called the "additivity" assumption
+  
+```{r out.width = 300}
+include_graphics("https://uwmadison.box.com/shared/static/dmob9sjh8my7l8hez390o7gnn3vu1oe6.png")
+```
+  
 ---
 
 ### Diagnostics
@@ -235,9 +239,32 @@ we use the fact that under $H_0$,
 * The only difference is that we are examining contrasts of group means _after controlling for block effects_
 * See below for a code example
 
+```{r, out.width = 400}
+include_graphics("https://uwmadison.box.com/shared/static/qezu75a0hv1qhqyeoz8wb7sbb294vrsm.png")
+```
+
 ---
 
 ### Code Implementation
+
+Take out your laptops!
+
+---
+
+### Learning new Functions
+
+Whenever we encounter an unfamiliar function, we need to figure out what exactly
+the inputs and outputs are. A few functions can help with this -- try using
+these throughout the examples below.
+
+* `?f` or `help(f)`: Pulls up the documentation about function `f`. Ideally this
+species the format of the input and output.
+* `example(f)`: Provides examples of the use of `f` from the documentation.
+* `str(object)`: Prints out the type and structure of an object. Especially useful to apply to the inputs and
+
+---
+
+### Dataset
 
 The code below reads in the vascular graft dataset. Is there an effect of
 pressure on yield, controlling for possible batch effects?
@@ -253,6 +280,14 @@ library(tidyr)
 graft <- read_table2("https://uwmadison.box.com/shared/static/0ciblk4z2f3k6zizbj4plg3q33w1d0n6.txt") %>%
   pivot_longer(-Pressure, names_to = "batch", values_to = "yield")
 graft$Pressure <- as.factor(graft$Pressure)
+```
+
+---
+
+### Example `str`
+
+```{r}
+str(graft)
 ```
 
 ---
@@ -280,7 +315,8 @@ ggplot(graft) +
 
 ```{r}
 fit <- lm(yield ~ Pressure + batch, graft)
-summary(aov(fit))
+aov_table <- aov(fit)
+summary(aov_table)
 ``` 
 
 Q: Which elements correspond to $MS_{\text{Block}}$, $MS_{\text{Treatment}}$,
@@ -292,14 +328,14 @@ and $MS_{E}$?
 
 ```{r}
 fit <- lm(yield ~ Pressure + batch, graft)
-summary(aov(fit))
+aov_table <- aov(fit)
+summary(aov_table)
 ```
 
 The low $p$-values indicate there is both batch-to-batch variation and a real
 pressure effect on yield.
 
 ---
-
 ### Additivity Assumption
 
 Plotting residuals against batch, we don't see an additivity assumption (Why?).
@@ -324,8 +360,18 @@ We can test for contrasts using the exact same recipe as before,
 This will be true almost without exception for the remainder of the class.
 
 ```{r}
+library(gmodels)
 contrasts <- matrix( c(1, 1, -1, -1, 1, 0, 0, -1), nrow = 2, byrow=TRUE )
-fit.contrast(aov_table, "Pressure", contrasts)
+fit.contrast(fit, "Pressure", contrasts)
+```
+
+---
+
+### Example Documentation
+
+```{r}
+?fit.contrast
+example(fit.contrast)
 ```
 
 ---
@@ -338,7 +384,8 @@ fit.contrast(aov_table, "Pressure", contrasts)
 This will be true almost without exception for the remainder of the class.
 
 ```{r}
-PostHocTest(aov_table, method = "scheffe", contrasts = contrasts)
+library(DescTools)
+PostHocTest(aov_table, method = "scheffe", contrasts = contrasts)$Pressure
 ```
 
 ---
@@ -355,15 +402,109 @@ TukeyHSD(aov_table)$Pressure # can also look batch-to-batch differences
 ```
 
 ---
+class: small
 
 ### Exercise
 
----
-exclude: true
+This walks through Problem 4.7 in the textbook.
 
-LO's
-- Fit an RCBD using either fixed or random treatments
-- Recognize when to fit an RCBD
-- Interpret RCBD computer output
-- Recognize when to apply an RCBD with random batch effects
-- Discuss model fit / appropriateness of assumptions using diagnostics
+.pull-left[
+> A chemist wishes to test the effect of four chemical agents on the strength of
+a particular type of cloth. Because there might be variability from one bolt to
+another, the chemist decides to use a randomized block design, with the bolts of
+cloth considered as blocks. She selects five bolts and applies all four
+chemicals in random order to each bolt. The resulting tensile strengths follow.
+Analyze the data from this experiment (use $\alpha = 0.05$) and draw appropriate
+conclusions.
+]
+
+.pull-right[
+```{r}
+experiment <- data.frame(
+  chemical = c("1", "2", "3", "4"),
+  "b1" = c(73, 73, 75, 73),
+  "b2" = c(68, 67, 68, 71),
+  "b3" = c(74, 75, 78, 75),
+  "b4" = c(71, 72, 73, 75),
+  "b5" = c(67, 70, 68, 69)
+)
+```
+]
+
+---
+
+(1) Interpret the $\tau_i$ and $\beta_j$ terms of the RCBD model within this
+problem context. What corresponds to bolt-to-bolt variation, and what is the
+chemical effect?
+
+(2) Use `pivot_longer` from the `tidyr` package to reshape the data so that all
+strength values are in a single column.
+
+(3) Determine a formula for `lm` that will fit the chemical effect and control
+for bolt-to-bolt variation.
+
+(4) Based on the formula in (4), use `lm` and `aov` to compute a $p$-value for
+the chemical effect.
+
+Bonus: What would the $p$-value be if we failed to account for bolt-to-bolt
+variation?
+
+---
+
+### Solution (1)
+
+$\tau_1, \dots, \tau_4$ represent the effect of the four chemicals on fabric
+strength, relative to the baseline. $\beta_1, \dots, \beta_5$ represent
+variation in fabric strength across the five bolts (if there were no
+bolt-to-bolt variation, then all the $\beta$'s would be 0).
+
+---
+
+### Solution (2)
+
+This reshaping is exactly the same as in the ANOVA examples. We make sure to
+provide names `bolt` and `strength` in the resulting `data.frame`, to make it
+easy to remember what each value stands for.
+```{r}
+library(tidyr)
+experiment_long <- experiment %>%
+  pivot_longer(-chemical, names_to = "bolt", values_to = "strength")
+```
+
+---
+
+### Solution (3)
+
+The formula we need is `strength ~ chemical + bolt`.
+
+* `strength` is the outcome variable of interest
+* `chemical` encodes the four different treatments, whose effects we want to evaluate
+* `bolt` encodes the five different bolts (the block effects), which we need to control for
+
+---
+
+### Solution (4)
+
+The `lm + aov` pattern is identical to the pattern for ANOVA. The only
+difference is the formula, which includes a block effect.
+
+```{r}
+fit <- lm(strength ~ chemical + bolt, data = experiment_long)
+summary(aov(fit))
+```
+
+Apparently, there is no detectable variation across the chemicals at the $\alpha = 0.05$ level.
+
+---
+
+### Bonus
+
+To study the effects without accounting for block effects, we remove the `bolt`
+term from the formula. In this case, neither model yields a significant chemical
+effect. Often, however, the model accounting for nuisance variation will have
+more noticeable effects.
+
+```{r}
+fit <- lm(strength ~ chemical, data = experiment_long)
+summary(aov(fit))
+```

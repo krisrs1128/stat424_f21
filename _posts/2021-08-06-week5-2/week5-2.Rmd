@@ -13,7 +13,17 @@ output:
 
 ```{r setup, include=FALSE}
 library("knitr")
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE, fig.align = "center")
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 _Readings [4.1](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-06-week5-2/week5-2.Rmd)_
@@ -26,7 +36,7 @@ before, but have to account for a few differences,
   * The number of samples per treatment $n$ is replaced by the number of blocks $b$.
   * The d.f. for $MS_{E}$ is now $(a - 1)(b - 1)$, not $N - a$.
 
-```{r}
+```{r, out.width = 350}
 include_graphics("https://uwmadison.box.com/shared/static/qezu75a0hv1qhqyeoz8wb7sbb294vrsm.png")
 ```
   
@@ -56,10 +66,10 @@ probability plots and residual analysis to check it.
 consistently lower / higher in some blocks.
 
 6. What can we do if we find an interaction effect?
-  * Sometimes the interaction effects will disappear after transforming the response (e.g., using $\log$ or $\sqrt$)
-  * Otherwise, another design may be necessary. Factorial designs (to be
-  discussed soon) allow for inference even in the presence of interactions.
-  
+    * Sometimes the interaction effects will disappear after transforming the response (e.g., using $\log$ or $\sqrt{}$)
+    * Otherwise, another design may be necessary. Factorial designs (to be
+    discussed soon) allow for inference even in the presence of interactions.
+    
 ### Code Example
 
 7. We will continue the graft example from the previous notes. First, let's
@@ -103,6 +113,7 @@ of residuals is consistently $> 0$ or $< 0$), equality of variance across
 batches seems to be violated. The variance of Batch 6's residuals is too small.
 
 ```{r}
+library(ggplot2)
 graft$residual <- resid(fit)
 ggplot(graft) +
   geom_point(aes(x = batch, y = residual, col = Pressure)) +

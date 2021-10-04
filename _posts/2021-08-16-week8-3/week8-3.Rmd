@@ -16,11 +16,6 @@ library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-```{r, fig.margin = TRUE}
-library(EBImage)
-display(readImage("https://uwmadison.box.com/shared/static/vxvzawk89r2m08um53dbfoka5md0bsnf.png"))
-```
-
 _Readings [6.3 - 6.4](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-16-week8-3/week8-3.Rmd)_
 
 ```{r, echo = FALSE}
@@ -45,15 +40,18 @@ general patterns
 2. For the $2^3$ design, we have 8 factor configurations
   	* Visualize as corners of a cube
   	* Call the third factor $C$.
-	
-```{r}
-library(readr)
-library(dplyr)
-plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1vq7uv7omp4pjdg.txt", header = TRUE) %>%
-  mutate_at(vars(-Rate), as.factor)
+  
+```{r, echo = FALSE, preview = TRUE}
+include_graphics("https://uwmadison.box.com/shared/static/l4qdpymt13focsszf5krxwt447plyfxu.png")
 ```
 
-```{r, fig.height = 5, fig.margin = TRUE}
+3. The example below reads in a dataset with 3 factors. We can use `facet_grid`
+to see effects across all 8 configurations.
+
+```{r fig.height = 5, fig.margin = TRUE}
+library(readr)
+library(dplyr)
+plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1vq7uv7omp4pjdg.txt", header = TRUE)
 ggplot(plasma) +
   geom_point(aes(A, Rate)) +
   facet_grid(B ~ C)
@@ -61,7 +59,7 @@ ggplot(plasma) +
 
 ### Effect Estimates
 
-3. Our table notation can be extended to deal with all 8 corners of the cube.
+4. Our table notation can be extended to deal with all 8 corners of the cube.
 
 | A | B | C | label |
 |---|---|--- | ---------|
@@ -74,15 +72,15 @@ ggplot(plasma) +
 | - | + | + | bc      |
 | + | + | + | abc   |
 
-4. The main effect estimates can be made by subtracting the + from the -
+5. The main effect estimates can be made by subtracting the + from the -
 corners. Equivalently, this can be viewed as the difference in averages,
  	* when the factor is on vs. off
 	* between one face of the cube and its opposite
 
-5. For example, to estimate the main effect of $A$, we can use,
+6. For example, to estimate the main effect of $A$, we can use,
 $$A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]$$
 
-6. To estimate interactions, we compare how the average effects of a variable
+7. To estimate interactions, we compare how the average effects of a variable
 change when we condition on the value of another variable. For example, for the
 interaction $AB$, notice that
 
@@ -97,7 +95,7 @@ $$
 AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
 $$
 
-7. Notice that the associated contrast can be obtained by multiplying the
+8. Notice that the associated contrast can be obtained by multiplying the
 columns in the table above.
 
 ```{r, fig.margin = TRUE}

@@ -180,3 +180,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   padding: 0px 0px 0px 0px;
   width: 100%;
 }
+
+.small {
+  font-size: 21px;
+}

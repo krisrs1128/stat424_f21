@@ -2294,19 +2294,17 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li><p>When <span class="math inline">\(p\)</span> is small, the test from the previous notes can have low power. If we can collect more than <span class="math inline">\(p^2\)</span> samples, we should. But how exactly should the samples be collected, and how is the replicated design analyzed?</p></li>
 <li><p>The design decision is context dependent,</p>
 <ul>
-<li></li>
-<li><ul>
-<li>Equivalently, can keep rows, but different columns</li>
+<li>We can use the same row and column levels.</li>
+<li>We can keep column levels, but have different row levels.
+<ul>
+<li>Equivalently, can keep rows, but different columns.</li>
 </ul></li>
-<li>Note that in each case, we use a different latin square in each replicate.</li>
-</ul></li>
+<li>We can have different row and different column levels.</li>
+</ul>
+<p>Note that in each case, we use a different Latin square in each replicate.</p></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"figure/ls-1.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
 <img src="figure/ls-1.png" alt="Design where all the row and column levels are reused." width="406" />
 <p class="caption">
 Figure 1: Design where all the row and column levels are reused.
@@ -2314,11 +2312,7 @@ Figure 1: Design where all the row and column levels are reused.
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"figure/ls-2.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="figure/ls-2.png" alt="Design where only the column levels are reused. Pay attention to the difference in row labels from one group to the next." width="406" />
 <p class="caption">
 Figure 2: Design where only the column levels are reused. Pay attention to the difference in row labels from one group to the next.
@@ -2326,11 +2320,7 @@ Figure 2: Design where only the column levels are reused. Pay attention to the d
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"figure/ls-2.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
 <img src="figure/ls-2.png" alt="Design where neither the row nor column levels are reused." width="406" />
 <p class="caption">
 Figure 3: Design where neither the row nor column levels are reused.
@@ -2348,26 +2338,22 @@ Figure 3: Design where neither the row nor column levels are reused.
 <li><p>A Graeco-Latin square is like two Latin Squares overlaid on one another,</p></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"figure/gl.png"</span><span class='op'>)</span>
-</code></pre>
-</div>
-<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
 <img src="figure/gl.png" alt="An example graeco-latin square." width="411" />
 <p class="caption">
 Figure 4: An example graeco-latin square.
 </p>
 </div>
 </div>
-<p>with one additional requirement: each latin and each greek letter must only appear together once. This last requirement is called <strong>orthogonality</strong>.</p>
+<p>with one additional requirement: each Latin and each Greek letter must only appear together once. This last requirement is called <strong>orthogonality</strong>.</p>
 <ol start="6" type="1">
 <li>A hypothesis test can be defined, by using the decomposition, <span class="math display">\[
-SS_{T} = SS_{\text{Rows}} + SS_{\text{Columns}} + SS_{\text{Trewatments}} + SS_{\text{Greek}} + 
+SS_{\text{Total}} = SS_{\text{Rows}} + SS_{\text{Columns}} + SS_{\text{Treatments}} + SS_{\text{Greek}} + 
 SS_{E}
 \]</span> and noting that,</li>
 </ol>
 <p><span class="math display">\[
-\frac{MS_{\text{Treatment}}}{MS_{E}} = \frac{\frac{1}{p - 1}SS_{\text{Treatment}}}{\frac{1}{\left(p - 1\right)\left(p - 3\right)}SS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 3\right)\right)
+\frac{MS_{\text{Treatment}}}{MS_{E}} = \frac{\frac{1}{p - 1}SS_{\text{Treatment}}}{\frac{1}{\left(p - 1\right)\left(p - 3\right)}SS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 3\right)\right).
 \]</span></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

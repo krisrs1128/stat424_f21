@@ -2299,33 +2299,46 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </ul>
 <ol start="2" type="1">
 <li><p>Assume two nuisance factors, each with <span class="math inline">\(p\)</span> levels. Furthermore, assume that we care about <span class="math inline">\(p\)</span> different treatments.</p></li>
-<li><p>The intuition for Latin Squares is similar to the intuition for RCBD,</p></li>
+<li><p>The intuition for Latin Squares is similar to the intuition for RCBD, &gt; Make sure to run each treatment on each nuisance factor exactly once.</p>
+<p>For example, in the manufacturing example, each operator should see each treatment once, and each batch of materials should be used for each treatment</p></li>
 </ol>
-<blockquote>
-<p>Make sure to run each treatment on each nuisance factor exactly once.</p>
-</blockquote>
-<p>For example, in the manufacturing example, each operator should see each treatment once, and each batch of materials should be used for each treatment</p>
 <h3 id="setup">Setup</h3>
 <ol start="4" type="1">
-<li>Latin Squares are <span class="math inline">\(p\times p\)</span> arrays, filled with <span class="math inline">\(p\)</span> letters, so that each letter appears exactly once in each row and each column. Here are three tables when <span class="math inline">\(p = 3\)</span>.</li>
+<li>Latin Squares are <span class="math inline">\(p\times p\)</span> arrays, filled with <span class="math inline">\(p\)</span> letters, so that each letter appears exactly once in each row and each column. For example, here is a table when <span class="math inline">\(p = 3\)</span>.</li>
 </ol>
-<p>| A | B | C | | B | C | A | | C | A | B |</p>
-<p>| B | A | C | | A | C | B | | C | B | A |</p>
-<p>| C | B | A | | B | A | C | | A | C | B |</p>
-<p>This is basically sudoku for statisticians</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>B</td>
+<td>C</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>C</td>
+<td>A</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>A</td>
+<td>B</td>
+</tr>
+</tbody>
+</table>
 <ol start="5" type="1">
-<li>Why do we care? It tells us how we can implement the design idea above. First, randomly choose a <span class="math inline">\(p\times p\)</span> latin square</li>
-</ol>
+<li>Why do we care? It tells us how we can implement the design idea above. First, randomly choose a <span class="math inline">\(p\times p\)</span> Latin square
 <ul>
 <li>The rows are levels of the first blocking factor.</li>
 <li>The columns are levels of the second blocking factor.</li>
-<li>The letters are the treatment levels Then, the experiment consists of <span class="math inline">\(p^2\)</span> runs, one for each of the pairs of blocking levels, with treatment specified by the cell’s label</li>
+<li>The letters are the treatment levels</li>
 </ul>
+Then, the experiment consists of <span class="math inline">\(p^2\)</span> runs, one for each of the pairs of blocking levels, with treatment specified by the cell’s label.</li>
+</ol>
 <h3 id="model-setting">Model Setting</h3>
 <ol start="6" type="1">
 <li><p>Instead of just one set of block effects, we’ll have two sets, <span class="math inline">\(\alpha_i\)</span> and <span class="math inline">\(\beta_k\)</span>. This results in, <span class="math display">\[\begin{align*}
 y_{ijk} &amp;= \mu + \alpha_i + \tau_j + \beta_k + \epsilon_{ijk}
-\end{align*}\]</span> where <span class="math inline">\(\epsilon_{ijk} \mathcal{N}\left(0,\sigma^2\right)\)</span> independently. Note that each of the indices <span class="math inline">\(i, j\)</span> and <span class="math inline">\(k\)</span> range from <span class="math inline">\(1, \dots, p\)</span>.</p></li>
+\end{align*}\]</span> where <span class="math inline">\(\epsilon_{ijk}\sim \mathcal{N}\left(0,\sigma^2\right)\)</span> independently. Note that each of the indices <span class="math inline">\(i, j\)</span> and <span class="math inline">\(k\)</span> range from <span class="math inline">\(1, \dots, p\)</span>.</p></li>
 <li><p>To make the model identifiable, we assume <span class="math display">\[
 \sum_{i = 1}^{p} \alpha_i = \sum_{j = 1}^{p} \tau_j = \sum_{k = 1}^{p} \beta_{k} = 0
 \]</span></p></li>
@@ -2347,18 +2360,23 @@ H_{1} &amp;: \tau_{i} \neq 0 \text{ for at least one } i
 \end{aligned}
 \]</span></p>
 <ol start="10" type="1">
-<li>This is abbreviated as,</li>
+<li>This is abbreviated as, <span class="math display">\[\begin{align*}
+  SS_{\text{Total}} = &amp;SS_{\text{Rows}} + \\
+  &amp;SS_{\text{Columns}} +\\
+  &amp;SS_{\text{Treatment}} + \\
+  &amp;SS_{E}
+  \end{align*}\]</span> and we define</li>
 </ol>
-<p><span class="math display">\[\begin{align*}
-SS_{\text{Total}} = &amp;SS_{\text{Rows}} + \\
-&amp;SS_{\text{Columns}} +\\
-&amp;SS_{\text{Treatment}} + \\
-&amp;SS_{E}
-\end{align*}\]</span> and we define * <span class="math inline">\(MS_{\text{Rows}}=\frac{1}{p - 1}SS_{\text{Rows}}\)</span> * <span class="math inline">\(MS_{\text{Treatment}}=\frac{1}{p - 1}SS_{\text{Treatment}}\)</span> * <span class="math inline">\(MS_{\text{Columns}}=\frac{1}{p - 1}SS_{\text{Columns}}\)</span> * <span class="math inline">\(MS_{E}=\frac{1}{(p - 1)(p - 2)}SS_{E}\)</span></p>
+<ul>
+<li><span class="math inline">\(MS_{\text{Rows}}=\frac{1}{p - 1}SS_{\text{Rows}}\)</span></li>
+<li><span class="math inline">\(MS_{\text{Treatment}}=\frac{1}{p - 1}SS_{\text{Treatment}}\)</span></li>
+<li><span class="math inline">\(MS_{\text{Columns}}=\frac{1}{p - 1}SS_{\text{Columns}}\)</span></li>
+<li><span class="math inline">\(MS_{E}=\frac{1}{(p - 1)(p - 2)}SS_{E}\)</span></li>
+</ul>
 <ol start="11" type="1">
 <li>It turns out that <span class="math display">\[
-\frac{MS_{\text{Treatment}}}{MS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 2\right)\right)
-\]</span> which forms the basis for the test: reject the null if the ratio lies above the <span class="math inline">\(1 - \alpha\)</span> quantile of this <span class="math inline">\(F\)</span>-distribution.</li>
+  \frac{MS_{\text{Treatment}}}{MS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 2\right)\right)
+  \]</span> which forms the basis for the test: reject the null if the ratio lies above the <span class="math inline">\(1 - \alpha\)</span> quantile of this <span class="math inline">\(F\)</span>-distribution.</li>
 </ol>
 <h3 id="code-example">Code Example</h3>
 <ol start="12" type="1">
@@ -2389,7 +2407,7 @@ SS_{\text{Total}} = &amp;SS_{\text{Rows}} + \\
 # … with 15 more rows</code></pre>
 </div>
 <ol start="13" type="1">
-<li>Given this design, we can fit the model using a linear model. Here, <span class="math display">\[\alpha_{i}, \tau_{j}\]</span>, and <span class="math display">\[\beta_{k}\]</span> are the batch, formulation, and operator, respectively. We’ll use the shorthand <code>y ~ .</code> to refer to the model using all the other variables in the data frame as inputs. Compare the ANOVA table below with Table 4.12.</li>
+<li>Given this design, we can fit the model using a linear model. Here, <span class="math inline">\(\alpha_{i}, \tau_{j}\)</span>, and <span class="math inline">\(\beta_{k}\)</span> are the batch, formulation, and operator, respectively. We’ll use the shorthand <code>y ~ .</code> to refer to the model using all the other variables in the data frame as inputs. Compare the ANOVA table below with Table 4.12.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
