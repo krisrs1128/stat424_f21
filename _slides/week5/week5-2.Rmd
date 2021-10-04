@@ -3,10 +3,9 @@ title: "RCBD with Random Blocks and Latin Squares"
 author: "Kris Sankaran | UW Madison | 7 October 2021"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -95,7 +94,7 @@ y_{ij} &= \mu + \tau_i + \beta_j + \epsilon_{ij} \\
 \end{align}
 ]
 
-```{r}
+```{r, out.width = 350}
 include_graphics("https://uwmadison.box.com/shared/static/gu58jurmhyraebsdyh4txlpyxegxn9xf.png")
 ```
 
@@ -131,7 +130,8 @@ Imagine there are two sources of nuisance variation in an experiment,
 
 > Make sure to run each treatment on each nuisance factor exactly once.
 
-  * Each operator should see each treatment once, and each batch of materials should be used for each treatment
+  * Each operator should see each treatment once, and each batch of materials
+  should be used for each treatment
   * Don't want any particular treatment to get lucky and have a "good" batch of
   material or operator
 
@@ -141,11 +141,13 @@ Imagine there are two sources of nuisance variation in an experiment,
 
 Latin Squares are $p\times p$ arrays, filled with $p$ letters, so that each
 letter appears exactly once in each row and each column.
-
-  | A | B | C |
-  | B | C | A |
-  | C | A | B |
   
+|   |   |   |
+| - | - | - |
+| A | B | C |
+| B | C | A |
+| C | A | B |
+
 It is like Sudoku.
 
 ---
@@ -215,12 +217,12 @@ $$
 \frac{MS_{\text{Treatment}}}{MS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 2\right)\right)
 $$
 
-Therefore, we reject the null if the ratio lies above the $1 -  \alpha$ quantile
+Therefore, we reject the null if the ratio lies above the $1 - \alpha$ quantile
 of this $F$-distribution.
 
 ---
 
-### Code Implementation
+# Code Implementation
 
 ---
 
@@ -292,7 +294,7 @@ summary(aov(fit))
 ### Hypothesis Test
 
 * There is an operator effect, but no detectable variation across batches.
-* Controlling for batch and operater, there is a significant difference across
+* Controlling for batch and operator, there is a significant difference across
 formulations.
 
 ```{r}

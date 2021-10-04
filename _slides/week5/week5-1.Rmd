@@ -245,7 +245,7 @@ include_graphics("https://uwmadison.box.com/shared/static/qezu75a0hv1qhqyeoz8wb7
 
 ---
 
-### Code Implementation
+# Code Implementation
 
 Take out your laptops!
 
