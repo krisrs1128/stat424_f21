@@ -16,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 6, fig.height = 2.7, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 6, fig.height = 2.7, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -29,10 +29,12 @@ theme424 <- theme_minimal() +
 theme_set(theme424)
 ```
 
-# ANOVA Extensions
+# RCBD with Random Blocks + Latin Squares
 
-```{r, out.width = 200}
+```{r, out.width = 300}
+include_graphics("https://uwmadison.box.com/shared/static/gu58jurmhyraebsdyh4txlpyxegxn9xf.png")
 ```
+
 ### Statistical Experimental Design
 
 .large[Kris Sankaran | UW Madison | 7 October 2021]
@@ -43,6 +45,15 @@ theme_set(theme424)
 
 * Book Sections: 4.1 - 4.3
 * Online Notes: Week 5 [3], [4], [5]
+
+---
+
+### Warm-Up: Memo to Friend
+
+Imagine that your friend missed the last lecture. Work with a partner to draft a
+short summary of one key idea or piece of code discussed in the last lecture.
+Have either you or your partner submit your memo to on Canvas (Week 5 -
+Discussion 2).
 
 ---
 
@@ -58,10 +69,10 @@ of realistic settings,
 
 ### Overview
 
-This lecture $\rightarrow 1, 2$. Next week $\arrow 3$.
+This lecture $\rightarrow 1, 2$. Next week $\rightarrow 3$.
 
 1. Working with many blocks $\rightarrow$ RCBD with Random Block Effects
-2. Multiple sources of nuisance variation $rightarrow$ Latin Squares
+2. Multiple sources of nuisance variation $\rightarrow$ Latin Squares
 3. Fewer samples than treatments $\rightarrow$ Incomplete Block Designs
 
 ---
@@ -69,14 +80,15 @@ This lecture $\rightarrow 1, 2$. Next week $\arrow 3$.
 ### RCBD with Random Blocks
 
 .center[
-ANOVA $rightarrow$ Random Effects ANOVA
-RCBD $rightarrow$ RCBD with Random Block Effects
+ANOVA $\rightarrow$ Random Effects ANOVA
+
+RCBD $\rightarrow$ RCBD with Random Block Effects
 ]
 
-* ANOVA with Random Effects: Imagine that group effects are drawn from a large
-population
-* RCBD with Random Block Effects: Imagine that block effects are drawn from a
-large population
+* ANOVA with Random Effects: Imagine that **group effects** are drawn from a
+large population.
+* RCBD with Random Block Effects: Imagine that **block effects** are drawn from
+a large population.
 
 ---
 
@@ -94,9 +106,11 @@ y_{ij} &= \mu + \tau_i + \beta_j + \epsilon_{ij} \\
 \end{align}
 ]
 
+.pull-right[
 ```{r, out.width = 350}
 include_graphics("https://uwmadison.box.com/shared/static/gu58jurmhyraebsdyh4txlpyxegxn9xf.png")
 ```
+]
 
 ---
 
@@ -110,8 +124,7 @@ H_0 &: \tau_1 = \dots = \tau_a = 0 \\
 H_{1} &: \tau_{i} \neq 0 \text{ for at least one } i
 \end{align*}
 
-In fact, we can use the same test statistic
-($\frac{MS_{\text{Treatment}}}{MS_{E}}$) and cutoffs as in the fixed block case.
+In fact, we can use the same test statistic $\frac{MS_{\text{Treatment}}}{MS_{E}}$ and cutoffs as in the fixed block case.
 
 ---
 
@@ -169,7 +182,7 @@ We now have two sets of block effects, $\alpha_i$ and $\beta_k$.
 
 \begin{align*}
 y_{ijk} &= \mu + \alpha_i + \tau_j + \beta_k + \epsilon_{ijk} \\
-\epsilon_{ijk} \mathcal{N}\left(0,\sigma^2\right)
+\epsilon_{ijk} &\sim \mathcal{N}\left(0,\sigma^2\right)
 \end{align*}
 
 Note that each of the indices $i, j$ and $k$ range from $1, \dots, p$.
@@ -213,9 +226,9 @@ In analogy to ANOVA, define
 
 Under the null hypothesis, it can be shown that,
 
-$$
+\begin{align*}
 \frac{MS_{\text{Treatment}}}{MS_{E}} \sim F\left(p - 1, \left(p - 1\right)\left(p - 2\right)\right)
-$$
+\end{align*}
 
 Therefore, we reject the null if the ratio lies above the $1 - \alpha$ quantile
 of this $F$-distribution.
@@ -223,6 +236,13 @@ of this $F$-distribution.
 ---
 
 # Code Implementation
+
+Take out your laptops!
+
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
 
 ---
 
@@ -241,15 +261,19 @@ graft$Pressure <- as.factor(graft$Pressure)
 
 ---
 
+.pull-left[
 * We can continue to use the `lmer` function from `lme4`.
 * `(1 | variable)` indicates that a variable should be treated as random
 * We estimate a fixed effect for `Pressure` but a random effect for `batch` 
+]
 
+.pull-right[
 ```{r}
 library(lme4)
 fit <- lmer(yield ~ Pressure + (1 | batch), data = graft)
 fit
 ```
+]
 
 ---
 
@@ -265,16 +289,20 @@ confint(fit)
 
 ### Latin Squares
 
+.pull-left[
 * In the rocket dataset, both operator and batch are nuisance factors
 * The `mutate_at` line is a shortcut to using `as.factor` for the `Batch`,
 `Operator`, and `Formulation` columns
+]
 
+.pull-right[
 ```{r}
 library(dplyr)
 rocket <- read_table2("https://uwmadison.box.com/shared/static/ac68766l3zcjog1ldrzki3lis74bbd71.txt") %>%
   mutate_at(vars(-BurningRate), as.factor) # convert all but BurningRate to factor
 head(rocket)
 ```
+]
 
 ---
 
@@ -286,25 +314,143 @@ head(rocket)
 ```{r}
 #fit <- lm(BurningRate ~ Batch + Operator + Formulation, data = rocket) # gives exact same result
 fit <- lm(BurningRate ~ ., data = rocket)
-summary(aov(fit))
 ```
 
 ---
 
 ### Hypothesis Test
 
+.pull-left[
 * There is an operator effect, but no detectable variation across batches.
 * Controlling for batch and operator, there is a significant difference across
 formulations.
+]
 
+.pull-right[
 ```{r}
-#fit <- lm(BurningRate ~ Batch + Operator + Formulation, data = rocket) # gives exact same result
-fit <- lm(BurningRate ~ ., data = rocket)
 summary(aov(fit))
 ```
+]
 
 ---
+class: small
 
 ### Exercise
 
+This walks through Problem 4.24 in the textbook.
+
+.pull-left[
+The effect of five different ingredients $(A, B, C, D, E)$ on the reaction time
+of a chemical process is being studied. Each batch of new material is only large
+enough to permit five runs to be made. Furthermore, each run requires
+approximately 1.5 hours, so only 5 runs can be made in one day. The experimenter
+decides to run the experiment as a Latin square so that the day and batch
+effects may be systematically controlled. She obtains the data that follow.
+Analyze the data from this experiment (use $\alpha = 0.05$) and draw
+conclusions.
+]
+
+.pull-right[
+```{r}
+library(dplyr)
+experiment <- data.frame(
+  day = rep(1:5, each = 5),
+  batch = rep(1:5, 5),
+  ingredient = c("A", "C", "B", "D", "E", "B", "E", "A", "C", "D", "D", "A", "C", "E", "B", "C", "D", "E", "B", "A", "E", "B", "D", "A", "C"),
+  time = c(8, 11, 4, 6, 4, 7, 2, 9, 8, 2, 1, 7, 10, 6, 3, 7, 3, 1, 6, 8, 3, 8, 5, 10, 8)
+) %>%
+  mutate_at(vars(-time), as.factor) # why is this needed?
+```
+]
+
 ---
+  
+(1) Summarize the problem statement in one sentence.
+
+(2) Setup a formula for `lm` that fits the ingredient effect while controlling
+for batch and day.
+
+(3) Use `lm` and `aov` to produce an ANOVA table. Interpret the $p$-value for
+the ingredient effect in context.
+  
+Bonus: Are there systematic differences in the model's residuals across batches
+or days? What are the implications?
+
+---
+
+### Solution (1)
+
+A Latin squares experiment was run to see how ingredient affects reaction time
+in a plant, controlling for two sources of nuisance variation (batch and day).
+
+---
+
+### Solution (2)
+
+ * We can use  `time ~ ingredient + batch + day`.
+ * This can be abbreviated `time ~ .`, since the right hand side contains
+ all columns in the `data.frame` other than time.
+
+---
+
+### Solution (3)
+
+```{r}
+fit <- lm(time ~ ingredient + batch + day, data = experiment)
+summary(aov(fit))
+```
+
+After controlling for the sources of potential nuisance variation, there is a
+very strong ingredient effect. We can conclude that the ingredients are not all identical.
+
+---
+
+### Solution: Bonus
+
+.pull-left[Normality seems plausible, and there are no systematic differences between
+batches. However, some of the days seemed to have higher variance than others.
+It might be worth transforming the response to stabilize the variance.
+]
+
+.pull-right[
+```{r}
+experiment <- experiment %>%
+  mutate(
+    residual = resid(fit),
+    fitted = predict(fit)
+    )
+```
+]
+
+---
+
+### Solution: Bonus
+
+.pull-left[Normality seems plausible, and there are no systematic differences between
+batches. However, some of the days seemed to have higher variance than others.
+It might be worth transforming the response to stabilize the variance.
+]
+
+.pull-right[
+```{r, fig.width = 4, fig.height = 2.6}
+library(ggbeeswarm)
+ggplot(experiment) +
+  geom_beeswarm(aes(batch, residual))
+```
+]
+
+---
+
+### Solution: Bonus
+
+.pull-left[Normality seems plausible, and there are no systematic differences between
+batches. However, some of the days seemed to have higher variance than others.
+It might be worth transforming the response to stabilize the variance.
+]
+
+.pull-right[
+```{r, fig.width = 4, fig.height = 2.6}
+ggplot(experiment) +
+  geom_beeswarm(aes(day, residual))
+```
+]

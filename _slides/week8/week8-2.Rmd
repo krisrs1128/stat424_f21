@@ -228,17 +228,58 @@ AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
 \end{align}
 ]
 
+Q: What is the contrast for BC?
+
+---
+
+### Variance Estimates
+
+* Uncertainty is often just as important as the raw estimates
+* A simple formula gives the variance for all effect estimates in $2^K$ designs
+  - The proof is given in the notes and book
+
+\begin{align*}
+\text{Var}\left(\text{Effect }A\right) &= \frac{\sigma^2}{2^{K - 2}n} \\
+&\approx \frac{\hat{\sigma}^2}{2^{K - 2}n}
+\end{align*}
+
 ---
 
 ### Regression View
 
-For our code implementation, it will be useful to adopt a regression view,
+.pull-left[
+There is an equivalent regression view,
 
 \begin{align}
-y_{i} = \beta_0 + \sum_{k = 1}^{3} \beta_k x_{ik} + \sum_{\text{pairs } k, k^\prime} \beta_{k k^\prime} x_{ik}x_{ik^{\prime}} + \epsilon_{i}
+y_{i} = \beta_0 + \sum_{k \in \{A, B, C\}} \beta_k x_{ik} + \sum_{\text{pairs } k, k^\prime \in \{A, B, C\}} \beta_{k k^\prime} x_{ik}x_{ik^{\prime}} + \beta_{ABC}x_{ABC} \epsilon_{i}
 \end{align}
 
 where each of the $x_{ik} \in \{-1, 1\}$.
+]
+
+.pull-right[
+* We can encode whether or not A is active using $x_{iA}$ 
+* The associated A effect is the $\beta_{A}$ for this term
+* We can encode an interaction between A and B by $x_{iA}x_{iB}$
+* The associated AB effect is the $\beta_{AB}$ for this product term
+* ...
+]
+
+---
+
+### Regression View
+
+.pull-left[
+* This view generalizes immediately to $K > 3$
+* In general, $\text{Effect}_{k} = 2\hat{\beta}$. See the code example below and the discussion in Week 10.
+  - Similarly, $\text{s.e.}\left(Effect\right) = 2\text{s.e.}\left(\hat{\beta}\right)$
+]
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/8euuywv5ay4x7przznhsxdo269865h2a.png")
+```
+]
 
 ---
 
@@ -246,6 +287,163 @@ where each of the $x_{ik} \in \{-1, 1\}$.
 
 ---
 
-### Exercise
+### Dataset
+
+.pull-left[
+We will work with the plasma etching dataset (example 6.1). In this experiment,
+3 factors are varied and their effects on device etch rate are noted. Each
+combination of factors has two replicates.
+]
+
+.pull-right[
+```{r}
+library(readr)
+library(dplyr)
+coded <- function(x) ifelse(x == '-', -1, 1)
+plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1vq7uv7omp4pjdg.txt", header = TRUE) %>%
+  mutate_at(vars(A:C), coded)
+
+head(plasma, 4)
+```
+]
 
 ---
+
+### Hand Calculation - Effects
+
+.pull-left[
+We can plug into the formula
+\begin{align*}
+A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]
+\end{align*}
+]
+
+.pull-right[
+```{r}
+K <- 3 # three factors
+n <- 2 # two replicates per corner
+a_positive <- sum(plasma$Rate[plasma$A == 1])
+a_negative <- sum(plasma$Rate[plasma$A == -1])
+a_effect <- (a_positive - a_negative) / (n * 2 ^ (K - 1))
+a_effect
+```
+]
+
+---
+
+### Hand Calculation -- Variances
+
+We can plug into the formula,
+\begin{align*}
+\approx \frac{\hat{\sigma}^2}{2^{K - 2}n}
+\end{align*}
+using the estimate $\hat{\sigma}^2 \approx MS_{E}$.
+
+```{r}
+fit <- lm(Rate ~ A * B * C, plasma)
+aov_table <- aov(fit)
+s2 <- last(tidy(aov_table)$meansq) # MS["residual"]
+
+var_effect <- s2 / (n * 2 ^ (K - 2))
+sqrt(var_effect)
+```
+
+---
+
+### Computer Calculation
+
+* The coefficients in the `lm` fit are always exactly half the true effect estimate
+* Therefore, in practice, we never have to compute effects by hand.
+
+```{r}
+paste("lm estimate:", 2 * coef(fit)["A"])
+paste("Hand calculation: ", a_effect)
+```
+
+---
+
+```{r}
+paste("lm estimate:", 2 * tidy(fit)$std.error[2]) # corresponds to "A"
+paste("Hand calculation:", sqrt(var_effect))
+```
+
+---
+
+### Exercise
+
+This exercise walks through 6.11.
+
+.pull-left[
+An experiment was performed to improve the yield of a chemical process. Four
+factors were selected, and two replicates of a completely randomized experiment
+were run. The results are available [here](https://uwmadison.box.com/shared/static/8eh4ezyudsefc5i9o83uolr7xdkeang4.csv).
+]
+
+.pull-right[
+```{r}
+library(readr)
+chemicals <- read_csv("https://uwmadison.box.com/shared/static/8eh4ezyudsefc5i9o83uolr7xdkeang4.csv")
+head(chemicals)
+```
+]
+
+---
+
+(1) Code the raw data into $\pm 1$'s, mirroring the`mutate` step in the code
+example.
+(2) Estimate the factors effects, using `coef` applied to an `lm` fit.
+(3) Prepare an ANOVA table and determine important factors, using `aov` applied to an `lm` fit.
+(4) Create and interpret a QQ plot of the residuals, using `qqnorm` and `qqline`.
+
+---
+
+### Solution (1)
+
+We can use the same function, `coded`, for converting each column to $\pm 1$'s.
+Notice that we sweep through columns A - D, not just A - C like in the example
+above.
+
+```{r}
+library(dplyr)
+coded <- function(x) ifelse(x == '-', -1, 1)
+chemicals <- chemicals %>%
+  mutate_at(vars(A:D), coded)
+```
+
+---
+
+### Solution (2)
+
+The effect estimates are always twice the fitted coefficients from the full
+model.
+
+```{r}
+fit <- lm(Output ~ A * B * C * D, chemicals)
+2 * coef(fit)
+```
+
+---
+
+### Solution (4)
+
+* The main effects for A and D are very significant
+* The main effect for C is marginally significant
+* Two and three-order interaction effects including A and B seem to be
+significant
+
+```{r}
+summary(aov(fit))
+```
+
+---
+
+### Solution (4)
+
+The discretization in the residuals is somewhat troubling. However, with 32
+samples total, our conclusions still likely hold approximately, since the
+central limit theorem should be starting to apply.
+
+```{r, fig.width = 8, fig.height = 4}
+qqnorm(resid(fit))
+qqline(resid(fit), col = "red")
+```

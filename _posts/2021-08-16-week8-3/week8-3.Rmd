@@ -78,7 +78,7 @@ corners. Equivalently, this can be viewed as the difference in averages,
 	* between one face of the cube and its opposite
 
 6. For example, to estimate the main effect of $A$, we can use,
-$$A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]$$
+$$A = \frac{1}{2^3 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]$$
 
 7. To estimate interactions, we compare how the average effects of a variable
 change when we condition on the value of another variable. For example, for the
@@ -86,13 +86,13 @@ interaction $AB$, notice that
 
 | B | Average A Effect | 
 | --- | ------| 
-| + | $\frac{1}{2^2 n}\left[\left(abc - bc\right) + \left(ab - b\right)\right]$ |
-| - | $\frac{1}{2^2 n}\left[\left(ac - c\right) + \left(a - \left(1\right)\right)\right]$ |
+| + | $\frac{1}{2^3 n}\left[\left(abc - bc\right) + \left(ab - b\right)\right]$ |
+| - | $\frac{1}{2^3 n}\left[\left(ac - c\right) + \left(a - \left(1\right)\right)\right]$ |
 
     which inspires the definition,
 
 $$
-AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
+AB = \frac{1}{2^3 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
 $$
 
 8. Notice that the associated contrast can be obtained by multiplying the

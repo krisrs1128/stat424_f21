@@ -41,6 +41,18 @@ include_graphics("https://uwmadison.box.com/shared/static/fgtpgaimnwwlm5s63bmj9f
 
 ---
 
+### Announcements
+
+* Fixed figures in the online notes.
+* Midterm is next Thursday, in class.
+  - Covers material up to today's lecture.
+  - Will be taken on Canvas -- bring a laptop.
+  - Be able to distinguish between designs, produce output associated with
+  different designs, and interpret output given to you.
+  - Problems will be at the level of the textbook problems.
+
+---
+
 ### Today
 
 * Book Sections: 4.1

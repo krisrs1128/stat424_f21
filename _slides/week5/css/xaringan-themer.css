@@ -90,8 +90,6 @@ a, a > code {
 .title-slide {
   background-color: #09017F;
   
-  
-  
 }
 .title-slide .remark-slide-number {
   display: none;
@@ -133,12 +131,10 @@ blockquote {
 }
 .remark-slide table {
   margin: auto;
-  border-top: 1px solid #666;
-  border-bottom: 1px solid #666;
 }
 .remark-slide table thead th { border-bottom: 1px solid #ddd; }
 th, td { padding: 5px; }
-.remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) { background: #B5B2D8 }
+.remark-slide thead, .remark-slide tfoot
 table.dataTable tbody {
   background-color: #FFFFFF;
   color: #272822;
@@ -146,7 +142,7 @@ table.dataTable tbody {
 table.dataTable.display tbody tr.odd {
   background-color: #FFFFFF;
 }
-table.dataTable.display tbody tr.even {
+table.dataTable.display tbody {
   background-color: #B5B2D8;
 }
 table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
