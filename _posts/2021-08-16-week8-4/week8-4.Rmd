@@ -1,7 +1,7 @@
 ---
 title: "Interpreting effects in $2 ^ 3$ Designs"
 description: |
-  A short description of the post.
+  Testing, uncertainty, and visualization in $2^3$ designs.
 author:
   - name: Kris Sankaran
     url: {}
@@ -38,8 +38,9 @@ dividing by the number of data points. This lets us build the associated ANOVA t
 ```{r}
 library(readr)
 library(dplyr)
+code <- function(x) ifelse(x == '-', -1, 1)
 plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1vq7uv7omp4pjdg.txt", header = TRUE) %>%
-  mutate_at(vars(-Rate), as.factor)
+  mutate_at(vars(A:C), code)
 ```
 
 ```{r}
@@ -85,7 +86,7 @@ so at the end of the day, we get
 \text{Var}\left(\text{Effect }A\right) &= \frac{\sigma^2}{2^{K - 2}n}
 \end{align*}
 
-and we can estimate $\sigma^2$ by the error sum fo squares $S^2$. From these
+and we can estimate $\sigma^2$ by the error sum of squares $S^2$. From these
 variance estimates, we can build confidence intervals that summarize all the
 effects.
 
@@ -99,3 +100,18 @@ summary(fit)
 numbers of factors. For example, the table notation can be used to get effect
 estimate for interaction ABCD listed before equation 6.22 in the book, and the
 sum of squares remain just the normalized square of the contrasts.
+
+6. The key observation is that the regression representation continues to be
+true even for large $K$. In particular, the effect estimates and their standard
+errors will always be twice the coefficients of the regression onto coded
+factors. For example, the code below manually estimates A's effect and compares
+it with the coefficient in the regression,
+
+```{r}
+mean(plasma$Rate[plasma$A == 1] - plasma$Rate[plasma$A == -1])
+2 * coef(fit)["A"]
+```
+
+This means we can use general regression machinery, without having to
+manually substitute into formulas for different effects. This connection will be
+explored in more depth in the next few weeks.

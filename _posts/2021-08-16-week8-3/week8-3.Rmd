@@ -120,4 +120,3 @@ display(readImage("https://uwmadison.box.com/shared/static/hapjw92oqij5oiyddt29n
   change in two-way interactions across the two values for the third variable.
   It's contrast can be derived also by multiplying the relevant columns from the
   table above.
-  

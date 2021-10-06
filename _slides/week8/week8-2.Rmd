@@ -322,9 +322,9 @@ A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) +
 ```{r}
 K <- 3 # three factors
 n <- 2 # two replicates per corner
-a_positive <- sum(plasma$Rate[plasma$A == 1])
-a_negative <- sum(plasma$Rate[plasma$A == -1])
-a_effect <- (a_positive - a_negative) / (n * 2 ^ (K - 1))
+a_positive <- plasma$Rate[plasma$A == 1]
+a_negative <- plasma$Rate[plasma$A == -1]
+a_effect <- mean(a_positive - a_negative)
 a_effect
 ```
 ]
