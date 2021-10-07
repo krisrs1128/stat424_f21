@@ -1,5 +1,5 @@
 ---
-title: "ANOVA Extensions"
+title: "$2^K$ Design Case Studies"
 author: "Kris Sankaran | UW Madison | 23 September 2021"
 output:
   xaringan::moon_reader:
@@ -17,7 +17,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 5, fig.height = 3, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -30,33 +30,363 @@ theme424 <- theme_minimal() +
 theme_set(theme424)
 ```
 
-# ANOVA Extensions
+# $2^K$ Design Case Studies
 
 ```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
 ```
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison | 23 September 2021]
+.large[Kris Sankaran | UW Madison]
 
 ---
 
 ### Today
 
-* Book Sections: 3.9 & 3.11
-* Online Notes: Week 4 [2] and [3]
+* Book Sections: 6.6
+* Online Notes: Week 9 [2]
 
 ---
 
 ### Motivation
 
+* Analysis of factorial experiments is hard to completely automate
+* Paying attention to structures in the problem or data can pay dividends
+* We'll consider three case studies to illustrate typical scenarios
+* We show code along the way
 
 ---
 
-### Code Implementation
+# Example 6.3
 
 ---
 
-### Exercise
+### Drill Dataset
+
+An experiment was done to see how the "advance rate of a drill" varied as a
+function of four factors, which we will call A, B, C, and D.
+
+```{r}
+library(dplyr)
+library(readr)
+code <- function(x) ifelse(x == '-', -1, 1)
+drill <- read_csv("https://uwmadison.box.com/shared/static/7l8bpcu36a12a8c0chlh4id0qezdnnoe.csv") %>%
+  mutate_at(vars(A:D), code)
+head(drill, 4)
+```
 
 ---
+
+### Daniel Plot
+
+.pull-left[
+* We first fit a full $2^4$ model and get effects by doubling the regression
+coefficients.
+* It seems like we should drop factor A
+]
+
+```{r, echo = FALSE}
+daniel_plot <- function(effects, probs = c(0.3, 0.7)) { 
+  qq <- qqnorm(effects, datax = TRUE)
+  qqline(effects, col = "red", probs = probs, datax = TRUE)
+  text(qq$x, qq$y, names(effects), pos=1)
+}
+```
+
+.pull-right[
+```{r, fig.height = 5, fig.width = 5}
+fit <- lm(rate ~ A * B * C * D, drill)
+effects <- 2 * coef(fit)[-1]
+daniel_plot(effects, c(0.35, 0.65)) # same code from last lecture
+```
+]
+
+---
+
+### Fitted Submodel
+
+* We fit the submodel without A: `rate ~ B * C * D`.
+* We use `resid` and `predict` to get residual and predicted values from the
+submodel
+
+```{r}
+fit <- lm(rate ~ B * C * D, drill) # removed A from the model
+drill_resid <- drill %>%
+  mutate(residual = resid(fit), y_hat = predict(fit))
+```
+
+---
+
+### Submodel Residuals
+
+* Larger residuals are associated with higher predicted values.
+* We should transform the original rates.
+  - Let's try `log`, which is often useful for nonnegative or skewed data
+
+```{r}
+ggplot(drill_resid) +
+  geom_point(aes(y_hat, residual))
+```
+
+---
+
+### New Daniel Plot
+
+.pull-left[
+* We can regenerate the Daniel plot using the transformed response.
+* B, C, and D alone now seem to strongly stand out
+  - We should fit the submodel with just these factors
+]
+
+.pull-right[
+```{r, fig.height = 5, fig.width = 5}
+fit <- lm(log(rate) ~ A * B * C * D, data = drill)
+daniel_plot(2 * coef(fit)[-1])
+```
+]
+
+---
+
+### New Submodel
+
+The residuals of the new submodel are much better behaved.
+
+```{r}
+fit <- lm(log(rate) ~ B + C + D, drill)
+drill_resid <- drill %>%
+  mutate(residual = resid(fit), y_hat = predict(fit))
+ggplot(drill_resid) +
+  geom_point(aes(y_hat, residual))
+```
+
+---
+
+### New Submodel
+
+The ANOVA table quantifies the significance of the effects we drew out by eye.
+They also guide us to a plot where the effects are clearer.
+
+.pull-left[
+```{r}
+summary(aov(fit))
+```
+]
+
+.pull-right[
+```{r, fig.height = 2.5}
+ggplot(drill) +
+  geom_point(aes(B, log(rate), col = as.factor(D))) +
+  scale_color_brewer(palette = "Set2") +
+  facet_wrap(~ C)
+```
+]
+
+---
+
+# Example 6.4
+
+---
+
+### Airplane Window Dataset
+
+How do temperature (A), clamp time (B), resin flow (C), and press closing time
+(D) affect airplane window defect rates?
+
+```{r}
+code <- function(x) ifelse(x == '-', -1, 1)
+windows <- read_csv("https://uwmadison.box.com/shared/static/62phufkeprheu9gu35mu1e75x6rc2shv.csv") %>%
+  mutate_at(vars(A:D), code)
+```
+
+---
+
+### Effect Estimates
+
+.pull-left[
+We make a Daniel plot from the full data. The story seems simple,
+  * Temperature (A) has a strong positive effect
+  * Resin (C) flow has a slight negative effect.
+]
+
+.pull-right[
+```{r, fig.height = 5, fig.width = 5}
+fit <- lm(defects ~ A * B * C * D, data = windows)
+daniel_plot(2 * coef(fit)[-1])
+```
+]
+  
+---
+
+### Fitted Submodel
+
+The A effect is very strong, and both A and C are significant.
+
+```{r}
+fit <- lm(defects ~ A + C, data = windows)
+summary(aov(fit))
+```
+
+---
+
+### Interpretation
+
+.pull-left[
+Both the coefficients and the plot suggest that turning A off, $A = -1$, and C
+on, $C = 1$, will minimize the defect rate.
+]
+
+.pull-right[
+```{r}
+coef(fit)
+ggplot(windows) +
+  geom_point(aes(A, defects, col = as.factor(C))) +
+  scale_color_brewer(palette = "Set2")
+```
+]
+
+---
+
+### Residual Plot
+
+Plotting residuals of the submodel against factors, we notice strong heteroskedasticity.
+* B does not affect the mean, but does affect the error variance.
+
+```{r, fig.height = 2.5}
+windows$residual <- resid(fit)
+ggplot(windows) +
+  geom_point(aes(B, residual))
+```
+
+---
+
+### Approach
+
+Make the recommendation A off, C on, B off
+
+B has no effect on the average defect rate, but keeping it off will reduce the
+variance in defect rate around the optimal A and C values.
+
+Takeaway: In practice, it’s often useful to take variability into account,
+rather than just average response.
+
+---
+
+# Example 6.5
+
+---
+
+### Semiconductor Dataset
+
+How do temperature (A), time (B), pressure (C), and gas flow (D) affect oxide
+thickness of semiconductor wafers? The code below downloads the data and
+reshapes it so that the oxide thickness variable is all in one column.
+
+```{r}
+library(tidyr)
+oxide <- read_csv("https://uwmadison.box.com/shared/static/vyk6uoe3zbnonv4n6jcusbrocmt4cvru.csv") %>%
+  pivot_longer(starts_with("wafer"), names_to = "variable")
+head(oxide, 4)
+```
+
+---
+
+### Repeated Measures
+
+* In the design, four wafers are put in the furnace at a time.
+* These are not independent replicates, they are repeated measures.
+* We average the responses within each factor combination
+  - Pretend it is an unreplicated design
+
+```{r}
+oxide_collapse <- oxide %>%
+  group_by(A, B, C, D) %>% # isolate independent configurations
+  summarise(mean = mean(value), var = var(value)) # take average and var. across groups
+head(oxide_collapse, 4)
+```
+
+---
+
+### Daniel Plot
+
+.pull-left[
+A, B, C, and the interactions AB and AC are likely nonnull.
+]
+
+.pull-right[
+```{r, fig.width = 5, fig.height = 5}
+fit <- lm(mean ~ A * B * C * D, data = oxide_collapse)
+daniel_plot(2 * coef(fit)[-1])
+```
+]
+
+---
+
+### Submodel
+
+.pull-left[
+To fit the all the main effects together when the interactions AB, AC, we can
+use the formula `~ A * (B + C)`.
+]
+.pull-right[
+```{r}
+fit <- lm(mean ~ A * (B + C), oxide_collapse)
+summary(fit) # the p-values are the same as for summary(aov(fit))
+```
+]
+
+---
+
+### Caution
+
+.pull-left[
+* If we had imagined that the repeated measures were actually replicates, we
+would have identified many false positives.
+* From the Daniel plot, factor D is almost definitely not significant
+]
+
+.pull-right[
+```{r}
+fit <- lm(value ~ A * B * C * D, data = oxide)
+summary(fit)
+```
+]
+
+---
+
+### Visualization
+
+The changes in slope across colors and panels are exactly the AB and AC
+interaction effects.
+
+```{r}
+ggplot(oxide_collapse) +
+  geom_point(aes(A, mean, col = as.factor(C))) +
+  facet_wrap(~ B)
+```
+
+---
+
+### Visualization: Response Surface
+
+* We can also use `image` (in `rsm`) to view the fitted response
+* This can be read like a topographic map -- darker colors are higher
+* Here, the interaction appears as curvature
+
+```{r}
+library(rsm)
+fit <- lm(mean ~ A * (B + C), oxide_collapse)
+image(fit, ~ A + B + C)
+```
+
+---
+
+### Modeling the Variances
+
+Above, we modeled the average of the repeated measures within each factor
+combination. We can instead model the variances.
+
+The choice `~ A + B * D` came from looking at the Daniel plot.
+
+```{r}
+fit <- lm(var ~ A + B * D, data = oxide_collapse)
+image(fit, ~ A + B + D)
+```

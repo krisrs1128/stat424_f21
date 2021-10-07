@@ -1,12 +1,11 @@
 ---
-title: "ANOVA Extensions"
+title: "Unreplicated $2^K$ Designs"
 author: "Kris Sankaran | UW Madison | 23 September 2021"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -17,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 4.5, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"), fig.show = "hold", fig.align = "center")
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -30,33 +29,313 @@ theme424 <- theme_minimal() +
 theme_set(theme424)
 ```
 
-# ANOVA Extensions
+# Unreplicated $2^K$ Design
 
-```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```{r, out.width = 400, fig.align = "left"}
+include_graphics("https://uwmadison.box.com/shared/static/rfdz734pv6rxolgwz5fx215qb41qm0k6.png")
 ```
+
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison | 23 September 2021]
+.large[Kris Sankaran | UW Madison ]
 
 ---
 
 ### Today
 
-* Book Sections: 3.9 & 3.11
-* Online Notes: Week 4 [2] and [3]
+* Book Sections: 6.5
+* Online Notes: Week 9 [1]
 
 ---
 
 ### Motivation
 
+* What happens if $n = 1$ in a $2^K$ design?
+  - i.e., if we have only one sample at each factor combination?
+* This is surprisingly common
+  - From $n = 1$ to $n = 2$ can double the cost of an experiment
+  - When $K$ is large, even getting $n = 1$ can be expensive
+* This seems like an impossible problem
+  - However, there is a way forward
+  - The price in terms of new assumptions is relatively small
 
 ---
 
-### Code Implementation
+### Types of Errors
+
+Replicates had been useful because they help gauge measurement noise. Without
+them, we have to be very careful to avoid two types of errors,
+  * Missing true effects (False Negatives)
+  * Spurious effects (False Positives)
+
+---
+
+### Missing True Effects
+
+.pull-left[
+* Problem: If only nearby levels are tested, then weak effects may be missed
+* Solution: Space out the levels at which we test each factor
+  - This makes the effect as obvious as possible
+  - However, the fix must be made _before data collection_, not during analysis
+]
+  
+.pull-right[
+```{r, out.width = "70%"}
+include_graphics("https://uwmadison.box.com/shared/static/axysolfp0hgtmnthy9vsndljpuuh5nsa.png")
+include_graphics("https://uwmadison.box.com/shared/static/olbjp5fubt4mm6j1fa7rthe0uoctymef.pnghttps://uwmadison.box.com/shared/static/8h0vt5kcb5ss0l9dlghsswnpf88q8267.png")
+```
+]
+
+---
+
+### Spurious Effects
+
+* Usually, we would rely on $p$-values in ANOVA to guard against false positives
+* With $n = 1$, we cannot use ANOVA, because $MS_{E}$ is always 0
+  - This had been the denominator in all the $F$-statistics
+
+```{r, out.width = "50%"}
+include_graphics("https://uwmadison.box.com/shared/static/099eopgmbncci9ob9zjo1mvvguxinibn.png")
+```
+
+---
+
+### Sparsity of Effects
+
+* If we ignore high-order interaction terms, we no longer interpolate the data
+  - Then, we can use ANOVA again
+* High-order interactions tend to be rare anyways
+  - E.g., if $K = 4$, then the ABCD interaction term is usually 0
+  - Consider the interpretation of a nonzero ABCD term
+
+```{r, out.width = "40%"}
+include_graphics("https://uwmadison.box.com/shared/static/rfdz734pv6rxolgwz5fx215qb41qm0k6.png")
+```
+
+---
+
+### Design Projection
+
+* When we ignore a factor, we double the number of effective replicates
+* There is a basic tension between studying many factors and having many
+replicates
+
+
+```{r, out.width = "80%"}
+include_graphics("https://uwmadison.box.com/shared/static/yhc2w1698namew8r0vgn7ej7546ev2wg.png")
+```
+
+---
+
+### General Recipe
+
+* Estimate effects for the full (interpolating) model
+* Use a graphical method to guess at effects that seem "large enough"
+* Refit a submodel on these selected factors
+* Build and interpret an ANOVA table on the selected factors
+
+---
+
+### General Recipe
+
+* Estimate effects for the full (interpolating) model
+* **Use a graphical method to guess at effects that seem "large enough"**
+* Refit a submodel on these selected factors
+* Build and interpret an ANOVA table on the selected factors
+
+This is the only new part.
+
+---
+
+### Daniel Plots
+
+.pull-left[
+* Assumption: If none of the factors had any influence on the response, then
+effects are usually normally distributed around 0.
+* Idea: Make a QQ plot of the effects, and look for outliers
+  - These are likely real effects.
+  - Note: The QQ line is drawn after trimming away the outliers
+]
+
+.pull-right[
+```{r, fig.height = 4, fig.width = 5}
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+code <- function(x) ifelse(x == '-', -1, 1)
+daniel_plot <- function(effects, p = c(0.3, 0.7)) { 
+  qq <- qqnorm(effects, datax = TRUE)
+  qqline(effects, col = "red", probs = p, datax = TRUE)
+  text(qq$x, qq$y, names(effects), pos=4)
+}
+
+
+filtration <- read_table2("https://uwmadison.box.com/shared/static/xxh05ngikmscnddbhg2l3v268jnu4jtc.txt")
+
+filtration_coded <- filtration %>%
+  mutate_at(vars(A:D), code)
+fit_coded <- lm(Rate~A * B * C * D, filtration_coded)
+effects <- 2 * coef(fit_coded)[-1] # exclude intercept
+daniel_plot(effects)
+```
+]
+
+---
+
+### Lenth Plots
+
+.pull-left[
+* Lenth plots show effect sizes together with robust (i.e., insensitive to
+outliers) standard error estimates.
+* Margin of Error (ME): A threshold outside which effects are likely real,
+controlling hypothesis-wise error rates
+* Simultaneous Margin of Error (SME): Same, but controlling experiment-wise
+error rates
+]
+
+.pull-right[
+```{r, fig.width = 6, fig.height = 6, results = "hide"}
+library(BsMD)
+LenthPlot(fit_coded, cex.fac = 0.8)
+```
+]
+
+---
+
+# Code Implementation
+
+Take out your laptops!
+
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
+---
+
+### Filtration Dataset
+
+.pull-left[
+The filtration dataset asks how temperature (A), pressure (B), formaldehyde (C),
+and stirring rate (D) affect the filtration rate of the resulting product. We
+can plot all 4 factors against one another, but it's very confusion -- we need a
+more quantitative approach.
+]
+
+.pull-right[
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+filtration <- read_table2("https://uwmadison.box.com/shared/static/xxh05ngikmscnddbhg2l3v268jnu4jtc.txt")
+
+ggplot(filtration) +
+  geom_point(aes(B, Rate, col = D)) +
+  scale_color_brewer(palette = "Set2") +
+  facet_grid(A ~ C)
+```
+]
+
+---
+
+### Fitting the Full Model
+
+* The full model can be used to get raw effect estimates
+* However, the fact that $MS_{E} = 0$ means that we can't get any test statistics / $p$-values
+
+```{r}
+fit <- lm(Rate ~ A * B * C * D, filtration)
+effects <- 2 * coef(fit)[-1] # ignore global mean
+summary(aov(fit)) # no p-values!
+```
+
+---
+
+### Daniel Plot
+
+* The function below can be used to make a Daniel Plot.
+* We discard outliers using the `probs` argument. The 30% smallest and largest
+effects are not used to draw the QQ line
+* We have seen `qqnorm` and `qqline` before. `text` is used to draw factor names
+on the QQ plot.
+
+```{r}
+daniel_plot <- function(effects, p = c(0.3, 0.7)) { 
+  qq <- qqnorm(effects, datax = TRUE)
+  qqline(effects, col = "red", probs = p, datax = TRUE)
+  text(qq$x, qq$y, names(effects), pos=4)
+}
+```
+
+---
+
+### Daniel Plot
+
+.pull-left[
+* All the effects along the red line is likely due to chance variation
+* The A, C, and D main effects seem likely to be real
+* The AC and AD interactions are also probably real
+]
+
+.pull-right[
+```{r, fig.height = 4, fig.width = 5}
+daniel_plot(effects)
+```
+]
+
+---
+
+### Lenth Plot
+
+.pull-left[
+* We can use the `LenthPlot` function from the `BsMD` library
+  - The input is the original fitted object
+* The interpretation is consistent with the Daniel plot
+  - However, C no longer passes the (more conservative) SME threshold
+]
+
+.pull-right[
+```{r, fig.width = 6, fig.height = 6, results = "hide"}
+library(BsMD)
+LenthPlot(fit_coded, cex.fac = 0.8) # cex.fac controls label size
+```
+]
+
+---
+
+### Refitting the Submodel
+
+* We want to include terms A, C, D, AC, and AD
+* A formula that captures this is `A + C + D + A : C + A : D`
+* An equivalent, more concise notation is `A * (C + D)`
+
+```{r}
+fit <- lm(Rate ~ A * (C + D), filtration_coded)
+summary(aov(fit))
+```
+
+---
+
+### Revisiting
+
+.pull-left[
+These estimates guide our eyes exactly towards the most interesting variation in
+the raw data. 
+
+* Change in slopes from left to right panels $\rightarrow$ interaction AC
+* Change in slopes between colors $\rightarrow$ interaction AD
+]
+
+.pull-right[
+```{r}
+ggplot(filtration) +
+  geom_point(aes(A, Rate, col = D)) +
+  scale_color_brewer(palette = "Set2") +
+  facet_grid(B ~ C)
+```
+]
 
 ---
 
 ### Exercise
-
----

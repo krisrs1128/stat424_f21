@@ -81,11 +81,11 @@ effects <- 2 * coef(fit)[-1]
 daniel_plot(effects, c(0.35, 0.65))
 ```
 
-5. The absence of A among the large effects suggests dropping factor $A$ in the
+5. The absence of A among the large effects suggests dropping factor A in the
 fit. However, when we study the residuals, we notice they are heteroskedastic,
 with larger residuals associated with higher predicted values.
 
-```{r, fig.margin = FALSE}
+```{r}
 fit <- lm(rate ~ B * C * D, drill) # removed A from the model
 drill_resid <- drill %>%
   mutate(residual = resid(fit), y_hat = predict(fit))
@@ -100,8 +100,6 @@ now.
 
 _Lessons_: 
     * Examining residuals can motivate useful transformations of the data.
-    * It’s a good thing replicates were made.
-
 
 ```{r, fig.margin = FALSE}
 fit <- lm(log(rate) ~ A * B * C * D, data = drill)
@@ -195,7 +193,8 @@ daniel_plot(s_ratio)
 
 13. A $2^{4}$ experiment is setup to improve semiconductor manufacturing. The
 question of interest is: How do temperature (A), time (B), pressure (C), and gas
-flow (D) affect oxide thickness of the wafers? The code below downloads the data and reshapes it so that the oxide thickness variable is all in one column.
+flow (D) affect oxide thickness of the wafers? The code below downloads the data
+and reshapes it so that the oxide thickness variable is all in one column.
 
 ```{r}
 library(tidyr)

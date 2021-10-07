@@ -99,7 +99,6 @@ estimates, and the usual `aov` function won't give us any $p$-values (because it
 can't estimate $\sigma^2$).
 
 ```{r}
-library(broom)
 fit <- lm(Rate ~ A * B * C * D, filtration)
 summary(fit)
 summary(aov(fit))
@@ -165,9 +164,8 @@ daniel_plot(effects)
 ```
 
 13. Lenth Plots. An alternative to Daniel plots is to simply plot the effect
-sizes directly. These plots are provided by the `BsMD` package. 
-Let $s_0 = 1.5 \times \text{median}\left(\text{Contrast}_j\right)$.  Then, the
-notation in the plot below refers to,
+sizes directly. These plots are provided by the `BsMD` package. Let $s_0 = 1.5 \times \text{median}\left(\text{Contrast}_j\right)$. Then, the notation in the
+plot below refers to,
     * Pseudostandard error (PSE): $1.5 \times \text{median}\left(\left|c_j\right| : \left|c_j\right| < 2.5 s_0\right)$ 
     serves as an alternative to the usual standard error over contrasts, which is
     robust to outliers (it completely ignores $c_j$'s that are larger than $2.5
@@ -182,3 +180,15 @@ notation in the plot below refers to,
 library(BsMD)
 LenthPlot(fit_coded, cex.fac = 0.4)
 ```
+
+
+14. Based on these plots, it makes sense to fit the model with only the effects
+A, C, D, AC, and AD. The code below refits this model and produces an ANOVA
+table, providing quantitative uncertainty estimates around the effects that had
+qualitatively seemed reasonable.
+
+```{r}
+fit <- lm(Rate ~ A * (C + D), filtration_coded)
+summary(aov(fit))
+```
+
