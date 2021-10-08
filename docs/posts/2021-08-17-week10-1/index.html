@@ -88,7 +88,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: $2^K$ Designs and Regression</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="How effect estimates can be found using linear regression."/>
 
 
 <!--  https://schema.org/Article -->
@@ -99,20 +99,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: $2^K$ Designs and Regression"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="How effect estimates can be found using linear regression."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: $2^K$ Designs and Regression"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="How effect estimates can be found using linear regression."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["$2^K$ Designs and Regression"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["11-09-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["$2^K$ Designs and Regression"]},{"type":"character","attributes":{},"value":["How effect estimates can be found using linear regression."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["11-09-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"$2^K$ Designs and Regression","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-09T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"$2^K$ Designs and Regression","description":"How effect estimates can be found using linear regression.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-09T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,7 +2279,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>2^K Designs and Regression</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>How effect estimates can be found using linear regression.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2289,21 +2289,17 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">6.7</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">6.7</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week10-1/week10-1.Rmd">Rmarkdown</a></em></p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+
 </div>
-</div>
-<p>In all the code examples, we’ve been fitting <span class="math inline">\(2^K\)</span> designs using the <code>lm</code> function. Why does this work? In these notes, we’ll see how our effect estimates can be viewed through the lens of linear regression.</p>
-<h2 id="the-design-matrix">The Design Matrix</h2>
-<p>Let’s write our contrasts summary table linear algebraically. Remember our notation,</p>
+<ol type="1">
+<li>In all the code examples, we’ve been fitting <span class="math inline">\(2^K\)</span> designs using the <code>lm</code> function. Why does this work? In these notes, we’ll see how our effect estimates can be viewed through the lens of linear regression.</li>
+</ol>
+<h3 id="the-design-matrix">The Design Matrix</h3>
+<ol start="2" type="1">
+<li>Let’s write our contrasts summary table linear algebraically. Remember our notation,</li>
+</ol>
 <table>
 <thead>
 <tr class="header">
@@ -2375,7 +2371,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </table>
 <p>We’ll translate this into</p>
 <p><span class="math display">\[\begin{align*}
-X &amp;= \begin{pmatrix}
+X = \begin{pmatrix}
 1 &amp; -1 &amp; -1 &amp; - 1 &amp; 1 \\
 1 &amp; 1 &amp; -1 &amp; -1 &amp; -1 \\
 1 &amp; -1 &amp; 1 &amp; -1 &amp; -1 \\
@@ -2384,9 +2380,9 @@ X &amp;= \begin{pmatrix}
 1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 \\
 1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 \\
 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1
-\end{pmatrix} \\
-\end{align*}\]</span> <span class="math display">\[\begin{align*}
-y &amp;= \begin{pmatrix}
+\end{pmatrix}
+&amp;&amp;
+y = \begin{pmatrix}
 (1) \\
 a \\
 b \\
@@ -2398,27 +2394,27 @@ abc
 \end{pmatrix}
 \end{align*}\]</span></p>
 <p>For <span class="math inline">\(X\)</span>, we’ve just added an intercept column of <span class="math inline">\(1\)</span>’s and concatenated it with the contrasts written as <span class="math inline">\(\pm 1\)</span>’s. As before, <span class="math inline">\((1)\)</span> means the value of the sample taken at that corner of the cube, <span class="math inline">\(a\)</span> means the sample at the <span class="math inline">\(a\)</span> corner, etc.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/8euuywv5ay4x7przznhsxdo269865h2a.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week10-1_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
-</div>
-<p>Let’s observe some properties of this matrix,</p>
+<ol start="2" type="1">
+<li>Let’s observe some properties of this matrix,
 <ul>
-<li><p>It has <span class="math inline">\(2^{K}\)</span> rows, one per replicate on each corner of the cube.</p></li>
-<li><p>It has <span class="math inline">\(2^{K}\)</span> columns. To see why, notice that there are</p>
+<li>It has <span class="math inline">\(2^{K}\)</span> rows, one per replicate on each corner of the cube.</li>
+<li>It has <span class="math inline">\(2^{K}\)</span> columns. To see why, notice that there are
 <ul>
-<li><p>1 intercept, <span class="math inline">\(K\)</span> main effects, and <span class="math inline">\({K \choose 2}\)</span> two-way interactions, which adds up to <span class="math inline">\(2 ^ K\)</span>.</p></li>
-<li><p>Moreover, if our <span class="math inline">\(K &gt; 2\)</span>, we’d have <span class="math inline">\({K \choose 3}\)</span> three-way interactions, etc. and that, by the binomial theorem, <span class="math inline">\(\left(1 + 1\right)^{K} = \sum_{j \leq  K} {K \choose j}1^{j}1^{K - j}\)</span></p></li>
+<li>1 intercept, <span class="math inline">\(K\)</span> main effects, and <span class="math inline">\({K \choose 2}\)</span> two-way interactions, which adds up to <span class="math inline">\(2 ^ K\)</span>.</li>
+<li>Moreover, if our <span class="math inline">\(K &gt; 2\)</span>, we’d have <span class="math inline">\({K \choose 3}\)</span> three-way interactions, etc. and that, by the binomial theorem, <span class="math inline">\(\left(1 + 1\right)^{K} = \sum_{j \leq  K} {K \choose j}1^{j}1^{K - j}\)</span></li>
 </ul></li>
-<li><p>The columns are orthogonal. Their norms are all <span class="math inline">\(2^{K}\)</span>. Hence <span class="math inline">\(X^{T}X = 2^{K}I_{2^{K}}\)</span>.</p></li>
-</ul>
-<h2 id="hatbeta-and-effect-estimates"><span class="math inline">\(\hat{\beta}\)</span> and Effect Estimates</h2>
-<p>In linear regression, the least squares solution <span class="math inline">\(\hat{\beta}\)</span> is the vector that optimizes</p>
+<li>The columns are orthogonal. Their norms are all <span class="math inline">\(2^{K}\)</span>. Hence <span class="math inline">\(X^{T}X = 2^{K}I_{2^{K}}\)</span>.</li>
+</ul></li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="https://uwmadison.box.com/shared/static/8euuywv5ay4x7przznhsxdo269865h2a.png" width="60%" style="display: block; margin: auto;" /></p>
+</div>
+<h3 id="hatbeta-and-effect-estimates"><span class="math inline">\(\hat{\beta}\)</span> and Effect Estimates</h3>
+<ol start="3" type="1">
+<li>In linear regression, the least squares solution <span class="math inline">\(\hat{\beta}\)</span> is the vector that optimizes</li>
+</ol>
 <p><span class="math display">\[\begin{align*}
-\hat{beta} := \arg\min_{\beta \in \mathbb{R}^{2^{K}}} \|y - X\beta\|_{2}^{2}
+\hat{\beta} := \arg\min_{\beta \in \mathbb{R}^{2^{K}}} \|y - X\beta\|_{2}^{2}
 \end{align*}\]</span></p>
 <p>To minimize a quadratic like this, we can differentiate and use the chain rule,</p>
 <p><span class="math display">\[\begin{align*}
@@ -2430,7 +2426,9 @@ abc
 \hat{\beta} &amp;= \left(2^{K}I_{2^{K}}\right)^{-1}X^T y \\
 &amp;= \frac{1}{2^{K}}X^{T}y.
 \end{align*}\]</span></p>
-<p>But <span class="math inline">\(X^{T}y\)</span> are exactly our contrasts (!),</p>
+<ol start="4" type="1">
+<li>But <span class="math inline">\(X^{T}y\)</span> are exactly our contrasts (!),</li>
+</ol>
 <p><span class="math display">\[\begin{align*}
 X^{T}y &amp;= \begin{pmatrix}
 1 &amp;  1 &amp;  1 &amp;  1 &amp; 1 &amp; 1 &amp;  1 &amp; 1 \\
@@ -2447,13 +2445,18 @@ c \\
 \end{pmatrix}
 \end{align*}\]</span></p>
 <p>e.g., <span class="math inline">\(A = \frac{1}{2^{K - 1}}\left[-(1) + a - b -c + ab + ac - bc + abc\right]\)</span>. The only difference between <span class="math inline">\(\hat{\beta}\)</span> and our effect estimates is a factor of 2 in the scaling. Therefore, to estimate the effects in a <span class="math inline">\(2^{K}\)</span> design, it’s enough to construct the <span class="math inline">\(X, y\)</span> matrices above and plug them into standard linear regression programs.</p>
-<h2 id="code-example">Code Example</h2>
-To complete this discussion, let’s revisit the <span class="math inline">\(2 ^ 4\)</span> design in the drill example. First, let’s verify that the <span class="math inline">\(X\)</span> matrix used by <code>lm</code> is the same as the one in our conceptual discussion.
+<h3 id="code-example">Code Example</h3>
 <div class="layout-chunk" data-layout="l-body">
+
+</div>
+<ol start="5" type="1">
+<li>To complete this discussion, let’s revisit the <span class="math inline">\(2 ^ 4\)</span> design in the drill example. First, let’s verify that the <span class="math inline">\(X\)</span> matrix used by <code>lm</code> is the same as the one in our conceptual discussion.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body-outset">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>code</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>'-'</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>drill</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/7l8bpcu36a12a8c0chlh4id0qezdnnoe.csv"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>rate</span><span class='op'>)</span>, <span class='va'>code</span><span class='op'>)</span>
+<span class='va'>drill</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/7l8bpcu36a12a8c0chlh4id0qezdnnoe.csv"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate_at</span><span class='op'>(</span><span class='fu'>vars</span><span class='op'>(</span><span class='va'>A</span><span class='op'>:</span><span class='va'>D</span><span class='op'>)</span>, <span class='va'>code</span><span class='op'>)</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>rate</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, <span class='va'>drill</span><span class='op'>)</span>
 <span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 <span class='va'>X</span>
@@ -2542,7 +2545,9 @@ A:C:D           0    16     0       0
 B:C:D           0     0    16       0
 A:B:C:D         0     0     0      16</code></pre>
 </div>
-Let’s make sure that the formula we derived above is exactly what <code>lm</code> is doing.
+<ol start="7" type="1">
+<li>Let’s make sure that the formula we derived above is exactly what <code>lm</code> is doing.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='fl'>1</span> <span class='op'>/</span> <span class='fl'>16</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='va'>drill</span><span class='op'>$</span><span class='va'>rate</span>
@@ -2578,7 +2583,7 @@ A:B:C:D     0.27125</code></pre>
     A:B:C:D 
     0.27125 </code></pre>
 </div>
-Finally, let’s compare the fitted <span class="math inline">\(\hat{\beta}\)</span> with our original effect estimates (at least, for the effect <span class="math inline">\(A\)</span>).
+<p>Finally, let’s compare the fitted <span class="math inline">\(\hat{\beta}\)</span> with our original effect estimates (at least, for the effect <span class="math inline">\(A\)</span>).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>drill</span><span class='op'>$</span><span class='va'>A</span>

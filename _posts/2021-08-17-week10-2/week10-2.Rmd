@@ -1,7 +1,7 @@
 ---
 title: "$2^K$ Designs are Optimal"
 description: |
-  A short description of the post.
+    Some notions of optimality in experimental design.
 author:
   - name: Kris Sankaran
     url: {}
@@ -13,21 +13,23 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE, fig.align = "center", fig.show = "hold")
 ```
 
 _Readings [6.7](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week10-2/week10-2.Rmd)_
 
-
-
 ```{r}
-library(dplyr)
 library(ggplot2)
-library(gganimate)
-library(readr)
-library(EBImage)
-library(ggplot2)
-theme_set(theme_bw() + theme(legend.position = "bottom"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 ```{r}
@@ -44,7 +46,7 @@ simulate <- function(x, f, n_runs=1000) {
   for (i in seq_len(n_runs)) {
     y <- samples(f, x)
     fit <- lm(y ~ x)
-    sim_data[[i]] <- tibble(
+    sim_data[[i]] <- data.frame(
       rep = i,
       x = x,
       y = y,
@@ -57,57 +59,45 @@ simulate <- function(x, f, n_runs=1000) {
 }
 ```
 
-```{r}
-display(readImage("https://uwmadison.box.com/shared/static/9qhkn4dnuqoou7dm02zgkexze5mlaz6z.png"))
-```
-```{r}
-display(readImage("https://uwmadison.box.com/shared/static/ywt9gxdakwz558bl6j57y1v25uncjjil.png"))
-```
-```{r, fig.cap="Three candidate designs when studying 2 factors, all using 4 samples. The $2^2$ design is at the bottom."}
-display(readImage("https://uwmadison.box.com/shared/static/mpi36bkvrhpuf3ls66jxkqy4mvqoqzfm.png"))
-```
-
-This seems like a bold claim, before we can justify it, we need a sense of (1) the setting, i.e., what are alternative designs are up for consideration and (2) the criteria that will be used to call one design better than an another.
-
-* Setting: We have a fixed budget of $n$ samples. Without loss of generality, the factors take their values within the interval $\left[-1, 1\right]$. A candidate design is any way of gathering $n$ samples from among all the possible settings of the $K$ factors.
-
-* Criteria: We want to estimate the effects « as well as possible. » We also want to make good predictions at new factor combinations. We’ll have to make these notions precise.
-
-We won’t give formal proofs of optimality (it’s beyond the scope of our book).
-But we *will* use simulations to get a sense of the key phenomena at work here,
-and we’ll create names (like $D-$, $G-$, and $I$-optimality) to describe what we see.
+1. The claim that $2^{K}$ designs are optimal is a bold one, and before we can
+justify it, we need a sense of (1) the setting, i.e., what are alternative
+designs are up for consideration and (2) the criteria that will be used to call
+one design better than an another.
+  * Setting: We have a fixed budget of $n$ samples. Without loss of
+  generality, the factors take their values within the interval $\left[-1,
+  1\right]$. A candidate design is any way of gathering $n$ samples from among
+  all the possible settings of the $K$ factors.
+  * Criteria: We want to estimate the effects « as well as possible. » We also
+  want to make good predictions at new factor combinations. We’ll have to make
+  these notions precise.
+      
+2. We won’t give formal proofs of optimality (it’s beyond the scope of our
+book). But we *will* use simulations to get a sense of the key phenomena at work
+here, and we’ll create names (like $D-$, $G-$, and $I$-optimality) to describe
+what we see.
 
 ### Simulation
 
-For simplicity, let’s consider $K = 1$. 
+3. For simplicity, let’s consider $K = 1$. We know that we can use linear
+regression to estimate factor effects. Suppose that the underlying function is a
+true linear regression and that our sample size budget is $n = 4$. How should we
+distributed our four points in order to achieve a good estimate of the
+underlying linear regression?
 
-* We know that we can use linear regression to estimate factor effects.
-
-* Suppose that the underlying function is a true linear regression
-
-* Suppose our budget is $n = 4$.
-
-* How should we distributed our four points in order to achieve a good estimate of the underlying linear regression?
-
-```{r}
-display(readImage("https://uwmadison.box.com/shared/static/zm5ork632pktbbryzvs4ex6fbvd78z72.png"))
-```
-```{r}
-display(readImage("https://uwmadison.box.com/shared/static/48czl1on1krut0gquz5arqdb5a81ft40.png"))
-```
-```{r, fig.cap="Three candidate designs explored in our $K = 1$ simulation."}
-display(readImage("https://uwmadison.box.com/shared/static/0s7m67r9k447irxr8jdzmta8h0ea2seg.png"))
+```{r, out.width = 250, fig.cap="Three candidate designs explored in our $K = 1$ simulation."}
+include_graphics("https://uwmadison.box.com/shared/static/zm5ork632pktbbryzvs4ex6fbvd78z72.png")
+include_graphics("https://uwmadison.box.com/shared/static/48czl1on1krut0gquz5arqdb5a81ft40.png")
+include_graphics("https://uwmadison.box.com/shared/static/0s7m67r9k447irxr8jdzmta8h0ea2seg.png")
 ```
 
-Here are three candidates,
-
-* Near the origin: Place two points each at -0.1 and 0.1.
-
-* Equispaced: Place the four points equally spaced between -1 and 1
-
-* Boundaries: Place 2 points at -1 and 2 at 1
+4. Here are three candidates,
+  * Near the origin: Place two points each at -0.1 and 0.1.
+  * Equispaced: Place the four points equally spaced between -1 and 1
+  * Boundaries: Place 2 points at -1 and 2 at 1
 
 ```{r}
+library(dplyr)
+
 N <- 10
 x <- c(rep(-0.1, 2), rep(0.1, 2))
 sim_data <- list()
@@ -119,9 +109,10 @@ sim_data[["2k"]] <- simulate(x, f)
 sim_df <- bind_rows(sim_data, .id = "design")
 ```
 
-```{r}
+```{r, fig.width = 5, fig.height = 4, fig.cap = "An animation illustrating the variance in estimated slopes across several designs."}
+library(gganimate)
 p <- ggplot(sim_df %>% filter(rep < 100)) +
-  geom_point(aes(x = x, y = y)) +
+  geom_point(aes(x, y)) +
   geom_abline(slope = 3, intercept = -1, col = "red") +
   geom_abline(aes(slope = slope, intercept = intercept, color = design)) +
   scale_color_brewer(palette = "Set2") +
@@ -130,30 +121,23 @@ p <- ggplot(sim_df %>% filter(rep < 100)) +
 animate(p, fps=10)
 ```
 
-To illustrate this idea, consider the animation
-[here](https://drive.google.com/file/d/1pgMuz67plwSSb0kWw0i87QK7vaztbxba/view?usp=sharing).
-Each frame is a random run from the simulation.
+5. To illustrate this idea, consider the animation above. Each frame is a random
+run from the simulation. The red line is the true regression function, the three
+panels correspond to the different placements of $x$, and the black dots are
+random $y$’s that we observe when sampling at $x$. The orange, green, and blue
+lines are the regression fits corresponding to those $\left(x, y\right)$ pairs
+After running this 1000 times, we get the figures below.
 
-* The red line is the true regression function.
-
-* The three panels correspond to the different placements of $x$.
-
-* The black dots are random $y$’s that you observe when you sample at $x$
-
-* The orange, green, and blue lines are the regression fits corresponding to those $\left(x, y\right)$ pairs
-
-After running this 1000 times, we get the figure to the right. We can alternatively make a histogram of the estimated slopes.
-
-```{r}
+```{r, fig.width = 5, fig.height = 4, out.width = "30%", fig.cap = "The original regressions overlaid (top) and a histogram of all the slopes (bottom)."}
 ggplot(sim_df) +
-  geom_point(aes(x = x, y = y), alpha = 0.05) +
+  geom_point(aes(x, y), alpha = 0.05) +
   geom_abline(aes(slope = slope, intercept = intercept, color = design), alpha = 0.1) +
   geom_abline(slope = 3, intercept = -1, col = "red") +
   scale_color_brewer(palette = "Set2") +
   facet_grid(design ~ .)
 ggplot(sim_df) +
   geom_histogram(
-    aes(x = slope, fill = design), 
+    aes(slope, fill = design), 
     position = "identity", bins = 100, alpha = 0.6
   ) +
   scale_fill_brewer(palette = "Set2")
@@ -161,32 +145,37 @@ ggplot(sim_df) +
 
 ### Observations
 
-* When we choose x’s close to the origin, the estimates are highly variable
-
-* The $2^{K}$ approach, which places all samples at the extremes of the factor seems best, in two senses,
-
-	* Narrowest band of fitted regression lines
-	
-	* Narrowest histogram of estimated slopes (around the truth)
+6. When we choose x’s close to the origin, the estimates are highly variable. On
+the other hand, the $2^{K}$ approach, which places all samples at the extremes
+of the factor seems best, in two senses. First, it has the narrowest band of
+fitted regression lines. Second, it has the narrowest histogram of estimated
+slopes (and around the truth).
 
 ### Definitions
 
-```{r, fig.cap = "Summary of alternative optimality definitions."}
-display(readImage("https://uwmadison.box.com/shared/static/6xoe5onf01gdpaef6g0qtcstbhb9w72n.png"))
+7. A design is _$D$-optimal_ if
+$\left|\text{Cov}\left(\hat{\beta}\right)\right|$ is minimized. In our picture,
+this happens when the width of the histogram of $\hat{\beta}$ is minimized. The
+determinant generalizes the notion of width to higher-dimensions (specifically,
+it gives the volume of a high-dimensional parallelogram.)
+	
+8. A design is _$G$-optimal_ if $\max_{x}
+\text{Var}\left(\hat{y}\left(x\right)\right)$ is minimized. In our picture, this
+happens when the maximum vertical spread of the prediction band is minimized.
+
+9. A design is _$V$-optimal_ if $\int_{\left[-1, 1\right]^{K}}.
+\text{Var}\left(\hat{y}\left(x\right)\right)dx$ is minimized. In our picture,
+this happens when the area of the prediction band is minimized
+
+```{r, out.width = 350, fig.cap = "Summary of alternative optimality definitions."}
+include_graphics("https://uwmadison.box.com/shared/static/6xoe5onf01gdpaef6g0qtcstbhb9w72n.png")
 ```
 
-* A design is _$D$-optimal_ if $\left|\text{Cov}\left(\hat{\beta}\right)\right|$ is minimized.
+10. While our simulation was only for $K = 1$, it turns out that according to all
+three criteria, the $2^{K}$-design is optimal.
 
-	* In our picture, if the width of the histogram of $\hat{\beta}$ is minimized
-	
-	* The determinant generalizes the notion of « size » to higher-dimensions (specifically, it’s related to volume)
-	
-* A design is _$G$-optimal_ if $\max_{x} \text{Var}\left(\hat{y}\left(x\right)\right)$ is minimized
-
-	* In our picture, if the maximum vertical spread of the prediction band is minimized
-	
-* A design is _$V$-optimal_ if $\int_{\left[-1, 1\right]^{K}} \text{Var}\left(\hat{y}\left(x\right)\right)dx$ is minimized
-
-	* In our picture, if the area of the prediction band is minimized
-
-While our simulation was only for $K = 1$, it turns out that according to all three  criteria, the $2^{K}$-design is optimal.
+```{r, out.width = 225, fig.show = "hold", fig.cap="Three candidate designs when studying 2 factors, all using 4 samples. The $2^2$ design is at the bottom."}
+include_graphics("https://uwmadison.box.com/shared/static/9qhkn4dnuqoou7dm02zgkexze5mlaz6z.png")
+include_graphics("https://uwmadison.box.com/shared/static/ywt9gxdakwz558bl6j57y1v25uncjjil.png")
+include_graphics("https://uwmadison.box.com/shared/static/mpi36bkvrhpuf3ls66jxkqy4mvqoqzfm.png")
+```

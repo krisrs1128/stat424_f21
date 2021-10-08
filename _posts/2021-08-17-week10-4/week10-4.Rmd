@@ -1,7 +1,7 @@
 ---
 title: "$2^{K - 1}$ Fractional Factorial Designs"
 description: |
-  A short description of the post.
+    Reducing the number of samples required in factorial designs.
 author:
   - name: Kris Sankaran
     url: {}
@@ -11,35 +11,28 @@ output:
     self_contained: false
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE, out.width = 400, fig.align = "center")
 ```
 
-_Readings [8.1 - 8.2](), [Rmarkdown]()_
-
+_Readings [8.1 - 8.2](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week10-4/week10-4.Rmd)_
 
 ```{r}
-library(dplyr)
 library(ggplot2)
-library(readr)
-library(EBImage)
-library(ggplot2)
-theme_set(theme_bw() + theme(legend.position = "bottom"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
-```{r}
-# helper functions
-code <- function(x) ifelse(x == '-', -1, 1)
-daniel_plot <- function(effects, probs = c(0.4, 0.6)) { 
-  qq <- qqnorm(effects, datax = TRUE)
-  qqline(effects, col = "red", probs = probs, datax = TRUE)
-  text(qq$x, qq$y, names(effects), pos=1)
-}
-```
-
-
-The trouble with $2^{K}$ designs is that the number of samples required grows
+1. The trouble with $2^{K}$ designs is that the number of samples required grows
 exponentially with the number of factors $K$. The differences between 4 and 7
 factors doesn’t sound like a lot, but it’s the difference between 16 and 128
 experimental runs. Fractional factorial designs show how to study extra factors
@@ -48,23 +41,17 @@ that it creates are often worth it.
 
 ### Principles
 
-There are two central ideas,
-
-* Sparsity of Effects: It’s often safe to assume that high-order interactions
-are rare.
-
-* Heredity: It is unusual for an interaction to be significant without the
-corresponding main effects also being significant. For example, it would be
-unusual to have $A \times B$ be significant without at least one of $A$ and $B$
-being significant.
+2. There are two central ideas,
+  * Sparsity of Effects: It’s often safe to assume that high-order interactions
+  are rare.
+  * Heredity: It is unusual for an interaction to be significant without the
+  corresponding main effects also being significant. For example, it would be
+  unusual to have $A \times B$ be significant without at least one of $A$ and $B$
+  being significant.
 
 ### Initial Exploration
-
-```{r, fig.cap = "A bad choice of samples to subset down to, which would make it impossible to estimate effects from $C$."}
-display(readImage("https://uwmadison.box.com/shared/static/gu87vet64i970eonsbvtds7bsb31qbuy.png"))
-```
-Suppose we want to study $A, B$ and $C$, but we only have a budget of 4 runs. We
-need to choose four corners of the cube to sample. Some choices are obviously
+3. Suppose we want to study $A, B$ and $C$, but we only have a budget of 4 runs.
+We need to choose four corners of the cube to sample. Some choices are obviously
 bad. E.g., if we chose all the samples on one face, we wouldn’t see any
 variation in one factor. Here’s an idea that will lead us on the right path.
 Recall our old notation,
@@ -76,9 +63,13 @@ Recall our old notation,
 | b | - | + | - |
 | ab | + | + | + |
 
-Acting on the sparsity of effects principle, let’s suppose that AB is null and
-invent a contrast for C that exactly matches AB. We’ll update the label to match
-the associated corner of the cube.
+```{r, fig.cap = "A bad choice of samples to subset down to, which would make it impossible to estimate effects from $C$."}
+include_graphics("https://uwmadison.box.com/shared/static/gu87vet64i970eonsbvtds7bsb31qbuy.png")
+```
+
+4. Acting on the sparsity of effects principle, let’s suppose that AB is null
+and invent a contrast for C that exactly matches AB. We’ll update the label to
+match the associated corner of the cube.
 
 | label | A | B |  AB | C |
 |---| --- | --- | --- | --- |
@@ -88,48 +79,48 @@ the associated corner of the cube.
 | abc | + | + | + | + |
 
 ```{r, fig.cap="A more sensible fraction of samples to take."}
-display(readImage("https://uwmadison.box.com/shared/static/mmj9mcixl4y0o95hwf7h93vayw0eooc0.png"))
+include_graphics("https://uwmadison.box.com/shared/static/mmj9mcixl4y0o95hwf7h93vayw0eooc0.png")
 ```
 
-This seems like a reasonable choice of 4 corners, making it possible to estimate
-at least all the main effects. This turns out to be a general strategy for
-subsetting the full design. But before we do another example, we need to define
-some vocabulary.
+5. This seems like a reasonable choice of 4 corners, making it possible to
+estimate at least all the main effects. This turns out to be a general strategy
+for subsetting the full design. But before we do another example, we need to
+define some vocabulary.
 
 ### Vocabulary
 
-* $2^{K - 1}$: This denotes a fractional factorial design where we take $\frac{1}{2}$ of the samples in a $2^{K}$ design.
+6. $2^{K - 1}$: This denotes a fractional factorial design where we take
+$\frac{1}{2}$ of the samples in a $2^{K}$ design.
 
-* Aliases: Above, we assumed that AB was null. Suppose that it weren’t, though.
+7. Aliases: Above, we assumed that AB was null. Suppose that it weren’t, though.
 Notice that the contrasts used for the pairs below are all equal,
 \begin{align*}
 	 \left[AB\right] &= \frac{1}{2}\left(c - a + b + abc\right) = \left[C\right] \\
 		\left[BC\right] &= \frac{1}{2}\left(-c + a - b + abc\right) = \left[A\right] \\
 		\left[AC\right] &= \frac{1}{2}\left(-c - a + b + abc\right) = \left[B\right]
 \end{align*}
-
-and we have no conclusive way of distinguishing between these *aliased* effects,
-besides appeals to the hereditary principle or domain knowledge. To denote this
-unidentifiability, we will use bracket notation, for example,
-\begin{align*}
-\left[A\right] &= A + BC.
-\end{align*}
-
-* Generators: In the example, we set $C = AB$. Multiplying both sides by $C$ and
-using the fact that $C^2 = I$, we find $ABC = I$. The *word* ABC will be called
-the generator for this fraction. 
+  and we have no conclusive way of distinguishing between these *aliased* effects,
+  besides appeals to the hereditary principle or domain knowledge. To denote this
+  unidentifiability, we will use bracket notation, for example,
+  \begin{align*}
+  \left[A\right] &= A + BC.
+  \end{align*}
+  
+8. Generators: In the example, we set $C = AB$. Multiplying both sides by $C$
+and using the fact that $C^2 = I$, we find $ABC = I$. The *word* ABC will be
+called the generator for this fraction.
 
 ```{r, fig.cap = "An example complementary fraction."}
-display(readImage("https://uwmadison.box.com/shared/static/pffnjyav7wexbujzf32vlhorcfxhfa6w.png"))
+include_graphics("https://uwmadison.box.com/shared/static/pffnjyav7wexbujzf32vlhorcfxhfa6w.png")
 ```
 
-* Complementary designs: The complementary fraction of a fractional factorial
+9. Complementary designs: The complementary fraction of a fractional factorial
 design are the corners on which we didn’t take samples. Often, if there are
 strong aliased effects in an initial fractional design, the complementary
 fraction will be run in the next experiment.
 
-* Resolution: A fractional design has resolution $R$ if no $p$-factor is aliased
-with an effect containing less than $R - p$ factors.
+10. Resolution: A fractional design has resolution $R$ if no $p$-factor is
+aliased with an effect containing less than $R - p$ factors.
 
 | $R$ | $p$ | $< R - p$ | Interpretation |
 |- | - | --- | ------- |
@@ -139,76 +130,97 @@ with an effect containing less than $R - p$ factors.
 | 5 | 1 | $\leq 4$ | Main effects aren’t aliased with other main effects, two-way, or three way interactions. | 
 | | 2 | $\leq 3$ | Two-way interactions aren’t aliased with with main effects or two-way interactions. |
 
-* Projection: In a fractional factorial, if we decided that we don’t care about
-a factor after all, we automatically end up with a $2 ^ {K - 1}$  full-factorial
-for free.
+11. Projection: In a fractional factorial, if we decided that we don’t care
+about a factor after all, we automatically end up with a $2 ^ {K - 1}$
+full-factorial for free.
+
 ```{r fig.cap="Three projections of $2^3$ designs into $2^2$ designs, from the textbook."}
-display(readImage("https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg"))
+include_graphics("https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg")
 ```
 
-* Sequences: If we find a strong contrast for an aliased effect, it’s natural to
-try a follow-up experiment to resolve the ambiguity.
+12. Sequences: If we find a strong contrast for an aliased effect, it’s natural
+to try a follow-up experiment to resolve the ambiguity.
 
 ### Code Example
 
-Let's suppose we only had only run half of the runs in the filtration example
-from week 9 [1]. The original experiment is a $2^ 4$ design; we will choose the
-fraction corresponding to the word^[The word $I = ABCD$ emerged from defining $D
-= ABC$.] $I = ABCD$
+13. Let's suppose we only had only run half of the runs in the filtration
+example from week 9 [1]. The original experiment is a $2^ 4$ design; we will
+choose the fraction corresponding to the word^[The word $I = ABCD$ emerged from
+defining $D = ABC$.] $I = ABCD$.
 
-This is a general principle for $2 ^ {K - 1}$ designs: choose which
+14. This is a general principle for $2 ^ {K - 1}$ designs: choose which
 configurations to run by defining the relation $K = A B C \dots J$. This turns a
 full $2^{K - 1}$ factorial design, which only studied $K - 1$ factors into a
 fractional $2^{K - 1}$ factorial that studies $K$ factors.
 
-```{r, echo = FALSE}
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
+15. Let's read the filtration dataset and pretend that we had only collected
+data corresponding to the fraction specified by $D = ABC$. This is exactly what
+the `filter` command does below -- it removes all samples that are not
+consistent with the $D = ABC$ fraction.
+
+```{r}
+library(readr)
+library(dplyr)
+code <- function(x) ifelse(x == '-', -1, 1)
 filtration <- read_table2("https://uwmadison.box.com/shared/static/xxh05ngikmscnddbhg2l3v268jnu4jtc.txt") %>%
-  mutate_at(vars(-Rate), as.factor) %>%
-  mutate_at(vars(-Rate), code) %>%
+  mutate_at(vars(A:D), code) %>%
   filter(D == A * B * C)
 ```
-We can perform the fit. Note that there missing values in the estimated
+
+16. We can perform the fit. Note that there missing values in the estimated
 coefficients because some effects are aliased.
-```{r, echo = TRUE}
-dim(filtration)
+
+```{r}
 fit <- lm(Rate ~ A * B * C * D, data = filtration)
 summary(fit)
 ```
 
-To back out which terms are aliased, let's look carefully at the design matrix.
-```{r, echo = TRUE, size = "scriptsize"}
+17. To back out which terms are aliased, let's look carefully at the design
+matrix. All `TRUE` elements outside of the diagonal are aliased effects. For
+example, the `TRUE` in column A on row BCD means that A is aliased with BCD.
+
+```{r}
 X <- model.matrix(fit)
 t(X) %*% X != 0 # TRUE on off diagonals are aliases
 ```
-So, revisiting the estimated fit, we can conclude that.
-\begin{align*}
-\widehat{\mu}+\widehat{A B C D} &=70.75 \\
-\widehat{A}+\widehat{B C D} &=9.5 \times 2=19 \\
-\widehat{B}+\widehat{A C D} &=0.75 \times 2=1.5 \\
-\widehat{C}+\widehat{A B D} &=7 \times 2=14 \\
-\widehat{D}+\widehat{A B C} &=8.25 \times 2=16.5 \\
-\widehat{A B}+\widehat{C D} &=-0.5 \times 2=-1 \\
-\widehat{A C}+\widehat{B D}=&-9.25 \times 2=-18.5 \\
-\widehat{B C}+\widehat{A D} &=9.5 \times 2=19
-\end{align*}
 
-Let's see which of the effects are important, and see whether we can draw any
-reasonable conclusions, based on the hereditary principle.
-```{r, echo = FALSE}
+  So, revisiting the estimated fit, we can conclude that.
+  \begin{align*}
+  \widehat{\mu}+\widehat{A B C D} &=70.75 \\
+  \widehat{A}+\widehat{B C D} &=9.5 \times 2=19 \\
+  \widehat{B}+\widehat{A C D} &=0.75 \times 2=1.5 \\
+  \widehat{C}+\widehat{A B D} &=7 \times 2=14 \\
+  \widehat{D}+\widehat{A B C} &=8.25 \times 2=16.5 \\
+  \widehat{A B}+\widehat{C D} &=-0.5 \times 2=-1 \\
+  \widehat{A C}+\widehat{B D}=&-9.25 \times 2=-18.5 \\
+  \widehat{B C}+\widehat{A D} &=9.5 \times 2=19
+  \end{align*}
+  
+18. Let's see which of the effects are important, and see whether we can draw
+any reasonable conclusions, based on the hereditary principle.
+
+```{r, out.width = 600}
+daniel_plot <- function(effects, probs = c(0.4, 0.6)) { 
+  qq <- qqnorm(effects, datax = TRUE)
+  qqline(effects, col = "red", probs = probs, datax = TRUE)
+  text(qq$x, qq$y, names(effects), pos=1)
+}
+
 daniel_plot(2 * coef(fit)[-1], prob=c(0.25, 0.3))
 ```
-The important effects look like,
 
-* $A + BCD$ 
-
-* $BC + AD$
-
-* $D + ABC$
-
-* $C + ABD$
-
-* $AC + BD$
-
-It seems like we should believe in the main effects $A, D$, and $C$. For the
-two-way interactions, $AC$ and $AD$ are more plausible, because the main effect
-for $B$ was not significant.
+19. The important effects look like,
+  
+  * $A + BCD$ 
+  * $BC + AD$
+  * $D + ABC$
+  * $C + ABD$
+  * $AC + BD$
+  
+  It seems like we should believe in the main effects $A, D$, and $C$. For the
+  two-way interactions, $AC$ and $AD$ are more plausible, because the main effect
+  for $B$ was not significant.

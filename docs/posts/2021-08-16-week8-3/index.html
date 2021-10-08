@@ -2302,7 +2302,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </ul></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="https://uwmadison.box.com/shared/static/l4qdpymt13focsszf5krxwt447plyfxu.png" data-distill-preview=1 /></p>
+<p><img src="https://uwmadison.box.com/shared/static/l4qdpymt13focsszf5krxwt447plyfxu.png" width="80%" data-distill-preview=1 style="display: block; margin: auto;" /></p>
 </div>
 <ol start="3" type="1">
 <li>The example below reads in a dataset with 3 factors. We can use <code>facet_grid</code> to see effects across all 8 configurations.</li>
@@ -2317,7 +2317,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>B</span> <span class='op'>~</span> <span class='va'>C</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week8-3_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+<p><img src="week8-3_files/figure-html5/unnamed-chunk-3-1.svg" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <h3 id="effect-estimates">Effect Estimates</h3>
 <ol start="4" type="1">
@@ -2389,7 +2389,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li>when the factor is on vs. off</li>
 <li>between one face of the cube and its opposite</li>
 </ul></li>
-<li><p>For example, to estimate the main effect of <span class="math inline">\(A\)</span>, we can use, <span class="math display">\[A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]\]</span></p></li>
+<li><p>For example, to estimate the main effect of <span class="math inline">\(A\)</span>, we can use, <span class="math display">\[A = \frac{1}{2^3 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]\]</span></p></li>
 <li><p>To estimate interactions, we compare how the average effects of a variable change when we condition on the value of another variable. For example, for the interaction <span class="math inline">\(AB\)</span>, notice that</p></li>
 </ol>
 <table>
@@ -2406,17 +2406,17 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <tbody>
 <tr class="odd">
 <td>+</td>
-<td><span class="math inline">\(\frac{1}{2^2 n}\left[\left(abc - bc\right) + \left(ab - b\right)\right]\)</span></td>
+<td><span class="math inline">\(\frac{1}{2^3 n}\left[\left(abc - bc\right) + \left(ab - b\right)\right]\)</span></td>
 </tr>
 <tr class="even">
 <td>-</td>
-<td><span class="math inline">\(\frac{1}{2^2 n}\left[\left(ac - c\right) + \left(a - \left(1\right)\right)\right]\)</span></td>
+<td><span class="math inline">\(\frac{1}{2^3 n}\left[\left(ac - c\right) + \left(a - \left(1\right)\right)\right]\)</span></td>
 </tr>
 </tbody>
 </table>
 <pre><code>which inspires the definition,</code></pre>
 <p><span class="math display">\[
-AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
+AB = \frac{1}{2^3 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
 \]</span></p>
 <ol start="8" type="1">
 <li>Notice that the associated contrast can be obtained by multiplying the columns in the table above.</li>
@@ -2424,14 +2424,10 @@ AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/wwsniua1ce0q376oy2ffrtzf4ivzup99.png"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/hapjw92oqij5oiyddt29nvtq6y1xzxxu.png"</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<img src="week8-3_files/figure-html5/unnamed-chunk-4-1.png" width="624" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/hapjw92oqij5oiyddt29nvtq6y1xzxxu.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-<p><img src="week8-3_files/figure-html5/unnamed-chunk-4-2.png" width="624" /></p>
+<p><img src="week8-3_files/figure-html5/unnamed-chunk-4-1.svg" width="80%" style="display: block; margin: auto;" /><img src="week8-3_files/figure-html5/unnamed-chunk-4-2.svg" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <table>
 <thead>
