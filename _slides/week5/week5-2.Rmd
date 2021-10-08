@@ -13,7 +13,7 @@ output:
     seal: false  
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE}
 library(knitr)
 library(ggplot2)
 opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 6, fig.height = 2.7, dev = 'svg', dev.args = list(bg = "transparent"))
@@ -31,7 +31,7 @@ theme_set(theme424)
 
 # RCBD with Random Blocks + Latin Squares
 
-```{r, out.width = 300}
+```{r, out.width = 300, fig.align = "left"}
 include_graphics("https://uwmadison.box.com/shared/static/gu58jurmhyraebsdyh4txlpyxegxn9xf.png")
 ```
 
