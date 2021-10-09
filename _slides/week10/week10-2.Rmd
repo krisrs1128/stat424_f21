@@ -17,7 +17,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 5, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -105,7 +105,9 @@ and error
 
 ---
 
-### Approach
+### Setup
+
+Consider the $2^2$ design.
 
 | label | A | B |  AB |
 |--- | --- | --- | --- |
@@ -116,10 +118,319 @@ and error
 
 ---
 
+### Extension
+
+* To extend this design to 3 factors, set $C = AB$
+* This is based on the sparsity of effects principle
+  - We won't be able to tell the difference between an AB or C effect
+  - We have to assume there is no AB effect
+
+| label | A | B |  AB | C |
+|---| --- | --- | --- | --- |
+| (c) | - | - | + | + |
+| a | + | - | - | - |
+| b | - | + | - | - |
+| abc | + | + | + | + |
+
+---
+
+### Selected Samples
+
+* These are the same points shown on the cube earlier
+* The fact that we found this fraction by setting a main effect equal to an
+interaction term is not a coincidence
+
+.pull-left[
+| label | A | B |  AB | C |
+|---| --- | --- | --- | --- |
+| (c) | - | - | + | + |
+| a | + | - | - | - |
+| b | - | + | - | - |
+| abc | + | + | + | + |
+]
+
+.pull-right[
+```{r, fig.cap="A more sensible fraction of samples to take."}
+include_graphics("https://uwmadison.box.com/shared/static/mmj9mcixl4y0o95hwf7h93vayw0eooc0.png")
+```
+]
+
+---
+
+### Vocabulary
+
+* $2^{K - 1}$: This denotes a fractional factorial design with $K$ factors but
+only $\frac{1}{2}$ of the samples of a full $2^{K}$ design.
+* Generators: In the example, we set $C = AB$. Multiplying by $C$
+and using $C^2 = I$, we find $ABC = I$. $ABC$ is called the generator of the fraction.
+* Complementary fraction: This is the fractional factorial
+design are the corners on which we didn’t take samples. This can be run in a
+follow-up experiment.
+
+```{r, fig.cap = "An example complementary fraction."}
+include_graphics("https://uwmadison.box.com/shared/static/pffnjyav7wexbujzf32vlhorcfxhfa6w.png")
+```
+
+---
+
+### Aliasing
+
+Above, we assumed that AB was null. Suppose that it weren’t. Notice that the
+contrasts used for the pairs below are all equal,
+\begin{align*}
+	 \left[AB\right] &= \frac{1}{2}\left(c - a + b + abc\right) = \left[C\right] \\
+		\left[BC\right] &= \frac{1}{2}\left(-c + a - b + abc\right) = \left[A\right] \\
+		\left[AC\right] &= \frac{1}{2}\left(-c - a + b + abc\right) = \left[B\right]
+\end{align*}
+  and we have no conclusive way of distinguishing between these *aliased* effects.
+  
+---
+
+### Aliasing
+
+* To denote this unidentifiability, we will use bracket notation, for example,
+  \begin{align*}
+  \left[A\right] &= A + BC.
+  \end{align*}
+* Aliasing is typically resolved by invoking either the hereditary principle or
+domain knowledge. 
+  
+---
+
+### Resolution
+
+A fractional design has resolution $R$ if no $p$-factor effect is aliased with
+an effect containing less than $R - p$ factors.
+
+| $R$ | $p$ | $< R - p$ | Interpretation |
+|- | - | --- | ------- |
+| 3 | 1 |  $\leq 2$ | Main effects aren't aliased with other main effects, but could be aliased with two-way interactions | 
+| 4 | 1 | $\leq 3$ | Main effects aren't aliased with any other main effects or with any two-way interactions, but could be aliased with three-way interactions | 
+|  | 2 | $\leq 2$ | Two-way interactions aren’t aliased with main effects.
+| 5 | 1 | $\leq 4$ | Main effects aren’t aliased with other main effects, two-way, or three way interactions. | 
+| | 2 | $\leq 3$ | Two-way interactions aren’t aliased with with main effects or two-way interactions. |
+
+A table of fractional factorial designs and their resolutions is available in
+the appendix of the textbook. They can be looked up based on the design's
+generator.
+
+---
+
+### Recipe: $2^{K - 1}$ Designs
+
+1. Create a full factorial for all but one effect.
+2. Define an aliasing pattern for the left out effect by choosing a generator.
+3. Multiply columns in the high-order interactions to determine in which
+samples the aliased main effect should be present.
+4. Analyze data in the same way as before (plot effects, then fit submodel), but paying attention to aliased effects.
+
+---
+
+### Example: Step (1)
+
+We are interested in factors A, B, C, and D. We will alias B.
+
+| A | C | D |
+| - | - | - |
+| + | - | - |
+| - | + | - |
+| + | + | - |
+| - | - | + |
+| + | - | + | 
+| - | + | + |
+| + | + | + |
+
+---
+
+### Example: Step (2) and (3)
+
+We have set $B = ACD$ (i.e., the word $ACDB$).
+
+| A | C | D | B |
+| - | - | - | - |
+| + | - | - | + |
+| - | + | - | + |
+| + | + | - | - |
+| - | - | + | + |
+| + | - | + | - |
+| - | + | + | - |
+| + | + | + | + |
+
+---
+class: small
+
+### Exercise -- Part (1)
+
+This walks through problem 8.8 in the textbook.
+
+.pull-left[
+An article describes the use of a replicated fractional factorial to investigate the effect of five factors on the free height of leaf springs used in an automotive application. The factors are A = furnace temperature, B = heating time, C = transfer time, D = hold down time, and E = quench oil temperature.
+**(i) Write out the alias structure for this design. What is the resolution?**
+(ii) Analyze the data. What factors influence the mean free height?
+]
+
+.pull-right[
+```{r}
+library(readr)
+experiment <- read_csv("https://uwmadison.box.com/shared/static/45uw7mlupit7qczysus599173tr2o9eu.csv")
+```
+]
+
+---
+
+### Exercise -- Part (1)
+
+(1) Which column looks like it is a product of the others? Use this to determine
+the aliasing structure. (Hint: It is the column with the most irregular
+structure)
+
+(2) Determine the resolution of this design by referring to the appendix in the
+textbook.
+
+---
+
+### Solution
+
+
+
+---
+
 ### Code Implementation
 
 ---
 
-### Exercise
+### Filtration Data
+
+We will work with the filtration dataset, but pretending that we had run a $2^{4 - 1}$ design using the word $ABCD$. The `filter` step reduces the full factorial into the imagined fractional factorial.
+
+```{r}
+library(readr)
+library(dplyr)
+code <- function(x) ifelse(x == '-', -1, 1)
+filtration <- read_table2("https://uwmadison.box.com/shared/static/xxh05ngikmscnddbhg2l3v268jnu4jtc.txt") %>%
+  mutate_at(vars(A:D), code) %>%
+  filter(D == A * B * C)
+```
+
+---
+
+```{r, echo = FALSE}
+daniel_plot <- function(effects, probs = c(0.4, 0.6)) { 
+  qq <- qqnorm(effects, datax = TRUE)
+  qqline(effects, col = "red", probs = probs, datax = TRUE)
+  text(qq$x, qq$y, names(effects), pos=1)
+}
+```
+
+--- 
+### Fitted Full Model
+
+```{r}
+library(BsMD)
+fit <- lm(Rate ~ A * B * C * D, filtration)
+daniel_plot(2 * coef(fit)[-1], prob=c(0.25, 0.3))
+```
+
+---
+
+### Aliasing Pattern
+
+.pull-left[
+* The aliasing pattern can be found from the design matrix.
+* Off diagonal elements of $X^T X$ that are not 0 are aliased effects. The
+function on the right finds these aliases.
+]
+
+.pull-right[
+```{r}
+library(dplyr)
+library(tidyr)
+
+aliases <- function(fit) {
+  X <- model.matrix(fit)
+  t(X) %*% X  %>%
+    as.data.frame() %>%
+    add_rownames("effect") %>%
+    pivot_longer(-effect, names_to = "alias") %>%
+    filter(value != 0, effect != alias) %>%
+    select(-value)
+}
+```
+]
+
+---
+
+### Aliasing Pattern
+
+.pull-left[
+* The aliasing pattern can be found from the design matrix.
+* Off diagonal elements of $X^T X$ that are not 0 are aliased effects. The
+function on the right finds these aliases.
+]
+
+.pull-right[
+```{r}
+aliases(fit)
+```
+]
+
+---
+
+### Interpretation
+
+The important effects seem like $A + BCD$, $BC + AD$, $D + ABC$, $C + ABD$, $AC + BD$.
+  
+.pull-left[
+```{r}
+daniel_plot(2 * coef(fit)[-1], prob=c(0.25, 0.3))
+```
+]
+
+.pull-right[
+```{r}
+aliases(fit)
+```
+]
+
+---
+
+### Interpretation
+
+* Based on the sparsity of effects principle, we should believe in effects for $A,
+D$, and $C$.
+* For the two-way interactions,  $AC$ and $AD$ are more plausible, because the
+main effect for $B$ was not significant.
+
+---
+class: small
+
+### Exercise -- Part (2)
+
+This walks through problem 8.8 in the textbook.
+
+.pull-left[
+An article describes the use of a replicated fractional factorial to investigate the effect of five factors on the free height of leaf springs used in an automotive application. The factors are A = furnace temperature, B = heating time, C = transfer time, D = hold down time, and E = quench oil temperature.
+(i) Write out the alias structure for this design. What is the resolution?
+**(ii) Analyze the data. What factors influence the mean free height?**
+]
+
+.pull-right[
+
+```{r}
+library(readr)
+experiment <- read_csv("https://uwmadison.box.com/shared/static/45uw7mlupit7qczysus599173tr2o9eu.csv")
+```
+]
+
+---
+
+### Exercise --- Part (2)
+
+(1) Reshape the data so that all replicates are contained in one column.
+
+(2) Make a Daniel or Lenth plot based on effects estimated from a model with all interactions. Which effects seem relevant?
+
+(3) Refit a submodel based on the analysis in (4). Report significant effects
+and interpret them based on the sparsity of effects and hereditary principles.
 
 ---
