@@ -69,7 +69,7 @@ where the $x_k$’s take on one of two values, depending on whether or not facto
     * If the factors are binary (on vs. off), we can use a binary encoding. 
 
 ```{r, echo = FALSE, out.width = "50%"}
-display(readImage("https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepards9fv0cqvbmc.png"))
+include_graphics("https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepards9fv0cqvbmc.png")
 ```
 
 

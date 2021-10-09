@@ -78,10 +78,10 @@ abc
 \end{pmatrix}
 \end{align*}
 
-  For $X$, we’ve just added an intercept column of $1$’s and concatenated it with
+For $X$, we’ve just added an intercept column of $1$’s and concatenated it with
 the contrasts written as $\pm 1$’s. As before, $(1)$ means the value of the
-sample taken at that corner of the cube, $a$ means the sample at the $a$ corner,
-etc.
+sample taken at the $(1)$ corner of the cube, $a$ means the sample at the $a$
+corner, etc.
 
 2. Let’s observe some properties of this matrix,
     * It has $2^{K}$ rows, one per replicate on each corner of the cube.
@@ -90,7 +90,7 @@ etc.
     	* Moreover, if our $K > 2$, we’d have ${K \choose 3}$ three-way interactions,
     	etc. and that, by the binomial theorem, $\left(1 + 1\right)^{K} = \sum_{j \leq
     	K} {K \choose j}1^{j}1^{K - j}$
-    * The columns are orthogonal. Their norms are all $2^{K}$. Hence $X^{T}X = 2^{K}I_{2^{K}}$.
+    * The columns are orthogonal. Their sum of squares are all $2^{K}$. Hence $X^{T}X = 2^{K}I_{2^{K}}$.
 
 ```{r, out.width = "60%"}
 include_graphics("https://uwmadison.box.com/shared/static/8euuywv5ay4x7przznhsxdo269865h2a.png")

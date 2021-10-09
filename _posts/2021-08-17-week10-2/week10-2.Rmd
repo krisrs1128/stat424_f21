@@ -67,7 +67,7 @@ one design better than an another.
   generality, the factors take their values within the interval $\left[-1,
   1\right]$. A candidate design is any way of gathering $n$ samples from among
   all the possible settings of the $K$ factors.
-  * Criteria: We want to estimate the effects « as well as possible. » We also
+  * Criteria: We want to estimate the effects "as well as possible." We also
   want to make good predictions at new factor combinations. We’ll have to make
   these notions precise.
       
@@ -135,12 +135,14 @@ ggplot(sim_df) +
   geom_abline(slope = 3, intercept = -1, col = "red") +
   scale_color_brewer(palette = "Set2") +
   facet_grid(design ~ .)
+ggsave("~/Desktop/stat424_f21/_slides/week10/optimality_overlaid.png", dpi=600)
 ggplot(sim_df) +
   geom_histogram(
     aes(slope, fill = design), 
     position = "identity", bins = 100, alpha = 0.6
   ) +
   scale_fill_brewer(palette = "Set2")
+ggsave("~/Desktop/stat424_f21/_slides/week10/optimality_histograms.png", dpi=600)
 ```
 
 ### Observations

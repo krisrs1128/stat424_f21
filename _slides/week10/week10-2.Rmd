@@ -1,0 +1,125 @@
+---
+title: "Fractional Factorial Designs"
+author: "Kris Sankaran | UW Madison | 23 September 2021"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    lib_dir: libs
+    nature:
+      beforeInit: "cols_macro.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+    seal: false  
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(ggplot2)
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
+```
+
+# $2^{K - 1}$ Fractional Factorial Designs
+
+```{r, out.width = 200}
+include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```
+
+### Statistical Experimental Design
+
+.large[Kris Sankaran | UW Madison ]
+
+---
+
+### Today
+
+* Book Sections: 8.1 - 8.2
+* Online Notes: Week 10 [4]
+
+---
+
+### Motivation
+
+* The number of samples required for a $2^{K}$ design grows exponentially with $K$
+* From 4 to 7 factors doesn't sound like a large change, but there is a
+substantial cost difference between collecting 16 and 128 samples
+* Fractional factorial designs offer a compromise between (1) completely
+ignoring some interesting factors and (2) having to arrange very intensive,
+$2^{K}$ factorial experiments
+
+---
+
+### Main Ideas
+
+  * Sparsity of Effects: It’s often safe to assume that high-order interactions
+  are rare.
+  * Heredity: It is unusual for an interaction to be significant without the
+  corresponding main effects also being significant. 
+  - It would be unusual for $A \times B$ be significant without at least one
+  of $A$ or $B$ being significant.
+
+---
+
+### Discussion
+
+* We are interested in three factors, A, B, and C
+* We have a budget of 4 samples
+* Which factor configurations should we consider sampling?
+  - i.e., which corners of the cube?
+
+---
+
+### A Bad Choice
+
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/gu87vet64i970eonsbvtds7bsb31qbuy.png")
+```
+
+---
+
+### A Better Choice
+
+```{r, fig.cap="A more sensible fraction of samples to take."}
+include_graphics("https://uwmadison.box.com/shared/static/mmj9mcixl4y0o95hwf7h93vayw0eooc0.png")
+```
+
+---
+
+### Automatic Procedure
+
+* This choice of a subsample of points is called a "fraction" of the original $2^{K}$ design
+* For the $2^3$ design, we were able to find a reasonable fraction by trial
+and error
+  - Is there a more automatic way to find good fractions?
+
+---
+
+### Approach
+
+| label | A | B |  AB |
+|--- | --- | --- | --- |
+| (1) | - | - | + |
+| a | + | - | - |
+| b | - | + | - |
+| ab | + | + | + |
+
+---
+
+### Code Implementation
+
+---
+
+### Exercise
+
+---

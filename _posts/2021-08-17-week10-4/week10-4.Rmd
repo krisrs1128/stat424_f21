@@ -46,10 +46,11 @@ that it creates are often worth it.
   are rare.
   * Heredity: It is unusual for an interaction to be significant without the
   corresponding main effects also being significant. For example, it would be
-  unusual to have $A \times B$ be significant without at least one of $A$ and $B$
+  unusual to have $A \times B$ be significant without at least one of $A$ or $B$
   being significant.
 
 ### Initial Exploration
+
 3. Suppose we want to study $A, B$ and $C$, but we only have a budget of 4 runs.
 We need to choose four corners of the cube to sample. Some choices are obviously
 bad. E.g., if we chose all the samples on one face, we wouldn’t see any
