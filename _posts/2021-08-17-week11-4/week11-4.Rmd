@@ -1,7 +1,7 @@
 ---
 title: "Saturated Designs"
 description: |
-  A short description of the post.
+  Very efficient analysis of a large set of factors.
 author:
   - name: Kris Sankaran
     url: {}
@@ -16,34 +16,36 @@ library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-_Readings [8.6, 8.7](), [Rmarkdown]()_
-
+_Readings [8.6, 8.7](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week11-4/week11-4.Rmd)_
 
 ```{r}
-library(dplyr)
 library(ggplot2)
-library(readr)
-library(EBImage)
-library(reshape2)
-library(ggplot2)
-theme_set(theme_bw() + theme(legend.position = "bottom"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
-There are designs that let you study $K$ factors using only $N + 1$ samples;
+
+1. There are designs that let you study $K$ factors using only $N + 1$ samples;
 such designs are called _saturated_. This is an extremely efficient use of
 samples.
 
-The reason we don’t use saturated designs all the time are that (1) they are not
-available for all choices of $K$ and (2) the resulting aliasing structure can
-make definitive inferences difficult. That said, it’s worth being familiar with
-a few saturated designs, since it can result in dramatically reduced sampling
-effort in some special cases.
+2. The reason we don’t use saturated designs all the time are that (1) they are
+not available for all choices of $K$ and (2) the resulting aliasing structure
+can make definitive inferences difficult. That said, it’s worth being familiar
+with a few saturated designs, since it can result in dramatically reduced
+sampling effort in some special cases.
 
 ### Resolution III Designs
 
-When $K + 1$ is a power of 2, then there are resolution III designs that use
-only $N = K + 1$ samples.
-
-Examples
+3. When $K + 1$ is a power of 2, then there are resolution III designs that use
+only $N = K + 1$ samples. Here are some examples,
 
 * $2^{3 - 1}_{III}$: 3 factors in 4 samples
   - Generators: $C = AB$
@@ -68,28 +70,23 @@ Examples
 
 ### Plackett-Burman Designs
 
-Plackett-Burman designs are a collection of design options working outside the
-usual fractional factorial paradigm — they don’t rely on the ideas of generators
-or defining relations that we’ve been using so far to subset full factorial
-designs into less-costly experiments.
+4. Plackett-Burman designs are a collection of design options working outside
+the usual fractional factorial paradigm — they don’t rely on the ideas of
+generators or defining relations that we’ve been using so far to subset full
+factorial designs into less-costly experiments.
 
-We won’t describe their construction, which relies on techniques from abstract
-algebra. The properties that are most important to know are
-
-* A saturated design can be found whenever $K + 1$ is a multiple of 4, which
-is much more often than in the resolution III situation above
-
-* Their aliasing structure is typically more complicated. For example, when $K
-= 11$, then every main effect is aliased with every pairwise interaction not
-including that main effect
-
-* Their projectivity properties are typically good.
-
-	* E.g., resolution III Plackett-Burman has projectivity 3, while any $2^{k -
-	p}_{III}$  fractional factorial has only projectivity 2
+5. We won’t describe their construction, which relies on techniques from
+abstract algebra. The properties that are most important to know are
+  * A saturated design can be found whenever $K + 1$ is a multiple of 4, which
+  is much more often than in the resolution III situation above
+  * Their aliasing structure is typically more complicated. For example, when $K
+  = 11$, then every main effect is aliased with every pairwise interaction not
+  including that main effect
+  * Their projectivity properties are typically good.
+  	* E.g., resolution III Plackett-Burman has projectivity 3, while any $2^{k -
+  	p}_{III}$  fractional factorial has only projectivity 2
+  	* So, we can collapse to any subset of 3 factors and get a full factorial
 	
-	* So, we can collapse to any subset of 3 factors and get a full factorial
-	
-To use these designs, you have to look up the tables of +/-’s, saying which
+6. To use these designs, you have to look up the tables of +/-’s, saying which
 factors to keep on or off for each run. See e.g., Table 8.23/8.24.
 Alternatively, use the `FrF2` R package.

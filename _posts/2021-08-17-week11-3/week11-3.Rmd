@@ -1,7 +1,7 @@
 ---
 title: "Foldover in $2^{K - p}$ Designs"
 description: |
-  A short description of the post.
+  Strategies for dealiasing effects in follow-up experiments.
 author:
   - name: Kris Sankaran
     url: {}
@@ -16,17 +16,20 @@ library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-_Readings [8.6, 8.7](), [Rmarkdown]()_
-
+_Readings [8.6, 8.7](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week11-3/week11-3.Rmd)_
 
 ```{r}
-library(dplyr)
 library(ggplot2)
-library(readr)
-library(EBImage)
-library(reshape2)
-library(ggplot2)
-theme_set(theme_bw() + theme(legend.position = "bottom"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 ```{r helper_funs}

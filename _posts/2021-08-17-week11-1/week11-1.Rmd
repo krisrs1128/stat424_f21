@@ -1,7 +1,7 @@
 ---
 title: "$2^{K - p}$ Fractional Factorial Designs"
 description: |
-  A short description of the post.
+    Even smaller fractions for more sample efficient experiments.
 author:
   - name: Kris Sankaran
     url: {}
