@@ -47,7 +47,8 @@ aliases <- function(fit, trim = TRUE) {
   
   if (trim) {
     pattern <- pattern %>%
-      filter(value != 0)
+      filter(value != 0) %>%
+      select(-value)
   }
   
   pattern
