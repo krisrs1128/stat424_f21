@@ -189,6 +189,26 @@ X <- model.matrix(fit)
 t(X) %*% X != 0 # TRUE on off diagonals are aliases
 ```
 
+These off-diagonal elements are automatically extracted in the function below.
+
+```{r}
+library(dplyr)
+library(tidyr)
+
+aliases <- function(fit) {
+  X <- model.matrix(fit)
+  t(X) %*% X  %>%
+    as.data.frame() %>%
+    add_rownames("effect") %>%
+    pivot_longer(-effect, names_to = "alias") %>%
+    filter(value != 0, effect != alias) %>%
+    select(-value)
+}
+
+aliases(fit)
+```
+
+
   So, revisiting the estimated fit, we can conclude that.
   \begin{align*}
   \widehat{\mu}+\widehat{A B C D} &=70.75 \\

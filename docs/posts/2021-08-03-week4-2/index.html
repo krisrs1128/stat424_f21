@@ -2333,21 +2333,21 @@ y_{a n}
 \]</span> Here, <span class="math inline">\(1_{n}\)</span> refers to a vector of <span class="math inline">\(n\)</span> 1’s stacked in a column and <span class="math inline">\(I_{n}\)</span> refers to the <span class="math inline">\(n\times n\)</span> identity matrix.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="week4-2_files/figure-html5/unnamed-chunk-1-1.svg" width="80%" data-distill-preview=1 style="display: block; margin: auto;" /></p>
+<p><img src="week4-2_files/figure-html5/unnamed-chunk-1-1.svg" width="400" data-distill-preview=1 style="display: block; margin: auto;" /></p>
 </div>
 <ol start="8" type="1">
 <li><p>The specific form of the covariance isn’t important. What is important is that we can exactly evaluate the probability of <span class="math inline">\(y_{11}, y_{12},\dots, y_{an}\)</span> under any choice of the parameters <span class="math inline">\(\mu, \sigma^2, \sigma^2_{\tau}\)</span>.</p></li>
 <li><p>Define <span class="math inline">\(L(\mu, \sigma^2, \sigma^2_{\tau})\)</span> to be the probability of the dataset <span class="math inline">\(y_{11}, y_{12}, \dots y_{an}\)</span> viewed as a function of the normal distribution’s parameters. A good estimate for these parameters comes from finding the configuration that maximizes <span class="math inline">\(L\left(\mu, \sigma^2, \sigma^2_{\tau}\right)\)</span>. The maximizers can’t be found analytically, but algorithms exist to find the maximizers.</p></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="https://uwmadison.box.com/shared/static/0au3iwj17u49ueqor5djqg58rensvmqo.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="https://uwmadison.box.com/shared/static/0au3iwj17u49ueqor5djqg58rensvmqo.png" width="400" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="10" type="1">
 <li>Software also gives a confidence interval for the estimates. It works by studying the curvature of the likelihood function at the maximizer.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
-<img src="https://uwmadison.box.com/shared/static/kqgsua08wh8n2h6zhssbmxf4byldcq2o.png" alt="A highly peaked likelihood surface will give a smaller confidence interval, because there is a smaller set parameters that gives a good probability to the observed data." width="80%" />
+<img src="https://uwmadison.box.com/shared/static/kqgsua08wh8n2h6zhssbmxf4byldcq2o.png" alt="A highly peaked likelihood surface will give a smaller confidence interval, because there is a smaller set parameters that gives a good probability to the observed data." width="400" />
 <p class="caption">
 Figure 1: A highly peaked likelihood surface will give a smaller confidence interval, because there is a smaller set parameters that gives a good probability to the observed data.
 </p>
