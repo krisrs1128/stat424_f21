@@ -33,22 +33,37 @@ theme_set(theme424)
 ```
 
 ```{r helper_funs}
-code <- function(x) ifelse(x == '-', -1, 1)
+library(tidyr)
+library(dplyr)
 
-plot_aliases <- function(fit, n_keep = NULL, n_sample=8) {
+aliases <- function(fit, trim = TRUE) {
   X <- model.matrix(fit)
-  aliases <- (1 / n_sample) * t(X) %*% X
+  pattern <- t(X) %*% X  %>%
+    as.data.frame() %>%
+    add_rownames("effect") %>%
+    pivot_longer(-effect, names_to = "alias") %>%
+    filter(effect != alias)
   
-  if (!is.null(n_keep)) {
-    aliases <- aliases[1:n_keep, 1:n_keep]
+  if (trim) {
+    pattern <- pattern %>%
+      filter(value != 0) %>%
+      select(-value)
   }
   
-  maliases <- melt(aliases)
-  ggplot(maliases) +
-    geom_tile(aes(x = Var1, y = Var2, fill = as.factor(value)), col = "black") +
-    scale_fill_manual(values = c("-1" = "#be8fc5", "1" = "#648d90", "0" = "#e3e6e3")) +
+  pattern
+}
+
+plot_aliases <- function(fit, max_str=NULL) {
+  pattern <- aliases(fit, FALSE)
+  if (!is.null(max_str)) {
+    pattern <- pattern %>%
+      filter(nchar(effect) <= max_str, nchar(alias) <= max_str)
+  }
+  
+  ggplot(pattern) +
+    geom_tile(aes(x = effect, y = alias, fill = as.factor(value)), col = "black") +
+    scale_fill_brewer(palette = "Set3") +
     theme(
-      legend.position = "bottom",
       axis.title = element_blank(),
       axis.ticks = element_blank(),
       axis.text = element_text(size = 6),
@@ -57,6 +72,7 @@ plot_aliases <- function(fit, n_keep = NULL, n_sample=8) {
     coord_fixed()
 }
 
+code <- function(x) ifelse(x == '-', -1, 1)
 daniel_plot <- function(effects, probs = c(0.4, 0.6)) { 
   qq <- qqnorm(effects, datax = TRUE)
   qqline(effects, col = "red", probs = probs, datax = TRUE)
@@ -80,25 +96,26 @@ main effects can be confounded with order-2 interactions.
 ## Full Foldover
 
 ```{r}
+library(readr)
 eye <- read_table2("https://uwmadison.box.com/shared/static/zh7majh2s6gesnu6f27fl17ncqfuwzev.txt") %>%
   mutate_at(vars(-Seq, -y), code)
 ```
 
-```{r fig.cap="Setup for the $2^{7 - 4}$ design with foldover used in the eye focus experiment. The second panel is the full foldover of the first."}
+3.Imagine that we want to delias *main effects* for *all factors* under study.
+	* Assume that there aren’t any interaction effects with order > 2
+  * Idea: For a second fractional factorial run, reverse the signs of all factors
+
+```{r fig.cap="Setup for the $2^{7 - 4}$ design with foldover used in the eye focus experiment. The second panel is the full foldover of the first.", fig.height = 6, fig.width = 3}
 mdesign <- eye %>%
   mutate(ix = row_number()) %>%
-  select(-y) %>%
-  melt(id.vars = c("ix", "Seq"))
+  pivot_longer(A:G, names_to = "factor")
 ggplot(mdesign) +
-  geom_tile(aes(x = variable, y = as.factor(ix), fill = as.factor(value))) +
+  geom_tile(aes(factor, y = as.factor(ix), fill = as.factor(value))) +
   scale_fill_brewer(palette = "Set3") +
   facet_grid(Seq ~ ., scale = "free_y") +
   theme(legend.position = "none")
 ```
 
-3.Imagine that we want to delias *main effects* for *all factors* under study.
-	* Assume that there aren’t any interaction effects with order > 2
-* Idea: For a second fractional factorial run, reverse the signs of all factors
 
 4. What does this do? Let’s consider an the eye focus time example from the
 textbook (Example 8.7). The design is a $2^{7 - 3}_{III}$ fractional factorial
@@ -110,7 +127,7 @@ ignoring all interactions of order 3 and higher.
 
 ```{r, fig.cap = "Alias pattern of the original $2^{7 - 3}$ design."}
 fit <- lm(y ~ A * B * C * D * E * F * G, data = eye[eye$Seq == 1, ])
-plot_aliases(fit, 29)
+plot_aliases(fit, 3)
 ```
 Parsing this matrix, the effects derived from alias groups are
 \begin{align*}
@@ -125,7 +142,7 @@ Parsing this matrix, the effects derived from alias groups are
 
 ```{r, fig.margin = FALSE, fig.cap = "Alias pattern after a full foldover. Note that the signs between main effects and their aliased interactions have switched."}
 fit <- lm(y ~ A * B * C * D * E * F * G, data = eye[eye$Seq == 2, ])
-plot_aliases(fit, 29)
+plot_aliases(fit, 3)
 ```
 
 6. Now, suppose we reversed the signs of all the factors. What happens to the
@@ -169,7 +186,7 @@ opts_chunk$set(echo = TRUE)
 
 ```{r size="footnotesize", echo = TRUE, fig.cap="From the original fraction, it seems that the effects for [A], [B], and [D] are important."}
 eye <- read_table2("https://uwmadison.box.com/shared/static/zh7majh2s6gesnu6f27fl17ncqfuwzev.txt") %>%
-  mutate_at(vars(-Seq, -y), code)
+  mutate_at(vars(A:G), code)
 eye1 <- eye[eye$Seq == 1, ]
 fit <- lm(y ~ A * B * C * D * E * F, data = eye1)
 effects <- coef(fit)[-1]
@@ -179,14 +196,10 @@ daniel_plot(effects, probs = c(0.1, 0.5))
 It seems like $\left[B\right], \left[D\right]$, and / or $\left[A\right]$ are
 important. Inspecting the corresponding alias groups, and using the heredity
 principle, some plausible situations are
-
-* $A, B, D$ are important
-
-* $A, B, AB$ are important
-
-* $A, D, AD$ are important
-
-* $B, D, BD$ are important
+  * $A, B, D$ are important
+  * $A, B, AB$ are important
+  * $A, D, AD$ are important
+  * $B, D, BD$ are important
 
 9. But without more information, we can't draw further conclusions. To that end,
 suppose we've run the full foldover experiment. Let's estimate effects in this
@@ -196,7 +209,7 @@ main effects.
 ```{r}
 fit <- lm(y ~ A * B * C * D * E * F, data = eye[eye$Seq == 2, ])
 effects_fold <- coef(fit)[-1]
-(effects + effects_fold)[1:6]
+0.5 * (effects + effects_fold)[1:6]
 ```
 
 It's now clear that the main effect for $A$ is in fact not important. The only
@@ -233,7 +246,6 @@ estimates would be,
 [F]^{fold} &= F + BC + BG - DE \\
 [G]^{fold} &= G - CD + BE + AF
 \end{align*}
-You can see this in the plot — all the signs from terms involving $D$ are flipped.
 
 13. In particular, notice that we can estimate the main effect of $D$ using
 \begin{align*}

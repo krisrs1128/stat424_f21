@@ -1,12 +1,11 @@
 ---
-title: "ANOVA Extensions"
-author: "Kris Sankaran | UW Madison | 23 September 2021"
+title: "Blocking  and Foldover in $2^{K - p}$ Designs"
+author: "Kris Sankaran | UW Madison"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -28,35 +27,390 @@ theme424 <- theme_minimal() +
     legend.position = "bottom"
   )
 theme_set(theme424)
+
+aliases <- function(fit, trim = TRUE) {
+  X <- model.matrix(fit)
+  pattern <- t(X) %*% X  %>%
+    as.data.frame() %>%
+    add_rownames("effect") %>%
+    pivot_longer(-effect, names_to = "alias") %>%
+    filter(effect != alias)
+  
+  if (trim) {
+    pattern <- pattern %>%
+      filter(value != 0) %>%
+      select(-value)
+  }
+  
+  pattern
+}
+
+plot_aliases <- function(fit, max_str=NULL) {
+  pattern <- aliases(fit, FALSE)
+  if (!is.null(max_str)) {
+    pattern <- pattern %>%
+      filter(nchar(effect) <= max_str, nchar(alias) <= max_str)
+  }
+  
+  ggplot(pattern) +
+    geom_tile(aes(x = effect, y = alias, fill = as.factor(value)), col = "black") +
+    scale_fill_brewer(palette = "Set3") +
+    theme(
+      axis.title = element_blank(),
+      axis.ticks = element_blank(),
+      axis.text = element_text(size = 6),
+      axis.text.x = element_text(angle = -90)
+    ) +
+    coord_fixed()
+}
 ```
 
-# ANOVA Extensions
+# Blocking and Foldover in $2^{K - p}$ Designs
 
 ```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
 ```
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison | 23 September 2021]
+.large[Kris Sankaran | UW Madison]
 
 ---
 
 ### Today
 
-* Book Sections: 3.9 & 3.11
-* Online Notes: Week 4 [2] and [3]
+* Book Sections: 8.3, 8.4, 8.6
+* Online Notes: Week 11 [2] and [3]
 
 ---
 
 ### Motivation
 
+Real-world experimental design is often more complex than what we presented in
+the last lecture. We will discuss variations of $2^{K - p}$ designs that help
+address two of the most common difficulties,
+* Presence of nuisance variation $\to$ blocked $2^{K - p}$ designs
+* Ambiguous conclusions due to aliasing $\to$ Foldover designs
 
 ---
 
-### Code Implementation
+### Blocking
+
+* Imagine there is an external source of nuisance variation
+  - Operators, materials, times of day, ...
+* Suppose that it isn't possible to collect all runs of a $2^{K - p}$ within a
+single block
+* How should we distribute runs of our $2^{K - p}$ design across blocks so that the blocks don't bias results?
+
+---
+
+### Approach
+
+* The idea is to choose a high-order effect and alias it with the batches. 
+* The block can be thought of as a new factor, with its own pattern of $+$'s and $-$'s.
+* It's important to check that the alias group for the block doesn't contain any
+important main or interaction effects
+  - Otherwise, the block will be confounded with those effects
+
+---
+
+### Example
+
+Recall that in the last lecture, we built a $2^{6 - 2}$ design.
+
+| A | B | C	| D | E = ABC | F = BCD |
+| --- | --- | --- | --- | --- | --- |
+| - | - | - | - | - | - |
+| + | - | - | - | + | - |
+| - | + | - | - | + | + |
+| - | - | + | - | + | + |
+| - | - | - | + | - | + |
+| + | + | - | - | - | + |
+| + | - | + | - | - | + |
+| + | - | - | + | + |  + |
+| - | + | + | - | - | - |
+| - | + | - | + | + | - |
+| - | - | + | + | + | - |
+| + | + | + | - | + | - |
+| + | + | - | + | - | - |
+| + | - | + | + | - | - |
+| - | + | + | + | - | + |
+| + | + | + | + | + | + |
+
+---
+
+### Example
+
+* We can split into blocks by setting Block = ACD
+* The associated alias group is ACD=BDE=ABF=CEF.
+* A downside of this approach is that we still need 8 runs per block
+
+| A | B | C	| D | E | F | Block = ACD |
+| --- | --- | --- | --- | --- | --- | --- |
+| - | - | - | - | - | - | - (B1) | 
+| + | - | - | - | + | - | + (B2) |
+| - | + | - | - | + | + | - (B1) |
+| - | - | + | - | + | + | + (B2) |
+| - | - | - | + | - | + | + (B2) |
+| + | + | - | - | - | + | + (B2) |
+| + | - | + | - | - | + | - (B1) |
+| + | - | - | + | + |  + | - (B1) |
+| - | + | + | - | - | - | + (B2) |
+| - | + | - | + | + | - | + (B2) |
+| - | - | + | + | + | - | - (B1) |
+| + | + | + | - | + | - | - (B1) |
+| + | + | - | + | - | - | - (B1) |
+| + | - | + | + | - | - | + (B2) |
+| - | + | + | + | - | + | - (B1) |
+| + | + | + | + | + | + | + (B2)|
+
+---
+
+### Foldover
+
+* Sometimes the results from a $2^{K - p}$ design are ambiguous
+* A foldover experiment is a type of follow-up experiment that ensures that,
+from the combined experiment, all effects of interest can be estimated
+* We will consider two types of foldover: full foldover and single-factor
+foldover
+
+---
+
+### Full Foldover
+
+* A full foldover is a follow-up experiment that flips signs of all factors in the original design
+* This dealiases *main effects* for *all factors*.
+* We assume there aren't any interactions of order $ > 2$
+
+.pull-right[
+```{r fig.cap="Setup for the $2^{7 - 4}$ design with foldover used in the eye focus experiment. The second panel is the full foldover of the first.", fig.height = 6, fig.width = 3, echo = FALSE}
+library(readr)
+eye <- read_table2("https://uwmadison.box.com/shared/static/zh7majh2s6gesnu6f27fl17ncqfuwzev.txt") %>%
+  mutate_at(vars(-Seq, -y), code)
+mdesign <- eye %>%
+  mutate(ix = row_number()) %>%
+  pivot_longer(A:G, names_to = "factor")
+ggplot(mdesign) +
+  geom_tile(aes(factor, y = as.factor(ix), fill = as.factor(value))) +
+  scale_fill_brewer(palette = "Set3") +
+  facet_grid(Seq ~ ., scale = "free_y") +
+  theme(legend.position = "none")
+```
+]
+
+---
+
+### Alias Groups
+
+.pull-left[
+* We will justify this foldover in the case of a $2^{7 - 3}$ design. 
+* First, we use the `plot_aliases` function to determine alias groups for this
+design
+]
+
+.pull-right[
+```{r, echo = TRUE, fig.width = 3, fig.height = 3}
+fit <- lm(y ~ A * B * C * D * E * F * G, data = eye[eye$Seq == 1, ])
+plot_aliases(fit, 3)
+```
+]
+
+---
+
+### Alias Groups
+
+From this plot, we can infer that the alias groups are
+
+\begin{align*}
+[A] = A + BD + CE + FG \\
+[B] = B + AD + CF + EG \\
+[C] = C + AE + BF + DG \\
+[D] = D + AB + CG + EF \\
+[E] = E + AC + BG + DF \\
+[F] = F + BC + BG + DE \\
+[G] = G + CD + BE + AF
+\end{align*}
+
+---
+
+### Aliases after Full Foldover
+
+After the full foldover, the signs between main effects and their aliased
+interactions switch.
+
+.pull-left[
+\begin{align*}
+[A]^{fold} = A - BD - CE - FG \\
+[B]^{fold} = B - AD - CF - EG \\
+[C]^{fold} = C - AE - BF - DG \\
+[D]^{fold} = D - AB - CG - EF \\
+[E]^{fold} = E - AC - BG - DF \\
+[F]^{fold} = F - BC - BG - DE \\
+[G]^{fold} = G - CD - BE - AF
+\end{align*}
+]
+
+.pull-right[
+```{r, echo = TRUE}
+fit <- lm(y ~ A * B * C * D * E * F * G, data = eye[eye$Seq == 2, ])
+plot_aliases(fit, 3)
+```
+]
+
+---
+
+### Dealiasing
+
+Since the interaction effects cancel, we can estimate main effects by averaging
+main effects in the original and the foldover experiments.
+
+\begin{align*}
+A = \frac{1}{2}\left(\left[A\right] + \left[A\right]^{fold}\right) \\
+B = \frac{1}{2}\left(\left[B\right] + \left[B\right]^{fold}\right) \\
+C = \frac{1}{2}\left(\left[C\right] + \left[C\right]^{fold}\right) \\
+D = \frac{1}{2}\left(\left[D\right] + \left[D\right]^{fold}\right) \\
+E = \frac{1}{2}\left(\left[E\right] + \left[E\right]^{fold}\right) \\
+F = \frac{1}{2}\left(\left[F\right] + \left[F\right]^{fold}\right) \\
+G = \frac{1}{2}\left(\left[G\right] + \left[G\right]^{fold}\right) \\
+\end{align*}
+
+---
+
+### Single-Factor Foldover
+
+* A single-factor foldover is a follow-up experiment that reverses the sign for just a single factor
+* This dealiases *all effects* for a *single factor* (the one whose sign is
+flipped)
+
+---
+
+### Aliases after Single-Factor Foldover
+
+Consider the same design as above, but suppose that in the follow-up experiment,
+we flipped the sign for factor D.
+
+\begin{align*}
+[A]^{fold} &= A - BD + CE + FG \\
+[B]^{fold} &= B - AD + CF + EG \\
+[C]^{fold} &= C + AE + BF + DG \\
+[D]^{fold} &= -D + AB + CG + EF \\
+[E]^{fold} &= E + AC + BG - DF \\
+[F]^{fold} &= F + BC + BG - DE \\
+[G]^{fold} &= G - CD + BE + AF
+\end{align*}
+
+---
+
+### Dealiasing
+
+.pull-left[
+Now, we can estimate the main effect of $D$ using
+\begin{align*}
+D = \frac{1}{2}\left(\left[D\right] - \left[D\right]^{fold}\right)
+\end{align*}
+]
+
+.pull-right[
+Similarly, we can estimate interactions involving $D$. For example,
+\begin{align*}
+AD = \frac{1}{2}\left(\left[B\right] - \left[B\right]^{fold}\right).
+\end{align*}
+]
+
+---
+
+### Code Example
+
+---
+
+### Eye Focus Dataset
+
+.pull-left[
+We will work with the eye focus experiment (Example 8.7). The goal is to understand how eye focus time varies as a function of,
+
+* A: Sharpness of vision
+* B: Distance to the eye
+* C: Target shape
+* D: Illumination level
+* E: Target size
+* F: Target density
+* G: Subject
+]
+
+.pull-right[
+An initial $2^{7 - 4} design is run (`Seq` = 1).
+
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+eye <- read_table2("https://uwmadison.box.com/shared/static/zh7majh2s6gesnu6f27fl17ncqfuwzev.txt") %>%
+  mutate_at(vars(A:G), code)
+eye1 <- eye[eye$Seq == 1, ]
+head(eye1, 4)
+```
+
+]
+
+---
+
+### Example Ambiguities
+
+.pull-left[
+* The plot on the right is the Daniel plot associated with the experiment.
+* Based on the alias groups, of these situations are plausible,
+  * $A, B, D$ are important
+  * $A, B, AB$ are important
+  * $A, D, AD$ are important
+  * $B, D, BD$ are important
+]
+
+.pull-right[
+```{r}
+fit <- lm(y ~ A * B * C * D * E * F, data = eye1)
+effects <- coef(fit)[-1]
+daniel_plot(effects, probs = c(0.1, 0.5))
+```
+]
+
+---
+
+### Full Foldover
+
+.pull-left[
+* Without additional assumptions, any of these situations are equally plausible.
+* To fully characterize the main effects, a full foldover is applied.
+* Dealiasing main effects, it's clear that A is not important
+  - The B, D, BD situation is the only plausible one
+]
+
+.pull-right[
+```{r}
+fit <- lm(y ~ A * B * C * D * E * F, data = eye[eye$Seq == 2, ])
+effects_fold <- coef(fit)[-1]
+0.5 * (effects + effects_fold)[1:6]
+```
+]
 
 ---
 
 ### Exercise
+
+This walks through Problem 8.17 in the textbook.
+
+.pull-left[
+An industrial engineer is conducting an experiment using a Monte Carlo
+simulation model of an inventory system. The independent variables in her model
+are the order quantity (A), reorder point (B), setup cost (C), backorder cost
+(D), and carrying cost (E). The response variable is average cost. To consderve
+computer time, she investigates these factors using a $2^{5 - 2}_{III}$ design
+with $I = ABD$ and $I = BCE$. Results are available here.
+]
+
+.pull-right[
+(a) Verify that the treatment combinations given are correct. Estimate the effects, assuming three-factor and higher interactions are negligible. 
+(b) Suppose that a second fraction is added to the first. The data is here. How
+was this second fraction obtained? Add this data to the original fraction, and
+estimate the effects.
+]
 
 ---

@@ -47,6 +47,7 @@ aliases <- function(fit, trim = TRUE) {
   
   if (trim) {
     pattern <- pattern %>%
+      filter(value != 0, nchar(effect) <= trim, nchar(alias) <= trim) %>%
       filter(value != 0) %>%
       select(-value)
   }
@@ -202,10 +203,10 @@ head(injection)
 
 ```{r, fig.cap="Visualizing a $2 ^ {6 - 2}$ design for the injection experiment. Each column is a factor, each row is a run.", echo = FALSE}
 mdesign <- injection %>%
-  mutate(Shrinkage = as.factor(Shrinkage)) %>%
-  pivot_longer(-Shrinkage, names_to = "factor")
+  mutate(ix = row_number()) %>%
+  pivot_longer(A:F, names_to = "factor")
 ggplot(mdesign) +
-  geom_tile(aes(factor, Shrinkage, fill = as.factor(value))) +
+  geom_tile(aes(factor, ix, fill = as.factor(value))) +
   coord_fixed() +
   scale_fill_brewer(palette = "Set3")
 ```
