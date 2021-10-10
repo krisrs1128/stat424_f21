@@ -1,0 +1,324 @@
+---
+title: "$2^{K - p}$ Designs"
+author: "Kris Sankaran | UW Madison"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    lib_dir: libs
+    nature:
+      beforeInit: "cols_macro.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+    seal: false  
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(ggplot2)
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
+```
+
+```{r}
+# helper functions
+aliases <- function(fit, trim = TRUE) {
+  X <- model.matrix(fit)
+  pattern <- t(X) %*% X
+  pattern[lower.tri(pattern, diag = TRUE)] <- NA 
+  pattern <- pattern %>%
+    as.data.frame() %>%
+    add_rownames("effect") %>%
+    pivot_longer(-effect, names_to = "alias") %>%
+    filter(effect != alias)
+  
+  if (trim) {
+    pattern <- pattern %>%
+      filter(value != 0) %>%
+      select(-value)
+  }
+  
+  pattern
+}
+```
+
+# $2^{K - p}$ Designs
+
+```{r, out.width = 200}
+include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```
+### Statistical Experimental Design
+
+.large[Kris Sankaran | UW Madison ]
+
+---
+
+### Today
+
+* Book Sections: 8.3 - 8.4
+* Online Notes: Week 11 [1]
+
+---
+
+### Motivation
+
+* $2^{K - 1}$ designs allow us to draw similar conclusions as $2^{K}$ designs
+using only half of the samples
+* The approach can be generalized: A $2^{K - p}$ design allows us to use only
+$\frac{1}{2^{p}}$ samples of the full design
+  - E.g., $\frac{1}{4}, \frac{1}{8}, \frac{1}{16}\dots$
+
+---
+
+### Recipe
+
+1. Build a full factorial design from $K - p$ of the factors. The associated
+full factorial is called the _basic design_.
+2. Choose $p$ generating relations, which confound the remaining $p$
+factors with terms from the full factorial design. 
+3. Extend the table using the the relations in (2). This table specifies which
+factors should be active in each run.
+
+---
+
+### Conceptual Example
+
+* We will consider an example with 6 factors, A, ..., F.
+* We will build a $2^{6 - 2}$ design
+  - A $2^{6}$ design would require 64 samples
+  - The $2^{6 - 2}$ design only requires 16 samples
+
+---
+
+### Step 1: Setup the Basic Design
+
+* We will choose the full factorial based on A, ..., D.
+  - We could have used any subset of 4 factors
+
+| A | B | C	| D |
+| --- | --- | --- | --- |
+| - | - | - | - |
+| + | - | - | - |
+| - | + | - | - |
+| - | - | + | - |
+| - | - | - | + |
+| + | + | - | - |
+| + | - | + | - |
+| + | - | - | + |
+| - | + | + | - |
+| - | + | - | + |
+| - | - | + | + |
+| + | + | + | - |
+| + | + | - | + |
+| + | - | + | + |
+| - | + | + | + |
+| + | + | + | + |
+
+---
+
+### Step 2: Choose Complete Defining Relations
+
+* We will use $E = ABC$ and $F = BCD$, with the hope that aliasing $E$ and $F$
+high-order interactions will give us high resolution.
+* Definition: The complete defining relations are the products of columns that
+would give the all ones column.
+  * This is useful for discussing a design with others, since there are many
+  choices that have to be made while constructing $2^{K - p}$ designs
+  * For this design, they are $ABCE = BCDF = ADEF = I$
+
+---
+
+### Step 3: Extending the Table
+
+Multiply across the generating relations to choose settings for E and F.
+
+| A | B | C	| D | E = ABC | F = BCD |
+| --- | --- | --- | --- | --- | --- |
+| - | - | - | - | - | - |
+| + | - | - | - | + | - |
+| - | + | - | - | + | + |
+| - | - | + | - | + | + |
+| - | - | - | + | - | + |
+| + | + | - | - | - | + |
+| + | - | + | - | - | + |
+| + | - | - | + | + |  + |
+| - | + | + | - | - | - |
+| - | + | - | + | + | - |
+| - | - | + | + | + | - |
+| + | + | + | - | + | - |
+| + | + | - | + | - | - |
+| + | - | + | + | - | - |
+| - | + | + | + | - | + |
+| + | + | + | + | + | + |
+
+---
+
+###  Alias Groups
+
+Based on the complete defining relations, we can find all alias groups (multiply
+by each factor). In practice, we would be able to use code.
+
+.pull-left[
+\begin{align}
+  I&=A B C E=B C D F=A D E F \\
+  A&=B C E=D E F=A B C D F \\
+  B&=A C E=C D F=A B D E F \\
+  C&=A B E=B D F=A C D E F \\
+  D&=B C F=A E F=A B C D E \\
+  E&=A B C=A D F=B C D E F \\
+  F&=B C D=A D E=A B C E F \\
+  A B&=C E=A C D F=B D E F \\
+\end{align}
+]
+
+.pull-right[
+\begin{align}
+  A C&=B E=A B D F=C D E F \\
+  A D&=E F=B C D E=A B C F \\
+  A E&=B C=D F=A B C D E F \\
+  A F&=D E=B C E F=A B C D \\
+  B D&=C F=A C D E=A B E F \\
+  B F&=C D=A C E F=A B D E \\
+  A C D&=B D E=A B F=C E F \\
+  A B D&=C D E=A C F=B E F
+\end{align}
+]
+
+---
+
+### Resolution
+
+The resolution is 4. Two-way interactions are confounded with one another, but
+not with any main effects.
+
+.pull-left[
+\begin{align}
+  I&=A B C E=B C D F=A D E F \\
+  A&=B C E=D E F=A B C D F \\
+  B&=A C E=C D F=A B D E F \\
+  C&=A B E=B D F=A C D E F \\
+  D&=B C F=A E F=A B C D E \\
+  E&=A B C=A D F=B C D E F \\
+  F&=B C D=A D E=A B C E F \\
+  A B&=C E=A C D F=B D E F \\
+\end{align}
+]
+
+.pull-right[
+\begin{align}
+  A C&=B E=A B D F=C D E F \\
+  A D&=E F=B C D E=A B C F \\
+  A E&=B C=D F=A B C D E F \\
+  A F&=D E=B C E F=A B C D \\
+  B D&=C F=A C D E=A B E F \\
+  B F&=C D=A C E F=A B D E \\
+  A C D&=B D E=A B F=C E F \\
+  A B D&=C D E=A C F=B E F
+\end{align}
+]
+
+---
+
+### Code Implementation
+
+---
+
+### Injection Modeling Dataset
+
+.pull-left[
+The injection molding dataset has 6 factors,
+* A: mold temperature
+* B: screw speed
+* C: holding time
+* D: cycle time
+* E: gate size
+* F: holding pressure
+and the response variable is mold shrinkage.
+
+We will use the $2^{6 - 2}$ design that we just built.
+]
+
+.pull-right[
+```{r}
+injection <- read_table2("https://uwmadison.box.com/shared/static/uxd6sryqz32gbubwfhbdvsnqqkplqqef.txt") %>%
+  mutate_at(vars(A:F), code)
+head(injection, 4)
+```
+]
+
+---
+
+### Alias Groups
+
+* From the full model, we can determine the largest effects
+* The `aliases` function from last lecture can still be used
+* There are many aliases, but skimming through quickly confirms that the design is resolution 4 (like we deduced earlier)
+
+```{r}
+fit <- lm(Shrinkage ~ A * B * C * D * E * F, data = injection)
+aliases(fit)
+```
+
+---
+
+### Daniel Plot
+
+.pull-left[
+Based on the Daniel plot, it seems that a submodel based on just A, B, and AB
+should be sufficient (perhaps an argument could be made for ACD and AD, though).
+]
+
+.pull-right[
+```{r, fig.width = 5, fig.height = 5}
+daniel_plot(2 * coef(fit)[-1])
+```
+]
+
+---
+
+### Fitted Submodel
+
+.pull-left[
+Both mold temperature and screw speed affect shrinkage. Moreover, there is an
+interaction; i.e., screw speed has a different effect on shrinkage depending on
+the underlying mold temperature.
+]
+
+.pull-right[
+```{r}
+fit <- lm(Shrinkage ~ A * B, data = injection)
+summary(aov(fit))
+```
+]
+
+---
+
+### Exercise
+
+This walks through textbook problem 8.5.
+
+.pull-left[
+In example 6.6, a $2^{4}$ factorial design was used to improve the response rate
+to a credit card mail marketing offer. Suppose that the researchers had used the
+$2^{4 - 1}$ fractional factorial design with $I = ABCD$ instead. Setup the
+design and select the responses for the runs from the full factorial data in
+Example 6.6. Analyze the data and drew conclusions. Compare your findings with
+those of the full factorial.
+]
+
+.pull-right[
+```{r}
+library(readr)
+read_csv("credit_card.csv")
+```
+]
