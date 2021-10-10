@@ -11,37 +11,58 @@ output:
     self_contained: false
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
 
-_Readings [8.3, 8.4](), [Rmarkdown]()_
+_Readings [8.3, 8.4](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week11-1/week11-1.Rmd)_
 
 
 ```{r}
-library(dplyr)
 library(ggplot2)
-library(readr)
-library(reshape2)
-library(EBImage)
-theme_set(theme_bw() + theme(legend.position = "bottom"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 ```{r helper_funs}
 code <- function(x) ifelse(x == '-', -1, 1)
-plot_aliases <- function(fit, n_keep = NULL, n_sample=16) {
+
+aliases <- function(fit, trim = TRUE) {
   X <- model.matrix(fit)
-  aliases <- (1 / n_sample) * t(X) %*% X
+  pattern <- t(X) %*% X  %>%
+    as.data.frame() %>%
+    add_rownames("effect") %>%
+    pivot_longer(-effect, names_to = "alias") %>%
+    filter(effect != alias)
   
-  if (!is.null(n_keep)) {
-    aliases <- aliases[1:n_keep, 1:n_keep]
+  if (trim) {
+    pattern <- pattern %>%
+      filter(value != 0)
   }
   
-  maliases <- melt(aliases)
-  ggplot(maliases) +
-    geom_tile(aes(x = Var1, y = Var2, fill = as.factor(value)), col = "black") +
+  pattern
+}
+
+plot_aliases <- function(fit, max_str=NULL) {
+  pattern <- aliases(fit, FALSE)
+  if (!is.null(max_str)) {
+    pattern <- pattern %>%
+      filter(nchar(effect) <= max_str, nchar(alias) <= max_str)
+  }
+  
+  
+  ggplot(pattern) +
+    geom_tile(aes(x = effect, y = alias, fill = as.factor(value)), col = "black") +
     scale_fill_brewer(palette = "Set3") +
     theme(
       legend.position = "none",
@@ -52,6 +73,7 @@ plot_aliases <- function(fit, n_keep = NULL, n_sample=16) {
     ) +
     coord_fixed()
 }
+
 daniel_plot <- function(effects, probs = c(0.4, 0.6)) { 
   qq <- qqnorm(effects, datax = TRUE)
   qqline(effects, col = "red", probs = probs, datax = TRUE)
@@ -59,41 +81,29 @@ daniel_plot <- function(effects, probs = c(0.4, 0.6)) {
 }
 ```
 
-$2^{K - 1}$ designs allow us to draw conclusions about $K$ factors using only
+1. $2^{K - 1}$ designs allow us to draw conclusions about $K$ factors using only
 half of the runs that would be required for a full $2^{K}$ factorial. It’s
 possible to generalize these ideas so that smaller fractions ($\frac{1}{4},
 \frac{1}{8}, \dots$ of samples are required.  When only a fraction
 $\frac{1}{2^{p}}$ is required, we call the resulting design a $2^{K - p}$
 fractional factorial design.
 
-### Recipe
-
-* We can begin constructing a $2^{K - p}$ design by building a full factorial
-design from $K - p$ of the factors
-
-	* The associated full factorial is called the _basic design_
+2. To construct a $2^{K - p}$ design, we can follow a standard recipe,
+  * First, build a full factorial design from $K - p$ of the factors. The
+  associated full factorial is called the _basic design_.
+  * We then need $p$ generating relations, which confound the remaining $p$
+  factors with terms from the full factorial design. 
+  * The _complete defining relation_ for a design is the set of columns that
+  equal $I$, the identity column. These can be found by looking at generating
+  relations and their products
+  * The extended table specifies which factors should be active in each
+  experimental run.
 	
-* We then need $p$ generating relations, which confound the remaining $p$
-factors with terms from the full factorial design
-
-	* The _complete defining relation_ for a design is the set of columns that equal $I$, the identity column
-	
-	* These can be found by looking at generating relations and their products
-	
-Here’s the recipe in action.
-
-* Suppose we want a $2^{6 - 2}$ design.
-
-	* Study 6 factors using 16 (not 64) runs.
-	
-* Create a full factorial on the first four factors
-
-	* I’m only writing contrasts for the main effects
-	
-	* You can get the corresponding corner of the cube by isolating the positive
-	signs for that row. E., the first two rows are $(1)$ and $a$, and the last two
-	are $bcd$ and $abcd$.
-	
+3. Here’s the recipe in action. Suppose we want a $2^{6 - 2}$ design. This
+studies 6 factors using 16 (not 64) runs.
+  * First, create a full factorial on the first four factors. Note that I'm only
+  writing contrasts for main effects.
+  
 | A | B | C	| D |
 | --- | --- | --- | --- |
 | - | - | - | - |
@@ -113,16 +123,9 @@ Here’s the recipe in action.
 | - | + | + | + |
 | + | + | + | + |
 
-* Study the last two factors through the defining relations $E = ABC$ and $F =
-BCD$. Our hope is that by defining them as high-order interactions, we have a
-chance at higher resolution.
-
-	* The associated complete defining relations are $I = ABCE = BCDF = ADEF$.
-	
-	* To see this, notice $E^2 = ABCE$, but any term squared is just $I$. The last
-	relation comes from multiplying the two previous ones together.
-	
-The resulting design is
+  * Next, study the last two factors through the defining relations $E = ABC$ and $F = BCD$. Our hope is that by defining them as high-order interactions, we have a chance at higher resolution.
+  * The resulting design is found by multiplying signs across the defining
+  columns. For example, the first entry for E is `-`, because $ABC = - \times - \times - = -$.
 
 | A | B | C	| D | E = ABC | F = BCD |
 | --- | --- | --- | --- | --- | --- |
@@ -143,45 +146,43 @@ The resulting design is
 | - | + | + | + | - | + |
 | + | + | + | + | + | + |
 
-Let’s analyze this design,
+4. Let’s analyze this design,
+  * The associated complete defining relations are $I = ABCE = BCDF = ADEF$. To
+  see this, notice $E^2 = ABCE$, but any term squared is just $I$. The last
+  relation comes from multiplying the two previous ones together.
+  * The alias groups are complicated looking, but they can be found by simply
+  multiplying the defining relations by each of the factors and combinations of
+  factors. In practice, these would be found using code (see below).
+  \begin{align*}
+  I&=A B C E=B C D F=A D E F \\
+  A&=B C E=D E F=A B C D F \\
+  B&=A C E=C D F=A B D E F \\
+  C&=A B E=B D F=A C D E F \\
+  D&=B C F=A E F=A B C D E \\
+  E&=A B C=A D F=B C D E F \\
+  F&=B C D=A D E=A B C E F \\
+  A B&=C E=A C D F=B D E F \\
+  A C&=B E=A B D F=C D E F \\
+  A D&=E F=B C D E=A B C F \\
+  A E&=B C=D F=A B C D E F \\
+  A F&=D E=B C E F=A B C D \\
+  B D&=C F=A C D E=A B E F \\
+  B F&=C D=A C E F=A B D E \\
+  A C D&=B D E=A B F=C E F \\
+  A B D&=C D E=A C F=B E F
+  \end{align*}
+  
+  * From the alias groups, we can tell that the resolution is 4. Two-way interactions are confounded with one another, but not with any main effects.
 
-* The alias groups are complicated looking, but they can be found by mindlessly
-multiplying the defining relations by each of the factors and combinations of
-factors.
-
-	* In practice, you would use code to find the aliases (see below)
-	
-\begin{align*}
-I&=A B C E=B C D F=A D E F \\
-A&=B C E=D E F=A B C D F \\
-B&=A C E=C D F=A B D E F \\
-C&=A B E=B D F=A C D E F \\
-D&=B C F=A E F=A B C D E \\
-E&=A B C=A D F=B C D E F \\
-F&=B C D=A D E=A B C E F \\
-A B&=C E=A C D F=B D E F \\
-A C&=B E=A B D F=C D E F \\
-A D&=E F=B C D E=A B C F \\
-A E&=B C=D F=A B C D E F \\
-A F&=D E=B C E F=A B C D \\
-B D&=C F=A C D E=A B E F \\
-B F&=C D=A C E F=A B D E \\
-A C D&=B D E=A B F=C E F \\
-A B D&=C D E=A C F=B E F
-\end{align*}
-
-* From the alias groups, we can tell that the resolution is 4. Two-way
-interactions are confounded with one another, but not with any main effects.
-
-For an exercise, you can try going through this process using an alternative
+5. For an exercise, you can try going through this process using an alternative
 confounding structure: Set $E = ABCD$, and $F = ABC$. It’s somewhat tedious, but
 will build your confidence with this type of design.
 
 ### Code Example
 
-Let’s use the $2^{6 - 2}$ design that we just constructed on a dataset about
-injection molding. `r tufte::margin_note("Apparently this is how paper clips are made.") 
-In any case, it’s the example in the book (Example 8.4). The 6 factors are,
+6. Let’s use the $2^{6 - 2}$ design that we just constructed on a dataset about
+injection molding^[According to Example 8.4 in the book, this is how paper clips
+are made.] The 6 factors are,
 * A: mold temperature
 * B: screw speed
 * C: holding time
@@ -189,23 +190,26 @@ In any case, it’s the example in the book (Example 8.4). The 6 factors are,
 * E: gate size
 * F: holding pressure
 ```{r}
+options(echo = TRUE)
+```
+
+```{r}
 injection <- read_table2("https://uwmadison.box.com/shared/static/uxd6sryqz32gbubwfhbdvsnqqkplqqef.txt") %>%
   mutate_at(vars(-Shrinkage), code)
 head(injection)
 ```
 
-```{r, fig.cap="Visualizing a $2 ^ {6 - 2}$ design for the injection experiment. Each column is a factor, each row is a run."}
+```{r, fig.cap="Visualizing a $2 ^ {6 - 2}$ design for the injection experiment. Each column is a factor, each row is a run.", echo = FALSE}
 mdesign <- injection %>%
-  mutate(id = row_number()) %>%
-  select(-Shrinkage) %>%
-  melt(id.vars = "id")
+  mutate(Shrinkage = as.factor(Shrinkage)) %>%
+  pivot_longer(-Shrinkage, names_to = "factor")
 ggplot(mdesign) +
-  geom_tile(aes(x = variable, y = id, fill = as.factor(value))) +
+  geom_tile(aes(factor, Shrinkage, fill = as.factor(value))) +
   coord_fixed() +
   scale_fill_brewer(palette = "Set3")
 ```
 
-We can look at the aliasing structure by inspecting the design matrix.
+7. We can look at the aliasing structure by inspecting the design matrix.
 
 ```{r, fig.margin = FALSE, fig.fullwidth = TRUE, fig.caption = "Aliases in the $2^{6 - 2}$ Design."}
 fit <- lm(Shrinkage ~ A * B * C * D * E * F, data = injection)
@@ -214,19 +218,30 @@ plot_aliases(fit)
 
 
 ```{r, fig.margin = FALSE, fig.caption = "A zoomed-in version of the aliases from before, focusing only on main effects and second-order interactions."}
-plot_aliases(fit, 22)
+plot_aliases(fit, 3)
 ```
-Let’s make a Daniel plot and look at effects.
+
+8. Let’s make a Daniel plot and look at effects.
 
 ```{r}
 daniel_plot(2 * coef(fit)[-1])
 ```
 
-Let's refit to just the submodel.
+Based on the Daniel plot, it seems that a submodel based on just A, B, and AB
+should be sufficient (perhaps an argument could be made for ACD and AD, though).
 
 ```{r}
 fit <- lm(Shrinkage ~ A * B, data = injection)
-anova(fit)
+summary(aov(fit))
+```
+
+Both mold temperature and screw speed affect shrinkage. Moreover, there is an
+interaction; i.e., screw speed has a different effect on shrinkage depending on
+the underlying mold temperature.
+
+9. To evaluate the model, let's visualize the residuals.
+
+```{r}
 injection <- injection %>%
   mutate(residual = resid(fit))
 ggplot(injection) +
@@ -236,19 +251,18 @@ ggplot(injection) +
 ```
 
 Notice that the residuals have lower variance at the setting $C = -1$. Even
-though $C$ doesn’t have a strong effect, that might be a useful fact, in case
-you want to select a configuration with the optimal response and low variability
+though $C$ doesn’t have a strong effect, that might be a useful fact, in case we
+want to select a configuration with the optimal response and low variability
 around that response.
 
 ### Evaluating Designs
 
-In general, there will be several ways of constructing any $2^{p}$ design. How
-do we know which one to use? Here are some criteria.
-
-* Resolution: We’ve discussed this before. Remember, a design has resolution $R$
-if no $p$-factor effect is aliased with an effect with fewer than $R - p$
-factors.
-
-* Aberration: This is the number of defining words of length equal to the resolution. Lower is better.
-
-	* The example above had words $ABCE, BCDF$ and $ADEF$ and resolution 4, so aberration is 3.
+10. In general, there will be several ways of constructing any $2^{p}$ design.
+How do we know which one to use? Here are some criteria.
+  * Resolution: We’ve discussed this before. Remember, a design has resolution $R$
+  if no $p$-factor effect is aliased with an effect with fewer than $R - p$
+  factors.
+  * Aberration: This is the number of defining words of length equal to the resolution. Lower is better.
+  
+For example	the example above had words $ABCE, BCDF$ and $ADEF$ and resolution
+4, so aberration is 3.
