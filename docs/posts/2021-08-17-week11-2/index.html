@@ -88,7 +88,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: Projection and Blocking in $2^{K - p}$ Designs</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Special considerations designing fractional factorials."/>
 
 
 <!--  https://schema.org/Article -->
@@ -99,20 +99,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: Projection and Blocking in $2^{K - p}$ Designs"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Special considerations designing fractional factorials."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: Projection and Blocking in $2^{K - p}$ Designs"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="Special considerations designing fractional factorials."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Projection and Blocking in $2^{K - p}$ Designs"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["11-23-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Projection and Blocking in $2^{K - p}$ Designs"]},{"type":"character","attributes":{},"value":["Special considerations designing fractional factorials."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["11-23-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Projection and Blocking in $2^{K - p}$ Designs","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-23T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Projection and Blocking in $2^{K - p}$ Designs","description":"Special considerations designing fractional factorials.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-23T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,7 +2279,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>Projection and Blocking in 2^{K - p} Designs</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>Special considerations designing fractional factorials.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2289,41 +2289,44 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">8.3, 8.4</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">8.3, 8.4</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week11-2/week11-2.Rmd">Rmarkdown</a></em></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/hadley/reshape'>reshape2</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='va'>theme424</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>
+    panel.grid.minor <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
+    panel.background <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"#f7f7f7"</span><span class='op'>)</span>,
+    panel.border <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='cn'>NA</span>, color <span class='op'>=</span> <span class='st'>"#0c0c0c"</span>, size <span class='op'>=</span> <span class='fl'>0.6</span><span class='op'>)</span>,
+    axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>14</span><span class='op'>)</span>,
+    axis.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>16</span><span class='op'>)</span>,
+    legend.position <span class='op'>=</span> <span class='st'>"bottom"</span>
+  <span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='va'>theme424</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg"</span><span class='op'>)</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg"</span><span class='op'>)</span>
 </code></pre>
 </div>
 <div class="figure"><span id="fig:unnamed-chunk-2"></span>
-<img src="week11-2_files/figure-html5/unnamed-chunk-2-1.png" alt="Our earlier picture of projection from 3 to 2 factors in a complete factorial design." width="624" />
+<img src="https://uwmadison.box.com/shared/static/b94hfeyugeun1xywlm2ccls9am5l38xg.jpg" alt="Our earlier picture of projection from 3 to 2 factors in a complete factorial design."  />
 <p class="caption">
 Figure 1: Our earlier picture of projection from 3 to 2 factors in a complete factorial design.
 </p>
 </div>
 </div>
-<p>To be fluent in working with fractional factorial designs, it’s worth knowing how to project and block them. They provide useful alternative perspectives of the designs we have already constructed.</p>
+<ol type="1">
+<li>To be fluent in working with fractional factorial designs, it’s worth knowing how to project and block them. They provide useful alternative perspectives of the designs we have already constructed.</li>
+</ol>
 <h3 id="projection">Projection</h3>
-<ul>
-<li><p>Projection makes it possible to turn a fractional factorial screening experiment into a full factorial experiment</p></li>
-<li><p>Effectively, you delete the columns of your design matrix involving the factors outside the ones you want to project down to</p></li>
-<li><p>Depending on what design you project, a <span class="math inline">\(2^{K - p}\)</span> design will become either (1) a full factorial design or (2) a <span class="math inline">\(2^{K - r}\)</span> fractional factorial design, where <span class="math inline">\(r &lt; p\)</span>.</p></li>
-<li><p>Beware that conclusions will be somewhat tentative, because effects in the full factorial could be aliased with high-order effects from factors that have been projected out</p></li>
-</ul>
-<p>Warm-up: (<em>Projecting a <span class="math inline">\(2 ^ {4 - 1}\)</span> Design</em>). Consider the <span class="math inline">\(2 ^ {4 - 1}\)</span> design with defining relation <span class="math inline">\(I = ABCD\)</span>.</p>
-<div style="page-break-after: always;"></div>
+<ol start="2" type="1">
+<li><p>Projection makes it possible to turn a fractional factorial screening experiment into a full factorial experiment. Effectively, we delete the columns of our design matrix involving the factors outside the ones we want to project down to. Depending on what design we project, a <span class="math inline">\(2^{K - p}\)</span> design will become either (1) a full factorial design or (2) a <span class="math inline">\(2^{K - r}\)</span> fractional factorial design, where <span class="math inline">\(r &lt; p\)</span>.</p></li>
+<li><p>Beware that conclusions will be somewhat tentative, because effects in the full factorial could be aliased with high-order effects from factors that have been projected out.</p></li>
+<li><p>Warm-up: (<em>Projecting a <span class="math inline">\(2 ^ {4 - 1}\)</span> Design</em>). Consider the <span class="math inline">\(2 ^ {4 - 1}\)</span> design with defining relation <span class="math inline">\(I = ABCD\)</span>.</p></li>
+</ol>
 <table>
 <thead>
 <tr class="header">
@@ -2384,7 +2387,7 @@ Figure 1: Our earlier picture of projection from 3 to 2 factors in a complete fa
 </tr>
 </tbody>
 </table>
-<p>What happens when you project out A?</p>
+<p>What happens when we project out A?</p>
 <table>
 <thead>
 <tr class="header">
@@ -2436,9 +2439,10 @@ Figure 1: Our earlier picture of projection from 3 to 2 factors in a complete fa
 </tr>
 </tbody>
 </table>
-<p>You can check that this has all corners of the cube B-C-D, so it’s a full <span class="math inline">\(2^{3}\)</span> design.</p>
-<p>Example (<em>Different projections of <span class="math inline">\(2 ^ {6 - 2}\)</span> design</em>). Let’s consider the example from our previous lecture</p>
-<div style="page-break-after: always;"></div>
+<p>This design includes all corners of the cube B-C-D, so it’s a full <span class="math inline">\(2^{3}\)</span> design.</p>
+<ol start="5" type="1">
+<li>Example (<em>Different projections of <span class="math inline">\(2 ^ {6 - 2}\)</span> design</em>). Let’s consider the example from the previous notes.</li>
+</ol>
 <table>
 <thead>
 <tr class="header">
@@ -2581,11 +2585,7 @@ Figure 1: Our earlier picture of projection from 3 to 2 factors in a complete fa
 </tr>
 </tbody>
 </table>
-<ul>
-<li><p>The study examined 6 factors over 16 runs.</p></li>
-<li><p>The complete defining relations were <span class="math inline">\(I = ABCE = BCDF = ADEF\)</span>.</p></li>
-<li><p>What happens when we project out <span class="math inline">\(A\)</span>?</p></li>
-</ul>
+<p>This study examined 6 factors over 16 runs. Its complete defining relations are <span class="math inline">\(I = ABCE = BCDF = ADEF\)</span>. What happens when we project out <span class="math inline">\(A\)</span>?</p>
 <table>
 <thead>
 <tr class="header">
@@ -2728,12 +2728,15 @@ Figure 1: Our earlier picture of projection from 3 to 2 factors in a complete fa
 </tr>
 </tbody>
 </table>
-<p>Each configuration appears once. Since we have 16 rows still, this is evidently a <span class="math inline">\(2^{5 - 1}\)</span> fractional factorial design.</p>
-<p>What happens if we project out <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> instead?</p>
+<ol start="6" type="1">
+<li>Each configuration appears once. Since we have 16 rows still, this is evidently a <span class="math inline">\(2^{5 - 1}\)</span> fractional factorial design. What happens if we project out <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> instead?</li>
+</ol>
 <ul>
 <li>This is exactly the original “basic design.” I.e., the the full <span class="math inline">\(2 ^ 4\)</span> factorial before using the generators.</li>
 </ul>
-<p>We could try to project out two factors that don’t have such an obvious answer. So let’s project out <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p>
+<ol start="7" type="1">
+<li>We could try to project out two factors that don’t have such an obvious answer. So let’s project out <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</li>
+</ol>
 <ul>
 <li>It turns out we still get a <span class="math inline">\(2 ^ 4\)</span> full factorial, but now on <span class="math inline">\(C\)</span> through <span class="math inline">\(F\)</span>.</li>
 </ul>
@@ -2879,7 +2882,9 @@ Figure 1: Our earlier picture of projection from 3 to 2 factors in a complete fa
 </tr>
 </tbody>
 </table>
-<p>You might start suspecting that whenever we project out two variables, we will end up with a full <span class="math inline">\(2^{4}\)</span> factorial. But this is not the case!</p>
+<ol start="8" type="1">
+<li>We might start suspecting that whenever we project out two variables, we will end up with a full <span class="math inline">\(2^{4}\)</span> factorial. But this is not the case!</li>
+</ol>
 <ul>
 <li>Consider projecting out <span class="math inline">\(A\)</span> and <span class="math inline">\(E\)</span>.</li>
 <li>Now we have a <span class="math inline">\(2 ^ {4 - 1}\)</span> fractional factorial with 2 replicates.</li>
@@ -3027,22 +3032,23 @@ Figure 1: Our earlier picture of projection from 3 to 2 factors in a complete fa
 </tr>
 </tbody>
 </table>
-<p>This ends up being a general rule. If none of the defining words contain all the factors that you’re projecting out, then you’re left with a full factorial design; otherwise you get a fractional factorial with replicates.</p>
+<ol start="9" type="1">
+<li>This ends up being a general rule. If none of the defining words contain all the factors that you’re projecting out, then you’re left with a full factorial design; otherwise you get a fractional factorial with replicates.</li>
+</ol>
 <ul>
 <li>E.g., <span class="math inline">\(AE\)</span> is part of the first defining relation, so we got a fractional factorial.</li>
 </ul>
-<p>Exercise: Try projecting onto <span class="math inline">\(A, B, C\)</span>. Is it a fractional or full factorial? How many replicates each? Could you have determined this, just by looking at the defining relations?</p>
-<ul>
-<li>A design is said to have <em>projectivity</em> <span class="math inline">\(v\)</span> is collapsing to any subset of <span class="math inline">\(v\)</span> factors will result in a full factorial design. The example above has projectivity 3.</li>
-</ul>
+<ol start="10" type="1">
+<li><p>Exercise: Try projecting onto <span class="math inline">\(A, B, C\)</span>. Is it a fractional or full factorial? How many replicates each? Could you have determined this, just by looking at the defining relations?</p></li>
+<li><p>A design is said to have <em>projectivity</em> <span class="math inline">\(v\)</span> if collapsing to any subset of <span class="math inline">\(v\)</span> factors will result in a full factorial design. The example above has projectivity 3.</p></li>
+</ol>
 <h3 id="blocking">Blocking</h3>
-<p>Let’s say we’ve subsetted to a set of runs corresponding to a fractional factorial design. But, we still have to break the runs into batches, we have too many runs to be able to reasonably run them in one block. How can we appropriately block a fractional factorial design?</p>
-<ul>
+<ol start="12" type="1">
+<li><p>Let’s say we’ve subsetted to a set of runs corresponding to a fractional factorial design. But, we still have to break the runs into batches, we have too many runs to be able to reasonably run them in one block. How can we appropriately block a fractional factorial design?</p></li>
 <li><p>The typical solution is to choose a high-order effect and alias it with the batches. This divides the runs into two blocks, those where the effect is + and those where it is -.</p></li>
-<li><p>Ensure that the alias group doesn’t contain any low-order effects of interest (e.g., we don’t want the blocks to be confounded with any main effects)</p></li>
-<li><p>We effectively sacrifice the alias group that is confounded with the block.</p></li>
-</ul>
-<p>Example: For our <span class="math inline">\(2 ^{6 - 2}\)</span> design above, we can confound <span class="math inline">\(ACD\)</span> with the block, to avoid aliasing any main effects with the block effect. This let us divide our runs into two blocks of size 8.</p>
+<li><p>We should ensure that the alias group doesn’t contain any low-order effects of interest (e.g., we don’t want the blocks to be confounded with any main effects). We effectively sacrifice the alias group that is confounded with the block.</p></li>
+<li><p>Example: For our <span class="math inline">\(2 ^{6 - 2}\)</span> design above, we can confound <span class="math inline">\(ACD\)</span> with the block, to avoid aliasing any main effects with the block effect. This let us divide our runs into two blocks of size 8.</p></li>
+</ol>
 <table>
 <thead>
 <tr class="header">

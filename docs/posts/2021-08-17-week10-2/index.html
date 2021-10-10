@@ -2301,7 +2301,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </ol>
 <ul>
 <li>Setting: We have a fixed budget of <span class="math inline">\(n\)</span> samples. Without loss of generality, the factors take their values within the interval <span class="math inline">\(\left[-1,  1\right]\)</span>. A candidate design is any way of gathering <span class="math inline">\(n\)</span> samples from among all the possible settings of the <span class="math inline">\(K\)</span> factors.</li>
-<li>Criteria: We want to estimate the effects « as well as possible. » We also want to make good predictions at new factor combinations. We’ll have to make these notions precise.</li>
+<li>Criteria: We want to estimate the effects “as well as possible.” We also want to make good predictions at new factor combinations. We’ll have to make these notions precise.</li>
 </ul>
 <ol start="2" type="1">
 <li>We won’t give formal proofs of optimality (it’s beyond the scope of our book). But we <em>will</em> use simulations to get a sense of the key phenomena at work here, and we’ll create names (like <span class="math inline">\(D-\)</span>, <span class="math inline">\(G-\)</span>, and <span class="math inline">\(I\)</span>-optimality) to describe what we see.</li>
@@ -2311,7 +2311,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li>For simplicity, let’s consider <span class="math inline">\(K = 1\)</span>. We know that we can use linear regression to estimate factor effects. Suppose that the underlying function is a true linear regression and that our sample size budget is <span class="math inline">\(n = 4\)</span>. How should we distributed our four points in order to achieve a good estimate of the underlying linear regression?</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
 <img src="https://uwmadison.box.com/shared/static/zm5ork632pktbbryzvs4ex6fbvd78z72.png" alt="Three candidate designs explored in our $K = 1$ simulation." width="250" /><img src="https://uwmadison.box.com/shared/static/48czl1on1krut0gquz5arqdb5a81ft40.png" alt="Three candidate designs explored in our $K = 1$ simulation." width="250" /><img src="https://uwmadison.box.com/shared/static/0s7m67r9k447irxr8jdzmta8h0ea2seg.png" alt="Three candidate designs explored in our $K = 1$ simulation." width="250" />
 <p class="caption">
 Figure 1: Three candidate designs explored in our <span class="math inline">\(K = 1\)</span> simulation.
@@ -2330,14 +2330,14 @@ Figure 1: Three candidate designs explored in our <span class="math inline">\(K 
 
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="week10-2_files/figure-html5/unnamed-chunk-9-1.gif" alt="An animation illustrating the variance in estimated slopes across several designs."  /></p>
+<p><img src="week10-2_files/figure-html5/unnamed-chunk-5-1.gif" alt="An animation illustrating the variance in estimated slopes across several designs."  /></p>
 </div>
 <ol start="5" type="1">
 <li>To illustrate this idea, consider the animation above. Each frame is a random run from the simulation. The red line is the true regression function, the three panels correspond to the different placements of <span class="math inline">\(x\)</span>, and the black dots are random <span class="math inline">\(y\)</span>’s that we observe when sampling at <span class="math inline">\(x\)</span>. The orange, green, and blue lines are the regression fits corresponding to those <span class="math inline">\(\left(x, y\right)\)</span> pairs After running this 1000 times, we get the figures below.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
-<img src="week10-2_files/figure-html5/unnamed-chunk-10-1.png" alt="The original regressions overlaid (top) and a histogram of all the slopes (bottom)." width="30%" /><img src="week10-2_files/figure-html5/unnamed-chunk-10-2.png" alt="The original regressions overlaid (top) and a histogram of all the slopes (bottom)." width="30%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="week10-2_files/figure-html5/unnamed-chunk-6-1.png" alt="The original regressions overlaid (top) and a histogram of all the slopes (bottom)." width="30%" /><img src="week10-2_files/figure-html5/unnamed-chunk-6-2.png" alt="The original regressions overlaid (top) and a histogram of all the slopes (bottom)." width="30%" />
 <p class="caption">
 Figure 2: The original regressions overlaid (top) and a histogram of all the slopes (bottom).
 </p>
@@ -2354,7 +2354,7 @@ Figure 2: The original regressions overlaid (top) and a histogram of all the slo
 <li><p>A design is <em><span class="math inline">\(V\)</span>-optimal</em> if <span class="math inline">\(\int_{\left[-1, 1\right]^{K}}. \text{Var}\left(\hat{y}\left(x\right)\right)dx\)</span> is minimized. In our picture, this happens when the area of the prediction band is minimized</p></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
 <img src="https://uwmadison.box.com/shared/static/6xoe5onf01gdpaef6g0qtcstbhb9w72n.png" alt="Summary of alternative optimality definitions." width="350" />
 <p class="caption">
 Figure 3: Summary of alternative optimality definitions.
@@ -2365,7 +2365,7 @@ Figure 3: Summary of alternative optimality definitions.
 <li>While our simulation was only for <span class="math inline">\(K = 1\)</span>, it turns out that according to all three criteria, the <span class="math inline">\(2^{K}\)</span>-design is optimal.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
 <img src="https://uwmadison.box.com/shared/static/9qhkn4dnuqoou7dm02zgkexze5mlaz6z.png" alt="Three candidate designs when studying 2 factors, all using 4 samples. The $2^2$ design is at the bottom." width="225" /><img src="https://uwmadison.box.com/shared/static/ywt9gxdakwz558bl6j57y1v25uncjjil.png" alt="Three candidate designs when studying 2 factors, all using 4 samples. The $2^2$ design is at the bottom." width="225" /><img src="https://uwmadison.box.com/shared/static/mpi36bkvrhpuf3ls66jxkqy4mvqoqzfm.png" alt="Three candidate designs when studying 2 factors, all using 4 samples. The $2^2$ design is at the bottom." width="225" />
 <p class="caption">
 Figure 4: Three candidate designs when studying 2 factors, all using 4 samples. The <span class="math inline">\(2^2\)</span> design is at the bottom.
