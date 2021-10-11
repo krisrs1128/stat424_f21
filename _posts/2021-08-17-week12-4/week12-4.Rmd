@@ -13,7 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE, fig.align = "center")
 ```
 
 _Readings [11.4.1-11.4.2](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week12-4/week12-4.Rmd)_
@@ -36,48 +36,44 @@ theme_set(theme424)
 include_graphics("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png")
 ```
 
-We have been fitting surfaces to find some configuration of factors that optimizes a response. Sometimes we found the optimum just from one experiment, but more often, we ran a series of experiments, gradually refining our understanding of the response surface.
+1. We have been fitting surfaces to find some configuration of factors that
+optimizes a response. Sometimes we found the optimum just from one experiment,
+but more often, we ran a series of experiments, gradually refining our
+understanding of the response surface.
 
-*For any of these experiments, what designs should we use?*
-
-In theory, any of the designs we have discussed in this course could be used,
-but we will prefer those which give us an accurate estimate of the response
-surface (especially around stationary points) using as few samples as possible.
+2. *For any of these experiments, what designs should we use?* In theory, any of
+the designs we have discussed in this course could be used, but we will prefer
+those which give us an accurate estimate of the response surface (especially
+around stationary points) using as few samples as possible.
 
 ### Designs for First-Order Models
 
-In first-order models, we are interested in linear effects associated with each
-factor. Reasonable choices in this setting are,
-
-* $2^{K}$ factorial designs
-
-* $2^{K - p}$ fractional factorial designs
-
-* $2^{K}$ and $2^{K - p}$ designs that have been augmented with center
-points. These center points allow estimation of measurement error $\sigma^2$
-even when there is no replication.
+3. In first-order models, we are interested in linear effects associated with
+each factor. Reasonable choices in this setting are,
+  * $2^{K}$ factorial designs
+  * $2^{K - p}$ fractional factorial designs
+  * $2^{K}$ and $2^{K - p}$ designs that have been augmented with center points.
+  These center points allow estimation of measurement error $\sigma^2$ even when
+  there is no replication.
 
 ### Designs for Second-Order Models
 
-For second-order models, we need to estimation nonlinear and interaction
+4. For second-order models, we need to estimation nonlinear and interaction
 effects, which means we need more intensive sampling. The most common choice is
 the,
+  * Central Composite Design (CCD): As discussed in Section 6.8, this is a full
+  factorial $2^{K}$ design that has been supplemented by center and axial
+  points.
 
-* Central Composite Design (CCD): As discussed in Section 6.8, this is a full
-factorial $2^{K}$ design that has been supplemented by center and axial
-points.
+  though some alternatives are,
+  * Box-Behnken design: The associated samples are all on edges of the cube (none
+  at vertices or in the interior).
+  * Equiradial design: This generalizes the simplex idea above. Instead of
+  sampling at the corners of an equilateral triangle, we can sample at corners or
+  regular polygons (+ center points)
 
-though some alternatives are,
-
-* Box-Behnken design: The associated samples are all on edges of the cube (none
-at vertices or in the interior).
-
-* Equiradial design: This generalizes the simplex idea above. Instead of
-sampling at the corners of an equilateral triangle, we can sample at corners or
-regular polygons (+ center points)
-
-In practice, you can use functions from the `rsm` package. This code produces a
-central composite design with three center points for both the factorial and
+5. In practice, you can use functions from the `rsm` package. This code produces
+a central composite design with three center points for both the factorial and
 axial runs. The package also has code for factorial, fractional factorial, and
 Box-Behnken designs.
 
@@ -88,6 +84,7 @@ opts_chunk$set(echo = TRUE)
 ```{r}
 library(rsm)
 
+# code the time and temperature variables
 codings <- list(
   time_coded ~ (time - 35) / 5,
   temp_coded ~ (temp - 150) / 5
@@ -95,18 +92,20 @@ codings <- list(
 ccd_design <- ccd(~ time_coded + temp_coded, coding = codings, oneblock = TRUE)
 head(ccd_design)
 ```
+
 ```{r, fig.cap = "A generated CCD using the `rsm` package."}
 ggplot(decode.data(ccd_design)) +
   geom_point(
-    aes(x = time, y = temp),
+    aes(time, temp),
     position = position_jitter(w = 0.5, h = 0.5),
     size = 3
   ) +
   coord_fixed()
 ```
-Using the same function, we can easily generate fractional or foldover designs,
-which are useful during the first-order phase of response surface modeling. For
-example, the code below generates a $2^{4 - 1}$ design.
+
+6. Using the same function, we can easily generate fractional or foldover
+designs, which are useful during the first-order phase of response surface
+modeling. For example, the code below generates a $2^{4 - 1}$ design.
 
 ```{r, echo = TRUE}
 codings_x = list(
@@ -114,6 +113,7 @@ codings_x = list(
   x2 ~ (x2_ - 20) / 6,
   x3 ~ (x3_ + 1) / 4
 )
+
 ffactorial <- cube(
   ~ x1 + x2 + x3, 
   n0 = 0, 
@@ -121,14 +121,14 @@ ffactorial <- cube(
   generators = x4 ~ x1 * x2 * x3
   )
 ```
-And if we want to foldover this fractional factorial, we can use `foldover`.
+
+7. And if we want to foldover this fractional factorial, we can use `foldover`.
 
 ```{r, echo = TRUE, results = "hide"}
 foldover(ffactorial, randomize = FALSE)
 ```
 
-
-```{r, fig.cap = "A $2^{4 - 1}$ fractional factorial design, made using the `rsm` package."}
+```{r, fig.cap = "A $2^{4 - 1}$ fractional factorial design, made using the `rsm` package.", echo = FALSE}
 mfactorial <- ffactorial %>%
   head() %>%
   melt(id.vars = "std.order") %>%
@@ -145,11 +145,12 @@ ggplot(mfactorial) +
 ```{r, fig.cap = "The foldover of the previous fractional factorial design."}
 mfactorial <- foldover(ffactorial, randomize=FALSE) %>%
   head() %>%
-  melt(id.vars = "std.order") %>%
-  filter(variable != "run.order")
+  as.data.frame() %>%
+  pivot_longer(starts_with("x"))
+
 ggplot(mfactorial) +
   geom_tile(
-    aes(x = variable, y = as.factor(std.order), fill = as.factor(value))
+    aes(name, as.factor(std.order), fill = as.factor(value))
   ) +
   coord_fixed() +
   labs(x = "factor", y = "run", fill = "level") +
@@ -158,23 +159,17 @@ ggplot(mfactorial) +
 
 ### Variance of Response Surfaces
 
-At any point $x$, it’s possible to estimate the variance of the surface at
+8. At any point $x$, it’s possible to estimate the variance of the surface at
 that point, denoted $V\left(\hat{y}\left(x\right)\right)$.
+  * For any response surface, we can also imagine an accompanying variance
+  surface.
+  * Away from factor configurations that we’ve sampled, we expect the variance to increase.
 
-* For any response surface, we can also imagine an accompanying variance
-surface.
-
-* Away from factor configurations that we’ve sampled, we expect the variance to increase.
-
-If there are only 2 factors, this surface can be directly visualized. 
-
-* But in higher-dimensions, this is impossible.
-
-* In that case, use a _variance dispersion graph_ to visualize the variance as a function of the distance from the center point of the design.
-
-	* Specifically, plot the maximum, minimum, and average variances along rings that emanate from 0
-	
-* If the variances are constant along each ring, the design is called _rotatable_
+9. If there are only 2 factors, this surface can be directly visualized. 
+  * But in higher-dimensions, this is impossible.
+  * In that case, use a _variance dispersion graph_ to visualize the variance as a function of the distance from the center point of the design.
+  	* Specifically, plot the maximum, minimum, and average variances along rings that emanate from 0
+  * If the variances are constant along each ring, the design is called _rotatable_
 
 ```{r, fig.margin = FALSE, fig.fullwidth = TRUE, fig.height = 5, fig.width = 10, echo = TRUE, fig.cap = "The scaled prediction variance functions for a rotatable CCD."}
 ccd_design <- ccd(~ time_coded + temp_coded, coding = codings, oneblock = TRUE)

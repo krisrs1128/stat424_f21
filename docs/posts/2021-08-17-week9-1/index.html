@@ -2306,14 +2306,14 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li>Fix: We can space out the levels at which we test each factor</li>
 </ul>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="https://uwmadison.box.com/shared/static/axysolfp0hgtmnthy9vsndljpuuh5nsa.png" width="40%" /><img src="https://uwmadison.box.com/shared/static/olbjp5fubt4mm6j1fa7rthe0uoctymef.pnghttps://uwmadison.box.com/shared/static/8h0vt5kcb5ss0l9dlghsswnpf88q8267.png" width="40%" /></p>
+<p><img src="https://uwmadison.box.com/shared/static/axysolfp0hgtmnthy9vsndljpuuh5nsa.png" width="40%" style="display: block; margin: auto;" /><img src="https://uwmadison.box.com/shared/static/olbjp5fubt4mm6j1fa7rthe0uoctymef.pnghttps://uwmadison.box.com/shared/static/8h0vt5kcb5ss0l9dlghsswnpf88q8267.png" width="40%" style="display: block; margin: auto;" /></p>
 </div>
 <h3 id="spurious-effects">Spurious Effects</h3>
 <ol start="4" type="1">
 <li>If there are no replicates, then we can perfectly interpolate the data. This leaves us with no degrees-of-freedom for estimating <span class="math inline">\(\sigma^2\)</span> – but <span class="math inline">\(\sigma^2\)</span> is needed to perform ANOVA!</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="https://uwmadison.box.com/shared/static/099eopgmbncci9ob9zjo1mvvguxinibn.png" width="40%" /><img src="https://uwmadison.box.com/shared/static/rfdz734pv6rxolgwz5fx215qb41qm0k6.png" width="40%" /></p>
+<p><img src="https://uwmadison.box.com/shared/static/099eopgmbncci9ob9zjo1mvvguxinibn.png" width="40%" style="display: block; margin: auto;" /><img src="https://uwmadison.box.com/shared/static/rfdz734pv6rxolgwz5fx215qb41qm0k6.png" width="40%" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="5" type="1">
 <li>Fix: Pool together higher-order interactions
@@ -2344,15 +2344,14 @@ d-article ul > li { /*to add back in space between bullet items that I took away
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>B</span> <span class='op'>~</span> <span class='va'>D</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week9-1_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+<p><img src="week9-1_files/figure-html5/unnamed-chunk-4-1.png" width="624" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="7" type="1">
 <li>This is what happens when we try to estimate all interactions, even though there is only one replicate per factor configuration. We don’t get any standard error estimates, and the usual <code>aov</code> function won’t give us any <span class="math inline">\(p\)</span>-values (because it can’t estimate <span class="math inline">\(\sigma^2\)</span>).</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span>
-<span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Rate</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, <span class='va'>filtration</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Rate</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, <span class='va'>filtration</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2435,7 +2434,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <li>Related to pooling, sometimes it is clear that a certain factor has no bearing on the response. In this case, we may consider removing that factor and all the interaction terms that include it. By collapsing the factor, we double the number of effective replicates.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="https://uwmadison.box.com/shared/static/yhc2w1698namew8r0vgn7ej7546ev2wg.png" /><!-- --></p>
+<p><img src="https://uwmadison.box.com/shared/static/yhc2w1698namew8r0vgn7ej7546ev2wg.png" style="display: block; margin: auto;" /></p>
 </div>
 <h3 id="visualing-effects">Visualing Effects</h3>
 <ol start="10" type="1">
@@ -2471,7 +2470,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span class='fu'>daniel_plot</span><span class='op'>(</span><span class='va'>effects</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week9-1_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
+<p><img src="week9-1_files/figure-html5/unnamed-chunk-9-1.png" width="624" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="13" type="1">
 <li>Lenth Plots. An alternative to Daniel plots is to simply plot the effect sizes directly. These plots are provided by the <code>BsMD</code> package. Let <span class="math inline">\(s_0 = 1.5 \times \text{median}\left(\text{Contrast}_j\right)\)</span>. Then, the notation in the plot below refers to,
@@ -2487,11 +2486,30 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span class='fu'><a href='https://rdrr.io/pkg/BsMD/man/LenthPlot.html'>LenthPlot</a></span><span class='op'>(</span><span class='va'>fit_coded</span>, cex.fac <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week9-1_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+<p><img src="week9-1_files/figure-html5/unnamed-chunk-10-1.png" width="624" style="display: block; margin: auto;" /></p>
 <pre><code>    alpha       PSE        ME       SME 
  0.050000  2.625000  6.747777 13.698960 </code></pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<ol start="14" type="1">
+<li>Based on these plots, it makes sense to fit the model with only the effects A, C, D, AC, and AD. The code below refits this model and produces an ANOVA table, providing quantitative uncertainty estimates around the effects that had qualitatively seemed reasonable.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Rate</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>C</span> <span class='op'>+</span> <span class='va'>D</span><span class='op'>)</span>, <span class='va'>filtration_coded</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+A            1 1870.6  1870.6   95.86 1.93e-06 ***
+C            1  390.1   390.1   19.99   0.0012 ** 
+D            1  855.6   855.6   43.85 5.92e-05 ***
+A:C          1 1314.1  1314.1   67.34 9.41e-06 ***
+A:D          1 1105.6  1105.6   56.66 2.00e-05 ***
+Residuals   10  195.1    19.5                     
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

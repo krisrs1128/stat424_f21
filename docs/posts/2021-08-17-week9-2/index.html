@@ -2339,7 +2339,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <p><img src="week9-2_files/figure-html5/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="5" type="1">
-<li>The absence of A among the large effects suggests dropping factor <span class="math inline">\(A\)</span> in the fit. However, when we study the residuals, we notice they are heteroskedastic, with larger residuals associated with higher predicted values.</li>
+<li>The absence of A among the large effects suggests dropping factor A in the fit. However, when we study the residuals, we notice they are heteroskedastic, with larger residuals associated with higher predicted values.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2355,7 +2355,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <ol start="6" type="1">
 <li>Since the data are rates, we take a log-transform. We refit the full model, which suggests a much simpler set of factors (B, C, and D), with no interactions. The residuals of the associated submodel also look much better now.</li>
 </ol>
-<p><em>Lessons</em>: * Examining residuals can motivate useful transformations of the data. * It’s a good thing replicates were made.</p>
+<p><em>Lessons</em>: * Examining residuals can motivate useful transformations of the data.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>rate</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span>, data <span class='op'>=</span> <span class='va'>drill</span><span class='op'>)</span>

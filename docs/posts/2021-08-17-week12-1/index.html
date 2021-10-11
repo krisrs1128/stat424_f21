@@ -2294,24 +2294,26 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png" alt="In initial runs we will use first-order models. When we approach a potential optimum, we will switch to second-order models."  />
 <p class="caption">
 Figure 1: In initial runs we will use first-order models. When we approach a potential optimum, we will switch to second-order models.
 </p>
 </div>
 </div>
-<p>When we last discussed response surfaces (in Chapter 5), we showed how to fit a regression surface to a fixed set of runs. This let us find configurations of factors that optimized some response of interest.</p>
-<p>However, the real power of response surfaces emerges when we think sequentially, using the results from one fit to plan a series of follow-up experiments, each bringing us closer to an optimal configuration of factors.</p>
+<ol type="1">
+<li><p>When we last discussed response surfaces (in Chapter 5), we showed how to fit a regression surface to a fixed set of runs. This let us find configurations of factors that optimized some response of interest.</p></li>
+<li><p>However, the real power of response surfaces emerges when we think sequentially, using the results from one fit to plan a series of follow-up experiments, each bringing us closer to an optimal configuration of factors.</p></li>
+</ol>
 <h3 id="first-and-second-order-models">First and Second-Order Models</h3>
-<p>It makes sense to gradually refine our designs as we approach a potential optimal point. At the start of experimentation, even a few small runs are likely to point us in the right direction. Near the end, we’ll want to tune a good configuration of factors into an optimal one.</p>
-<p>One approach is to divide experimentation into two phases. We can start with first-order models, and then proceed to second-order when in the vicinity of the optimum.</p>
-<ul>
-<li>A first-order model is a linear model without any interactions or nonlinearities. It can be fit using relatively few samples; for example, unreplicated or fractional factorial designs. It is defined as, <span class="math display">\[\begin{align*}
+<ol start="3" type="1">
+<li><p>It makes sense to gradually refine our designs as we approach a potential optimal point. At the start of experimentation, even a few small runs are likely to point us in the right direction. Near the end, we’ll want to tune a good configuration of factors into an optimal one.</p></li>
+<li><p>One approach is to divide experimentation into two phases. We can start with first-order models, and then proceed to second-order when in the vicinity of the optimum.</p></li>
+<li><p>A first-order model is a linear model without any interactions or nonlinearities. It can be fit using relatively few samples; for example, unreplicated or fractional factorial designs. It is defined as, <span class="math display">\[\begin{align*}
 y_{i} &amp;= \beta_{0} + \sum_{k = 1}^{K}\beta_{k}x_{ik} + \epsilon_{i} \\
 &amp;= x_{i}^{T}b + \epsilon_{i}
-\end{align*}\]</span></li>
-</ul>
+\end{align*}\]</span></p></li>
+</ol>
 <p>where we defined <span class="math display">\[\begin{align*}
 x_{i} = \begin{pmatrix} 1 \\
 x_{i1} \\
@@ -2326,31 +2328,32 @@ b = \begin{pmatrix}
 \beta_{K}
 \end{pmatrix}
 \end{align*}\]</span></p>
-<ul>
+<ol start="6" type="1">
 <li>A second-order model is a linear model with interactions and quadratic terms. These surfaces are more complex, so require more involved sampling, like replicated factorial or central composite designs. It is defined as, <span class="math display">\[\begin{align*}
 y_{i} &amp;= \beta_0 + \sum_{k = 1}^{K}\beta_{kk}x_{k}^{2} + \sum_{k &lt; k_{\prime}} \beta_{k k^{\prime}} x_{k}x_{k^{\prime}} + \epsilon_{i} \\
 &amp;= x_{i}^{T}b + x_{i}^{T} B x_i + \epsilon_{i}
 \end{align*}\]</span></li>
-</ul>
+</ol>
 <p>where we defined <span class="math inline">\(B\)</span> as the symmetric <span class="math inline">\(K \times K\)</span> matrix with diagonal entries <span class="math inline">\(\beta_{kk}\)</span> and off-diagonal elements <span class="math inline">\(\frac{1}{2}\beta_{kl} = \frac{1}{2}\beta_{lk}\)</span>.</p>
 <h3 id="method-of-steepest-ascent">Method of Steepest Ascent</h3>
-<p>The method of steepest ascent uses the results of a first-order model to propose a new configuration of factors that brings us closer to the optimum. Specifically, we use the following recipe,</p>
-<ol type="1">
-<li><p>Using the current set of sampled factor configurations, fit the first-order (linear) surface, <span class="math display">\[\begin{align*}
-\hat{y}\left(x\right) &amp;= x^{T}\hat{b}
-\end{align*}\]</span></p></li>
-<li><p>Find the coordinate <span class="math inline">\(k^{\ast}\)</span> of the coefficient that has the largest magnitude, <span class="math display">\[\begin{align*}
- k^{\ast} &amp;= \arg \max_{k \in \{1, \dots, K\}} \left|\hat{\beta}_{k}\right|
-\end{align*}\]</span></p></li>
+<ol start="7" type="1">
+<li>The method of steepest ascent uses the results of a first-order model to propose a new configuration of factors that brings us closer to the optimum. Specifically, we use the following recipe,</li>
 </ol>
-<p>which represents the factor to which the response is most sensitive. Define some reasonable stepsize <span class="math inline">\(\Delta x_{k^{\ast}}\)</span> for this particular factor, so that the next run brings us closer to the optimum without being so far that the first-order model may not hold.</p>
-<ol start="3" type="1">
+<ul>
+<li>Using the current set of sampled factor configurations, fit the first-order (linear) surface, <span class="math display">\[\begin{align*}
+  \hat{y}\left(x\right) &amp;= x^{T}\hat{b}
+  \end{align*}\]</span></li>
+<li>Find the coordinate <span class="math inline">\(k^{\ast}\)</span> of the coefficient that has the largest magnitude, <span class="math display">\[\begin{align*}
+k^{\ast} &amp;= \arg \max_{k \in \{1, \dots, K\}} \left|\hat{\beta}_{k}\right|
+  \end{align*}\]</span> which represents the factor to which the response is most sensitive. Define some reasonable stepsize <span class="math inline">\(\Delta x_{k^{\ast}}\)</span> for this particular factor, so that the next run brings us closer to the optimum without being so far that the first-order model may not hold.</li>
 <li>Update each factor’s sampling values according to the sensitivities <span class="math inline">\(\hat{\beta_{k}}\)</span> of the response to that factor, and adjusting for the stepsize defined in step (2). <span class="math display">\[\begin{align*}
-x \leftarrow x + \frac{\Delta x_{k^{\ast}}}{\beta_{k^{\ast}}} b
-\end{align*}\]</span></li>
-</ol>
+  x \leftarrow x + \frac{\Delta x_{k^{\ast}}}{\beta_{k^{\ast}}} b
+  \end{align*}\]</span></li>
+</ul>
 <h3 id="code-example">Code Example</h3>
-Let’s work through example 11.1. Here, an experimenter is trying to optimize yield as a function of reaction time and temperature. The current time / temperature setting is at 35 minutes and 155 degrees. A <span class="math inline">\(2^{2}\)</span> factorial is run with four center points. Let’s visualize the data.
+<ol start="8" type="1">
+<li>Let’s work through example 11.1. Here, an experimenter is trying to optimize yield as a function of reaction time and temperature. The current time / temperature setting is at 35 minutes and 155 degrees. A <span class="math inline">\(2^{2}\)</span> factorial is run with four center points. Let’s visualize the data. Note that in our plot, we use <code>position = position_jitter(w = 0.5, h = 0.5)</code>. This prevents the few points sampled at the centerpoint from overlapping one another.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
@@ -2365,9 +2368,10 @@ Let’s work through example 11.1. Here, an experimenter is trying to optimize y
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>chem</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>+</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>chem</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>time</span>, <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
     position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_jitter.html'>position_jitter</a></span><span class='op'>(</span>w <span class='op'>=</span> <span class='fl'>0.5</span>, h <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>,
     size <span class='op'>=</span> <span class='fl'>3</span>
   <span class='op'>)</span> <span class='op'>+</span>
@@ -2376,14 +2380,16 @@ Let’s work through example 11.1. Here, an experimenter is trying to optimize y
 <span class='va'>p</span>
 </code></pre>
 </div>
-<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
 <img src="week12-1_files/figure-html5/unnamed-chunk-5-1.png" alt="$2^2$ factorial experiment around current operating conditions." width="624" />
 <p class="caption">
 Figure 2: <span class="math inline">\(2^2\)</span> factorial experiment around current operating conditions.
 </p>
 </div>
 </div>
-<p>Let’s code the data – this is a bit more involved than in factorial experiments, because the data don’t simply lie on the corners of a cube. We’ll use the <code>coded.data</code> function from the <code>rsm</code> package to handle this.</p>
+<ol start="9" type="1">
+<li>Let’s code the data – this is a bit more involved than in factorial experiments, because the data don’t simply lie on the corners of a cube. We’ll use the <code>coded.data</code> function from the <code>rsm</code> package to handle this.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>rsm</span><span class='op'>)</span>
@@ -2391,7 +2397,9 @@ Figure 2: <span class="math inline">\(2^2\)</span> factorial experiment around c
 </code></pre>
 </div>
 </div>
-<p>Now we can fit a first-order (<code>FO</code>) model to these data.</p>
+<ol start="10" type="1">
+<li>Now we can fit a first-order (<code>FO</code>) model to these data.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/rsm.html'>rsm</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>FO</a></span><span class='op'>(</span><span class='va'>time_coded</span> , <span class='va'>temp_coded</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>chem_coded</span><span class='op'>)</span>
@@ -2430,7 +2438,9 @@ Corresponding increment in original units:
 4.610972 1.933633 </code></pre>
 </div>
 <p>The output looks almost exactly the same as the output for <code>lm</code>, except it also includes the direction of steepest ascent.</p>
-<p>From visual inspection, and based on this model’s <span class="math inline">\(R^{2}\)</span>, the linear fit seems quite good. But for reference, we can compare with a model with both two-way interactions (<code>TWI</code>) and a quadratic component (<code>PQ</code>). Neither of these terms seem to improve fit, so we’ll stick to the original first-order model. Compare the ANVOA with table 11.2.</p>
+<ol start="11" type="1">
+<li>From visual inspection, and based on this model’s <span class="math inline">\(R^{2}\)</span>, the linear fit seems quite good. But for reference, we can compare with a model with both two-way interactions (<code>TWI</code>) and a quadratic component (<code>PQ</code>). Neither of these terms seem to improve fit, so we’ll stick to the original first-order model. Compare the ANVOA with table 11.2.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit_iq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/rsm.html'>rsm</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>FO</a></span><span class='op'>(</span><span class='va'>time_coded</span>, <span class='va'>temp_coded</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>TWI</a></span><span class='op'>(</span><span class='va'>time_coded</span> , <span class='va'>temp_coded</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>PQ</a></span><span class='op'>(</span><span class='va'>time_coded</span>, <span class='va'>temp_coded</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>chem_coded</span><span class='op'>)</span>
@@ -2465,52 +2475,57 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>p</span> <span class='op'>+</span> 
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
     data <span class='op'>=</span> <span class='va'>ascent</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>`|`</span><span class='op'>)</span>,
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yhat</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>time</span>, <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yhat</span><span class='op'>)</span>,
     shape <span class='op'>=</span> <span class='fl'>2</span> 
   <span class='op'>)</span>
 </code></pre>
 </div>
-<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
 <img src="week12-1_files/figure-html5/unnamed-chunk-10-1.png" alt="A short extrapolation along the direction of steepest ascent." width="624" />
 <p class="caption">
 Figure 3: A short extrapolation along the direction of steepest ascent.
 </p>
 </div>
 </div>
-<p>The experimenter follows this path and finds that at each point, the yield does increase, up to a time of 85 and temperature of 175. At this new point, it seems worth running a second factorial experiment.</p>
+<ol start="12" type="1">
+<li>The experimenter follows this path and finds that at each point, the yield does increase, up to a time of 85 and temperature of 175. At this new point, it seems worth running a second factorial experiment.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>p</span> <span class='op'>+</span> 
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
     data <span class='op'>=</span> <span class='va'>ascent_long</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>`|`</span><span class='op'>)</span>,
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yhat</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>time</span>, <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yhat</span><span class='op'>)</span>,
     shape <span class='op'>=</span> <span class='fl'>2</span> 
   <span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>time</span>, <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
     position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_jitter.html'>position_jitter</a></span><span class='op'>(</span>w <span class='op'>=</span> <span class='fl'>0.4</span>, h <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>,
     size <span class='op'>=</span> <span class='fl'>3</span>
   <span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
     data <span class='op'>=</span> <span class='va'>chem</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>,
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>time</span>, <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
     position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_jitter.html'>position_jitter</a></span><span class='op'>(</span>w <span class='op'>=</span> <span class='fl'>0.4</span>, h <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>,
     size <span class='op'>=</span> <span class='fl'>3</span>
   <span class='op'>)</span>
 </code></pre>
 </div>
-<div class="figure"><span id="fig:unnamed-chunk-11"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
 <img src="week12-1_files/figure-html5/unnamed-chunk-11-1.png" alt="A longer extrapolation, up to the point where the experimenter noticed a decrease in yield, along with the follow-up experiment at that location." width="624" />
 <p class="caption">
 Figure 4: A longer extrapolation, up to the point where the experimenter noticed a decrease in yield, along with the follow-up experiment at that location.
 </p>
 </div>
 </div>
+<ol start="13" type="1">
+<li>The second element of <code>chem</code> contains the second experiment after following the path suggested by the method of steepest ascent.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>chem</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>time</span>, <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
     position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_jitter.html'>position_jitter</a></span><span class='op'>(</span>w <span class='op'>=</span> <span class='fl'>0.4</span>, h <span class='op'>=</span> <span class='fl'>0.4</span><span class='op'>)</span>,
     size <span class='op'>=</span> <span class='fl'>3</span>
   <span class='op'>)</span> <span class='op'>+</span>
@@ -2518,9 +2533,11 @@ Figure 4: A longer extrapolation, up to the point where the experimenter noticed
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_color_viridis_c</a></span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week12-1_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
+<p><img src="week12-1_files/figure-html5/unnamed-chunk-12-1.png" width="624" style="display: block; margin: auto;" /></p>
 </div>
-<p>At this point, it seems like we might be at a local maximum. We will likely want to perform more intensive sampling – more than just a <span class="math inline">\(2^2\)</span> design with center points – in order to more precisely localize the optimum. For that, we’ll need to understand second-order methods and canonical analysis.</p>
+<ol start="14" type="1">
+<li>At this point, it seems like we might be at a local maximum. We will likely want to perform more intensive sampling – more than just a <span class="math inline">\(2^2\)</span> design with center points – in order to more precisely localize the optimum. For that, we’ll need to understand second-order methods and canonical analysis.</li>
+</ol>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

@@ -2293,74 +2293,78 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
+<ol type="1">
+<li>One we are in the vicinity of a potentially optimal point, we need more subtle methods. There are two essential issues,</li>
+</ol>
+<ul>
+<li>We need a way of deciding whether a point is optimal. The method of steepest ascent will always report a new direction to explore, even if the benefit is marginal. At some point we need to stop.</li>
+<li>We need a better way of proposing new directions to explore, when the first-order model is insufficient. Since the method of steepest ascent relies on a first-order model, it will not give good directions when the surface is actually highly nonlinear.</li>
+</ul>
+<ol start="2" type="1">
+<li>Canonical analysis helps solve both of these problems. First, we’ll define canonical analysis, and then we’ll illustrate its use in finding optimal points and proposing new directions.</li>
+</ol>
+<h3 id="mathematical-setup">Mathematical Setup</h3>
+<ol start="3" type="1">
+<li>A first-order model never has any isolated optima. It’s either perfectly flat, or increases forever in some direction. A second-order model, however, does potentially have optimal values.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lzt6gq5fkjfn.png" alt="First order models have no isolated optima."  />
 <p class="caption">
 Figure 1: First order models have no isolated optima.
 </p>
 </div>
 </div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="https://uwmadison.box.com/shared/static/qn1f8hrbb8uwtbflv02axa817m6tcmb7.png" alt="Second order model with a local minimum."  />
-<p class="caption">
-Figure 2: Second order model with a local minimum.
-</p>
-</div>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-4"></span>
-<img src="https://uwmadison.box.com/shared/static/x81swx5xslpzziywsupkuwpkyfggagis.png" alt="Second order model with a saddle point."  />
-<p class="caption">
-Figure 3: Second order model with a saddle point.
-</p>
-</div>
-</div>
-<p>One we are in the vicinity of a potentially optimal point, we need more subtle methods. There are two essential issues,</p>
-<ul>
-<li><p>We need a way of deciding whether a point is optimal. The method of steepest ascent will always report a new direction to explore, even if the benefit is marginal. At some point we need to stop.</p></li>
-<li><p>We need a better way of proposing new directions to explore, when the first-order model is insufficient. Since the method of steepest ascent relies on a first-order model, it will not give good directions when the surface is actually highly nonlinear.</p></li>
-</ul>
-<p>Canonical analysis helps solve both of these problems. First, we’ll define canonical analysis, and then we’ll illustrate its use in finding optimal points and proposing new directions.</p>
-<h3 id="mathematical-setup">Mathematical Setup</h3>
-<p>A first-order model never has any isolated optima. It’s either perfectly flat, or increases forever in some direction. A second-order model, however, does potentially have optimal values.</p>
-<p>Calculus can help us identify these optima. Recall that, at a function’s maximum, its gradient is zero. This makes it natural to consider the gradient of a fitted second order surface, <span class="math display">\[\begin{align*}
+<ol start="4" type="1">
+<li>Calculus can help us identify these optima. Recall that, at a function’s maximum, its gradient is zero. This makes it natural to consider the gradient of a fitted second order surface, <span class="math display">\[\begin{align*}
 \nabla_{x}\hat{y}\left(x\right) &amp;= \nabla_{x}\left[x^{T}\hat{b} + x^{T}\hat{B}x\right] \\
 &amp;= \hat{b} + 2\hat{B}x
-\end{align*}\]</span></p>
+\end{align*}\]</span></li>
+</ol>
 <p>so the function has a stationary point at <span class="math display">\[\begin{align*}
 x_{\ast} &amp;= -\frac{1}{2}\hat{B}^{-1}\hat{b}.
 \end{align*}\]</span></p>
-<p>We’ll denote the value of the surface at this optimal point by <span class="math display">\[\begin{align*}
+<ol start="5" type="1">
+<li><p>We’ll denote the value of the surface at this optimal point by <span class="math display">\[\begin{align*}
 \hat{y}_{\ast} &amp;= \hat{b}^{T}x + x^{T}\hat{B}\hat{x} \\
 &amp;= -\frac{1}{2}\hat{b}^{T}\hat{B}^{-1}\hat{b} + \frac{1}{4}\hat{b}^{T} \hat{B}^{-1} \hat{B} \hat{B}^{-1} \hat{b} \\
 &amp;= -\frac{1}{4}\hat{b}^{T}\hat{B}^{-1}\hat{b}
-\end{align*}\]</span></p>
-<p>Just like in ordinary calculus, there are three possibilities,</p>
+\end{align*}\]</span></p></li>
+<li><p>Just like in ordinary calculus, there are three possibilities,</p></li>
+</ol>
 <ul>
-<li><p>The stationary point is a maximum</p></li>
-<li><p>The stationary point is a minimum</p></li>
-<li><p>The stationary point is a saddlepoint</p></li>
+<li>The stationary point is a maximum</li>
+<li>The stationary point is a minimum</li>
+<li>The stationary point is a saddlepoint</li>
 </ul>
-<p>In one-variable calculus, we’d just take second derivatives, and see whether the function curves up, down, or is flat. We’re in higher-dimensions, though, so we’ll use the generalization of the second-derivative test, called…</p>
-<h3 id="canonical-representation">Canonical Representation</h3>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-5"></span>
-<img src="https://uwmadison.box.com/shared/static/ngiy01l2mtvem1o9e6diwawhypgf3jst.png" alt="Geometric representation of the eigendecomposition."  />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="https://uwmadison.box.com/shared/static/qn1f8hrbb8uwtbflv02axa817m6tcmb7.png" alt="Second order model with a local minimum and at a saddlepoint." width="250" /><img src="https://uwmadison.box.com/shared/static/x81swx5xslpzziywsupkuwpkyfggagis.png" alt="Second order model with a local minimum and at a saddlepoint." width="250" />
 <p class="caption">
-Figure 4: Geometric representation of the eigendecomposition.
+Figure 2: Second order model with a local minimum and at a saddlepoint.
 </p>
 </div>
 </div>
-<p>Since <span class="math inline">\(\hat{B}\)</span> is symmetric, we can find an eigendecomposition, <span class="math display">\[\begin{align*}
+<ol start="7" type="1">
+<li>In one-variable calculus, we’d just take second derivatives, and see whether the function curves up, down, or is flat. We’re in higher-dimensions, though, so we’ll use the generalization of the second-derivative test, called the canonical representation.</li>
+</ol>
+<h3 id="canonical-representation">Canonical Representation</h3>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="https://uwmadison.box.com/shared/static/ngiy01l2mtvem1o9e6diwawhypgf3jst.png" alt="Geometric representation of the eigendecomposition."  />
+<p class="caption">
+Figure 3: Geometric representation of the eigendecomposition.
+</p>
+</div>
+</div>
+<ol start="8" type="1">
+<li>Since <span class="math inline">\(\hat{B}\)</span> is symmetric, we can find an eigendecomposition, <span class="math display">\[\begin{align*}
 \hat{B} &amp;= U \Lambda U^{T},
-\end{align*}\]</span></p>
-<p>where <span class="math inline">\(U\)</span> are orthogonal eigenvectors and <span class="math inline">\(\Lambda\)</span> is a diagonal matrix containing eigenvalues <span class="math inline">\(\lambda_{k}\)</span>. Define <span class="math inline">\(w\left(x\right) = U^{T}\left(x - x_{\ast}\right)\)</span>. It turns out that our second-order fit can be equivalently expressed as <span class="math display">\[\begin{align*}
-\hat{y}\left(x\right) &amp;= \hat{y}_{\ast} + w^T\left(x\right)\Lambda w\left(x\right) \\
-&amp;= \hat{y}_{\ast} + \sum_{k = 1}^{K} \lambda_{k}w^{2}_{k}\left(x\right)
-\end{align*}\]</span></p>
-<p>which is much simpler because there are no interaction terms between the <span class="math inline">\(w_{k}\)</span>’s (like there are between <span class="math inline">\(x_{k}\)</span>’s).</p>
+\end{align*}\]</span> where <span class="math inline">\(U\)</span> are orthogonal eigenvectors and <span class="math inline">\(\Lambda\)</span> is a diagonal matrix containing eigenvalues <span class="math inline">\(\lambda_{k}\)</span>. Define <span class="math inline">\(w\left(x\right) = U^{T}\left(x -  x_{\ast}\right)\)</span>. It turns out that our second-order fit can be equivalently expressed as <span class="math display">\[\begin{align*}
+  \hat{y}\left(x\right) &amp;= \hat{y}_{\ast} + w^T\left(x\right)\Lambda w\left(x\right) \\
+  &amp;= \hat{y}_{\ast} + \sum_{k = 1}^{K} \lambda_{k}w^{2}_{k}\left(x\right)
+  \end{align*}\]</span> which is much simpler because there are no interaction terms between the <span class="math inline">\(w_{k}\)</span>’s (like there are between <span class="math inline">\(x_{k}\)</span>’s).</li>
+</ol>
 <p><em>Proof</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>: The textbook skips the proof of this fact, but if you have seen some linear algebra, the approach is interesting. First, plug-in the value of <span class="math inline">\(\hat{y}_{\ast}\)</span> from above, and expand the definition of <span class="math inline">\(w\left(x\right)\)</span>, <span class="math display">\[\begin{align*}
 \hat{y}\left(x\right) &amp;= \hat{y}_{\ast} + w^{T}\left(x\right) \Lambda w\left(x\right) \\
 &amp;= -\frac{1}{4}\hat{b}^{T}\hat{B}\hat{b} + \left(x - x_{\ast}\right)^{T}U\Lambda U^{T} \left(x - x_{\ast}\right).
@@ -2375,32 +2379,41 @@ Figure 4: Geometric representation of the eigendecomposition.
 \end{align*}\]</span></p>
 <p>which was exactly our original definition of the second-order model.</p>
 <h3 id="implications">Implications</h3>
-<p>The representation of the second-order model by <span class="math display">\[\begin{align}
-\label{eq:canonical}
-\hat{y}\left(x\right) &amp;= \hat{y}_{\ast} + \sum_{k = 1}^{K} \lambda_{k}w^{2}_{k}\left(x\right)
-\end{align}\]</span></p>
-<p>is an important one, because</p>
-<ol type="1">
-<li><p>It provides the high-dimensional analog of the second-derivative test.</p></li>
-<li><p>It suggests new configurations of <span class="math inline">\(x\)</span> that might be better.</p></li>
+<ol start="9" type="1">
+<li>The representation of the second-order model by <span class="math display">\[\begin{align}
+  \label{eq:canonical}
+  \hat{y}\left(x\right) &amp;= \hat{y}_{\ast} + \sum_{k = 1}^{K} \lambda_{k}w^{2}_{k}\left(x\right)
+  \end{align}\]</span> is an important one, because</li>
 </ol>
-<p>To see 1., suppose the <span class="math inline">\(\lambda_{k}\)</span>’s were all negative. Then, expression  is maximized when <span class="math inline">\(w_{k}\left(x\right)\)</span> are all zero — any change in the <span class="math inline">\(w_{k}\left(x\right)\)</span>’s from there can only ever decrease <span class="math inline">\(\hat{y}\left(x\right)\)</span>.</p>
 <ul>
-<li><p>But <span class="math inline">\(w\left(x\right) = 0\)</span> happens at <span class="math inline">\(x = x_{\ast}\)</span>, by definition of <span class="math inline">\(w\left(x\right)\)</span>.</p></li>
-<li><p>This means <span class="math inline">\(x_{\ast}\)</span> is a maximum!</p></li>
+<li>It provides the high-dimensional analog of the second-derivative test.</li>
+<li>It suggests new configurations of <span class="math inline">\(x\)</span> that might be better.</li>
 </ul>
-<p>Similarly, when all <span class="math inline">\(\lambda_{k}\)</span> are all positive, then moving the <span class="math inline">\(w_{k}\left(x\right)\)</span>’s by any amount can only increase <span class="math inline">\(\hat{y}\left(x\right)\)</span>. This means we’re at a minimum!</p>
-<p>Finally, when some of the <span class="math inline">\(\lambda_{k}\)</span>’s are positive and others are negative, then we’re at a saddlepoint.</p>
+<ol start="10" type="1">
+<li>To see the first point, suppose the <span class="math inline">\(\lambda_{k}\)</span>’s were all negative. Then, expression  is maximized when <span class="math inline">\(w_{k}\left(x\right)\)</span> are all zero — any change in the <span class="math inline">\(w_{k}\left(x\right)\)</span>’s from there can only ever decrease <span class="math inline">\(\hat{y}\left(x\right)\)</span>.</li>
+</ol>
 <ul>
-<li><p>Increasing <span class="math inline">\(w_{k}\left(x\right)\)</span> for <span class="math inline">\(\lambda_{k}\)</span>’s that are positive will increase <span class="math inline">\(\hat{y}\left(x\right)\)</span>.</p></li>
-<li><p>Increasing <span class="math inline">\(w_{k}\left(x\right)\)</span> for <span class="math inline">\(\lambda_{k}\)</span>’s that are negative will decrease <span class="math inline">\(\hat{y}\left(x\right)\)</span>.</p></li>
+<li>But <span class="math inline">\(w\left(x\right) = 0\)</span> happens at <span class="math inline">\(x = x_{\ast}\)</span>, by definition of <span class="math inline">\(w\left(x\right)\)</span>.</li>
+<li>This means <span class="math inline">\(x_{\ast}\)</span> is a maximum!</li>
 </ul>
-<p>This last discussion also gives us insight into 2.</p>
+<ol start="11" type="1">
+<li><p>Similarly, when all <span class="math inline">\(\lambda_{k}\)</span> are all positive, then moving the <span class="math inline">\(w_{k}\left(x\right)\)</span>’s by any amount can only increase <span class="math inline">\(\hat{y}\left(x\right)\)</span>. This means we’re at a minimum!</p></li>
+<li><p>Finally, when some of the <span class="math inline">\(\lambda_{k}\)</span>’s are positive and others are negative, then we’re at a saddlepoint.</p></li>
+</ol>
+<ul>
+<li>Increasing <span class="math inline">\(w_{k}\left(x\right)\)</span> for <span class="math inline">\(\lambda_{k}\)</span>’s that are positive will increase <span class="math inline">\(\hat{y}\left(x\right)\)</span>.</li>
+<li>Increasing <span class="math inline">\(w_{k}\left(x\right)\)</span> for <span class="math inline">\(\lambda_{k}\)</span>’s that are negative will decrease <span class="math inline">\(\hat{y}\left(x\right)\)</span>.</li>
+</ul>
+<ol start="13" type="1">
+<li>This last discussion also gives us insight into the second point.</li>
+</ol>
 <ul>
 <li>To find configurations <span class="math inline">\(x\)</span> that further increase the value of the response surface <span class="math inline">\(\hat{y}\left(x\right)\)</span>, increase <span class="math inline">\(w_{k}\left(x\right)\)</span> for those <span class="math inline">\(k\)</span>’s where <span class="math inline">\(\lambda_{k}\)</span> is most positive.</li>
 </ul>
 <h3 id="data-example">Data Example</h3>
-<p>We’ll continue the chemical process experiment from last time. Here, the experimenter has performed a central composite design experiment, a refinement of the earlier factorial designs. The hope is that now a configuration that maximizes the yield can be precisely isolated.</p>
+<ol start="14" type="1">
+<li>We’ll continue the chemical process experiment from last time. Here, the experimenter has performed a central composite design experiment, a refinement of the earlier factorial designs. The hope is that now a configuration that maximizes the yield can be precisely isolated.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
@@ -2408,6 +2421,7 @@ Figure 4: Geometric representation of the eigendecomposition.
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
 
 <span class='va'>chem</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/nbaj1m8j7tuaqmznjlrsgbzyhp9k61i8.csv"</span><span class='op'>)</span>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>chem</span><span class='op'>)</span> <span class='op'>+</span>
@@ -2419,9 +2433,11 @@ Figure 4: Geometric representation of the eigendecomposition.
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_color_viridis_c</a></span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week12-2_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+<p><img src="week12-2_files/figure-html5/unnamed-chunk-6-1.png" width="624" style="display: block; margin: auto;" /></p>
 </div>
-<p>As before, we will code the data. We use <code>SO</code> to fit a second-order model. It appears that the linear and pure quadratic components are very strong, and that there is limited, if any, interaction between these two variables.</p>
+<ol start="15" type="1">
+<li>As before, we will code the data. We use <code>SO</code> to fit a second-order model. It appears that the linear and pure quadratic components are very strong, and that there is limited, if any, interaction between these two variables.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>rsm</span><span class='op'>)</span>
@@ -2442,7 +2458,9 @@ Residuals                    7  0.4964  0.0709
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
-<p>Next, we can perform a canonical analysis, to make sure that we are at a stationary point. Since both of the eigenvalues are negative, this is in fact the case. The eigenvectors also tell us directions that (in this case) decrease the yield fastest.</p>
+<ol start="16" type="1">
+<li>Next, we can perform a canonical analysis, to make sure that we are at a stationary point. Since both of the eigenvalues are negative, this is in fact the case. The eigenvectors also tell us directions that (in this case) decrease the yield fastest.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>analysis</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/rsm.html'>canonical</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
@@ -2463,7 +2481,9 @@ $vectors
 temp_coded -0.9571122 -0.2897174
 time_coded -0.2897174  0.9571122</code></pre>
 </div>
-<p>We can identify the specific location of the optimum, by decoding the canonical analysis.</p>
+<ol start="17" type="1">
+<li>We can identify the specific location of the optimum, by decoding the canonical analysis.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>stationary</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/coded.data.html'>code2val</a></span><span class='op'>(</span><span class='va'>analysis</span><span class='op'>$</span><span class='va'>xs</span>, codings <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/coded.data.html'>codings</a></span><span class='op'>(</span><span class='va'>chem_coded</span><span class='op'>)</span><span class='op'>)</span>
@@ -2480,7 +2500,9 @@ time_coded -0.2897174  0.9571122</code></pre>
 </code></pre>
 </div>
 </div>
-<p>Finally, let’s plot the response surface, with the canonical points overlaid.</p>
+<ol start="18" type="1">
+<li>Finally, let’s plot the response surface, with the canonical points overlaid. For this, we can use the <code>contour</code> and <code>segments</code> methods provided by the <code>rsm</code> package.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/graphics/contour.html'>contour</a></span><span class='op'>(</span><span class='va'>fit</span>, <span class='op'>~</span> <span class='va'>time_coded</span> <span class='op'>+</span> <span class='va'>temp_coded</span>, image <span class='op'>=</span> <span class='cn'>TRUE</span>, asp <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
@@ -2488,10 +2510,10 @@ time_coded -0.2897174  0.9571122</code></pre>
 <span class='fu'><a href='https://rdrr.io/r/graphics/segments.html'>segments</a></span><span class='op'>(</span><span class='va'>stationary</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='va'>stationary</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='va'>w2</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='va'>w2</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, col <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div class="figure"><span id="fig:unnamed-chunk-11"></span>
-<img src="week12-2_files/figure-html5/unnamed-chunk-11-1.png" alt="The response surface, with canonical vectors overlaid." width="624" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="week12-2_files/figure-html5/unnamed-chunk-10-1.png" alt="The response surface, with canonical vectors overlaid." width="624" />
 <p class="caption">
-Figure 5: The response surface, with canonical vectors overlaid.
+Figure 4: The response surface, with canonical vectors overlaid.
 </p>
 </div>
 </div>

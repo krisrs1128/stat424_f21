@@ -13,7 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE, fig.align = "center")
 ```
 
 _Readings [11.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week12-2/week12-2.Rmd)_
@@ -36,24 +36,57 @@ theme_set(theme424)
 opts_chunk$set(echo = TRUE)
 ```
 
+1. In more complicated systems, we may want to optimize several objectives
+simultaneously. More often than not, the goals will be at odds with one another.
+For example, in our running chemical process example, we want to maximize yield
+while maintaining a target viscosity and minimizing molecular weight. How can we
+use response surface methods when we have several competing objectives?
+
+### Overlaying Contours
+
+2. The most direct approach is to simply fit several response surfaces. Then, we can visually inspect results to find factor configurations with desirable values across each response.
+
+3. To illustrate, we will work with a chemical process dataset, which varied
+temperature and time in some chemical process and observed changes in three
+responses -- yield, viscosity, and molecular weight. The block below reads in
+the data and defines a version, `mchem` that puts all three responses into one
+column, using `pivot_longer`. We standardize all the responses in `mchem` so
+that when we plot them below, the colors are all on the same scale.
 
 ```{r}
 library(readr)
 library(dplyr)
-library(reshape2)
+library(tidyr)
 
 chem <- read_csv("https://uwmadison.box.com/shared/static/nbaj1m8j7tuaqmznjlrsgbzyhp9k61i8.csv")
-std <- function(x) {
-  (x - mean(x)) / sd(x)
-}
+
 mchem <- chem %>%
-  mutate_at(vars(yield, viscosity, molecular_weight), std) %>%
-  melt(measure.vars = c("yield", "viscosity", "molecular_weight"))
+  mutate_at(vars(yield:molecular_weight), scale) %>% # standardize
+  pivot_longer(yield:molecular_weight, names_to = "response")
 ```
+4. The plot below shows how the three responses vary across the input
+temperature and time. It seems that molecular weight is highest at high times
+and temperatures. Viscosity is highest at average temperatures, and doesn't seem
+to depend on time. Yield is highest at the center point and at high temperature
+/ time.
+
+```{r}
+ggplot(mchem) +
+  geom_point(
+    aes(time, temp, col = value),
+    position = position_jitter(w = 0.3, h = 0.3)
+  ) +
+  facet_grid(. ~ response) +
+  scale_color_viridis_c()
+```
+
+5. We can improve this view by fitting a response model surface model to each
+response. Then, we can view the estimated values across all times and
+temperatures, not just the ones that were sampled. Below, we code the original
+times and temperatures and fit a second order model associated with each run.
 
 ```{r}
 library(rsm)
-library(desirability)
 
 chem_coded <- coded.data(chem, time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 155) / 5)
 fits <- list(
@@ -62,72 +95,61 @@ fits <- list(
   "molecular_weight" = rsm(molecular_weight ~ SO(temp_coded, time_coded), data = chem_coded)
 )
 ```
-```{r}
-contour(fits[[1]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
-```
-```{r}
-contour(fits[[2]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
-```
+
+6. Below, we visualize the contours associated with each of the three responses.
+The conclusions are consistent with the earlier discussion. Moreover, they
+highlight specific temperatures and times that would be optimal for each of the
+responses. However, it's unclear how we would reconcile these three surfaces to
+decide on a single temperature or time for the process.
+
 ```{r, fig.cap = "Three separate response surfaces, fit to yield, viscosity, and molecular weight, respectively."}
+contour(fits[[1]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
+contour(fits[[2]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 contour(fits[[3]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 ```
 
-In more complicated systems, we may want to optimize several objectives
-simultaneously. More often than not, the goals will be at odds with one another.
-For example, in our running chemical process example, we want to maximize yield
-while maintaining a target viscosity and minimizing molecular weight. How can we
-use response surface methods when we have several competing objectives?
-
-```{r, fig.margin = FALSE}
-ggplot(mchem) +
-  geom_point(
-    aes(x = time, y = temp, col = value),
-    position = position_jitter(w = 0.3, h = 0.3)
-  ) +
-  facet_grid(. ~ variable) +
-  coord_fixed() +
-  scale_color_viridis_c() +
-  theme(legend.position = "none")
-```
-
-### Overlaying Contours
-
-* The most direct approach is to simply fit several response surfaces.
-
-* Visually inspect results to find factor configurations with desirable values across each response.
 
 ### Constrained Optimization
 
-Whenever visual inspection is challenging, mathematical formalizations can offer
-support. One idea is to frame the multiple response surface problem as a
+7. Whenever visual inspection is challenging, mathematical formalizations can
+offer support. One idea is to frame the multiple response surface problem as a
 constrained optimization.
+  * Define acceptable ranges for responses  $y_{2}\left(x\right), \dots,
+  y_{R}\left(x\right)$ that are important, but not our main focus.
+  * Optimize the response $y_{1}\left(x\right)$ that’s our main focus.
 
-* Define acceptable ranges for responses  $y_{2}\left(x\right), \dots,
-y_{R}\left(x\right)$ that are important, but not our main focus.
-
-* Optimize the response $y_{1}\left(x\right)$ that’s our main focus.
-
-Formally, we look for a configuration of factors $x_{\ast}$ that solves the
+8. Formally, we look for a configuration of factors $x_{\ast}$ that solves the
 optimization
 \begin{align*}
 \underset{x}{\text{maximize}}\medspace &y_{1}\left(x\right) \\
 \text{subject to }\medspace &\left(y_{2}\left(x\right), \dots, y_{R}\left(x\right)\right) \in \mathcal{C}
 \end{align*}
-
 where $C$ is the predefined acceptable region for the secondary responses.
 
 ### Desirability Functions
 
-The main downside of the constrained optimization approach is that it forces us
-to choose one response to prioritize over all others. What if we care about each
-response more or less equally?
+9. The main downside of the constrained optimization approach is that it forces
+us to choose one response to prioritize over all others. What if we care about
+each response more or less equally?
 
-One idea is to optimize a sort of (geometric) averaged response,
+10. One idea is to optimize a sort of (geometric) averaged response,
 \begin{align*}
 \underset{x}{\text{maximize}}\medspace \left[\prod_{r = 1}^{R} y_{r}\left(x\right)\right]^{\frac{1}{R}}
 \end{align*}
 
-```{r, fig.cap = "Example desirability functions, for maximizing, minimizing, and achieving a target response."}
+11. The issue with this idea is that it treats all responses exactly equally.
+What if we want to maximize some, but minimize others? What if we want some to
+be near some target value?
+
+12. The solution is to use _desirability functions_. A few are plotted below. You
+can adjust their shape so that the $r^{th}$ desirability function is large for
+the values of $y_{r}\left(x\right)$ which are good (sloping down when you want
+to minimize, sloping up when you want to maximize).
+
+```{r, fig.cap = "Example desirability functions, for maximizing, minimizing, and achieving a target response.", echo = FALSE}
+library(stringr)
+library(desirability)
+
 x_grid <- seq(-1, 1, .01)
 example_funs <- data.frame(
   x = x_grid,
@@ -141,46 +163,42 @@ example_funs <- data.frame(
   d_target_1 = predict(dTarget(-1, 0, 1), x_grid),
   d_target_2 = predict(dTarget(-1, 0, 1, 2, 2), x_grid)
 ) %>%
-  melt(id.vars = c("x")) %>%
+  pivot_longer(-x, names_to="fun") %>%
   mutate(
-    type = str_replace(variable, "[\\.0-9]+", ""),
-    scale = str_extract(variable, "[\\.0-9]+")
+    type = str_replace(fun, "[\\.0-9]+", ""),
+    scale = str_extract(fun, "[\\.0-9]+")
   )
+```
+
+
+```{r, fig.cap = "Example desirability functions, for maximizing, minimizing, and achieving a target response.", echo = FALSE}
 ggplot(example_funs) +
-  geom_line(aes(x = x, y = value, col = scale)) +
+  geom_line(aes(x, value, col = scale)) +
   scale_color_brewer(palette = "Set2") +
   facet_grid(type ~ .)
 ```
 
-The issue with this idea is that it treats all responses exactly equally. What
-if we want to maximize some, but minimize others? What if we want some to be
-near some target value?
-
-The solution is to use _desirability functions_. A few are plotted below. You
-can adjust their shape so that the $r^{th}$ desirability function is large for
-the values of $y_{r}\left(x\right)$ which are good (sloping down when you want
-to minimize, sloping up when you want to maximize).
-
-Then, instead of optimizing the raw averaged response, we optimize the averaged
-response after first passing through the desirability functions,
+13. Then, instead of optimizing the raw averaged response, we optimize the
+averaged response after first passing through the desirability functions,
 \begin{align*}
 \underset{x}{\text{maximize}} \medspace \left[\prod_{r = 1}^{R} d_{r}\left(y_{r}\left(x\right)\right)\right]^{\frac{1}{R}}
 \end{align*}
 
 ### Data Example
 
-For the chemical problem, we can define a desirability function per response,
-and then combine them into an overall objective. This is done using the
-`desirability` package.
+14. For the chemical problem, we can define a desirability function per
+response, and then combine them into an overall objective. This is done using
+the `desirability` package.
 
 ```{r, echo = TRUE}
+library(desirability)
 d_yield <- dMax(70, 95) # min / max / scale
 d_viscosity <- dTarget(55, 65, 75) # min / target / max
 d_weight <- dMin(2750, 4000) # min / max
 objective <- dOverall(d_yield, d_viscosity, d_weight)
 ```
 
-Now, we can apply this objective function to predictions made by the three
+15. Now, we can apply this objective function to predictions made by the three
 response surface fits we made above, in the section on overlaying contours.
 We're evaluating the predictions over a grid of values in the range of the coded
 time and temperature.
@@ -193,7 +211,7 @@ x_grid <- expand.grid(
 )
 ```
 
-```{r, echo = TRUE}
+```{r}
 desirabilities <- cbind(
   x_grid,
   y1 = predict(fits[[1]], x_grid),
@@ -205,7 +223,7 @@ y_hat <- desirabilities %>%
 desirabilities$objective <- predict(objective, y_hat)
 ```
 
-At this point, we can plot the desirability of each point in the time /
+16. At this point, we can plot the desirability of each point in the time /
 temperature configuration space. Note that a second mode emerges along the
 low-temperature region -- these are regions which have good viscosity and
 molecular weight properties, even though their yield isn't as high. Try
@@ -215,7 +233,7 @@ for high yield more stringent.
 ```{r, fig.margin = FALSE, fig.cap = "Overall desirability, considering yield, viscosity, and molecular weight."}
 ggplot(desirabilities) +
   geom_tile(
-    aes(x = time_coded, y= temp_coded, fill = objective)
+    aes(time_coded, temp_coded, fill = objective)
   ) +
   coord_fixed() +
   scale_fill_viridis_c()
