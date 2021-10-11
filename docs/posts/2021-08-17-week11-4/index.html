@@ -88,7 +88,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: Saturated Designs</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Very efficient analysis of a large set of factors."/>
 
 
 <!--  https://schema.org/Article -->
@@ -99,20 +99,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: Saturated Designs"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Very efficient analysis of a large set of factors."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: Saturated Designs"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="Very efficient analysis of a large set of factors."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Saturated Designs"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["11-23-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Saturated Designs"]},{"type":"character","attributes":{},"value":["Very efficient analysis of a large set of factors."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["11-23-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Saturated Designs","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-23T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Saturated Designs","description":"Very efficient analysis of a large set of factors.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-23T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,7 +2279,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>Saturated Designs</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>Very efficient analysis of a large set of factors.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2289,24 +2289,18 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">8.6, 8.7</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">8.6, 8.7</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week11-4/week11-4.Rmd">Rmarkdown</a></em></p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/hadley/reshape'>reshape2</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
+
 </div>
-</div>
-<p>There are designs that let you study <span class="math inline">\(K\)</span> factors using only <span class="math inline">\(N + 1\)</span> samples; such designs are called <em>saturated</em>. This is an extremely efficient use of samples.</p>
-<p>The reason we don’t use saturated designs all the time are that (1) they are not available for all choices of <span class="math inline">\(K\)</span> and (2) the resulting aliasing structure can make definitive inferences difficult. That said, it’s worth being familiar with a few saturated designs, since it can result in dramatically reduced sampling effort in some special cases.</p>
+<ol type="1">
+<li><p>There are designs that let you study <span class="math inline">\(K\)</span> factors using only <span class="math inline">\(N + 1\)</span> samples; such designs are called <em>saturated</em>. This is an extremely efficient use of samples.</p></li>
+<li><p>The reason we don’t use saturated designs all the time are that (1) they are not available for all choices of <span class="math inline">\(K\)</span> and (2) the resulting aliasing structure can make definitive inferences difficult. That said, it’s worth being familiar with a few saturated designs, since it can result in dramatically reduced sampling effort in some special cases.</p></li>
+</ol>
 <h3 id="resolution-iii-designs">Resolution III Designs</h3>
-<p>When <span class="math inline">\(K + 1\)</span> is a power of 2, then there are resolution III designs that use only <span class="math inline">\(N = K + 1\)</span> samples.</p>
-<p>Examples</p>
+<ol start="3" type="1">
+<li>When <span class="math inline">\(K + 1\)</span> is a power of 2, then there are resolution III designs that use only <span class="math inline">\(N = K + 1\)</span> samples. Here are some examples,</li>
+</ol>
 <ul>
 <li><span class="math inline">\(2^{3 - 1}_{III}\)</span>: 3 factors in 4 samples
 <ul>
@@ -2357,18 +2351,22 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <li><p>Exercise: Give another example (e.g., for 31 factors?)</p></li>
 </ul>
 <h3 id="plackett-burman-designs">Plackett-Burman Designs</h3>
-<p>Plackett-Burman designs are a collection of design options working outside the usual fractional factorial paradigm — they don’t rely on the ideas of generators or defining relations that we’ve been using so far to subset full factorial designs into less-costly experiments.</p>
-<p>We won’t describe their construction, which relies on techniques from abstract algebra. The properties that are most important to know are</p>
+<ol start="4" type="1">
+<li><p>Plackett-Burman designs are a collection of design options working outside the usual fractional factorial paradigm — they don’t rely on the ideas of generators or defining relations that we’ve been using so far to subset full factorial designs into less-costly experiments.</p></li>
+<li><p>We won’t describe their construction, which relies on techniques from abstract algebra. The properties that are most important to know are</p></li>
+</ol>
 <ul>
-<li><p>A saturated design can be found whenever <span class="math inline">\(K + 1\)</span> is a multiple of 4, which is much more often than in the resolution III situation above</p></li>
-<li><p>Their aliasing structure is typically more complicated. For example, when <span class="math inline">\(K = 11\)</span>, then every main effect is aliased with every pairwise interaction not including that main effect</p></li>
-<li><p>Their projectivity properties are typically good.</p>
+<li>A saturated design can be found whenever <span class="math inline">\(K + 1\)</span> is a multiple of 4, which is much more often than in the resolution III situation above</li>
+<li>Their aliasing structure is typically more complicated. For example, when <span class="math inline">\(K  = 11\)</span>, then every main effect is aliased with every pairwise interaction not including that main effect</li>
+<li>Their projectivity properties are typically good.
 <ul>
-<li><p>E.g., resolution III Plackett-Burman has projectivity 3, while any <span class="math inline">\(2^{k -  p}_{III}\)</span> fractional factorial has only projectivity 2</p></li>
-<li><p>So, we can collapse to any subset of 3 factors and get a full factorial</p></li>
+<li>E.g., resolution III Plackett-Burman has projectivity 3, while any <span class="math inline">\(2^{k - p}_{III}\)</span> fractional factorial has only projectivity 2</li>
+<li>So, we can collapse to any subset of 3 factors and get a full factorial</li>
 </ul></li>
 </ul>
-<p>To use these designs, you have to look up the tables of +/-’s, saying which factors to keep on or off for each run. See e.g., Table 8.23/8.24. Alternatively, use the <code>FrF2</code> R package.</p>
+<ol start="6" type="1">
+<li>To use these designs, you have to look up the tables of +/-’s, saying which factors to keep on or off for each run. See e.g., Table 8.23/8.24. Alternatively, use the <code>FrF2</code> R package.</li>
+</ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

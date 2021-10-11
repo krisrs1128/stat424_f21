@@ -88,7 +88,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: Foldover in $2^{K - p}$ Designs</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Strategies for dealiasing effects in follow-up experiments."/>
 
 
 <!--  https://schema.org/Article -->
@@ -99,25 +99,25 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: Foldover in $2^{K - p}$ Designs"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Strategies for dealiasing effects in follow-up experiments."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: Foldover in $2^{K - p}$ Designs"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="Strategies for dealiasing effects in follow-up experiments."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Foldover in $2^{K - p}$ Designs"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["11-25-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Foldover in $2^{K - p}$ Designs"]},{"type":"character","attributes":{},"value":["Strategies for dealiasing effects in follow-up experiments."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["11-25-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week11-3_files/anchor-4.2.2/anchor.min.js","week11-3_files/bowser-1.9.3/bowser.min.js","week11-3_files/distill-2.2.21/template.v2.js","week11-3_files/figure-html5/unnamed-chunk-3-1.png","week11-3_files/figure-html5/unnamed-chunk-4-1.png","week11-3_files/figure-html5/unnamed-chunk-5-1.png","week11-3_files/figure-html5/unnamed-chunk-6-1.png","week11-3_files/header-attrs-2.8/header-attrs.js","week11-3_files/jquery-1.11.3/jquery.min.js","week11-3_files/popper-2.6.0/popper.min.js","week11-3_files/tippy-6.2.7/tippy-bundle.umd.min.js","week11-3_files/tippy-6.2.7/tippy-light-border.css","week11-3_files/tippy-6.2.7/tippy.css","week11-3_files/tippy-6.2.7/tippy.umd.min.js","week11-3_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week11-3_files/anchor-4.2.2/anchor.min.js","week11-3_files/bowser-1.9.3/bowser.min.js","week11-3_files/distill-2.2.21/template.v2.js","week11-3_files/figure-html5/unnamed-chunk-3-1.png","week11-3_files/figure-html5/unnamed-chunk-4-1.png","week11-3_files/figure-html5/unnamed-chunk-5-1.png","week11-3_files/figure-html5/unnamed-chunk-6-1.png","week11-3_files/figure-html5/unnamed-chunk-7-1.png","week11-3_files/header-attrs-2.8/header-attrs.js","week11-3_files/jquery-1.11.3/jquery.min.js","week11-3_files/popper-2.6.0/popper.min.js","week11-3_files/tippy-6.2.7/tippy-bundle.umd.min.js","week11-3_files/tippy-6.2.7/tippy-light-border.css","week11-3_files/tippy-6.2.7/tippy.css","week11-3_files/tippy-6.2.7/tippy.umd.min.js","week11-3_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Foldover in $2^{K - p}$ Designs","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-25T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Foldover in $2^{K - p}$ Designs","description":"Strategies for dealiasing effects in follow-up experiments.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-25T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,7 +2279,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>Foldover in 2^{K - p} Designs</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>Strategies for dealiasing effects in follow-up experiments.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2289,102 +2289,41 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">8.6, 8.7</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">8.6, 8.7</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week11-3/week11-3.Rmd">Rmarkdown</a></em></p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/aoles/EBImage'>EBImage</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/hadley/reshape'>reshape2</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>code</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>'-'</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
 
-<span class='va'>plot_aliases</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>fit</span>, <span class='va'>n_keep</span> <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>n_sample</span><span class='op'>=</span><span class='fl'>8</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/model.matrix.html'>model.matrix</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
-  <span class='va'>aliases</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>/</span> <span class='va'>n_sample</span><span class='op'>)</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span> <span class='op'>%*%</span> <span class='va'>X</span>
-  
-  <span class='kw'>if</span> <span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>n_keep</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='va'>aliases</span> <span class='op'>&lt;-</span> <span class='va'>aliases</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='va'>n_keep</span>, <span class='fl'>1</span><span class='op'>:</span><span class='va'>n_keep</span><span class='op'>]</span>
-  <span class='op'>}</span>
-  
-  <span class='va'>maliases</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/reshape2/man/melt.html'>melt</a></span><span class='op'>(</span><span class='va'>aliases</span><span class='op'>)</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>maliases</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Var1</span>, y <span class='op'>=</span> <span class='va'>Var2</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span><span class='op'>)</span>, col <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_fill_manual</a></span><span class='op'>(</span>values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"-1"</span> <span class='op'>=</span> <span class='st'>"#be8fc5"</span>, <span class='st'>"1"</span> <span class='op'>=</span> <span class='st'>"#648d90"</span>, <span class='st'>"0"</span> <span class='op'>=</span> <span class='st'>"#e3e6e3"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>
-      legend.position <span class='op'>=</span> <span class='st'>"bottom"</span>,
-      axis.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
-      axis.ticks <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,
-      axis.text <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>,
-      axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>angle <span class='op'>=</span> <span class='op'>-</span><span class='fl'>90</span><span class='op'>)</span>
-    <span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_fixed</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-<span class='va'>daniel_plot</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>effects</span>, <span class='va'>probs</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.4</span>, <span class='fl'>0.6</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span> 
-  <span class='va'>qq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqnorm</a></span><span class='op'>(</span><span class='va'>effects</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/qqnorm.html'>qqline</a></span><span class='op'>(</span><span class='va'>effects</span>, col <span class='op'>=</span> <span class='st'>"red"</span>, probs <span class='op'>=</span> <span class='va'>probs</span>, datax <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span><span class='op'>(</span><span class='va'>qq</span><span class='op'>$</span><span class='va'>x</span>, <span class='va'>qq</span><span class='op'>$</span><span class='va'>y</span>, <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>effects</span><span class='op'>)</span>, pos<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>}</span>
-</code></pre>
 </div>
-</div>
-<p>The main drawback of fractional designs is that we can end up with aliased effects. However, there are specific ways to follow-up initial experiments in a way that dealiases these effects.</p>
+<ol type="1">
+<li>The main drawback of fractional designs is that we can end up with aliased effects. However, there are specific ways to follow-up initial experiments in a way that dealiases these effects.</li>
+</ol>
 <ul>
-<li><p>Best case: The hierarchical and hereditary principles allow strong effects to be isolated using only a <span class="math inline">\(\frac{1}{2^p}\)</span> fraction of the samples needed for the full design.</p></li>
-<li><p>Worst case: Strong effects remain aliased, and a follow-up dealiasing experiment is required.</p></li>
+<li>Best case: The hierarchical and hereditary principles allow strong effects to be isolated using only a <span class="math inline">\(\frac{1}{2^p}\)</span> fraction of the samples needed for the full design.</li>
+<li>Worst case: Strong effects remain aliased, and a follow-up dealiasing experiment is required.</li>
 </ul>
-<p>We’ll discuss two dealiasing strategies, full-foldover and single-factor foldover. They are both particularly relevant in resolution III designs, where main effects can be confounded with order-2 interactions.</p>
+<ol start="2" type="1">
+<li>We’ll discuss two dealiasing strategies, full-foldover and single-factor foldover. They are both particularly relevant in resolution III designs, where main effects can be confounded with order-2 interactions.</li>
+</ol>
 <h2 id="full-foldover">Full Foldover</h2>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>eye</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_table.html'>read_table2</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/zh7majh2s6gesnu6f27fl17ncqfuwzev.txt"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>Seq</span>, <span class='op'>-</span><span class='va'>y</span><span class='op'>)</span>, <span class='va'>code</span><span class='op'>)</span>
-</code></pre>
+
 </div>
-</div>
+<p>3.Imagine that we want to delias <em>main effects</em> for <em>all factors</em> under study. * Assume that there aren’t any interaction effects with order &gt; 2 * Idea: For a second fractional factorial run, reverse the signs of all factors</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>mdesign</span> <span class='op'>&lt;-</span> <span class='va'>eye</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>ix <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/ranking.html'>row_number</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>y</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/reshape2/man/melt.html'>melt</a></span><span class='op'>(</span>id.vars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ix"</span>, <span class='st'>"Seq"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>mdesign</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>variable</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>ix</span><span class='op'>)</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_fill_brewer</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set3"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>Seq</span> <span class='op'>~</span> <span class='va'>.</span>, scale <span class='op'>=</span> <span class='st'>"free_y"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"none"</span><span class='op'>)</span>
-</code></pre>
-</div>
 <div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="week11-3_files/figure-html5/unnamed-chunk-3-1.png" alt="Setup for the $2^{7 - 4}$ design with foldover used in the eye focus experiment. The second panel is the full foldover of the first." width="624" />
+<img src="week11-3_files/figure-html5/unnamed-chunk-3-1.png" alt="Setup for the $2^{7 - 4}$ design with foldover used in the eye focus experiment. The second panel is the full foldover of the first." width="288" />
 <p class="caption">
 Figure 1: Setup for the <span class="math inline">\(2^{7 - 4}\)</span> design with foldover used in the eye focus experiment. The second panel is the full foldover of the first.
 </p>
 </div>
 </div>
-<ul>
-<li><p>Use case: We want to delias <em>main effects</em> for <em>all factors</em> under study</p>
-<ul>
-<li>Assume that there aren’t any interaction effects with order &gt; 2</li>
-</ul></li>
-<li><p>Idea: For a second fractional factorial run, reverse the signs of all factors</p></li>
-</ul>
-<p>What does this do? Let’s consider an the eye focus time example from the textbook (Example 8.7). The design is a <span class="math inline">\(2^{7 - 3}_{III}\)</span> fractional factorial experiment (<code>Seq == 1</code>) that has then been folded over (<code>Seq == 2</code>) by reversing the signs of factors.</p>
-<p>Let’s consider the alias structure for the original fractional factorial, ignoring all interactions of order 3 and higher.</p>
+<ol start="4" type="1">
+<li><p>What does this do? Let’s consider an the eye focus time example from the textbook (Example 8.7). The design is a <span class="math inline">\(2^{7 - 3}_{III}\)</span> fractional factorial experiment (<code>Seq == 1</code>) that has then been folded over (<code>Seq == 2</code>) by reversing the signs of factors.</p></li>
+<li><p>Let’s consider the alias structure for the original fractional factorial, ignoring all interactions of order 3 and higher.</p></li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span> <span class='op'>*</span> <span class='va'>E</span> <span class='op'>*</span> <span class='cn'>F</span> <span class='op'>*</span> <span class='va'>G</span>, data <span class='op'>=</span> <span class='va'>eye</span><span class='op'>[</span><span class='va'>eye</span><span class='op'>$</span><span class='va'>Seq</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='op'>]</span><span class='op'>)</span>
-<span class='fu'>plot_aliases</span><span class='op'>(</span><span class='va'>fit</span>, <span class='fl'>29</span><span class='op'>)</span>
-</code></pre>
-</div>
 <div class="figure"><span id="fig:unnamed-chunk-4"></span>
 <img src="week11-3_files/figure-html5/unnamed-chunk-4-1.png" alt="Alias pattern of the original $2^{7 - 3}$ design." width="624" />
 <p class="caption">
@@ -2402,11 +2341,6 @@ Figure 2: Alias pattern of the original <span class="math inline">\(2^{7 - 3}\)<
 [G] = G + CD + BE + AF
 \end{align*}\]</span></p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span> <span class='op'>*</span> <span class='va'>E</span> <span class='op'>*</span> <span class='cn'>F</span> <span class='op'>*</span> <span class='va'>G</span>, data <span class='op'>=</span> <span class='va'>eye</span><span class='op'>[</span><span class='va'>eye</span><span class='op'>$</span><span class='va'>Seq</span> <span class='op'>==</span> <span class='fl'>2</span>, <span class='op'>]</span><span class='op'>)</span>
-<span class='fu'>plot_aliases</span><span class='op'>(</span><span class='va'>fit</span>, <span class='fl'>29</span><span class='op'>)</span>
-</code></pre>
-</div>
 <div class="figure"><span id="fig:unnamed-chunk-5"></span>
 <img src="week11-3_files/figure-html5/unnamed-chunk-5-1.png" alt="Alias pattern after a full foldover. Note that the signs between main effects and their aliased interactions have switched." width="624" />
 <p class="caption">
@@ -2414,7 +2348,8 @@ Figure 3: Alias pattern after a full foldover. Note that the signs between main 
 </p>
 </div>
 </div>
-<p>Now, suppose we reversed the signs of all the factors. What happens to the alias groups? The signs for the second order interactions flip! The resulting effect estimates are <span class="math display">\[\begin{align*}
+<ol start="6" type="1">
+<li>Now, suppose we reversed the signs of all the factors. What happens to the alias groups? The signs for the second order interactions flip! The resulting effect estimates are <span class="math display">\[\begin{align*}
 [A]^{fold} = A - BD - CE - FG \\
 [B]^{fold} = B - AD - CF - EG \\
 [C]^{fold} = C - AE - BF - DG \\
@@ -2422,7 +2357,8 @@ Figure 3: Alias pattern after a full foldover. Note that the signs between main 
 [E]^{fold} = E - AC - BG - DF \\
 [F]^{fold} = F - BC - BG - DE \\
 [G]^{fold} = G - CD - BE - AF
-\end{align*}\]</span></p>
+\end{align*}\]</span></li>
+</ol>
 <p>The punchline is that we can now estimate the main effects without any aliasing, <span class="math display">\[\begin{align*}
 A = \frac{1}{2}\left(\left[A\right] + \left[A\right]^{fold}\right) \\
 B = \frac{1}{2}\left(\left[B\right] + \left[B\right]^{fold}\right) \\
@@ -2432,49 +2368,57 @@ E = \frac{1}{2}\left(\left[E\right] + \left[E\right]^{fold}\right) \\
 F = \frac{1}{2}\left(\left[F\right] + \left[F\right]^{fold}\right) \\
 G = \frac{1}{2}\left(\left[G\right] + \left[G\right]^{fold}\right) \\
 \end{align*}\]</span></p>
-<p>This is in fact a general principle for dealising main effects from second order interactions. When you flip the signs of all factors in an original fractional factorial design, you will get a cancellation of second-order terms when you add pairs of effect estimates.</p>
+<ol start="7" type="1">
+<li>This is in fact a general principle for dealising main effects from second order interactions. When you flip the signs of all factors in an original fractional factorial design, you will get a cancellation of second-order terms when you add pairs of effect estimates.</li>
+</ol>
 <h2 id="data-example">Data Example</h2>
-<p>Let’s use these ideas to study effects in the eye data experiment. Let’s first make a Daniel plot of the effects we’d find when running the fractional factorial before foldover.</p>
+<ol start="8" type="1">
+<li>Let’s use these ideas to study effects in the eye data experiment. Let’s first make a Daniel plot of the effects we’d find when running the fractional factorial before foldover.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>eye1</span> <span class='op'>&lt;-</span> <span class='va'>eye</span><span class='op'>[</span><span class='va'>eye</span><span class='op'>$</span><span class='va'>Seq</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='op'>]</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>eye</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_table.html'>read_table2</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/zh7majh2s6gesnu6f27fl17ncqfuwzev.txt"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate_all.html'>mutate_at</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/vars.html'>vars</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>:</span><span class='va'>G</span><span class='op'>)</span>, <span class='va'>code</span><span class='op'>)</span>
+<span class='va'>eye1</span> <span class='op'>&lt;-</span> <span class='va'>eye</span><span class='op'>[</span><span class='va'>eye</span><span class='op'>$</span><span class='va'>Seq</span> <span class='op'>==</span> <span class='fl'>1</span>, <span class='op'>]</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span> <span class='op'>*</span> <span class='va'>E</span> <span class='op'>*</span> <span class='cn'>F</span>, data <span class='op'>=</span> <span class='va'>eye1</span><span class='op'>)</span>
 <span class='va'>effects</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>
 <span class='fu'>daniel_plot</span><span class='op'>(</span><span class='va'>effects</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>, <span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div class="figure"><span id="fig:unnamed-chunk-6"></span>
-<img src="week11-3_files/figure-html5/unnamed-chunk-6-1.png" alt="From the original fraction, it seems that the effects for [A], [B], and [D] are important." width="624" />
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="week11-3_files/figure-html5/unnamed-chunk-7-1.png" alt="From the original fraction, it seems that the effects for [A], [B], and [D] are important." width="624" />
 <p class="caption">
 Figure 4: From the original fraction, it seems that the effects for [A], [B], and [D] are important.
 </p>
 </div>
 </div>
-<p>It seems like <span class="math inline">\(\left[B\right], \left[D\right]\)</span>, and / or <span class="math inline">\(\left[A\right]\)</span> are important. Inspecting the corresponding alias groups, and using the heredity principle, some plausible situations are</p>
-<ul>
-<li><p><span class="math inline">\(A, B, D\)</span> are important</p></li>
-<li><p><span class="math inline">\(A, B, AB\)</span> are important</p></li>
-<li><p><span class="math inline">\(A, D, AD\)</span> are important</p></li>
-<li><p><span class="math inline">\(B, D, BD\)</span> are important</p></li>
-</ul>
-<p>But without more information, we can’t draw further conclusions. To that end, suppose we’ve run the full foldover experiment. Let’s estimate effects in this run and then add them to effects from before – this is how we can estimate the main effects.</p>
+<p>It seems like <span class="math inline">\(\left[B\right], \left[D\right]\)</span>, and / or <span class="math inline">\(\left[A\right]\)</span> are important. Inspecting the corresponding alias groups, and using the heredity principle, some plausible situations are * <span class="math inline">\(A, B, D\)</span> are important * <span class="math inline">\(A, B, AB\)</span> are important * <span class="math inline">\(A, D, AD\)</span> are important * <span class="math inline">\(B, D, BD\)</span> are important</p>
+<ol start="9" type="1">
+<li>But without more information, we can’t draw further conclusions. To that end, suppose we’ve run the full foldover experiment. Let’s estimate effects in this run and then add them to effects from before – this is how we can estimate the main effects.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>y</span> <span class='op'>~</span> <span class='va'>A</span> <span class='op'>*</span> <span class='va'>B</span> <span class='op'>*</span> <span class='va'>C</span> <span class='op'>*</span> <span class='va'>D</span> <span class='op'>*</span> <span class='va'>E</span> <span class='op'>*</span> <span class='cn'>F</span>, data <span class='op'>=</span> <span class='va'>eye</span><span class='op'>[</span><span class='va'>eye</span><span class='op'>$</span><span class='va'>Seq</span> <span class='op'>==</span> <span class='fl'>2</span>, <span class='op'>]</span><span class='op'>)</span>
 <span class='va'>effects_fold</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>
-<span class='op'>(</span><span class='va'>effects</span> <span class='op'>+</span> <span class='va'>effects_fold</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span>
+<span class='fl'>0.5</span> <span class='op'>*</span> <span class='op'>(</span><span class='va'>effects</span> <span class='op'>+</span> <span class='va'>effects_fold</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span>
 </code></pre>
 </div>
-<pre><code>     A      B      C      D      E      F 
- 1.475 38.050 -1.800 29.375  0.125  0.500 </code></pre>
+<pre><code>      A       B       C       D       E       F 
+ 0.7375 19.0250 -0.9000 14.6875  0.0625  0.2500 </code></pre>
 </div>
 <p>It’s now clear that the main effect for <span class="math inline">\(A\)</span> is in fact not important. The only plausible situation is that <span class="math inline">\(B, D\)</span> and the <span class="math inline">\(BD\)</span> interaction are strong.</p>
 <h2 id="single-factor-foldover">Single-Factor Foldover</h2>
+<ol start="10" type="1">
+<li>Imagine that we want to dealias <em>main and interaction effects</em> associated with a <em>single factor</em> in the study,</li>
+</ol>
 <ul>
-<li><p>Use case: We want to dealias <em>main and interaction effects</em> associated with a <em>single factor</em> in the study</p></li>
-<li><p>Idea: For a second fractional factorial run, reverse the signs of just the factor of interest.</p></li>
+<li>Idea: For a second fractional factorial run, reverse the signs of just the factor of interest.</li>
 </ul>
-<p>The mechanics at work here are similar to those in the full foldover. As before, let’s focus attention on the <span class="math inline">\(2^{7 - 3}_{III}\)</span>. Remember that the effect estimates were, <span class="math display">\[\begin{align*}
+<ol start="11" type="1">
+<li><p>The mechanics at work here are similar to those in the full foldover. As before, let’s focus attention on the <span class="math inline">\(2^{7 - 3}_{III}\)</span>. Remember that the effect estimates were, <span class="math display">\[\begin{align*}
 [A] = A + BD + CE + FG \\
 [B] = B + AD + CF + EG \\
 [C] = C + AE + BF + DG \\
@@ -2482,8 +2426,8 @@ Figure 4: From the original fraction, it seems that the effects for [A], [B], an
 [E] = E + AC + BG + DF \\
 [F] = F + BC + BG + DE \\
 [G] = G + CD + BE + AF
-\end{align*}\]</span></p>
-<p>Suppose we flip the sign of factor <span class="math inline">\(D\)</span> in the follow-up run. The new effect estimates would be, <span class="math display">\[\begin{align*}
+\end{align*}\]</span></p></li>
+<li><p>Suppose we flip the sign of factor <span class="math inline">\(D\)</span> in the follow-up run. The new effect estimates would be, <span class="math display">\[\begin{align*}
 [A]^{fold} &amp;= A - BD + CE + FG \\
 [B]^{fold} &amp;= B - AD + CF + EG \\
 [C]^{fold} &amp;= C + AE + BF + DG \\
@@ -2491,14 +2435,13 @@ Figure 4: From the original fraction, it seems that the effects for [A], [B], an
 [E]^{fold} &amp;= E + AC + BG - DF \\
 [F]^{fold} &amp;= F + BC + BG - DE \\
 [G]^{fold} &amp;= G - CD + BE + AF
-\end{align*}\]</span></p>
-<p>You can see this in the plot — all the signs from terms involving <span class="math inline">\(D\)</span> are flipped.</p>
-<p>In particular, notice that we can estimate the main effect of <span class="math inline">\(D\)</span> using <span class="math display">\[\begin{align*}
+\end{align*}\]</span></p></li>
+<li><p>In particular, notice that we can estimate the main effect of <span class="math inline">\(D\)</span> using <span class="math display">\[\begin{align*}
 D = \frac{1}{2}\left(\left[D\right] - \left[D\right]^{fold}\right)
-\end{align*}\]</span></p>
-<p>and interactions involving <span class="math inline">\(D\)</span> using, for example, <span class="math display">\[\begin{align*}
+\end{align*}\]</span> and interactions involving <span class="math inline">\(D\)</span> using, for example, <span class="math display">\[\begin{align*}
 AD = \frac{1}{2}\left(\left[B\right] - \left[B\right]^{fold}\right).
-\end{align*}\]</span></p>
+\end{align*}\]</span></p></li>
+</ol>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

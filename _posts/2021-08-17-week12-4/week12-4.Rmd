@@ -1,7 +1,7 @@
 ---
 title: "Designs for Response Surfaces"
 description: |
-  A short description of the post.
+  Where to sample along a response surface.
 author:
   - name: Kris Sankaran
     url: {}
@@ -13,23 +13,27 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [11.4.1-11.4.2](), [Rmarkdown]()_
-
+_Readings [11.4.1-11.4.2](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week12-4/week12-4.Rmd)_
 
 ```{r}
-library(EBImage)
-library(dplyr)
 library(ggplot2)
-library(readr)
-library(reshape2)
-library(rsm)
-theme_set(theme_bw() + theme(legend.position = "bottom"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
+
 ```{r, fig.cap = "Initial runs are using a factorial design, while later runs use a CCD."}
-display(readImage("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png"))
+include_graphics("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png")
 ```
 
 We have been fitting surfaces to find some configuration of factors that optimizes a response. Sometimes we found the optimum just from one experiment, but more often, we ran a series of experiments, gradually refining our understanding of the response surface.
@@ -77,7 +81,13 @@ central composite design with three center points for both the factorial and
 axial runs. The package also has code for factorial, fractional factorial, and
 Box-Behnken designs.
 
-```{r, echo = TRUE}
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(rsm)
+
 codings <- list(
   time_coded ~ (time - 35) / 5,
   temp_coded ~ (temp - 150) / 5

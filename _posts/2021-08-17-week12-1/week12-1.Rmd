@@ -1,7 +1,7 @@
 ---
 title: "Method of Steepest Ascent"
 description: |
-  A short description of the post.
+  Sequential strategies for response surfaces.
 author:
   - name: Kris Sankaran
     url: {}
@@ -13,23 +13,26 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [11.1, 11.2](), [Rmarkdown]()_
-
-
+_Readings [11.1, 11.2](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-sectioni), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week12-1/week12-1.Rmd)_
 
 ```{r}
-library(EBImage)
-library(dplyr)
 library(ggplot2)
-library(readr)
-library(reshape2)
-theme_set(theme_bw() + theme(legend.position = "bottom"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 ```{r, fig.cap = "In initial runs we will use first-order models. When we approach a potential optimum, we will switch to second-order models."}
-display(readImage("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png"))
+include_graphics("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png")
 ```
 
 When we last discussed response surfaces (in Chapter 5), we showed how to fit a
@@ -125,8 +128,14 @@ Let's work through example 11.1. Here, an experimenter is trying to optimize
 yield as a function of reaction time and temperature. The current time /
 temperature setting is at 35 minutes and 155 degrees. A $2^{2}$ factorial is run
 with four center points. Let's visualize the data.
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
 
 ```{r}
+library(readr)
+library(dplyr)
 chem <- read_csv("https://uwmadison.box.com/shared/static/4x9v5wtgu8w8i2kuzjdhtlhkj1tda701.csv") %>%
   group_split(seq) # split main from follow-up experiments
 ```
@@ -147,7 +156,7 @@ experiments, because the data don't simply lie on the corners of a cube. We'll
 use the `coded.data` function from the `rsm` package to handle this.
 
 ```{r, echo = TRUE}
-library("rsm")
+library(rsm)
 chem_coded <- coded.data(chem[[1]], time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 155) / 5)
 ```
 

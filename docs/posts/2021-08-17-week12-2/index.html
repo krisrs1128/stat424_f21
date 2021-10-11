@@ -88,7 +88,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
 <title>Statistical Experimental Design: Canonical Analysis</title>
 
-<meta property="description" itemprop="description" content="A short description of the post."/>
+<meta property="description" itemprop="description" content="Characterizing optima in response surfaces."/>
 
 
 <!--  https://schema.org/Article -->
@@ -99,25 +99,25 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
 <meta property="og:title" content="Statistical Experimental Design: Canonical Analysis"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="A short description of the post."/>
+<meta property="og:description" content="Characterizing optima in response surfaces."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Statistical Experimental Design"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
 <meta property="twitter:title" content="Statistical Experimental Design: Canonical Analysis"/>
-<meta property="twitter:description" content="A short description of the post."/>
+<meta property="twitter:description" content="Characterizing optima in response surfaces."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Canonical Analysis"]},{"type":"character","attributes":{},"value":["A short description of the post."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["11-30-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Canonical Analysis"]},{"type":"character","attributes":{},"value":["Characterizing optima in response surfaces."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Kris Sankaran"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["11-30-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["week12-2_files/anchor-4.2.2/anchor.min.js","week12-2_files/bowser-1.9.3/bowser.min.js","week12-2_files/distill-2.2.21/template.v2.js","week12-2_files/figure-html5/unnamed-chunk-10-1.png","week12-2_files/figure-html5/unnamed-chunk-2-1.png","week12-2_files/figure-html5/unnamed-chunk-3-1.png","week12-2_files/figure-html5/unnamed-chunk-4-1.png","week12-2_files/figure-html5/unnamed-chunk-5-1.png","week12-2_files/figure-html5/unnamed-chunk-6-1.png","week12-2_files/header-attrs-2.8/header-attrs.js","week12-2_files/jquery-1.11.3/jquery.min.js","week12-2_files/popper-2.6.0/popper.min.js","week12-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","week12-2_files/tippy-6.2.7/tippy-light-border.css","week12-2_files/tippy-6.2.7/tippy.css","week12-2_files/tippy-6.2.7/tippy.umd.min.js","week12-2_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["week12-2_files/anchor-4.2.2/anchor.min.js","week12-2_files/bowser-1.9.3/bowser.min.js","week12-2_files/distill-2.2.21/template.v2.js","week12-2_files/figure-html5/unnamed-chunk-10-1.png","week12-2_files/figure-html5/unnamed-chunk-11-1.png","week12-2_files/figure-html5/unnamed-chunk-2-1.png","week12-2_files/figure-html5/unnamed-chunk-3-1.png","week12-2_files/figure-html5/unnamed-chunk-4-1.png","week12-2_files/figure-html5/unnamed-chunk-5-1.png","week12-2_files/figure-html5/unnamed-chunk-6-1.png","week12-2_files/figure-html5/unnamed-chunk-7-1.png","week12-2_files/header-attrs-2.8/header-attrs.js","week12-2_files/jquery-1.11.3/jquery.min.js","week12-2_files/popper-2.6.0/popper.min.js","week12-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","week12-2_files/tippy-6.2.7/tippy-light-border.css","week12-2_files/tippy-6.2.7/tippy.css","week12-2_files/tippy-6.2.7/tippy.umd.min.js","week12-2_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2253,7 +2253,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Canonical Analysis","description":"A short description of the post.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-30T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
+{"title":"Canonical Analysis","description":"Characterizing optima in response surfaces.","authors":[{"author":"Kris Sankaran","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-30T00:00:00.000+00:00","citationText":"Sankaran, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2279,7 +2279,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <h1>Canonical Analysis</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>Characterizing optima in response surfaces.</p></p>
 </div>
 
 <div class="d-byline">
@@ -2289,50 +2289,29 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 
 <div class="d-article">
-<p><em>Readings <a href="">11.3</a>, <a href="">Rmarkdown</a></em></p>
+<p><em>Readings <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section">11.3</a>, <a href="https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week12-3/week12-3.Rmd">Rmarkdown</a></em></p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://dplyr.tidyverse.org'>"dplyr"</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://ggplot2.tidyverse.org'>"ggplot2"</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://readr.tidyverse.org'>"readr"</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/aoles/EBImage'>"EBImage"</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'>"rsm"</span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/hadley/reshape'>"reshape2"</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"bottom"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
+
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lzt6gq5fkjfn.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
 <div class="figure"><span id="fig:unnamed-chunk-2"></span>
-<img src="week12-2_files/figure-html5/unnamed-chunk-2-1.png" alt="First order models have no isolated optima." width="624" />
+<img src="https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lzt6gq5fkjfn.png" alt="First order models have no isolated optima."  />
 <p class="caption">
 Figure 1: First order models have no isolated optima.
 </p>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/qn1f8hrbb8uwtbflv02axa817m6tcmb7.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
 <div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="week12-2_files/figure-html5/unnamed-chunk-3-1.png" alt="Second order model with a local minimum." width="624" />
+<img src="https://uwmadison.box.com/shared/static/qn1f8hrbb8uwtbflv02axa817m6tcmb7.png" alt="Second order model with a local minimum."  />
 <p class="caption">
 Figure 2: Second order model with a local minimum.
 </p>
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/x81swx5xslpzziywsupkuwpkyfggagis.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
 <div class="figure"><span id="fig:unnamed-chunk-4"></span>
-<img src="week12-2_files/figure-html5/unnamed-chunk-4-1.png" alt="Second order model with a saddle point." width="624" />
+<img src="https://uwmadison.box.com/shared/static/x81swx5xslpzziywsupkuwpkyfggagis.png" alt="Second order model with a saddle point."  />
 <p class="caption">
 Figure 3: Second order model with a saddle point.
 </p>
@@ -2367,12 +2346,8 @@ x_{\ast} &amp;= -\frac{1}{2}\hat{B}^{-1}\hat{b}.
 <p>In one-variable calculus, we’d just take second derivatives, and see whether the function curves up, down, or is flat. We’re in higher-dimensions, though, so we’ll use the generalization of the second-derivative test, called…</p>
 <h3 id="canonical-representation">Canonical Representation</h3>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/display.html'>display</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/EBImage/man/io.html'>readImage</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/ngiy01l2mtvem1o9e6diwawhypgf3jst.png"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
 <div class="figure"><span id="fig:unnamed-chunk-5"></span>
-<img src="week12-2_files/figure-html5/unnamed-chunk-5-1.png" alt="Geometric representation of the eigendecomposition." width="624" />
+<img src="https://uwmadison.box.com/shared/static/ngiy01l2mtvem1o9e6diwawhypgf3jst.png" alt="Geometric representation of the eigendecomposition."  />
 <p class="caption">
 Figure 4: Geometric representation of the eigendecomposition.
 </p>
@@ -2427,23 +2402,31 @@ Figure 4: Geometric representation of the eigendecomposition.
 <h3 id="data-example">Data Example</h3>
 <p>We’ll continue the chemical process experiment from last time. Here, the experimenter has performed a central composite design experiment, a refinement of the earlier factorial designs. The hope is that now a configuration that maximizes the yield can be precisely isolated.</p>
 <div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>chem</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/nbaj1m8j7tuaqmznjlrsgbzyhp9k61i8.csv"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+
+<span class='va'>chem</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"https://uwmadison.box.com/shared/static/nbaj1m8j7tuaqmznjlrsgbzyhp9k61i8.csv"</span><span class='op'>)</span>
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>chem</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>time</span>, y <span class='op'>=</span> <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>time</span>, <span class='va'>temp</span>, col <span class='op'>=</span> <span class='va'>yield</span><span class='op'>)</span>,
     position <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/position_jitter.html'>position_jitter</a></span><span class='op'>(</span>w <span class='op'>=</span> <span class='fl'>0.3</span>, h <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span>
   <span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_fixed</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_viridis.html'>scale_color_viridis_c</a></span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week12-2_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+<p><img src="week12-2_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
 </div>
 <p>As before, we will code the data. We use <code>SO</code> to fit a second-order model. It appears that the linear and pure quadratic components are very strong, and that there is limited, if any, interaction between these two variables.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>chem_coded</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/coded.data.html'>coded.data</a></span><span class='op'>(</span><span class='va'>chem</span>, <span class='va'>time_coded</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>time</span> <span class='op'>-</span> <span class='fl'>35</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>5</span>, <span class='va'>temp_coded</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>temp</span> <span class='op'>-</span> <span class='fl'>155</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>5</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>rsm</span><span class='op'>)</span>
+
+<span class='va'>chem_coded</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/coded.data.html'>coded.data</a></span><span class='op'>(</span><span class='va'>chem</span>, <span class='va'>time_coded</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>time</span> <span class='op'>-</span> <span class='fl'>35</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>5</span>, <span class='va'>temp_coded</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>temp</span> <span class='op'>-</span> <span class='fl'>155</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>5</span><span class='op'>)</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/rsm.html'>rsm</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>SO</a></span><span class='op'>(</span><span class='va'>temp_coded</span>, <span class='va'>time_coded</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>chem_coded</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
 </code></pre>
@@ -2505,8 +2488,8 @@ time_coded -0.2897174  0.9571122</code></pre>
 <span class='fu'><a href='https://rdrr.io/r/graphics/segments.html'>segments</a></span><span class='op'>(</span><span class='va'>stationary</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='va'>stationary</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='va'>w2</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='va'>w2</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, col <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<div class="figure"><span id="fig:unnamed-chunk-10"></span>
-<img src="week12-2_files/figure-html5/unnamed-chunk-10-1.png" alt="The response surface, with canonical vectors overlaid." width="624" />
+<div class="figure"><span id="fig:unnamed-chunk-11"></span>
+<img src="week12-2_files/figure-html5/unnamed-chunk-11-1.png" alt="The response surface, with canonical vectors overlaid." width="624" />
 <p class="caption">
 Figure 5: The response surface, with canonical vectors overlaid.
 </p>

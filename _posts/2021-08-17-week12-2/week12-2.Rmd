@@ -1,7 +1,7 @@
 ---
 title: "Canonical Analysis"
 description: |
-  A short description of the post.
+    Characterizing optima in response surfaces.  
 author:
   - name: Kris Sankaran
     url: {}
@@ -13,33 +13,35 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-
-_Readings [11.3](), [Rmarkdown]()_
-
+_Readings [11.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week12-3/week12-3.Rmd)_
 
 ```{r}
-library("dplyr")
-library("ggplot2")
-library("readr")
-library("EBImage")
-library("rsm")
-library("reshape2")
-theme_set(theme_bw() + theme(legend.position = "bottom"))
+library(ggplot2)
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
 ```{r fig.cap = "First order models have no isolated optima."}
-display(readImage("https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lzt6gq5fkjfn.png"))
+include_graphics("https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lzt6gq5fkjfn.png")
 ```
 
 ```{r fig.cap = "Second order model with a local minimum."}
-display(readImage("https://uwmadison.box.com/shared/static/qn1f8hrbb8uwtbflv02axa817m6tcmb7.png"))
+include_graphics("https://uwmadison.box.com/shared/static/qn1f8hrbb8uwtbflv02axa817m6tcmb7.png")
 ```
 
 ```{r fig.cap = "Second order model with a saddle point."}
-display(readImage("https://uwmadison.box.com/shared/static/x81swx5xslpzziywsupkuwpkyfggagis.png"))
+include_graphics("https://uwmadison.box.com/shared/static/x81swx5xslpzziywsupkuwpkyfggagis.png")
 ```
 
 One we are in the vicinity of a potentially optimal point, we need more subtle
@@ -97,7 +99,7 @@ we’ll use the generalization of the second-derivative test, called...
 
 ### Canonical Representation
 ```{r, fig.cap = "Geometric representation of the eigendecomposition."}
-display(readImage("https://uwmadison.box.com/shared/static/ngiy01l2mtvem1o9e6diwawhypgf3jst.png"))
+include_graphics("https://uwmadison.box.com/shared/static/ngiy01l2mtvem1o9e6diwawhypgf3jst.png")
 ```
 
 Since $\hat{B}$ is symmetric, we can find an eigendecomposition,
@@ -191,10 +193,17 @@ of the earlier factorial designs. The hope is that now a configuration that
 maximizes the yield can be precisely isolated.
 
 ```{r}
+opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+library(dplyr)
+
 chem <- read_csv("https://uwmadison.box.com/shared/static/nbaj1m8j7tuaqmznjlrsgbzyhp9k61i8.csv")
 ggplot(chem) +
   geom_point(
-    aes(x = time, y = temp, col = yield),
+    aes(time, temp, col = yield),
     position = position_jitter(w = 0.3, h = 0.3)
   ) +
   coord_fixed() +
@@ -204,7 +213,9 @@ As before, we will code the data. We use `SO` to fit a second-order model. It
 appears that the linear and pure quadratic components are very strong, and that
 there is limited, if any, interaction between these two variables.
 
-```{r, echo = TRUE}
+```{r}
+library(rsm)
+
 chem_coded <- coded.data(chem, time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 155) / 5)
 fit <- rsm(yield ~ SO(temp_coded, time_coded), data = chem_coded)
 anova(fit)
@@ -214,7 +225,7 @@ stationary point. Since both of the eigenvalues are negative, this is in fact
 the case. The eigenvectors also tell us directions that (in this case) decrease
 the yield fastest.
 
-```{r, echo = TRUE}
+```{r}
 analysis <- canonical(fit)
 analysis
 ```
@@ -222,7 +233,7 @@ analysis
 We can identify the specific location of the optimum, by decoding the canonical
 analysis.
 
-```{r, echo = TRUE}
+```{r}
 stationary <- code2val(analysis$xs, codings = codings(chem_coded))
 stationary
 ```
@@ -235,7 +246,7 @@ w2 <- code2val(analysis$xs + analysis$eigen$vectors[, 2], codings = codings(chem
 
 Finally, let's plot the response surface, with the canonical points overlaid.
 
-```{r, echo = TRUE, fig.margin = FALSE, fig.cap = "The response surface, with canonical vectors overlaid."}
+```{r, fig.cap = "The response surface, with canonical vectors overlaid."}
 contour(fit, ~ time_coded + temp_coded, image = TRUE, asp = 1)
 segments(stationary[2], stationary[1], w1[2], w1[1], col = "red")
 segments(stationary[2], stationary[1], w2[2], w2[1], col = "red")

@@ -1,7 +1,7 @@
 ---
 title: "Optimizing Multiple Responses"
 description: |
-  A short description of the post.
+  Tracking several criteria simultaneously.
 author:
   - name: Kris Sankaran
     url: {}
@@ -13,26 +13,35 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [11.3](), [Rmarkdown]()_
+_Readings [11.3](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week12-2/week12-2.Rmd)_
 
+```{r}
+library(ggplot2)
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
+```
+
+```{r}
+opts_chunk$set(echo = TRUE)
+```
 
 
 ```{r}
-library(dplyr)
-library(EBImage)
-library(desirability)
-library(ggplot2)
 library(readr)
+library(dplyr)
 library(reshape2)
-library(rsm)
-library(stringr)
-theme_set(theme_bw() + theme(legend.position = "bottom"))
-```
 
-```{r, fig.margin = FALSE}
 chem <- read_csv("https://uwmadison.box.com/shared/static/nbaj1m8j7tuaqmznjlrsgbzyhp9k61i8.csv")
 std <- function(x) {
   (x - mean(x)) / sd(x)
@@ -43,6 +52,9 @@ mchem <- chem %>%
 ```
 
 ```{r}
+library(rsm)
+library(desirability)
+
 chem_coded <- coded.data(chem, time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 155) / 5)
 fits <- list(
   "yield" = rsm(yield ~ SO(temp_coded, time_coded), data = chem_coded),
@@ -65,8 +77,6 @@ simultaneously. More often than not, the goals will be at odds with one another.
 For example, in our running chemical process example, we want to maximize yield
 while maintaining a target viscosity and minimizing molecular weight. How can we
 use response surface methods when we have several competing objectives?
-
-\vspace{5mm}
 
 ```{r, fig.margin = FALSE}
 ggplot(mchem) +
@@ -141,8 +151,6 @@ ggplot(example_funs) +
   scale_color_brewer(palette = "Set2") +
   facet_grid(type ~ .)
 ```
-
-
 
 The issue with this idea is that it treats all responses exactly equally. What
 if we want to maximize some, but minimize others? What if we want some to be
