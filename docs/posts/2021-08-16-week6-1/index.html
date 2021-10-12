@@ -2425,16 +2425,16 @@ The functions <code>BIBsize</code> and <code>find.BIB</code> answer these two qu
 </code></pre>
 </div>
 <pre><code>      [,1] [,2] [,3]
- [1,]    2    4    5
- [2,]    1    2    5
- [3,]    1    3    5
- [4,]    2    3    4
- [5,]    1    3    4
- [6,]    1    4    5
- [7,]    1    2    3
- [8,]    3    4    5
- [9,]    2    3    5
-[10,]    1    2    4</code></pre>
+ [1,]    3    4    5
+ [2,]    1    2    4
+ [3,]    2    3    5
+ [4,]    1    4    5
+ [5,]    1    2    3
+ [6,]    2    3    4
+ [7,]    1    2    5
+ [8,]    1    3    4
+ [9,]    1    3    5
+[10,]    2    4    5</code></pre>
 </div>
 <ol start="11" type="1">
 <li>Next, we’ll analyze a BIBD experiment. We download the <code>catalyst</code> experiment, which studied the effect of different catalysts on chemical reaction time.</li>
@@ -2459,7 +2459,7 @@ The functions <code>BIBsize</code> and <code>find.BIB</code> answer these two qu
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_color_brewer</a></span><span class='op'>(</span>palette <span class='op'>=</span> <span class='st'>"Set2"</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="week6-1_files/figure-html5/unnamed-chunk-11-1.png" width="624" style="display: block; margin: auto;" /></p>
+<p><img src="week6-1_files/figure-html5/unnamed-chunk-11-1.svg" width="624" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="13" type="1">
 <li>To estimate the effects for each catalyst, we can use <code>lm</code>. The associated ANOVA gives evidence against the null that the catalysts are equal, and the corresponding confidence intervals suggests that catalyst 4 has a longer reaction time than would be believable under the null. This is a nice situation in which something that wasn’t obvious visually becomes more clear when we apply a principled testing procedure. Compare the ANOVA table with Table 4.25.</li>

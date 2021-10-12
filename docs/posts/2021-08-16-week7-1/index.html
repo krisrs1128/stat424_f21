@@ -2400,7 +2400,7 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 <li>Before testing for effects, we can plot the influence of each factor. The code below uses <code>facet_wrap</code> to split the plot across the three material types. There seems to be a clear temperature effect, though the effects are not exactly the same across material. This suggests that an interaction is present, though we will need a test to quantify the strength of this pattern.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="week7-1_files/figure-html5/unnamed-chunk-6-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="week7-1_files/figure-html5/unnamed-chunk-6-1.svg" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <ol start="12" type="1">
 <li>We can fit the two factor model using <code>lm</code>. We use the syntax <code>Material * Temperature</code> to fit all main effects and interactions involving those variables; it is shorthand for the more explicit notation <code>Material + Temperature + Material : Temperature</code> (here, the <code>:</code> denotes an interaction). The <code>Material</code> and <code>Temperature</code> rows of the ANOVA table give main effects, the <code>Material:Temperature</code> row gives the interaction effect, and the <code>Residuals</code> row corresponds to the <span class="math inline">\(SS_{E}\)</span> and <span class="math inline">\(MS_{E}\)</span> terms.</li>
