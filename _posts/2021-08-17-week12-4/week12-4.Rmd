@@ -69,7 +69,7 @@ the,
   * Box-Behnken design: The associated samples are all on edges of the cube (none
   at vertices or in the interior).
   * Equiradial design: This generalizes the simplex idea above. Instead of
-  sampling at the corners of an equilateral triangle, we can sample at corners or
+  sampling at the corners of an equilateral triangle, we can sample at corners of
   regular polygons (+ center points)
 
 5. In practice, you can use functions from the `rsm` package. This code produces
@@ -164,6 +164,8 @@ that point, denoted $V\left(\hat{y}\left(x\right)\right)$.
   * For any response surface, we can also imagine an accompanying variance
   surface.
   * Away from factor configurations that we’ve sampled, we expect the variance to increase.
+  * Using the `rsm` package, we can visualize these variance functions using the
+  function `varfcn`.
 
 9. If there are only 2 factors, this surface can be directly visualized. 
   * But in higher-dimensions, this is impossible.

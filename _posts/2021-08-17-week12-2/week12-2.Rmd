@@ -207,7 +207,7 @@ library(rsm)
 
 chem_coded <- coded.data(chem, time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 155) / 5)
 fit <- rsm(yield ~ SO(temp_coded, time_coded), data = chem_coded)
-anova(fit)
+summary(aov(fit))
 ```
 
 16. Next, we can perform a canonical analysis, to make sure that we are at a

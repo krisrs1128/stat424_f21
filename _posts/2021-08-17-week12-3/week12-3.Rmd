@@ -44,7 +44,9 @@ use response surface methods when we have several competing objectives?
 
 ### Overlaying Contours
 
-2. The most direct approach is to simply fit several response surfaces. Then, we can visually inspect results to find factor configurations with desirable values across each response.
+2. The most direct approach is to simply fit several response surfaces. Then, we
+can visually inspect results to find factor configurations with desirable values
+across each response.
 
 3. To illustrate, we will work with a chemical process dataset, which varied
 temperature and time in some chemical process and observed changes in three
@@ -168,10 +170,7 @@ example_funs <- data.frame(
     type = str_replace(fun, "[\\.0-9]+", ""),
     scale = str_extract(fun, "[\\.0-9]+")
   )
-```
 
-
-```{r, fig.cap = "Example desirability functions, for maximizing, minimizing, and achieving a target response.", echo = FALSE}
 ggplot(example_funs) +
   geom_line(aes(x, value, col = scale)) +
   scale_color_brewer(palette = "Set2") +
@@ -212,14 +211,8 @@ x_grid <- expand.grid(
 ```
 
 ```{r}
-desirabilities <- cbind(
-  x_grid,
-  y1 = predict(fits[[1]], x_grid),
-  y2 = predict(fits[[2]], x_grid),
-  y3 = predict(fits[[3]], x_grid)
-)
-y_hat <- desirabilities %>% 
-  select(starts_with("y"))
+library(purrr)
+y_hat <- map_dfc(fits, ~ predict(., x_grid))
 desirabilities$objective <- predict(objective, y_hat)
 ```
 

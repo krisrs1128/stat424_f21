@@ -31,9 +31,6 @@ theme424 <- theme_minimal() +
   )
 theme_set(theme424)
 ```
-```{r, fig.cap = "In initial runs we will use first-order models. When we approach a potential optimum, we will switch to second-order models."}
-include_graphics("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png")
-```
 
 1. When we last discussed response surfaces (in Chapter 5), we showed how to fit
 a regression surface to a fixed set of runs. This let us find configurations of
@@ -49,6 +46,10 @@ experiments, each bringing us closer to an optimal configuration of factors.
 optimal point. At the start of experimentation, even a few small runs are likely
 to point us in the right direction. Near the end, we’ll want to tune a good
 configuration of factors into an optimal one.
+
+```{r, fig.cap = "In initial runs we will use first-order models. When we approach a potential optimum, we will switch to second-order models."}
+include_graphics("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png")
+```
 
 4. One approach is to divide experimentation into two phases. We can start with
 first-order models, and then proceed to second-order when in the vicinity of the
@@ -84,7 +85,7 @@ b = \begin{pmatrix}
 These surfaces are more complex, so require more involved sampling, like
 replicated factorial or central composite designs. It is defined as,
 \begin{align*}
-y_{i} &= \beta_0 + \sum_{k = 1}^{K}\beta_{kk}x_{k}^{2} + \sum_{k < k_{\prime}} \beta_{k k^{\prime}} x_{k}x_{k^{\prime}} + \epsilon_{i} \\
+y_{i} &= \beta_0 + \sum_{k = 1}^{K}\beta_{kk}x_{ik}^{2} + \sum_{k < k_{\prime}} \beta_{k k^{\prime}} x_{ik}x_{ik^{\prime}} + \epsilon_{i} \\
 &= x_{i}^{T}b + x_{i}^{T} B x_i + \epsilon_{i}
 \end{align*}
 
@@ -156,7 +157,7 @@ p
 experiments, because the data don't simply lie on the corners of a cube. We'll
 use the `coded.data` function from the `rsm` package to handle this.
 
-```{r, echo = TRUE}
+```{r}
 library(rsm)
 chem_coded <- coded.data(chem[[1]], time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 155) / 5)
 ```
@@ -178,7 +179,7 @@ Compare the ANVOA with table 11.2.
 
 ```{r, echo = TRUE}
 fit_iq <- rsm(yield ~ FO(time_coded, temp_coded) + TWI(time_coded , temp_coded) + PQ(time_coded, temp_coded), data = chem_coded)
-anova(fit_iq)
+summary(aov(fit_iq))
 ```
 
 ```{r, echo = TRUE}
