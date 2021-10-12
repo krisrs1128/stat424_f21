@@ -1,12 +1,11 @@
 ---
 title: "BIBD Introduction"
-author: "Kris Sankaran | UW Madison | 23 September 2021"
+author: "Kris Sankaran | UW Madison "
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -17,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -32,11 +31,13 @@ theme_set(theme424)
 
 # Introduction to Balanced Incomplete Block Designs
 
-```{r, out.width = 200}
+```{r, out.width = 400, fig.align = "left"}
+include_graphics("figure/bibd-identity1.png")
 ```
+
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison | October 2021]
+.large[Kris Sankaran | UW Madison | October 12, 2021]
 
 ---
 
@@ -59,12 +60,14 @@ theme_set(theme424)
 
 ### Incomplete Designs
 
+.pull-left[
 * In an incomplete design, not all treatments appear in each block
 * A design is **balanced** if any pair of treatments appear together in a block the same number of times
 * Balance ensures that treatment and block effects don't become confounded
+]
 
 .pull-right[
-```{r, fig.show = "hold", out.width = 200, fig.cap = "An example BIBD with 3 treatments total and 2 treatments run per each block."}
+```{r, fig.show = "hold", out.width = 200, fig.cap = "An example BIBD with 3 treatments total and 2 treatments run per each block.", fig.align = "left"}
 include_graphics("figure/bibd-example1.png")
 ```
 ]
@@ -73,12 +76,14 @@ include_graphics("figure/bibd-example1.png")
 
 ### Incomplete Designs
 
+.pull-left[
 * In an incomplete design, not all treatments appear in each block
 * A design is **balanced** if any pair of treatments appear together in a block the same number of times
 * Balance ensures that treatment and block effects don't become confounded
+]
 
 .pull-right[
-```{r, fig.show = "hold", out.width = 250, fig.cap = "An example BIBD with 4 treatments total and 2 treatments run per each block."}
+```{r, fig.show = "hold", out.width = 250, fig.cap = "An example BIBD with 4 treatments total and 2 treatments run per each block.", fig.align = "left"}
 include_graphics("figure/bibd-example2.png")
 ```
 ]
@@ -87,15 +92,12 @@ include_graphics("figure/bibd-example2.png")
 
 ### Notation
 
-We will need a bit of notation to keep track of all the parameters in this design,
-
-* $a$: Number of treatment levels
-* $b$: Number of blocks
-* $k$: Number of treatments per block
-* $r$: Number of blocks per treatment
+We will need new notation to keep track of parameters in this design,
+* $a, b$: Number of treatment and block levels, respectively
+* $k, r$: Number of treatments per block and blocks per treatment, respectively
 * $\lambda$: Number of appearances for each level pair
 
-```{r, fig.cap = "Circles mark which treatments are run in which blocks. We need to ensure balance across this diagram.", out.width = 500}
+```{r, fig.cap = "Circles mark which treatments are run in which blocks. We need to ensure balance across this diagram.", out.width = 400}
 include_graphics("figure/bibd-identity1.png")
 ```
 
@@ -103,10 +105,8 @@ include_graphics("figure/bibd-identity1.png")
 
 ### Constraint
 
-* It's generally not possible to find a design for arbitrary values of these
-parameters
+* It's generally not possible to find a design for arbitrary parameters
 * The main constraint is $\lambda (a - 1) = r(k - 1)$
-  - A counting-based proof is given in the notes
   - Later, we will use a package to determine possible configurations
 
 ```{r, fig.cap = "Circles mark which treatments are run in which blocks. We need to ensure balance across this diagram.", out.width = 500}
@@ -117,13 +117,20 @@ include_graphics("figure/bibd-identity1.png")
 
 ### Discussion
 
-For one example we showed above, what are the values of $a, b, k$, $r$, and
-$\lambda$?
+For one of the examples we showed above, what are the values of $a, b, k$, $r$,
+and $\lambda$?
 
-```{r, fig.show = "hold", out.width = 200, fig.cap = "An example BIBD with 3 treatments total and 2 treatments run per each block."}
+.pull-left[
+```{r, fig.show = "hold", out.width = 400}
 include_graphics("figure/bibd-example1.png")
+```
+]
+
+.pull-right[
+```{r, fig.show = "hold", out.width = 400}
 include_graphics("figure/bibd-example2.png")
 ```
+]
 
 ---
 
@@ -135,13 +142,14 @@ y_{ij} &= \mu + \tau_i + \beta_j + \epsilon_{ij} \\
 \epsilon_{ij} &\sim \mathcal{N}\left(0, \sigma^2\right)
 \end{align}
 
-The difference is that $y_{ij}$ isn't observed for all combinations of blocks and treatments.
+The difference is that $y_{ij}$ isn't observed for all combinations of blocks
+and treatments.
 
 ---
 
 ### Hypothesis Testing
 
-We are generally interested in whether any treatment is different from the rest,
+We are interested in whether any treatment is different from the rest,
 
 \begin{aligned}
 H_0 &: \tau_1 = \dots = \tau_a = 0 \\
@@ -155,9 +163,9 @@ H_{1} &: \tau_{i} \neq 0 \text{ for at least one } i
 As in previous designs, we will use a decomposition of the total sum of squares
 to come up with a hypothesis test,
 
-$$
+\begin{align*}
 SS_{\text{Total}} = SS_{\text{Treatments}\left(adjusted\right)} + SS_{\text{Block}} + SS_{E}
-$$
+\end{align*}
 
 ---
 
@@ -177,14 +185,18 @@ SS_{\text{Block}} &= k \sum_{j} \left(\bar{y}_{\cdot j} - \bar{y}_{\cdot\cdot}\r
 But $SS_{\text{Treatments}}$ has to be adjusted. The reason is each treatment
 only appears in a subset of blocks, which might bias conclusions.
 
-    \begin{align*}
-    SS_{\text{Treatments }(adjusted )}=\frac{k}{\lambda a} \sum_{i=1}^{a}\left(\bar{y}_{i}-\frac{1}{k} \sum_{j \in B(j)} \bar{y}_{\cdot j}\right)^2
-    \end{align*}
-    where $B\left(j\right)$ indexes the blocks within which treatment $i$ was administered.
+.pull-left[
+\begin{align*}
+SS_{\text{Treatments }(adjusted )}=\frac{k}{\lambda a} \sum_{i=1}^{a}\left(\bar{y}_{i}-\frac{1}{k} \sum_{j \in B(j)} \bar{y}_{\cdot j}\right)^2
+\end{align*}
+where $B\left(j\right)$ indexes the blocks within which treatment $i$ was administered.
+]
 
-```{r}
+.pull-right[
+```{r, out.width = 250, fig.align = "right"}
 include_graphics("figure/bibd-sum-squares.png")
 ```
+]
 
 ---
 
@@ -214,7 +226,7 @@ opts_chunk$set(echo = TRUE)
 
 * We can use `BIBsize` to determine the minimum number of blocks that must be
 sampled before a balanced design can be constructed.
-* We imagine having 5 treatments of interest, but can only run 3 in each block.
+* Imagine having 5 treatments of interest, but can only run 3 in each block.
 
 ```{r}
 library(daewr)
@@ -244,17 +256,21 @@ library(readr)
 library(dplyr)
 catalyst <- read_table2("https://uwmadison.box.com/shared/static/2tfwo6oohyffw0x299105rj54iabkw4u.txt") %>%
   mutate_at(vars(-Time), as.factor) # use as.factor on all but the Time column
+head(catalyst, 4)
 ```
 
 ---
 
 ### Plot
 
+.pull-left[
 There seem to be definitive batch effects, but it's unclear whether there's any
 difference between Catalysts.
 
 Q: How can we tell from the figure that this is an incomplete design?
+]
 
+.pull-right[
 ```{r}
 library(ggplot2)
 library(ggbeeswarm)
@@ -262,6 +278,7 @@ ggplot(catalyst) +
   geom_beeswarm(aes(x = Batch, y = Time, col = Catalyst)) +
   scale_color_brewer(palette = "Set2")
 ```
+]
 
 ---
 
@@ -280,13 +297,17 @@ summary(aov_table) # only the unadjusted block mean square
 
 ### Multiple Testing
 
+.pull-left[
 * Contrasts can be done in exactly the same was as done before
-* Multiple comparisons in the BIBD setup requires a different package, `lsmeans`,
+* Multiple comparisons in BIBD requires a different package, `lsmeans`,
+]
 
+.pull-right[
 ```{r}
 library(lsmeans)
-lsmeans(fit, pairwise ~ Catalyst, adjust = "Tukey") # tukey's test
+lsmeans(fit, pairwise ~ Catalyst, adjust = "Tukey")$contrasts # tukey's test
 ```
+]
 
 ---
 
