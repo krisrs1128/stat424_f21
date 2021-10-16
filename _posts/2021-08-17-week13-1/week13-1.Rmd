@@ -1,7 +1,7 @@
 ---
 title: "Blocking in Response Surface Designs"
 description: |
-  A short description of the post.
+    Assigning samples to blocks in central composites.
 author:
   - name: Kris Sankaran
     url: {}
@@ -13,65 +13,68 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [11.4](), [Rmarkdown]()_
-
-
+_Readings [11.4](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week13-1/week13-1.Rmd)_
 
 ```{r}
-library(dplyr)
 library(ggplot2)
-library(readr)
-library(EBImage)
-library(reshape2)
-library(rsm)
-theme_set(theme_bw() + theme(legend.position = "bottom"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
+
+1. It’s often impossible to collect all the samples for an experiment at once,
+which can lead to batch effects downstream. This motivates the use of blocked
+designs — how should we think of blocked designs in the context of response
+surface experiments?
+
+2. First, let’s build intuition through an example. Suppose we are using a
+central composite design and $K = 2$, but we can’t complete all 10 runs at once.
+At most, during a single pass, we can collect 5 samples. One idea is to split
+the factorial and axial samples into two blocks, but tie them together at the
+center points. Then, any batch effects can be directly estimated through shifts
+in the average value at the center.
+
+3. The main technical condition that generalizes this idea is called _block
+orthogonality_. A design is called block orthogonal if,
+  * Each block $X_{b}$ is orthogonal, i.e., $X_{b}^{T}X_{b}$ = I when we stack
+  all design points for the block into an $n_{b} \times K$ matrix $X_{b}$.
+  * For each factor $k$ and each block $b$,
+  \begin{align*}
+    \frac{\sum_{u = 1}^{n_{b}} x_{iu}^{2}}{\sum_{u = 1}^{N} x_{iu}^{2}} = \frac{n_{b}}{N}
+  \end{align*}
+    this ensures that no one block has undue influence over the eventual estimates.
+	
+4. For arbitrary number of factors $K$, the central composite design turns can
+be made block orthogonal by dividing into two blocks (factor and axial points,
+tied at the center). It can be broken into even more blocks for particular
+choices of block size; this is summarized in Table 11.11.
 
 ```{r, fig.cap = "By tying sampling center points in both the axial and factorial blocks, it becomes possible to estimate and correct for block effects."}
 display(readImage("https://uwmadison.box.com/shared/static/hxsz37wvxcj93osymlckvep6da6ipoqy.png"))
 ```
 
-It’s often impossible to collect all the samples for an experiment at once,
-which can lead to batch effects downstream. This motivates the use of blocked
-designs — how should we think of blocked designs in the context of response
-surface experiments?
-
-First, let’s build intuition through an example. Suppose we are using a central
-composite design and $K = 2$, but we can’t complete all 10 runs at once. At
-most, during a single pass, we can collect 5 samples.
-
-Idea: Split the factorial and axial samples into two blocks, but tie them
-together at the center points.
-
-* Any batch effects can be directly estimated through shifts in the average
-value at the center
-
-The main technical condition that generalizes this idea is called _block
-orthogonality_. A design is called block orthogonal if,
-
-* Each block $X_{b}$ is orthogonal, i.e., $X_{b}^{T}X_{b}$ = I when we stack
-all design points for the block into an $n_{b} \times K$ matrix $X_{b}$.
-
-* For each factor $k$ and each block $b$,
-\begin{align*}
-  \frac{\sum_{u = 1}^{n_{b}} x_{iu}^{2}}{\sum_{u = 1}^{N} x_{iu}^{2}} = \frac{n_{b}}{N}
-\end{align*}
-  this ensures that no one block has undue influence over the eventual estimates.
-	
-For arbitrary number of factors $K$, the central composite design turns can be
-made block orthogonal by dividing into two blocks (factor and axial points, tied
-at the center). It can be broken into even more blocks for particular choices of
-block size; this is summarized in Table 11.11.
-
 ### Code Example
 
-We can use the same code we used to generate central composite designs before,
-but using the `blocks` argument.
+```{r}
+options(echo = TRUE)
+```
+
+4. We can use the same code we used to generate central composite designs
+before, but using the `blocks` argument.
 
 ```{r}
+library(rsm)
+
 codings <- list(
   time_coded ~ (time - 35) / 5,
   temp_coded ~ (temp - 150) / 5
@@ -80,10 +83,10 @@ ccd_design <- ccd(~ time_coded + temp_coded, coding = codings)
 ccd_design
 ```
 
-```{r}
+```{r, echo = FALSE, fig.cap = "A central composite design with factor combinations shaded in by the batch from which them emerged."}
 ggplot(decode.data(ccd_design)) +
   geom_point(
-    aes(x = time, y = temp, col = Block),
+    aes(time, temp, col = Block),
     position = position_jitter(w = 0.5, h = 0.5),
     size = 3
   ) +
@@ -91,13 +94,13 @@ ggplot(decode.data(ccd_design)) +
   coord_fixed()
 ```
 
-Suppose we wanted to block more than just the factorial and the axial runs; for
-example, we may only be able to run 2 examples per batch.  In this case, we
+5. Suppose we wanted to block more than just the factorial and the axial runs;
+for example, we may only be able to run 2 examples per batch.  In this case, we
 might block the factorial runs by confounding a high-order interaction with the
 blocks. For example, the code below blocks the 32 runs of a $2^{5}$ factorial
 into blocks of size 8.
 
-```{r, echo = TRUE}
+```{r}
 codings <- list(
   time_ ~ (time - 35) / 5,
   temp_ ~ (temp - 150) / 5,
@@ -108,15 +111,15 @@ codings <- list(
 blocked_ccd <- ccd(~ time_ + temp_ + power_ + rate_ + cooling_, coding = codings, blocks = Block ~ c(time_ * temp_ * power_, power_ * rate_ * cooling_))
 ```
 
-Finally, let's check the orthogonal blocking property for one of the blocks.
+6. Finally, let's check the orthogonal blocking property for one of the blocks.
 Remember, we need to make sure that (1) the design within the block is diagonal
 and (2) the fraction of norm for a column is proportional to the number of
 samples within the block. This is checked below for Block 1.
 
-```{r}
+```{r, echo = FALSE, fig.cap = "Shading samples according to the block assignments found by the ccd function."}
 ggplot(decode.data(blocked_ccd)) +
   geom_point(
-    aes(x = time, y = temp, col = Block),
+    aes(time, temp, col = Block),
     position = position_jitter(w = 1, h = 1),
     size = 3, alpha = 0.6
   ) +
@@ -124,7 +127,9 @@ ggplot(decode.data(blocked_ccd)) +
   coord_fixed()
 ```
 
-```{r, echo = TRUE, size = "scriptsize"}
+```{r}
+library(dplyr)
+
 x <- as.data.frame(blocked_ccd)
 xb <- x[x$Block == 1, ] %>%
   select(ends_with("_")) %>%

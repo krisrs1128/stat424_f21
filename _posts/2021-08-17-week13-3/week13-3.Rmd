@@ -1,7 +1,7 @@
 ---
 title: "Mixture Experiments"
 description: |
-  A short description of the post.
+  Optimizing responses when mixing ingredients.
 author:
   - name: Kris Sankaran
     url: {}
@@ -13,104 +13,104 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [11.6](), [Rmarkdown]()_
+_Readings [11.6](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week13-3/week13-3.Rmd)_
 
 
 ```{r}
-library(dplyr)
 library(ggplot2)
-library(mixexp)
-library(readr)
-library(EBImage)
-library(reshape2)
-library(AlgDesign)
-theme_set(theme_bw() + theme(legend.position = "bottom"))
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
 
-When we are cooking something up, we may want to find an optimal mixture of
-ingredients. For example, when making a fiber for a kind of yarn, there are
-three ingredients (polyethylene, polystyrene, and polypropylene) that are mixed
-at various fractions. What fraction would optimize the stretchiness of the yarn?
+1. There are many situations where we may want to find a mixture of
+ingredients to optimize some criteria. For example, when making a fiber for a
+kind of yarn, there are three ingredients (polyethylene, polystyrene, and
+polypropylene) that are mixed at various fractions. What fraction would optimize
+the stretchiness of the yarn?
 
-We’ll explore this problem as a special case of the general response surface problem.
+2. We’ll explore this problem as a special case of the general response surface
+problem.
 
 ### Geometry
 
-The mixture setting induces specific geometric constraints.
-
-* Suppose there are $P$ total ingredients.
-
-* Let $x_{p}$ denote the fraction of ingredient $p$.
-
+3. The mixture setting induces specific geometric constraints. Suppose there are
+$P$ total ingredients, and let $x_{p}$ denote the fraction of ingredient $p$.
 Since the $x_{p}$ are mixture fractions, we have the constraints,
-
-1. $x_{p} \in \left[0, 1\right]$
-
-2. $\sum_{p = 1}^{P} x_{p} = 1$
-
-The set of $x = \left(x_{1}, \dots, x_{P}\right)$ that satisfy these constraints
+  * $x_{p} \in \left[0, 1\right]$
+  * $\sum_{p = 1}^{P} x_{p} = 1$
+  
+4. The set of $x = \left(x_{1}, \dots, x_{P}\right)$ that satisfy these constraints
 can be geometrically represented by a simplex.
-
-* Center point has an equal amount of each ingredient
-
-* Corners have 100% coming from one of the ingredients
-
-There is nothing stopping us from fitting a response surface over the simplex.
+  * Center point has an equal amount of each ingredient
+  * Corners have 100% coming from one of the ingredients
+  There is nothing stopping us from fitting a response surface over the simplex.
 
 ### Design Points
 
-What design points should we use?
+4. What design points should we use? Factorial and central composite designs
+don't respect the geometry of the simplex, so we need alternatives.
 
-```{r, fig.cap = "An example $(3, 3)$ simplex lattice design." }
+```{r, fig.cap = "Examples of simplex lattice and centroid designs." }
+library(mixexp)
 DesignPoints(SLD(3, 3))
-```
-
-```{r, fig.cap = "An example $(3, 5)$ simplex lattice design." }
 DesignPoints(SLD(3, 5))
-```
-
-```{r, fig.cap="Simplex centroid design across 3 mixture elements."}
 DesignPoints(SCD(3))
 ```
 
-* Simplex lattice design: Choose some $m$ which will reflect the granularity of our design. Consider combinations of integers $k_{p} \in \{0,1, \dots, m\}$ such that $\sum_{p= 1}^{P} k_{p} = m$. Each such combination specifies a point
+5. Simplex lattice design: Choose some $m$ which will reflect the granularity of
+our design. Consider combinations of integers $k_{p} \in \{0,1, \dots, m\}$ such
+that $\sum_{p= 1}^{P} k_{p} = m$. Each such combination specifies a point
 \begin{align*}
 \frac{1}{m}\left(k_{1}, \dots, k_{P}\right)
 \end{align*}
-	that is included in the simplex lattice design.
+	that is included in the simplex lattice design. An alternative way to specify
+	this design is to draw a lattice grid with spacing $\frac{1}{m}$ in the unit
+	cube, and then discard points that don’t lie in the simplex.
 	
-	* An alternative way to specify this is to draw a lattice grid with spacing $\frac{1}{m}$ in the unit cube, and then discard points that don’t lie in the simplex.
-	
-* Simplex centroid design
-
+6. Simplex centroid design
 	* Corners: Add all $P$ permutations of the vector $\left(1, 0, \dots, 0\right)$.
-	
 	* Edge midpoints: Add all ${P \choose 2}$ permutations of $\left(\frac{1}{2}, \frac{1}{2}, 0, \dots, 0\right)$. These are midpoints between two corners, and so lie on edges of the simplex.
-	
 	* Face centroids: Add all ${P \choose 3}$ permutations of $\left(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, 0, \dots, 0\right)$ which are the centers of faces defined by three corners.
-	
 	* .. continue the pattern: For all $k \leq P$, add all ${P \choose k}$ permutations of $\left(\frac{1}{k}, \dots, \frac{1}{k}, 0, \dots, 0\right)$.
 	
-There are some common variations,
+7. The block below shows the first few rows from both a simplex centroid (`SCD`)
+and simplex linear (`SLD`) design.
 
-* It’s common to augment the designs above with center points.
+```{r}
+options(echo = TRUE)
+```
 
-* Sometimes it is useful to include _axial points_, which are samples along rays   extending from corners of the simplex
+```{r}
+library(mixexp)
+head(SCD(5))
+head(SLD(5, 2))
+```
+	
+8. There are some common variations,
+  * It’s common to augment the designs above with center points.
+  * Sometimes it is useful to include _axial points_, which are samples along rays   extending from corners of the simplex
+  * Computer-generated designs can be used, especially when there are constraints on feasible mixture values.
 
-* Computer-generated designs can be used, especially when there are constraints on feasible mixture values.
-
-```{r, fig.cap = "Simplex centroid design across 5 mixture elements."}
+```{r, fig.cap = "Simplex centroid design across 5 mixture elements.", echo = FALSE}
 mscd <- SCD(5) %>%
   mutate(id = row_number()) %>%
-  melt(id.vars = "id")
+  pivot_longer(-id)
+
 ggplot(mscd) +
-  geom_tile(
-    aes(x = variable, y = id, fill = value)
-  ) +
+  geom_tile(aes(name, id, fill = value)) +
   scale_fill_viridis_c() +
+  scale_y_continuous(expand = c(0, 0)) +
   coord_fixed() +
   theme(
     legend.position = "right",
@@ -119,29 +119,31 @@ ggplot(mscd) +
   )
 ```
 
-
 ### Data Example
 
-We'll use the yarn data from Example 11.5. The experiment used a (3, 2) simplex
-lattice design to measure variation in yarn elongation as a function of the
-fractions of different materials used to make the base fiber. First, let's try
-to see the dependence visually, though direct visualization on the simplex is
-challenging.
+9. We'll use the yarn data from Example 11.5. The experiment used a (3, 2)
+simplex lattice design to measure variation in yarn elongation as a function of
+the fractions of different materials used to make the base fiber. First, let's
+try to see the dependence visually, though direct visualization on the simplex
+is challenging.
 
 ```{r}
+library(readr)
 yarn <- read_csv("https://uwmadison.box.com/shared/static/jghwbsnn6qjpwdr1lc97p9mbxk8qkwif.csv")
 ggplot(yarn) +
   geom_point(
-    aes(x = x1, y = x2, size = sqrt(x3), col = elongation),
+    aes(x1, x2, size = x3, col = elongation),
     position = position_jitter(w = 0.1, h = 0.1)
   ) +
+  scale_size(range = c(2, 5)) +
   scale_color_viridis_c() +
   theme(legend.position = "none")
 ```
-Now, let's fit a second-order polynomial to the data. Note that we include a
+
+10. Now, let's fit a second-order polynomial to the data. Note that we include a
 `-1` term in the fit below, to ensure the model does not fit an intercept term.
 
-```{r, echo = TRUE, size = "scriptsize"}
+```{r, size = "scriptsize"}
 fit <- lm(elongation ~ -1 + (x1 + x2 + x3) ^ 2, data = yarn)
 summary(fit)
 ```
