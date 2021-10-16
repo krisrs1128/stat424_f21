@@ -31,12 +31,12 @@ theme_set(theme424)
 
 # Introduction to Factorial Design
 
-```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```{r, out.width = 450}
+include_graphics("https://uwmadison.box.com/shared/static/y2vm6wssbczsp9g0fnp9pr0lnljbdyn1.png")
 ```
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison | 23 September 2021]
+.large[Kris Sankaran | UW Madison ]
 
 ---
 
@@ -84,14 +84,14 @@ on a square
 * For general $2^K$ designs, a subset of factors has to be chosen for each plot
     
 .pull-left[
-```{r, fig.cap = "A two factor experiment viewed in 3D."}
-include_graphics("figure/22_factorial.png")
+```{r, fig.cap = "A two factor experiment viewed in 3D.", out.width = 300}
+include_graphics("https://uwmadison.box.com/shared/static/y2vm6wssbczsp9g0fnp9pr0lnljbdyn1.png")
 ```
 ]
 
 .pull-right[
-```{r, fig.cap = "A two factor experiment viewed from the top down."}
-include_graphics("figure/22_factorial_flat.png")
+```{r, fig.cap = "A two factor experiment viewed from the top down.", out.width = 250}
+include_graphics("https://uwmadison.box.com/shared/static/fe44vpifjca3ug9cgcomngeli0zsovm6.png")
 ```
 ]
 
@@ -120,12 +120,12 @@ when increasing that factor by one unit
 configuration of another (or several other) factors
 * This is called an _interaction effect_ between factors
 
-```{r, fig.cap = "A two factor experiment with an interaction effect, viewed in 3D"}
-include_graphics("figure/22_factorial_interaction.png")
+```{r, fig.cap = "A two factor experiment with an interaction effect, viewed in 3D", out.width = 450}
+include_graphics("https://uwmadison.box.com/shared/static/z0oxu2ir9tqdxzfcduq67tuqpiblar3r.png")
 ```
 
 ```{r, fig.cap = "A two factor experiment with an interaction effect, viewed from the top down"}
-include_graphics("figure/22_factorial_flat_interaction.png")
+include_graphics("https://uwmadison.box.com/shared/static/ja2uy27rcvv9k3a6j7305ocx6oz5cixr.png")
 ```
 
 ---
@@ -168,6 +168,29 @@ y &= \beta_0 + \left(\beta_1 + x_{12}\right)x_1 + \beta_2 x_2 \\
 
 Option A: What is the interpretation of a coefficient $\beta_{12}$ that is large
 and positive? large and negative?
+
 Option B: An study of battery manufacturing data reports that there is a strong
 interaction between material and temperature factors when modeling battery
 lifetime. What does this mean, in your own words?
+
+---
+
+### Solution (A)
+
+A large positive coefficient $\beta_{12}$ means that the observed value when
+both factors are active is larger than would be expected by simply adding the
+effects from either on their own. There is a synergy that leads to an especially high response when both are present.
+
+A large negative coefficient has the opposite interpretation. In this case, the
+observed value when both values are active is smaller than simply adding either
+on their own. The two factors dampen each others effects.
+
+---
+
+### Solution B
+
+* Across materials, the effect of temperature is not the same. For example, for
+material 1, an increase by 10 degrees might increase battery lifetime, but for
+material 2, the same increase might decrease lifetime.
+* The same logic works symmetrically. For different temperatures, the effect on
+lifetime of using material 1 vs. 2 might not be the same.
