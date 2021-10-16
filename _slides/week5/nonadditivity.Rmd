@@ -1,0 +1,66 @@
+---
+title: "Additvity Experiment"
+output: html_notebook
+---
+
+First we simulate an example dataset.
+
+```{r}
+library(dplyr)
+
+betas <- c(-1, 0, 1)
+taus_varying <- matrix(
+  c(3, 0, -3,
+    3, -3, 0,
+    -3, 0, 3), nrow = 3, byrow = T
+)
+
+b <- length(betas)
+a <- ncol(taus_varying)
+n_rep <- 10
+
+experiment <- list()
+counter <- 1
+for (i in seq_len(a)) {
+  for (j in seq_len(b)) {
+    for (k in seq_len(5)) {
+      experiment[[counter]] <- data.frame(
+        treatment = i,
+        block = j,
+        replicate = k,
+        value = taus_varying[j, i] + betas[j] + rnorm(1)
+      )
+      counter <- counter + 1
+    }
+  }
+}
+
+experiment <- bind_rows(experiment)
+```
+
+Now we plot the simulated data.
+
+
+```{r}
+library(ggplot2)
+
+experiment <- experiment %>%
+  mutate_at(vars(-value), as.factor)
+
+ggplot(experiment) +
+  geom_point(aes(treatment, value, col = block))
+
+ggplot(experiment) +
+  geom_point(aes(block, value, col = treatment))
+ggsave("~/Downloads/nonadditivity.png", dpi = 400)
+```
+
+And now we plot the residuals.
+
+```{r}
+fit <- lm(value ~ treatment + block, experiment)
+experiment$resid <- resid(fit)
+ggplot(experiment) +
+  geom_point(aes(block, resid, col = treatment))
+ggsave("~/Downloads/residuals.png", dpi = 400)
+```
