@@ -35,7 +35,7 @@ are two-factor factorial designs.
 
 2. We will assume a model of the form,
 $$
-y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
+y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ijk}
 $$
   where $\epsilon_{ijk} \sim \mathcal{N}\left(0, \sigma^2\right)$ independently.
   For identifiability, we have to assume that the sums $\sum_{i} \tau_i =

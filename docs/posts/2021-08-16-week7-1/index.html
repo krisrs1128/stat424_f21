@@ -2293,7 +2293,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <ol type="1">
 <li><p>Recall that in a factorial design, we want to study the influences of multiple experimental factors on some responses of interest. The simplest situation is when there are two factors of interest, and the associated designs are two-factor factorial designs.</p></li>
 <li><p>We will assume a model of the form, <span class="math display">\[
-y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
+y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ijk}
 \]</span> where <span class="math inline">\(\epsilon_{ijk} \sim \mathcal{N}\left(0, \sigma^2\right)\)</span> independently. For identifiability, we have to assume that the sums <span class="math inline">\(\sum_{i} \tau_i =  \sum_{j} \beta_{j}= \sum_{ij} \left(\tau\beta\right)_{ij}=0\)</span>. We’ll suppose <span class="math inline">\(i\)</span> ranges from <span class="math inline">\(1, \dots, a\)</span>, <span class="math inline">\(j\)</span> ranges from <span class="math inline">\(1, \dots, b\)</span> and <span class="math inline">\(k\)</span> ranges from <span class="math inline">\(1,\dots, n\)</span>.</p></li>
 <li><p>What do the indices mean?</p>
 <ul>
@@ -2311,7 +2311,7 @@ y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij}
 </ul></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<div class="figure"><span id="fig:unnamed-chunk-1"></span>
 <img src="figure/parameters.png" alt="A graphical view of all the parameters in a factorial design." width="894" data-distill-preview=1 />
 <p class="caption">
 Figure 1: A graphical view of all the parameters in a factorial design.
@@ -2347,7 +2347,7 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 <li><p>The punchline is that if <span class="math inline">\(SS_{A}\)</span> is large, we have evidence against hypothesis A, if <span class="math inline">\(SS_{B}\)</span> is large we have evidence against hypothesis B, and if <span class="math inline">\(SS_{AB}\)</span> is large, we have evidence against hypothesis AB.</p></li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png" width="45%" style="display: block; margin: auto;" /><img src="https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png" width="45%" style="display: block; margin: auto;" /></p>
+<p><img src="https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png" width="45%" /><img src="https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png" width="45%" /></p>
 </div>
 <ol start="8" type="1">
 <li>Dividing <span class="math inline">\(SS\)</span> terms by their degrees of freedom (d.f.) gives <span class="math inline">\(MS_{A}, MS_{B}, MS_{AB}\)</span>, and <span class="math inline">\(MS_{E}\)</span>. The d.f. are derived from the number of levels for each factor, but a proof is beyond the scope of this course.</li>
@@ -2371,7 +2371,7 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 <li>We can define corresponding mean squares by dividing by the degrees of freedom. For each hypothesis, we get a corresponding <span class="math inline">\(F\)</span>-statistic.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png" width="45%" style="display: block; margin: auto;" /><img src="https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png" width="45%" style="display: block; margin: auto;" /></p>
+<p><img src="https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png" width="45%" /><img src="https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png" width="45%" /></p>
 </div>
 <h3 id="code-example">Code Example</h3>
 <ol start="10" type="1">
@@ -2400,7 +2400,7 @@ H_1: \left(\tau\beta\right)_{ij} &amp;= 0 \text{ for at least one } ij \text{ co
 <li>Before testing for effects, we can plot the influence of each factor. The code below uses <code>facet_wrap</code> to split the plot across the three material types. There seems to be a clear temperature effect, though the effects are not exactly the same across material. This suggests that an interaction is present, though we will need a test to quantify the strength of this pattern.</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="week7-1_files/figure-html5/unnamed-chunk-6-1.svg" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="week7-1_files/figure-html5/unnamed-chunk-6-1.png" width="480" /></p>
 </div>
 <ol start="12" type="1">
 <li>We can fit the two factor model using <code>lm</code>. We use the syntax <code>Material * Temperature</code> to fit all main effects and interactions involving those variables; it is shorthand for the more explicit notation <code>Material + Temperature + Material : Temperature</code> (here, the <code>:</code> denotes an interaction). The <code>Material</code> and <code>Temperature</code> rows of the ANOVA table give main effects, the <code>Material:Temperature</code> row gives the interaction effect, and the <code>Residuals</code> row corresponds to the <span class="math inline">\(SS_{E}\)</span> and <span class="math inline">\(MS_{E}\)</span> terms.</li>
