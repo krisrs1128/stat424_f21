@@ -3,10 +3,9 @@ title: "Two Factor Factorial Designs"
 author: "Kris Sankaran | UW Madison | 23 September 2021"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -14,10 +13,10 @@ output:
     seal: false  
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"), fig.align = "center")
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -32,12 +31,20 @@ theme_set(theme424)
 
 # Two Factor Factorial Designs
 
-```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```{r, out.width = 350, fig.align = "left"}
+include_graphics("https://raw.githubusercontent.com/krisrs1128/stat424_f21/main/_posts/2021-08-16-week7-1/figure/parameters.png")
 ```
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison | 23 September 2021]
+.large[Kris Sankaran | UW Madison | October 19, 2021]
+
+---
+
+### Announcements
+
+* Midterm 1 is graded
+* Do not worry about BIBD
+  - Will give an example calculation in cheatsheet
 
 ---
 
@@ -50,57 +57,136 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 
 ### Motivation
 
-* Last time we introduced the factorial design setting
+* What should we do when multiple factors are of interest?
+ - This is the most common situation in practice
 * How can we guide decision making around,
   - Whether a factor has a relationship with the response?
   - Whether any interaction effects exist?
-* As the number of factors increases, these become harder to check visually
+* With many factors, this can be hard to check visually
   - Having quantitative summaries / uncertainties is critical
 
 ---
 
 ### Two-Factor Model
 
-We start by considering only two factors.
+We start by considering only two factors,
 
 \begin{align}
-y_{ijk} = \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ij} \\
-\epsilon_{ijk} &\sim \mathcal{N}\left(0, \sigma^2\right)
+y_{ijk} &= \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ijk} \\
+\epsilon_{ijk} &\overset{i.i.d.}{\sim} \mathcal{N}\left(0, \sigma^2\right)
 \end{align}
 
-* $i$ indexes the $a$ levels of the first factor (temperature).
-* $j$ indexes the $b$ levels of the second factor (material).
+* $i$ indexes the $a$ levels of the first factor.
+* $j$ indexes the $b$ levels of the second factor.
 * $k$ indexes the $n$ replicates at a particular combination factors.
 
 ---
 
 ### Interpretation
 
+\begin{align}
+y_{ijk} &= \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ijk} \\
+\epsilon_{ijk} &\overset{i.i.d.}{\sim} \mathcal{N}\left(0, \sigma^2\right)
+\end{align}
+
 * $\mu$ is the global mean
 * $\tau_i$ is the effect of the $i^{th}$ level of factor 1
 * $\beta_{j}$ is the effect of the $j^{th}$ level of factor 2
 * $\left(\tau\beta\right)_{ij}$ is the interaction between the $i^{th}$ level of factor 1 and the $j^{th}$ level of factor 2
-* $\epsilon_{ijk}$: Random variation between samples a fixed setting of the two
-factors
-
-```{r, fig.cap = "A graphical view of all the parameters in a factorial design.", preview = TRUE}
-include_graphics("figure/parameters.png")
-```
+* $\epsilon_{ijk}$ is random variation between samples a fixed setting
 
 ---
 
-### Example Interpretation
+### Example
 
-Suppose we are studying how battery life depends on temperature and material.
+How does battery life $y$ depend on temperature and
+material?
+
+\begin{align}
+y_{ijk} &= \mu + \tau_i + \beta_j + \left(\tau\beta\right)_{ij} + \epsilon_{ijk} \\
+\epsilon_{ijk} &\overset{i.i.d.}{\sim} \mathcal{N}\left(0, \sigma^2\right)
+\end{align}
 
 * $\mu$ is average battery lifetime across all settings
 * $\tau_i$ encodes how using temperature level $i$ affects battery lifetime
 * $\beta_{j}$ encodes how using material $j$ affects battery lifetime
 * $\left(\tau\beta\right)_{ij}$ encodes whether there is a synergy between temperature $i$ and material $j$
-* $\epsilon_{ijk}$: Random variation in battery lifetime when fixing temperature and material
+* $\epsilon_{ijk}$ is random variation in battery lifetime when fixing
+temperature and material
 
-```{r, fig.cap = "A graphical view of all the parameters in a factorial design.", preview = TRUE}
-include_graphics("figure/parameters.png")
+---
+
+### Visualization
+
+```{r, fig.cap = "A graphical view of all the parameters in a factorial design.", out.width = 550}
+include_graphics("https://raw.githubusercontent.com/krisrs1128/stat424_f21/main/_posts/2021-08-16-week7-1/figure/parameters.png")
+```
+
+---
+
+### Main Effects
+
+.pull-left[
+* The main effects $\tau_i$ and $\beta_j$ describe the average change in the
+response when setting factor 1 to level $i$ or factor 2 to level $j$
+* The average is taken over values of all other factors
+]
+
+.pull-right[
+```{r}
+include_graphics("https://raw.githubusercontent.com/krisrs1128/stat424_f21/main/_posts/2021-08-16-week7-1/figure/parameters.png")
+```
+]
+
+---
+
+### Main Effects
+
+.pull-left[
+* The main effects $\tau_i$ and $\beta_j$ describe the average change in the
+response when setting factor 1 to level $i$ or factor 2 to level $j$
+* The average is taken over values of all other factors
+]
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/2nkb62ybdgkziv3ahhsqqc6omgacpczo.png")
+```
+]
+
+---
+
+### Interaction Effects
+
+* The change in response when a factor is changed might depend on the specific
+configuration of another (or several other) factors
+* This is the purpose of including the $\left(\tau\beta\right)_{ij}$ term
+* This is called an _interaction effect_ between factors
+
+.pull-left[
+```{r, fig.cap = "A two factor experiment with an interaction effect, viewed in 3D", out.width = 450}
+include_graphics("https://uwmadison.box.com/shared/static/z0oxu2ir9tqdxzfcduq67tuqpiblar3r.png")
+include_graphics("https://uwmadison.box.com/shared/static/2nkb62ybdgkziv3ahhsqqc6omgacpczo.png")
+```
+]
+
+.pull-right[
+```{r, fig.cap = "A two factor experiment with an interaction effect, viewed from the top down", out.width = 300}
+include_graphics("https://uwmadison.box.com/shared/static/ja2uy27rcvv9k3a6j7305ocx6oz5cixr.png")
+```
+]
+
+---
+
+### Interaction Effects
+
+* The change in response when a factor is changed might depend on the specific
+configuration of another (or several other) factors
+* This is the purpose of including the $\left(\tau\beta\right)_{ij}$ term
+* This is called an _interaction effect_ between factors
+
+```{r, out.width = 340, fig.align = "center"}
+include_graphics("https://uwmadison.box.com/shared/static/l0g4oup86roq013s4y3jsyqoyny595ps.png")
 ```
 
 ---
@@ -128,47 +214,44 @@ H_{1} &: \beta_{j} \neq 0 \text{ for at least one } j
 
 (Hypothesis AB) Are there interaction effects?
 \begin{align}
-H_0: \left(\tau\beta\right)_{ij}= \dots = \left(\tau\beta\right)_{ij} = 0 \\
-H_1: \left(\tau\beta\right)_{ij} &= 0 \text{ for at least one } ij \text{ combination}
+H_0&: \left(\tau\beta\right)_{ij}= \dots = \left(\tau\beta\right)_{ij} = 0 \\
+H_1&: \left(\tau\beta\right)_{ij} = 0 \text{ for at least one } ij \text{ combination}
 \end{align}
 
 ---
 
 ### ANOVA-like Identity
 
-.pull-left[
 * We’ll denote this by $SS_{\text{Total}}=SS_{A}+SS_{B}+SS_{AB}+SS_{E}$
 * *Don't* try memorizing the formulas, but *do* know how to relate the formulas to computer output
-]
 
-.pull-right[
 \begin{align*}
 \sum_{i j k}\left(y_{i j k}-\bar{y}\right)^{2}=& b n \sum_{i}\left(\bar{y}_{i . .}-\bar{y}\right)^{2}+\\
 & a n \sum_{j}\left(\bar{y}_{.j.} -\bar{y}\right)^{2}+\\
 & n \sum_{i, j}\left(\bar{y}_{i j.}-\bar{y}_{i. .}+\bar{y}_{. j.}-\bar{y}\right)^{2}+\\
 & \sum_{i, j, k}\left(y_{i j k}-\bar{y}_{i j.} .\right)^{2}
 \end{align*}
-]
 
 ---
 
 ### Degrees of Freedom
 
-* Dividing $SS$ terms by their degrees of freedom (d.f.) gives $MS_{A}, MS_{B},
-MS_{AB}$, and $MS_{E}$.
+.pull-left[
+* Dividing $SS$ terms by their degrees of freedom (d.f.) gives $MS_{A}, MS_{B}, MS_{AB}$, and $MS_{E}$.
 * The d.f. are derived from the number of levels for each factor, but a proof is
 beyond the scope of this course
 * Under the null, the sums of squares are $\chi^2$ distributed, and the ratios
 are $F$ distributed
+]
 
------
+.pull-right[
 | term | d.f.|
------
-| $SS_{A} | $a - 1$ |
-| $SS_{B} | $b - 1$ |
-| $SS_{AB} | $\left(a - 1\right)\left(b - 1\right)$ |
-| $SS_{E} | $ab\left(n - 1\right)$ |
------
+|---|----|
+| $SS_{A}$ | $a - 1$ |
+| $SS_{B}$ | $b - 1$ |
+| $SS_{AB}$ | $\left(a - 1\right)\left(b - 1\right)$ |
+| $SS_{E}$ | $ab\left(n - 1\right)$ |
+]
 
 ---
 
@@ -177,10 +260,17 @@ are $F$ distributed
 * If $MS_{A}$ is large, we have evidence against hypothesis A
 * If $MS_{B}$ is large, we have evidence against hypothesis B
 
-```{r, fig.show = "hold", out.width = "45%"}
+.pull-left[
+```{r, out.width = 450}
 include_graphics("https://uwmadison.box.com/shared/static/ner7fbntbrdatsi94lk8p7bz469vigcd.png")
+```
+]
+
+.pull-right[
+```{r, out.width = 450}
 include_graphics("https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo7rsyz9cnpk.png")
 ```
+]
 
 ---
 
@@ -188,10 +278,17 @@ include_graphics("https://uwmadison.box.com/shared/static/sf0qeddpcestas9t5c2ubo
 
 $MS_{AB}$ is large, we have evidence against hypothesis AB.
 
-```{r, fig.show = "hold", out.width = "45%"}
+.pull-left[
+```{r, out.width = 450}
 include_graphics("https://uwmadison.box.com/shared/static/2956oz2t0rows6bj3zprb0yssagp7fww.png")
+```
+]
+
+.pull-right[
+```{r, out.width = 600}
 include_graphics("https://uwmadison.box.com/shared/static/y1j6wo96ocp0cr2ourswaklsa6exl8ed.png")
 ```
+]
 
 ---
 
@@ -229,15 +326,14 @@ levels for the factor of interest.
 ]
 
 .pull-right[
-```{r, fig.margin=TRUE, echo = FALSE, fig.cap = "All pairwise contrasts between levels of one factor, restricted to a single level of another.", fig.width = 2.6}
-library("EBImage")
-display(readImage("https://uwmadison.box.com/shared/static/oqhdg1jvjwo4x4g5z0y294555xb1nnz3.png"))
+```{r, fig.margin=TRUE, echo = FALSE, fig.cap = "All pairwise contrasts between levels of one factor, restricted to a single level of another.", out.width = 250}
+include_graphics("https://uwmadison.box.com/shared/static/oqhdg1jvjwo4x4g5z0y294555xb1nnz3.png")
 ```
 ]
 
 ---
 
-### Contrasts Example
+### Contrasts
 
 .pull-left[
 In the battery example, we may want to first fix temperature, and then use
@@ -246,11 +342,23 @@ temperature).
 ]
 
 .pull-right[
-```{r, fig.margin=TRUE, echo = FALSE, fig.cap = "All pairwise contrasts between levels of one factor, restricted to a single level of another.", fig.width = 2.6}
-library("EBImage")
-display(readImage("https://uwmadison.box.com/shared/static/oqhdg1jvjwo4x4g5z0y294555xb1nnz3.png"))
+```{r, fig.margin=TRUE, echo = FALSE, fig.cap = "All pairwise contrasts between levels of one factor, restricted to a single level of another.", out.width = 250}
+include_graphics("https://uwmadison.box.com/shared/static/oqhdg1jvjwo4x4g5z0y294555xb1nnz3.png")
 ```
 ]
+
+---
+
+### Discussion
+
+Imagine that you are the consulting statistician for a psychology study. They
+are interested in how different news media (video, radio, print) and content
+(first-hand accounts, statistics, expert perspectives) affect perceived
+importance of a social issue in a follow-up survey (importance = 1 to 10).
+
+In plain language, try to explain,
+* What is a two-factor design, and how it might apply to their study
+* How is hypothesis testing done for factorial designs?
 
 ---
 
@@ -264,7 +372,7 @@ How do material and temperature affect battery lifetimes? These are the two
 factors of interest, and each is measured at 3 levels.
 
 ```{r}
-options(echo = TRUE)
+opts_chunk$set(echo = TRUE)
 ```
 
 
@@ -274,7 +382,7 @@ library(dplyr)
 battery <- read_table2("https://uwmadison.box.com/shared/static/vmxs2wcsdxkdjujp85nw5kvk83xz4gl9.txt") %>%
   mutate_at(vars(-Life), as.factor) # convert columns except "Life" to factor
 
-battery
+head(battery, 4)
 ```
 
 ---
@@ -284,11 +392,15 @@ battery
 The `facet_wrap` and `facet_grid` commands in ggplot2 can be useful for plotting
 a variable across combinations of factors.
 
-```{r, fig.height = 3, fig.width = 5}
+```{r, out.width = 550}
 library(ggplot2)
 ggplot(battery) +
   geom_point(aes(Temperature, Life)) +
   facet_wrap(~ Material)
+```
+  
+```{r, echo = FALSE}
+options(width = 300)
 ```
 
 ---
@@ -296,8 +408,8 @@ ggplot(battery) +
 ### Model Fit
 
 * We can fit the two factor model using `lm`.
-* The syntax `Material * Temperature` to fits all main effects and interactions
-  - It is shorthand for `Material + Temperature + Material : Temperature` (the `:` denotes an interaction)
+* The syntax `Material * Temperature` fits all main effects and interactions
+  - It is shorthand for `Material + Temperature + Material : Temperature` (the `:` denotes interaction)
 
 ```{r}
 fit <- lm(Life ~ Material * Temperature, data = battery)
@@ -309,31 +421,34 @@ summary(aov(fit))
 
 ### Model Fit
 
-* The `Material` and `Temperature` rows of the ANOVA table give main effects
-* The `Material:Temperature` row gives the interaction effect
-* The `Residuals` row corresponds to the $SS_{E}$ and $MS_{E}$ terms.
+* The `Material` and `Temperature` rows of the table give $MS_{A}, MS_{B}$
+* The `Material:Temperature` row gives $MS_{AB}$
+* The `Residuals` row corresponds to the $MS_{E}$ term
 
 ```{r}
 fit <- lm(Life ~ Material * Temperature, data = battery)
 summary(aov(fit))
 ```
 
-There are strong temperature and material effects, and a slight interaction
-effect.
+There are strong temperature and material effects, with a slight interaction.
 
 ---
 
 ### Futher Interpretation
 
+.pull-left[
 * The `summary` command shows all fitted coefficients
 * The first temperature and material coefficients are absorbed into the baseline
 * The significant interaction between material 3 and temperature 70 means this
 combination lives about 80 units longer than expected in the absence of
 interaction
+]
 
+.pull-right[
 ```{r}
 summary(fit)
 ```
+]
 
 ---
 
@@ -351,8 +466,8 @@ fit.contrast(fit, "Temperature", c(1, -1, 0))
 
 ### Contrasts
 
-If we are worried about interactions, we can use the `emmeans` function to
-compare pairs of materials within each temperature level.
+Alternatively, we can use the `emmeans` function to compare pairs of materials
+within each temperature level.
 
 ```{r}
 library(emmeans)
@@ -366,7 +481,7 @@ emmeans(fit, pairwise ~ Material | Temperature)$contrasts
 As before, we can use `resid` and `predict` to extract residuals and fitted
 values.
 
-```{r, }
+```{r, echo = TRUE, out.width = 400}
 battery <- battery %>%
   mutate(resid = resid(fit), y_hat = predict(fit)) # create two new columns
 ggplot(battery) +
@@ -377,4 +492,140 @@ ggplot(battery) +
 
 # Exercise
 
+This exercise walks through problem 5.11.
+
+The factors that influence the breaking strength of a synthetic fiber are being studied. Four production machines and three operators are chosen and a factorial experiment is run using fiber from the same production batch.
+* Analyze the data and draw conclusions.
+* Prepare appropriate residual plots and comment on model adequacy
+
 ---
+
+(1) Read in data from [this link](https://tinyurl.com/ydx8jmcz) using `read_csv`
+from the `readr` package. Convert all columns except for `Strength` into
+factors.
+
+(2) What should go after `Strength ~ ` in order to fit a two factor model for
+operator and machine (including both main and interaction effects).
+
+(3) Find and interpret the $p$-values associated with the main and interaction effects.
+
+(4) Find and interpret the estimated parameters associated with the main and
+interaction effects. For example, what does the estimate for
+`operator2:machine2` mean?
+
+(5) Use `resid` and `predict` to extract residuals and make plots to evaluate
+model adequacy.
+
+---
+
+### Solution (1)
+
+`mutate_at` applies a function across all columns contained in `vars`. Another
+acceptable solution uses `vars(operator:replicate)`, meaning columns `operator`
+to `replicate`, instead of `vars(-Strength)`, meaning all but the `Strength`
+column.
+
+```{r}
+library(readr)
+library(dplyr)
+experiment <- read_csv("https://tinyurl.com/ydx8jmcz") %>%
+  mutate_at(vars(-Strength), as.factor)
+```
+
+---
+
+### Solution (2)
+
+We can use either
+
+```
+Strength ~ operator + machine + operator : machine
+```
+
+or the equivalent shorthand,
+
+```
+Strength ~ operator * machine
+```
+
+---
+
+### Solution (3)
+
+```{r, echo = FALSE}
+options(width = 400) # keep the output from wrapping too soon
+```
+
+```{r}
+fit <- lm(Strength ~ operator * machine, experiment)
+summary(aov(fit))
+```
+
+Fabric strength seems to vary significantly across operators. However, the
+machine factor has no effect, and there is no detectable interaction effect
+between machine or operator.
+
+---
+
+### Solution (4)
+
+.pull-left[
+* The `operator3` estimate means that fabric produced by operator 3 is typically
+about 5.5 strength units stronger than fabric produced by operator 1 on machine
+1 (the baseline configuration).
+* `operator2 : machine2` is the effect that can't be explained by the main
+effects. If significant, the configuration would have lower strength than would
+have been expected by just adding the operator 2 and machine 2 estimates.
+]
+
+.pull-right[
+```{r}
+summary(fit)
+```
+]
+
+---
+
+### Solution (5)
+
+```{r}
+experiment <- experiment %>%
+  mutate(residual = resid(fit), y_hat = predict(fit))
+```
+
+---
+
+### Solution (5)
+
+The discreteness in the residuals is a potential concern. However, the residuals
+are still symmetric around 0 and don't have any outliers.
+
+```{r}
+qqnorm(experiment$residual)
+qqline(experiment$residual, col = "red")
+```
+
+---
+
+### Solution (5)
+
+The discreteness is visible in a faceted plot of the residuals. Each panel here
+is an operator.
+
+```{r}
+ggplot(experiment) +
+  geom_point(aes(machine, residual)) +
+  facet_wrap(~ operator)
+```
+
+---
+
+### Solution (5)
+
+The larger residuals tend to happen at larger predicted values. It might be
+worth taking a log transformation of the response.
+
+```{r}
+ggplot(experiment) +
+  geom_point(aes(y_hat, residual))
+```

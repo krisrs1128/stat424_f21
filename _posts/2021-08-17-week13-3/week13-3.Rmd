@@ -18,7 +18,6 @@ opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 
 _Readings [11.6](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week13-3/week13-3.Rmd)_
 
-
 ```{r}
 library(ggplot2)
 theme424 <- theme_minimal() + 
