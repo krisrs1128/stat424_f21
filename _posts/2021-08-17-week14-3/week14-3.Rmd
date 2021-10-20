@@ -1,7 +1,7 @@
 ---
 title: "Split-Plot Designs"
 description: |
-  A short description of the post.
+  Designs with constraints on factor assignments.
 author:
   - name: Kris Sankaran
     url: {}
@@ -13,26 +13,31 @@ output:
 
 ```{r setup, include=FALSE}
 library(knitr)
-opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
+opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
 ```
 
-_Readings [14.4](), [Rmarkdown]()_
+_Readings [14.4](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown](https://github.com/krisrs1128/stat424_f21/blob/main/_posts/2021-08-17-week14-3/week14-3.Rmd)_
 
-
-```{r}
-library("dplyr")
-library("ggplot2")
-library("readr")
-library("EBImage")
-library("reshape2")
-theme_set(theme_bw() + theme(legend.position = "bottom"))
+```{r, echo = FALSE}
+library(ggplot2)
+theme424 <- theme_minimal() + 
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "#f7f7f7"),
+    panel.border = element_rect(fill = NA, color = "#0c0c0c", size = 0.6),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
+    legend.position = "bottom"
+  )
+theme_set(theme424)
 ```
+
 ```{r, fig.cap = "A single field from a true factorial design in the irrigation example."}
-display(readImage("https://uwmadison.box.com/shared/static/qtxsckab5vcxffrhbpepj9peq28m7zwn.png"))
+include_graphics("https://uwmadison.box.com/shared/static/qtxsckab5vcxffrhbpepj9peq28m7zwn.png")
 ```
 
 ```{r, fig.cap = "An alternative split plot structure. The irrigation strategies are now rows, and each cell is a subplot."}
-display(readImage("https://uwmadison.box.com/shared/static/9s2cmkmgc45po62yzm8eltry8cy7rv42.png"))
+include_graphics("https://uwmadison.box.com/shared/static/9s2cmkmgc45po62yzm8eltry8cy7rv42.png")
 ```
 
 There are times when we would like to perform a two-factor factorial experiment

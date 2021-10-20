@@ -1,7 +1,7 @@
 ---
 title: "Nested Designs"
 description: |
-  A short description of the post.
+  Effects that are unique to a subset of configurations.
 author:
   - name: Kris Sankaran
     url: {}
@@ -16,21 +16,19 @@ library(knitr)
 opts_chunk$set(cache = FALSE, message = FALSE, warning = FALSE, echo = TRUE)
 ```
 
-_Readings [14.1](), [Rmarkdown]()_
-
+_Readings [14.1](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443#content-section), [Rmarkdown]()_
 
 ```{r}
 library(dplyr)
 library(ggplot2)
 library(lme4)
 library(readr)
-library(EBImage)
 library(reshape2)
 theme_set(theme_bw() + theme(legend.position = "bottom"))
 ```
 
 ```{r, fig.cap = "The nested structure in the suppliers example"}
-display(readImage("https://uwmadison.box.com/shared/static/kbs80435ds41u0qp7typvmuiaibyjlpm.png"))
+include_graphics("https://uwmadison.box.com/shared/static/kbs80435ds41u0qp7typvmuiaibyjlpm.png")
 ```
 
 Factorial designs cover the situation where effects from multiple sources are
@@ -49,7 +47,7 @@ effect is nested within the alloy effect.
 ### Model
 
 ```{r, fig.cap = "Notation used in nested designs. Parentheses denote the parent branch."}
-display(readImage("https://uwmadison.box.com/shared/static/g6yb4uu8nncnqc39rbjhh3kz8bv9jzwc.png"))
+include_graphics("https://uwmadison.box.com/shared/static/g6yb4uu8nncnqc39rbjhh3kz8bv9jzwc.png")
 ```
 
 We will consider the two-stage design here. The data are imagined to be drawn
@@ -59,7 +57,7 @@ y_{ijk} &= \mu + \alpha_{i} + \beta_{j\left(i\right)} + \epsilon_{ijk}.
 \end{align*}
 
 ```{r, fig.cap = "Another way to look at the nested coefficient structure.", out.width = "80%"}
-display(readImage("https://uwmadison.box.com/shared/static/fy3jwyeou1bu6nyo1i2lypg8juj80z8k.png"))
+include_graphics("https://uwmadison.box.com/shared/static/fy3jwyeou1bu6nyo1i2lypg8juj80z8k.png")
 ```
 
 * $\alpha_i$ is the parent-effect (e.g., supplier effect). For identifiability,
@@ -82,7 +80,7 @@ First, imagine treating all the effects as fixed. In this case, there are two
 typical hypotheses of interest.
 
 ```{r, fig.cap = "The nested effect term looks at the variation across child means along a single branch."}
-display(readImage("https://uwmadison.box.com/shared/static/6bona7dg8dl6fbnfvetovq2cl9l5zo11.png"))
+include_graphics("https://uwmadison.box.com/shared/static/6bona7dg8dl6fbnfvetovq2cl9l5zo11.png")
 ```
 
 * Null parent-effect,
@@ -113,11 +111,9 @@ supplier-materials example above. (example 14.1)
 
 ```{r}
 purity <- read_csv("https://uwmadison.box.com/shared/static/uub0t6lvii52rxyygb2yt4ph3vmionjz.csv") %>%
-  mutate(
-    supplier = as.factor(supplier),
-    batch = as.factor(batch)
-  )
+  mutate_at(vars(-purity), as.factor)
 ```
+
 ```{r, fig.cap = "Data from the supplier example."}
 ggplot(purity) +
   geom_point( aes(x = batch, y = purity) ) +
@@ -144,23 +140,22 @@ about the typical size of batch-to-batch variation. In this case, it makes sense
 to use random effects. We can use a random effect for just the nested factors,
 
 ```{r, fig.margin = FALSE, fig.cap = "We might imagine the batch effects are drawn from some distribution, and do inference on the variance of that distribution."}
-display(readImage("https://uwmadison.box.com/shared/static/twey7ufa1zeaq8lgjpdg1uu66a7fi2l4.png"))
+include_graphics("https://uwmadison.box.com/shared/static/twey7ufa1zeaq8lgjpdg1uu66a7fi2l4.png")
 ```
-
 
 ```{r}
-fit <- aov(purity ~ supplier + Error(supplier/batch), data = purity)
-summary(fit)
+lmer(purity ~ supplier + (1 | supplier:batch), data = purity)
 ```
+
 or for both the nested and parent factors,
+
 ```{r}
 fit <- lmer(purity ~ (1 | supplier / batch), data = purity)
+#fit <- lmer(purity ~ (1 | supplier) + (1 | supplier:batch), purity) # equivalent longhand
 summary(fit)
 ```
-However, it makes no sense to treat the parent as random, but its child as
-fixed.
 
-An important detail to keep in mind is that, for nested designs, computation of
+An detail to keep in mind is that, for nested designs, computation of
 $F$-statistics depends on which terms are treated as fixed or random. For
 example, suppose $B$ is nested within $A$. Then the $F$ statistic for $A$ is
 computed as
