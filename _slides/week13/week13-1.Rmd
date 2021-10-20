@@ -198,39 +198,211 @@ response surfaces covered so far
 
 ### Simplex Geometry
 
+* $P$: Total number of ingredients
+* $x_{p}$: The fraction of ingredient $p$
+
+Then we have the constraints,
+
+* Data are proportions: $x_{p} \in \left[0, 1\right]$
+* Sum to One: $\sum_{p = 1}^{P} x_{p} = 1$
 
 ---
 
-### Designs on the Simplex
+### Simplex Geometry
+
+* The set of $x = \left(x_{1}, \dots, x_{P}\right)$ satisfying these constraints
+is called the simplex,
+  * Center point has an equal amount of each ingredient
+  * Corners have 100% coming from one of the ingredients
+* Factorial and central composite designs can't be used -- they might fall off
+the edges
 
 ---
 
 ### Simplex Lattice Design
 
+.pull-left[
+* Draw a grid with spacing $\frac{1}{m}$ in each direction in $p$-dimensional
+space
+* Discard all points that don't lie on the simplex
+* The parameter $m$ controls the granularity of the sampling points.
+]
+
+.pull-right[
+```{r, fig.cap = "An SLD with m = 3." }
+library(mixexp)
+DesignPoints(SLD(3, 3))
+```
+]
+
+---
+
+### Simplex Lattice Design
+
+.pull-left[
+Consider combinations of integers $k_{p} \in \{0,1, \dots, m\}$ such that
+$\sum_{p = 1}^{P} k_{p} = m$. The SLD$(m)$ design places samples at,
+\begin{align*}
+\frac{1}{m}\left(k_{1}, \dots, k_{P}\right)
+\end{align*}
+The parameter $m$ controls the granularity of the sampling points.
+]
+
+.pull-right[
+```{r, fig.cap = "An SLD with m = 5." }
+library(mixexp)
+DesignPoints(SLD(3, 5))
+```
+]
+
 ---
 
 ### Simplex Centroid Design
+
+.pull-left[
+* Corners: Permutations of the vector $\left(1, 0, \dots, 0\right)$.
+* Edge midpoints: Add permutations of $\left(\frac{1}{2}, \frac{1}{2}, 0, \dots, 0\right)$.
+* Face centroids: Add permutations of $\left(\frac{1}{3}, \frac{1}{3}, \frac{1}{3}, 0, \dots, 0\right)$.
+* .. continue the pattern until meet sample size limit
+]
+	
+.pull-right[
+```{r, fig.cap = "An SCD with 5 sample points." }
+head(SCD(5))
+```
+]
 
 ---
 
 ### Fitting Surfaces
 
+.pull-left[
+Once we have samples along the simplex, we can use our earlier methods for
+estimating a response surface on it
+  * Can still fit polynomial or spline regression
+]
+
+.pull-right[
+```{r}
+library(readr)
+yarn <- read_csv("https://uwmadison.box.com/shared/static/jghwbsnn6qjpwdr1lc97p9mbxk8qkwif.csv")
+fit <- lm(elongation ~ -1 + (x1 + x2 + x3) ^ 2, data = yarn)
+ModelPlot(
+  fit, 
+  dimensions = list(x1 = "x1", x2 = "x2", x3 = "x3"), 
+  contour = TRUE
+)
+```
+]
+
 ---
+
+```{r}
+opts_chunk$set(echo = TRUE)
+```
 
 ### Code Implementation
 
 ---
 
+### Simplex Designs
+
+.pull-left[
+* We can use the `mixexp` package to find points along lattice and centroid
+designs
+* The `DesignPoints` function visualizes the resulting designs
+]
+
+.pull-right[
+```{r}
+library(mixexp)
+head(SLD(3, 3)) # first argument is # of factors
+head(SCD(3))
+```
+]
+
+---
+
+### Simplex Designs
+
+.pull-left[
+* We can use the `mixexp` package to find points along lattice and centroid
+designs
+* The `DesignPoints` function visualizes the resulting designs
+]
+
+.pull-right[
+```{r}
+library(mixexp)
+DesignPoints(SLD(3, 3))
+```
+]
+
+---
+
+### Simplex Designs
+
+.pull-left[
+* We can use the `mixexp` package to find points along lattice and centroid
+designs
+* The `DesignPoints` function visualizes the resulting designs
+]
+
+.pull-right[
+```{r}
+library(mixexp)
+DesignPoints(SCD(3))
+```
+]
+
+---
+
 ### Dataset
 
+In the yarn dataset, an experiment used a (3, 2) SLD to measure variation in
+yarn elongation as a function of the fractions of materials used to make the
+base fiber.
+
+```{r}
+library(readr)
+yarn <- read_csv("https://uwmadison.box.com/shared/static/jghwbsnn6qjpwdr1lc97p9mbxk8qkwif.csv")
+head(yarn)
+```
+
 ---
 
-###
+### Model Fitting
+
+* The code below fits a quadratic model with second order interactions over the
+simplex.
+* We omit the intercept term using `-1`
+  - An intercept column would introduce a collinearity (mixture columns sum to
+  1)
+
+```{r}
+fit <- lm(elongation ~ -1 + (x1 + x2 + x3) ^ 2, data = yarn)
+summary(fit)
+```
 
 ---
 
-###
+### Visualization
 
+.pull-left[
+* `ModelPlot` function shows the response surface over mixture components.
+* We can change the `dimensions` argument whenever there are more than 3 mixture
+components
+]
+
+.pull-right[
+```{r, echo = TRUE, fig.margin = FALSE, fig.width = 10}
+ModelPlot(
+  fit, 
+  dimensions = list(x1 = "x1", x2 = "x2", x3 = "x3"), 
+  contour = TRUE
+)
+```
+]
 
 ---
 
