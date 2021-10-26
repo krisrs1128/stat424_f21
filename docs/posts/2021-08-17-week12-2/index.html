@@ -2444,17 +2444,14 @@ Figure 3: Geometric representation of the eigendecomposition.
 
 <span class='va'>chem_coded</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/coded.data.html'>coded.data</a></span><span class='op'>(</span><span class='va'>chem</span>, <span class='va'>time_coded</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>time</span> <span class='op'>-</span> <span class='fl'>35</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>5</span>, <span class='va'>temp_coded</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>temp</span> <span class='op'>-</span> <span class='fl'>155</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>5</span><span class='op'>)</span>
 <span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/rsm.html'>rsm</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>SO</a></span><span class='op'>(</span><span class='va'>temp_coded</span>, <span class='va'>time_coded</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>chem_coded</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>Analysis of Variance Table
-
-Response: yield
-                            Df  Sum Sq Mean Sq  F value    Pr(&gt;F)    
-FO(temp_coded, time_coded)   2 10.0430  5.0215  70.8143 2.267e-05 ***
-TWI(temp_coded, time_coded)  1  0.2500  0.2500   3.5256    0.1025    
-PQ(temp_coded, time_coded)   2 17.9537  8.9769 126.5944 3.194e-06 ***
-Residuals                    7  0.4964  0.0709                       
+<pre><code>                            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+FO(temp_coded, time_coded)   2 10.043   5.021  70.814 2.27e-05 ***
+TWI(temp_coded, time_coded)  1  0.250   0.250   3.526    0.103    
+PQ(temp_coded, time_coded)   2 17.954   8.977 126.594 3.19e-06 ***
+Residuals                    7  0.496   0.071                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>

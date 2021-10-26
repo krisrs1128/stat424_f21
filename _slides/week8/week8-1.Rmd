@@ -59,8 +59,7 @@ include_graphics("https://uwmadison.box.com/shared/static/32pelq6o9jz7nnnavkdx1k
 ### Discussion Follow-up (II)
 
 There was a fair bit of confusion about interaction terms, the cube
-visualization of them, and whether there was any intuitive way to think about
-them.
+visualization of them, and their intuitive interpretation.
 
 Intuition: Interactions exist when there is a nonuniformity of effects
   - Ice cream / French Fries vs. Chocolate / Ketchup
@@ -71,22 +70,8 @@ Intuition: Interactions exist when there is a nonuniformity of effects
 
 ### Cube Plot
 
-* The cube plot was necessary because we can't visualize a surface in four
-dimensions.
-* We can understand it through analogy with the 2D case
-
-.pull-left-right[
-```{r}
-include_graphics("https://uwmadison.box.com/shared/static/gnoa5i4w5qp6ehbweh30n3a2v91qpi89.png")
-```
-]
-
----
-
-### Cube Plot
-
 .pull-left[
-* The cube plot was necessary because we can't visualize a surface in four
+* The cube plot was needed because we can't visualize a surface in four
 dimensions.
 * We can understand it through analogy with the 2D case
 ]
@@ -101,33 +86,25 @@ include_graphics("https://uwmadison.box.com/shared/static/gnoa5i4w5qp6ehbweh30n3
 
 ### Cube Plot
 
-.pull-left[
-* The cube plot was necessary because we can't visualize a surface in four
+* The cube plot was needed because we can't visualize a surface in four
 dimensions.
 * We can understand it through analogy with the 2D case
-]
 
-.pull-right[
-```{r}
+```{r, out.width = 900}
 include_graphics("sketches/no-interactions.png")
 ```
-]
 
 ---
 
 ### Cube Plot
 
-.pull-left[
-* The cube plot was necessary because we can't visualize a surface in four
+* The cube plot was needed because we can't visualize a surface in four
 dimensions.
 * We can understand it through analogy with the 2D case
-]
 
-.pull-right[
-```{r}
+```{r, out.width = 760}
 include_graphics("sketches/interactions-present.png")
 ```
-]
 
 ---
 
@@ -146,10 +123,23 @@ we will be more skeptical about their existence
 
 ---
 
+---
+
 ### Today
 
 * Book Sections: 6.1 - 6.2
 * Online Notes: Week 8 [1] and [2]
+
+---
+
+### Pre-Post Writing Exercise
+
+Take 2 minutes to write down everything you can think of related to $2^2$
+factorial designs.
+* If you started the reading, what do you understand?
+* If not, what would your best guess be for an example $2^2$ experiment?
+
+We will take 2 minutes before the code example to summarize your progress.
 
 ---
 
@@ -209,7 +199,7 @@ Simple formulas summarize the main and interaction effects in a $2^{2}$ design.
 > "What is the average change in the response when A is activated?"
 
 \begin{align}
-A &= \frac{1}{2n}\left(\left(ab +a\right) - \left(b + (1)\right)\right)
+A &= \frac{1}{2n}\left[\left(ab +a\right) - \left(b + (1)\right)\right]
 \end{align}
 ]
 
@@ -229,7 +219,7 @@ Simple formulas summarize the main and interaction effects in a $2^{2}$ design.
 > "Does the effect of A change depending on whether or not B is active?"
 
 \begin{align}
-AB &= \frac{1}{2n}\left[\left(ab - b\right) + \left(a - \left(1\right)\right)\right]
+AB &= \frac{1}{2n}\left[\left(ab - b\right) - \left(a - \left(1\right)\right)\right]
 \end{align}
 ]
 
@@ -292,13 +282,13 @@ All the formulas we've shown are consistent with the effect estimates of a
 regression model,
 
 \begin{align*}
-y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_{12} x_{1}x_{2} + \epsilon
 \end{align*}
 
-where the $x_k$’s take on one of two values.
+where the $x_k$’s take on one of two values, $-1$, or $1$.
 
-* This model only includes main effects
-* An interaction would require an extra $\beta_{12} x_{1}x_{2}$ term
+It will turn out that $2 \hat{\beta}_1$ is the effect estimate A, and similarly
+for B and AB.
 
 ---
 
@@ -307,7 +297,7 @@ where the $x_k$’s take on one of two values.
 .pull-left[
 * To use the regression approach, we need to _code_ the variables
 * Coding converts low and high levels to ${-1, 1}$.
-* This makes scales comparable and removes correlation between factors
+* This makes scales comparable and allows predictions at intermediate values
 ]
 
 .pull-right[
@@ -315,6 +305,27 @@ where the $x_k$’s take on one of two values.
 include_graphics("https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepards9fv0cqvbmc.png")
 ```
 ]
+
+---
+
+### When to use this?
+
+* Whenever there are two factors with two levels in each
+  - Especially useful when we care about interactions
+* Ensure no blocking is present
+  - Neither factor should be viewed as a nuisance variable
+  - There should be no systematic differences between groups of samples
+* It may be necessary to recognize that "low" and "high" values for a continuous
+factor can be coded into two levels
+
+---
+
+### Pre-Post Writing Exercise
+
+Take 2 minutes to write down everything you can think of related to $2^2$
+factorial designs.
+* What new definitions or notation did you learn?
+* What associations do you want to strengthen for this phrase?
 
 ---
 
@@ -356,7 +367,7 @@ ggplot(yield) +
 ### Interaction Plot
 
 Another useful command is `interaction.plot`, which shows the same kind of
-information, but in one line.
+information, but in one line of code.
 
 ```{r, fig.width = 6, fig.height = 3.8}
 interaction.plot(yield$A, yield$B, yield$Yield)
@@ -371,10 +382,10 @@ interaction.plot(yield$A, yield$B, yield$Yield)
 
 ```{r}
 library(dplyr)
-coded <- function(x) ifelse(x == '-', -1, 1)
+code <- function(x) ifelse(x == '-', -1, 1)
 yield <- yield %>%
-  mutate(cA = coded(A), cB = coded(B))
-fit <- lm(Yield ~ cA * cB, data = yield)
+  mutate_at(vars(A, B), code)
+fit <- lm(Yield ~ A * B, data = yield)
 summary(aov(fit))
 ```
 
@@ -385,7 +396,7 @@ summary(aov(fit))
 We could implement the formulas by hand, e.g., for the main effect of A,
 
 ```{r}
-mean(yield$Yield[yield$cA == 1]) - mean(yield$Yield[yield$cA == -1])
+mean(yield$Yield[yield$A == 1]) - mean(yield$Yield[yield$A == -1])
 ```
 Alternatively, we could use the coefficients of the fitted model.
 
@@ -405,7 +416,7 @@ down, using the `image` command from the `rsm` package.
 
 ```{r, fig.height = 3.5, fig.width = 3.5}
 library(rsm)
-image(fit, ~ cA + cB)
+image(fit, ~ A + B)
 ```
 
 
@@ -418,22 +429,29 @@ This walks through Exercise 6.14.
 An article describes the application of two-level factorial designs to circuit
 manufacturing. An experiment was run using two factors: arsenic flow rate (A)
 and deposition time (B). Four replicates were run, and the epitaxial layer
-thickness was measured. The data are [here](https://uwmadison.box.com/shared/static/0f3435o8no6zvvzyd0lvgbx1jzt72xcs.csv).
+thickness was measured. The data are at
+[https://tinyurl.com/562du4db](https://tinyurl.com/562du4db).
 
 * Estimate the factor effects
-* Conduct an analysis of variance. Which factors are important
+* Conduct an analysis of variance. Which factors are important?
 * Write down a regression equation that could be used to predict epitaxial layer
-thickness. You may use these [codings](https://uwmadison.box.com/shared/static/f78j6y6dnnxom41ge3e08n0m2wygswzq.csv).
+thickness. The codings are at
+[https://tinyurl.com/3tje3d7z](https://tinyurl.com/3tje3d7z).
 
 ---
 
 (1) Read the data in from the link provided.
+
 (2) Using `mutate_at`, code the `+` and `-` levels for each factor into -1, 1.
+
 (3) Fit the response `yield` onto both factors, A and B.
-(4) Double the fitted coefficients to estimate the factor effects.
+
+(4) Estimate the factor effects by using `2 * coef(name_of_your_model)`
+
 (5) Interpret the $p$-values given by `aov` to determine the important factors.
-(6) Use the estimated factor effects and the given codings to write an equation
-to predict the response at new flow rates and deposition times.
+
+(6) Challenge: Use the estimated factor effects and the given codings to write
+an equation to predict the response at new flow rates and deposition times.
 
 ---
 
@@ -442,10 +460,10 @@ to predict the response at new flow rates and deposition times.
 ```{r}
 library(readr)
 library(dplyr)
-coded <- function(x) ifelse(x == '-', -1, 1)
+code <- function(x) ifelse(x == '-', -1, 1)
 
-experiment <- read_csv("https://uwmadison.box.com/shared/static/0f3435o8no6zvvzyd0lvgbx1jzt72xcs.csv") %>%
-  mutate_at(vars(A, B), coded)
+experiment <- read_csv("https://tinyurl.com/562du4db") %>%
+  mutate_at(vars(A, B), code)
 ```
 
 ---
@@ -475,8 +493,8 @@ significant at $\alpha = 0.1$.
 First code the flow and time values,
 
 \begin{align*}
-\tilde{\text{flow}} &= 2\left[\frac{\text{flow} - 55}}{59 - 55}\right] - 1 \\
-\tilde{\text{time}} &= 2\left[\frac{\text{time} - 10}{15 - 5}}\right] - 1
+\widetilde{\text{flow}} &= 2\left[\frac{\text{flow} - 55}{59 - 55}\right] - 1 \\
+\widetilde{\text{time}} &= 2\left[\frac{\text{time} - 10}{15 - 5}\right] - 1
 \end{align*}
 
 (to convince yourself that the coding works, check that 55 maps to -1 and 59
@@ -489,5 +507,9 @@ maps to 1 in the first coding, for example).
 Then substitute the fitted coefficients,
 
 \begin{align*}
-\hat{y} &= 29.0405 -1.1975\tilde{\text{flow}} + 0.609\tilde{\text{time}} \left(\right) + 1.126\tilde{\text{flow}} \tilde{\text{time}}
+\hat{y} &= 29.0405 -1.1975\times \widetilde{\text{flow}} + 0.609 \times \widetilde{\text{time}} + 1.126 \times \widetilde{\text{flow}} \times \widetilde{\text{time}}.
 \end{align*}
+
+Therefore, to make a prediction the yield at any new flow and time value, we can
+code them using the transformations on the previous page and substitute into
+this formula.

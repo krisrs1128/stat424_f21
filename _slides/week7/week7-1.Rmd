@@ -215,7 +215,7 @@ H_{1} &: \beta_{j} \neq 0 \text{ for at least one } j
 (Hypothesis AB) Are there interaction effects?
 \begin{align}
 H_0&: \left(\tau\beta\right)_{ij}= \dots = \left(\tau\beta\right)_{ij} = 0 \\
-H_1&: \left(\tau\beta\right)_{ij} = 0 \text{ for at least one } ij \text{ combination}
+H_1&: \left(\tau\beta\right)_{ij} \neq 0 \text{ for at least one } ij \text{ combination}
 \end{align}
 
 ---

@@ -2293,6 +2293,14 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
+<ol type="1">
+<li><p>When we last discussed response surfaces (in Chapter 5), we showed how to fit a regression surface to a fixed set of runs. This let us find configurations of factors that optimized some response of interest.</p></li>
+<li><p>However, the real power of response surfaces emerges when we think sequentially, using the results from one fit to plan a series of follow-up experiments, each bringing us closer to an optimal configuration of factors.</p></li>
+</ol>
+<h3 id="first-and-second-order-models">First and Second-Order Models</h3>
+<ol start="3" type="1">
+<li>It makes sense to gradually refine our designs as we approach a potential optimal point. At the start of experimentation, even a few small runs are likely to point us in the right direction. Near the end, we’ll want to tune a good configuration of factors into an optimal one.</li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png" alt="In initial runs we will use first-order models. When we approach a potential optimum, we will switch to second-order models."  />
@@ -2301,13 +2309,7 @@ Figure 1: In initial runs we will use first-order models. When we approach a pot
 </p>
 </div>
 </div>
-<ol type="1">
-<li><p>When we last discussed response surfaces (in Chapter 5), we showed how to fit a regression surface to a fixed set of runs. This let us find configurations of factors that optimized some response of interest.</p></li>
-<li><p>However, the real power of response surfaces emerges when we think sequentially, using the results from one fit to plan a series of follow-up experiments, each bringing us closer to an optimal configuration of factors.</p></li>
-</ol>
-<h3 id="first-and-second-order-models">First and Second-Order Models</h3>
-<ol start="3" type="1">
-<li><p>It makes sense to gradually refine our designs as we approach a potential optimal point. At the start of experimentation, even a few small runs are likely to point us in the right direction. Near the end, we’ll want to tune a good configuration of factors into an optimal one.</p></li>
+<ol start="4" type="1">
 <li><p>One approach is to divide experimentation into two phases. We can start with first-order models, and then proceed to second-order when in the vicinity of the optimum.</p></li>
 <li><p>A first-order model is a linear model without any interactions or nonlinearities. It can be fit using relatively few samples; for example, unreplicated or fractional factorial designs. It is defined as, <span class="math display">\[\begin{align*}
 y_{i} &amp;= \beta_{0} + \sum_{k = 1}^{K}\beta_{k}x_{ik} + \epsilon_{i} \\
@@ -2330,7 +2332,7 @@ b = \begin{pmatrix}
 \end{align*}\]</span></p>
 <ol start="6" type="1">
 <li>A second-order model is a linear model with interactions and quadratic terms. These surfaces are more complex, so require more involved sampling, like replicated factorial or central composite designs. It is defined as, <span class="math display">\[\begin{align*}
-y_{i} &amp;= \beta_0 + \sum_{k = 1}^{K}\beta_{kk}x_{k}^{2} + \sum_{k &lt; k_{\prime}} \beta_{k k^{\prime}} x_{k}x_{k^{\prime}} + \epsilon_{i} \\
+y_{i} &amp;= \beta_0 + \sum_{k = 1}^{K}\beta_{kk}x_{ik}^{2} + \sum_{k &lt; k_{\prime}} \beta_{k k^{\prime}} x_{ik}x_{ik^{\prime}} + \epsilon_{i} \\
 &amp;= x_{i}^{T}b + x_{i}^{T} B x_i + \epsilon_{i}
 \end{align*}\]</span></li>
 </ol>
@@ -2444,17 +2446,14 @@ Corresponding increment in original units:
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fit_iq</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/rsm.html'>rsm</a></span><span class='op'>(</span><span class='va'>yield</span> <span class='op'>~</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>FO</a></span><span class='op'>(</span><span class='va'>time_coded</span>, <span class='va'>temp_coded</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>TWI</a></span><span class='op'>(</span><span class='va'>time_coded</span> , <span class='va'>temp_coded</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/pkg/rsm/man/FO.html'>PQ</a></span><span class='op'>(</span><span class='va'>time_coded</span>, <span class='va'>temp_coded</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>chem_coded</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/anova.html'>anova</a></span><span class='op'>(</span><span class='va'>fit_iq</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>fit_iq</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>Analysis of Variance Table
-
-Response: yield
-                            Df  Sum Sq Mean Sq F value   Pr(&gt;F)   
-FO(time_coded, temp_coded)   2 2.82500 1.41250 32.8488 0.003294 **
-TWI(time_coded, temp_coded)  1 0.00250 0.00250  0.0581 0.821316   
-PQ(time_coded, temp_coded)   1 0.00272 0.00272  0.0633 0.813741   
-Residuals                    4 0.17200 0.04300                    
+<pre><code>                            Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+FO(time_coded, temp_coded)   2 2.8250  1.4125  32.849 0.00329 **
+TWI(time_coded, temp_coded)  1 0.0025  0.0025   0.058 0.82132   
+PQ(time_coded, temp_coded)   1 0.0027  0.0027   0.063 0.81374   
+Residuals                    4 0.1720  0.0430                   
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
