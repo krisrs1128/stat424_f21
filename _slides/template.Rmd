@@ -16,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 6, fig.height = 3, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -40,10 +40,20 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 
 ---
 
+\begin{align}
+\operatorname{Pr}(X=x)=\prod_{i=1}^{N} \int_{\Delta_{K-1}} \prod_{j=1}^{J} \sum_{k=1}^{K} g_{k} \lambda_{j k}\left(x_{i j}\right) G(d g)
+\end{align}
+
+---
+
 ### Today
 
 * Book Sections: 3.9 & 3.11
 * Online Notes: Week 4 [2] and [3]
+
+```{r}
+hist(rnorm(1000))
+```
 
 ---
 

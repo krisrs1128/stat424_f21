@@ -13,10 +13,10 @@ output:
     seal: false  
 ---
 
-```{r setup, include=FALSE}
+```{r echo=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -31,11 +31,118 @@ theme_set(theme424)
 
 # $2^2$ Factorial Designs in Depth
 
-```{r, out.width = 200}
+```{r, out.width = 300}
+include_graphics("https://uwmadison.box.com/shared/static/32pelq6o9jz7nnnavkdx1kjuxfjkvzrc.png")
 ```
+
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison | 23 September 2021]
+.large[Kris Sankaran | UW Madison | 26 October 2021]
+
+---
+
+### Discussion Follow-up (I)
+
+* In the examples, why were we only using 2 levels per factor? 
+  - This is mainly for visual convenience (and to give a head start for the next sections)
+  - We will see that there is much more that can be said about the 2-level special case
+* Which method should we use when?
+  - The _motivation_ slide in past lectures should help
+  - We'll try including slides about this in future lectures
+* Where are we going, overall?
+  - $2^K$ designs, $2^K$ designs with very large $K$ (fractional factorials),
+  and advanced response surfaces
+  - We want richer machinery for working with many factors
+
+---
+
+### Discussion Follow-up (II)
+
+There was a fair bit of confusion about interaction terms, the cube
+visualization of them, and whether there was any intuitive way to think about
+them.
+
+Intuition: Interactions exist when there is a nonuniformity of effects
+  - Ice cream / French Fries vs. Chocolate / Ketchup
+  - Education level, political affiliation, and belief in climate change
+  - Drug given to patients with different stroke severity
+
+---
+
+### Cube Plot
+
+* The cube plot was necessary because we can't visualize a surface in four
+dimensions.
+* We can understand it through analogy with the 2D case
+
+.pull-left-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/gnoa5i4w5qp6ehbweh30n3a2v91qpi89.png")
+```
+]
+
+---
+
+### Cube Plot
+
+.pull-left[
+* The cube plot was necessary because we can't visualize a surface in four
+dimensions.
+* We can understand it through analogy with the 2D case
+]
+
+.pull-right[
+```{r}
+include_graphics("https://uwmadison.box.com/shared/static/gnoa5i4w5qp6ehbweh30n3a2v91qpi89.png")
+```
+]
+
+---
+
+### Cube Plot
+
+.pull-left[
+* The cube plot was necessary because we can't visualize a surface in four
+dimensions.
+* We can understand it through analogy with the 2D case
+]
+
+.pull-right[
+```{r}
+include_graphics("sketches/no-interactions.png")
+```
+]
+
+---
+
+### Cube Plot
+
+.pull-left[
+* The cube plot was necessary because we can't visualize a surface in four
+dimensions.
+* We can understand it through analogy with the 2D case
+]
+
+.pull-right[
+```{r}
+include_graphics("sketches/interactions-present.png")
+```
+]
+
+---
+
+### Higher-Order Interactions
+
+* For second-order interactions (e.g., ABC), we compute "correction factors" for
+the model that could use first-order interactions (e.g., AB, BC, and AC).
+* Example: Suppose there were an interaction between drug efficacy (A) and
+disease severity (B). The drug leads to more improvement among sicker people.
+  - If the interaction effect looks identical across two age groups (C), then
+  there is only a first-order interaction
+  - If the shape of the interactions changes across C, then there is an ABC
+  interaction
+* In the future, we *will* consider models with all high-order interactions, but
+we will be more skeptical about their existence
 
 ---
 
@@ -59,7 +166,7 @@ at only two values (high and low).
 
 .pull-right[
 General two factor vs. $2^{2}$ design.
-```{r}
+```{r, out.width = 220}
 include_graphics("https://uwmadison.box.com/shared/static/e6sprneaeamlav35csswq68t62p0xney.png")
 include_graphics("https://uwmadison.box.com/shared/static/jst0ib619vjw386gnl2hs8pee5rkkbx1.png")
 ```
@@ -98,11 +205,13 @@ responses at that corner, not just its index
 
 Simple formulas summarize the main and interaction effects in a $2^{2}$ design.
 
+.pull-left[
 > "What is the average change in the response when A is activated?"
 
 \begin{align}
 A &= \frac{1}{2n}\left(\left(ab +a\right) - \left(b + (1)\right)\right)
 \end{align}
+]
 
 .pull-right[
 ```{r}
@@ -116,15 +225,19 @@ include_graphics("https://uwmadison.box.com/shared/static/32pelq6o9jz7nnnavkdx1k
 
 Simple formulas summarize the main and interaction effects in a $2^{2}$ design.
 
+.pull-left[
 > "Does the effect of A change depending on whether or not B is active?"
 
 \begin{align}
 AB &= \frac{1}{2n}\left[\left(ab - b\right) + \left(a - \left(1\right)\right)\right]
 \end{align}
+]
 
+.pull-right[
 ```{r}
 include_graphics("https://uwmadison.box.com/shared/static/hvedijshgaw7so91kqcl1l8eunml4m9v.png")
 ```
+]
 
 ---
 
@@ -199,13 +312,18 @@ where the $x_k$’s take on one of two values.
 
 .pull-right[
 ```{r}
-display(readImage("https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepards9fv0cqvbmc.png"))
+include_graphics("https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepards9fv0cqvbmc.png")
 ```
 ]
 
 ---
 
-### Code Implementation
+# Code Implementation
+
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
 
 ---
 
@@ -217,7 +335,7 @@ three replicates at each corner of the square.
 ```{r}
 library(readr)
 yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzftg1azu2f7z77mk.txt")
-yield
+head(yield, 8)
 ```
 
 ---
@@ -235,43 +353,141 @@ ggplot(yield) +
 
 ---
 
+### Interaction Plot
+
+Another useful command is `interaction.plot`, which shows the same kind of
+information, but in one line.
+
+```{r, fig.width = 6, fig.height = 3.8}
+interaction.plot(yield$A, yield$B, yield$Yield)
+```
+
+---
+
 ### Coding
 
-.pull-left[
 * For testing, we can still use the `lm + aov` approach from before
 * First though, we code the low and high values as -1 and 1
-]
 
-.pull-right[
 ```{r}
+library(dplyr)
 coded <- function(x) ifelse(x == '-', -1, 1)
 yield <- yield %>%
   mutate(cA = coded(A), cB = coded(B))
 fit <- lm(Yield ~ cA * cB, data = yield)
 summary(aov(fit))
 ```
-]
-
-Q: How to interpret this fit? Is there an interaction effect?
 
 ---
 
 ### Effect Estimates
 
-* The ANOVA table doesn't describe in what way the response changes when the
-factors are turned on or off.
-* `Intercept` estimate gives the response when all the factors are turned off 
-* `cA` and `cB` estimates describe how the response changes when those factors
-are turned on
-* The interaction effect measures how the effect differs from the additive
-effect
+We could implement the formulas by hand, e.g., for the main effect of A,
 
 ```{r}
-summary(fit)
+mean(yield$Yield[yield$cA == 1]) - mean(yield$Yield[yield$cA == -1])
 ```
+Alternatively, we could use the coefficients of the fitted model.
+
+```{r}
+2 * coef(fit) # works for main and interaction effects
+```
+
+The fact that the effect estimates in $2^K$ designs are always `2 * coef(fit)`
+will be proved next week.
+
+---
+
+### Top-Down Visualization
+
+For a $2^2$ design, we can visualize the fitted regression surface from the top
+down, using the `image` command from the `rsm` package.
+
+```{r, fig.height = 3.5, fig.width = 3.5}
+library(rsm)
+image(fit, ~ cA + cB)
+```
+
 
 ---
 
 ### Exercise
 
+This walks through Exercise 6.14.
+
+An article describes the application of two-level factorial designs to circuit
+manufacturing. An experiment was run using two factors: arsenic flow rate (A)
+and deposition time (B). Four replicates were run, and the epitaxial layer
+thickness was measured. The data are [here](https://uwmadison.box.com/shared/static/0f3435o8no6zvvzyd0lvgbx1jzt72xcs.csv).
+
+* Estimate the factor effects
+* Conduct an analysis of variance. Which factors are important
+* Write down a regression equation that could be used to predict epitaxial layer
+thickness. You may use these [codings](https://uwmadison.box.com/shared/static/f78j6y6dnnxom41ge3e08n0m2wygswzq.csv).
+
 ---
+
+(1) Read the data in from the link provided.
+(2) Using `mutate_at`, code the `+` and `-` levels for each factor into -1, 1.
+(3) Fit the response `yield` onto both factors, A and B.
+(4) Double the fitted coefficients to estimate the factor effects.
+(5) Interpret the $p$-values given by `aov` to determine the important factors.
+(6) Use the estimated factor effects and the given codings to write an equation
+to predict the response at new flow rates and deposition times.
+
+---
+
+### Solution (1) and (2)
+
+```{r}
+library(readr)
+library(dplyr)
+coded <- function(x) ifelse(x == '-', -1, 1)
+
+experiment <- read_csv("https://uwmadison.box.com/shared/static/0f3435o8no6zvvzyd0lvgbx1jzt72xcs.csv") %>%
+  mutate_at(vars(A, B), coded)
+```
+
+---
+
+### Solution (3) and (4)
+
+```{r}
+fit <- lm(yield ~ A * B, experiment)
+2 * coef(fit)
+```
+
+---
+
+### Solution (5)
+
+```{r}
+summary(aov(fit))
+```
+
+None of the factors are significant at the $\alpha = 0.05$ level, though B is
+significant at $\alpha = 0.1$.
+
+---
+
+### Solution (6)
+
+First code the flow and time values,
+
+\begin{align*}
+\tilde{\text{flow}} &= 2\left[\frac{\text{flow} - 55}}{59 - 55}\right] - 1 \\
+\tilde{\text{time}} &= 2\left[\frac{\text{time} - 10}{15 - 5}}\right] - 1
+\end{align*}
+
+(to convince yourself that the coding works, check that 55 maps to -1 and 59
+maps to 1 in the first coding, for example).
+
+---
+
+### Solution (6)
+
+Then substitute the fitted coefficients,
+
+\begin{align*}
+\hat{y} &= 29.0405 -1.1975\tilde{\text{flow}} + 0.609\tilde{\text{time}} \left(\right) + 1.126\tilde{\text{flow}} \tilde{\text{time}}
+\end{align*}
