@@ -78,7 +78,7 @@ formulas for estimating main and interaction effects.
     * The interaction effect measures the degree to which the effect of A changes
     depending on whether or not B is active. It is defined as
     \begin{align}
-    AB &= \frac{1}{2n}\left[\left(ab - b\right) + \left(a - \left(1\right)\right)\right]
+    AB &= \frac{1}{2n}\left[\left(ab - b\right) - \left(a - \left(1\right)\right)\right]
     \end{align}
     Notice that the role of A and B is symmetric — we could read the interaction
     as how the effect of B changes depending on whether A is active.
@@ -87,7 +87,6 @@ formulas for estimating main and interaction effects.
 display(readImage("https://uwmadison.box.com/shared/static/32pelq6o9jz7nnnavkdx1kjuxfjkvzrc.png"))
 display(readImage("https://uwmadison.box.com/shared/static/hvedijshgaw7so91kqcl1l8eunml4m9v.png"))
 ```
-
   
 6. All these effect estimates can be summarized by our tabular notation,
 
@@ -112,7 +111,7 @@ yield <- read_table2("https://uwmadison.box.com/shared/static/bfwd6us8xsii4uelzf
 8. We can either use `facet_wrap` in `ggplot` to split a plot of the data into
 separate panels or use the base R `interaction.plot` function. Both plots show
 how the effect of factor A varies as the value of factor B changes. In this
-case, the effect of factor A is slightly smaller (lower slope) when factor B is
+case, the effect of factor A is slightly smaller (lower slope) when factor B isB
 inactive. In the next lecture though, we'll see that this difference is not
 significant (it could very well happen by change under the model with no
 interaction term).

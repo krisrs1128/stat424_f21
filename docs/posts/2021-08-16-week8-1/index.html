@@ -2348,7 +2348,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
  A &amp;= \frac{1}{2n}\left(\left(ab +a\right) - \left(b + (1)\right)\right)
  \end{align}\]</span> which is the average of the responses on the edge where A is active minus the average when A is inactive. The definition for B is analogous.</li>
 <li>The interaction effect measures the degree to which the effect of A changes depending on whether or not B is active. It is defined as <span class="math display">\[\begin{align}
- AB &amp;= \frac{1}{2n}\left[\left(ab - b\right) + \left(a - \left(1\right)\right)\right]
+ AB &amp;= \frac{1}{2n}\left[\left(ab - b\right) - \left(a - \left(1\right)\right)\right]
  \end{align}\]</span> Notice that the role of A and B is symmetric — we could read the interaction as how the effect of B changes depending on whether A is active.</li>
 </ul></li>
 </ol>
@@ -2407,7 +2407,7 @@ d-article ul > li { /*to add back in space between bullet items that I took away
 </div>
 </div>
 <ol start="8" type="1">
-<li>We can either use <code>facet_wrap</code> in <code>ggplot</code> to split a plot of the data into separate panels or use the base R <code>interaction.plot</code> function. Both plots show how the effect of factor A varies as the value of factor B changes. In this case, the effect of factor A is slightly smaller (lower slope) when factor B is inactive. In the next lecture though, we’ll see that this difference is not significant (it could very well happen by change under the model with no interaction term).</li>
+<li>We can either use <code>facet_wrap</code> in <code>ggplot</code> to split a plot of the data into separate panels or use the base R <code>interaction.plot</code> function. Both plots show how the effect of factor A varies as the value of factor B changes. In this case, the effect of factor A is slightly smaller (lower slope) when factor B isB inactive. In the next lecture though, we’ll see that this difference is not significant (it could very well happen by change under the model with no interaction term).</li>
 </ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
