@@ -3,10 +3,9 @@ title: "$2^3$ Designs (and beyond)"
 author: "Kris Sankaran | UW Madison | 23 September 2021"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -17,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -32,8 +31,8 @@ theme_set(theme424)
 
 # $2^3$ Designs (and beyond)
 
-```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```{r, out.width = 250}
+include_graphics("https://uwmadison.box.com/shared/static/wwsniua1ce0q376oy2ffrtzf4ivzup99.png")
 ```
 ### Statistical Experimental Design
 
@@ -51,7 +50,7 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 ### Motivation
 
 * We motivated $2^{K}$ designs by discussing their value for screening across a large number of factors $K$
-* But we've only studied $K = 2$!
+* But we've only studied $K = 2$ ....
 * We will generalize those concepts to $K \geq 3$, so that we can actually run a screening experiment
 
 ---
@@ -60,8 +59,10 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 
 .pull-left[
 For the $2^3$ design, we have 8 factor configurations
-	* Visualize as corners of a cube
-	* Call the third factor $C$.
+
+* Visualize as corners of a cube
+
+* Call the third factor $C$.
 ]
 
 .pull-right[
@@ -76,8 +77,11 @@ include_graphics("https://uwmadison.box.com/shared/static/l4qdpymt13focsszf5krxw
 
 .pull-left[
 For the $2^3$ design, we have 8 factor configurations
-	* Visualize as corners of a cube
-	* Call the third factor $C$.
+
+* Visualize as corners of a cube
+
+* Call the third factor $C$.
+
 ]
 
 .pull-right[
@@ -100,8 +104,8 @@ For the $2^3$ design, we have 8 factor configurations
 .pull-left[
 * The main effect estimates can be made by subtracting the + from the - corners.
 * Equivalently, this can be viewed as the difference in averages,
- 	* when the factor is on vs. off
-	* between one face of the cube and its opposite
+ 	* When the factor is on vs. off
+	* Between one face of the cube and its opposite
 ]
 
 .pull-right[
@@ -125,7 +129,7 @@ For the $2^3$ design, we have 8 factor configurations
 For example, to estimate the main effect for $A$, we would compute
 
 \begin{align*}
-A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]
+A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) -\\ \left(\left(1\right) + b + c + bc\right)\right]
 \end{align*}
 ]
 
@@ -143,7 +147,7 @@ include_graphics("https://uwmadison.box.com/shared/static/wwsniua1ce0q376oy2ffrt
 For example, to estimate the main effect for $A$, we would compute
 
 \begin{align*}
-A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]
+A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) -\\ \left(\left(1\right) + b + c + bc\right)\right]
 \end{align*}
 ]
 
@@ -198,7 +202,7 @@ we condition on the value of another variable.
 
 .pull-right[
 \begin{align}
-AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
+AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - \\ ac + c - a + \left(1\right)\right]
 \end{align}
 ]
 
@@ -206,10 +210,15 @@ AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
 
 ### Notational Trick
 
+.pull-left[
 * Notice that these contrasts can be formed by multiplying the appropriate columns
 * This works in general, even with for higher-order interactions when $K > 3$
+\begin{align}
+AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - \\ ac + c - a + \left(1\right)\right]
+\end{align}
+]
 
-.pull-left[
+.pull-right[
   | A | B | C | AB | label |
   | --- | --- | --- | --- | ------| 
   | - | - | - | + | (1) |
@@ -220,12 +229,6 @@ AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
   | + | - | + | - | ac |
   | - | + | + | - |  bc |
   | + | + | + | + | abc |
-]
-
-.pull-right[
-\begin{align}
-AB = \frac{1}{2^2 n}\left[abc - bc + ab - b - ac + c - a + \left(1\right)\right]
-\end{align}
 ]
 
 Q: What is the contrast for BC?
@@ -247,23 +250,19 @@ Q: What is the contrast for BC?
 
 ### Regression View
 
-.pull-left[
 There is an equivalent regression view,
 
 \begin{align}
-y_{i} = \beta_0 + \sum_{k \in \{A, B, C\}} \beta_k x_{ik} + \sum_{\text{pairs } k, k^\prime \in \{A, B, C\}} \beta_{k k^\prime} x_{ik}x_{ik^{\prime}} + \beta_{ABC}x_{ABC} \epsilon_{i}
+y_{i} = \beta_0 + \sum_{k \in \{A, B, C\}} \beta_k x_{ik} + \sum_{\text{pairs } k, k^\prime \in \{A, B, C\}} \beta_{k k^\prime} x_{ik}x_{ik^{\prime}} + \beta_{ABC}x_{iA}x_{iB}x_{iC}+ \epsilon_{i}
 \end{align}
 
 where each of the $x_{ik} \in \{-1, 1\}$.
-]
 
-.pull-right[
 * We can encode whether or not A is active using $x_{iA}$ 
 * The associated A effect is the $\beta_{A}$ for this term
 * We can encode an interaction between A and B by $x_{iA}x_{iB}$
 * The associated AB effect is the $\beta_{AB}$ for this product term
 * ...
-]
 
 ---
 
@@ -271,8 +270,8 @@ where each of the $x_{ik} \in \{-1, 1\}$.
 
 .pull-left[
 * This view generalizes immediately to $K > 3$
-* In general, $\text{Effect}_{k} = 2\hat{\beta}$. See the code example below and the discussion in Week 10.
-  - Similarly, $\text{s.e.}\left(Effect\right) = 2\text{s.e.}\left(\hat{\beta}\right)$
+* In general, $\text{Effect}_{k} = 2\hat{\beta}_k$. See the code example below and the discussion in Week 10.
+  - Similarly, $\text{s.e.}\left(\text{Effect}_k\right) = 2\text{s.e.}\left(\hat{\beta}_k\right)$
 ]
 
 .pull-right[
@@ -283,7 +282,25 @@ include_graphics("https://uwmadison.box.com/shared/static/8euuywv5ay4x7przznhsxd
 
 ---
 
-### Code Implementation
+### When to use this?
+
+* Imagine that there are $K$ factors of interest
+* The sampling budget has to lie between two extremes...
+* Not so large that it's possible to sample $ \geq 3$ levels for each factor 
+  - In this case, use a general factorial design
+* Not so small that sampling every corner of the cube is impossible 
+  - In this case, use a $2^{K - p}$ design (future lecture)
+* Can't use this to disentangle complex, nonlinear relationships, but often good
+enough for screening
+
+---
+
+# Code Implementation
+
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
 
 ---
 
@@ -299,11 +316,11 @@ combination of factors has two replicates.
 ```{r}
 library(readr)
 library(dplyr)
-coded <- function(x) ifelse(x == '-', -1, 1)
+code <- function(x) ifelse(x == '-', -1, 1)
 plasma <- read.table("https://uwmadison.box.com/shared/static/f3sggiltyl5ycw1gu1vq7uv7omp4pjdg.txt", header = TRUE) %>%
-  mutate_at(vars(A:C), coded)
+  mutate_at(vars(A:C), code)
 
-head(plasma, 4)
+head(plasma)
 ```
 ]
 
@@ -311,14 +328,11 @@ head(plasma, 4)
 
 ### Hand Calculation - Effects
 
-.pull-left[
 We can plug into the formula
 \begin{align*}
 A = \frac{1}{2^2 n}\left[\left(a + ab + ac + abc\right) - \left(\left(1\right) + b + c + bc\right)\right]
 \end{align*}
-]
 
-.pull-right[
 ```{r}
 K <- 3 # three factors
 n <- 2 # two replicates per corner
@@ -327,7 +341,6 @@ a_negative <- plasma$Rate[plasma$A == -1]
 a_effect <- mean(a_positive - a_negative)
 a_effect
 ```
-]
 
 ---
 
@@ -340,6 +353,7 @@ We can plug into the formula,
 using the estimate $\hat{\sigma}^2 \approx MS_{E}$.
 
 ```{r}
+library(broom)
 fit <- lm(Rate ~ A * B * C, plasma)
 aov_table <- aov(fit)
 s2 <- last(tidy(aov_table)$meansq) # MS["residual"]
@@ -352,7 +366,7 @@ sqrt(var_effect)
 
 ### Computer Calculation
 
-* The coefficients in the `lm` fit are always exactly half the true effect estimate
+* The effect estimates are always double the coefficients in the `lm` fit
 * Therefore, in practice, we never have to compute effects by hand.
 
 ```{r}
@@ -376,38 +390,41 @@ This exercise walks through 6.11.
 .pull-left[
 An experiment was performed to improve the yield of a chemical process. Four
 factors were selected, and two replicates of a completely randomized experiment
-were run. The results are available [here](https://uwmadison.box.com/shared/static/8eh4ezyudsefc5i9o83uolr7xdkeang4.csv).
+were run. The results are available at this link: [https://tinyurl.com/9fpcpzm3](https://tinyurl.com/9fpcpzm3)
 ]
 
 .pull-right[
 ```{r}
 library(readr)
-chemicals <- read_csv("https://uwmadison.box.com/shared/static/8eh4ezyudsefc5i9o83uolr7xdkeang4.csv")
+chemicals <- read_csv("https://tinyurl.com/9fpcpzm3")
 head(chemicals)
 ```
 ]
 
 ---
 
-(1) Code the raw data into $\pm 1$'s, mirroring the`mutate` step in the code
+(1) Code the raw data into $\pm 1$'s, mirroring the `mutate` step in the code
 example.
+
 (2) Estimate the factors effects, using `coef` applied to an `lm` fit.
+
 (3) Prepare an ANOVA table and determine important factors, using `aov` applied to an `lm` fit.
+
 (4) Create and interpret a QQ plot of the residuals, using `qqnorm` and `qqline`.
 
 ---
 
 ### Solution (1)
 
-We can use the same function, `coded`, for converting each column to $\pm 1$'s.
+We can use the same function, `code`, for converting each column to $\pm 1$'s.
 Notice that we sweep through columns A - D, not just A - C like in the example
 above.
 
 ```{r}
 library(dplyr)
-coded <- function(x) ifelse(x == '-', -1, 1)
+code <- function(x) ifelse(x == '-', -1, 1)
 chemicals <- chemicals %>%
-  mutate_at(vars(A:D), coded)
+  mutate_at(vars(A:D), code)
 ```
 
 ---
@@ -415,7 +432,12 @@ chemicals <- chemicals %>%
 ### Solution (2)
 
 The effect estimates are always twice the fitted coefficients from the full
-model.
+model. E.g., on average, whenever A is active, the yield decreases by about 9
+units.
+
+```{r, echo = FALSE}
+options(width=100)
+```
 
 ```{r}
 fit <- lm(Output ~ A * B * C * D, chemicals)
@@ -431,6 +453,7 @@ fit <- lm(Output ~ A * B * C * D, chemicals)
 * Two and three-order interaction effects including A and B seem to be
 significant
 
+
 ```{r}
 summary(aov(fit))
 ```
@@ -439,11 +462,11 @@ summary(aov(fit))
 
 ### Solution (4)
 
-The discretization in the residuals is somewhat troubling. However, with 32
-samples total, our conclusions still likely hold approximately, since the
-central limit theorem should be starting to apply.
+The discretization in the residuals is somewhat troubling. The strong effects
+are probably trustworthy, but more marginal significance should be viewed
+skeptically.
 
-```{r, fig.width = 8, fig.height = 4}
+```{r, fig.width = 6, fig.height = 2.8}
 qqnorm(resid(fit))
 qqline(resid(fit), col = "red")
 ```

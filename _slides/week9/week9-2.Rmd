@@ -3,10 +3,9 @@ title: "$2^K$ Design Case Studies"
 author: "Kris Sankaran | UW Madison | 23 September 2021"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/xaringan-themer.css", "cols.css"]
+    css: ["default", "css/xaringan-themer.css"]
     lib_dir: libs
     nature:
-      beforeInit: "cols_macro.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -32,11 +31,12 @@ theme_set(theme424)
 
 # $2^K$ Design Case Studies
 
-```{r, out.width = 200}
+```{r, out.width = 300, fig.height = 4, fig.width = 4, echo = FALSE}
+include_graphics("slides-cover.png")
 ```
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison]
+.large[Kris Sankaran | UW Madison | November 4, 2021]
 
 ---
 
@@ -76,6 +76,18 @@ head(drill, 4)
 
 ---
 
+### Discussion - Guess and confirm.
+
+Before working through each of the examples, we'll try a "guess and confirm
+exercise."
+
+With a partner, prepare a 3 - 4 bullet point list of what you think I will share
+when presenting this example.
+  - What concepts will be used?
+  - What code do you think you would use?
+
+---
+
 ### Daniel Plot
 
 .pull-left[
@@ -93,7 +105,7 @@ daniel_plot <- function(effects, probs = c(0.3, 0.7)) {
 ```
 
 .pull-right[
-```{r, fig.height = 5, fig.width = 5}
+```{r, fig.height = 4, fig.width = 5, out.width = 400}
 fit <- lm(rate ~ A * B * C * D, drill)
 effects <- 2 * coef(fit)[-1]
 daniel_plot(effects, c(0.35, 0.65)) # same code from last lecture
@@ -104,7 +116,7 @@ daniel_plot(effects, c(0.35, 0.65)) # same code from last lecture
 
 ### Fitted Submodel
 
-* We fit the submodel without A: `rate ~ B * C * D`.
+* We fit the submodel without A, `rate ~ B * C * D`.
 * We use `resid` and `predict` to get residual and predicted values from the
 submodel
 
@@ -112,6 +124,7 @@ submodel
 fit <- lm(rate ~ B * C * D, drill) # removed A from the model
 drill_resid <- drill %>%
   mutate(residual = resid(fit), y_hat = predict(fit))
+head(drill_resid, 4)
 ```
 
 ---
@@ -138,7 +151,7 @@ ggplot(drill_resid) +
 ]
 
 .pull-right[
-```{r, fig.height = 5, fig.width = 5}
+```{r, fig.height = 4, fig.width = 5, out.width = 400}
 fit <- lm(log(rate) ~ A * B * C * D, data = drill)
 daniel_plot(2 * coef(fit)[-1])
 ```
@@ -172,13 +185,22 @@ summary(aov(fit))
 ]
 
 .pull-right[
-```{r, fig.height = 2.5}
+```{r, fig.height = 2.6, fig.width = 5}
 ggplot(drill) +
   geom_point(aes(B, log(rate), col = as.factor(D))) +
   scale_color_brewer(palette = "Set2") +
   facet_wrap(~ C)
 ```
 ]
+
+---
+
+### Discussion - Guess and confirm.
+
+With your partner, review your bullet list.
+
+* Which items did you correctly guess?
+* Were there concepts covered that you had not anticipated?
 
 ---
 
@@ -195,7 +217,20 @@ How do temperature (A), clamp time (B), resin flow (C), and press closing time
 code <- function(x) ifelse(x == '-', -1, 1)
 windows <- read_csv("https://uwmadison.box.com/shared/static/62phufkeprheu9gu35mu1e75x6rc2shv.csv") %>%
   mutate_at(vars(A:D), code)
+head(windows)
 ```
+
+---
+
+### Discussion - Guess and confirm.
+
+Before working through each of the examples, we'll try a "guess and confirm
+exercise."
+
+With a partner, prepare a 3 - 4 bullet point list of what you think I will share
+when presenting this example.
+  - What concepts will be used?
+  - What code do you think you would use?
 
 ---
 
@@ -208,7 +243,7 @@ We make a Daniel plot from the full data. The story seems simple,
 ]
 
 .pull-right[
-```{r, fig.height = 5, fig.width = 5}
+```{r, fig.height = 4, fig.width = 5, out.width = 400}
 fit <- lm(defects ~ A * B * C * D, data = windows)
 daniel_plot(2 * coef(fit)[-1])
 ```
@@ -235,7 +270,7 @@ on, $C = 1$, will minimize the defect rate.
 ]
 
 .pull-right[
-```{r}
+```{r, out.width = 340, fig.width = 5, fig.height = 2.8}
 coef(fit)
 ggplot(windows) +
   geom_point(aes(A, defects, col = as.factor(C))) +
@@ -270,6 +305,15 @@ rather than just average response.
 
 ---
 
+### Discussion - Guess and confirm.
+
+With your partner, review your bullet list.
+
+* Which items did you correctly guess?
+* Were there concepts covered that you had not anticipated?
+
+---
+
 # Example 6.5
 
 ---
@@ -286,6 +330,18 @@ oxide <- read_csv("https://uwmadison.box.com/shared/static/vyk6uoe3zbnonv4n6jcus
   pivot_longer(starts_with("wafer"), names_to = "variable")
 head(oxide, 4)
 ```
+
+---
+
+### Discussion - Guess and confirm.
+
+Before working through each of the examples, we'll try a "guess and confirm
+exercise."
+
+With a partner, prepare a 3 - 4 bullet point list of what you think I will share
+when presenting this example.
+  - What concepts will be used?
+  - What code do you think you would use?
 
 ---
 
@@ -312,7 +368,7 @@ A, B, C, and the interactions AB and AC are likely nonnull.
 ]
 
 .pull-right[
-```{r, fig.width = 5, fig.height = 5}
+```{r, fig.height = 4, fig.width = 5, out.width = 400}
 fit <- lm(mean ~ A * B * C * D, data = oxide_collapse)
 daniel_plot(2 * coef(fit)[-1])
 ```
@@ -371,7 +427,7 @@ ggplot(oxide_collapse) +
 * This can be read like a topographic map -- darker colors are higher
 * Here, the interaction appears as curvature
 
-```{r}
+```{r, out.width = 300}
 library(rsm)
 fit <- lm(mean ~ A * (B + C), oxide_collapse)
 image(fit, ~ A + B + C)
@@ -386,7 +442,16 @@ combination. We can instead model the variances.
 
 The choice `~ A + B * D` came from looking at the Daniel plot.
 
-```{r}
+```{r, out.width = 300}
 fit <- lm(var ~ A + B * D, data = oxide_collapse)
 image(fit, ~ A + B + D)
 ```
+
+---
+
+### Discussion - Guess and confirm.
+
+With your partner, review your bullet list.
+
+* Which items did you correctly guess?
+* Were there concepts covered that you had not anticipated?

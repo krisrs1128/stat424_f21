@@ -49,7 +49,7 @@ summary(aov(fit))
 ```
 
 2. Consider the regression view of this situation. The full model would be
-$$y_{i} = \beta_0 + \sum_{k = 1}^{3} \beta_k x_{ik} + \sum_{\text{pairs } k, k^\prime} \beta_{k k^\prime} x_{ik}x_{ik^{\prime}} + \epsilon_{i}$$
+$$y_{i} = \beta_0 + \sum_{k = 1}^{3} \beta_k x_{ik} + \sum_{\text{pairs } k, k^\prime} \beta_{k k^\prime} x_{ik}x_{ik^{\prime}} + \beta_{ABC}x_{iA}x_{iB}x_{iC} + \epsilon_{i}$$
 though we will often be interested in whether a submodel (which discards some of
 the main or interaction effects) can do as well.
 	

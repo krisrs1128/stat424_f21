@@ -29,7 +29,7 @@ theme424 <- theme_minimal() +
 theme_set(theme424)
 ```
 
-# Unreplicated $2^K$ Design
+# Unreplicated $2^K$ Designs
 
 ```{r, out.width = 400, fig.align = "left"}
 include_graphics("https://uwmadison.box.com/shared/static/rfdz734pv6rxolgwz5fx215qb41qm0k6.png")
@@ -37,7 +37,17 @@ include_graphics("https://uwmadison.box.com/shared/static/rfdz734pv6rxolgwz5fx21
 
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison ]
+.large[Kris Sankaran | UW Madison | November 2, 2021]
+
+---
+
+### Announcements
+* Project Milestone 2 peer reviews due Sunday 
+ - I'm sorry for forgetting this in mention the weekly announcement
+
+```{r, echo = FALSE}
+include_graphics("https://imgs.xkcd.com/comics/slope_hypothesis_testing.png")
+```
 
 ---
 
@@ -55,7 +65,7 @@ include_graphics("https://uwmadison.box.com/shared/static/rfdz734pv6rxolgwz5fx21
 * This is surprisingly common
   - From $n = 1$ to $n = 2$ can double the cost of an experiment
   - When $K$ is large, even getting $n = 1$ can be expensive
-* This seems like an impossible problem
+* Without replicates, estimating $\sigma^2$ is impossible
   - However, there is a way forward
   - The price in terms of new assumptions is relatively small
 
@@ -63,8 +73,9 @@ include_graphics("https://uwmadison.box.com/shared/static/rfdz734pv6rxolgwz5fx21
 
 ### Types of Errors
 
-Replicates had been useful because they help gauge measurement noise. Without
-them, we have to be very careful to avoid two types of errors,
+Replicates had been useful because they help gauge the measurement noise
+$\sigma^2$. Without them, we have to be very careful to avoid two types of
+errors,
   * Missing true effects (False Negatives)
   * Spurious effects (False Positives)
 
@@ -205,8 +216,6 @@ LenthPlot(fit_coded, cex.fac = 0.8)
 
 # Code Implementation
 
-Take out your laptops!
-
 ```{r}
 opts_chunk$set(echo = TRUE)
 ```
@@ -223,15 +232,35 @@ more quantitative approach.
 ]
 
 .pull-right[
-```{r}
+```{r, fig.width = 5, fig.height = 2.5}
 library(readr)
 library(dplyr)
 library(ggplot2)
 
-filtration <- read_table2("https://uwmadison.box.com/shared/static/xxh05ngikmscnddbhg2l3v268jnu4jtc.txt")
+code <- function(x) ifelse(x == '-', -1, 1)
+filtration <- read_table2("https://uwmadison.box.com/shared/static/xxh05ngikmscnddbhg2l3v268jnu4jtc.txt") %>%
+  mutate_at(vars(A:D), code)
 
+head(filtration)
+```
+]
+
+---
+
+### Filtration Dataset
+
+.pull-left[
+The filtration dataset asks how temperature (A), pressure (B), formaldehyde (C),
+and stirring rate (D) affect the filtration rate of the resulting product. We
+can plot all 4 factors against one another, but it's very confusion -- we need a
+more quantitative approach.
+]
+
+
+.pull-right[
+```{r, fig.width = 5, fig.height = 3}
 ggplot(filtration) +
-  geom_point(aes(B, Rate, col = D)) +
+  geom_point(aes(B, Rate, col = as.factor(D))) +
   scale_color_brewer(palette = "Set2") +
   facet_grid(A ~ C)
 ```
@@ -241,14 +270,18 @@ ggplot(filtration) +
 
 ### Fitting the Full Model
 
+.pull-left[
 * The full model can be used to get raw effect estimates
 * However, the fact that $MS_{E} = 0$ means that we can't get any test statistics / $p$-values
+]
 
+.pull-right[
 ```{r}
 fit <- lm(Rate ~ A * B * C * D, filtration)
 effects <- 2 * coef(fit)[-1] # ignore global mean
 summary(aov(fit)) # no p-values!
 ```
+]
 
 ---
 
@@ -273,7 +306,7 @@ daniel_plot <- function(effects, p = c(0.3, 0.7)) {
 ### Daniel Plot
 
 .pull-left[
-* All the effects along the red line is likely due to chance variation
+* All the effects along the red line are likely chance variation
 * The A, C, and D main effects seem likely to be real
 * The AC and AD interactions are also probably real
 ]
@@ -296,7 +329,7 @@ daniel_plot(effects)
 ]
 
 .pull-right[
-```{r, fig.width = 6, fig.height = 6, results = "hide"}
+```{r, fig.width = 5, fig.height = 4, results = "hide"}
 library(BsMD)
 LenthPlot(fit_coded, cex.fac = 0.8) # cex.fac controls label size
 ```
@@ -309,6 +342,10 @@ LenthPlot(fit_coded, cex.fac = 0.8) # cex.fac controls label size
 * We want to include terms A, C, D, AC, and AD
 * A formula that captures this is `A + C + D + A : C + A : D`
 * An equivalent, more concise notation is `A * (C + D)`
+
+```{r, echo = FALSE}
+options(width = 300)
+```
 
 ```{r}
 fit <- lm(Rate ~ A * (C + D), filtration_coded)
@@ -328,9 +365,9 @@ the raw data.
 ]
 
 .pull-right[
-```{r}
+```{r, fig.width = 5, fig.height = 3}
 ggplot(filtration) +
-  geom_point(aes(A, Rate, col = D)) +
+  geom_point(aes(A, Rate, col = as.factor(D))) +
   scale_color_brewer(palette = "Set2") +
   facet_grid(B ~ C)
 ```
@@ -338,4 +375,172 @@ ggplot(filtration) +
 
 ---
 
+### Discussion
+
+With a partner, respond to the following questions on piazza ([Week 9 - Discussion 1](https://piazza.com/class/ksf28gqo39x382?cid=69)),
+
+> What is a concept from this lecture that you think is important, but which you don't feel you fully understand yet? What specific point seems the "muddiest"?
+>
+> Share your answer below. You are also welcome to share replies to other questions or to upvote questions you also have.
+
+I will review this during the exercise and share responses at the end of class.
+
+
+---
+
 ### Exercise
+
+This exercise walks through problem 6.26.
+
+In a process development study on yield, four factors were studied, each at two
+levels: time (A), concentration (B), pressure (C), and temperature (D). A single
+replicate of a $2 ^ 4$ design was run, and the resulting data are available
+at [https://tinyurl.com/37uep73r](https://tinyurl.com/37uep73r).
+
+```{r}
+library(readr)
+experiment <- read_csv("https://tinyurl.com/37uep73r") %>%
+  mutate_at(vars(A:D), code)
+head(experiment, 4) 
+```
+
+---
+
+(1) Fit the full model with all interaction terms, using the formula `Yield ~ A * B * C * D`.
+
+(2) Using the `daniel_plot` function provided above, construct a QQ plot of the
+effect estimates. Which factors have large effects?
+
+(3) Fit a submodel based on an interprtation of (2). What are your conclusions?
+
+(4) Write down a regression model relating yield to the important process
+variables. (codebook at https://tinyurl.com/4tt22eny).
+
+(5) Can this design be collapsed into a $2^3$ design with two replicates? If so,
+sketch the design with the average and range of yield at each point in the cube.
+
+---
+
+It looks like A, C, D, AD, and AC have large effects.
+
+```{r, fig.height = 4, fig.width = 4}
+fit <- lm(Yield ~ A * B * C * D, experiment)
+daniel_plot(coef(fit)[-1])
+```
+
+---
+
+All the estimated coefficients seem significant at the 0.05 level. The A and D
+effects are very significant, while the C effect is only marginally significant.
+
+```{r}
+fit <- lm(Yield ~ A + C + D + A : C + A : D, experiment)
+summary(aov(fit))
+```
+
+---
+
+The coefficients in terms of the coded variables are,
+
+```{r}
+coef(fit)
+```
+
+In terms of the coded variables, the equation has the form,
+
+\begin{align*}
+\text{Yield} = 17.375 + 2.25 \text{time} +  \text{pressure} + \\ 
+1.625 \text{temperature} - 2.125 \text{time} \times \text{pressure} + 2 \text{time} \times \text{temperature}
+\end{align*}
+
+but the formula we want should work on the raw values (not the values converted
+to $\left[-1, 1\right]$).
+
+---
+
+To get an equation that works on the raw values, we have to reverse the coding.
+Looking at the [codings table](https://tinyurl.com/4tt22eny), we should be able
+to use the functions like the ones below to make the transformation from
+$\left[-1, 1\right]$ coded units to the raw space.
+
+```{r, echo = FALSE}
+include_graphics("transformation.png")
+```
+
+
+For example, we know that the low value for time (2.5) should map to $-1$, while
+the high value (3) should map to $1$.
+
+---
+
+Then, we substitute these transformed values into the original  equation.
+
+\begin{align}
+\text{Yield} &= 17.375 + 2.25 \left(4\times \text{time} - 11\right) +  \left(0.1 \times \text{pressure} - 7\right) + \\ 
+&1.625 \left(0.08 \times \text{temperature} - 19\right) - \\
+&2.125\times \left(4 \times\text{time} - 11\right) \times \left(0.1\times\text{pressure} - 7\right) + \\
+&2 \left(4\times\text{time} - 11\right) \times \left(0.08\times\text{temperature} - 19\right)
+\end{align}
+
+---
+
+After expanding all the terms an simplfying, this becomes
+
+\begin{align*}
+\text{Yield} = &209.13 - 68.5 \times \text{time} + 2.4375 \times \text{pressure} - \\
+&1.63 \times \text{temp} - 0.85 \times \text{time} \times \text{pressure} + 0.64 \times \text{time} \times \text{temp}
+\end{align*}
+
+---
+
+This is optional, but we can also check the residuals for the fitted model. The
+only unusual pattern is that the variance when A = -1 is lower than when A = 1.
+
+```{r}
+experiment <- experiment %>%
+  mutate(residual = resid(fit), predicted = predict(fit))
+qqnorm(experiment$residual)
+qqline(experiment$residual)
+```
+
+---
+
+This is optional, but we can also check the residuals for the fitted model. The
+only unusual pattern is that the variance when A = 1 is lower.
+
+```{r}
+ggplot(experiment) +
+  geom_point(aes(predicted, residual))
+```
+
+---
+
+This is optional, but we can also check the residuals for the fitted model. The
+only unusual pattern is that the variance when A = 1 is lower.
+
+.pull-left[
+```{r, fig.height = 2.5, fig.width = 4, out.width = 200}
+ggplot(experiment) +
+  geom_point(aes(A, residual))
+ggplot(experiment) +
+  geom_point(aes(B, residual))
+```
+]
+
+.pull-right[
+```{r, fig.height = 2.5, fig.width = 4, out.width = 200}
+ggplot(experiment) +
+  geom_point(aes(C, residual))
+ggplot(experiment) +
+  geom_point(aes(D, residual))
+```
+]
+
+---
+
+Since the B factor does not seem significant, we can project it out. The
+resulting cube only has three factors, A, C and D.
+
+```{r, echo = FALSE}
+include_graphics("626d.png")
+```

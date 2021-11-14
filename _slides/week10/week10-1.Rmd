@@ -37,7 +37,14 @@ include_graphics("https://uwmadison.box.com/shared/static/rfdz734pv6rxolgwz5fx21
 
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison ]
+.large[Kris Sankaran | UW Madison | November 9, 2021]
+
+---
+
+### Announcements
+
+* HW5 Problem 6.29 should only be (a - d), not (a - e).
+* Midterm 2 is in two weeks
 
 ---
 
@@ -92,7 +99,6 @@ include_graphics("https://uwmadison.box.com/shared/static/giacopxkfj5jhuucepards
 of the cube
 * We've added an extra intercept column to $X$
 
-.pull-left[
 | A | B | C | AB | label |
 |---|---| --- | --- | --- |
 | - | - | - | + | (1) |
@@ -105,8 +111,18 @@ of the cube
 | + | + | + | + | abc |
 ]
 
-.pull-right[
-\begin{align*}
+---
+
+### Coding Factors
+
+* We can use coding to convert a table of +, - into a numeric matrix.
+* The notation $(1), a, b, ...$ refers to the measured response at those corners
+of the cube
+* We've added an extra intercept column to $X$
+
+<div class="math">
+\[
+\begin{align}
 X = \begin{pmatrix}
 1 & -1 & -1 & - 1 & 1 \\
 1 & 1 & -1 & -1 & -1 \\
@@ -128,19 +144,20 @@ ac \\
 bc \\
 abc
 \end{pmatrix}
-\end{align*}
-]
+\end{align}
+\]
+</div>
 
 ---
 
 ### Properties of $X$
 
 * $X$ is a square matrix, with $2^{K}$ rows and columns
-* It's columns are orthogonal to one another
+* Its columns are orthogonal to one another
 * The sum of squares of any column is $2^K$
 * These three facts imply $X^T X = 2^{K}I_{2^{K}}$.
 
-```{r, out.width = "60%"}
+```{r, out.width = 500}
 include_graphics("https://uwmadison.box.com/shared/static/8euuywv5ay4x7przznhsxdo269865h2a.png")
 ```
 
@@ -150,16 +167,24 @@ include_graphics("https://uwmadison.box.com/shared/static/8euuywv5ay4x7przznhsxd
 
 Linear models assume the response is a linear function of the predictors $X$, with some additional noise,
 
+<div class="math">
+\[
 \begin{align*}
 y = X \beta + \epsilon
 \end{align*}
+\]
+</div>
 
 Least squares fits $\hat{\beta}$ by minimizing $\|y - X\beta\|_{2}^{2}$. The
 solution has a closed form,
 
+<div class="math">
+\[
 \begin{align*}
-\hat{\beta} &= \left(X^T X\right)^-1X^T y
+\hat{\beta} &= \left(X^T X\right)^{-1} X^T y
 \end{align*}
+\]
+</div>
 
 We will take this fact for granted; it is proved in most linear regression
 courses.
@@ -171,10 +196,14 @@ courses.
 The $X$ matrix in $2^{K}$ designs has a special form, so we can simplify the
 formula for $\hat{\beta}$.
 
+<div class="math">
+\[
 \begin{align*}
 \hat{\beta} &= \left(2^{K}I_{2^{K}}\right)^{-1}X^T y \\
 &= \frac{1}{2^{K}}X^{T}y.
 \end{align*}
+\]
+</div>
 
 ---
 
@@ -182,6 +211,8 @@ formula for $\hat{\beta}$.
 
 The matrix $X^T y$ are exactly our contrasts,
 
+<div class="math">
+\[
 \begin{align*}
 X^{T}y &= \begin{pmatrix}
 1 &  1 &  1 &  1 & 1 & 1 &  1 & 1 \\
@@ -197,11 +228,17 @@ c \\
 \vdots 
 \end{pmatrix}
 \end{align*}
+\]
+</div>
 
 For example,
+<div class="math">
+\[
 \begin{align*}
 A = \frac{1}{2^{K - 1}}\left[-(1) + a - b -c + ab + ac - bc + abc\right]
 \end{align*}
+\]
+</div>
 
 The only difference between $\hat{\beta}$ and the effect estimates is that
 $\hat{\beta}$ divides by $2^{K}$ while the effect estimates divide by $2^{K -
@@ -220,7 +257,7 @@ This connection to regression allows us to make statements about the optimality 
 We won't prove optimality results, but will include a simulation experiment to
 build intuition about how to interpret these results.
 
-----
+---
 
 ### Three Candidates for $K = 1, n = 4$
 
@@ -241,7 +278,7 @@ include_graphics("https://uwmadison.box.com/shared/static/0s7m67r9k447irxr8jdzmt
 * The red line is the true response
 * We use each of the three designs (separate panels)
 * We observe noisy data around the true response (black dots)
-* Estimated effects are the moving lines
+* Estimated effects are the [moving lines](https://drive.google.com/file/d/1v-eZJ6ssNHkqIDaG-66cinUI-gGdpP8d/view?usp=sharing)
 ]
 
 .pull-right[
@@ -260,12 +297,12 @@ include_graphics("optimality_animation.gif")
   - The estimated slope is more narrowly centered around the truth
 
 .pull-left[
-```{r}
+```{r, out.width = 320}
 include_graphics("optimality_overlaid.png")
 ```
 ]
 .pull-right[
-```{r}
+```{r, out.width = 300}
 include_graphics("optimality_histograms.png")
 ```
 ]
@@ -276,12 +313,11 @@ include_graphics("optimality_histograms.png")
 
 In general, $2^{K}$ designs satisfy three notions of optimality,
 
-* _$D$-optimality_ :
+* $D$-optimality :
 $\left|\text{Cov}\left(\hat{\beta}\right)\right|$ is minimized. This happens when the width of the histogram of $\hat{\beta}$ is minimized.
-* _$G$-optimalty_: $\max_{x} \text{Var}\left(\hat{y}\left(x\right)\right)$ is minimized. This
+* $G$-optimalty: $\max_{x} \text{Var}\left(\hat{y}\left(x\right)\right)$ is minimized. This
 happens when the maximum vertical spread of the prediction band is minimized.
-* _$V$-optimality_: $\int_{\left[-1, 1\right]^{K}}. \text{Var}\left(\hat{y}\left(x\right)\right)dx$ is minimized. This happens when
-the area of the prediction band is minimized
+* $V$-optimality: $\int_{\left[-1, 1\right]^{K}}. \text{Var}\left(\hat{y}\left(x\right)\right)dx$ is minimized. This happens when the area of the prediction band is minimized
 
 ---
 
@@ -315,11 +351,17 @@ include_graphics("https://uwmadison.box.com/shared/static/gz504o59rs4212x3v8mip8
 
 ### Code Example
 
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
 We will use this code example to illustrate steps in the derivation above. We
 will again consider the drill dataset and first fit a linear model on the coded
 variables.
 
 ```{r, layout="l-body-outset"}
+library(readr)
+library(dplyr)
 code <- function(x) ifelse(x == '-', -1, 1)
 drill <- read_csv("https://uwmadison.box.com/shared/static/7l8bpcu36a12a8c0chlh4id0qezdnnoe.csv") %>%
   mutate_at(vars(A:D), code)
@@ -354,46 +396,41 @@ t(X) %*% X
 
 The step below computes the effect of factor A using three different approaches,
 
+.pull-left[
 * The original definition, which averages the difference between settings that are the same except for whether A is on or off
-* The formula $\frac{1}{2^{K _ 1}} X^T y$ discussed above
-* The coefficient $\hat{\beta}$ of the lienar regression
+* The formula $\frac{1}{2^{K - 1}} X^T y$ discussed above
+* The coefficient $\hat{\beta}$ of the linear regression
+]
 
+.pull-right[
 ```{r}
 mean(drill$rate[drill$A == 1] - drill$rate[drill$A == -1])
 (((1 / 8) * t(X) %*% drill$rate))["A", ]
 2 * coef(fit)["A"]
 ```
+]
 
 ---
 
 ### Exercise
 
-This exercises walks through problem 6.41.
+This exercise does not follow a textbook example. Instead, we will design a
+concept map of factorial designs together.
 
-.pull-left[
-Suppose that a full $2^4$ factorial uses the factor levels in the table on the right. The fitted model from this experiment is $\hat{y} = 24 + 16 x_{1} - 34x_[2} + 12 x_{3} + 6 x_{4} - 10 x_{1}x_{2} + 16 x_{1}x_{3}$. Predict the response at the following points,
-(i) A = 89, B = 20, C = 38, D = 66
-(ii) A = 90, B = 16, C = 40, D = 0
-(iii) A = 8, B = 28, C = 40, D = 61
-]
+(1) Initialize your team's map using the seed terms on the next page.
 
-.pull-right[
-| Factor | Low (-) | High (+) |
-| ----- | --- | --- |
-| A: Acid Strength (%) | 85 | 95 |
-| B: Reaction time (min) | 15 | 35 |
-| C: Amount of acid (mL) | 35 | 45 |
-| D: Reaction temperature (C) | 60 | 80 |
-]
+(2) Motivated by the extension phrases in the next page, draw new links and
+nodes in your concept map.
+
+(3) Upload a picture / screenshot of your final concept map to this [piazza post](https://piazza.com/class/ksf28gqo39x382?cid=75).
+
+In your post, highlight one part of the map that you feel you understand better
+now and another that still seems difficult to fill in.
 
 ---
 
-(1) Code the raw numbers in (i) into values between $\left[-1, 1\right]$, interpolating numbers that lie between bounds in the table.
-(2) Substitute values from (1) into the regression equation to determine the predicted value.
-(3) Repeat for parts (ii) - (iii)
+Seed Terms: General factorial design, $2^K$ design, $2^2$ design, unreplicated
+design, two-way interaction, `lm`, `A * B * C * D`, Daniel Plot, `2 * coef(fit)`, interaction term, coding, regression equation, $F$-statistic, design
+projection, center points
 
----
-
-### Solution
-
----
+Extension Phrases: is motivated by, is implemented by, is useful for, differs from other designs because, appears in problems like, is defined as, can be checked by, is a special case of, ...
