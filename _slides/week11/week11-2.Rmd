@@ -13,10 +13,13 @@ output:
     seal: false  
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo = FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"))
+library(tibble)
+library(dplyr)
+library(tidyr)
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -28,47 +31,30 @@ theme424 <- theme_minimal() +
   )
 theme_set(theme424)
 
-aliases <- function(fit, trim = TRUE) {
+aliases <- function(fit, max_len=3) {
   X <- model.matrix(fit)
-  pattern <- t(X) %*% X  %>%
+  pairs <- t(X) %*% X
+  pairs[lower.tri(pairs)] <- NA
+  pairs %>%
     as.data.frame() %>%
-    add_rownames("effect") %>%
+    rownames_to_column("effect") %>%
     pivot_longer(-effect, names_to = "alias") %>%
-    filter(effect != alias)
-  
-  if (trim) {
-    pattern <- pattern %>%
-      filter(value != 0) %>%
-      select(-value)
-  }
-  
-  pattern
-}
-
-plot_aliases <- function(fit, max_str=NULL) {
-  pattern <- aliases(fit, FALSE)
-  if (!is.null(max_str)) {
-    pattern <- pattern %>%
-      filter(nchar(effect) <= max_str, nchar(alias) <= max_str)
-  }
-  
-  ggplot(pattern) +
-    geom_tile(aes(x = effect, y = alias, fill = as.factor(value)), col = "black") +
-    scale_fill_brewer(palette = "Set3") +
-    theme(
-      axis.title = element_blank(),
-      axis.ticks = element_blank(),
-      axis.text = element_text(size = 6),
-      axis.text.x = element_text(angle = -90)
-    ) +
-    coord_fixed()
+    filter(
+      value != 0, 
+      effect != alias,
+      nchar(alias) < max_len + (max_len - 1),
+      nchar(effect) < max_len + (max_len - 1)
+    ) %>%
+    select(-value)
 }
 ```
 
 # Blocking and Foldover in $2^{K - p}$ Designs
 
-```{r, out.width = 200}
+```{r, out.width = 165}
+include_graphics("https://krisrs1128.github.io/stat424_f21/posts/2021-08-17-week11-3/week11-3_files/figure-html5/unnamed-chunk-3-1.png")
 ```
+
 ### Statistical Experimental Design
 
 .large[Kris Sankaran | UW Madison]
@@ -202,14 +188,14 @@ ggplot(mdesign) +
 
 .pull-left[
 * We will justify this foldover in the case of a $2^{7 - 3}$ design. 
-* First, we use the `plot_aliases` function to determine alias groups for this
+* First, we use the `aliases` function to determine alias groups for this
 design
 ]
 
 .pull-right[
 ```{r, echo = TRUE, fig.width = 3, fig.height = 3}
 fit <- lm(y ~ A * B * C * D * E * F * G, data = eye[eye$Seq == 1, ])
-plot_aliases(fit, 3)
+aliases(fit)
 ```
 ]
 
@@ -217,7 +203,7 @@ plot_aliases(fit, 3)
 
 ### Alias Groups
 
-From this plot, we can infer that the alias groups are
+From this information, we can infer that the alias groups are
 
 \begin{align*}
 [A] = A + BD + CE + FG \\
@@ -251,7 +237,7 @@ interactions switch.
 .pull-right[
 ```{r, echo = TRUE}
 fit <- lm(y ~ A * B * C * D * E * F * G, data = eye[eye$Seq == 2, ])
-plot_aliases(fit, 3)
+aliases(fit)
 ```
 ]
 
@@ -317,7 +303,7 @@ AD = \frac{1}{2}\left(\left[B\right] - \left[B\right]^{fold}\right).
 
 ---
 
-### Code Example
+# Code Implementation
 
 ---
 
@@ -343,6 +329,7 @@ opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
+code <- function(x) ifelse(x == '-', -1, 1)
 eye <- read_table2("https://uwmadison.box.com/shared/static/zh7majh2s6gesnu6f27fl17ncqfuwzev.txt") %>%
   mutate_at(vars(A:G), code)
 eye1 <- eye[eye$Seq == 1, ]
@@ -367,7 +354,7 @@ head(eye1, 4)
 .pull-right[
 ```{r}
 fit <- lm(y ~ A * B * C * D * E * F, data = eye1)
-effects <- coef(fit)[-1]
+effects <- 2 * coef(fit)[-1]
 daniel_plot(effects, probs = c(0.1, 0.5))
 ```
 ]
@@ -386,10 +373,23 @@ daniel_plot(effects, probs = c(0.1, 0.5))
 .pull-right[
 ```{r}
 fit <- lm(y ~ A * B * C * D * E * F, data = eye[eye$Seq == 2, ])
-effects_fold <- coef(fit)[-1]
+effects_fold <- 2 * coef(fit)[-1]
 0.5 * (effects + effects_fold)[1:6]
 ```
 ]
+
+---
+
+.pull-left[
+In fact, we could have obtained these last effects by fitting a model to the
+combined data.
+]
+
+```{r}
+fit <- lm(y ~ A * B * C * D * E * F, data = eye)
+2 * coef(fit)[2:13]
+```
+
 
 ---
 
@@ -403,14 +403,75 @@ simulation model of an inventory system. The independent variables in her model
 are the order quantity (A), reorder point (B), setup cost (C), backorder cost
 (D), and carrying cost (E). The response variable is average cost. To consderve
 computer time, she investigates these factors using a $2^{5 - 2}_{III}$ design
-with $I = ABD$ and $I = BCE$. Results are available here.
+with $I = ABD$ and $I = BCE$. Results are available
+[here](https://tinyurl.com/3496suyt) (https://tinyurl.com/3496suyt).
 ]
 
 .pull-right[
 (a) Verify that the treatment combinations given are correct. Estimate the effects, assuming three-factor and higher interactions are negligible. 
-(b) Suppose that a second fraction is added to the first. The data is here. How
-was this second fraction obtained? Add this data to the original fraction, and
+(b) Suppose that a second fraction is added to the first. The data is
+[here](https://tinyurl.com/6bvcv5yh) (https://tinyurl.com/6bvcv5yh). How was
+this second fraction obtained? Add this data to the original fraction, and
 estimate the effects.
 ]
 
 ---
+
+```{r}
+library(readr)
+experiment <- read_csv("https://tinyurl.com/3496suyt")
+experiment %>%
+  summarise(A * B * D, B * C * E)
+```
+
+---
+
+```{r}
+daniel_plot <- function(effects, probs = c(0.5, 0.6)) { 
+  qq <- qqnorm(effects, datax = TRUE)
+  qqline(effects, col = "red", probs = probs, datax = TRUE)
+  text(qq$x, qq$y, names(effects), pos=4)
+}
+
+#fit <- lm(cost ~ (A + B + C + D) ^ 2, experiment)
+fit <- lm(cost ~ A * B * C * D, experiment)
+effects <- 2 * coef(fit)[-1]
+daniel_plot(effects)
+```
+
+---
+
+It seems that A, B, D, BC, and CD are large effects. However, D is aliased with
+AB, BC with ACD, and CD with ABC. Of these, the D vs. AB choice is ambiguous,
+since the sparsity of effects and hereditary principles are in conflict.
+
+
+```{r}
+aliases(fit)
+```
+
+---
+
+.pull-left[
+It seems that the follow-up has folded over factor A, since all its signs are
+reversed in Block 2.
+]
+
+.pull-right[
+```{r}
+followup <- read_csv("https://tinyurl.com/6bvcv5yh")
+followup
+```
+]
+
+---
+
+The foldover experiment lets us estimate effects for all interactions involving
+A. It seems that the AB effect is stronger than the D effect; thet D effect we
+saw before is most likely this interaction.
+
+```{r}
+fit <- lm(cost ~ A * B * C * D * E, followup)
+c(na.omit(2 * coef(fit)[-1]))
+```
+

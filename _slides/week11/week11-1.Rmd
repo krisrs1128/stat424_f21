@@ -13,10 +13,10 @@ output:
     seal: false  
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"))
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -52,13 +52,13 @@ aliases <- function(fit, trim = TRUE) {
 ```
 
 # $2^{K - p}$ Designs
-
-```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```{r, out.width = 350, fig.align = "left"}
+include_graphics("https://uwmadison.box.com/shared/static/mmj9mcixl4y0o95hwf7h93vayw0eooc0.png")
 ```
+
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison ]
+.large[Kris Sankaran | UW Madison | November 16, 2021]
 
 ---
 
@@ -197,6 +197,25 @@ by each factor). In practice, we would be able to use code.
 
 ### Resolution
 
+A fractional design has resolution $R$ if no $p$-factor effect is aliased with
+an effect containing less than $R - p$ factors.
+
+| $R$ | $p$ | $< R - p$ | Interpretation |
+|- | - | --- | ------- |
+| 3 | 1 |  $\leq 2$ | Main effects aren't aliased with other main effects, but could be aliased with two-way interactions | 
+| 4 | 1 | $\leq 3$ | Main effects aren't aliased with any other main effects or with any two-way interactions, but could be aliased with three-way interactions | 
+|  | 2 | $\leq 2$ | Two-way interactions aren’t aliased with main effects.
+| 5 | 1 | $\leq 4$ | Main effects aren’t aliased with other main effects, two-way, or three way interactions. | 
+| | 2 | $\leq 3$ | Two-way interactions aren’t aliased with with main effects or two-way interactions. |
+
+A table of fractional factorial designs and their resolutions is available in
+the appendix of the textbook. They can be looked up based on the design's
+generator.
+
+---
+
+### Resolution
+
 The resolution is 4. Two-way interactions are confounded with one another, but
 not with any main effects.
 
@@ -228,7 +247,7 @@ not with any main effects.
 
 ---
 
-### Code Implementation
+# Code Implementation
 
 ---
 
@@ -248,7 +267,7 @@ We will use the $2^{6 - 2}$ design that we just built.
 ]
 
 .pull-right[
-```{r}
+```{r, echo = TRUE}
 injection <- read_table2("https://uwmadison.box.com/shared/static/uxd6sryqz32gbubwfhbdvsnqqkplqqef.txt") %>%
   mutate_at(vars(A:F), code)
 head(injection, 4)
@@ -259,14 +278,18 @@ head(injection, 4)
 
 ### Alias Groups
 
+.pull-left[
 * From the full model, we can determine the largest effects
 * The `aliases` function from last lecture can still be used
 * There are many aliases, but skimming through quickly confirms that the design is resolution 4 (like we deduced earlier)
+]
 
-```{r}
-fit <- lm(Shrinkage ~ A * B * C * D * E * F, data = injection)
+.pull-right[
+```{r, echo = TRUE}
+fit <- lm(Shrinkage ~ A * B * C * D * E * F, injection)
 aliases(fit)
 ```
+]
 
 ---
 
@@ -278,7 +301,7 @@ should be sufficient (perhaps an argument could be made for ACD and AD, though).
 ]
 
 .pull-right[
-```{r, fig.width = 5, fig.height = 5}
+```{r, fig.width = 5, fig.height = 5, echo = TRUE}
 daniel_plot(2 * coef(fit)[-1])
 ```
 ]
@@ -294,7 +317,7 @@ the underlying mold temperature.
 ]
 
 .pull-right[
-```{r}
+```{r, echo = TRUE}
 fit <- lm(Shrinkage ~ A * B, data = injection)
 summary(aov(fit))
 ```
@@ -316,8 +339,109 @@ those of the full factorial.
 ]
 
 .pull-right[
-```{r}
+```{r, echo = TRUE}
 library(readr)
 read_csv("credit_card.csv")
 ```
 ]
+
+---
+
+### Exercise
+
+This walks through Problem 8.10 in the textbook. 
+
+.pull-left[
+Analyze the [data](https://tinyurl.com/37cznbt6) (https://tinyurl.com/37cznbt6)
+in Problem 6.26 as if it came from a  design with $I=ABCD$. Project the design
+into a full factorial in the subset of the original four factors that appear to
+be significant.
+]
+
+.pull-right[
+For reference,
+
+6.26:	In a process development study on yield, four factors were studied, each
+at two levels: time (A), concentration (B), pressure (C), and temperature (D). A
+single replicate of a $2^4$ design was run, and the resulting data are shown
+here.
+
+a. Construct a Daniel plot. Which factors have large effects?
+b. Conduct an ANOVA using the Daniel plot for guidance. What are your conclusions?
+c. Write down a regression model relating yield to important process variables.
+]
+
+---
+
+We first read in the data and manually code the factors. Next, we filter to the
+rows where $ABCD = 1$, to simulate a $2 ^ {4 - 1}$ design.
+
+```{r, echo = TRUE}
+library(readr)
+library(dplyr)
+experiment <- read_csv("https://tinyurl.com/37cznbt6") %>%
+  mutate(
+    A = ifelse(A == 3, 1, -1),
+    B = ifelse(B == 18, 1, -1),
+    C = ifelse(C == 80, 1, -1),
+    D = ifelse(D == 250, 1, -1)
+  ) %>%
+  filter(A * B * C * D == 1)
+```
+
+---
+
+From the Daniel plot, the terms $AC, C, A, BC$ and $D$ stand out. Note that we
+adjusted the `probs` argument so that the effects had tails that were heavier
+than normal.
+
+```{r, echo = TRUE}
+daniel_plot <- function(effects, probs = c(0.2, 0.3)) { 
+  qq <- qqnorm(effects, datax = TRUE, ylim = c(-4.8, 4.8)) # show the labels
+  qqline(effects, col = "red", probs = probs, datax = TRUE)
+  text(qq$x, qq$y, names(effects), pos=4)
+}
+
+fit <- lm(Yield ~ A * B * C * D, experiment)
+effects <- 2 * coef(fit)[-1]
+daniel_plot(effects) # need heavier tails than normal for plot to make sense
+```
+
+---
+
+.pull-left[
+```{r}
+library(tidyr)
+library(tibble)
+
+aliases <- function(fit) {
+  X <- model.matrix(fit)
+  t(X) %*% X  %>%
+    as.data.frame() %>%
+    rownames_to_column("effect") %>%
+    pivot_longer(-effect, names_to = "alias") %>%
+    filter(value != 0, effect != alias) %>%
+    select(-value)
+}
+
+aliases(fit)
+```
+]
+
+.pull-right[
+The alias groups, together with the fact that the A and D (but not B) main
+effects are significant, suggest that the displayed BC effect actually an AD
+interaction.
+]
+
+---
+
+Based on the Daniel plot, we should fit the model `A + D + A:C + A:D`, which is
+equivalent to `A * (C + D)`. All effects are marginally significant. With so few
+samples, it is hard to claim that these effects are definitively real, but they
+all seem worth following up.
+
+```{r, echo = TRUE, fig.width = 4, fig.height = 4}
+fit <- lm(Yield ~ A * (C + D), experiment)
+summary(aov(fit))
+```
