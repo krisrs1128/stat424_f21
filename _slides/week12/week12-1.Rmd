@@ -13,10 +13,10 @@ output:
     seal: false  
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE}
 library(knitr)
 library(ggplot2)
-opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 2, fig.height = 1, dev = 'svg', dev.args = list(bg = "transparent"), fig.align = "center")
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 6, fig.height = 4, dev = 'svg', dev.args = list(bg = "transparent"), fig.align = "left")
 theme424 <- theme_minimal() + 
   theme(
     panel.grid.minor = element_blank(),
@@ -81,9 +81,11 @@ move towards.
 rich)  designs to find the best configuration.
 ]
 
+.pull-right[
 ```{r, fig.cap = "In initial runs we will use first-order models. When we approach a potential optimum, we will switch to second-order models."}
 include_graphics("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png")
 ```
+]
 
 ---
 
@@ -96,40 +98,18 @@ move towards.
 * Second Order Phase: Use a model with both interaction terms and nonlinearities
 ]
 
+.pull-right[
 ```{r, fig.cap = "In initial runs we will use first-order models. When we approach a potential optimum, we will switch to second-order models."}
 include_graphics("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png")
 ```
+]
 
 ---
 
 ###  First Order Model
 
-.pull-left[
-\begin{align*}
-y_{i} &= \beta_{0} + \sum_{k = 1}^{K}\beta_{k}x_{ik} + \epsilon_{i} \\
-&= x_{i}^{T}b + \epsilon_{i}
-\end{align*}
-]
-
-.pull-right[
-Where we defined
-\begin{align*}
-x_{i} = \begin{pmatrix} 1 \\
-x_{i1} \\
-\vdots \\
-x_{iK}
-\end{pmatrix},
-\end{align*}
-and 
-\begin{align*}
-b = \begin{pmatrix}
-\beta_0 \\
-\beta_1 \\
-\vdots \\
-\beta_{K}
-\end{pmatrix}
-\end{align*}
-]
+$$\begin{align*}y_{i} &= \beta_{0} + \sum_{k = 1}^{K}x_{ik}\beta_{k} + \epsilon_{i} \\ 
+&=: x_{i}^{T}b + \epsilon_{i}\end{align*}$$
 
 Notice that this design doesn't require many samples. It can be fit even with an
 unreplicated $2^{K}$ or $2^{K - p}$ design.
@@ -146,9 +126,11 @@ unreplicated $2^{K}$ or $2^{K - p}$ design.
 the fitted plane
 ]
 
+.pull-right[
 ```{r fig.cap = "First order models have no isolated optima."}
 include_graphics("https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lzt6gq5fkjfn.png")
 ```
+]
 
 ---
 
@@ -156,13 +138,13 @@ include_graphics("https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lz
 
 .pull-left[
 * Suppose the current fitted surface has the form
-  \begin{align*}
-  \hat{y}\left(x\right) &= x^{T}\hat{b}
-  \end{align*}
+$$\begin{align*}
+\hat{y}\left(x\right) &= x^{T}\hat{b}
+\end{align*}$$
 * Find the coordinate $k^{\ast}$ satisfying,
-  \begin{align*}
-  	k^{\ast} &= \arg \max_{k \in \{1, \dots, K\}} \left|\hat{\beta}_{k}\right|
-  \end{align*}
+$$\begin{align*}
+	k^{\ast} &= \arg \max_{k \in \{1, \dots, K\}} \left|\hat{\beta}_{k}\right|
+\end{align*}$$
   This is the factor to which the response is most sensitive. 
 ]
 
@@ -171,9 +153,9 @@ include_graphics("https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lz
   - Make sure it's not so large that the fitted approximation is poor
 * Update each factor’s sampling values according to the sensitivities
   $\hat{\beta_{k}}$ of the response to that factor,
-  \begin{align*}
-  x \leftarrow x + \frac{\Delta x_{k^{\ast}}}{\beta_{k^{\ast}}} b
-  \end{align*}
+$$\begin{align*}
+x \leftarrow x + \frac{\Delta x_{k^{\ast}}}{\beta_{k^{\ast}}} b
+\end{align*}$$
 ]
 
 ---
@@ -182,18 +164,13 @@ include_graphics("https://uwmadison.box.com/shared/static/oi55vfta5tpd7foy8ur3lz
 
 Once we're in the vicinity of an optimum, we can fit a second order model,
 
-.pull-left[
 \begin{align*}
 y_{i} &= \beta_0 + \sum_{k = 1}^{K}\beta_{kk}x_{ik}^{2} + \sum_{k < k_{\prime}} \beta_{k k^{\prime}} x_{ik}x_{ik^{\prime}} + \epsilon_{i} \\
-&= x_{i}^{T}b + x_{i}^{T} B x_i + \epsilon_{i}
+&= x_{i}^{T}b + x_{i}^{T} B x_i + \epsilon_{i},
 \end{align*}
-]
 
-.pull-right[
-Where we defined $B$ as the symmetric $K \times K$ matrix with diagonal entries
-$\beta_{kk}$ and off-diagonal elements $\frac{1}{2}\beta_{kl} =
-\frac{1}{2}\beta_{lk}$.
-]
+where we defined $B$ as the symmetric $K \times K$ matrix with diagonal entries
+$\beta_{kk}$ and off-diagonal elements $\frac{1}{2}\beta_{kl} = \frac{1}{2}\beta_{lk}$.
 
 Since this model fits a more complex surface, more samples are needed. We will
 discuss specific designs for it in the next lecture.
@@ -246,16 +223,18 @@ We can differentiate the second order model with respect to $x$, to determine
 whether any factor combinations are stationary points.
 
 .pull-left[
-\begin{align*}
-y\left(x\right)} &= x^{T}b + x^{T} B x_i + \epsilon_{i}
-\end{align*}
+Equation:
+$$\begin{align*}
+y\left(x\right) &= x^{T}b + x^{T} B x + \epsilon
+\end{align*}$$
 ]
 
 .pull-right[
-\begin{align*}
+Derivative:
+$$\begin{align*}
 \nabla_{x}\hat{y}\left(x\right) &= \nabla_{x}\left[x^{T}\hat{b} + x^{T}\hat{B}x\right] \\
 &= \hat{b} + 2\hat{B}x
-\end{align*}
+\end{align*}$$
 
 This is the multivariate analog of $\frac{\partial}{\partial x}\left[ax^2 + bx + c\right]$
 
@@ -283,17 +262,20 @@ Substituting into the formula for $y\left(x\right)$, we find that the response a
 \end{align*}
 ]
 
+The question is, does moving away from the stationary point $x^{\ast}$ increase
+or decrease $y\left(x\right)$?
+
 ---
 
 ### Canonical Representation
 
 .pull-left[
-A key mathematical fact is that $B$ can be written as 
+A key mathematical fact is that $\hat{B}$ can be written as 
 \begin{align*}
 \hat{B} &= U \Lambda U^{T}
 \end{align*}
-where $\Lambda$ is a diagonal matrix and the columns of $U$ are orthogonal (the
-"canonical directions").
+where $\Lambda$ is a diagonal matrix with nonnegative entries and the columns of
+$U$ are orthogonal (at 90 degrees to one another).
 ]
 
 .pull-right[
@@ -326,7 +308,7 @@ given by the stationary point.
   - Moving in the direction $w_{k}$ changes the response by $\lambda_{k}$
 * The sign of each term in the sum is determined by $\lambda_{k}$
   - All positive (negative) values $\implies$ local minimum (maximum)
-  - Mix of positive and negative $\to$ saddlepoint
+  - Mix of positive and negative $\implies$ saddlepoint
 ]
 
 .pull-right[
@@ -339,6 +321,11 @@ given by the stationary point.
 ---
 
 ### Code Implementation
+
+```{r}
+opts_chunk$set(echo = TRUE)
+```
+
 
 ---
 
@@ -480,6 +467,37 @@ summary(fit)
 
 ---
 
+### Stationary Points
+
+We can get the stationary point in terms of the original units using the
+`code2val` function.
+
+
+```{r}
+analysis <- canonical(fit)
+stationary <- code2val(analysis$xs, codings = codings(chem_coded))
+stationary
+```
+
+---
+
+### Canonical Directions
+
+* By adding the eigenvector directions, we can also see the directions that would
+decrease the response surface the most quickly.
+* Like the previous slide, we can code them using `code2val`
+
+```{r}
+w1 <- code2val(analysis$xs + analysis$eigen$vectors[, 1], codings = codings(chem_coded))
+w2 <- code2val(analysis$xs + analysis$eigen$vectors[, 2], codings = codings(chem_coded))
+w1
+w2
+```
+
+
+---
+
+
 ### Interpretation
 
 * Since both eigenvalues are negative, we are at a maximum
@@ -520,21 +538,83 @@ segments(stationary[2], stationary[1], w2[2], w2[1], col = "red")
 
 ### Exercise
 
-This exercise walks through Problem 11.7.
+This exercise walks through Problem 11.6.
 
 .pull-left[
-The data on the left were collected by a chemical engineer. The response $y$ is
-filtration time, $x_1$ is temperature, and $x_2$ is pressure. Fit a second-order
-model.
-(a) What operating conditions would you recommend if the objective is to
-minimize the filtration time?
-(b) What operating conditions would you recommend if the objective is to operate
-the process at a mean filtration rate close to 46?
+The data below were collected in an experiment to optimize crystal growth as a
+function of three variables $x_1, x_2$, and $x_3$. Large values of $y$ (yield in
+grams) are desirable.  Fit a second order model and analyze the fitted surface.
+Under what set of conditions is maximum growth achieved?
 ]
 
 .pull-right[
 ```{r}
 library(readr)
-experiment <- read_csv("https://uwmadison.box.com/shared/static/f2foas0qcutw7ea8ai0dklot04y6h93b.csv")
+experiment <- read_csv("https://uwmadison.box.com/shared/static/lh9updl58a1xqaeunhumhrbrnv78630b.csv")
 ```
 ]
+
+---
+
+We can try breaking down the general problem statement,
+(1) Use `rsm`, `SO`, and `canonical` to conduct a second order analysis.
+  - Notice that the data are already coded
+(2) Use the `Stationary points` part of the output to identify a candidate for the maximum.
+(3) Look at the `$values` part of the output to determine whether the candidate is in fact a maximum (or if it is in fact a minimum or saddlepoint).
+(4) Plot the fitted surface using `contour`.
+(5) Interpret the resulting figure and check that it is consistent with the earlier numerical output.
+
+---
+
+### Solution (1)
+
+```{r}
+library(rsm)
+fit <- rsm(y ~ SO(x_1, x_2, x_3), experiment)
+canonical(fit)
+```
+
+---
+
+### Solution (2)
+
+Copying from the summary above, it seems like the point below is a potential
+optimizer (it seems close to the origin).
+
+```
+Stationary point of response surface:
+       x_1        x_2        x_3 
+ 0.2597353  0.1108581 -0.1400280 
+```
+
+---
+
+### Solution (3)
+
+Since all the eigenvalues are negative, we can conclude that the stationary
+point is a maximum. Moving in any of the three eigenvector directions starting
+from the stationary point would only reduce the response value.
+
+```
+$values
+[1]  -3.079142  -8.952298 -13.764404
+```
+
+---
+
+### Solution (4)
+
+```{r}
+contour(fit, ~ x_1 + x_2 + x_3, image = TRUE, asp = 1)
+```
+
+---
+
+### Solution (5)
+
+The brightest area is the maximizer. For $x_2$ and $x_3$, a value close to the
+origin (midway between the low and high factor values) seems best. The surface
+seems less sensitive to variation in the $x_1$ factor -- the response is high
+across all both low and high values of $x_1$. The shape of the ellipses are
+consistent with the eigenvectors. For example, for $x_3 = 0$ (the first plot),
+the most rapid decrease is in the $\left(0.94, 0.21\right)$ direction.

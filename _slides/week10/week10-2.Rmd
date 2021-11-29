@@ -540,9 +540,9 @@ It looks like A, B, E, and BE have an influence on free height.
 
 ```{r, fig.width = 12, fig.height = 4.2, out.width = 500}
 daniel_plot <- function(effects, probs = c(0.4, 0.6)) { 
-  qq <- qqnorm(effects, datax = TRUE)
+  qq <- qqnorm(effects, datax = TRUE, ylim = c(-.3, .25))
   qqline(effects, col = "red", probs = probs, datax = TRUE)
-  text(qq$x, qq$y, names(effects), pos=1)
+  text(qq$x, qq$y, names(effects), pos=2)
 }
 fit <- lm(height ~ A * B * C * D * E, experiment_long)
 
