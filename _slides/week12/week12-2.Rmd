@@ -13,7 +13,7 @@ output:
     seal: false  
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE}
 library(knitr)
 library(ggplot2)
 opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"), fig.align = "center")
@@ -29,10 +29,10 @@ theme424 <- theme_minimal() +
 theme_set(theme424)
 ```
 
-# Response Surfaces, continued: Multi-Response and Design Approaches
+# Response Surfaces II
 
-```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```{r, out.width = 400, fig.align = "left"}
+include_graphics("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d06r7r0uz52.png")
 ```
 ### Statistical Experimental Design
 
@@ -47,81 +47,77 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 
 ---
 
+### Review
+
+---
+
 ### Motivation
 
-* Usually, we need to balance several competing objectives. 
-  - Process efficiency and cost
-  - Material strength and production speed
-  How can response surfaces be adapted to this multi-response setup?
-* We have a choice of designs during both the first and second order phases
+* **Multiple Responses** Usually, we need to balance several competing objectives. 
+  - Process efficiency vs. cost, material strength vs. production speed, ...
+  - How can response surfaces be adapted to this multi-response setup?
+* **Designs** We have a choice of designs during both the first and second order phases
   - Which designs are most commonly used, and why?
 
 ---
 
-### Overlaying Contours
+### Comparing Contours
 
 The most straightforward approach is to treat each response separately.
-* We can use the overlaid contours to find acceptable configurations
+* We can compare contours to find acceptable configurations
+* Below: Response surfaces for yield, viscosity, and molecular weight
 
-```{r}
+```{r, fig.width = 8, fig.height = 3, out.width = 920, dpi = 200}
 library(readr)
 library(dplyr)
 library(rsm)
 
 chem <- read_csv("https://uwmadison.box.com/shared/static/nbaj1m8j7tuaqmznjlrsgbzyhp9k61i8.csv")
-
 chem_coded <- coded.data(chem, time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 155) / 5)
 fits <- list(
   "yield" = rsm(yield ~ SO(temp_coded, time_coded), data = chem_coded),
   "viscosity" = rsm(viscosity ~ SO(temp_coded, time_coded), data = chem_coded),
   "molecular_weight" = rsm(molecular_weight ~ SO(temp_coded, time_coded), data = chem_coded)
 )
-
-```
-
-```{r, fig.cap = "Three separate response surfaces, fit to yield, viscosity, and molecular weight, respectively.", fig.show = "hold"}
+par(mfrow = c(1, 3))
 contour(fits[[1]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 contour(fits[[2]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 contour(fits[[3]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
+par(mfrow = c(1, 1))
 ```
 
 ---
 
 ### Constrained Optimization
 
-.pull-left[
 * Define acceptable ranges for responses  $y_{2}\left(x\right), \dots, y_{R}\left(x\right)$ that are important, but not our main focus.
 * Optimize the response $y_{1}\left(x\right)$ that’s our main focus.
-]
 
-.pull-right[
-```{r, fig.cap = "Three separate response surfaces, fit to yield, viscosity, and molecular weight, respectively.", fig.show = "hold"}
+```{r, fig.width = 8, fig.height = 3, out.width = 920, dpi = 200}
+par(mfrow = c(1, 3))
 contour(fits[[1]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 contour(fits[[2]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 contour(fits[[3]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
+par(mfrow = c(1, 1))
 ```
-]
 
 ---
 
 ### Constrained Optimization
 
-.pull-left[
 Formally, this seeks the $x_{\ast}$ that solves,
 \begin{align*}
-\underset{x}{\text{maximize}}\medspace &y_{1}\left(x\right) \\
-\text{subject to }\medspace &\left(y_{2}\left(x\right), \dots, y_{R}\left(x\right)\right) \in \mathcal{C}
+\underset{x}{\text{maximize}}\space &y_{1}\left(x\right) \\
+\text{subject to }\space &\left(y_{2}\left(x\right), \dots, y_{R}\left(x\right)\right) \in \mathcal{C}
 \end{align*}
-where $C$ is a predefined constraint region.
-]
-
-.pull-right[
-```{r, fig.cap = "Three separate response surfaces, fit to yield, viscosity, and molecular weight, respectively.", fig.show = "hold"}
+where $\mathcal{C}$ is a preset constraint region.
+```{r, fig.width = 8, fig.height = 3, out.width = 800, dpi = 200}
+par(mfrow = c(1, 3))
 contour(fits[[1]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 contour(fits[[2]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 contour(fits[[3]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
+par(mfrow = c(1, 1))
 ```
-]
 
 ---
 
@@ -131,28 +127,23 @@ contour(fits[[3]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 to prioritize one response over the rest
 * We can instead optimize the product,
 \begin{align*}
-\underset{x}{\text{maximize}} \medspace \left[\prod_{r = 1}^{R} d_{r}\left(y_{r}\left(x\right)\right)\right]^{\frac{1}{R}}
+\underset{x}{\text{maximize}} \space \left[\prod_{r = 1}^{R} d_{r}\left(y_{r}\left(x\right)\right)\right]^{\frac{1}{R}}
 \end{align*}
 for some _desirability_ functions $d_r \in \left[0, 1\right]$ that take high
 values when $y_r$ is in a desirable region.
-  - The product will only be high when all the $y_r$ are in desirable regions
+* The product will only be high when all the $y_r$ are in desirable regions
 
 ---
 
 ### Desirability Functions
 
-Example functions $d_r$ from the `desirability` package are shown on the right.
+Example functions $d_r$, 
 
-.pull-left[
-\begin{align*}
-\underset{x}{\text{maximize}} \medspace \left[\prod_{r = 1}^{R} d_{r}\left(y_{r}\left(x\right)\right)\right]^{\frac{1}{R}}
-\end{align*}
-]
-
-.pull-right[
-```{r, fig.cap = "Example desirability functions, for maximizing, minimizing, and achieving a target response.", echo = FALSE}
+```{r, fig.height = 3, fig.width = 6, out.width = 800}
 library(stringr)
 library(desirability)
+library(tidyr)
+library(dplyr)
 
 x_grid <- seq(-1, 1, .01)
 example_funs <- data.frame(
@@ -176,9 +167,8 @@ example_funs <- data.frame(
 ggplot(example_funs) +
   geom_line(aes(x, value, col = scale)) +
   scale_color_brewer(palette = "Set2") +
-  facet_grid(type ~ .)
+  facet_grid(.~ type)
 ```
-]
 
 ---
 
@@ -187,8 +177,12 @@ ggplot(example_funs) +
 * Sometimes we found the optimum just from one experiment, but more often, we
 ran a series of experiments, gradually refining our understanding of the
 response surface.
-* At each step, we could use any design from the course
-  - However, a few choices are more common than others
+* At each step, which design should we use?
+  
+```{r, out.width = 600}
+include_graphics("designs.png")
+```
+
 
 ---
 
@@ -200,7 +194,7 @@ each factor.
 * We can be more sample efficient in this phase
 ]
 
-pull-right[
+.pull-right[
   * $2^{K}$ factorial designs
   * $2^{K - p}$ fractional factorial designs
   * $2^{K}$ and $2^{K - p}$ designs that have been augmented with center points.
@@ -210,23 +204,105 @@ pull-right[
 
 ### Designs for Second-Order Models
 
-.pull-left[
-* For second-order models, we need to estimation nonlinear and interaction
+For second-order models, we need to estimation nonlinear and interaction
 effects, which requires more intensive sampling.
-* For all these designs, we can use functions from the `rsm` package
+
+.pull-left[
+* **Central Composite Design (CCD)**: This is a full factorial $2^{K}$ design that
+has been supplemented by center and axial points.
+* Equiradial design: This samples sample at the corners of regular polygons (+
+center points)
 ]
 
 .pull-right[
-  * Central Composite Design (CCD): This is a full factorial $2^{K}$ design that
-  has been supplemented by center and axial points.
-  * Equiradial design: This samples sample at the corners of regular polygons (+
-  center points)
-  * Box-Behnken design: The associated samples are all on edges of the cube
+```{r, fig.width = 4, fig.height = 4, out.width = 400}
+codings <- list(
+  time_coded ~ (time - 35) / 5,
+  temp_coded ~ (temp - 150) / 5
+)
+ccd_design <- ccd(~ time_coded + temp_coded, coding = codings, oneblock = TRUE, alpha = 3)
+
+ggplot(data.frame(ccd_design)) +
+  geom_point(aes(time_coded, temp_coded)) +
+  coord_fixed()
+```
+
 ]
 
 ---
 
-### Code Implementation
+### Designs for Second-Order Models
+
+For second-order models, we need to estimation nonlinear and interaction
+effects, which requires more intensive sampling.
+
+.pull-left[
+* **Central Composite Design (CCD)**: This is a full factorial $2^{K}$ design that
+has been supplemented by center and axial points.
+* Equiradial design: This samples sample at the corners of regular polygons (+
+center points)
+]
+
+.pull-right[
+```{r, fig.width = 4, fig.height = 4, out.width = 400}
+ccd_design <- ccd(~ time_coded + temp_coded, coding = codings, oneblock = TRUE, alpha = 5)
+ggplot(data.frame(ccd_design)) +
+  geom_point(aes(time_coded, temp_coded)) +
+  coord_fixed()
+```
+
+]
+
+---
+
+### Designs for Second-Order Models
+
+For second-order models, we need to estimation nonlinear and interaction
+effects, which requires more intensive sampling.
+
+.pull-left[
+* **Central Composite Design (CCD)**: This is a full factorial $2^{K}$ design that
+has been supplemented by center and axial points.
+* Equiradial design: This samples sample at the corners of regular polygons (+
+center points)
+]
+
+.pull-right[
+```{r, fig.width = 4, fig.height = 4, out.width = 400}
+ccd_design <- ccd(~ time_coded + temp_coded, coding = codings, oneblock = TRUE, alpha = 1.2)
+ggplot(data.frame(ccd_design)) +
+  geom_point(aes(time_coded, temp_coded)) +
+  coord_fixed()
+```
+
+]
+
+---
+
+### Designs for Second-Order Models
+
+For second-order models, we need to estimation nonlinear and interaction
+effects, which requires more intensive sampling.
+
+.pull-left[
+* Central Composite Design (CCD): This is a full factorial $2^{K}$ design that
+has been supplemented by center and axial points.
+* **Equiradial design**: This samples sample at the corners of regular polygons (+
+center points)
+]
+
+.pull-right[
+```{r, fig.width = 4, fig.height = 4, out.width = 400}
+ccd_design <- ccd(~ time_coded + temp_coded, coding = codings, oneblock = TRUE)
+ggplot(data.frame(ccd_design)) +
+  geom_point(aes(time_coded, temp_coded)) +
+  coord_fixed()
+```
+]
+
+---
+
+# Code Implementation
 
 ---
 
@@ -235,7 +311,7 @@ effects, which requires more intensive sampling.
 In this dataset, we want to maximize yield while maintaining a target viscosity
 and minimizing molecular weight.
 
-```{r}
+```{r, echo = TRUE}
 library(readr)
 library(dplyr)
 library(rsm)
@@ -245,30 +321,29 @@ head(chem, 4)
 
 ---
 
-### Overlaying Contours
+### Comparing Contours
 
-.pull-left[
 For this approach, we can use the same code as before, but fitting a separate
 model for each response.
-]
 
-.pull-right[
-```{r}
+```{r, echo = TRUE}
 chem_coded <- coded.data(chem, time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 155) / 5)
-
 fits <- list(
   "yield" = rsm(yield ~ SO(temp_coded, time_coded), data = chem_coded),
   "viscosity" = rsm(viscosity ~ SO(temp_coded, time_coded), data = chem_coded),
   "molecular_weight" = rsm(molecular_weight ~ SO(temp_coded, time_coded), data = chem_coded)
 )
 ```
-]
 
 ---
 
-### Overlaying Contours
+### Comparing Contours
 
-```{r, fig.cap = "Three separate response surfaces, fit to yield, viscosity, and molecular weight, respectively."}
+```{r}
+```
+
+```{r, echo = TRUE, fig.width = 8, fig.height = 3, out.width = 920, dpi = 200}
+par(mfrow = c(1, 3))
 contour(fits[[1]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 contour(fits[[2]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 contour(fits[[3]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
@@ -278,14 +353,11 @@ contour(fits[[3]], ~ time_coded + temp_coded, image = TRUE, asp = 1)
 
 ### Desirability Functions
 
-.pull-left[
 For the desirability approach, we can define desirability functions using
 `dMax`, `dTarget`, and `dMin`. The arguments specify where desirability should
 be highest.
-]
 
-.pull-right[
-```{r}
+```{r, echo = TRUE, fig.height = 3.2, fig.width = 6, out.width = 500}
 library(desirability)
 d_yield <- dMax(70, 95) # min / max / scale
 plot(d_yield)
@@ -295,14 +367,11 @@ plot(d_yield)
 
 ### Desirability Functions
 
-.pull-left[
 For the desirability approach, we can define desirability functions using
 `dMax`, `dTarget`, and `dMin`. The arguments specify where desirability should
 be highest.
-]
 
-
-```{r}
+```{r, echo = TRUE, fig.height = 3.2, fig.width = 6, out.width = 500}
 d_viscosity <- dTarget(55, 65, 75) # min / target / max
 plot(d_viscosity)
 ```
@@ -311,14 +380,11 @@ plot(d_viscosity)
 
 ### Desirability Functions
 
-.pull-left[
 For the desirability approach, we can define desirability functions using
 `dMax`, `dTarget`, and `dMin`. The arguments specify where desirability should
 be highest.
-]
 
-
-```{r}
+```{r, echo = TRUE, fig.height = 3.2, fig.width = 6, out.width = 500}
 d_weight <- dMin(2750, 4000) # min / max
 plot(d_weight)
 ```
@@ -327,71 +393,113 @@ plot(d_weight)
 
 ### Desirability Functions
 
-.pull-left[
-* Once we have each $d_r$, we can use the `dOverall` function to combine them.
+* Once we have each $d_r$, we can use `dOverall` to combine them.
 This function will be large only if all its arguments are.
 * We can then evaluate this objective over a grid of time and temperature values.
-]
 
-.pull-left[
-```{r}
+```{r, echo = TRUE}
 objective <- dOverall(d_yield, d_viscosity, d_weight)
-
 coded <- as.data.frame(chem_coded)
 x_grid <- expand.grid(
   time_coded = seq(min(coded$time_coded), max(coded$time_coded), .1),
   temp_coded = seq(min(coded$temp_coded), max(coded$temp_coded), 0.1)
 )
+head(x_grid)
 ```
-]
 
 ---
 
 ### Desirability Functions
 
-.pull-left[
 * The code on the right finds $\hat{y}_{r}\left(x\right)$ for each response $r$,
 across the full grid of $x$ values defined on the previous slide.
-* For each configuration of $\hat{y}_r}\left(x\right)$, we can compute a
+* For each configuration of $\hat{y}_r\left(x\right)$, we can compute a
 desirability value.
-]
 
-.pull-right[
-```{r}
+```{r, echo = TRUE}
 library(purrr)
 y_hat <- map_dfc(fits, ~ predict(., x_grid))
-desirabilities$objective <- predict(objective, y_hat)
+x_grid$objective <- predict(objective, y_hat)
+head(x_grid)
 ```
-]
 
 ---
 
 ### Desirability Functions
 
-.pull-left[
 We can then visualize the desirability of each factor combination.
-]
 
-
-.pull-right[
-```{r, fig.margin = FALSE, fig.cap = "Overall desirability, considering yield, viscosity, and molecular weight."}
-ggplot(desirabilities) +
-  geom_tile(aes(time_coded, temp_coded, fill = objective)) +
+```{r, fig.margin = FALSE, echo = TRUE, fig.height = 4, fig.width = 5.5, out.width = 400}
+ggplot(x_grid) +
+  geom_tile(aes(time_coded, temp_coded, fill = objective, col = objective)) +
   coord_fixed() +
-  scale_fill_viridis_c()
+  scale_fill_viridis_c() +
+  scale_color_viridis_c()
 ```
-]
 
 ---
+
+### Designs
+
+The `rsm` package comes with functions for specifying designs.
+- `cube` for factorial designs
+- `n0` $\to$ number of center points
+- `reps` $\to$ number of replicates
+
+```{r}
+codings <- list(time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 150) / 5)
+cube(~ time_coded + temp_coded, coding = codings, n0 = 0, reps = 2)
+```
+---
+
+### Designs
+
+The `rsm` package comes with functions for specifying designs.
+- `cube` for factorial designs
+- `n0` $\to$ number of center points
+- `reps` $\to$ number of replicates
+
+```{r}
+codings <- list(time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 150) / 5)
+cube(~ time_coded + temp_coded, coding = codings, n0 = 3, reps = 1)
+```
+
+---
+
+### Desgins
+
+The `rsm` package comes with functions for specifying designs.
+- `ccd` for Central Composite Design
+- `alpha` parameter controls axis length (defaults to equiradial)
+
+```{r}
+codings <- list(time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 150) / 5)
+ccd_design <- ccd(~ time_coded + temp_coded, coding = codings, oneblock = TRUE, alpha = 3)
+ccd_design
+```
+
+---
+
+class: small
 
 ### Exercise
 
 This walks through problem 11.27 in the textbook.
 
-An article describes using a central composite design to improve the packaging of oen-pound coffee. The objective is to produce an airtight seal that is easy to open without damaging the top of the coffee bag. The experimenters studied three factors -- $x_1 = $ plastic viscosity (300 - 400 centipoise), $x_{2} = $ clamp pressure (170 - 190 psi), and $x_{3} = $plate gap (-3, +3 mm) and two responses, $y_1 = $ tear and $y_2 = $ leakage. The tear response was measured on a scale of 0 - 9 (good to bad) and leakage was proportion failing. Each run used a sample of 20 bags for response measurement.
+An article describes using a central composite design to improve the packaging
+of one-pound coffee. The objective is to produce an airtight seal that is easy
+to open without damaging the top of the coffee bag. The experimenters studied
+three factors -- $x_1 = $ plastic viscosity (300 - 400 centipoise), $x_{2} = $
+clamp pressure (170 - 190 psi), and $x_{3} = $plate gap (-3, +3 mm) and two
+responses, $y_1 = $ tear and $y_2 = $ leakage. The tear response was measured on
+a scale of 0 - 9 (good to bad) and leakage was proportion failing. Each run used
+a sample of 20 bags for response measurement.
 
-(a) Build a second-order model for hte tear response
+(a) Build a second-order model for the tear response
+
 (b) Build a second-order model for the leakage response.
+
 (c) Analyze residuals for both models. Are transformations necessary?
+
 (d) Construct contour plots for both responses.  What conditions would you
 recommend for process operation to minimize leakage and keep tear below 0.75?
