@@ -36,7 +36,7 @@ include_graphics("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d
 ```
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison ]
+.large[Kris Sankaran | UW Madison | December 2, 2021]
 
 ---
 
@@ -49,14 +49,49 @@ include_graphics("https://uwmadison.box.com/shared/static/uubzanl5c273c45mxazy0d
 
 ### Review
 
+> I do not understand the second order model- if we are running a sequence of
+> experiments, isn't there a model implied by each experiment?
+
+* There _is_ a model implied by each experiment
+* "Second" refers to the complexity of the model (linear vs. quadratic)
+* The sequence includes a series of first order models followed by a second order one
+
 ---
+
+```{r, out.width = 500}
+include_graphics("seq1.png")
+```
+---
+```{r, out.width = 500}
+include_graphics("seq2.png")
+```
+---
+```{r, out.width = 500}
+include_graphics("seq3.png")
+```
+---
+```{r, out.width = 500}
+include_graphics("seq4.png")
+```
+---
+```{r, out.width = 500}
+include_graphics("seq5.png")
+```
+---
+```{r, out.width = 500}
+include_graphics("seq6.png")
+```
+---
+
 
 ### Motivation
 
-* **Multiple Responses** Usually, we need to balance several competing objectives. 
+* **Multiple Responses**: Usually, we need to balance several competing
+objectives.
   - Process efficiency vs. cost, material strength vs. production speed, ...
   - How can response surfaces be adapted to this multi-response setup?
-* **Designs** We have a choice of designs during both the first and second order phases
+* **Designs**: We have a choice of designs during both the first and second
+order phases
   - Which designs are most commonly used, and why?
 
 ---
@@ -137,6 +172,16 @@ values when $y_r$ is in a desirable region.
 
 ### Desirability Functions
 
+.pull-left[
+\begin{align*}
+\underset{x}{\text{maximize}} \space \left[\prod_{r = 1}^{R} d_{r}\left(y_{r}\left(x\right)\right)\right]^{\frac{1}{R}}
+\end{align*}
+]
+
+---
+
+### Desirability Functions
+
 Example functions $d_r$, 
 
 ```{r, fig.height = 3, fig.width = 6, out.width = 800}
@@ -169,6 +214,18 @@ ggplot(example_funs) +
   scale_color_brewer(palette = "Set2") +
   facet_grid(.~ type)
 ```
+
+---
+
+### Discussion
+
+* What is an example of a situation where you might want to optimize several
+competing objectives?
+* Sketch either,
+  - Hypothetical contours and constraint sets, or
+  - Example desirability functions,
+  that would help select an optimal configuration.
+* Explain the choices made in your sketch  
 
 ---
 
@@ -442,11 +499,12 @@ ggplot(x_grid) +
 ### Designs
 
 The `rsm` package comes with functions for specifying designs.
+
 - `cube` for factorial designs
 - `n0` $\to$ number of center points
 - `reps` $\to$ number of replicates
 
-```{r}
+```{r, echo = TRUE}
 codings <- list(time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 150) / 5)
 cube(~ time_coded + temp_coded, coding = codings, n0 = 0, reps = 2)
 ```
@@ -455,11 +513,12 @@ cube(~ time_coded + temp_coded, coding = codings, n0 = 0, reps = 2)
 ### Designs
 
 The `rsm` package comes with functions for specifying designs.
+
 - `cube` for factorial designs
 - `n0` $\to$ number of center points
 - `reps` $\to$ number of replicates
 
-```{r}
+```{r, echo = TRUE}
 codings <- list(time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 150) / 5)
 cube(~ time_coded + temp_coded, coding = codings, n0 = 3, reps = 1)
 ```
@@ -472,7 +531,7 @@ The `rsm` package comes with functions for specifying designs.
 - `ccd` for Central Composite Design
 - `alpha` parameter controls axis length (defaults to equiradial)
 
-```{r}
+```{r, echo = TRUE}
 codings <- list(time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 150) / 5)
 ccd_design <- ccd(~ time_coded + temp_coded, coding = codings, oneblock = TRUE, alpha = 3)
 ccd_design
@@ -489,17 +548,104 @@ This walks through problem 11.27 in the textbook.
 An article describes using a central composite design to improve the packaging
 of one-pound coffee. The objective is to produce an airtight seal that is easy
 to open without damaging the top of the coffee bag. The experimenters studied
-three factors -- $x_1 = $ plastic viscosity (300 - 400 centipoise), $x_{2} = $
-clamp pressure (170 - 190 psi), and $x_{3} = $plate gap (-3, +3 mm) and two
-responses, $y_1 = $ tear and $y_2 = $ leakage. The tear response was measured on
-a scale of 0 - 9 (good to bad) and leakage was proportion failing. Each run used
-a sample of 20 bags for response measurement.
+three factors -- plastic viscosity (300 - 400 centipoise), clamp pressure (170 -
+190 psi), and plate gap (-3, +3 mm) and two responses, tear and leakage. The
+tear response was measured on a scale of 0 - 9 (good to bad) and leakage was
+proportion failing. Each run used a sample of 20 bags for response measurement.
 
 (a) Build a second-order model for the tear response
 
 (b) Build a second-order model for the leakage response.
 
-(c) Analyze residuals for both models. Are transformations necessary?
-
-(d) Construct contour plots for both responses.  What conditions would you
+(c) Construct contour plots for both responses.  What conditions would you
 recommend for process operation to minimize leakage and keep tear below 0.75?
+
+---
+
+(1) Read in the data and determine an appropriate coding for the three measured variables.
+
+(2) Use `rsm` and `SO` to fit second order models to both responses.
+
+(3) Inspect the contour plots associated with each response. Does the best
+configuration for leakage satisfy the tear constraint? If not, find a good
+(though for simplicity, not necessarily optimal) point that does.
+
+---
+
+### Solution (1)
+
+First we read in the data. The distance between center and factorial points will
+be used in the coding.
+
+```{r}
+experiment <- read_csv("https://uwmadison.box.com/shared/static/4uemf98b5hp0a3pw76idwpzdgec11h9t.csv")
+head(experiment, 4)
+```
+
+---
+
+### Solution (1)
+
+We use `coded.data` to define the coding. The center points and scales are
+determined based on the values observed in the previous slide.
+
+```{r, echo = TRUE}
+library(rsm)
+exp <- coded.data(experiment, vis_ ~ (Viscosity - 350) / 30, press_ ~ (Pressure - 180) / 6, plate_ ~(Plate - 0) / 1.8)
+```
+
+---
+
+### Solution (2)
+
+We fit two second order models with the same predictors but different responses.
+
+```{r, echo = TRUE}
+fits <- list(
+  "tear" = rsm(Tear ~ SO(vis_, press_, plate_), data = exp),
+  "leakage" = rsm(Leakage ~ SO(vis_, press_, plate_), data = exp)
+)
+```
+
+---
+
+### Solution (3)
+
+Inspecting the tear response can be used to rule out configurations that are not
+satisfactory. E.g., for pressure $> 185$ and viscosity $> 350$, plate should be
+set $< 1$.
+
+```{r, fig.width = 8, fig.height = 3, echo = TRUE}
+par(mfrow = c(1, 3))
+contour(fits[[1]], ~ vis_ + press_ + plate_, image = TRUE)
+```
+
+---
+
+### Solution (3)
+
+The optimal point for leakage does not satisfy this constraint. 
+
+```{r, echo = TRUE}
+xs <- canonical(fits[[2]])$xs
+code2val(xs, codings(exp))
+```
+
+---
+
+### Solution (3)
+
+```{r, fig.width = 8, fig.height = 3, echo = TRUE}
+par(mfrow = c(1, 3))
+contour(fits[[2]], ~ vis_ + press_ + plate_, image = TRUE)
+```
+
+---
+
+### Solution (3)
+
+A value around $360, 190, 0.5$ seems good for leakage (green in the contours
+above) while satisfying the constraint on tear. A more thorough solution would
+test a grid of combinations of these three variables and evaluate the fitted
+values at each. The selected point would be the one with the lowest predicted
+value for leakage subject to the predicted value for tear being less than 0.75
