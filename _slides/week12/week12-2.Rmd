@@ -225,7 +225,7 @@ competing objectives?
   - Hypothetical contours and constraint sets, or
   - Example desirability functions,
   that would help select an optimal configuration.
-* Explain the choices made in your sketch  
+* Explain the choices made in your sketch. E.g., why are the constraints where you set them? Or, why does the desirability function have a high value where you placed it?  
 
 ---
 
@@ -543,7 +543,7 @@ class: small
 
 ### Exercise
 
-This walks through problem 11.27 in the textbook.
+This walks through problem 11.27 in the textbook. ([Data](https://uwmadison.box.com/shared/static/4uemf98b5hp0a3pw76idwpzdgec11h9t.csv))
 
 An article describes using a central composite design to improve the packaging
 of one-pound coffee. The objective is to produce an airtight seal that is easy
@@ -566,9 +566,10 @@ recommend for process operation to minimize leakage and keep tear below 0.75?
 
 (2) Use `rsm` and `SO` to fit second order models to both responses.
 
-(3) Inspect the contour plots associated with each response. Does the best
-configuration for leakage satisfy the tear constraint? If not, find a good
-(though for simplicity, not necessarily optimal) point that does.
+(3) Inspect the contour plots and stationary points associated with each
+response. Does the best configuration for leakage satisfy the tear constraint?
+If not, find a good (though for simplicity, not necessarily optimal) point that
+does.
 
 ---
 

@@ -13,8 +13,9 @@ output:
     seal: false  
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE}
 library(knitr)
+library(dplyr)
 library(ggplot2)
 opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = TRUE, dpi = 200, fig.width = 6, fig.height = 2.8, dev = 'svg', dev.args = list(bg = "transparent"))
 theme424 <- theme_minimal() + 
@@ -31,12 +32,12 @@ theme_set(theme424)
 
 # Blocking and Mixtures in Response Surface Design
 
-```{r, out.width = 200}
-include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a81236k3enbtzzn.png")
+```{r, out.width = 350}
+include_graphics("https://uwmadison.box.com/shared/static/hxsz37wvxcj93osymlckvep6da6ipoqy.png")
 ```
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison ]
+.large[Kris Sankaran | UW Madison | December 7, 2021]
 
 ---
 
@@ -49,12 +50,12 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 
 ### Motivation
 
-* At each step in a response surface design, we may encounter nuisance variation
+* In response surfaces, we may encounter nuisance variation
 * While sampling for a first-order model, 
   - The operators may change
   - A batch of material might be exhausted
   - Might switch from weekend to weekday in an online shop
-* How can we adapt our earlier intuition about blocking to the response surface
+* How can we adapt our earlier approaches to blocking?
 
 ---
 
@@ -78,16 +79,17 @@ include_graphics("https://krisrs1128.github.io/stat424_f21/posts/2021-08-17-week
 
 ### Intuition: Two Factors
 
+.pull-left[
 * The main idea is to tie blocks together at the center points. 
-* Since the runs at central points should be the same (on average), any
-systematic difference is an unwanted block effect
+* Since the runs at central points should be the same, any systematic difference
+is an unwanted block effect
 * Remaining points are distributed to axial and factorial points
    - This ensures each block is evenly spread across low and high settings
-* This intuition works even with larger $K$
+]
 
 .pull-right[
 ```{r, fig.cap = "By tying sampling center points in both the axial and factorial blocks, it becomes possible to estimate and correct for block effects."}
-display(readImage("https://uwmadison.box.com/shared/static/hxsz37wvxcj93osymlckvep6da6ipoqy.png"))
+include_graphics("https://uwmadison.box.com/shared/static/hxsz37wvxcj93osymlckvep6da6ipoqy.png")
 ```
 ]
 
@@ -114,16 +116,15 @@ designs, but with center points tied together
 The default for `ccd` blocks the axial and factorial points.
 
 .pull-left[
-```{r}
+```{r, echo = TRUE}
 library(rsm)
-
 codings <- list(time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 150) / 5)
 ccd_design <- ccd(~ time_coded + temp_coded, coding = codings)
 ```
 ]
 
 .pull-right[
-```{r}
+```{r, echo = TRUE}
 head(ccd_design)
 ```
 ]
@@ -132,14 +133,15 @@ head(ccd_design)
 
 ### Visualization
 
-Note that we recovered the original temperature and time units using the
-`decode.data` function.
-
 .pull-left[
-```{r, echo = FALSE, fig.cap = "A central composite design with factor combinations shaded in by the batch from which them emerged."}
+* The figures shows a CCD with samples shaded in by block
+* We recovered the original temperature and time units using `decode.data`
+]
+
+.pull-right[
+```{r, echo = TRUE, fig.height = 5, fig.width = 4.5, dpi = 300, out.width = 320}
 ggplot(decode.data(ccd_design)) +
   geom_jitter(aes(time, temp, col = Block)) +
-  scale_color_brewer(palette = "Set2") +
   coord_fixed()
 ```
 ]
@@ -148,16 +150,13 @@ ggplot(decode.data(ccd_design)) +
 
 ### More than 2 Blocks
 
-.pull-left[
 * The `blocks` argument to `ccd` allows us to define generators to use during
 block construction.
 * The generators here are (ABC, CDE). This creates 5 blocks.
   - Four blocks of $2^{5 - 2}$ samples, each of which is a fractional factorial
   - One block of axial points
-]
 
-.pull-right[
-```{r}
+```{r, echo = TRUE}
 codings <- list(time_ ~ (time - 35) / 5, temp_ ~ (temp - 150) / 5, 
                 power_ ~ power, rate_ ~ rate, cooling_ ~ cooling)
 blocked_ccd <- ccd(
@@ -166,16 +165,34 @@ blocked_ccd <- ccd(
   blocks = Block ~ c(time_ * temp_ * power_, power_ * rate_ * cooling_)
 )
 ```
+
+---
+
+
+
+.pull-left[
+```{r}
+decode.data(blocked_ccd) %>%
+  arrange(time, temp) %>%
+  select(time, temp, power, Block)
+```
+]
+
+.pull-right[
+```{r, echo = TRUE, fig.height = 5, fig.width = 4.5, dpi = 300, out.width = 320}
+ggplot(decode.data(blocked_ccd)) +
+  geom_jitter(aes(time, temp, col = Block), width = 0.45, height = 0.45) +
+  coord_fixed()
+```
 ]
 
 ---
 
-```{r, out.width = 700}
-ggplot(decode.data(blocked_ccd)) +
-  geom_jitter(aes(time, temp, col = Block)) +
-  scale_color_brewer(palette = "Set2") +
-  coord_fixed()
-```
+### Discussion
+
+Imagine an experiment with 6 factors. Is it possible to design a CCD that can be
+split into 9 blocks? If so, describe the construction. What about 4 blocks?
+Justify your answer.
 
 ---
 
@@ -190,12 +207,11 @@ ggplot(decode.data(blocked_ccd)) +
   sources?
   - How much of the computational budget should be allocated to different
   hyperparameter searches?
-* Mixture experiments have a specific geometry which is not respected by the
-response surfaces covered so far
+* Mixture experiments have a specific geometry which is different from those for
+response surfaces so far
   - All the parts have to sum up to 1
 
 ---
-
 ### Simplex Geometry
 
 * $P$: Total number of ingredients
@@ -210,12 +226,40 @@ Then we have the constraints,
 
 ### Simplex Geometry
 
+.pull-left[
 * The set of $x = \left(x_{1}, \dots, x_{P}\right)$ satisfying these constraints
 is called the simplex,
   * Center point has an equal amount of each ingredient
   * Corners have 100% coming from one of the ingredients
 * Factorial and central composite designs can't be used -- they might fall off
 the edges
+]
+
+.pull-right[
+```{r, out.width = 350}
+include_graphics("simplex2.png")
+```
+]
+
+---
+
+### Simplex Geometry
+
+.pull-left[
+* The set of $x = \left(x_{1}, \dots, x_{P}\right)$ satisfying these constraints
+is called the simplex,
+  * Center point has an equal amount of each ingredient
+  * Corners have 100% coming from one of the ingredients
+* Factorial and central composite designs can't be used -- they might fall off
+the edges
+]
+
+.pull-right[
+```{r, out.width = 350}
+include_graphics("simplex3.png")
+```
+]
+
 
 ---
 
@@ -229,7 +273,7 @@ space
 ]
 
 .pull-right[
-```{r, fig.cap = "An SLD with m = 3." }
+```{r, fig.cap = "An SLD with m = 3." , fig.height = 4, fig.width = 4}
 library(mixexp)
 DesignPoints(SLD(3, 3))
 ```
@@ -240,8 +284,7 @@ DesignPoints(SLD(3, 3))
 ### Simplex Lattice Design
 
 .pull-left[
-Consider combinations of integers $k_{p} \in \{0,1, \dots, m\}$ such that
-$\sum_{p = 1}^{P} k_{p} = m$. The SLD$(m)$ design places samples at,
+Equivalently, consider integers $k_{p} \in \{0,1, \dots, m\}$ such that $\sum_{p = 1}^{P} k_{p} = m$. The $\text{SLD}\left(m\right)$ design places samples at,
 \begin{align*}
 \frac{1}{m}\left(k_{1}, \dots, k_{P}\right)
 \end{align*}
@@ -249,8 +292,7 @@ The parameter $m$ controls the granularity of the sampling points.
 ]
 
 .pull-right[
-```{r, fig.cap = "An SLD with m = 5." }
-library(mixexp)
+```{r, fig.cap = "An SLD with m = 5.", fig.height = 4, fig.width = 4}
 DesignPoints(SLD(3, 5))
 ```
 ]
@@ -267,8 +309,8 @@ DesignPoints(SLD(3, 5))
 ]
 	
 .pull-right[
-```{r, fig.cap = "An SCD with 5 sample points." }
-head(SCD(5))
+```{r, fig.height = 4, fig.width = 4}
+DesignPoints(SCD(3))
 ```
 ]
 
@@ -283,7 +325,7 @@ estimating a response surface on it
 ]
 
 .pull-right[
-```{r}
+```{r, fig.height = 5, fig.width = 5, out.width = 700}
 library(readr)
 yarn <- read_csv("https://uwmadison.box.com/shared/static/jghwbsnn6qjpwdr1lc97p9mbxk8qkwif.csv")
 fit <- lm(elongation ~ -1 + (x1 + x2 + x3) ^ 2, data = yarn)
@@ -301,7 +343,7 @@ ModelPlot(
 opts_chunk$set(echo = TRUE)
 ```
 
-### Code Implementation
+# Code Implementation
 
 ---
 
@@ -314,10 +356,10 @@ designs
 ]
 
 .pull-right[
-```{r}
+```{r, echo = TRUE}
 library(mixexp)
-head(SLD(3, 3)) # first argument is # of factors
-head(SCD(3))
+head(SLD(3, 3)) # K, m
+head(SCD(3)) # K
 ```
 ]
 
@@ -332,8 +374,7 @@ designs
 ]
 
 .pull-right[
-```{r}
-library(mixexp)
+```{r, echo = TRUE, fig.height = 4, fig.width = 4}
 DesignPoints(SLD(3, 3))
 ```
 ]
@@ -349,8 +390,7 @@ designs
 ]
 
 .pull-right[
-```{r}
-library(mixexp)
+```{r, echo = TRUE, fig.width = 4, fig.height = 4}
 DesignPoints(SCD(3))
 ```
 ]
@@ -359,11 +399,11 @@ DesignPoints(SCD(3))
 
 ### Dataset
 
-In the yarn dataset, an experiment used a (3, 2) SLD to measure variation in
-yarn elongation as a function of the fractions of materials used to make the
-base fiber.
+In the yarn dataset, an experiment used an $\text{SLD}\left(3, 2\right)$ design
+to measure variation in yarn elongation as a function of the fractions of
+materials used to make the base fiber.
 
-```{r}
+```{r, echo = TRUE}
 library(readr)
 yarn <- read_csv("https://uwmadison.box.com/shared/static/jghwbsnn6qjpwdr1lc97p9mbxk8qkwif.csv")
 head(yarn)
@@ -379,7 +419,7 @@ simplex.
   - An intercept column would introduce a collinearity (mixture columns sum to
   1)
 
-```{r}
+```{r, echo = TRUE}
 fit <- lm(elongation ~ -1 + (x1 + x2 + x3) ^ 2, data = yarn)
 summary(fit)
 ```
@@ -395,7 +435,7 @@ components
 ]
 
 .pull-right[
-```{r, echo = TRUE, fig.margin = FALSE, fig.width = 10}
+```{r, echo = TRUE, fig.margin = FALSE, fig.width = 5, fig.height = 5, out.width = 320}
 ModelPlot(
   fit, 
   dimensions = list(x1 = "x1", x2 = "x2", x3 = "x3"), 
@@ -408,4 +448,83 @@ ModelPlot(
 
 ### Exercise
 
+This exercise walks through Problem 11.25.
+
+Myers, Montgomery and Anderson-Cook (2009) describe a gasoline blending
+experiment involving three mixture components. There are no constraints on the
+mixture proportions, and the 10 run design
+[here](https://uwmadison.box.com/shared/static/86psbganmd8qlhv5808ein0f87xr0b3u.csv)
+is used.
+
+(1)	What type of design did the experimenters use?
+(2) Fit a quadratic mixture model to the data. Is this model adequate?
+
 ---
+
+### Solution (1)
+
+First, we read in the data.
+
+```{r, echo = TRUE}
+library(readr)
+library(dplyr)
+library(mixexp)
+experiment <- read_csv("https://uwmadison.box.com/shared/static/86psbganmd8qlhv5808ein0f87xr0b3u.csv")
+head(experiment)
+```
+
+---
+
+### Solution (1)
+
+.pull-left[
+An $\text{SLD}(3)$ design was used. The first six rows take samples at corners
+of the simplex, the next three are on the midpoints of edges, etc.
+]
+
+.pull-right[
+```{r, echo = TRUE}
+experiment
+```
+]
+
+---
+
+### Solution (2)
+
+We first fit a quadratic model like in the code example above.
+
+```{r, echo = TRUE, fig.margin = FALSE, fig.width = 5, fig.height = 5, out.width = 260}
+fit <- lm(y ~ -1 + (x1 + x2 + x3) ^ 2, data = experiment)
+ModelPlot(
+  fit, 
+  dimensions = list(x1 = "x1", x2 = "x2", x3 = "x3"), 
+  contour = TRUE
+)
+```
+
+
+---
+
+### Solution (2)
+
+It seems that curvature might not be necessary -- the contours are nearly
+parallel. We can fit the same model without the quadratic term. The result is
+simpler to interpret and provides almost the same predictions across the
+simplex.
+
+```{r, echo = TRUE, fig.margin = FALSE, fig.width = 5, fig.height = 5, out.width = 300}
+fit <- lm(y ~ -1 + x1 + x2 + x3, data = experiment)
+```
+
+---
+
+### Solution (2)
+
+```{r, echo = TRUE, fig.margin = FALSE, fig.width = 5, fig.height = 5, out.width = 330}
+ModelPlot(
+  fit, 
+  dimensions = list(x1 = "x1", x2 = "x2", x3 = "x3"), 
+  contour = TRUE
+)
+```
