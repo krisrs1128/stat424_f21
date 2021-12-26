@@ -115,16 +115,10 @@ designs, but with center points tied together
 
 The default for `ccd` blocks the axial and factorial points.
 
-.pull-left[
 ```{r, echo = TRUE}
 library(rsm)
 codings <- list(time_coded ~ (time - 35) / 5, temp_coded ~ (temp - 150) / 5)
 ccd_design <- ccd(~ time_coded + temp_coded, coding = codings)
-```
-]
-
-.pull-right[
-```{r, echo = TRUE}
 head(ccd_design)
 ```
 ]
@@ -457,6 +451,7 @@ mixture proportions, and the 10 run design
 is used.
 
 (1)	What type of design did the experimenters use?
+
 (2) Fit a quadratic mixture model to the data. Is this model adequate?
 
 ---

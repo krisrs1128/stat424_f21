@@ -37,7 +37,7 @@ include_graphics("https://uwmadison.box.com/shared/static/a8jqduhcmjzj9re22a8123
 
 ### Statistical Experimental Design
 
-.large[Kris Sankaran | UW Madison ]
+.large[Kris Sankaran | UW Madison | December 9, 2021 ]
 
 ---
 
